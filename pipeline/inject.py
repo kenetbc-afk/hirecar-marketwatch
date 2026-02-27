@@ -103,7 +103,9 @@ def run_pipeline(repo_root=None):
                 print(f"      Headline: {article['headline'][:60]}...")
 
             except Exception as e:
+                import traceback
                 print(f"      ERROR rewriting for {city_name}: {e}")
+                traceback.print_exc()
                 continue
 
     if not new_articles:
