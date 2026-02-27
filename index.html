@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIRECAR MarketWatch! — Auto Operator Intelligence · Los Angeles</title>
+<title>HIRECAR MarketWatch! — HIRECAR LLC · Est. November 2024</title>
 <!-- v18: Desktop scroll fix, Remote edge-to-edge viewport, Logo wordmark cleanup, Hero city/time images, Enriched remote entry sequence, Top Stories CTA dynamic, Mobility 4-car gallery, Vegas centering, Weather-correlated travel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -4858,8 +4858,11 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div>
     <div class="masthead-center">
       <div class="masthead-date">Friday, February 20, 2026 &nbsp;·&nbsp; Los Angeles, California</div>
-      <div class="masthead-motto" style="display:flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;opacity:.7;">
-        <span>Est.</span><span class="masthead-sep">·</span><span>HIRECAR</span><span class="masthead-sep">·</span><span>Nov 16, 2024</span>
+      <div class="masthead-wx" id="mastheadWx" style="display:flex;align-items:center;justify-content:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;font-weight:400;color:var(--muted);margin-top:2px;">
+        <span id="mastheadWxIcon">☀️</span>
+        <span id="mastheadWxTemp">--°F</span>
+        <span style="opacity:.4;">·</span>
+        <span id="mastheadWxDesc" style="text-transform:capitalize;">Loading...</span>
       </div>
     </div>
     <div class="masthead-right">
@@ -6001,11 +6004,11 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 /* ─── EDITIONS CONFIG ───────────────────────────────────── */
 const EDITIONS = {
   'los-angeles': {
-    label: 'Los Angeles, CA', sub: 'Auto Operator Intelligence · Los Angeles, CA',
+    label: 'Los Angeles, CA', sub: 'HIRECAR LLC · Est. November 2024',
     lat: 34.0195, lon: -118.2764, tz: 'America/Los_Angeles'
   },
   'san-francisco': {
-    label: 'San Francisco, CA', sub: 'Auto Operator Intelligence · San Francisco, CA',
+    label: 'San Francisco, CA', sub: 'HIRECAR LLC · Est. November 2024',
     lat: 37.7749, lon: -122.4194, tz: 'America/Los_Angeles'
   }
 };
@@ -6436,7 +6439,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const EDITIONS = {
   'los-angeles': {
     label: 'Los Angeles, CA',
-    sub:   'Auto Operator Intelligence · Los Angeles',
+    sub:   'HIRECAR LLC · Est. November 2024',
     zip:   '90001',
     lat:   34.0195,
     lon:  -118.2764,
@@ -6444,7 +6447,7 @@ const EDITIONS = {
   },
   'san-francisco': {
     label: 'San Francisco, CA',
-    sub:   'Auto Operator Intelligence · San Francisco',
+    sub:   'HIRECAR LLC · Est. November 2024',
     zip:   '94102',
     lat:   37.7749,
     lon:  -122.4194,
@@ -6502,6 +6505,17 @@ async function fetchWeather(editionKey) {
     const detailEl = document.getElementById('wx-detail-' + key);
     if (detailEl) detailEl.textContent =
       `Feels ${Math.round(c.apparent_temperature)}° · Wind ${Math.round(c.windspeed_10m)} mph`;
+
+    // Update masthead weather (only for active edition)
+    const sel = document.getElementById('editionSelect');
+    if (sel && sel.value === key) {
+      var mhIcon = document.getElementById('mastheadWxIcon');
+      var mhTemp = document.getElementById('mastheadWxTemp');
+      var mhDesc = document.getElementById('mastheadWxDesc');
+      if (mhIcon) mhIcon.textContent = wx.icon;
+      if (mhTemp) mhTemp.textContent = Math.round(c.temperature_2m) + '°F';
+      if (mhDesc) mhDesc.textContent = wx.desc;
+    }
 
   } catch (e) {
     const tempEl = document.getElementById('wx-temp-' + editionKey);
