@@ -1,0 +1,91 @@
+{
+  "articles": [
+    {
+      "id": "seed-001",
+      "headline": "LA Auto Loan Delinquencies Hit 18-Month High as Subprime Originations Climb",
+      "excerpt": "Subprime auto loan delinquencies in Los Angeles County surged to 6.3% in Q4 2025, driven by rising insurance costs and stagnant wage growth. For collision operators and credit-recovery consumers, the trend signals both risk and opportunity in the nation's largest used-car market.",
+      "body": "<p>Auto loan delinquencies across Los Angeles County reached their highest level since mid-2024, with subprime 60-day-plus delinquencies climbing to 6.3% at the close of Q4 2025. The increase comes amid a broader national trend, but LA's numbers run nearly 1.2 percentage points above the national average, reflecting unique pressures in the region's massive vehicle-dependent economy.</p><p>Southern California continues to lead the nation in subprime auto originations, a pattern driven partly by the region's sprawling geography and limited public transit alternatives. With over 7.2 million registered vehicles in LA County alone, the sheer volume of outstanding auto debt creates outsized exposure to economic slowdowns.</p><p>For collision shop operators, the delinquency spike has a direct operational impact. Consumers behind on auto payments are statistically less likely to carry comprehensive coverage, increasing the share of out-of-pocket repair costs and payment plan requests at the shop level. Operators report a measurable uptick in deferred-repair customers since late 2025.</p><p>Credit-recovery professionals see the data differently. Rising delinquencies typically precede a wave of credit rebuilding activity as consumers seek to restore their scores after charge-offs or settlements. HIRECAR's internal data suggests that credit repair inquiries tied to auto-related events are up 22% year-over-year in the LA metro.</p><p>The takeaway for operators: tighten receivables processes, review insurance verification workflows, and prepare for a consumer base that is increasingly navigating financial stress alongside vehicle maintenance needs.</p>",
+      "category": "Credit & Lending",
+      "tags": ["subprime auto", "delinquency", "LA County", "credit recovery", "collision operators"],
+      "source_url": "https://www.pymnts.com/auto-lending/",
+      "source_title": "Auto Lending Trends Q4 2025",
+      "source_attribution": "Reporting informed by PYMNTS.com",
+      "published": "2026-02-25T14:00:00Z",
+      "generated_at": "2026-02-27T06:00:00Z",
+      "city": "la"
+    },
+    {
+      "id": "seed-002",
+      "headline": "Insurance Premium Shock: LA Collision Shops Brace for $3,100 Average Policy Year",
+      "excerpt": "Average auto insurance premiums in LA County are on track to exceed $3,100 annually by mid-2026, squeezing both consumers and the collision repair ecosystem. Shops processing an estimated $4.8B in annual claims face shifting payer dynamics.",
+      "body": "<p>Auto insurance costs in Los Angeles County have entered what industry analysts call uncharted territory. Average annual premiums, already exceeding $2,900 in 2025, are projected to breach $3,100 by Q3 2026 according to California Department of Insurance filings reviewed by HIRECAR MarketWatch.</p><p>The surge is not uniform. Drivers in South LA and parts of the San Fernando Valley face premiums 18-25% above the county average, reflecting localized collision density along corridors like the 405, 101, and 10 freeways, which see some of the highest accident rates in the nation.</p><p>For collision repair operators, premium inflation creates a paradox. Higher premiums mean larger insured-loss pools, but they also drive more consumers toward liability-only coverage or policy lapses altogether. The California Low Cost Automobile Insurance Program saw enrollment jump 14% in 2025, a signal that price sensitivity is reshaping the coverage landscape.</p><p>Shops that process claims through direct repair programs (DRPs) report stable volume, but independent operators without insurer partnerships are seeing a shift toward cash-pay and financing-dependent customers. Several LA-area shops have begun offering in-house payment plans, a practice that introduces new credit risk into the repair business.</p><p>The operator insight: shops that build financial flexibility into their service model, whether through financing partnerships or streamlined claims advocacy, will be better positioned as insurance economics continue to pressure the LA market.</p>",
+      "category": "Insurance & Risk",
+      "tags": ["auto insurance", "premium rates", "collision repair", "LA County", "DRP"],
+      "source_url": "https://www.pymnts.com/insurance/",
+      "source_title": "Auto Insurance Rate Pressures 2026",
+      "source_attribution": "Reporting informed by PYMNTS.com",
+      "published": "2026-02-24T10:30:00Z",
+      "generated_at": "2026-02-27T06:00:00Z",
+      "city": "la"
+    },
+    {
+      "id": "seed-003",
+      "headline": "BNPL Meets the Body Shop: Buy Now Pay Later Expands into Collision Repair Financing",
+      "excerpt": "Buy now pay later providers are quietly entering the vehicle repair space, offering point-of-sale financing for collision work and mechanical repairs. LA operators weigh the trade-offs of a new payment channel.",
+      "body": "<p>The buy now pay later wave that reshaped retail spending is making its first serious push into automotive services. At least three major BNPL platforms have launched or piloted collision repair financing products in the past six months, targeting the gap between insurance payouts and actual repair costs that consumers frequently face.</p><p>In Los Angeles, where average collision repair invoices run 12-15% above the national mean, the financing gap is particularly acute. Consumers with deductibles of $1,000 or more often delay repairs, creating safety risks and compounding vehicle depreciation. BNPL providers see this as an addressable market worth billions.</p><p>For shop operators, the appeal is clear: faster payment, reduced receivables risk, and higher conversion on deferred-repair customers. Early adopters in the LA market report that offering point-of-sale financing has increased average repair order completion rates by 15-20%.</p><p>The risks, however, are real. BNPL financing introduces new compliance requirements, and operators must evaluate platform fees that typically run 3-6% of the transaction value. There are also consumer protection concerns; regulators in California have signaled increased scrutiny of BNPL products in essential services categories.</p><p>Credit-recovery professionals note an additional dimension: BNPL payment history is increasingly reported to credit bureaus. For consumers rebuilding credit after an auto-related financial event, timely BNPL payments on collision repairs could become part of their credit recovery strategy, turning a repair bill into a score-building opportunity.</p>",
+      "category": "Fintech & Innovation",
+      "tags": ["BNPL", "collision repair", "fintech", "consumer finance", "payment innovation"],
+      "source_url": "https://www.pymnts.com/buy-now-pay-later/",
+      "source_title": "BNPL Expansion into Auto Services",
+      "source_attribution": "Reporting informed by PYMNTS.com",
+      "published": "2026-02-23T09:15:00Z",
+      "generated_at": "2026-02-27T06:00:00Z",
+      "city": "la"
+    }
+  ],
+  "ticker_items": [
+    {
+      "text": "LA subprime auto delinquencies hit 6.3% — highest in 18 months",
+      "city": "la",
+      "article_id": "seed-001"
+    },
+    {
+      "text": "LA County auto insurance premiums on track to exceed $3,100 by mid-2026",
+      "city": "la",
+      "article_id": "seed-002"
+    },
+    {
+      "text": "BNPL platforms launch collision repair financing — LA shops adopt early",
+      "city": "la",
+      "article_id": "seed-003"
+    },
+    {
+      "text": "Credit repair inquiries tied to auto events up 22% YoY in LA metro",
+      "city": "la",
+      "article_id": "seed-001"
+    },
+    {
+      "text": "Collision shops report 15-20% boost in repair completions via BNPL",
+      "city": "la",
+      "article_id": "seed-003"
+    }
+  ],
+  "trending": [
+    {
+      "headline": "LA Auto Loan Delinquencies Hit 18-Month High as Subprime Originations Climb",
+      "category": "Credit & Lending",
+      "id": "seed-001"
+    },
+    {
+      "headline": "Insurance Premium Shock: LA Collision Shops Brace for $3,100 Average Policy Year",
+      "category": "Insurance & Risk",
+      "id": "seed-002"
+    },
+    {
+      "headline": "BNPL Meets the Body Shop: Buy Now Pay Later Expands into Collision Repair Financing",
+      "category": "Fintech & Innovation",
+      "id": "seed-003"
+    }
+  ],
+  "last_updated": "2026-02-27T06:00:00Z"
+}

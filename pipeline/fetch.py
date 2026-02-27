@@ -4,8 +4,12 @@ HIRECAR MarketWatch -- RSS Fetch + Relevance Filtering
 import json
 import os
 import re
+import sys
 import feedparser
 from datetime import datetime, timezone
+
+# Ensure pipeline directory is on the path for sibling imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import (
     PYMNTS_RSS_URL,

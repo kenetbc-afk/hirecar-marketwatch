@@ -2,9 +2,14 @@
 HIRECAR MarketWatch -- Claude API Article Rewriting + Localization
 """
 import json
+import os
 import re
+import sys
 import uuid
 from anthropic import Anthropic
+
+# Ensure pipeline directory is on the path for sibling imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import ANTHROPIC_API_KEY, ANTHROPIC_MODEL, EDITIONS, CATEGORIES
 from prompts import SYSTEM_PROMPT, REWRITE_TEMPLATE, TICKER_TEMPLATE
@@ -68,14 +73,17 @@ def rewrite_article(client, source, city_code):
 
     raw = response.content[0].text.strip()
 
-    # Parse JSON response -- handle potential markdown fences
-    if raw.startswith("```"):
-        raw = raw.split("\n", 1)[1]
-        if raw.endswith("```"):
-            raw = raw[:-3]
-        raw = raw.strip()
+    # Parse JSON response — robustly strip markdown code fences if present
+    raw = re.sub(r"^```(?:json)?\s*\n?", "", raw)
+    raw = re.sub(r"\n?```\s*$", "", raw)
+    raw = raw.strip()
 
-    article = json.loads(raw)
+    try:
+        article = json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"  JSON parse error: {e}")
+        print(f"  Raw response (first 300 chars): {raw[:300]}")
+        raise
 
     # Add metadata
     article["id"] = str(uuid.uuid4())[:8]

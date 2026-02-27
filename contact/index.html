@@ -1434,19 +1434,19 @@
             <h3 class="info-block__title">Follow Us</h3>
             <div class="social-links">
               <!-- Instagram -->
-              <a href="#" class="social-link" aria-label="Instagram">
+              <a href="#" onclick="return false;" class="social-link" aria-label="Instagram">
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
               </a>
               <!-- LinkedIn -->
-              <a href="#" class="social-link" aria-label="LinkedIn">
+              <a href="#" onclick="return false;" class="social-link" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="4" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
               </a>
               <!-- X/Twitter -->
-              <a href="#" class="social-link" aria-label="X (Twitter)">
+              <a href="#" onclick="return false;" class="social-link" aria-label="X (Twitter)">
                 <svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.8L16 20h4l-6.8-8.4L20 4h-2l-5.2 6.4L8 4H4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
               </a>
               <!-- YouTube -->
-              <a href="#" class="social-link" aria-label="YouTube">
+              <a href="#" onclick="return false;" class="social-link" aria-label="YouTube">
                 <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg>
               </a>
             </div>
@@ -1792,14 +1792,40 @@
           }
 
           if (isValid) {
-            // Simulate submission
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
-            setTimeout(function() {
+            var payload = {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              subject: subject,
+              message: message,
+              source: 'contact-page',
+              leadType: 'contact-inquiry',
+              timestamp: new Date().toISOString(),
+              referenceId: 'HC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase(),
+              phone: '',
+              status: 'new'
+            };
+
+            fetch('https://hook.us2.make.com/cruoficmy70b9mwtxysi03vojk24k8jf', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            })
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Server responded with status ' + response.status);
+              }
               form.style.display = 'none';
               formSuccess.classList.add('show');
-            }, 1200);
+            })
+            .catch(function(error) {
+              alert('Something went wrong. Please try again.');
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Message';
+            });
           }
         });
       }

@@ -2320,6 +2320,27 @@ ul, ol { list-style: none; }
   btnBack4.addEventListener('click', function() { goToStep(3); });
 
   btnConfirm.addEventListener('click', function() {
+    // Fire lead data to Make webhook (fire-and-forget)
+    fetch('https://hook.us2.make.com/cruoficmy70b9mwtxysi03vojk24k8jf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone') ? document.getElementById('phone').value.trim() : "",
+        source: "booking-page",
+        leadType: "booking-request",
+        subject: state.selectedService ? state.selectedService.name : "Booking Request",
+        message: "Service: " + (state.selectedService ? state.selectedService.name : "N/A") + " | Date: " + formatDate(state.selectedDate) + " | Time: " + (state.selectedTime || "N/A") + " | Duration: " + (state.selectedService ? state.selectedService.duration : "N/A") + " | Price: " + (state.selectedService ? state.selectedService.price : "N/A"),
+        timestamp: new Date().toISOString(),
+        referenceId: document.getElementById('refNumber').textContent,
+        status: "new"
+      })
+    }).catch(function(err) {
+      console.error('Webhook submission error:', err);
+    });
+
     // Show success state
     btnConfirm.innerHTML = '&#10003; Booking Confirmed!';
     btnConfirm.style.background = 'var(--success)';
