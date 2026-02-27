@@ -1,12 +1,27 @@
 """
-HIRECAR MarketWatch — Claude API Article Rewriting + Localization
+HIRECAR MarketWatch -- Claude API Article Rewriting + Localization
 """
 import json
+import re
 import uuid
 from anthropic import Anthropic
 
 from config import ANTHROPIC_API_KEY, ANTHROPIC_MODEL, EDITIONS, CATEGORIES
 from prompts import SYSTEM_PROMPT, REWRITE_TEMPLATE, TICKER_TEMPLATE
+
+
+def sanitize_text(text):
+    """Remove any non-ASCII characters to prevent encoding errors."""
+    replacements = {
+        "\u2014": " -- ", "\u2013": " - ",
+        "\u2018": "'", "\u2019": "'",
+        "\u201c": '"', "\u201d": '"',
+        "\u2026": "...", "\u00a0": " ",
+        "\u2022": "* ", "\u00b7": " ",
+    }
+    for char, repl in replacements.items():
+        text = text.replace(char, repl)
+    return text.encode("ascii", "replace").decode("ascii")
 
 
 def get_client():
@@ -35,9 +50,9 @@ def rewrite_article(client, source, city_code):
     categories_str = ", ".join(CATEGORIES)
 
     prompt = REWRITE_TEMPLATE.format(
-        source_title=source["title"],
-        source_date=source["published"],
-        source_summary=source["summary"][:1500],
+        source_title=sanitize_text(source["title"]),
+        source_date=sanitize_text(source["published"]),
+        source_summary=sanitize_text(source["summary"][:1500]),
         city_name=edition["name"],
         city_code=city_code,
         local_context=local_context,

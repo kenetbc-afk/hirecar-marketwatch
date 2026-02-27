@@ -1,5 +1,5 @@
 """
-HIRECAR MarketWatch — RSS Fetch + Relevance Filtering
+HIRECAR MarketWatch -- RSS Fetch + Relevance Filtering
 """
 import json
 import os

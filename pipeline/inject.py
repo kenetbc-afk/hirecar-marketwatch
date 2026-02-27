@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-HIRECAR MarketWatch — Main Pipeline Orchestrator
+HIRECAR MarketWatch -- Main Pipeline Orchestrator
 Fetch -> Filter -> Rewrite -> Save to data/articles.json
 """
 import json
@@ -54,7 +54,7 @@ def run_pipeline(repo_root=None):
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     print("=" * 60)
-    print("HIRECAR MarketWatch — Content Pipeline")
+    print("HIRECAR MarketWatch -- Content Pipeline")
     print(f"Run time: {datetime.now(timezone.utc).isoformat()}")
     print("=" * 60)
 
