@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peter Mills — Litigation Evidence Intake | SeedXchange / CREDITWITHKEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f2ee;
+    --cream: #ede9e2;
+    --gold: #b8922a;
+    --gold-light: #d4aa4a;
+    --rule: #c8c0b4;
+    --muted: #7a7068;
+    --white: #ffffff;
+    --error: #c0392b;
+    --success: #1a6b3c;
+    --red-dark: #8b1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── PASSWORD GATE ─── */
+  #authGate {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .gate-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 48px 40px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gate-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .gate-lock-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 20px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gate-lock-icon svg { width: 28px; height: 28px; }
+
+  .gate-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .gate-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .gate-confidential {
+    display: inline-block;
+    background: var(--red-dark);
+    color: var(--white);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .gate-input-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .gate-input-wrap input {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 14px 48px 14px 18px;
+    border: 2px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .gate-input-wrap input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(184,146,42,0.12);
+    background: var(--white);
+  }
+
+  .gate-input-wrap .toggle-pw {
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%);
+    background: none; border: none;
+    cursor: pointer; font-size: 18px;
+    color: var(--muted);
+    padding: 4px;
+  }
+
+  .gate-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-bottom: 16px;
+  }
+
+  .gate-btn:hover {
+    background: var(--gold);
+    box-shadow: 0 6px 24px rgba(184,146,42,0.35);
+  }
+
+  .gate-error {
+    color: var(--error);
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 20px;
+    margin-bottom: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .gate-disclaimer {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ─── MAIN CONTENT (hidden until auth) ─── */
+  #protectedContent { display: none; }
+
+  /* ─── TOP BANNER ─── */
+  .top-banner {
+    background: var(--red-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .sub-banner {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 8px 20px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: var(--ink);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-mark svg { width: 26px; height: 26px; }
+
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+
+  .logo-text .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .logo-text .tagline {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 3px;
+  }
+
+  .header-right { text-align: right; }
+
+  .header-right .service-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .header-right .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ─── HERO ─── */
+  .form-hero {
+    background: var(--ink);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 20% 50%, rgba(184,146,42,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(184,146,42,0.08) 0%, transparent 50%);
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(184,146,42,0.15);
+    border: 1px solid rgba(184,146,42,0.4);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold-light);
+    border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ─── CASE REFERENCE CARD ─── */
+  .case-ref-card {
+    max-width: 860px;
+    margin: -32px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .case-ref-inner {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+
+  .case-ref-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case-ref-header-icon {
+    width: 28px; height: 28px;
+    background: var(--ink);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .case-ref-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .case-ref-header-badge {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .case-ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .case-ref-item {}
+
+  .case-ref-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .case-ref-value {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-bar-wrap {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .progress-label { font-size: 12px; color: var(--muted); font-weight: 500; white-space: nowrap; }
+  .progress-track { flex: 1; height: 4px; background: var(--rule); border-radius: 2px; }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+  .progress-pct { font-size: 12px; font-weight: 600; color: var(--gold); white-space: nowrap; min-width: 36px; text-align: right; }
+
+  /* ─── LAYOUT ─── */
+  .form-layout {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ─── SECTION ─── */
+  .form-section {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+
+  .form-section:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 28px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .section-header:hover { background: #e6e1da; }
+
+  .section-number {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Playfair Display', serif;
+    transition: background 0.3s;
+  }
+
+  .section-number.completed { background: var(--success); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .section-toggle {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+
+  .section-toggle.open { transform: rotate(180deg); }
+
+  .section-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-body.collapsed { display: none; }
+
+  /* ─── FIELD ─── */
+  .field { display: flex; flex-direction: column; gap: 8px; }
+
+  .field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .required-star { color: var(--gold); font-size: 14px; }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field textarea,
+  .field select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,146,42,0.1);
+    background: var(--white);
+  }
+
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  .currency-wrap { position: relative; }
+  .currency-symbol {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+    pointer-events: none;
+  }
+  .currency-wrap input { padding-left: 28px; }
+
+  /* ─── RADIO ─── */
+  .radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--paper);
+  }
+
+  .radio-option:hover {
+    border-color: var(--gold-light);
+    background: #fffdf7;
+  }
+
+  .radio-option.selected {
+    border-color: var(--gold);
+    background: rgba(184,146,42,0.06);
+  }
+
+  .radio-option input[type="radio"] { display: none; }
+
+  .radio-dot {
+    width: 18px; height: 18px;
+    border: 2px solid var(--rule);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .radio-option.selected .radio-dot {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+
+  .radio-option.selected .radio-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--white);
+    border-radius: 50%;
+  }
+
+  .radio-label { font-size: 14px; color: var(--ink); }
+
+  /* ─── FILE UPLOAD ─── */
+  .upload-zone {
+    border: 2px dashed var(--rule);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--gold);
+    background: rgba(184,146,42,0.04);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  .upload-icon { font-size: 28px; margin-bottom: 10px; }
+  .upload-text { font-size: 13px; color: var(--muted); }
+  .upload-text strong { color: var(--gold); }
+  .upload-files-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+
+  .uploaded-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .uploaded-file .file-icon { font-size: 14px; }
+  .uploaded-file .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .uploaded-file .remove-file { cursor: pointer; color: var(--muted); transition: color 0.2s; }
+  .uploaded-file .remove-file:hover { color: var(--error); }
+
+  /* ─── TWO COL ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ─── DOCUMENTS ON FILE ─── */
+  .docs-on-file {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .docs-on-file-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 28px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .docs-on-file-icon {
+    width: 32px; height: 32px;
+    background: var(--success);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .docs-on-file-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .docs-on-file-body {
+    padding: 24px 28px;
+  }
+
+  .docs-on-file-note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .doc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .doc-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .doc-list li .doc-check {
+    width: 20px; height: 20px;
+    background: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* ─── SUBMIT ─── */
+  .form-footer {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .submit-note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 16px 48px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .btn-submit:hover {
+    background: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(184,146,42,0.35);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  /* ─── SITE FOOTER ─── */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    line-height: 2;
+  }
+
+  .site-footer strong { color: rgba(255,255,255,0.75); }
+  .site-footer a { color: var(--gold-light); text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; }
+
+  .footer-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin: 12px auto;
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--ink);
+    color: var(--white);
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 999;
+    border-left: 4px solid var(--gold);
+    max-width: 400px;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ─── ANIMATION ─── */
+  .form-section, .docs-on-file, .form-footer { opacity: 0; transform: translateY(20px); animation: fadeUp 0.5s forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .form-section:nth-child(1) { animation-delay: 0.05s; }
+  .form-section:nth-child(2) { animation-delay: 0.1s; }
+  .form-section:nth-child(3) { animation-delay: 0.15s; }
+  .form-section:nth-child(4) { animation-delay: 0.2s; }
+  .form-section:nth-child(5) { animation-delay: 0.25s; }
+  .form-section:nth-child(6) { animation-delay: 0.3s; }
+  .form-section:nth-child(7) { animation-delay: 0.35s; }
+  .form-section:nth-child(8) { animation-delay: 0.4s; }
+  .form-section:nth-child(9) { animation-delay: 0.45s; }
+  .docs-on-file { animation-delay: 0.5s; }
+  .form-footer { animation-delay: 0.55s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .site-header { padding: 16px 20px; }
+    .form-hero { padding: 40px 20px; }
+    .case-ref-inner { padding: 20px; }
+    .case-ref-grid { grid-template-columns: 1fr; }
+    .section-header { padding: 18px 20px; }
+    .section-body { padding: 20px; }
+    .progress-bar-wrap { padding: 14px 20px; }
+    .form-layout { padding: 32px 16px 60px; }
+    .gate-card { padding: 36px 24px; }
+  }
+
+  /* ─── EVIDENCE STATUS BADGES ─── */
+  .ev-status { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:4px 10px; border-radius:4px; margin-left:8px; }
+  .ev-status.confirmed { background:#e8f5e9; color:#1a6b3c; border:1px solid rgba(26,107,60,0.25); }
+  .ev-status.exposed { background:#fde8e8; color:#8b1a1a; border:1px solid rgba(139,26,26,0.25); }
+  .ev-status.partial { background:#fff3e0; color:#b8922a; border:1px solid rgba(184,146,42,0.3); }
+  .ev-note { font-size:12px; color:var(--muted); line-height:1.5; margin-top:4px; padding:8px 12px; background:var(--paper); border-radius:6px; border-left:3px solid var(--rule); }
+  .ev-note.warn { border-left-color:#c0392b; background:#fdf2f2; }
+  .ev-note.ok { border-left-color:#1a6b3c; background:#f2faf5; }
+  .ev-note.info { border-left-color:#b8922a; background:#fffbf0; }
+  .field-hint { font-size:11px; color:var(--muted); font-weight:400; font-style:italic; margin-top:-4px; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     PASSWORD GATE OVERLAY
+     ══════════════════════════════════════════════ -->
+<div id="authGate">
+  <div class="gate-card">
+    <div class="gate-confidential">Confidential -- Authorized Access Only</div>
+    <div class="gate-lock-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#b8922a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        <circle cx="12" cy="16" r="1"/>
+      </svg>
+    </div>
+    <h2 class="gate-title">Peter Mills Evidence Intake</h2>
+    <p class="gate-subtitle">
+      Mills v. Cho et al. — Security Deposit Dispute<br>
+      Enter the authorized password to access this form.
+    </p>
+    <div class="gate-error" id="gateError"></div>
+    <div class="gate-input-wrap">
+      <input type="password" id="gatePassword" placeholder="Enter access password" autocomplete="off" autofocus>
+      <button class="toggle-pw" type="button" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility" id="togglePwBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <button class="gate-btn" id="gateSubmit" onclick="attemptAuth()">Unlock Form</button>
+    <div class="gate-disclaimer">
+      This is client-side password protection only. It is not equivalent to server-grade encryption. Do not rely on this for securing highly sensitive data against determined adversaries. For full security, host behind authenticated server infrastructure.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PROTECTED FORM CONTENT
+     ══════════════════════════════════════════════ -->
+<div id="protectedContent">
+
+<div class="top-banner">CONFIDENTIAL -- AUTHORIZED ACCESS ONLY</div>
+<div class="sub-banner">Litigation Evidence Intake -- Mills v. Cho et al.</div>
+
+<header class="site-header">
+  <a class="logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2C7 2 2 7 2 13s5 11 11 11 11-5 11-11S19 2 13 2z" fill="none" stroke="#b8922a" stroke-width="1.8"/>
+        <path d="M9 13h8M13 9v8" stroke="#b8922a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M7 9.5C8.2 7.5 10.5 6 13 6c4 0 7 3.1 7 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="brand">SeedXchange</span>
+      <span class="tagline">CREDITWITHKEN -- Legal & Financial Services</span>
+    </div>
+  </a>
+  <div class="header-right">
+    <div class="service-label">Service Provider</div>
+    <div class="service-name">SeedXchange, LLC</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="form-hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Litigation Evidence Confirmation & Upload</div>
+    <h1 class="hero-title">Peter T. Mills<br>Evidence Intake Form</h1>
+    <p class="hero-sub">Complete all required fields and upload supporting documents. All submissions are handled with strict confidentiality under SeedXchange / CREDITWITHKEN protocols.</p>
+  </div>
+</div>
+
+<!-- CASE REFERENCE CARD -->
+<div class="case-ref-card">
+  <div class="case-ref-inner">
+    <div class="case-ref-header">
+      <div class="case-ref-header-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8922a" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+      </div>
+      <div class="case-ref-header-title">Case Reference Summary</div>
+      <div class="case-ref-header-badge">Active</div>
+    </div>
+    <div class="case-ref-grid">
+      <div class="case-ref-item">
+        <div class="case-ref-label">Client / Plaintiff</div>
+        <div class="case-ref-value">Peter T. Mills (Pro Per)</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Case</div>
+        <div class="case-ref-value">Mills v. Cho et al.</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Property</div>
+        <div class="case-ref-value">25625 Birchleaf Ct., Valencia, CA 91381</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Defendants</div>
+        <div class="case-ref-value">New Star Realty, Inc.; Cho; Alan Oh (Broker)</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Security Deposit</div>
+        <div class="case-ref-value">$9,000.00</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Governing Statute</div>
+        <div class="case-ref-value">CA Civil Code &sect; 1950.5</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Filing Court</div>
+        <div class="case-ref-value">Los Angeles County Superior Court</div>
+      </div>
+      <div class="case-ref-item">
+        <div class="case-ref-label">Proposal Signed</div>
+        <div class="case-ref-value">March 31, 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <span class="progress-label">Required Fields Completed</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- FORM BODY -->
+<div class="form-layout" id="mainForm">
+
+  <!-- ╔═══════════════════════════════════════════╗
+       ║  SECTION 1 — Move-Out & Deposit Timeline  ║
+       ╚═══════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="1">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn1">1</div>
+      <div class="section-title">Move-Out & Deposit Timeline</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Date you vacated the property <span class="required-star">*</span></label>
+          <input type="date" name="vacate_date" required data-req="1">
+        </div>
+        <div class="field">
+          <label class="field-label">Date keys were returned <span class="required-star">*</span></label>
+          <input type="date" name="keys_returned" required data-req="1">
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Total security deposit paid <span class="required-star">*</span></label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="text" name="deposit_total" placeholder="9,000.00" required data-req="1">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Amount returned <span class="required-star">*</span></label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="text" name="amount_returned" placeholder="0.00" required data-req="1">
+          </div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Amount withheld <span class="required-star">*</span></label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="text" name="amount_withheld" placeholder="0.00" required data-req="1">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Date disposition statement received <span class="required-star">*</span></label>
+          <input type="date" name="disposition_date" required data-req="1">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Was the disposition received within 21 days? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="disposition_21days" data-req="1">
+          <label class="radio-option"><input type="radio" name="disposition_21days" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="disposition_21days" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="disposition_21days" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="disposition_21days" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload deposit disposition statement <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'disp_doc')">
+          <input type="file" id="disp_doc" multiple onchange="handleFiles(this,'disp_doc_list')">
+          <div class="upload-icon">&#128196;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="disp_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 2 — Itemized Statement & Receipts     ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="2">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn2">2</div>
+      <div class="section-title">Itemized Statement & Receipts</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">Did the statement include actual receipts (not estimates)? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="has_receipts" data-req="1">
+          <label class="radio-option"><input type="radio" name="has_receipts" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="has_receipts" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="has_receipts" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="has_receipts" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Were vendor names listed? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="vendor_names" data-req="1">
+          <label class="radio-option"><input type="radio" name="vendor_names" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="vendor_names" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="vendor_names" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="vendor_names" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Were contractor license numbers listed? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="license_nums" data-req="1">
+          <label class="radio-option"><input type="radio" name="license_nums" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="license_nums" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="license_nums" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="license_nums" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Were amounts rounded to whole dollar figures? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="rounded_amounts" data-req="1">
+          <label class="radio-option"><input type="radio" name="rounded_amounts" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="rounded_amounts" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="rounded_amounts" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="rounded_amounts" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload receipts, invoices, or estimates <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'receipts_doc')">
+          <input type="file" id="receipts_doc" multiple onchange="handleFiles(this,'receipts_doc_list')">
+          <div class="upload-icon">&#129534;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="receipts_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 3 — Property Condition Evidence        ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="3">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn3">3</div>
+      <div class="section-title">Property Condition Evidence</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">Do you have time-stamped move-out photos? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="moveout_photos" data-req="1">
+          <label class="radio-option"><input type="radio" name="moveout_photos" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="moveout_photos" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="moveout_photos" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload move-out photos <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'photos_doc')">
+          <input type="file" id="photos_doc" multiple accept="image/*" onchange="handleFiles(this,'photos_doc_list')">
+          <div class="upload-icon">&#128247;</div>
+          <div class="upload-text">Drag & drop images here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="photos_doc_list"></div>
+      </div>
+      <div class="field">
+        <label class="field-label">Do listing photos contradict alleged damages?</label>
+        <div class="radio-group" data-name="listing_contradiction">
+          <label class="radio-option"><input type="radio" name="listing_contradiction" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="listing_contradiction" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="listing_contradiction" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="listing_contradiction" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload MLS listing screenshots <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'mls_doc')">
+          <input type="file" id="mls_doc" multiple onchange="handleFiles(this,'mls_doc_list')">
+          <div class="upload-icon">&#127968;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="mls_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 4 — Sale of Property                    ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="4">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn4">4</div>
+      <div class="section-title">Sale of Property</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Date property was listed for sale</label>
+          <input type="date" name="listed_date">
+        </div>
+        <div class="field">
+          <label class="field-label">Date property was sold</label>
+          <input type="date" name="sold_date">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Did escrow know about your deposit dispute?</label>
+        <div class="radio-group" data-name="escrow_knows">
+          <label class="radio-option"><input type="radio" name="escrow_knows" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="escrow_knows" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="escrow_knows" value="Unsure"><div class="radio-dot"></div><span class="radio-label">Unsure</span></label>
+          <label class="radio-option"><input type="radio" name="escrow_knows" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload emails discussing sale during dispute <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'sale_doc')">
+          <input type="file" id="sale_doc" multiple onchange="handleFiles(this,'sale_doc_list')">
+          <div class="upload-icon">&#9993;&#65039;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="sale_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 5 — Broker & Trust Account Issues      ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="5">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn5">5</div>
+      <div class="section-title">Broker & Trust Account Issues</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">Where was the security deposit held?</label>
+        <textarea name="deposit_held_where" placeholder="Describe where the funds were held (bank name, trust account, etc.)..."></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label">Do you have proof of where funds were deposited?</label>
+        <div class="radio-group" data-name="funds_proof">
+          <label class="radio-option"><input type="radio" name="funds_proof" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="funds_proof" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="funds_proof" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload bank or wire documentation <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'bank_doc')">
+          <input type="file" id="bank_doc" multiple onchange="handleFiles(this,'bank_doc_list')">
+          <div class="upload-icon">&#127974;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="bank_doc_list"></div>
+      </div>
+      <div class="field">
+        <label class="field-label">Did Alan Oh negotiate lease or deposit terms? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="alan_negotiated" data-req="1">
+          <label class="radio-option"><input type="radio" name="alan_negotiated" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="alan_negotiated" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="alan_negotiated" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload emails/texts showing Alan Oh negotiated <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'alan_doc')">
+          <input type="file" id="alan_doc" multiple onchange="handleFiles(this,'alan_doc_list')">
+          <div class="upload-icon">&#128172;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="alan_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 6 — Demands & Regulatory Action        ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="6">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn6">6</div>
+      <div class="section-title">Demands & Regulatory Action</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">Were demand letters sent via certified mail?</label>
+        <div class="radio-group" data-name="certified_mail">
+          <label class="radio-option"><input type="radio" name="certified_mail" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="certified_mail" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="certified_mail" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload certified mail proof <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'mail_doc')">
+          <input type="file" id="mail_doc" multiple onchange="handleFiles(this,'mail_doc_list')">
+          <div class="upload-icon">&#128236;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="mail_doc_list"></div>
+      </div>
+      <div class="field">
+        <label class="field-label">Have you filed a DRE complaint? <span class="required-star">*</span></label>
+        <div class="radio-group" data-name="dre_complaint" data-req="1">
+          <label class="radio-option"><input type="radio" name="dre_complaint" value="Yes"><div class="radio-dot"></div><span class="radio-label">Yes</span></label>
+          <label class="radio-option"><input type="radio" name="dre_complaint" value="No"><div class="radio-dot"></div><span class="radio-label">No</span></label>
+          <label class="radio-option"><input type="radio" name="dre_complaint" value="Confirmed"><div class="radio-dot"></div><span class="radio-label">Confirmed -- Already Submitted in Exhibit Packet</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload DRE filing confirmation <span style="color:var(--muted);font-weight:400">(if not already submitted)</span></label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'dre_doc')">
+          <input type="file" id="dre_doc" multiple onchange="handleFiles(this,'dre_doc_list')">
+          <div class="upload-icon">&#9878;&#65039;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="dre_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  SECTION 7 — Additional Evidence                 ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="form-section" data-section="7">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number" id="sn7">7</div>
+      <div class="section-title">Additional Evidence</div>
+      <div class="section-toggle open">&#9662;</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">Witness name and contact information</label>
+        <textarea name="witness_info" placeholder="Full name, phone number, email address, and relationship to the case..."></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label">Upload any additional documents not previously submitted</label>
+        <div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(event,this)" ondrop="handleDrop(event,this,'extra_doc')">
+          <input type="file" id="extra_doc" multiple onchange="handleFiles(this,'extra_doc_list')">
+          <div class="upload-icon">&#128206;</div>
+          <div class="upload-text">Drag & drop files here or <strong>click to browse</strong></div>
+        </div>
+        <div class="upload-files-list" id="extra_doc_list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔═══════════════════════════════════════════════╗
+       ║  CASE DOCUMENTS ALREADY ON FILE                  ║
+       ╚═══════════════════════════════════════════════╝ -->
+  <div class="docs-on-file">
+    <div class="docs-on-file-header">
+      <div class="docs-on-file-icon">&#10003;</div>
+      <div class="docs-on-file-title">Case Documents Already on File</div>
+    </div>
+    <div class="docs-on-file-body">
+      <p class="docs-on-file-note">The following documents have been received and are on file with SeedXchange / CREDITWITHKEN. You do not need to re-upload these unless you have updated versions.</p>
+      <ul class="doc-list">
+        <li><span class="doc-check">&#10003;</span>Verified Complaint (Peter T. Mills v. Cho)</li>
+        <li><span class="doc-check">&#10003;</span>Civil Case Cover Sheet (CM-010)</li>
+        <li><span class="doc-check">&#10003;</span>LACIV 109 Civil Case Cover Sheet Addendum</li>
+        <li><span class="doc-check">&#10003;</span>Notice of Case Assignment</li>
+        <li><span class="doc-check">&#10003;</span>Notice of E-Filing Confirmation</li>
+        <li><span class="doc-check">&#10003;</span>Alternative Dispute Resolution Packet</li>
+        <li><span class="doc-check">&#10003;</span>Exhibit Packet: Legal Research & Document Prep</li>
+        <li><span class="doc-check">&#10003;</span>Payment Receipts</li>
+        <li><span class="doc-check">&#10003;</span>Notice Documents</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SUBMIT FOOTER -->
+  <div class="form-footer">
+    <p class="submit-note">By submitting this form, you confirm that all information provided is accurate and complete to the best of your knowledge. This intake is for authorized use only under the engagement between Peter T. Mills and SeedXchange, LLC / CREDITWITHKEN. All data is handled in accordance with strict confidentiality protocols.</p>
+    <button type="button" class="btn-submit" onclick="submitForm()">
+      <span>Submit Evidence Intake</span>
+      <span>&rarr;</span>
+    </button>
+  </div>
+
+</div><!-- end .form-layout -->
+
+<footer class="site-footer">
+  <div class="footer-brand-row">
+    <strong>SeedXchange, LLC</strong> &nbsp;/&nbsp; <strong>CREDITWITHKEN</strong>
+  </div>
+  <div>Legal & Financial Services</div>
+  <div class="footer-divider"></div>
+  <div>
+    <a href="mailto:info@seedxg.com">info@seedxg.com</a> &nbsp;&middot;&nbsp;
+    (661) 469-1141 &nbsp;&middot;&nbsp;
+    <a href="https://seedxg.com" target="_blank">SeedXg.com</a>
+  </div>
+  <div style="margin-top:6px;">Service Fee: $18,050 total ($3,500 down payment) &nbsp;&middot;&nbsp; Proposal signed March 31, 2025</div>
+  <div class="footer-divider"></div>
+  <div>This form is confidential and intended solely for authorized litigation intake purposes.<br>Client-side protection only -- not a substitute for server-grade encryption.</div>
+</footer>
+
+</div><!-- end #protectedContent -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ═══════════════════════════════════════
+     PASSWORD GATE LOGIC
+     ═══════════════════════════════════════ */
+  var AUTH_KEY = 'pmills_intake_auth';
+  var CORRECT_PW = 'SeedXg2025!';
+
+  // Check sessionStorage on load
+  if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+    unlockForm();
+  }
+
+  // Enter key on password field
+  document.getElementById('gatePassword').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') attemptAuth();
+  });
+
+  window.attemptAuth = function() {
+    var pw = document.getElementById('gatePassword').value;
+    var errEl = document.getElementById('gateError');
+    if (pw === CORRECT_PW) {
+      sessionStorage.setItem(AUTH_KEY, 'true');
+      unlockForm();
+    } else {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      document.getElementById('gatePassword').value = '';
+      document.getElementById('gatePassword').focus();
+      // Shake animation
+      var card = document.querySelector('.gate-card');
+      card.style.animation = 'shake 0.4s ease';
+      setTimeout(function() { card.style.animation = ''; }, 400);
+    }
+  };
+
+  function unlockForm() {
+    document.getElementById('authGate').style.display = 'none';
+    document.getElementById('protectedContent').style.display = 'block';
+    updateProgress();
+  }
+
+  window.togglePasswordVisibility = function() {
+    var inp = document.getElementById('gatePassword');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  };
+
+  /* ═══════════════════════════════════════
+     SECTION TOGGLE
+     ═══════════════════════════════════════ */
+  window.toggleSection = function(header) {
+    var body = header.nextElementSibling;
+    var toggle = header.querySelector('.section-toggle');
+    if (body.classList.contains('collapsed')) {
+      body.classList.remove('collapsed');
+      body.style.display = '';
+      toggle.classList.add('open');
+    } else {
+      body.classList.add('collapsed');
+      body.style.display = 'none';
+      toggle.classList.remove('open');
+    }
+  };
+
+  /* ═══════════════════════════════════════
+     RADIO SELECTION
+     ═══════════════════════════════════════ */
+  document.querySelectorAll('.radio-group').forEach(function(group) {
+    group.querySelectorAll('.radio-option').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        group.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        opt.querySelector('input').checked = true;
+        updateProgress();
+      });
+    });
+  });
+
+  /* ═══════════════════════════════════════
+     FILE HANDLING
+     ═══════════════════════════════════════ */
+  window.handleFiles = function(input, listId) {
+    var list = document.getElementById(listId);
+    var files = Array.from(input.files);
+    files.forEach(function(f) { addFileChip(list, f); });
+    updateProgress();
+  };
+
+  function addFileChip(list, file) {
+    var div = document.createElement('div');
+    div.className = 'uploaded-file';
+    var ext = file.name.split('.').pop().toLowerCase();
+    var icons = {pdf:'&#128196;', jpg:'&#128444;', jpeg:'&#128444;', png:'&#128444;', gif:'&#128444;', doc:'&#128221;', docx:'&#128221;', xls:'&#128202;', xlsx:'&#128202;', heic:'&#128444;'};
+    var icon = icons[ext] || '&#128206;';
+    var size = file.size < 1024*1024
+      ? (file.size/1024).toFixed(0) + ' KB'
+      : (file.size/(1024*1024)).toFixed(1) + ' MB';
+    div.innerHTML = '<span class="file-icon">' + icon + '</span><span class="file-name">' + file.name + '</span><span class="file-size" style="font-size:11px;color:var(--muted);white-space:nowrap">' + size + '</span><span class="remove-file" onclick="this.parentElement.remove()">&#10005;</span>';
+    list.appendChild(div);
+  }
+
+  window.dragOver = function(e, zone) { e.preventDefault(); zone.classList.add('drag-over'); };
+  window.dragLeave = function(e, zone) { zone.classList.remove('drag-over'); };
+  window.handleDrop = function(e, zone, inputId) {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    var files = Array.from(e.dataTransfer.files);
+    var listId = inputId + '_list';
+    var list = document.getElementById(listId);
+    files.forEach(function(f) { addFileChip(list, f); });
+    updateProgress();
+  };
+
+  /* ═══════════════════════════════════════
+     PROGRESS TRACKING
+     ═══════════════════════════════════════ */
+  function updateProgress() {
+    // Count required text/date inputs
+    var textInputs = document.querySelectorAll('#mainForm input[data-req="1"][type="date"], #mainForm input[data-req="1"][type="text"]');
+    var filledText = 0;
+    textInputs.forEach(function(el) {
+      if (el.value.trim()) filledText++;
+    });
+
+    // Count required radio groups
+    var reqRadioGroups = document.querySelectorAll('#mainForm .radio-group[data-req="1"]');
+    var filledRadio = 0;
+    reqRadioGroups.forEach(function(group) {
+      var name = group.getAttribute('data-name');
+      if (document.querySelector('input[name="' + name + '"]:checked')) filledRadio++;
+    });
+
+    var total = textInputs.length + reqRadioGroups.length;
+    var filled = filledText + filledRadio;
+    var pct = total ? Math.round((filled / total) * 100) : 0;
+
+    var fillEl = document.getElementById('progressFill');
+    var pctEl = document.getElementById('progressPct');
+    if (fillEl) fillEl.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+
+    // Update section numbers for completed sections
+    for (var s = 1; s <= 7; s++) {
+      var section = document.querySelector('[data-section="' + s + '"]');
+      if (!section) continue;
+      var snEl = document.getElementById('sn' + s);
+      var sReqInputs = section.querySelectorAll('input[data-req="1"][type="date"], input[data-req="1"][type="text"]');
+      var sReqRadios = section.querySelectorAll('.radio-group[data-req="1"]');
+      var sTotal = sReqInputs.length + sReqRadios.length;
+      if (sTotal === 0) continue;
+      var sFilled = 0;
+      sReqInputs.forEach(function(el) { if (el.value.trim()) sFilled++; });
+      sReqRadios.forEach(function(group) {
+        var name = group.getAttribute('data-name');
+        if (document.querySelector('input[name="' + name + '"]:checked')) sFilled++;
+      });
+      if (sFilled === sTotal) {
+        snEl.classList.add('completed');
+      } else {
+        snEl.classList.remove('completed');
+      }
+    }
+  }
+
+  window.updateProgress = updateProgress;
+
+  /* ═══════════════════════════════════════
+     SUBMIT
+     ═══════════════════════════════════════ */
+  window.submitForm = function() {
+    // Check required fields
+    var textInputs = document.querySelectorAll('#mainForm input[data-req="1"][type="date"], #mainForm input[data-req="1"][type="text"]');
+    var reqRadioGroups = document.querySelectorAll('#mainForm .radio-group[data-req="1"]');
+    var missing = [];
+
+    textInputs.forEach(function(el) {
+      if (!el.value.trim()) {
+        var label = el.closest('.field').querySelector('.field-label');
+        missing.push(label ? label.textContent.replace('*','').trim() : el.name);
+      }
+    });
+
+    reqRadioGroups.forEach(function(group) {
+      var name = group.getAttribute('data-name');
+      if (!document.querySelector('input[name="' + name + '"]:checked')) {
+        var label = group.closest('.field').querySelector('.field-label');
+        missing.push(label ? label.textContent.replace('*','').trim() : name);
+      }
+    });
+
+    if (missing.length > 0) {
+      showToast('Please complete ' + missing.length + ' required field' + (missing.length > 1 ? 's' : '') + ' before submitting.');
+      // Scroll to first missing
+      var firstMissing = document.querySelector('#mainForm input[data-req="1"]:invalid') ||
+                         document.querySelector('#mainForm input[data-req="1"][type="date"][value=""]');
+      if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    showToast('Evidence intake submitted successfully to SeedXchange / CREDITWITHKEN. You will receive confirmation shortly.');
+  };
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 5000);
+  }
+
+  /* ═══════════════════════════════════════
+     INPUT CHANGE LISTENERS
+     ═══════════════════════════════════════ */
+  document.querySelectorAll('input[type="date"], input[type="text"], textarea').forEach(function(el) {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+})();
+</script>
+
+<!-- Shake animation for incorrect password -->
+<style>
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-12px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(6px); }
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>HIRECAR — MarketWatch UX/UI Web Development Methodology (v0.31)</title>
+
+<style>
+:root{
+  --ink:#111820; --slate:#3d4a58; --muted:#6b7280; --border:#dde1e7; --bg:#f8f9fb; --card:#ffffff;
+  --gold:#c9920a; --blue:#0f4c75; --danger:#c0392b; --ok:#1f7a3a;
+  --r:18px; --shadow:0 18px 48px rgba(17,24,32,.10); --max:1180px;
+}
+/* PASSWORD GATE */
+#pw-gate{position:fixed;inset:0;z-index:9999;background:rgba(17,24,32,.96);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center}
+#pw-gate .pw-card{background:#fff;border-radius:18px;padding:40px 36px;max-width:420px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.25)}
+#pw-gate .pw-card h2{font-size:22px;margin:0 0 6px;color:#111820;letter-spacing:-.02em}
+#pw-gate .pw-card p{font-size:13px;color:#6b7280;margin:0 0 24px;line-height:1.6}
+#pw-gate .pw-card .pw-classified{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#c9920a;font-weight:700;margin-bottom:18px}
+#pw-gate input{width:100%;padding:14px 16px;border:1.5px solid #dde1e7;border-radius:10px;font-size:15px;outline:none;font-family:inherit;transition:border-color .2s}
+#pw-gate input:focus{border-color:#c9920a;box-shadow:0 0 0 3px rgba(201,146,10,.12)}
+#pw-gate .pw-btn{width:100%;margin-top:14px;padding:14px;background:#111820;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+#pw-gate .pw-btn:hover{background:#c9920a}
+#pw-gate .pw-error{color:#c0392b;font-size:12px;margin-top:10px;display:none}
+#pw-gate .pw-note{font-size:10px;color:#6b7280;margin-top:16px;line-height:1.6}
+#doc-content{display:none}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height:1.55;
+}
+a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+code{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+.small{font-size:12px;color:var(--muted)} .muted{color:var(--muted)}
+
+.top{position:sticky;top:0;z-index:50;background:rgba(248,249,251,.92);backdrop-filter: blur(10px);border-bottom:1px solid var(--border)}
+.topin{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:34px;width:auto}
+.pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--slate)}
+.pill b{color:var(--ink)}
+
+.shell{max-width:var(--max);margin:0 auto;padding:18px 16px 70px;display:grid;grid-template-columns:320px 1fr;gap:18px}
+@media (max-width: 980px){.shell{grid-template-columns:1fr}.toc{position:relative;top:0}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);padding:16px}
+.toc{position:sticky;top:76px;align-self:start;padding:14px}
+.toc h3{margin:0 0 10px;font-size:14px}
+.toc a{display:block;padding:7px 9px;border-radius:12px;color:var(--slate)}
+.toc a:hover{background:#fff3d6;color:var(--ink);text-decoration:none}
+
+.h1{font-size:28px;letter-spacing:-.02em;margin:0 0 8px}
+.h2{font-size:20px;margin:26px 0 10px}
+h3{margin:18px 0 8px}
+hr{border:0;border-top:1px solid var(--border);margin:18px 0}
+
+.hero{
+  border-radius:var(--r);
+  border:1px solid var(--border);
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(11,18,32,.82), rgba(11,18,32,.18)),
+    url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=2000&q=75') center/cover no-repeat;
+}
+.heroIn{padding:20px 18px;display:flex;gap:14px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.hero h1{color:#fff;margin:0;font-size:28px;letter-spacing:-.02em}
+.hero p{color:rgba(255,255,255,.85);margin:8px 0 0;max-width:860px}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.hero .meta span{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#fff;padding:6px 10px;border-radius:999px;font-size:12px}
+
+.figure{border:1px solid var(--border);border-radius:var(--r);background:#fff;padding:10px}
+.figure img{width:100%;height:auto;border-radius:12px;display:block}
+.figure .cap{margin-top:8px;font-size:12px;color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width: 860px){.grid2{grid-template-columns:1fr}}
+
+.box{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fff}
+.box.do{border-color:rgba(31,122,58,.25)}
+.box.dont{border-color:rgba(192,57,43,.25)}
+.box h4{margin:0 0 8px}
+.box.do h4{color:#155a2c}
+.box.dont h4{color:var(--danger)}
+ul{margin:8px 0 0 20px}
+li{margin:4px 0}
+
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;border:1px solid var(--border);background:#fbfcfe;font-size:11px;color:var(--slate)}
+.badge.blue{border-color:rgba(15,76,117,.30);background:rgba(15,76,117,.08);color:var(--blue)}
+
+.callout{border-left:4px solid var(--gold);background:#fffaf0;padding:12px;border-radius:14px}
+.callout .t{font-weight:900;margin-bottom:4px}
+.callout.red{border-left-color:var(--danger);background:rgba(192,57,43,.06)}
+.callout.blue{border-left-color:var(--blue);background:rgba(15,76,117,.06)}
+
+details{border:1px solid var(--border);border-radius:14px;background:#fff;padding:10px 12px}
+details+details{margin-top:10px}
+summary{cursor:pointer;font-weight:900}
+summary::-webkit-details-marker{display:none}
+
+.tableWrap{overflow:auto;border-radius:14px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{text-align:left;background:#fbfcfe}
+tr:last-child td{border-bottom:none}
+
+.logoRow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:860px){.logoRow{grid-template-columns:1fr}}
+.logoCard{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fff}
+.logoCard.dark{background:#111820;border-color:#1f2a37}
+.logoCard img{height:56px;width:auto;display:block}
+
+.svgCard{border:1px solid var(--border);border-radius:16px;background:#fff;padding:12px}
+.svgCard svg{width:100%;height:auto;display:block}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-gate">
+  <div class="pw-card">
+    <div class="pw-classified">HIRECAR, LLC — Classified Document</div>
+    <h2>Authorized Access Only</h2>
+    <p>This document is classified and restricted to HIRECAR executives, approved designers, and engineers under NDA. Enter the access code to continue.</p>
+    <input type="password" id="pw-input" placeholder="Enter access code" autocomplete="off" onkeydown="if(event.key==='Enter')checkPw()"/>
+    <button class="pw-btn" onclick="checkPw()">Unlock Document</button>
+    <div class="pw-error" id="pw-error">Incorrect access code. Contact your administrator.</div>
+    <div class="pw-note">CONFIDENTIAL / INTERNAL USE ONLY<br>Unauthorized access or distribution is prohibited.</div>
+  </div>
+</div>
+
+<div id="doc-content">
+<header class="top">
+  <div class="topin">
+    <div class="brand">
+      <div>
+        <div style="font-weight:1000">HIRECAR — MarketWatch UX/UI Web Development Methodology</div>
+        <div class="small">v0.31 · CONFIDENTIAL / INTERNAL USE ONLY — CLASSIFIED</div>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill"><b>2026 posture</b> Control-first</span>
+      <span class="pill"><b>Rule</b> The Record Is the Asset</span>
+      <span class="pill"><b>Mode</b> Desktop / Remote</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc card">
+    <h3>Contents</h3>
+    <a href="#overview">0. Overview</a>
+    <a href="#intent">1. Executive Intent</a>
+    <a href="#method">2. HIRECAR Method</a>
+    <a href="#ia">3. MarketWatch IA</a>
+    <a href="#device">4. Device Strategy</a>
+    <a href="#modes">5. Desktop / Remote Standard</a>
+    <a href="#visual">6. Visual System</a>
+    <a href="#modules">7. Module Specs</a>
+    <a href="#handoff">8. Engineering Handoff</a>
+    <a href="#contracts">9. Contracts</a>
+    <a href="#measure">10. Instrumentation</a>
+    <a href="#qa">11. QA Gates</a>
+    <a href="#templates">12. Templates + Image Map</a>
+    <a href="#glossary">13. Glossary</a>
+  </aside>
+
+  <main>
+    <!-- 0) OVERVIEW -->
+    <section class="card" id="overview">
+      <div class="hero">
+        <div class="heroIn">
+          <div>
+            <h1>MarketWatch v1.1 — standards that hold under pressure.</h1>
+            <p>
+              Controlled internal methodology for designing and shipping the HIRECAR: MarketWatch homepage and related web surfaces.
+              Standardizes architecture, proof surfaces, contracts (IDs/CMS), and Desktop/Remote interaction modes.
+            </p>
+            <div class="meta">
+              <span>Do / Don't execution</span>
+              <span>Evidence-first UX</span>
+              <span>Conversion protected</span>
+              <span>Wix + Velo + CMS contracts</span>
+            </div>
+          </div>
+          <div style="min-width:260px;max-width:360px">
+            <span class="badge blue">Controlled Standard</span>
+            <div class="small" style="margin-top:10px;color:rgba(255,255,255,.78)">
+              Changes affecting payments, verification, refunds/holds, dispute language, or partner exposure require CEO approval.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="grid2">
+        <div class="callout">
+          <div class="t">Non-negotiable operating rule</div>
+          If it can create a dispute, the interface must create a record: receipt surface + timestamp + next steps + support path.
+        </div>
+        <div class="callout blue">
+          <div class="t">MarketWatch role</div>
+          Authority layer + standards engine that routes users into Apply and teaches suppliers how to operate inside HIRECAR.
+        </div>
+      </div>
+
+      <!-- Blueprint diagram -->
+      <div class="svgCard" style="margin-top:14px">
+        <svg viewBox="0 0 1200 320" role="img" aria-label="MarketWatch blueprint">
+          <defs>
+            <style>
+              .bg{fill:#0b1220}
+              .bcard{fill:#ffffff;stroke:#dde1e7;stroke-width:2;rx:18;ry:18}
+              .bt{font:900 16px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;fill:#111820}
+              .bs{font:600 12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;fill:#3d4a58}
+              .bpill{fill:#c9920a;rx:10;ry:10}
+              .bpt{font:900 11px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;fill:#ffffff}
+            </style>
+          </defs>
+          <rect class="bg" x="0" y="0" width="1200" height="320" rx="20"/>
+          <g transform="translate(24,24)">
+            <rect class="bcard" x="0" y="0" width="1152" height="272"/>
+            <text class="bt" x="18" y="38">MarketWatch v1.1 — Page Blueprint (Desktop)</text>
+            <text class="bs" x="18" y="64">Stable modules + one primary action + proof surfaces</text>
+
+            <g transform="translate(18,88)">
+              <rect class="bpill" x="0" y="0" width="96" height="24"/>
+              <text class="bpt" x="18" y="16">DO</text>
+              <text class="bs" x="110" y="16">Utility + Ticker → Masthead (Apply) → Hero → Standards → Feed (≤6) → Trending → Footer</text>
+            </g>
+
+            <g transform="translate(18,150)">
+              <rect class="bpill" x="0" y="0" width="96" height="24" style="fill:#c0392b"/>
+              <text class="bpt" x="18" y="16">DON'T</text>
+              <text class="bs" x="110" y="16">Multiple primary CTAs · content noise · hidden Apply · no receipts · time-based mode switching</text>
+            </g>
+
+            <g transform="translate(18,192)">
+              <rect x="0" y="0" width="740" height="60" fill="rgba(201,146,10,.12)" stroke="rgba(201,146,10,.35)" stroke-width="2" rx="14" ry="14"/>
+              <text class="bt" x="16" y="26" style="font-size:14px">Primary conversion rule</text>
+              <text class="bs" x="16" y="46">Apply to Qualify stays above the fold in every mode and every breakpoint</text>
+            </g>
+
+            <g transform="translate(780,192)">
+              <rect x="0" y="0" width="354" height="60" fill="rgba(15,76,117,.08)" stroke="rgba(15,76,117,.28)" stroke-width="2" rx="14" ry="14"/>
+              <text class="bt" x="16" y="26" style="font-size:14px">Proof rule</text>
+              <text class="bs" x="16" y="46">Every submit produces a receipt surface + timestamp</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 1) INTENT -->
+    <section class="card" id="intent" style="margin-top:18px">
+      <h2 class="h2">1. Executive Intent</h2>
+      <p class="muted">
+        MarketWatch exists to scale discipline before scale volume. It sets standards upstream, routes users into controlled outcomes,
+        and keeps the system defensible when incidents, billing fog, custody ambiguity, and vendor drift occur.
+      </p>
+
+      <div class="grid2">
+        <div class="box do">
+          <h4>DO</h4>
+          <ul>
+            <li>Use MarketWatch as the authority layer: clear signals, clear posture, clear routing.</li>
+            <li>Keep "Apply to Qualify" stable and above the fold.</li>
+            <li>Teach standards through content: what compliant looks like.</li>
+          </ul>
+        </div>
+        <div class="box dont">
+          <h4>DON'T</h4>
+          <ul>
+            <li>Don't treat MarketWatch like a generic blog.</li>
+            <li>Don't publish content noise that competes with conversion.</li>
+            <li>Don't weaken proof surfaces to gain clicks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) METHOD -->
+    <section class="card" id="method" style="margin-top:18px">
+      <h2 class="h2">2. The HIRECAR Method (How UX/UI is governed)</h2>
+
+      <details open>
+        <summary>2.1 Evidence Velocity Doctrine (EVD)</summary>
+        <p>
+          Time destroys evidence. Evidence protects outcomes. Any action that can create a dispute must create a record.
+        </p>
+        <div class="callout">
+          <div class="t">DO</div>
+          Design "receipt-first": confirmations, timestamps, next steps, and support entry on every submission.
+        </div>
+        <div class="callout red" style="margin-top:8px">
+          <div class="t">DON'T</div>
+          Don't rely on email alone. Don't allow silent success. Don't overwrite receipts in redesigns.
+        </div>
+      </details>
+
+      <details>
+        <summary>2.2 Lane Routing as UI Posture</summary>
+        <p>
+          Revenue/Cure/Remedy posture determines friction and gating. Friction is a control lever, not a design flaw.
+        </p>
+        <ul>
+          <li><b>Revenue:</b> scale-safe clarity and speed</li>
+          <li><b>Cure:</b> controlled recovery with added confirmations</li>
+          <li><b>Remedy:</b> containment posture with strict evidence intake</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>2.3 Access Governance</summary>
+        <p>
+          Permissions and restrictions are enforced through UX boundaries. Every restriction must tell the user: what, why, and what next.
+        </p>
+      </details>
+
+      <details>
+        <summary>2.4 Remedy Architecture</summary>
+        <p>
+          Recovery is productized through standard packs. Remedy workflows must collect structured evidence and generate export-ready packets.
+        </p>
+      </details>
+    </section>
+
+    <!-- 3) IA -->
+    <section class="card" id="ia" style="margin-top:18px">
+      <h2 class="h2">3. MarketWatch v1.1 — Information Architecture</h2>
+
+      <div class="callout blue">
+        <div class="t">Non-negotiable home modules</div>
+        Utility + Ticker · Masthead (Apply) · Hero (one) · Standards Strip · Feed (≤ 6) · Trending · Footer (support + policies).
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div class="box do">
+          <h4>DO</h4>
+          <ul>
+            <li>Limit homepage feed to six cards.</li>
+            <li>Maintain consistent card rhythm and metadata formatting.</li>
+            <li>Keep Apply stable across sessions and pages.</li>
+          </ul>
+        </div>
+        <div class="box dont">
+          <h4>DON'T</h4>
+          <ul>
+            <li>Don't add modules without removing something else.</li>
+            <li>Don't introduce competing primary actions.</li>
+            <li>Don't move Trending above Hero on mobile.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) DEVICE -->
+    <section class="card" id="device" style="margin-top:18px">
+      <h2 class="h2">4. Device Strategy — Mobile vs Desktop Execution</h2>
+
+      <div class="grid2">
+        <div class="box do">
+          <h4>Mobile = Fast Signal + One Action</h4>
+          <ul>
+            <li>In 10 seconds: what is happening (ticker + one hero) and what to do next (Apply).</li>
+            <li>Keep modules short; reduce scrolling cost.</li>
+            <li>Keep Apply visible (top + repeated at high-intent points).</li>
+          </ul>
+        </div>
+        <div class="box do">
+          <h4>Desktop = Depth + Governance + Operator Mode</h4>
+          <ul>
+            <li>Two-rail layout: feed left, trending/signals right.</li>
+            <li>Provide deeper reference links (standards, "how it works").</li>
+            <li>No "dashboard cosplay" clutter.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) MODES -->
+    <section class="card" id="modes" style="margin-top:18px">
+      <h2 class="h2">5. Interaction Modes Standard — Desktop / Remote (Replaces Day/Night)</h2>
+
+      <div class="callout">
+        <div class="t">Core decision</div>
+        Remove time-based switching (including hourly re-check). Desktop/Remote is intentional and user-controlled.
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div class="box do">
+          <h4>Desktop mode</h4>
+          <ul>
+            <li>Information-dense operator layout.</li>
+            <li>Two-rail on wide screens.</li>
+            <li>Apply stays above the fold.</li>
+          </ul>
+        </div>
+        <div class="box do">
+          <h4>Remote mode</h4>
+          <ul>
+            <li>Mobile-first visual menu hub (tiles).</li>
+            <li>Big tap targets route to existing anchors.</li>
+            <li>Bottom bar: Menu / Top / Switch Mode.</li>
+          </ul>
+        </div>
+      </div>
+
+      <details open style="margin-top:12px">
+        <summary>5.1 Mode Gate (First-run prompt)</summary>
+        <ul>
+          <li>Only appears if no preference is saved.</li>
+          <li>Desktop/Remote choice, plus "Remember on this device" (default ON).</li>
+          <li>Recommended highlight: Remote on mobile; Desktop on desktop.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>5.2 Remote Home (Visual menu hub)</summary>
+        <p>
+          Remote mode adds a tile menu hub that routes to existing section IDs. It is designed to reduce mobile bounce by routing first and reading second.
+        </p>
+        <div class="callout blue"><div class="t">Required tile targets</div>
+          Credit Recovery (featured) · Top Stories · Trending · Mobility + Rentals · Entertainment · Services · Membership
+        </div>
+      </details>
+
+      <details>
+        <summary>5.3 CSS correctness gate (release blocker)</summary>
+        <p>
+          Fix invalid rgba alpha values site-wide. Alpha must be 0–1 (example: 0.12), not 12/65/5. This is a release blocker.
+        </p>
+      </details>
+
+      <details>
+        <summary>5.4 Mobile layout fixes (grid-first)</summary>
+        <p>
+          Where the layout uses grid containers, mobile corrections must update grid templates to one column—do not use flex-direction hacks on grids.
+          Avoid competing sticky systems on mobile (nav sticky wins).
+        </p>
+      </details>
+
+      <details>
+        <summary>5.5 Persistence and Migration</summary>
+        <p>
+          If preference exists: restore immediately. If not: show Mode Gate. Migration rule: dark → Remote, light → Desktop. Silent one-time migration.
+          Remove time-based switching from the background entirely.
+        </p>
+      </details>
+    </section>
+
+    <!-- 6) VISUAL -->
+    <section class="card" id="visual" style="margin-top:18px">
+      <h2 class="h2">6. Visual System Standards</h2>
+
+      <div class="grid2">
+        <div class="box do">
+          <h4>Authority + Clean Enforcement</h4>
+          <ul>
+            <li>High contrast, strong hierarchy, minimal clutter.</li>
+            <li>CTA dominance in both modes.</li>
+            <li>Readable nav + footer in dark/remote.</li>
+          </ul>
+        </div>
+        <div class="box dont">
+          <h4>Anti-patterns</h4>
+          <ul>
+            <li>Trend aesthetics that reduce readability.</li>
+            <li>Gray-on-gray text in dark/remote.</li>
+            <li>Multiple competing CTAs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7) MODULE SPECS -->
+    <section class="card" id="modules" style="margin-top:18px">
+      <h2 class="h2">7. MarketWatch Page Specs (Module-by-module)</h2>
+
+      <details open>
+        <summary>7.1 Utility Bar + Ticker</summary>
+        <div class="grid2" style="margin-top:10px">
+          <div class="box do">
+            <h4>DO</h4>
+            <ul>
+              <li>Ticker is short, factual, standards-forward.</li>
+              <li>Readable in both Desktop and Remote.</li>
+              <li>Never louder than Apply.</li>
+            </ul>
+          </div>
+          <div class="box dont">
+            <h4>DON'T</h4>
+            <ul>
+              <li>Don't use ticker for sales copy.</li>
+              <li>Don't imply approvals/guarantees.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>7.2 Masthead (Apply gateway)</summary>
+        <p><b>DO:</b> Apply above the fold and stable. <b>DON'T:</b> hide Apply in menu-only navigation or rotate primary CTAs.</p>
+      </details>
+
+      <details>
+        <summary>7.3 Hero</summary>
+        <p><b>DO:</b> one hero only, consistent metadata. <b>DON'T:</b> multiple featured zones.</p>
+      </details>
+
+      <details>
+        <summary>7.4 Feed (≤ 6)</summary>
+        <p><b>DO:</b> one card pattern, stable ratios. <b>DON'T:</b> exceed six on homepage.</p>
+      </details>
+
+      <details>
+        <summary>7.5 Trending</summary>
+        <p><b>DO:</b> ranked list; desktop right rail; mobile below feed. <b>DON'T:</b> trending above hero on mobile.</p>
+      </details>
+
+      <details>
+        <summary>7.6 Proof surfaces (Receipts)</summary>
+        <p>
+          Every submission ends in a receipt surface containing: timestamp, summary, next steps, support entry, and reference ID (where applicable).
+        </p>
+      </details>
+    </section>
+
+    <!-- 8) HANDOFF -->
+    <section class="card" id="handoff" style="margin-top:18px">
+      <h2 class="h2">8. Engineering Handoff Standard (Wix + Velo)</h2>
+
+      <details open>
+        <summary>8.1 Boot order stability</summary>
+        <ul>
+          <li>Initialize mode (with migration) before layout-dependent scripts.</li>
+          <li>Bind Mode Gate + toggle + Remote routing before counters/reveals/sticky detection.</li>
+          <li>Remove hourly time-based switching entirely.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>8.2 Mobile layout discipline</summary>
+        <p>Fix grid containers by updating grid templates; do not apply flex-direction hacks on grids. Prevent competing sticky systems.</p>
+      </details>
+
+      <details>
+        <summary>8.3 CSS correctness gate</summary>
+        <p>Invalid rgba alpha values must be corrected before release. Treat as a release blocker.</p>
+      </details>
+    </section>
+
+    <!-- 9) CONTRACTS -->
+    <section class="card" id="contracts" style="margin-top:18px">
+      <h2 class="h2">9. Contracts (IDs · CMS Schema · Tokens)</h2>
+
+      <div class="callout blue">
+        <div class="t">Contract rule</div>
+        IDs and schema are contracts. Renaming breaks bindings. Token drift breaks consistency.
+      </div>
+
+      <details open style="margin-top:12px">
+        <summary>9.1 Element IDs</summary>
+        <p class="muted">Assign element IDs exactly as the design contract requires. Treat renaming as a breaking change requiring coordination and approvals.</p>
+      </details>
+
+      <details>
+        <summary>9.2 CMS schema</summary>
+        <p class="muted">Design cards and modules to survive missing optional fields. Support "coming soon" editions with clear disabled states.</p>
+      </details>
+
+      <details>
+        <summary>9.3 Tokens</summary>
+        <p class="muted">Use tokens for colors and spacing. Document token changes as version updates. No random hex without tokens + documentation.</p>
+      </details>
+    </section>
+
+    <!-- 10) MEASUREMENT -->
+    <section class="card" id="measure" style="margin-top:18px">
+      <h2 class="h2">10. Instrumentation</h2>
+
+      <div class="tableWrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>Funnel</th><th>Required events</th><th>Proof requirement</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>MarketWatch → Apply</b></td>
+              <td>view_marketwatch, select_edition, click_hero, click_apply, apply_start, apply_submit, receipt_view</td>
+              <td>Every submit renders receipt surface + timestamp</td>
+            </tr>
+            <tr>
+              <td><b>Engagement</b></td>
+              <td>article_click, trending_click, ticker_visible (optional)</td>
+              <td>Click targets unambiguous (no "maybe clicked" UI)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11) QA -->
+    <section class="card" id="qa" style="margin-top:18px">
+      <h2 class="h2">11. QA Gates (Release is controlled)</h2>
+
+      <details open>
+        <summary>11.1 Must-pass checklist</summary>
+        <ul>
+          <li>Apply above fold (desktop + mobile)</li>
+          <li>Mode Gate only when no preference exists</li>
+          <li>Desktop/Remote toggle works + correct label</li>
+          <li>No time-based switching remains</li>
+          <li>Remote routing works + bottom bar respects safe area</li>
+          <li>Mobile grid stacking correct</li>
+          <li>Invalid rgba corrected</li>
+          <li>Receipt surfaces exist for submissions</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>11.2 Release blockers</summary>
+        <ul>
+          <li>Apply missing above fold</li>
+          <li>Mode switching breaks layout or hides content</li>
+          <li>Submissions without receipts</li>
+          <li>IDs/schema renamed after bind without coordinated release</li>
+          <li>Invalid rgba values remain</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- 12) TEMPLATES -->
+    <section class="card" id="templates" style="margin-top:18px">
+      <h2 class="h2">12. Templates + Image/Example Placement Map</h2>
+
+      <div class="grid2">
+        <div class="box do">
+          <h4>Templates (Controlled Exhibits)</h4>
+          <ul>
+            <li>DRP — Design Request Pack</li>
+            <li>Module Spec Sheet (per module)</li>
+            <li>Component Documentation Sheet (states/variants/do/don't)</li>
+            <li>Release Checklist + Screenshot Log</li>
+            <li>Receipt Surface Spec</li>
+            <li>Desktop/Remote Rollout Checklist</li>
+          </ul>
+        </div>
+        <div class="box do">
+          <h4>Image/Example Placement Map</h4>
+          <ul>
+            <li>Annotated wireframes (Desktop + Mobile)</li>
+            <li>Mode Gate screenshots (recommended states)</li>
+            <li>Remote tile grid screenshots (2-col + 1-col)</li>
+            <li>Remote bottom bar safe-area examples</li>
+            <li>Before/After: mobile grid fix + dark readability + rgba correction</li>
+            <li>Receipt surfaces + empty/error state gallery</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13) GLOSSARY -->
+    <section class="card" id="glossary" style="margin-top:18px">
+      <h2 class="h2">13. Controlled Glossary</h2>
+
+      <details open><summary>EVD — Evidence Velocity Doctrine</summary>
+        <p>Speed-to-verifiable-record. No verbal-only decisions. UX must generate proof surfaces.</p>
+      </details>
+
+      <details><summary>BRE Lane Routing</summary>
+        <p>Revenue/Cure/Remedy posture determines friction and gating. Not negotiated in the moment.</p>
+      </details>
+
+      <details><summary>MEB — Minimum Evidence Bundle</summary>
+        <p>Who/what/when/where/state/outcome/attachments + receipt surface.</p>
+      </details>
+
+      <details><summary>Desktop / Remote</summary>
+        <p>Intentional interaction modes replacing time-based theme switching; never weakens governance.</p>
+      </details>
+    </section>
+
+    <div style="margin-top:24px;text-align:center;padding:18px">
+      <p class="small">HIRECAR, LLC dba HIRECREDIT / CREDITWITHKEN, LLC — CONFIDENTIAL / INTERNAL USE ONLY — CLASSIFIED</p>
+      <p class="small">v0.31 · Feb. 2026 · Master Governing Playbook (MGP)</p>
+    </div>
+
+  </main>
+</div>
+
+</div><!-- /doc-content -->
+
+<script>
+(function(){
+  var CODE='SeedXg2025!';
+  if(sessionStorage.getItem('hc_auth')==='1'){
+    document.getElementById('pw-gate').style.display='none';
+    document.getElementById('doc-content').style.display='';
+  }
+  window.checkPw=function(){
+    var v=document.getElementById('pw-input').value;
+    if(v===CODE){
+      sessionStorage.setItem('hc_auth','1');
+      document.getElementById('pw-gate').style.display='none';
+      document.getElementById('doc-content').style.display='';
+    }else{
+      document.getElementById('pw-error').style.display='block';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+  };
+  document.getElementById('pw-input').focus();
+})();
+</script>
+</body>
+</html>

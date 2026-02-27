@@ -1,0 +1,174 @@
+{
+  "version": "v18",
+  "baseVersion": "v13 (latest project file)",
+  "date": "2026-02-24",
+  "changes": {
+    "CSS": [
+      {
+        "id": "DESKTOP_CUTOFF_SCROLL_FIX",
+        "priority": "P0",
+        "description": "Fixed desktop mode being cut off in Wix iframe",
+        "details": [
+          "Replaced global `html { overflow: hidden; }` with `html, body { width:100%; height:auto; min-height:100%; overflow-x:hidden; }`",
+          "Added `body { overflow-y:auto; -webkit-text-size-adjust:100%; }`",
+          "Kept `body.remote-mode { overflow:hidden !important; }`",
+          "Removed duplicate overflow rules in @media (max-width: 768px) block"
+        ],
+        "find": "/* iframe embed fix */",
+        "anchor": "Line ~1902 in v13"
+      },
+      {
+        "id": "REMOTE_VIEWPORT_EDGE_TO_EDGE",
+        "priority": "P0",
+        "description": "Remote mode fills full mobile screen using visualViewport",
+        "details": [
+          "#remoteHub uses `height: var(--rh-vh, 100svh)`",
+          "iframe-mode uses `min-height: var(--rh-vh, 100vh)` and `height: var(--rh-vh, 100vh)`",
+          "JS sets --rh-vh via visualViewport API on load/resize/orientation"
+        ],
+        "anchor": "Line ~2884 in v13"
+      },
+      {
+        "id": "LOGO_WORDMARK_CLEANUP",
+        "priority": "P0",
+        "description": "Tighter remote masthead logo + wordmark alignment",
+        "details": [
+          ".rh-logo-link gap: 4px (desktop), 3px (mobile)",
+          ".rh-logo opacity:1, no animation delay - immediate visibility",
+          "Added .rh-wordmark-block, .rh-wordmark, .rh-wordmark-est classes",
+          "MarketWatch! in Cormorant Garant 16px, HIRECAR LLC Est. Nov 2024 in DM Mono 7px",
+          "Wordmark sits exactly below logo with line-height:1"
+        ],
+        "anchor": "Line ~3048 in v13"
+      },
+      {
+        "id": "HERO_HEADLINE_TWO_LINES",
+        "priority": "P1",
+        "description": "Hero headline balanced on two lines",
+        "details": [
+          "Added text-wrap:balance and max-width:14ch to .hero-title",
+          "Headline text: 'Your credit took a hit.<br>We bring it back.'"
+        ],
+        "anchor": ".hero-title CSS"
+      },
+      {
+        "id": "REMOTE_ENTRY_OVERLAY_CSS",
+        "priority": "P0",
+        "description": "New enriched remote entry sequence styles",
+        "details": [
+          "Window tint overlay with #rhLoadOverlay",
+          "Logo glitch animation (@keyframes rhLogoGlitch) with blur/skew/brightness",
+          "Wordmark fade-in animation",
+          "Lead capture modal (#rhLeadModal) with form styling",
+          "All input, checkbox, button, and error state styles"
+        ],
+        "anchor": "#rhLoadOverlay CSS"
+      },
+      {
+        "id": "MOBILITY_CAR_GALLERY_CSS",
+        "priority": "P1",
+        "description": "4-car horizontal scroll-snap gallery for First Class Mobility",
+        "details": [
+          ".rh-car-gallery: flex, overflow-x:auto, scroll-snap-type:x mandatory",
+          ".rh-car-card: scroll-snap-align:start, min-width:82% (mobile) / 340px (desktop)",
+          "Dark mode variants included",
+          "CTA button style: .mobility-cta-btn"
+        ],
+        "anchor": "Before FOOTER CSS section"
+      }
+    ],
+    "HTML": [
+      {
+        "id": "REMOTE_ENTRY_HTML",
+        "description": "New remote entry sequence HTML",
+        "details": [
+          "Phase 1: #rhLoadOverlay with logo img + glitch anim + wordmark + est line + label",
+          "Phase 2: #rhLeadModal with first name, mobile, TOS checkbox, SMS policy, remember checkbox, Start Now button, instruction text",
+          "Replaced old spinner rings with premium logo glitch animation"
+        ]
+      },
+      {
+        "id": "LOGO_WORDMARK_HTML",
+        "description": "Added wordmark block to remote masthead",
+        "details": [
+          "Inside .rh-logo-link: added .rh-wordmark-block div",
+          "Contains 'MarketWatch!' in .rh-wordmark and 'HIRECAR, LLC · Est. Nov 2024' in .rh-wordmark-est"
+        ]
+      },
+      {
+        "id": "HERO_HEADLINE_HTML",
+        "description": "Updated hero headline text",
+        "details": [
+          "Changed from '810,839 Collisions...' to 'Your credit took a hit.<br>We bring it back.'"
+        ]
+      },
+      {
+        "id": "MOBILITY_GALLERY_HTML",
+        "description": "Added 4-car swipe gallery to Mobility section",
+        "details": [
+          "4 cards: Ferrari 488 Spider, Lamborghini Huracán, Mercedes-AMG GT, Tesla Model S Plaid",
+          "Each with unique Unsplash image, name, and meta text",
+          "CTA button: 'HIRECAR Rental Broker + Dealerships →'"
+        ]
+      },
+      {
+        "id": "DESKTOP_HERO_IMAGE",
+        "description": "Replaced emoji placeholder with dynamic hero image container",
+        "details": [
+          "#desktopHeroWrap with #desktopHeroSlide for background-image rotation",
+          "Default image: LA skyline/freeway, background-position: center 35%"
+        ]
+      }
+    ],
+    "JS": [
+      {
+        "id": "CITY_HERO_IMAGES",
+        "description": "Per-city hero image sets with time-of-day logic",
+        "details": [
+          "CITY_HERO_CONFIG object with day/night arrays for los-angeles, las-vegas, san-francisco",
+          "6 images per city per time period: sweeping city, supercar, road trip, freeway, culture, scenic",
+          "applyDesktopHero(cityKey) rotates images every 6s",
+          "Vegas images use background-position: center 42% for proper centering on mobile"
+        ]
+      },
+      {
+        "id": "REMOTE_ENTRY_SEQUENCE",
+        "description": "Complete remote entry state machine",
+        "details": [
+          "States: idle -> leadModal -> loadingOverlay -> pushToStart -> heroRevealed",
+          "rhHasLeadData() checks localStorage for remembered lead",
+          "rhShowLeadModal() -> rhSubmitLead() validates name + TOS",
+          "rhShowLoadingOverlay() runs 2.2s logo glitch animation",
+          "Remember checkbox saves lead data to localStorage",
+          "Switching to desktop clears all entry UI states"
+        ]
+      },
+      {
+        "id": "VISUAL_VIEWPORT",
+        "description": "Real viewport height for remote mode",
+        "details": [
+          "rhSetVh() uses visualViewport.height when available",
+          "Sets CSS var --rh-vh on documentElement",
+          "Bound to: load, resize, visualViewport.resize, orientationchange"
+        ]
+      },
+      {
+        "id": "TOP_STORIES_CTA",
+        "description": "CTA-driven Top Stories content switching (data structure ready)",
+        "details": [
+          "STORIES_VARIANTS object with read/info/reserve/purchase variants",
+          "Each variant has headline, subtext, and 3 news card data objects",
+          "Ready for UI binding in remote hub CTA handlers"
+        ]
+      },
+      {
+        "id": "SETMODE_PATCH",
+        "description": "Enhanced setMode for v18 features",
+        "details": [
+          "Desktop mode: restores body scroll, clears remote UI states",
+          "Remote mode: calls rhSetVh(), triggers entry sequence after 100ms"
+        ]
+      }
+    ]
+  }
+}

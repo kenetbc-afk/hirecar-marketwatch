@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "marketwatch-v21",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/hirecar-marketwatch/serve.py", "8080"],
+      "port": 8080
+    },
+    {
+      "name": "marketwatch-v20",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/hirecar-marketwatch/serve.py", "8081"],
+      "port": 8081
+    },
+    {
+      "name": "marketwatch-v19",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/hirecar-marketwatch/serve.py", "8082"],
+      "port": 8082
+    },
+    {
+      "name": "marketwatch-v18",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/hirecar-marketwatch/serve.py", "8083"],
+      "port": 8083
+    }
+  ]
+}

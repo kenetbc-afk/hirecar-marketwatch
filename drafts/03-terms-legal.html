@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions — HIRECAR, LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  --ink: #111820;
+  --cta: #c9920a;
+  --bg: #ffffff;
+  --muted: #9aa3ad;
+  --border: #dde1e7;
+  --sidebar-w: 260px;
+  --header-h: 56px;
+  --legal-header-h: auto;
+  --content-max: 720px;
+  --section-gap: 56px;
+  --cta-light: rgba(201, 146, 10, 0.08);
+  --cta-border: rgba(201, 146, 10, 0.35);
+  --surface: #f8f9fa;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--cta);
+  color: #fff;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-header__logo {
+  height: 28px;
+  width: auto;
+}
+
+.site-header__name {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.site-header__back {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.site-header__back:hover {
+  color: var(--ink);
+}
+
+/* ============================================
+   LEGAL PAGE HEADER
+   ============================================ */
+.legal-header {
+  background: var(--bg);
+  padding: 56px 32px 40px;
+  border-bottom: none;
+}
+
+.legal-header__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: calc(var(--sidebar-w) + 48px);
+}
+
+.legal-header__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.legal-header__meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.legal-header__divider {
+  height: 2px;
+  background: var(--cta);
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.legal-header__version {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   TWO-COLUMN LAYOUT
+   ============================================ */
+.legal-body {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  gap: 48px;
+  padding: 40px 32px 80px;
+  position: relative;
+}
+
+/* ============================================
+   SIDEBAR / TABLE OF CONTENTS
+   ============================================ */
+.toc {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--header-h) - 48px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.toc::-webkit-scrollbar {
+  width: 3px;
+}
+
+.toc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.toc__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding-left: 12px;
+}
+
+.toc__list {
+  list-style: none;
+}
+
+.toc__item {
+  margin-bottom: 1px;
+}
+
+.toc__link {
+  display: block;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b7280;
+  padding: 5px 12px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+.toc__link:hover {
+  color: var(--ink);
+}
+
+.toc__link.active {
+  color: var(--ink);
+  font-weight: 600;
+  border-left-color: var(--cta);
+  background: var(--cta-light);
+}
+
+.toc__number {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-right: 6px;
+  font-weight: 400;
+}
+
+.toc__link.active .toc__number {
+  color: var(--cta);
+}
+
+/* ============================================
+   CONTENT AREA
+   ============================================ */
+.legal-content {
+  flex: 1;
+  max-width: var(--content-max);
+  min-width: 0;
+}
+
+.legal-section {
+  margin-bottom: var(--section-gap);
+  scroll-margin-top: 100px;
+}
+
+.legal-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--cta);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.35;
+}
+
+.legal-content p {
+  margin-bottom: 16px;
+  color: #374151;
+}
+
+.legal-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Definition boxes */
+.definition-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+
+.definition-item {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.definition-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.definition-term {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.definition-desc {
+  font-size: 13.5px;
+  color: #6b7280;
+  line-height: 1.65;
+}
+
+/* Highlighted / Important clauses */
+.clause-highlight {
+  border-left: 3px solid var(--cta);
+  padding: 20px 24px;
+  background: var(--cta-light);
+  border-radius: 0 6px 6px 0;
+  margin: 20px 0;
+}
+
+.clause-highlight p {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Uppercase emphasis */
+.legal-caps {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
+}
+
+/* Ordered sublists */
+.legal-list {
+  list-style: none;
+  counter-reset: legal-counter;
+  margin: 12px 0 16px 0;
+  padding-left: 0;
+}
+
+.legal-list li {
+  counter-increment: legal-counter;
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.legal-list li::before {
+  content: counter(legal-counter, lower-alpha) ".";
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  position: absolute;
+  left: 0;
+  top: 1px;
+}
+
+/* Contact block */
+.contact-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin-top: 20px;
+}
+
+.contact-block__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.contact-block__line {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 4px;
+  line-height: 1.7;
+}
+
+.contact-block__line a {
+  color: var(--cta);
+  border-bottom: 1px solid var(--cta-border);
+  transition: border-color 0.2s;
+}
+
+.contact-block__line a:hover {
+  border-bottom-color: var(--cta);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px;
+  text-align: center;
+}
+
+.site-footer__copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+}
+
+.site-footer__links a {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.site-footer__links a:hover {
+  color: var(--ink);
+}
+
+.site-footer__sep {
+  color: var(--border);
+  font-size: 10px;
+}
+
+/* ============================================
+   MOBILE TOC TOGGLE
+   ============================================ */
+.toc-mobile-toggle {
+  display: none;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.toc-mobile-toggle__icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.toc-mobile-toggle.open .toc-mobile-toggle__icon {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .legal-header__inner {
+    padding-left: 0;
+  }
+
+  .legal-header__title {
+    font-size: 32px;
+  }
+
+  .legal-body {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 0 60px;
+  }
+
+  .toc-mobile-toggle {
+    display: flex;
+  }
+
+  .toc {
+    position: static;
+    width: 100%;
+    min-width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc.open {
+    max-height: 520px;
+    overflow-y: auto;
+    padding: 16px 24px 20px;
+  }
+
+  .toc__label {
+    margin-bottom: 10px;
+  }
+
+  .toc__link {
+    padding: 4px 10px;
+    font-size: 12.5px;
+  }
+
+  .legal-content {
+    padding: 32px 24px 0;
+    max-width: 100%;
+  }
+
+  .legal-header {
+    padding: 36px 24px 28px;
+  }
+
+  .site-header {
+    padding: 0 20px;
+  }
+
+  html {
+    scroll-padding-top: 140px;
+  }
+}
+
+@media (max-width: 520px) {
+  .legal-header__title {
+    font-size: 26px;
+  }
+
+  .legal-header__meta {
+    font-size: 9px;
+  }
+
+  .section-title {
+    font-size: 17px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .definition-block {
+    padding: 18px 20px;
+  }
+
+  .clause-highlight {
+    padding: 16px 18px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .site-header,
+  .toc,
+  .toc-mobile-toggle,
+  .site-footer__links {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #000;
+  }
+
+  .legal-header {
+    padding: 0 0 20pt;
+  }
+
+  .legal-header__inner {
+    padding-left: 0;
+  }
+
+  .legal-header__title {
+    font-size: 24pt;
+  }
+
+  .legal-body {
+    display: block;
+    padding: 0;
+  }
+
+  .legal-content {
+    max-width: 100%;
+  }
+
+  .legal-section {
+    page-break-inside: avoid;
+    margin-bottom: 24pt;
+  }
+
+  .clause-highlight {
+    border-left: 2pt solid #999;
+    background: none;
+  }
+
+  .definition-block {
+    border: 1pt solid #ccc;
+    background: none;
+  }
+
+  .contact-block {
+    border: 1pt solid #ccc;
+    background: none;
+  }
+
+  .site-footer {
+    border-top: 1pt solid #ccc;
+    padding: 12pt 0;
+  }
+
+  a[href]::after {
+    content: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header class="site-header">
+  <a href="#" class="site-header__brand">
+    <img src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png"
+         alt="HIRECAR Logo"
+         class="site-header__logo">
+    <span class="site-header__name">Hirecar</span>
+  </a>
+  <a href="https://www.hirecar.la" class="site-header__back">
+    Back to HIRECAR.LA <span aria-hidden="true">&rarr;</span>
+  </a>
+</header>
+
+<!-- ============================================
+     LEGAL PAGE HEADER
+     ============================================ -->
+<section class="legal-header">
+  <div class="legal-header__inner">
+    <h1 class="legal-header__title">Terms &amp; Conditions</h1>
+    <p class="legal-header__meta">
+      HIRECAR, LLC &middot; Effective February 1, 2026 &middot; Last Updated February 26, 2026
+    </p>
+    <div class="legal-header__divider"></div>
+    <span class="legal-header__version">v2.0</span>
+  </div>
+</section>
+
+<!-- ============================================
+     MOBILE TOC TOGGLE
+     ============================================ -->
+<div class="toc-mobile-toggle" id="tocToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="tocSidebar">
+  <span>Contents</span>
+  <svg class="toc-mobile-toggle__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M4 6l4 4 4-4"/>
+  </svg>
+</div>
+
+<!-- ============================================
+     TWO-COLUMN LAYOUT
+     ============================================ -->
+<div class="legal-body">
+
+  <!-- SIDEBAR / TABLE OF CONTENTS -->
+  <nav class="toc" id="tocSidebar" aria-label="Table of Contents">
+    <div class="toc__label">Contents</div>
+    <ol class="toc__list">
+      <li class="toc__item"><a href="#acceptance" class="toc__link"><span class="toc__number">1.</span>Acceptance of Terms</a></li>
+      <li class="toc__item"><a href="#definitions" class="toc__link"><span class="toc__number">2.</span>Definitions</a></li>
+      <li class="toc__item"><a href="#services" class="toc__link"><span class="toc__number">3.</span>Services Description</a></li>
+      <li class="toc__item"><a href="#hirecredit" class="toc__link"><span class="toc__number">4.</span>HIRECREDIT Program</a></li>
+      <li class="toc__item"><a href="#registration" class="toc__link"><span class="toc__number">5.</span>Account Registration</a></li>
+      <li class="toc__item"><a href="#payment" class="toc__link"><span class="toc__number">6.</span>Payment Terms</a></li>
+      <li class="toc__item"><a href="#membership" class="toc__link"><span class="toc__number">7.</span>First Class Membership</a></li>
+      <li class="toc__item"><a href="#seedxchange" class="toc__link"><span class="toc__number">8.</span>SeedXchange Funding</a></li>
+      <li class="toc__item"><a href="#creditwithken" class="toc__link"><span class="toc__number">9.</span>CreditWithKen Sessions</a></li>
+      <li class="toc__item"><a href="#ip" class="toc__link"><span class="toc__number">10.</span>Intellectual Property</a></li>
+      <li class="toc__item"><a href="#conduct" class="toc__link"><span class="toc__number">11.</span>User Conduct</a></li>
+      <li class="toc__item"><a href="#privacy" class="toc__link"><span class="toc__number">12.</span>Data &amp; Privacy</a></li>
+      <li class="toc__item"><a href="#disclaimers" class="toc__link"><span class="toc__number">13.</span>Disclaimers</a></li>
+      <li class="toc__item"><a href="#liability" class="toc__link"><span class="toc__number">14.</span>Limitation of Liability</a></li>
+      <li class="toc__item"><a href="#disputes" class="toc__link"><span class="toc__number">15.</span>Dispute Resolution</a></li>
+      <li class="toc__item"><a href="#governing-law" class="toc__link"><span class="toc__number">16.</span>Governing Law</a></li>
+      <li class="toc__item"><a href="#changes" class="toc__link"><span class="toc__number">17.</span>Changes to Terms</a></li>
+      <li class="toc__item"><a href="#contact" class="toc__link"><span class="toc__number">18.</span>Contact Information</a></li>
+    </ol>
+  </nav>
+
+  <!-- CONTENT AREA -->
+  <main class="legal-content">
+
+    <!-- §1. ACCEPTANCE OF TERMS -->
+    <section class="legal-section" id="acceptance">
+      <span class="section-number">&sect;1</span>
+      <h2 class="section-title">Acceptance of Terms</h2>
+      <p>
+        By accessing or using any service provided by HIRECAR, LLC ("Company," "we," "our," "us"), including but not limited to HIRECREDIT credit repair services, SeedXchange business funding programs, CreditWithKen coaching sessions, First Class Membership benefits, vehicle mobility services, and the MarketWatch intelligence platform (collectively, "Services"), you ("User," "Client," "Member," or "you") agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, you must immediately cease all use of the Services.
+      </p>
+      <p>
+        These Terms constitute a legally binding agreement between you and HIRECAR, LLC, a California limited liability company doing business as HIRECREDIT, operating alongside its affiliated entities SEEDXCHANGE, LLC and CREDITWITHKEN, LLC. Your continued use of any Service following any modification to these Terms constitutes acceptance of such modifications.
+      </p>
+      <p>
+        You represent and warrant that you are at least eighteen (18) years of age, that you have the legal capacity to enter into these Terms, and that your use of the Services will comply with all applicable local, state, and federal laws and regulations.
+      </p>
+    </section>
+
+    <!-- §2. DEFINITIONS -->
+    <section class="legal-section" id="definitions">
+      <span class="section-number">&sect;2</span>
+      <h2 class="section-title">Definitions</h2>
+      <p>
+        The following terms, when used throughout this agreement, shall have the meanings set forth below unless the context clearly indicates otherwise:
+      </p>
+      <div class="definition-block">
+        <div class="definition-item">
+          <div class="definition-term">"Operator"</div>
+          <div class="definition-desc">Any individual enrolled in the HIRECAR vehicle mobility program who operates a vehicle obtained through or facilitated by Company services for rideshare, delivery, or commercial purposes.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Member"</div>
+          <div class="definition-desc">Any individual or entity holding an active First Class Membership subscription or other paid membership tier with the Company.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Client"</div>
+          <div class="definition-desc">Any individual or entity that engages the Company for credit repair services, coaching sessions, funding consultation, or any other professional service offering.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Services"</div>
+          <div class="definition-desc">All products, programs, platforms, tools, resources, and professional services offered by HIRECAR, LLC and its affiliated entities, whether delivered digitally, in person, or through third-party integrations.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Platform"</div>
+          <div class="definition-desc">The Company's digital infrastructure, including the HIRECAR.LA website, member portals, MarketWatch dashboards, mobile interfaces, and all associated software applications.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"PIFR" (Post-Incident Financial Recovery)</div>
+          <div class="definition-desc">The Company's proprietary framework for addressing credit and financial recovery following automotive incidents, insurance disputes, and related financial disruptions.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"HBI Score" (HIRECAR Business Intelligence Score)</div>
+          <div class="definition-desc">A proprietary composite metric developed by the Company to assess operator performance, business readiness, and creditworthiness within the HIRECAR ecosystem.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"BRE Standards" (Business Readiness &amp; Eligibility)</div>
+          <div class="definition-desc">The Company's internal qualification criteria used to determine client eligibility for funding programs, membership tiers, and advanced service offerings.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Revenue Lane"</div>
+          <div class="definition-desc">A designated operational track within the HIRECAR system through which Operators and Members generate income, including rideshare operations, fleet management, and referral programs.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"Cure Lane"</div>
+          <div class="definition-desc">The credit recovery and financial rehabilitation pathway within the HIRECREDIT program, designed to address negative tradelines, dispute inaccuracies, and rebuild credit profiles.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"First Class Membership"</div>
+          <div class="definition-desc">The Company's premium annual membership program that provides bundled access to credit monitoring, coaching sessions, funding consultation, MarketWatch intelligence, and priority service processing.</div>
+        </div>
+        <div class="definition-item">
+          <div class="definition-term">"MarketWatch Intelligence"</div>
+          <div class="definition-desc">The Company's proprietary market analysis and reporting service that provides real-time insights into credit trends, lending conditions, funding opportunities, and automotive industry developments relevant to Operators and Members.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §3. SERVICES DESCRIPTION -->
+    <section class="legal-section" id="services">
+      <span class="section-number">&sect;3</span>
+      <h2 class="section-title">Services Description</h2>
+      <p>
+        HIRECAR, LLC provides a comprehensive suite of financial recovery, business development, and mobility services designed to serve individuals and businesses within the rideshare, delivery, and automotive sectors. Our Services include, but are not limited to, the following:
+      </p>
+      <ol class="legal-list">
+        <li><strong>Credit Repair and Recovery (HIRECREDIT).</strong> Post-incident credit rehabilitation, dispute resolution with credit bureaus, creditor negotiations, and credit profile optimization services.</li>
+        <li><strong>Vehicle Mobility Services.</strong> Facilitation of vehicle acquisition, lease arrangements, fleet coordination, and operational support for rideshare and delivery operators.</li>
+        <li><strong>Business Funding Consultation (SeedXchange).</strong> Assessment of funding eligibility, preparation of funding applications, lender introductions, and ongoing support through the capital acquisition process.</li>
+        <li><strong>Credit Coaching (CreditWithKen).</strong> One-on-one and group coaching sessions focused on credit literacy, financial planning, debt management strategies, and long-term credit building techniques.</li>
+        <li><strong>MarketWatch Intelligence.</strong> Data-driven market analysis, credit industry monitoring, lending environment reports, and strategic insights delivered through the Platform.</li>
+        <li><strong>First Class Membership.</strong> A bundled annual subscription that provides Members with prioritized access to all Company services, exclusive resources, and enhanced support.</li>
+      </ol>
+      <p>
+        The availability, scope, and pricing of individual Services may vary and are subject to change at the Company's discretion. The Company reserves the right to introduce new Services, modify existing ones, or discontinue any Service at any time with reasonable notice to affected Users.
+      </p>
+    </section>
+
+    <!-- §4. HIRECREDIT PROGRAM -->
+    <section class="legal-section" id="hirecredit">
+      <span class="section-number">&sect;4</span>
+      <h2 class="section-title">HIRECREDIT Program</h2>
+      <p>
+        HIRECREDIT provides credit recovery services following automotive incidents including but not limited to collision events, insurance claim disputes, total loss valuations, medical billing discrepancies, and associated financial disruptions that negatively impact consumer credit profiles.
+      </p>
+      <p>
+        Upon enrollment, the Company will conduct an initial credit analysis to evaluate the Client's current credit standing, identify inaccurate, incomplete, or unverifiable information on the Client's credit reports, and develop a customized recovery strategy. The Company will engage with the three major credit reporting agencies (Equifax, Experian, and TransUnion) as well as individual creditors, collection agencies, and data furnishers as necessary to dispute and resolve identified issues.
+      </p>
+      <div class="clause-highlight">
+        <p>
+          <span class="legal-caps">No Guarantee of Outcomes.</span> Results are not guaranteed. Individual credit outcomes depend on multiple factors beyond the Company's control, including but not limited to the accuracy and completeness of information provided by the Client, the responsiveness of credit bureaus and creditors, existing balances and payment history, and applicable laws governing credit reporting and disputes.
+        </p>
+      </div>
+      <p>
+        The Company operates in full compliance with the Credit Repair Organizations Act (CROA), 15 U.S.C. &sect;&sect; 1679&ndash;1679j, and all applicable California state regulations governing credit services organizations. The Client has the right to cancel the credit repair agreement within three (3) business days of signing without charge, as required by law.
+      </p>
+      <p>
+        HIRECREDIT does not provide legal advice, and nothing in these Terms or in the provision of Services shall be construed as establishing an attorney-client relationship. Clients requiring legal representation are encouraged to consult with a licensed attorney.
+      </p>
+    </section>
+
+    <!-- §5. ACCOUNT REGISTRATION -->
+    <section class="legal-section" id="registration">
+      <span class="section-number">&sect;5</span>
+      <h2 class="section-title">Account Registration</h2>
+      <p>
+        Access to certain Services requires the creation of a user account on the Platform. When registering, you agree to provide accurate, current, and complete information as prompted by the registration process, and to update such information to maintain its accuracy throughout the duration of your account.
+      </p>
+      <p>
+        You are solely responsible for safeguarding the confidentiality of your account credentials, including your password and any authentication tokens. You agree to immediately notify the Company of any unauthorized use of your account or any other security breach. The Company shall not be liable for any loss or damage arising from your failure to maintain the security of your account credentials.
+      </p>
+      <ol class="legal-list">
+        <li>Each individual may maintain only one (1) active account unless expressly authorized by the Company in writing.</li>
+        <li>Accounts are non-transferable and may not be sold, assigned, or shared with any third party.</li>
+        <li>The Company reserves the right to suspend or terminate accounts that are inactive for a period exceeding twelve (12) consecutive months.</li>
+        <li>The Company may, at its sole discretion, refuse registration, suspend, or terminate any account for any reason, including but not limited to violation of these Terms.</li>
+      </ol>
+    </section>
+
+    <!-- §6. PAYMENT TERMS -->
+    <section class="legal-section" id="payment">
+      <span class="section-number">&sect;6</span>
+      <h2 class="section-title">Payment Terms</h2>
+      <p>
+        All fees for Services are quoted in United States Dollars (USD) and are due at the time specified in the applicable service agreement, invoice, or subscription terms. Payment may be made via credit card, debit card, ACH transfer, or other payment methods accepted by the Company.
+      </p>
+      <p>
+        By providing a payment method, you represent and warrant that you are authorized to use the designated payment method and authorize the Company to charge all fees incurred through your account to that payment method. The Company utilizes third-party payment processors and does not directly store complete payment card information.
+      </p>
+      <ol class="legal-list">
+        <li><strong>Late Payments.</strong> Any amount not paid when due shall accrue interest at the rate of one and one-half percent (1.5%) per month, or the maximum rate permitted by applicable law, whichever is less.</li>
+        <li><strong>Failed Payments.</strong> If a scheduled payment fails, the Company will attempt to process the payment up to two (2) additional times. Continued failure may result in suspension of Services until the outstanding balance is resolved.</li>
+        <li><strong>Refund Policy.</strong> Refund eligibility varies by Service. Credit repair setup fees are non-refundable after the three-day cancellation period mandated by federal law. Membership fees may be prorated upon cancellation as described in Section 7. Coaching session fees are subject to the cancellation policy described in Section 9.</li>
+        <li><strong>Taxes.</strong> All fees are exclusive of applicable taxes. You are responsible for all sales tax, use tax, value-added tax, or similar taxes arising from your purchase of Services, excluding taxes based on the Company's income.</li>
+      </ol>
+    </section>
+
+    <!-- §7. FIRST CLASS MEMBERSHIP -->
+    <section class="legal-section" id="membership">
+      <span class="section-number">&sect;7</span>
+      <h2 class="section-title">First Class Membership</h2>
+      <p>
+        The First Class Membership is an annual subscription program priced at One Thousand Three Hundred Eighty Dollars ($1,380.00) per year, payable in full at enrollment or through an approved installment arrangement where available. Membership provides access to the following bundled benefits:
+      </p>
+      <ol class="legal-list">
+        <li>Priority processing for all HIRECREDIT credit repair services</li>
+        <li>Monthly one-on-one CreditWithKen coaching sessions (twelve sessions per year)</li>
+        <li>Full access to MarketWatch Intelligence reports and dashboards</li>
+        <li>SeedXchange funding eligibility assessment and application support</li>
+        <li>Dedicated account representative and priority customer support</li>
+        <li>Access to exclusive member events, webinars, and educational resources</li>
+        <li>Discounted rates on supplemental services and partner offerings</li>
+      </ol>
+      <p>
+        <strong>Auto-Renewal.</strong> Your Membership will automatically renew for successive one-year terms unless you cancel at least thirty (30) days prior to the renewal date. The Company will send a renewal reminder via email at least forty-five (45) days before each renewal date.
+      </p>
+      <p>
+        <strong>Cancellation.</strong> Members may cancel their Membership at any time by providing written notice to the Company via email or through the Platform. If cancellation occurs within the first thirty (30) days of enrollment, a full refund will be issued. After thirty (30) days, the Member may continue to use Membership benefits through the end of the current billing period, but no prorated refund will be issued unless required by applicable law.
+      </p>
+      <p>
+        The Company reserves the right to modify Membership pricing, benefits, and terms upon thirty (30) days' written notice. Price changes will take effect at the next renewal period and will not apply retroactively to the current Membership term.
+      </p>
+    </section>
+
+    <!-- §8. SEEDXCHANGE FUNDING -->
+    <section class="legal-section" id="seedxchange">
+      <span class="section-number">&sect;8</span>
+      <h2 class="section-title">SeedXchange Funding</h2>
+      <p>
+        SEEDXCHANGE, LLC operates a business funding consultation and facilitation service designed to connect qualified individuals and businesses with appropriate financing solutions. The SeedXchange program includes eligibility assessment, application preparation, lender matching, and ongoing advisory support.
+      </p>
+      <p>
+        Participation in the SeedXchange program requires completion of a Business Readiness and Eligibility (BRE) assessment. The Company evaluates applicants based on multiple criteria including but not limited to credit profile, business history, revenue documentation, industry sector, and stated funding objectives.
+      </p>
+      <div class="clause-highlight">
+        <p>
+          <span class="legal-caps">Funding Not Guaranteed.</span> The Company acts as a facilitator and consultant. We do not directly provide loans, lines of credit, or capital investments. Approval of funding applications is solely at the discretion of third-party lenders and funding partners. The Company makes no representations or warranties regarding the approval, terms, interest rates, or timing of any funding obtained through the program.
+        </p>
+      </div>
+      <p>
+        Clients acknowledge that all information submitted in connection with funding applications must be truthful and accurate. Submission of false, misleading, or fraudulent information is grounds for immediate termination of Services and may result in legal action. The Client is solely responsible for repaying any financing obtained through the program according to the terms agreed upon with the applicable lender.
+      </p>
+    </section>
+
+    <!-- §9. CREDITWITHKEN SESSIONS -->
+    <section class="legal-section" id="creditwithken">
+      <span class="section-number">&sect;9</span>
+      <h2 class="section-title">CreditWithKen Sessions</h2>
+      <p>
+        CREDITWITHKEN, LLC provides individual and group credit coaching sessions designed to educate Clients on credit management principles, debt reduction strategies, financial planning, and long-term wealth building. Sessions are conducted via video conference, telephone, or in person at a designated Company location, as agreed upon at the time of scheduling.
+      </p>
+      <p>
+        <strong>Scheduling.</strong> Sessions must be scheduled at least forty-eight (48) hours in advance through the Platform or by contacting the Company directly. Session availability is subject to coach capacity and scheduling constraints.
+      </p>
+      <p>
+        <strong>Cancellation and Rescheduling.</strong> Clients may cancel or reschedule a session without penalty by providing at least twenty-four (24) hours' notice prior to the scheduled session time. Cancellations made with less than twenty-four (24) hours' notice, or failure to attend a scheduled session ("no-show"), will result in forfeiture of the session fee. For First Class Members, the forfeited session will be deducted from the annual session allotment.
+      </p>
+      <p>
+        <strong>Scope of Services.</strong> CreditWithKen coaching is educational in nature. Coaches do not provide legal, tax, investment, or accounting advice. Information presented during sessions is for general educational purposes and should not be construed as professional advice specific to your financial situation. Clients are encouraged to consult with appropriately licensed professionals for advice tailored to their individual circumstances.
+      </p>
+    </section>
+
+    <!-- §10. INTELLECTUAL PROPERTY -->
+    <section class="legal-section" id="ip">
+      <span class="section-number">&sect;10</span>
+      <h2 class="section-title">Intellectual Property</h2>
+      <p>
+        All content, materials, software, data, methodologies, processes, trademarks, trade names, logos, graphics, and other intellectual property displayed on or made available through the Platform and Services are the exclusive property of HIRECAR, LLC and its affiliated entities, or their respective licensors, and are protected by United States and international copyright, trademark, patent, trade secret, and other intellectual property laws.
+      </p>
+      <p>
+        Without limiting the foregoing, the following are proprietary to the Company: the HIRECAR, HIRECREDIT, SEEDXCHANGE, CREDITWITHKEN, and MARKETWATCH names, logos, and service marks; the PIFR methodology; the HBI Score system; the BRE Standards framework; all MarketWatch reports, analyses, data compilations, and visualizations; and all Platform software, algorithms, and user interface designs.
+      </p>
+      <p>
+        You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Platform and Services solely for their intended purposes and in accordance with these Terms. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, transmit, or otherwise exploit any content or materials from the Platform except as expressly permitted by these Terms or with prior written consent from the Company.
+      </p>
+    </section>
+
+    <!-- §11. USER CONDUCT -->
+    <section class="legal-section" id="conduct">
+      <span class="section-number">&sect;11</span>
+      <h2 class="section-title">User Conduct</h2>
+      <p>
+        You agree to use the Services and Platform only for lawful purposes and in accordance with these Terms. You agree not to engage in any activity that:
+      </p>
+      <ol class="legal-list">
+        <li>Violates any applicable federal, state, local, or international law, regulation, or ordinance</li>
+        <li>Involves the submission of false, misleading, inaccurate, or fraudulent information to the Company, credit bureaus, lenders, or any third party</li>
+        <li>Infringes upon the intellectual property rights, privacy rights, or other rights of any third party</li>
+        <li>Involves unauthorized access to, interference with, or disruption of the Platform, its servers, or any connected networks</li>
+        <li>Introduces viruses, malware, or other harmful code to the Platform or its infrastructure</li>
+        <li>Attempts to reverse-engineer, decompile, or disassemble any portion of the Platform software</li>
+        <li>Involves the scraping, harvesting, or automated collection of data from the Platform without express written authorization</li>
+        <li>Constitutes harassment, abuse, or threatening behavior toward Company employees, contractors, or other Users</li>
+        <li>Involves the resale, redistribution, or unauthorized sharing of Services, MarketWatch content, or other proprietary materials</li>
+      </ol>
+      <p>
+        The Company reserves the right to investigate and take appropriate action against any User who, in the Company's sole discretion, violates these conduct requirements, including without limitation terminating the offending User's account, reporting the User to applicable law enforcement authorities, and pursuing available legal remedies.
+      </p>
+    </section>
+
+    <!-- §12. DATA & PRIVACY -->
+    <section class="legal-section" id="privacy">
+      <span class="section-number">&sect;12</span>
+      <h2 class="section-title">Data &amp; Privacy</h2>
+      <p>
+        The Company collects, processes, and stores personal information in connection with the provision of Services. Our collection and use of personal data is governed by our Privacy Policy, which is incorporated into these Terms by reference. By using the Services, you acknowledge that you have read and understood our Privacy Policy and consent to the data practices described therein.
+      </p>
+      <p>
+        In the course of providing credit repair and financial services, the Company may collect sensitive personal information including but not limited to Social Security numbers, dates of birth, financial account information, credit reports, employment history, income documentation, and government-issued identification. This information is collected solely for the purpose of performing the requested Services and is handled in accordance with applicable data protection laws, including the California Consumer Privacy Act (CCPA) and the Gramm-Leach-Bliley Act (GLBA).
+      </p>
+      <ol class="legal-list">
+        <li>The Company implements industry-standard security measures, including encryption, access controls, and secure data storage protocols, to protect your personal information.</li>
+        <li>The Company will not sell your personal information to third parties for marketing purposes.</li>
+        <li>Personal information may be shared with third parties only as necessary to perform the requested Services (e.g., credit bureaus, lenders, funding partners) or as required by law.</li>
+        <li>You have the right to request access to, correction of, or deletion of your personal information, subject to applicable legal requirements and legitimate business retention needs.</li>
+      </ol>
+    </section>
+
+    <!-- §13. DISCLAIMERS -->
+    <section class="legal-section" id="disclaimers">
+      <span class="section-number">&sect;13</span>
+      <h2 class="section-title">Disclaimers</h2>
+      <div class="clause-highlight">
+        <p>
+          <span class="legal-caps">The Services are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied.</span> To the fullest extent permitted by applicable law, the Company disclaims all warranties, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, non-infringement, and any warranties arising from course of dealing or usage of trade.
+        </p>
+      </div>
+      <p>
+        Without limiting the foregoing, the Company does not warrant that:
+      </p>
+      <ol class="legal-list">
+        <li>The Services will meet your specific requirements or expectations</li>
+        <li>The Services will be uninterrupted, timely, secure, or error-free</li>
+        <li>Any specific credit score improvement, credit report change, or financial outcome will be achieved</li>
+        <li>Any funding application will be approved or that specific funding terms will be obtained</li>
+        <li>MarketWatch data, reports, or analyses will be completely accurate, current, or comprehensive</li>
+        <li>Any information obtained through the Services will be accurate, reliable, or suitable for any particular purpose</li>
+      </ol>
+      <p>
+        Any reliance you place on information provided through the Services is strictly at your own risk. The Company expressly disclaims any responsibility for decisions made or actions taken based on information obtained through the Services, including MarketWatch Intelligence reports and CreditWithKen coaching sessions.
+      </p>
+    </section>
+
+    <!-- §14. LIMITATION OF LIABILITY -->
+    <section class="legal-section" id="liability">
+      <span class="section-number">&sect;14</span>
+      <h2 class="section-title">Limitation of Liability</h2>
+      <div class="clause-highlight">
+        <p>
+          <span class="legal-caps">To the maximum extent permitted by applicable law, in no event shall HIRECAR, LLC, its affiliated entities (SEEDXCHANGE, LLC and CREDITWITHKEN, LLC), or their respective officers, directors, employees, agents, partners, or licensors be liable for any indirect, incidental, special, consequential, or punitive damages,</span> including without limitation damages for loss of profits, goodwill, data, or other intangible losses, arising out of or in connection with your use of or inability to use the Services, regardless of the theory of liability (contract, tort, strict liability, or otherwise) and even if the Company has been advised of the possibility of such damages.
+        </p>
+      </div>
+      <p>
+        In no event shall the Company's total aggregate liability to you for all claims arising out of or relating to these Terms or the Services exceed the greater of: (a) the total amount paid by you to the Company during the twelve (12) month period immediately preceding the event giving rise to the claim, or (b) Five Hundred Dollars ($500.00).
+      </p>
+      <p>
+        Some jurisdictions do not allow the exclusion or limitation of certain damages. In such jurisdictions, the limitations set forth above shall apply to the fullest extent permitted by applicable law.
+      </p>
+    </section>
+
+    <!-- §15. DISPUTE RESOLUTION -->
+    <section class="legal-section" id="disputes">
+      <span class="section-number">&sect;15</span>
+      <h2 class="section-title">Dispute Resolution</h2>
+      <p>
+        <strong>Informal Resolution.</strong> Before initiating any formal dispute resolution proceeding, you agree to first contact the Company and attempt to resolve the dispute informally. You must send a written description of the dispute, including your name, account information, and a summary of the issue, to the Company's address specified in Section 18. The Company will respond within thirty (30) days. The parties agree to negotiate in good faith for a period of at least sixty (60) days before initiating arbitration.
+      </p>
+      <p>
+        <strong>Binding Arbitration.</strong> If the dispute cannot be resolved informally, you and the Company agree that any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved exclusively through final and binding arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules then in effect, rather than in a court of law. The arbitration shall be conducted by a single arbitrator in Los Angeles County, California, or at another mutually agreed-upon location.
+      </p>
+      <p>
+        <strong>Class Action Waiver.</strong> You and the Company each agree that any dispute resolution proceeding shall be conducted solely on an individual basis and not as a class, consolidated, or representative action. If for any reason a claim proceeds in court rather than in arbitration, you and the Company each waive any right to a jury trial.
+      </p>
+      <p>
+        <strong>Exceptions.</strong> Notwithstanding the foregoing, either party may seek injunctive or other equitable relief in any court of competent jurisdiction to prevent the actual or threatened infringement, misappropriation, or violation of intellectual property rights.
+      </p>
+    </section>
+
+    <!-- §16. GOVERNING LAW -->
+    <section class="legal-section" id="governing-law">
+      <span class="section-number">&sect;16</span>
+      <h2 class="section-title">Governing Law</h2>
+      <p>
+        These Terms shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions. To the extent that any legal proceeding is permitted under these Terms to be filed in court, you and the Company agree that such proceeding shall be filed exclusively in the state or federal courts located in Los Angeles County, California, and you consent to the personal jurisdiction and venue of such courts.
+      </p>
+      <p>
+        Notwithstanding the foregoing, nothing in these Terms shall prevent either party from seeking injunctive or other equitable relief in any jurisdiction as necessary to protect its intellectual property rights or enforce a confidentiality obligation. The application of the United Nations Convention on Contracts for the International Sale of Goods is expressly excluded.
+      </p>
+    </section>
+
+    <!-- §17. CHANGES TO TERMS -->
+    <section class="legal-section" id="changes">
+      <span class="section-number">&sect;17</span>
+      <h2 class="section-title">Changes to Terms</h2>
+      <p>
+        The Company reserves the right to modify, amend, or replace these Terms at any time in its sole discretion. If a revision is material, as determined by the Company, we will provide at least thirty (30) days' notice prior to the new terms taking effect. Notice may be provided by posting the updated Terms on the Platform, by sending an email to the address associated with your account, or by other reasonable means.
+      </p>
+      <p>
+        The "Last Updated" date at the top of these Terms indicates when the most recent revisions were made. Your continued access to or use of the Services after the effective date of any revised Terms constitutes your acceptance of the revised Terms. If you do not agree to the revised Terms, you must discontinue your use of the Services prior to the effective date of the changes.
+      </p>
+      <p>
+        Material changes include, but are not limited to, modifications to the dispute resolution process, changes to fee structures, alterations to the scope of Services, and changes that reduce your rights or increase your obligations under these Terms.
+      </p>
+    </section>
+
+    <!-- §18. CONTACT INFORMATION -->
+    <section class="legal-section" id="contact">
+      <span class="section-number">&sect;18</span>
+      <h2 class="section-title">Contact Information</h2>
+      <p>
+        If you have any questions, concerns, or requests regarding these Terms, the Services, or your account, please contact the Company using the information provided below. We endeavor to respond to all inquiries within two (2) business days.
+      </p>
+      <div class="contact-block">
+        <div class="contact-block__label">Legal &amp; Administrative Inquiries</div>
+        <div class="contact-block__line"><strong>HIRECAR, LLC</strong></div>
+        <div class="contact-block__line">dba HIRECREDIT &middot; SEEDXCHANGE, LLC &middot; CREDITWITHKEN, LLC</div>
+        <div class="contact-block__line">27200 Tourney Rd</div>
+        <div class="contact-block__line">Valencia, CA 91355</div>
+        <div class="contact-block__line" style="margin-top: 8px;">Phone: <a href="tel:+16616510858">(661) 651-0858</a></div>
+        <div class="contact-block__line">Web: <a href="https://www.hirecar.la" target="_blank" rel="noopener">www.hirecar.la</a></div>
+      </div>
+      <p style="margin-top: 24px;">
+        For urgent matters related to account security, unauthorized access, or data privacy concerns, please contact us immediately by phone during business hours (Monday through Friday, 9:00 AM to 6:00 PM Pacific Time) or via email with "URGENT" in the subject line.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+  <div class="site-footer__copy">&copy; 2026 HIRECAR, LLC &middot; All Rights Reserved</div>
+  <div class="site-footer__links">
+    <a href="#">Privacy Policy</a>
+    <span class="site-footer__sep">|</span>
+    <a href="#">Terms &amp; Conditions</a>
+    <span class="site-footer__sep">|</span>
+    <a href="#">Cookie Policy</a>
+  </div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---- Mobile TOC Toggle ---- */
+  const tocToggle = document.getElementById('tocToggle');
+  const tocSidebar = document.getElementById('tocSidebar');
+
+  if (tocToggle && tocSidebar) {
+    tocToggle.addEventListener('click', function () {
+      const isOpen = tocSidebar.classList.toggle('open');
+      tocToggle.classList.toggle('open', isOpen);
+      tocToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    tocToggle.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        tocToggle.click();
+      }
+    });
+
+    /* Close mobile TOC when a link is clicked */
+    tocSidebar.querySelectorAll('.toc__link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth <= 900) {
+          tocSidebar.classList.remove('open');
+          tocToggle.classList.remove('open');
+          tocToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+
+  /* ---- Intersection Observer for Active TOC Section ---- */
+  const sections = document.querySelectorAll('.legal-section');
+  const tocLinks = document.querySelectorAll('.toc__link');
+
+  if (sections.length && tocLinks.length && 'IntersectionObserver' in window) {
+    const tocLinkMap = {};
+    tocLinks.forEach(function (link) {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        tocLinkMap[href.slice(1)] = link;
+      }
+    });
+
+    let currentActive = null;
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        /* Collect all currently intersecting sections */
+        const visible = [];
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            visible.push(entry.target);
+          }
+        });
+
+        /* Find the topmost visible section */
+        let topSection = null;
+        let topOffset = Infinity;
+
+        sections.forEach(function (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < topOffset && rect.bottom > 100) {
+            topOffset = rect.top;
+            topSection = section;
+          }
+        });
+
+        if (topSection) {
+          const id = topSection.getAttribute('id');
+          if (id && id !== currentActive) {
+            tocLinks.forEach(function (l) { l.classList.remove('active'); });
+            if (tocLinkMap[id]) {
+              tocLinkMap[id].classList.add('active');
+            }
+            currentActive = id;
+          }
+        }
+      },
+      {
+        rootMargin: '-80px 0px -40% 0px',
+        threshold: 0
+      }
+    );
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+
+    /* Fallback: scroll-based detection for edge cases */
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          let best = null;
+          let bestDist = Infinity;
+          sections.forEach(function (section) {
+            const rect = section.getBoundingClientRect();
+            const dist = Math.abs(rect.top - 100);
+            if (rect.top <= 120 && dist < bestDist) {
+              bestDist = dist;
+              best = section;
+            }
+          });
+          if (best) {
+            const id = best.getAttribute('id');
+            if (id && id !== currentActive) {
+              tocLinks.forEach(function (l) { l.classList.remove('active'); });
+              if (tocLinkMap[id]) {
+                tocLinkMap[id].classList.add('active');
+              }
+              currentActive = id;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "version": "v18",
+  "imageGuidance": "All images from Unsplash CDN (no API keys required). No image is reused across hero and content sections where possible.",
+  "heroImages": {
+    "los-angeles": {
+      "day": [
+        {
+          "slide": 0,
+          "description": "Sweeping LA skyline/freeway",
+          "url": "https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=1200&q=85&fit=crop",
+          "posDesktop": "center 35%",
+          "posMobile": "center 40%"
+        },
+        {
+          "slide": 1,
+          "description": "Yellow/gold Ferrari supercar",
+          "url": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 2,
+          "description": "Women/families road trip scenic",
+          "url": "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 3,
+          "description": "Driving/highway scenic",
+          "url": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 4,
+          "description": "Supercar street culture (Lambo)",
+          "url": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 5,
+          "description": "Woman scenic overlook / mountain view",
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center 40%"
+        }
+      ],
+      "night": [
+        {
+          "slide": 0,
+          "description": "LA night skyline / downtown glow",
+          "url": "https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1200&q=85&fit=crop",
+          "posDesktop": "center 40%",
+          "posMobile": "center 45%"
+        },
+        {
+          "slide": 1,
+          "description": "Yellow/gold Ferrari supercar (same as day)",
+          "url": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 2,
+          "description": "Night car culture / private driver",
+          "url": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 3,
+          "description": "Night driving highway",
+          "url": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 4,
+          "description": "Supercar street culture night",
+          "url": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 5,
+          "description": "City skyline panoramic night",
+          "url": "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center 40%"
+        }
+      ]
+    },
+    "las-vegas": {
+      "day": [
+        {
+          "slide": 0,
+          "description": "Vegas strip daytime sweeping shot — centered for mobile",
+          "url": "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=1200&q=85&fit=crop",
+          "posDesktop": "center 42%",
+          "posMobile": "center 42%",
+          "note": "Vegas: position center 42% keeps strip buildings centered on phone screen"
+        },
+        {
+          "slide": 1,
+          "description": "Yellow/gold Ferrari",
+          "url": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 2,
+          "description": "Vegas lifestyle / pool scene",
+          "url": "https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 3,
+          "description": "Las Vegas night freeway / neon",
+          "url": "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 4,
+          "description": "Supercar culture",
+          "url": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 5,
+          "description": "Scenic mountain view / desert road",
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center 40%"
+        }
+      ],
+      "night": [
+        {
+          "slide": 0,
+          "description": "Vegas strip night iconic neon — centered for mobile",
+          "url": "https://images.unsplash.com/photo-1415594445260-63e18261587e?w=1200&q=85&fit=crop",
+          "posDesktop": "center 42%",
+          "posMobile": "center 42%",
+          "note": "Vegas night: position center 42% keeps strip centered on both iOS and Android"
+        },
+        {
+          "slide": 1,
+          "description": "Yellow/gold Ferrari",
+          "url": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 2,
+          "description": "Night car culture",
+          "url": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 3,
+          "description": "Vegas boulevard night drive",
+          "url": "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 4,
+          "description": "Supercar culture night",
+          "url": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center center"
+        },
+        {
+          "slide": 5,
+          "description": "City panoramic night",
+          "url": "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&q=85&fit=crop",
+          "posDesktop": "center center",
+          "posMobile": "center 40%"
+        }
+      ]
+    },
+    "san-francisco": {
+      "day": [
+        {
+          "slide": 0,
+          "description": "Golden Gate Bridge / SF skyline",
+          "url": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200&q=85&fit=crop",
+          "posDesktop": "center 35%",
+          "posMobile": "center 40%"
+        }
+      ],
+      "night": [
+        {
+          "slide": 0,
+          "description": "SF Bay night skyline",
+          "url": "https://images.unsplash.com/photo-1521464302861-ce943915d1c3?w=1200&q=85&fit=crop",
+          "posDesktop": "center 40%",
+          "posMobile": "center 45%"
+        }
+      ]
+    }
+  },
+  "mobilityGallery": [
+    {
+      "card": 1,
+      "name": "Ferrari 488 Spider",
+      "url": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&q=85&fit=crop",
+      "posDesktop": "center center",
+      "posMobile": "center center"
+    },
+    {
+      "card": 2,
+      "name": "Lamborghini Huracán",
+      "url": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=85&fit=crop",
+      "posDesktop": "center center",
+      "posMobile": "center center"
+    },
+    {
+      "card": 3,
+      "name": "Mercedes-AMG GT",
+      "url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&q=85&fit=crop",
+      "posDesktop": "center center",
+      "posMobile": "center center"
+    },
+    {
+      "card": 4,
+      "name": "Tesla Model S Plaid",
+      "url": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=85&fit=crop",
+      "posDesktop": "center center",
+      "posMobile": "center center"
+    }
+  ],
+  "entertainmentSection": {
+    "note": "Entertainment travel images correlate with city selection and weather/mood. LA day = road trips/beach; LA night = private driver life; Vegas = casino culture; SF = tech/bay area lifestyle.",
+    "images": [
+      {
+        "card": "Road Trip Culture",
+        "url": "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=85&fit=crop",
+        "posDesktop": "center center",
+        "posMobile": "center center"
+      },
+      {
+        "card": "Family Mobility",
+        "url": "https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=85&fit=crop",
+        "posDesktop": "center center",
+        "posMobile": "center center"
+      },
+      {
+        "card": "Collision + Recovery",
+        "url": "https://images.unsplash.com/photo-1562441289-f82a53fe2dd5?w=800&q=85&fit=crop",
+        "posDesktop": "center center",
+        "posMobile": "center center"
+      },
+      {
+        "card": "Private Driver Life",
+        "url": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=85&fit=crop",
+        "posDesktop": "center center",
+        "posMobile": "center center"
+      }
+    ]
+  }
+}

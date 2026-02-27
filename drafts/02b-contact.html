@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — HIRECAR.LA</title>
+  <meta name="description" content="Get in touch with HIRECAR, LLC. Phone, email, and office contact for credit repair, membership, partnerships, and collision recovery services in Los Angeles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS CUSTOM PROPERTIES
+       ======================================== */
+    :root {
+      --ink: #111820;
+      --ink-2: #1e2530;
+      --cta: #c9920a;
+      --cta-hover: #b07f08;
+      --live: #c0392b;
+      --member: #0f4c75;
+      --bg: #ffffff;
+      --muted: #9aa3ad;
+      --border: #dde1e7;
+      --slate: #3d4a58;
+      --serif: 'Cormorant Garant', Georgia, serif;
+      --sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --max-w: 1200px;
+      --max-w-narrow: 800px;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 8rem;
+      --radius: 6px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 1px 3px rgba(17,24,32,0.06);
+      --shadow-md: 0 4px 16px rgba(17,24,32,0.08);
+      --shadow-lg: 0 8px 32px rgba(17,24,32,0.10);
+      --transition: 0.25s ease;
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ========================================
+       UTILITY
+       ======================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .container--narrow {
+      max-width: var(--max-w-narrow);
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .label--gold {
+      color: var(--cta);
+    }
+
+    .section-pad {
+      padding: var(--space-3xl) 0;
+    }
+
+    .gold-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--cta);
+      border: none;
+      margin: var(--space-lg) auto 0;
+    }
+
+    /* Scroll-triggered fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       1. NAVIGATION (dark variant)
+       ======================================== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(17,24,32,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      height: 64px;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav__logo {
+      height: 30px;
+      width: auto;
+    }
+
+    .nav__wordmark {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.6);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--cta);
+      transition: width var(--transition);
+    }
+
+    .nav__links a:hover {
+      color: #ffffff;
+    }
+
+    .nav__links a:hover::after {
+      width: 100%;
+    }
+
+    .nav__links a.active {
+      color: #ffffff;
+    }
+
+    .nav__links a.active::after {
+      width: 100%;
+    }
+
+    .nav__cta {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--bg);
+      background: var(--cta);
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav__cta:hover {
+      background: var(--cta-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Mobile menu toggle */
+    .nav__toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #ffffff;
+      margin: 5px 0;
+      transition: var(--transition);
+      border-radius: 1px;
+    }
+
+    /* ========================================
+       2. HERO
+       ======================================== */
+    .hero {
+      background: linear-gradient(170deg, var(--ink) 0%, #1a2030 100%);
+      color: var(--bg);
+      position: relative;
+      overflow: hidden;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,146,10,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(15,76,117,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Decorative grid lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: var(--space-3xl) var(--space-md);
+    }
+
+    .hero__headline {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: var(--space-md);
+      color: var(--bg);
+    }
+
+    .hero__rule {
+      width: 80px;
+      height: 3px;
+      background: var(--cta);
+      border: none;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .hero__subtitle {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       3. CONTACT CARDS
+       ======================================== */
+    .contact-cards {
+      padding: var(--space-3xl) 0;
+      background: #f8f9fa;
+    }
+
+    .contact-cards__header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-cards__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: var(--space-sm);
+    }
+
+    .contact-cards__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .contact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .contact-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .contact-card__icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(201,146,10,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+    }
+
+    .contact-card__icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--cta);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-card__label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cta);
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-card__value {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .contact-card__note {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: var(--space-lg);
+    }
+
+    .contact-card__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 11px 24px;
+      border-radius: var(--radius);
+      background: var(--cta);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .contact-card__btn:hover {
+      background: var(--cta-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ========================================
+       4. CONTACT FORM + INFO PANEL
+       ======================================== */
+    .contact-form-section {
+      padding: var(--space-3xl) 0;
+    }
+
+    .contact-form-section__header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-form-section__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: var(--space-sm);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* Form Styles */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .form__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .form__group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form__label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+
+    .form__label .required {
+      color: var(--live);
+      margin-left: 2px;
+    }
+
+    .form__input,
+    .form__select,
+    .form__textarea {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      width: 100%;
+    }
+
+    .form__input:focus,
+    .form__select:focus,
+    .form__textarea:focus {
+      border-color: var(--cta);
+      box-shadow: 0 0 0 3px rgba(201,146,10,0.1);
+    }
+
+    .form__input.error,
+    .form__select.error,
+    .form__textarea.error {
+      border-color: var(--live);
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+    }
+
+    .form__error {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--live);
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form__error.show {
+      display: block;
+    }
+
+    .form__select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239aa3ad' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form__textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .form__submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      background: var(--cta);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      align-self: flex-start;
+    }
+
+    .form__submit:hover {
+      background: var(--cta-hover);
+      transform: translateY(-1px);
+    }
+
+    .form__submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form__success {
+      display: none;
+      background: rgba(201,146,10,0.08);
+      border: 1px solid rgba(201,146,10,0.2);
+      border-radius: var(--radius);
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .form__success.show {
+      display: block;
+    }
+
+    .form__success-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .form__success-text {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--slate);
+    }
+
+    /* Info Panel */
+    .info-panel {
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .info-block {
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-block:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .info-block__title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cta);
+      margin-bottom: var(--space-sm);
+    }
+
+    .info-block__text {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--slate);
+    }
+
+    .info-block__text strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Emergency alert */
+    .emergency-alert {
+      background: rgba(192,57,43,0.04);
+      border: 1px solid rgba(192,57,43,0.25);
+      border-left: 3px solid var(--live);
+      border-radius: var(--radius);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .emergency-alert__badge {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--live);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .emergency-alert__badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--live);
+      border-radius: 50%;
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .emergency-alert__text {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .emergency-alert__phone {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--live);
+    }
+
+    /* Social icons */
+    .social-links {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .social-link:hover {
+      border-color: var(--cta);
+      background: rgba(201,146,10,0.06);
+    }
+
+    .social-link svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--slate);
+      transition: fill var(--transition);
+    }
+
+    .social-link:hover svg {
+      fill: var(--cta);
+    }
+
+    /* ========================================
+       5. FAQ ACCORDION
+       ======================================== */
+    .faq-section {
+      padding: var(--space-3xl) 0;
+      background: #f8f9fa;
+    }
+
+    .faq-section__header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .faq-section__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: var(--space-sm);
+    }
+
+    .faq-list {
+      max-width: var(--max-w-narrow);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .faq-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow var(--transition);
+    }
+
+    .faq-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-item.open {
+      border-color: rgba(201,146,10,0.3);
+    }
+
+    .faq-item__question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: var(--space-md) var(--space-lg);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      line-height: 1.4;
+    }
+
+    .faq-item__question:hover {
+      color: var(--cta);
+    }
+
+    .faq-item__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+
+    .faq-item__icon::before,
+    .faq-item__icon::after {
+      content: '';
+      position: absolute;
+      background: var(--cta);
+      border-radius: 1px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item__icon::before {
+      width: 14px;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-item__icon::after {
+      width: 2px;
+      height: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-item.open .faq-item__icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .faq-item__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item__answer-inner {
+      padding: 0 var(--space-lg) var(--space-lg);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--slate);
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-md);
+    }
+
+    /* ========================================
+       6. MAP / LOCATION
+       ======================================== */
+    .location-section {
+      padding: var(--space-3xl) 0;
+    }
+
+    .location-section__header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .location-section__title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: var(--space-sm);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 360px;
+      background: linear-gradient(145deg, #e8eaed 0%, #d8dce2 100%);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+      border: 1px solid var(--border);
+    }
+
+    .map-placeholder__icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .map-placeholder__text {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .location-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      text-align: center;
+    }
+
+    .location-detail__label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cta);
+      margin-bottom: var(--space-sm);
+    }
+
+    .location-detail__text {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--slate);
+    }
+
+    .location-detail__text strong {
+      color: var(--ink);
+      font-weight: 600;
+      display: block;
+    }
+
+    .location-est {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .location-est__text {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    /* ========================================
+       7. FOOTER
+       ======================================== */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.5);
+      padding: var(--space-2xl) 0 var(--space-lg);
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: var(--space-lg);
+    }
+
+    .footer__brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer__brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer__logo {
+      height: 24px;
+      width: auto;
+      opacity: 0.7;
+    }
+
+    .footer__brand-name {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer__tagline {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.4);
+      max-width: 280px;
+    }
+
+    .footer__col-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cta);
+      margin-bottom: var(--space-md);
+    }
+
+    .footer__col-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__col-links a {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      transition: color var(--transition);
+    }
+
+    .footer__col-links a:hover {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .footer__copyright {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer__legal-links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+    }
+
+    .footer__legal-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.25);
+      transition: color var(--transition);
+    }
+
+    .footer__legal-links a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      .nav__links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--ink);
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-sm);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      }
+
+      .nav__links.open {
+        display: flex;
+      }
+
+      .nav__links a::after {
+        display: none;
+      }
+
+      .nav__toggle {
+        display: block;
+      }
+
+      .nav__cta {
+        display: none;
+      }
+
+      .contact-cards__grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+
+      .location-details {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+
+      .footer__top {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      :root {
+        --space-3xl: 5rem;
+        --space-2xl: 3.5rem;
+        --space-xl: 2.5rem;
+      }
+
+      .hero {
+        min-height: 40vh;
+      }
+
+      .hero__content {
+        padding: var(--space-2xl) var(--space-md);
+      }
+
+      .form__row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__top {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer__legal-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    /* ========================================
+       PRINT
+       ======================================== */
+    @media print {
+      .nav,
+      .contact-form-section,
+      .faq-section,
+      .footer {
+        display: none !important;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 2rem 0;
+        background: #fff !important;
+        color: #000 !important;
+      }
+
+      .hero__headline {
+        color: #000 !important;
+        font-size: 2rem;
+      }
+
+      .hero__subtitle {
+        color: #333 !important;
+      }
+
+      .hero__rule {
+        background: #ccc !important;
+      }
+
+      .contact-card {
+        break-inside: avoid;
+        border: 1px solid #ccc;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      .contact-cards {
+        background: #fff !important;
+      }
+
+      .faq-section,
+      .map-placeholder {
+        display: none !important;
+      }
+
+      body {
+        font-size: 12pt;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. NAVIGATION
+       ========================================== -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="01-home-marketplace.html" class="nav__brand">
+        <img
+          src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png"
+          alt="HIRECAR Logo"
+          class="nav__logo"
+        >
+        <span class="nav__wordmark">HIRECAR</span>
+      </a>
+
+      <ul class="nav__links" id="navLinks">
+        <li><a href="01-home-marketplace.html">Home</a></li>
+        <li><a href="02-about-bio.html">About</a></li>
+        <li><a href="05-services-gamified.html">Services</a></li>
+        <li><a href="04-playbooks-standards.html">Playbooks</a></li>
+        <li><a href="06-members-firstclass.html">Members</a></li>
+      </ul>
+
+      <a href="#contact-form" class="nav__cta">Start Recovery &rarr;</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       2. HERO
+       ========================================== -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="label label--gold" style="margin-bottom: var(--space-sm);">Contact Us</p>
+      <h1 class="hero__headline">Get In Touch</h1>
+      <hr class="hero__rule">
+      <p class="hero__subtitle">
+        Whether you're an operator, a partner, or just curious &mdash; we're here.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       3. CONTACT CARDS
+       ========================================== -->
+  <section class="contact-cards">
+    <div class="container">
+      <div class="contact-cards__header fade-in">
+        <p class="label label--gold">Reach Out</p>
+        <h2 class="contact-cards__title">How to Connect</h2>
+        <hr class="gold-rule">
+      </div>
+
+      <div class="contact-cards__grid">
+        <!-- Call Us -->
+        <div class="contact-card fade-in">
+          <div class="contact-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <p class="contact-card__label">Call Us</p>
+          <p class="contact-card__value">(661) 651-0858</p>
+          <p class="contact-card__note">Mon&ndash;Fri 9am&ndash;6pm PST</p>
+          <a href="tel:+16616510858" class="contact-card__btn">Call Now &rarr;</a>
+        </div>
+
+        <!-- Email Us -->
+        <div class="contact-card fade-in">
+          <div class="contact-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <p class="contact-card__label">Email Us</p>
+          <p class="contact-card__value">info@hirecar.la</p>
+          <p class="contact-card__note">We respond within 24 hours</p>
+          <a href="mailto:info@hirecar.la" class="contact-card__btn">Send Email &rarr;</a>
+        </div>
+
+        <!-- Visit Us -->
+        <div class="contact-card fade-in">
+          <div class="contact-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <p class="contact-card__label">Visit Us</p>
+          <p class="contact-card__value">Los Angeles, CA</p>
+          <p class="contact-card__note">By appointment only</p>
+          <a href="https://maps.google.com/?q=Los+Angeles+CA" target="_blank" rel="noopener" class="contact-card__btn">Get Directions &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. CONTACT FORM + INFO PANEL
+       ========================================== -->
+  <section class="contact-form-section" id="contact-form">
+    <div class="container">
+      <div class="contact-form-section__header fade-in">
+        <p class="label label--gold">Send a Message</p>
+        <h2 class="contact-form-section__title">We'd Love to Hear From You</h2>
+        <hr class="gold-rule">
+      </div>
+
+      <div class="contact-layout">
+        <!-- Left: Form -->
+        <div class="fade-in">
+          <form class="form" id="contactForm" novalidate>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="firstName">First Name <span class="required">*</span></label>
+                <input class="form__input" type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                <span class="form__error" id="firstNameError">First name is required.</span>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="lastName">Last Name <span class="required">*</span></label>
+                <input class="form__input" type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                <span class="form__error" id="lastNameError">Last name is required.</span>
+              </div>
+            </div>
+
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="email">Email <span class="required">*</span></label>
+                <input class="form__input" type="email" id="email" name="email" required autocomplete="email">
+                <span class="form__error" id="emailError">Please enter a valid email address.</span>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="phone">Phone</label>
+                <input class="form__input" type="tel" id="phone" name="phone" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="subject">Subject <span class="required">*</span></label>
+              <select class="form__select" id="subject" name="subject" required>
+                <option value="" disabled selected>Select a topic...</option>
+                <option value="general">General Inquiry</option>
+                <option value="credit-repair">Credit Repair</option>
+                <option value="membership">Membership</option>
+                <option value="partnership">Partnership</option>
+                <option value="press">Press / Media</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="form__error" id="subjectError">Please select a subject.</span>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="message">Message <span class="required">*</span></label>
+              <textarea class="form__textarea" id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
+              <span class="form__error" id="messageError">Please enter a message.</span>
+            </div>
+
+            <button type="submit" class="form__submit" id="submitBtn">
+              Send Message &rarr;
+            </button>
+          </form>
+
+          <div class="form__success" id="formSuccess">
+            <p class="form__success-title">Message Sent</p>
+            <p class="form__success-text">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+          </div>
+        </div>
+
+        <!-- Right: Info Panel -->
+        <div class="info-panel fade-in">
+          <!-- Office Hours -->
+          <div class="info-block">
+            <h3 class="info-block__title">Office Hours</h3>
+            <p class="info-block__text">
+              <strong>Monday &ndash; Friday</strong>
+              9:00 AM &ndash; 6:00 PM PST
+            </p>
+            <p class="info-block__text" style="margin-top: 8px;">
+              <strong>Saturday &ndash; Sunday</strong>
+              Closed (email monitored)
+            </p>
+          </div>
+
+          <!-- Emergency Line -->
+          <div class="info-block">
+            <h3 class="info-block__title">Member Emergency Line</h3>
+            <p class="info-block__text">
+              Active First Class Members have priority access to our direct recovery line.
+            </p>
+            <div class="emergency-alert" style="margin-top: var(--space-sm);">
+              <p class="emergency-alert__badge">PIFR Emergency</p>
+              <p class="emergency-alert__text">
+                For PIFR emergencies, call<br>
+                <a href="tel:+16616510858" class="emergency-alert__phone">(661) 651-0858</a> immediately.
+              </p>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="info-block">
+            <h3 class="info-block__title">Follow Us</h3>
+            <div class="social-links">
+              <!-- Instagram -->
+              <a href="#" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="#" class="social-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="4" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              </a>
+              <!-- X/Twitter -->
+              <a href="#" class="social-link" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.8L16 20h4l-6.8-8.4L20 4h-2l-5.2 6.4L8 4H4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              </a>
+              <!-- YouTube -->
+              <a href="#" class="social-link" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. FAQ ACCORDION
+       ========================================== -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-section__header fade-in">
+        <p class="label label--gold">Common Questions</p>
+        <h2 class="faq-section__title">Frequently Asked</h2>
+        <hr class="gold-rule">
+      </div>
+
+      <div class="faq-list">
+        <!-- Q1 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            How do I start credit repair?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              The easiest way to start is to reach out through our contact form above or call us at (661) 651-0858. Our HIRECREDIT team will pull a soft review of your credit profile, identify post-incident damage, and build a recovery plan. Most clients see movement on their file within the first 45 days. Active HIRECAR members receive priority onboarding.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            What is an HBI score?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              The HIRECAR Business Index (HBI) is a proprietary score that measures operator readiness across four pillars: credit health, fleet condition, compliance standing, and operational history. It ranges from 0 to 100. A strong HBI unlocks access to premium volume, SeedXchange capital, and First Class Membership benefits. Think of it as your operator credit score within the HIRECAR ecosystem.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            How do I become a First Class Member?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              First Class Membership is available to qualified operators who meet HIRECAR's standards baseline. Start by completing a qualification funnel on our Services page, or contact us directly to schedule a review. Membership includes priority routing, dedicated recovery support, CreditWithKen sessions, fleet tools, and access to SeedXchange funding. There's no cost to apply &mdash; we evaluate on standards, not fees.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            What areas do you serve?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              HIRECAR is headquartered in Los Angeles and currently serves operators across the Greater LA basin, including the San Fernando Valley, South Bay, Inland Empire, and Orange County. Credit repair and CreditWithKen coaching are available nationwide (remote). We're expanding service coverage quarterly &mdash; reach out if you're outside our current area and we'll let you know the timeline.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            How do I report a collision?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              If you're an active HIRECAR member, call our PIFR emergency line at (661) 651-0858 immediately. Our Post-Incident First Response protocol activates within minutes. If you're not yet a member, you can still reach out via the number above or the contact form. We'll triage your situation and route you to the right services &mdash; from towing coordination to credit protection to insurance follow-up.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item fade-in">
+          <button class="faq-item__question" aria-expanded="false">
+            Can I schedule a CreditWithKen session?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              Absolutely. CreditWithKen is Ken Eckman's 1-on-1 credit coaching program. Sessions cover credit file review, dispute strategy, tradeline optimization, funding readiness, and approval pathways. First Class Members get monthly sessions included; non-members can book individual sessions. Use the contact form above and select "Credit Repair" as the subject, or email info@hirecar.la directly to schedule.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. MAP / LOCATION
+       ========================================== -->
+  <section class="location-section">
+    <div class="container">
+      <div class="location-section__header fade-in">
+        <p class="label label--gold">Our Location</p>
+        <h2 class="location-section__title">Find Us</h2>
+        <hr class="gold-rule">
+      </div>
+
+      <div class="map-placeholder fade-in" id="mapPlaceholder">
+        <div class="map-placeholder__icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <p class="map-placeholder__text">Map Loading...</p>
+      </div>
+
+      <div class="location-details fade-in">
+        <div>
+          <p class="location-detail__label">Address</p>
+          <p class="location-detail__text">
+            <strong>HIRECAR, LLC</strong>
+            Los Angeles, California<br>
+            By appointment only
+          </p>
+        </div>
+        <div>
+          <p class="location-detail__label">Business Hours</p>
+          <p class="location-detail__text">
+            <strong>Mon &ndash; Fri</strong>
+            9:00 AM &ndash; 6:00 PM PST
+          </p>
+          <p class="location-detail__text" style="margin-top: 4px;">
+            <strong>Sat &ndash; Sun</strong>
+            Closed
+          </p>
+        </div>
+        <div>
+          <p class="location-detail__label">Contact</p>
+          <p class="location-detail__text">
+            <strong>(661) 651-0858</strong>
+            info@hirecar.la
+          </p>
+        </div>
+      </div>
+
+      <div class="location-est fade-in">
+        <p class="location-est__text">HIRECAR, LLC &middot; Est. November 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <!-- Brand Column -->
+        <div class="footer__brand">
+          <div class="footer__brand-row">
+            <img
+              src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png"
+              alt="HIRECAR"
+              class="footer__logo"
+            >
+            <span class="footer__brand-name">HIRECAR</span>
+          </div>
+          <p class="footer__tagline">Intelligence for the auto operator economy. From collision to credit file to the operator's next vehicle.</p>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <p class="footer__col-title">Company</p>
+          <ul class="footer__col-links">
+            <li><a href="02-about-bio.html">About</a></li>
+            <li><a href="05-services-gamified.html">Services</a></li>
+            <li><a href="06-members-firstclass.html">Membership</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources Links -->
+        <div>
+          <p class="footer__col-title">Resources</p>
+          <ul class="footer__col-links">
+            <li><a href="04-playbooks-standards.html">Playbooks</a></li>
+            <li><a href="#">MarketWatch!</a></li>
+            <li><a href="#">CreditWithKen</a></li>
+            <li><a href="#">SeedXchange</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div>
+          <p class="footer__col-title">Legal</p>
+          <ul class="footer__col-links">
+            <li><a href="03-terms-legal.html">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Disclosures</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 HIRECAR, LLC. All rights reserved.</p>
+        <ul class="footer__legal-links">
+          <li><a href="03-terms-legal.html">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       INLINE SCRIPTS
+       ========================================== -->
+  <script>
+    (function() {
+      'use strict';
+
+      /* ------------------------------------------
+         Mobile Nav Toggle
+         ------------------------------------------ */
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      if (toggle && links) {
+        toggle.addEventListener('click', function() {
+          links.classList.toggle('open');
+        });
+      }
+
+      /* ------------------------------------------
+         FAQ Accordion
+         ------------------------------------------ */
+      var faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function(item) {
+        var question = item.querySelector('.faq-item__question');
+        var answer = item.querySelector('.faq-item__answer');
+        var answerInner = item.querySelector('.faq-item__answer-inner');
+
+        question.addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+
+          // Close all others
+          faqItems.forEach(function(other) {
+            if (other !== item) {
+              other.classList.remove('open');
+              other.querySelector('.faq-item__question').setAttribute('aria-expanded', 'false');
+              other.querySelector('.faq-item__answer').style.maxHeight = '0';
+            }
+          });
+
+          // Toggle current
+          if (isOpen) {
+            item.classList.remove('open');
+            question.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = '0';
+          } else {
+            item.classList.add('open');
+            question.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answerInner.scrollHeight + 40 + 'px';
+          }
+        });
+      });
+
+      /* ------------------------------------------
+         Form Validation
+         ------------------------------------------ */
+      var form = document.getElementById('contactForm');
+      var submitBtn = document.getElementById('submitBtn');
+      var formSuccess = document.getElementById('formSuccess');
+
+      function showError(inputId, errorId) {
+        var input = document.getElementById(inputId);
+        var error = document.getElementById(errorId);
+        input.classList.add('error');
+        error.classList.add('show');
+      }
+
+      function clearError(inputId, errorId) {
+        var input = document.getElementById(inputId);
+        var error = document.getElementById(errorId);
+        input.classList.remove('error');
+        error.classList.remove('show');
+      }
+
+      function validateEmail(email) {
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      // Clear errors on input
+      ['firstName', 'lastName', 'email', 'subject', 'message'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input', function() {
+            clearError(id, id + 'Error');
+          });
+          el.addEventListener('change', function() {
+            clearError(id, id + 'Error');
+          });
+        }
+      });
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          var isValid = true;
+
+          // First Name
+          var firstName = document.getElementById('firstName').value.trim();
+          if (!firstName) {
+            showError('firstName', 'firstNameError');
+            isValid = false;
+          } else {
+            clearError('firstName', 'firstNameError');
+          }
+
+          // Last Name
+          var lastName = document.getElementById('lastName').value.trim();
+          if (!lastName) {
+            showError('lastName', 'lastNameError');
+            isValid = false;
+          } else {
+            clearError('lastName', 'lastNameError');
+          }
+
+          // Email
+          var email = document.getElementById('email').value.trim();
+          if (!email || !validateEmail(email)) {
+            showError('email', 'emailError');
+            isValid = false;
+          } else {
+            clearError('email', 'emailError');
+          }
+
+          // Subject
+          var subject = document.getElementById('subject').value;
+          if (!subject) {
+            showError('subject', 'subjectError');
+            isValid = false;
+          } else {
+            clearError('subject', 'subjectError');
+          }
+
+          // Message
+          var message = document.getElementById('message').value.trim();
+          if (!message) {
+            showError('message', 'messageError');
+            isValid = false;
+          } else {
+            clearError('message', 'messageError');
+          }
+
+          if (isValid) {
+            // Simulate submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            setTimeout(function() {
+              form.style.display = 'none';
+              formSuccess.classList.add('show');
+            }, 1200);
+          }
+        });
+      }
+
+      /* ------------------------------------------
+         Intersection Observer: Fade-In on Scroll
+         ------------------------------------------ */
+      if ('IntersectionObserver' in window) {
+        var fadeElements = document.querySelectorAll('.fade-in');
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        fadeElements.forEach(function(el) {
+          observer.observe(el);
+        });
+      } else {
+        // Fallback: show everything
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
