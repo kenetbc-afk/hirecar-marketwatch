@@ -68,7 +68,7 @@ def rewrite_article(client, source, city_code):
 
     raw = response.content[0].text.strip()
 
-    # Parse JSON response — handle potential markdown fences
+    # Parse JSON response -- handle potential markdown fences
     if raw.startswith("```"):
         raw = raw.split("\n", 1)[1]
         if raw.endswith("```"):

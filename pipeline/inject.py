@@ -10,11 +10,15 @@ import sys
 import locale
 from datetime import datetime, timezone
 
-# Ensure UTF-8 output on all platforms
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
-if sys.stderr.encoding != "utf-8":
-    sys.stderr.reconfigure(encoding="utf-8")
+# Force UTF-8 everywhere before any other imports
+os.environ["PYTHONIOENCODING"] = "utf-8"
+os.environ["LC_ALL"] = "C.UTF-8"
+os.environ["LANG"] = "C.UTF-8"
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 # Add pipeline dir to path so imports work when run from repo root
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
