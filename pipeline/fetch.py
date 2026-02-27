@@ -96,7 +96,7 @@ def fetch_and_filter(repo_root):
         if url in processed:
             continue
 
-        title = entry.get("title", "")
+        title = strip_html(entry.get("title", ""))
         summary = strip_html(entry.get("summary", ""))
         published = entry.get("published", "")
 

@@ -1,5 +1,5 @@
 """
-HIRECAR MarketWatch — Pipeline Configuration
+HIRECAR MarketWatch -- Pipeline Configuration
 """
 import os
 
@@ -42,7 +42,7 @@ EDITIONS = {
             "Average auto insurance premiums in LA County exceed $2,900/year",
             "LA is the largest used-car market in the United States",
             "Southern California leads the nation in subprime auto originations",
-            "LA County has 7.2 million registered vehicles — more than 38 states",
+            "LA County has 7.2 million registered vehicles -- more than 38 states",
             "The 405, 101, and 10 freeways see some of the highest collision density in the US",
             "Collision repair shops in LA process an estimated $4.8B in annual claims",
         ],
