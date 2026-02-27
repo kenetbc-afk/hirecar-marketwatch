@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base href="/hirecar-marketwatch/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBI Scoring | HIRECAR Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-dark: #111820;
+  --color-accent: #c9920a;
+  --color-accent-light: rgba(201, 146, 10, 0.08);
+  --color-accent-mid: rgba(201, 146, 10, 0.15);
+  --color-bg: #f5f5f7;
+  --color-content-bg: #ffffff;
+  --color-sidebar-bg: #f5f5f7;
+  --color-code-bg: #f0f2f5;
+  --color-border: #d1d1d6;
+  --color-border-light: #e5e5ea;
+  --color-text: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-text-tertiary: #86868b;
+  --color-link: #0066cc;
+  --color-green: #248a3d;
+  --color-green-bg: rgba(36, 138, 61, 0.08);
+  --color-amber: #af8200;
+  --color-amber-bg: rgba(175, 130, 0, 0.08);
+  --color-red: #d70015;
+  --font-display: 'Cormorant Garant', Georgia, serif;
+  --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'DM Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --sidebar-width: 240px;
+  --right-sidebar-width: 200px;
+  --header-height: 52px;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--color-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== HEADER ===== */
+.doc-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  height: var(--header-height);
+}
+
+.doc-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--color-text);
+  transition: background 0.15s;
+}
+.hamburger-btn:hover { background: var(--color-code-bg); }
+.hamburger-btn svg { display: block; }
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--color-dark);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.5px;
+}
+
+.logo-text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.logo-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+}
+
+.logo-documentation {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-left: 24px;
+}
+
+.breadcrumb a {
+  color: var(--color-text-tertiary);
+  transition: color 0.15s;
+}
+.breadcrumb a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.breadcrumb .sep { opacity: 0.5; }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 6px 12px 6px 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 200px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, width 0.25s;
+}
+.search-box input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(201, 146, 10, 0.15);
+  width: 260px;
+}
+.search-box input::placeholder { color: var(--color-text-tertiary); }
+
+.search-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.ext-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.ext-link:hover { color: var(--color-accent); text-decoration: none; }
+
+/* ===== LAYOUT ===== */
+.doc-layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr var(--right-sidebar-width);
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 89;
+}
+
+.doc-sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border-light);
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 0 32px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+.doc-sidebar::-webkit-scrollbar { width: 6px; }
+.doc-sidebar::-webkit-scrollbar-track { background: transparent; }
+.doc-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+
+.sidebar-section { margin-bottom: 4px; }
+
+.sidebar-heading {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-secondary);
+  padding: 10px 20px 6px;
+  cursor: default;
+}
+
+.sidebar-group summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 7px 20px;
+  transition: background 0.12s, color 0.12s;
+  user-select: none;
+}
+.sidebar-group summary::-webkit-details-marker { display: none; }
+.sidebar-group summary::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid var(--color-text-tertiary);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.sidebar-group[open] > summary::before {
+  transform: rotate(90deg);
+}
+.sidebar-group summary:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-children { padding: 2px 0; }
+
+.sidebar-link {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  padding: 5px 20px 5px 42px;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+.sidebar-link:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.sidebar-link.active {
+  background: var(--color-accent-light);
+  color: var(--color-dark);
+  font-weight: 600;
+  border-left-color: var(--color-accent);
+}
+
+.sidebar-link-root {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  padding: 7px 20px 7px 20px;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+  border-left: 3px solid transparent;
+}
+.sidebar-link-root:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.sidebar-link-root.active {
+  background: var(--color-accent-light);
+  color: var(--color-dark);
+  font-weight: 600;
+  border-left-color: var(--color-accent);
+}
+
+/* ===== MAIN CONTENT ===== */
+.doc-content {
+  max-width: 780px;
+  width: 100%;
+  padding: 32px 48px 80px;
+  background: var(--color-content-bg);
+  min-height: calc(100vh - var(--header-height));
+}
+
+.page-title {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-dark);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.page-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.badge-platform {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-code-bg);
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.2px;
+}
+
+.badge-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.2px;
+}
+.badge-status.active {
+  color: var(--color-green);
+  background: var(--color-green-bg);
+}
+.badge-status.beta {
+  color: var(--color-amber);
+  background: var(--color-amber-bg);
+}
+
+.content-section {
+  margin-bottom: 40px;
+}
+
+.section-heading {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: -0.3px;
+  margin-bottom: 14px;
+  padding-top: 8px;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.section-subheading {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.content-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.content-text strong { font-weight: 700; }
+
+.content-text code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--color-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--color-dark);
+}
+
+/* Declaration / Threshold Block */
+.declaration-block {
+  background: var(--color-code-bg);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+.declaration-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 8px;
+}
+
+.declaration-code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-dark);
+}
+
+.declaration-code .keyword { color: #9b2393; font-weight: 500; }
+.declaration-code .value { color: #0b4f79; font-weight: 500; }
+.declaration-code .symbol { color: var(--color-text-secondary); }
+
+/* Code Block */
+.code-block {
+  background: var(--color-code-bg);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+  overflow-x: auto;
+  position: relative;
+}
+
+.code-block pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-dark);
+  white-space: pre;
+  margin: 0;
+}
+
+.code-block .comment { color: var(--color-text-tertiary); }
+.code-block .var-name { color: #0b4f79; }
+.code-block .operator { color: #9b2393; }
+.code-block .number { color: #1c00cf; }
+
+.code-block-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Table */
+.doc-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light);
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.doc-table thead th {
+  background: var(--color-code-bg);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+  white-space: nowrap;
+}
+
+.doc-table tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text);
+  vertical-align: top;
+}
+
+.doc-table tbody tr:last-child td { border-bottom: none; }
+
+.doc-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.015); }
+
+.doc-table .weight-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.doc-table .metric-cell {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* Lane Comparison */
+.lane-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.lane-card {
+  border-radius: 10px;
+  padding: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+.lane-card.revenue {
+  background: var(--color-green-bg);
+  border-color: rgba(36, 138, 61, 0.2);
+}
+.lane-card.cure {
+  background: var(--color-amber-bg);
+  border-color: rgba(175, 130, 0, 0.2);
+}
+
+.lane-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.lane-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.revenue .lane-dot { background: var(--color-green); }
+.cure .lane-dot { background: var(--color-amber); }
+
+.lane-card-title {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.lane-threshold {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.revenue .lane-threshold { color: var(--color-green); background: rgba(36,138,61,0.1); }
+.cure .lane-threshold { color: var(--color-amber); background: rgba(175,130,0,0.1); }
+
+.lane-list {
+  list-style: none;
+  padding: 0;
+}
+.lane-list li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+  padding: 3px 0 3px 18px;
+  position: relative;
+}
+.lane-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.revenue .lane-list li::before { background: var(--color-green); }
+.cure .lane-list li::before { background: var(--color-amber); }
+
+/* See Also */
+.see-also {
+  background: var(--color-code-bg);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.see-also-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 10px;
+}
+
+.see-also-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.see-also-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-link);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.see-also-link:hover { text-decoration: underline; }
+.see-also-link .arrow { font-size: 11px; color: var(--color-text-tertiary); }
+
+/* Version History */
+.version-history {
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 24px;
+}
+
+.version-entry {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.version-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-accent);
+  white-space: nowrap;
+  min-width: 50px;
+}
+
+.version-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ===== RIGHT SIDEBAR (On This Page) ===== */
+.doc-right-sidebar {
+  width: var(--right-sidebar-width);
+  padding: 32px 20px 32px 16px;
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.doc-right-sidebar::-webkit-scrollbar { display: none; }
+
+.on-page-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 12px;
+}
+
+.on-page-nav { list-style: none; }
+
+.on-page-link {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1.5;
+}
+.on-page-link:hover {
+  color: var(--color-dark);
+  text-decoration: none;
+}
+.on-page-link.active {
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ===== FOOTER ===== */
+.doc-footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-content-bg);
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-links a {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--color-accent); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .doc-layout {
+    grid-template-columns: var(--sidebar-width) 1fr;
+  }
+  .doc-right-sidebar { display: none; }
+}
+
+@media (max-width: 768px) {
+  .doc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hamburger-btn { display: flex; }
+
+  .sidebar-overlay.open {
+    display: block;
+  }
+
+  .doc-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    z-index: 90;
+    width: 280px;
+    height: calc(100vh - var(--header-height));
+    background: var(--color-content-bg);
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: none;
+  }
+  .doc-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+  }
+
+  .doc-right-sidebar { display: none; }
+
+  .doc-content {
+    padding: 24px 20px 64px;
+  }
+
+  .breadcrumb { display: none; }
+
+  .search-box input { width: 140px; }
+  .search-box input:focus { width: 180px; }
+
+  .ext-link { display: none; }
+
+  .page-title { font-size: 26px; }
+  .section-heading { font-size: 20px; }
+
+  .lane-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .code-block { padding: 16px; }
+  .code-block pre { font-size: 12px; }
+
+  .doc-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-divider,
+  .logo-documentation { display: none; }
+
+  .search-box input { width: 120px; }
+  .search-box input:focus { width: 150px; }
+
+  .page-badges { flex-direction: column; align-items: flex-start; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  .doc-header,
+  .doc-sidebar,
+  .doc-right-sidebar,
+  .hamburger-btn,
+  .sidebar-overlay { display: none !important; }
+
+  .doc-layout {
+    display: block;
+  }
+
+  .doc-content {
+    max-width: 100%;
+    padding: 0;
+    background: #fff;
+  }
+
+  .code-block, .declaration-block {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .doc-table-wrapper { page-break-inside: avoid; }
+
+  .lane-comparison { page-break-inside: avoid; }
+
+  .doc-footer { border-top: 1px solid #ccc; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="doc-header">
+  <div class="doc-header-inner">
+    <div class="header-left">
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="4" width="16" height="2" rx="1" fill="currentColor"/>
+          <rect x="2" y="9" width="16" height="2" rx="1" fill="currentColor"/>
+          <rect x="2" y="14" width="16" height="2" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="logo-group">
+        <div class="logo-mark">HC</div>
+        <span class="logo-text">HIRECAR</span>
+        <div class="logo-divider"></div>
+        <span class="logo-documentation">Documentation</span>
+      </div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="./">HIRECAR</a>
+        <span class="sep">/</span>
+        <a href="playbooks/">Standards</a>
+        <span class="sep">/</span>
+        <span>HBI Scoring</span>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
+          <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M13.5 13.5L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="search" placeholder="Search Documentation" aria-label="Search documentation">
+      </div>
+      <a href="./" class="ext-link">HIRECAR.LA &#8599;</a>
+    </div>
+  </div>
+</header>
+
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== 3-COLUMN LAYOUT ===== -->
+<div class="doc-layout">
+
+  <!-- LEFT SIDEBAR -->
+  <nav class="doc-sidebar" id="docSidebar" aria-label="Documentation navigation">
+    <div class="sidebar-heading">HIRECAR Standards</div>
+
+    <a href="#" class="sidebar-link-root">Overview</a>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>Getting Started</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Operator Qualification</a>
+        <a href="#" class="sidebar-link">Network Requirements</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section" open>
+      <summary>HBI Scoring</summary>
+      <div class="sidebar-children">
+        <a href="#overview" class="sidebar-link active" data-section="overview">Overview</a>
+        <a href="#the-5-behaviors" class="sidebar-link" data-section="the-5-behaviors">The 5 Behaviors</a>
+        <a href="#scoring-algorithm" class="sidebar-link" data-section="scoring-algorithm">Scoring Algorithm</a>
+        <a href="#revenue-lane-vs-cure-lane" class="sidebar-link" data-section="revenue-lane-vs-cure-lane">Revenue Lane vs Cure Lane</a>
+        <a href="#score-improvement" class="sidebar-link" data-section="score-improvement">Score Improvement Guide</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>BRE Standards</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Overview</a>
+        <a href="#" class="sidebar-link">Business Readiness Evaluation</a>
+        <a href="#" class="sidebar-link">Compliance Requirements</a>
+        <a href="#" class="sidebar-link">Certification Process</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>PIFR Protocol</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Overview</a>
+        <a href="#" class="sidebar-link">Post-Incident Filing</a>
+        <a href="#" class="sidebar-link">SKU Tiers (Core/Plus/Max)</a>
+        <a href="#" class="sidebar-link">Timeline Management</a>
+        <a href="#" class="sidebar-link">Exhibit Packet Assembly</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>VDI Checklist</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Overview</a>
+        <a href="#" class="sidebar-link">Vehicle Documentation Index</a>
+        <a href="#" class="sidebar-link">Scoring Criteria</a>
+        <a href="#" class="sidebar-link">80+ Requirements</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>Custody Log Standards</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Overview</a>
+        <a href="#" class="sidebar-link">Chain of Custody</a>
+        <a href="#" class="sidebar-link">Required Fields</a>
+        <a href="#" class="sidebar-link">Audit Compliance</a>
+      </div>
+    </details>
+
+    <details class="sidebar-group sidebar-section">
+      <summary>Operator Playbooks</summary>
+      <div class="sidebar-children">
+        <a href="#" class="sidebar-link">Credit Recovery Playbook</a>
+        <a href="#" class="sidebar-link">Collision Response Playbook</a>
+        <a href="#" class="sidebar-link">Fleet Onboarding Playbook</a>
+        <a href="#" class="sidebar-link">Funding Readiness Playbook</a>
+      </div>
+    </details>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="doc-content">
+
+    <!-- Page Header -->
+    <h1 class="page-title">HBI Scoring</h1>
+    <div class="page-badges">
+      <span class="badge-platform">HIRECAR Network &middot; v2.0 &middot; Q1 2026</span>
+      <span class="badge-status active">Active Standard</span>
+    </div>
+
+    <!-- Overview -->
+    <section class="content-section" id="overview">
+      <h2 class="section-heading">Overview</h2>
+      <p class="content-text">
+        The HIRECAR Behavioral Index (HBI) is the primary qualification metric for operators in the HIRECAR network. HBI measures five operator behaviors that determine routing to <strong>Revenue Lane</strong> (premium volume) or <strong>Cure Lane</strong> (remediation).
+      </p>
+      <p class="content-text">
+        Every operator in the network receives an HBI score calculated from their trailing 90-day performance window. Scores are recalculated weekly and directly affect case routing, lead distribution, and tier access within the HIRECAR platform.
+      </p>
+
+      <!-- Declaration Block -->
+      <div class="declaration-block">
+        <div class="declaration-label">Threshold</div>
+        <div class="declaration-code">
+          <span class="keyword">HBI</span> <span class="symbol">&ge;</span> <span class="value">80</span> <span class="symbol">&rarr;</span> Revenue Lane<br>
+          <span class="keyword">HBI</span> <span class="symbol">&lt;</span> <span class="value">80</span> <span class="symbol">&rarr;</span> Cure Lane
+        </div>
+      </div>
+    </section>
+
+    <!-- The 5 Behaviors -->
+    <section class="content-section" id="the-5-behaviors">
+      <h2 class="section-heading">The 5 Behaviors</h2>
+      <p class="content-text">
+        HBI is composed of five individually scored behaviors. Each behavior is measured against a defined target and weighted according to its impact on operator quality and client outcomes.
+      </p>
+
+      <div class="doc-table-wrapper">
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Behavior</th>
+              <th>Weight</th>
+              <th>Description</th>
+              <th>Metric</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Response Time</strong></td>
+              <td class="weight-cell">20%</td>
+              <td>Time from incident report to first operator action</td>
+              <td class="metric-cell">Target: &lt; 4 hours</td>
+            </tr>
+            <tr>
+              <td><strong>Documentation Quality</strong></td>
+              <td class="weight-cell">25%</td>
+              <td>Completeness of PIFR filing and exhibit packet</td>
+              <td class="metric-cell">VDI Score &ge; 80</td>
+            </tr>
+            <tr>
+              <td><strong>Custody Compliance</strong></td>
+              <td class="weight-cell">20%</td>
+              <td>Chain of custody log accuracy and completeness</td>
+              <td class="metric-cell">Zero gaps</td>
+            </tr>
+            <tr>
+              <td><strong>Resolution Velocity</strong></td>
+              <td class="weight-cell">20%</td>
+              <td>Time from incident to full case closure</td>
+              <td class="metric-cell">Target: &lt; 30 days</td>
+            </tr>
+            <tr>
+              <td><strong>Client Communication</strong></td>
+              <td class="weight-cell">15%</td>
+              <td>Frequency and quality of client updates</td>
+              <td class="metric-cell">Min: weekly</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="content-text">
+        <strong>Documentation Quality</strong> carries the highest weight (25%) because thorough, timely documentation is the single greatest predictor of successful case outcomes and client satisfaction within the network.
+      </p>
+    </section>
+
+    <!-- Scoring Algorithm -->
+    <section class="content-section" id="scoring-algorithm">
+      <h2 class="section-heading">Scoring Algorithm</h2>
+      <p class="content-text">
+        The composite HBI score is a weighted sum of all five behavior scores. Each behavior is independently scored on a 0&ndash;100 scale, then multiplied by its weight to produce the final index value.
+      </p>
+
+      <div class="code-block">
+        <span class="code-block-label">Formula</span>
+<pre><span class="var-name">HBI</span> <span class="operator">=</span> (<span class="var-name">RT</span> <span class="operator">&times;</span> <span class="number">0.20</span>) <span class="operator">+</span> (<span class="var-name">DQ</span> <span class="operator">&times;</span> <span class="number">0.25</span>) <span class="operator">+</span> (<span class="var-name">CC</span> <span class="operator">&times;</span> <span class="number">0.20</span>) <span class="operator">+</span> (<span class="var-name">RV</span> <span class="operator">&times;</span> <span class="number">0.20</span>) <span class="operator">+</span> (<span class="var-name">CM</span> <span class="operator">&times;</span> <span class="number">0.15</span>)
+
+<span class="comment">Where:</span>
+  <span class="var-name">RT</span> = Response Time Score         <span class="comment">(0-100)</span>
+  <span class="var-name">DQ</span> = Documentation Quality Score <span class="comment">(0-100)</span>
+  <span class="var-name">CC</span> = Custody Compliance Score    <span class="comment">(0-100)</span>
+  <span class="var-name">RV</span> = Resolution Velocity Score   <span class="comment">(0-100)</span>
+  <span class="var-name">CM</span> = Client Communication Score  <span class="comment">(0-100)</span></pre>
+      </div>
+
+      <p class="content-text">
+        Scores are calculated against the operator's trailing 90-day performance window. A minimum of three completed cases within the window is required for an HBI score to be generated. Operators with fewer than three cases receive a provisional score based on available data.
+      </p>
+
+      <div class="code-block">
+        <span class="code-block-label">Example Calculation</span>
+<pre><span class="comment">// Operator with strong documentation but slower resolution</span>
+<span class="var-name">RT</span>  = <span class="number">85</span>     <span class="comment">// Responded in ~3 hours avg</span>
+<span class="var-name">DQ</span>  = <span class="number">95</span>     <span class="comment">// VDI Score of 95</span>
+<span class="var-name">CC</span>  = <span class="number">90</span>     <span class="comment">// Minor custody gap in 1 case</span>
+<span class="var-name">RV</span>  = <span class="number">70</span>     <span class="comment">// Avg resolution 35 days</span>
+<span class="var-name">CM</span>  = <span class="number">80</span>     <span class="comment">// Consistent weekly updates</span>
+
+<span class="var-name">HBI</span> = (<span class="number">85</span> <span class="operator">&times;</span> <span class="number">0.20</span>) + (<span class="number">95</span> <span class="operator">&times;</span> <span class="number">0.25</span>) + (<span class="number">90</span> <span class="operator">&times;</span> <span class="number">0.20</span>) + (<span class="number">70</span> <span class="operator">&times;</span> <span class="number">0.20</span>) + (<span class="number">80</span> <span class="operator">&times;</span> <span class="number">0.15</span>)
+<span class="var-name">HBI</span> = <span class="number">17.0</span> + <span class="number">23.75</span> + <span class="number">18.0</span> + <span class="number">14.0</span> + <span class="number">12.0</span>
+<span class="var-name">HBI</span> = <span class="number">84.75</span>  <span class="comment">// &rarr; Revenue Lane</span></pre>
+      </div>
+    </section>
+
+    <!-- Revenue Lane vs Cure Lane -->
+    <section class="content-section" id="revenue-lane-vs-cure-lane">
+      <h2 class="section-heading">Revenue Lane vs Cure Lane</h2>
+      <p class="content-text">
+        The HBI threshold of <code>80</code> determines operator routing into one of two operational lanes. Lane assignment directly affects the volume, quality, and margin of work an operator receives through the HIRECAR platform.
+      </p>
+
+      <div class="lane-comparison">
+        <div class="lane-card revenue">
+          <div class="lane-card-header">
+            <div class="lane-dot"></div>
+            <div class="lane-card-title">Revenue Lane</div>
+          </div>
+          <div class="lane-threshold">HBI &ge; 80</div>
+          <ul class="lane-list">
+            <li>Premium volume routing</li>
+            <li>Priority lead distribution</li>
+            <li>Higher margin work assignments</li>
+            <li>First Class client access</li>
+            <li>Eligible for network expansion tiers</li>
+            <li>Priority support from HIRECAR ops team</li>
+          </ul>
+        </div>
+        <div class="lane-card cure">
+          <div class="lane-card-header">
+            <div class="lane-dot"></div>
+            <div class="lane-card-title">Cure Lane</div>
+          </div>
+          <div class="lane-threshold">HBI &lt; 80</div>
+          <ul class="lane-list">
+            <li>Remediation period (30&ndash;90 days)</li>
+            <li>Standards coaching assigned</li>
+            <li>Reduced volume allocation</li>
+            <li>Improvement plan required</li>
+            <li>Bi-weekly score check-ins</li>
+            <li>Restricted from new client onboarding</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="content-text">
+        Operators in Cure Lane are not penalized permanently. The remediation period is designed as a structured improvement path with coaching, clear targets, and regular progress reviews. Operators who bring their HBI above 80 within the cure period are automatically re-routed to Revenue Lane at the next weekly recalculation.
+      </p>
+    </section>
+
+    <!-- Score Improvement Guide -->
+    <section class="content-section" id="score-improvement">
+      <h2 class="section-heading">Score Improvement Guide</h2>
+      <p class="content-text">
+        Operators seeking to improve their HBI should focus on the highest-weighted behaviors first. The following prioritization framework provides the most efficient path to score improvement.
+      </p>
+
+      <div class="code-block">
+        <span class="code-block-label">Improvement Priority Stack</span>
+<pre><span class="comment">// Focus areas ranked by score impact</span>
+
+<span class="number">1.</span> <span class="var-name">Documentation Quality</span>  <span class="comment">(25% weight &mdash; highest impact)</span>
+   &rarr; Complete every PIFR field
+   &rarr; Attach all required exhibits
+   &rarr; Target VDI score of 90+
+
+<span class="number">2.</span> <span class="var-name">Response Time</span>          <span class="comment">(20% weight)</span>
+   &rarr; Acknowledge within 1 hour
+   &rarr; First action within 4 hours
+   &rarr; Set up notification alerts
+
+<span class="number">3.</span> <span class="var-name">Custody Compliance</span>     <span class="comment">(20% weight)</span>
+   &rarr; Log every vehicle handoff
+   &rarr; Zero tolerance for gaps
+   &rarr; Use HIRECAR custody templates
+
+<span class="number">4.</span> <span class="var-name">Resolution Velocity</span>    <span class="comment">(20% weight)</span>
+   &rarr; Set internal 21-day target
+   &rarr; Escalate blockers at day 14
+   &rarr; Pre-schedule follow-ups
+
+<span class="number">5.</span> <span class="var-name">Client Communication</span>   <span class="comment">(15% weight)</span>
+   &rarr; Weekly status updates minimum
+   &rarr; Use HIRECAR update templates
+   &rarr; Document all client touchpoints</pre>
+      </div>
+
+      <p class="content-text">
+        Operators in Cure Lane are assigned a dedicated Standards Coach who provides a personalized improvement plan based on the operator's specific behavioral deficiencies. Coaching sessions occur bi-weekly until the operator achieves an HBI of 80 or above for two consecutive scoring periods.
+      </p>
+    </section>
+
+    <!-- See Also -->
+    <section class="content-section" id="see-also">
+      <div class="see-also">
+        <div class="see-also-title">See Also</div>
+        <div class="see-also-links">
+          <a href="#" class="see-also-link">
+            <span class="arrow">&#9654;</span>
+            BRE Standards &mdash; Business Readiness Evaluation
+          </a>
+          <a href="#" class="see-also-link">
+            <span class="arrow">&#9654;</span>
+            PIFR Protocol &mdash; Post-Incident Filing Requirements
+          </a>
+          <a href="#" class="see-also-link">
+            <span class="arrow">&#9654;</span>
+            VDI Checklist &mdash; Vehicle Documentation Index
+          </a>
+          <a href="#" class="see-also-link">
+            <span class="arrow">&#9654;</span>
+            Custody Log Standards &mdash; Chain of Custody Requirements
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Version History -->
+    <section class="content-section version-history" id="version-history">
+      <h2 class="section-heading">Version History</h2>
+      <div class="version-entry">
+        <span class="version-tag">v2.0</span>
+        <span class="version-desc">February 2026 &mdash; Updated scoring weights, added Client Communication behavior, introduced Cure Lane coaching program, revised Revenue Lane access tiers.</span>
+      </div>
+      <div class="version-entry">
+        <span class="version-tag">v1.1</span>
+        <span class="version-desc">October 2025 &mdash; Adjusted Resolution Velocity target from 45 days to 30 days based on network performance data.</span>
+      </div>
+      <div class="version-entry">
+        <span class="version-tag">v1.0</span>
+        <span class="version-desc">June 2025 &mdash; Initial HBI scoring standard published. Four core behaviors established with Revenue/Cure Lane routing.</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="doc-right-sidebar" aria-label="On this page">
+    <div class="on-page-label">On This Page</div>
+    <ul class="on-page-nav">
+      <li><a href="#overview" class="on-page-link active" data-target="overview">Overview</a></li>
+      <li><a href="#the-5-behaviors" class="on-page-link" data-target="the-5-behaviors">The 5 Behaviors</a></li>
+      <li><a href="#scoring-algorithm" class="on-page-link" data-target="scoring-algorithm">Scoring Algorithm</a></li>
+      <li><a href="#revenue-lane-vs-cure-lane" class="on-page-link" data-target="revenue-lane-vs-cure-lane">Revenue Lane vs Cure Lane</a></li>
+      <li><a href="#score-improvement" class="on-page-link" data-target="score-improvement">Score Improvement Guide</a></li>
+      <li><a href="#see-also" class="on-page-link" data-target="see-also">See Also</a></li>
+      <li><a href="#version-history" class="on-page-link" data-target="version-history">Version History</a></li>
+    </ul>
+  </aside>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="doc-footer">
+  <span>&copy; 2026 HIRECAR, LLC &middot; All Rights Reserved</span>
+  <div class="footer-links">
+    <a href="./">HIRECAR.LA</a>
+    <a href="terms/">Terms</a>
+    <a href="#">Privacy</a>
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+(function () {
+  'use strict';
+
+  // ---- Mobile sidebar toggle ----
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('docSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', function () {
+    if (sidebar.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar on link click (mobile)
+  sidebar.querySelectorAll('.sidebar-link, .sidebar-link-root').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (window.innerWidth <= 768) {
+        closeSidebar();
+      }
+    });
+  });
+
+  // ---- Active section highlighting with Intersection Observer ----
+  const sections = document.querySelectorAll('.content-section[id]');
+  const onPageLinks = document.querySelectorAll('.on-page-link');
+  const sidebarLinks = document.querySelectorAll('.sidebar-link[data-section]');
+
+  function setActive(id) {
+    onPageLinks.forEach(function (link) {
+      if (link.getAttribute('data-target') === id) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    sidebarLinks.forEach(function (link) {
+      if (link.getAttribute('data-section') === id) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var currentActive = 'overview';
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          currentActive = entry.target.id;
+          setActive(currentActive);
+        }
+      });
+    }, {
+      rootMargin: '-' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) + 40) + 'px 0px -60% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  }
+
+  // ---- Sidebar expand/collapse ----
+  // Details elements handle this natively. We add keyboard support.
+  document.querySelectorAll('.sidebar-group summary').forEach(function (summary) {
+    summary.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        summary.click();
+      }
+    });
+  });
+
+  // ---- Smooth scroll for on-page nav ----
+  document.querySelectorAll('.on-page-link, .sidebar-link[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        var target = document.getElementById(href.substring(1));
+        if (target) {
+          e.preventDefault();
+          var headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 52;
+          var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // ---- Resize handler: close sidebar on desktop ----
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (window.innerWidth > 768) {
+        closeSidebar();
+      }
+    }, 150);
+  });
+
+})();
+</script>
+
+</body>
+</html>

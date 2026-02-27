@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base href="/hirecar-marketwatch/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIRECAR MarketWatch! — Premium Auto Operator Intelligence</title>
+<meta name="description" content="HIRECAR MarketWatch! — Intelligence for the auto operator economy. Credit repair, collision claims, mobility rentals, and operator standards from Los Angeles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   DESIGN SYSTEM TOKENS
+   ======================================== */
+:root {
+  --ink: #111820;
+  --cta: #c9920a;
+  --cta-hover: #b07f08;
+  --live: #c0392b;
+  --member: #0f4c75;
+  --bg: #ffffff;
+  --muted: #9aa3ad;
+  --border: #dde1e7;
+  --slate: #3d4a58;
+  --bg-light: #f6f7f9;
+  --bg-dark: #0d1117;
+
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Nunito Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --wrap: 1340px;
+  --gap: 24px;
+  --radius: 4px;
+}
+
+/* ========================================
+   RESET + BASE
+   ======================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul, ol { list-style: none; }
+
+/* Utility */
+.page-wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ========================================
+   1. UTILITY BAR
+   ======================================== */
+.utility-bar {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+}
+.utility-bar__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+.ticker-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+.ticker-track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: ticker 45s linear infinite;
+  will-change: transform;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.75);
+  font-size: 10.5px;
+  letter-spacing: .3px;
+}
+.ticker-item::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+.badge-hot {
+  background: var(--cta);
+  color: var(--ink);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.utility-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.utility-bar__right a {
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+  letter-spacing: .4px;
+  transition: color .2s;
+}
+.utility-bar__right a:hover { color: #fff; }
+.btn-member {
+  background: var(--cta);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 5px 14px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.btn-member:hover { background: var(--cta-hover); }
+
+/* ========================================
+   2. MASTHEAD
+   ======================================== */
+.masthead {
+  background: var(--bg);
+  border-bottom: 2px solid var(--ink);
+  padding: 16px 0;
+}
+.masthead__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.masthead__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.masthead__logo {
+  height: 34px;
+  width: auto;
+  filter: invert(1) brightness(0.1);
+}
+.masthead__pipe {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+.masthead__titles {
+  display: flex;
+  flex-direction: column;
+}
+.masthead__name {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.5px;
+  color: var(--ink);
+}
+.masthead__name span { color: var(--cta); }
+.masthead__sub {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1.8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.masthead__center {
+  text-align: center;
+  flex-shrink: 0;
+}
+.masthead__date {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--slate);
+  letter-spacing: .5px;
+}
+.masthead__motto {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.masthead__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-signin {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--slate);
+  transition: all .2s;
+}
+.btn-signin:hover { border-color: var(--ink); color: var(--ink); }
+.btn-cta {
+  background: var(--cta);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 2px;
+  transition: background .2s;
+}
+.btn-cta:hover { background: var(--cta-hover); }
+
+/* ========================================
+   3. PRIMARY NAV
+   ======================================== */
+.primary-nav {
+  background: var(--ink);
+  border-bottom: 3px solid var(--cta);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+.primary-nav__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  gap: 4px;
+}
+.primary-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.primary-nav__links::-webkit-scrollbar { display: none; }
+.nav-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  padding: 12px 14px;
+  white-space: nowrap;
+  position: relative;
+  transition: color .2s;
+}
+.nav-item:hover { color: #fff; }
+.nav-item--active { color: var(--cta); }
+.nav-badge {
+  font-size: 7px;
+  font-weight: 700;
+  background: var(--cta);
+  color: var(--ink);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: .8px;
+  margin-left: 6px;
+  vertical-align: top;
+}
+.nav-external {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .8px;
+  color: var(--cta);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: opacity .2s;
+  flex-shrink: 0;
+}
+.nav-external:hover { opacity: .8; }
+
+/* ========================================
+   4. HIRECREDIT LEAD MODULE
+   ======================================== */
+.lead-module {
+  background: linear-gradient(135deg, #fdfaf3 0%, #f9f6ee 50%, #f5f2ea 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 0;
+}
+.lead-module__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  align-items: center;
+}
+.lead-module__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 12px;
+}
+.lead-module__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+}
+.lead-module__headline {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: -.3px;
+}
+.lead-module__subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+.lead-module__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.btn-cta-lg {
+  background: var(--cta);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 3px;
+  transition: background .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-cta-lg:hover { background: var(--cta-hover); }
+.link-more {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .5px;
+  color: var(--slate);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color .2s, border-color .2s;
+}
+.link-more:hover { color: var(--ink); border-color: var(--ink); }
+
+.lead-module__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.stat-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.stat-card__icon--collision { background: rgba(192,57,43,.1); }
+.stat-card__icon--export { background: rgba(15,76,117,.1); }
+.stat-card__icon--score { background: rgba(201,146,10,.12); }
+.stat-card__value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat-card__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.credit-gauge {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.credit-gauge__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--live) 0%, var(--cta) 60%, #27ae60 100%);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 2s ease-out;
+}
+
+/* ========================================
+   5. TOP STORIES
+   ======================================== */
+.top-stories {
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.section-label__bar {
+  width: 4px;
+  height: 20px;
+  background: var(--cta);
+  border-radius: 1px;
+}
+.section-label__text {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.top-stories__grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+}
+.hero-story {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+.hero-story__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-story__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+  background: linear-gradient(0deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 60%, transparent 100%);
+  color: #fff;
+}
+.cat-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  background: var(--cta);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.hero-story__title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.hero-story__meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,.6);
+  letter-spacing: .4px;
+}
+
+.icymi {
+  border-left: 1px solid var(--border);
+  padding-left: 28px;
+}
+.icymi__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.icymi__item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.icymi__item:last-child { border-bottom: none; }
+.icymi__cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 4px;
+}
+.icymi__title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 4px;
+  transition: color .2s;
+}
+.icymi__title:hover { color: var(--cta); }
+.icymi__date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .4px;
+}
+
+/* ========================================
+   6. TRENDING STRIP
+   ======================================== */
+.trending {
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  overflow: hidden;
+}
+.trending__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.trending__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cta);
+  font-weight: 700;
+  flex-shrink: 0;
+  padding-right: 20px;
+  border-right: 1px solid var(--border);
+}
+.trending__scroll {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+.trending__scroll::-webkit-scrollbar { display: none; }
+.trending__item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.trending__num {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--border);
+  line-height: 1;
+}
+.trending__title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color .2s;
+}
+.trending__title:hover { color: var(--cta); }
+
+/* ========================================
+   7. CREDIT REPAIR + AUTO INSURANCE
+   ======================================== */
+.credit-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+}
+.credit-section__grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+}
+.article-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.article-row:last-child { border-bottom: none; }
+.article-row__img {
+  width: 140px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.article-row__cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 4px;
+}
+.article-row__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 4px;
+  transition: color .2s;
+}
+.article-row__title:hover { color: var(--cta); }
+.article-row__blurb {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.article-row__meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .4px;
+}
+
+/* Sidebar widgets */
+.sidebar { display: flex; flex-direction: column; gap: 24px; }
+.widget {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.widget--seedx {
+  background: var(--member);
+  color: #fff;
+  padding: 24px;
+  border: none;
+}
+.widget--seedx .widget__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: .65;
+  margin-bottom: 8px;
+}
+.widget--seedx .widget__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.widget--seedx .widget__text {
+  font-size: 13px;
+  opacity: .8;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.widget--seedx .btn-cta { background: var(--cta); color: var(--ink); }
+
+.widget--list { padding: 20px; }
+.widget--list .widget__heading {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.widget--list .widget__item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.widget--list .widget__item:last-child { border-bottom: none; }
+.widget__rank {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--border);
+  font-weight: 500;
+  flex-shrink: 0;
+  width: 20px;
+}
+.widget__item-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  transition: color .2s;
+}
+.widget__item-title:hover { color: var(--cta); }
+
+/* ========================================
+   8. MOBILITY + RENTALS
+   ======================================== */
+.mobility-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+}
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.card__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card__body { padding: 18px; }
+.card__cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 6px;
+}
+.card__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  transition: color .2s;
+}
+.card__title:hover { color: var(--cta); }
+
+.car-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.car-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.car-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.car-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px;
+  background: linear-gradient(0deg, rgba(0,0,0,.75) 0%, transparent 100%);
+  color: #fff;
+}
+.car-card__name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+}
+.car-card__tag {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+.mobility-cta {
+  text-align: center;
+}
+.mobility-cta a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .8px;
+  color: var(--cta);
+  border-bottom: 1px solid var(--cta);
+  padding-bottom: 2px;
+  transition: opacity .2s;
+}
+.mobility-cta a:hover { opacity: .7; }
+
+/* ========================================
+   9. MCI INTELLIGENCE BAR
+   ======================================== */
+.mci-bar {
+  background: var(--bg-dark);
+  padding: 40px 0;
+  border-top: 3px solid var(--cta);
+}
+.mci-bar__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.mci-bar__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 24px;
+}
+.mci-bar__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.metric-block {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px;
+  padding: 24px;
+  text-align: center;
+}
+.metric-block__value {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.metric-block__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+.mci-bar__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.btn-outline-gold {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid var(--cta);
+  color: var(--cta);
+  border-radius: 3px;
+  transition: all .2s;
+}
+.btn-outline-gold:hover { background: var(--cta); color: var(--ink); }
+
+/* ========================================
+   10. ENTERTAINMENT SECTION
+   ======================================== */
+.entertainment {
+  background: var(--ink);
+  padding: 48px 0;
+}
+.entertainment .section-label__bar { background: var(--cta); }
+.entertainment .section-label__text { color: #fff; }
+.entertainment__subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .8px;
+  color: var(--muted);
+  margin-top: -20px;
+  margin-bottom: 28px;
+}
+.ent-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.ent-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+.ent-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ent-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  color: #fff;
+}
+.ent-card__cat {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 6px;
+}
+.ent-card__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* ========================================
+   11. FIRST CLASS MEMBERSHIP
+   ======================================== */
+.membership {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #fdfaf3 0%, #fff 100%);
+}
+.membership__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 280px;
+  gap: 40px;
+  align-items: start;
+}
+.membership__brand-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 10px;
+}
+.membership__brand-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.membership__brand-text {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.7;
+}
+.perks-list { display: flex; flex-direction: column; gap: 12px; }
+.perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.perk-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cta);
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.membership__cta-box {
+  background: var(--ink);
+  border-radius: 8px;
+  padding: 32px 28px;
+  text-align: center;
+  color: #fff;
+}
+.membership__price {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--cta);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.membership__price-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .5px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.membership__cta-box .btn-cta-lg { width: 100%; justify-content: center; }
+.membership__cta-note {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 12px;
+  letter-spacing: .3px;
+}
+
+/* ========================================
+   12. HIRECAR SERVICES SCROLL
+   ======================================== */
+.services-scroll {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.services-scroll__header {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.services-scroll__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.services-scroll__subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.scroll-arrows {
+  display: flex;
+  gap: 6px;
+}
+.scroll-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--slate);
+  transition: all .2s;
+}
+.scroll-arrow:hover { border-color: var(--ink); color: var(--ink); }
+.services-track-wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow: visible;
+}
+.services-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.services-track::-webkit-scrollbar { display: none; }
+.service-card {
+  flex-shrink: 0;
+  width: 190px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: box-shadow .2s;
+}
+.service-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+.service-card__img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: var(--bg-light);
+}
+.service-card__body { padding: 14px; }
+.service-card__status {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.status--active { color: #27ae60; }
+.status--coming { color: var(--muted); }
+.service-card__name {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* ========================================
+   13. COMPANY BAR
+   ======================================== */
+.company-bar {
+  background: var(--bg-light);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 0;
+}
+.company-bar__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+.company-item { text-align: center; }
+.company-item__name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .8px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.company-item__role {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .4px;
+}
+
+/* ========================================
+   14. FOOTER
+   ======================================== */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.6);
+  padding: 48px 0 0;
+}
+.footer__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 40px;
+}
+.footer__brand-logo {
+  height: 26px;
+  width: auto;
+  filter: invert(0) brightness(10);
+  margin-bottom: 6px;
+}
+.footer__brand-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.footer__brand-name span { color: var(--cta); }
+.footer__tagline {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 280px;
+}
+.footer__contact {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .3px;
+  line-height: 1.8;
+}
+.footer__col-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cta);
+  margin-bottom: 18px;
+}
+.footer__link {
+  display: block;
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  padding: 5px 0;
+  transition: color .2s;
+}
+.footer__link:hover { color: #fff; }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 18px 0;
+}
+.footer__bottom-inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer__legal {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,.3);
+  letter-spacing: .3px;
+}
+.footer__version {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,.2);
+  letter-spacing: .3px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .lead-module__inner { grid-template-columns: 1fr; gap: 32px; }
+  .lead-module__stats { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  .stat-card { flex: 1; min-width: 200px; }
+  .top-stories__grid { grid-template-columns: 1fr; }
+  .icymi { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 24px; }
+  .credit-section__grid { grid-template-columns: 1fr; }
+  .sidebar { order: -1; }
+  .membership__inner { grid-template-columns: 1fr 1fr; }
+  .membership__cta-box { grid-column: span 2; max-width: 400px; justify-self: center; }
+  .footer__inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  :root { --gap: 16px; }
+
+  /* Utility Bar */
+  .utility-bar__right .btn-member { display: none; }
+  .utility-bar__right a:first-child { display: none; }
+
+  /* Masthead */
+  .masthead__inner { flex-wrap: wrap; justify-content: center; text-align: center; }
+  .masthead__center { width: 100%; order: 3; margin-top: 6px; }
+  .masthead__actions { order: 4; width: 100%; justify-content: center; margin-top: 10px; }
+  .masthead__name { font-size: 24px; }
+
+  /* Nav */
+  .primary-nav__inner { height: auto; padding: 0; flex-direction: column; }
+  .primary-nav__links { width: 100%; padding: 0 16px; }
+  .nav-item { padding: 10px 12px; font-size: 10px; }
+  .nav-external { padding: 8px 16px; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,.1); }
+
+  /* Lead Module */
+  .lead-module { padding: 32px 0; }
+  .lead-module__headline { font-size: 28px; }
+  .lead-module__stats { flex-direction: column; }
+  .stat-card { min-width: unset; }
+  .lead-module__actions { flex-direction: column; align-items: flex-start; }
+
+  /* Top Stories */
+  .hero-story { aspect-ratio: 4/3; }
+  .hero-story__title { font-size: 22px; }
+
+  /* Trending */
+  .trending__inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .trending__label { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; width: 100%; }
+
+  /* Cards */
+  .card-grid-3 { grid-template-columns: 1fr; }
+  .car-gallery { grid-template-columns: repeat(2, 1fr); }
+  .ent-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Article rows */
+  .article-row { grid-template-columns: 100px 1fr; gap: 14px; }
+  .article-row__img { width: 100px; height: 72px; }
+  .article-row__title { font-size: 16px; }
+
+  /* MCI Bar */
+  .mci-bar__metrics { grid-template-columns: 1fr; }
+  .mci-bar__actions { flex-direction: column; }
+  .metric-block__value { font-size: 28px; }
+
+  /* Membership */
+  .membership__inner { grid-template-columns: 1fr; }
+  .membership__cta-box { grid-column: unset; max-width: 100%; }
+
+  /* Company Bar */
+  .company-bar__inner { grid-template-columns: repeat(2, 1fr); }
+
+  /* Services */
+  .service-card { width: 160px; }
+
+  /* Footer */
+  .footer__inner { grid-template-columns: 1fr; }
+  .footer__bottom-inner { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .masthead__brand { flex-direction: column; gap: 8px; }
+  .masthead__pipe { display: none; }
+  .ent-grid { grid-template-columns: 1fr; }
+  .car-gallery { grid-template-columns: 1fr; }
+  .company-bar__inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================
+     1. UTILITY BAR
+     ================================ -->
+<div class="utility-bar">
+  <div class="utility-bar__inner">
+    <div class="ticker-wrap">
+      <div class="ticker-track" id="tickerTrack">
+        <div class="ticker-item"><span class="badge-hot">HOT</span> HIRECREDIT — Post-collision credit recovery now active</div>
+        <div class="ticker-item">First Class Membership — includes HIRECAR Credit Card access</div>
+        <div class="ticker-item">SeedXchange Q1 2026 — Auto operator funding open</div>
+        <div class="ticker-item">810,839 LA Collisions 2024 — Structural demand confirmed</div>
+        <div class="ticker-item"><span class="badge-hot">HOT</span> HIRECREDIT — Post-collision credit recovery now active</div>
+        <div class="ticker-item">First Class Membership — includes HIRECAR Credit Card access</div>
+        <div class="ticker-item">SeedXchange Q1 2026 — Auto operator funding open</div>
+        <div class="ticker-item">810,839 LA Collisions 2024 — Structural demand confirmed</div>
+      </div>
+    </div>
+    <div class="utility-bar__right">
+      <a href="#">Sign In</a>
+      <a href="#membership" class="btn-member">Become a Member</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================
+     2. MASTHEAD
+     ================================ -->
+<header class="masthead">
+  <div class="masthead__inner">
+    <div class="masthead__brand">
+      <img src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png" alt="HIRECAR Logo" class="masthead__logo">
+      <div class="masthead__pipe"></div>
+      <div class="masthead__titles">
+        <div class="masthead__name">MarketWatch<span>!</span></div>
+        <div class="masthead__sub">HIRECAR, LLC &middot; EST. NOV 2024</div>
+      </div>
+    </div>
+    <div class="masthead__center">
+      <div class="masthead__date" id="mastheadDate"></div>
+      <div class="masthead__motto">Intelligence for the auto operator economy</div>
+    </div>
+    <div class="masthead__actions">
+      <a href="#" class="btn-signin">Sign In</a>
+      <a href="booking/" class="btn-cta">Start Recovery</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================================
+     3. PRIMARY NAV
+     ================================ -->
+<nav class="primary-nav">
+  <div class="primary-nav__inner">
+    <div class="primary-nav__links">
+      <a href="#" class="nav-item nav-item--active">Credit Repair <span class="nav-badge">LEAD</span></a>
+      <a href="#" class="nav-item">Collision + Claims</a>
+      <a href="#" class="nav-item">Operator Standards</a>
+      <a href="#" class="nav-item">Mobility + Rentals</a>
+      <a href="#" class="nav-item">Entertainment</a>
+      <a href="#" class="nav-item">Intelligence</a>
+    </div>
+    <a href="services/" class="nav-external">All Services &#8599;</a>
+  </div>
+</nav>
+
+<!-- ================================
+     4. HIRECREDIT LEAD MODULE
+     ================================ -->
+<section class="lead-module">
+  <div class="lead-module__inner">
+    <div class="lead-module__content">
+      <span class="lead-module__icon" aria-hidden="true">&#9888;&#65039;</span>
+      <div class="lead-module__eyebrow">Credit Repair &middot; Lead Category &middot; Q1 2026 — HIRECREDIT dba HIRECAR, LLC</div>
+      <h1 class="lead-module__headline">Your Credit Took a Hit.<br>We Bring It Back.</h1>
+      <p class="lead-module__subtitle">810,839 collisions struck Los Angeles in 2024 alone. Behind every collision is a credit report under siege — medical debt, insurance gaps, rental losses. HIRECREDIT is the first credit recovery engine built specifically for auto collision victims.</p>
+      <div class="lead-module__actions">
+        <a href="booking/" class="btn-cta-lg">Start Credit Recovery <span aria-hidden="true">&rarr;</span></a>
+        <a href="#" class="link-more">Learn More</a>
+      </div>
+    </div>
+    <div class="lead-module__stats">
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--collision">&#128165;</div>
+        <div>
+          <div class="stat-card__value" data-target="810839">0</div>
+          <div class="stat-card__label">LA Collisions &middot; 2024</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--export">&#128202;</div>
+        <div>
+          <div class="stat-card__value" data-target="239725">0</div>
+          <div class="stat-card__label">2025 Partial Export</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--score">&#127919;</div>
+        <div>
+          <div class="stat-card__value">HBI &gt;80</div>
+          <div class="stat-card__label">Credit Score Recovery Target</div>
+          <div class="credit-gauge">
+            <div class="credit-gauge__fill" id="creditGauge"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     5. TOP STORIES
+     ================================ -->
+<section class="top-stories page-wrap">
+  <div class="section-label">
+    <div class="section-label__bar"></div>
+    <h2 class="section-label__text">Top Stories</h2>
+  </div>
+  <div class="top-stories__grid">
+    <a href="#" class="hero-story">
+      <img src="https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=900&q=85&fit=crop" alt="Los Angeles skyline at dusk" class="hero-story__img">
+      <div class="hero-story__overlay">
+        <span class="cat-tag">Collision + Claims</span>
+        <h3 class="hero-story__title">Your credit took a hit. We bring it back.</h3>
+        <div class="hero-story__meta">By Ken Eckman &middot; HIRECAR MarketWatch &middot; Just Published &middot; 3 min read</div>
+      </div>
+    </a>
+    <div class="icymi">
+      <div class="icymi__label">In Case You Missed It</div>
+      <div class="icymi__item">
+        <div class="icymi__cat">Credit Repair</div>
+        <a href="#" class="icymi__title">Post-Collision Credit Recovery: The HIRECREDIT Playbook</a>
+        <div class="icymi__date">Feb 24, 2026</div>
+      </div>
+      <div class="icymi__item">
+        <div class="icymi__cat">Operator Standards</div>
+        <a href="#" class="icymi__title">Why 810,839 Collisions Changed Everything for LA Operators</a>
+        <div class="icymi__date">Feb 21, 2026</div>
+      </div>
+      <div class="icymi__item">
+        <div class="icymi__cat">Mobility + Rentals</div>
+        <a href="#" class="icymi__title">Luxury Rental Brokering: The 2026 Operator Opportunity</a>
+        <div class="icymi__date">Feb 18, 2026</div>
+      </div>
+      <div class="icymi__item">
+        <div class="icymi__cat">Intelligence</div>
+        <a href="#" class="icymi__title">MCI Index Q4 2025: Market Confidence Holds at 74.3</a>
+        <div class="icymi__date">Feb 14, 2026</div>
+      </div>
+      <div class="icymi__item">
+        <div class="icymi__cat">Business Funding</div>
+        <a href="#" class="icymi__title">SeedXchange Opens Q1 2026 Operator Funding Window</a>
+        <div class="icymi__date">Feb 10, 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     6. TRENDING STRIP
+     ================================ -->
+<section class="trending">
+  <div class="trending__inner">
+    <div class="trending__label">Trending</div>
+    <div class="trending__scroll">
+      <a href="#" class="trending__item">
+        <span class="trending__num">01</span>
+        <span class="trending__title">HIRECREDIT Launches Post-Collision Credit Engine</span>
+      </a>
+      <a href="#" class="trending__item">
+        <span class="trending__num">02</span>
+        <span class="trending__title">CreditWithKen: 90-Day Score Turnaround Program</span>
+      </a>
+      <a href="#" class="trending__item">
+        <span class="trending__num">03</span>
+        <span class="trending__title">SeedXchange Q1 Auto Operator Grants Now Open</span>
+      </a>
+      <a href="#" class="trending__item">
+        <span class="trending__num">04</span>
+        <span class="trending__title">Insurance Gap Analysis: What Operators Must Know</span>
+      </a>
+      <a href="#" class="trending__item">
+        <span class="trending__num">05</span>
+        <span class="trending__title">Luxury Fleet Standards: AMG, Rolls-Royce, Lambo</span>
+      </a>
+      <a href="#" class="trending__item">
+        <span class="trending__num">06</span>
+        <span class="trending__title">HBI Score Explained: Revenue Lane Thresholds</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     7. CREDIT REPAIR + AUTO INSURANCE
+     ================================ -->
+<section class="credit-section page-wrap">
+  <div class="section-label">
+    <div class="section-label__bar"></div>
+    <h2 class="section-label__text">Credit Repair + Auto Insurance</h2>
+  </div>
+  <div class="credit-section__grid">
+    <div class="credit-section__main">
+      <div class="article-row">
+        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=300&q=85&fit=crop" alt="Highway driving" class="article-row__img">
+        <div>
+          <div class="article-row__cat">Credit Repair</div>
+          <a href="#" class="article-row__title">Medical Debt After a Collision: How It Destroys Your Credit</a>
+          <p class="article-row__blurb">Unpaid medical bills are the #1 cause of credit score drops after auto collisions. Understanding the timeline is critical to recovery.</p>
+          <div class="article-row__meta">By Ken Eckman &middot; Feb 24, 2026 &middot; 5 min read</div>
+        </div>
+      </div>
+      <div class="article-row">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=300&q=85&fit=crop" alt="Night car" class="article-row__img">
+        <div>
+          <div class="article-row__cat">Auto Insurance</div>
+          <a href="#" class="article-row__title">Underinsured in LA: The Coverage Gap Killing Operator Credit</a>
+          <p class="article-row__blurb">63% of collision-affected operators in Los Angeles carry insufficient gap coverage, leaving them exposed to five-figure liability.</p>
+          <div class="article-row__meta">By HIRECAR Intelligence &middot; Feb 22, 2026 &middot; 4 min read</div>
+        </div>
+      </div>
+      <div class="article-row">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=300&q=85&fit=crop" alt="Road trip" class="article-row__img">
+        <div>
+          <div class="article-row__cat">Credit Repair</div>
+          <a href="#" class="article-row__title">The 90-Day Credit Recovery Sprint: A CreditWithKen Framework</a>
+          <p class="article-row__blurb">Ken Eckman's structured 90-day sprint targets dispute velocity, utilization reset, and authorized tradeline stacking.</p>
+          <div class="article-row__meta">By CreditWithKen &middot; Feb 19, 2026 &middot; 7 min read</div>
+        </div>
+      </div>
+      <div class="article-row">
+        <img src="https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=300&q=85&fit=crop" alt="LA skyline" class="article-row__img">
+        <div>
+          <div class="article-row__cat">Collision + Claims</div>
+          <a href="#" class="article-row__title">Filing After Impact: The Operator's Claims Checklist</a>
+          <p class="article-row__blurb">From police report to insurance adjuster — the 14-step claims process every auto operator must master after a collision event.</p>
+          <div class="article-row__meta">By HIRECAR MarketWatch &middot; Feb 16, 2026 &middot; 6 min read</div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="widget widget--seedx">
+        <div class="widget__label">SeedXchange &middot; Business Funding</div>
+        <div class="widget__title">Auto Operator Funding Is Open for Q1 2026</div>
+        <p class="widget__text">Access capital for fleet growth, insurance gaps, and credit recovery. SeedXchange connects auto operators to flexible business funding.</p>
+        <a href="#" class="btn-cta" style="display:inline-block;">Apply Now &rarr;</a>
+      </div>
+      <div class="widget widget--list">
+        <div class="widget__heading">Most Read This Week</div>
+        <div class="widget__item">
+          <span class="widget__rank">1</span>
+          <a href="#" class="widget__item-title">Post-Collision Credit Recovery 101</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">2</span>
+          <a href="#" class="widget__item-title">Insurance Gaps: What You Don't Know</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">3</span>
+          <a href="#" class="widget__item-title">SeedXchange Q1 Funding Guide</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">4</span>
+          <a href="#" class="widget__item-title">810,839: The LA Collision Report</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">5</span>
+          <a href="#" class="widget__item-title">HBI Score: What Operators Need</a>
+        </div>
+      </div>
+      <div class="widget widget--list">
+        <div class="widget__heading">Operator Playbooks</div>
+        <div class="widget__item">
+          <span class="widget__rank">&rarr;</span>
+          <a href="#" class="widget__item-title">Credit Recovery Playbook</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">&rarr;</span>
+          <a href="#" class="widget__item-title">Insurance Gap Analysis</a>
+        </div>
+        <div class="widget__item">
+          <span class="widget__rank">&rarr;</span>
+          <a href="#" class="widget__item-title">Fleet Growth Framework</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     8. MOBILITY + RENTALS
+     ================================ -->
+<section class="mobility-section page-wrap">
+  <div class="section-label">
+    <div class="section-label__bar"></div>
+    <h2 class="section-label__text">Mobility + Rentals</h2>
+  </div>
+  <div class="card-grid-3">
+    <a href="#" class="card">
+      <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&q=85&fit=crop" alt="Ferrari on road" class="card__img">
+      <div class="card__body">
+        <div class="card__cat">Luxury Rentals</div>
+        <h3 class="card__title">Luxury Rental Brokering: The Untapped Operator Revenue Lane</h3>
+      </div>
+    </a>
+    <a href="#" class="card">
+      <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&q=85&fit=crop" alt="Highway driving" class="card__img">
+      <div class="card__body">
+        <div class="card__cat">Mobility</div>
+        <h3 class="card__title">Private Driver Standards: What LA's Luxury Clients Now Expect</h3>
+      </div>
+    </a>
+    <a href="#" class="card">
+      <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=85&fit=crop" alt="Night driving" class="card__img">
+      <div class="card__body">
+        <div class="card__cat">Fleet</div>
+        <h3 class="card__title">Building a 10-Car Fleet: The Operator Economics Breakdown</h3>
+      </div>
+    </a>
+  </div>
+  <div class="car-gallery">
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=500&q=85&fit=crop" alt="Rolls-Royce Ghost" class="car-card__img">
+      <div class="car-card__overlay">
+        <div class="car-card__tag">Premium Fleet</div>
+        <div class="car-card__name">Rolls-Royce Ghost</div>
+      </div>
+    </div>
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=500&q=85&fit=crop" alt="Lamborghini Huracan" class="car-card__img">
+      <div class="car-card__overlay">
+        <div class="car-card__tag">Exotic Fleet</div>
+        <div class="car-card__name">Lamborghini Hurac&aacute;n</div>
+      </div>
+    </div>
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500&q=85&fit=crop" alt="Mercedes-AMG GT" class="car-card__img">
+      <div class="car-card__overlay">
+        <div class="car-card__tag">Performance Fleet</div>
+        <div class="car-card__name">Mercedes-AMG GT</div>
+      </div>
+    </div>
+    <div class="car-card">
+      <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=500&q=85&fit=crop" alt="Tesla Model S Plaid" class="car-card__img">
+      <div class="car-card__overlay">
+        <div class="car-card__tag">Electric Fleet</div>
+        <div class="car-card__name">Tesla Model S Plaid</div>
+      </div>
+    </div>
+  </div>
+  <div class="mobility-cta">
+    <a href="#">HIRECAR Rental Broker + Dealerships &rarr;</a>
+  </div>
+</section>
+
+<!-- ================================
+     9. MCI INTELLIGENCE BAR
+     ================================ -->
+<section class="mci-bar">
+  <div class="mci-bar__inner">
+    <div class="mci-bar__label">MarketWatch Intelligence</div>
+    <div class="mci-bar__metrics">
+      <div class="metric-block">
+        <div class="metric-block__value">810,839</div>
+        <div class="metric-block__label">LA Collisions &middot; 2024</div>
+      </div>
+      <div class="metric-block">
+        <div class="metric-block__value">239,725</div>
+        <div class="metric-block__label">2025 Partial Export</div>
+      </div>
+      <div class="metric-block">
+        <div class="metric-block__value">HBI &gt;80</div>
+        <div class="metric-block__label">Revenue Lane Threshold</div>
+      </div>
+    </div>
+    <div class="mci-bar__actions">
+      <a href="#" class="btn-outline-gold">View Full MCI Reports &rarr;</a>
+      <a href="#" class="btn-outline-gold">HBI Score Report</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     10. ENTERTAINMENT SECTION
+     ================================ -->
+<section class="entertainment">
+  <div class="page-wrap">
+    <div class="section-label">
+      <div class="section-label__bar"></div>
+      <h2 class="section-label__text">Entertainment</h2>
+    </div>
+    <div class="entertainment__subtitle">Entertainment &middot; Culture &middot; Auto &middot; City Life</div>
+    <div class="ent-grid">
+      <a href="#" class="ent-card">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=500&q=85&fit=crop" alt="Road trip culture" class="ent-card__img">
+        <div class="ent-card__overlay">
+          <div class="ent-card__cat">Culture</div>
+          <h3 class="ent-card__title">Road Trip Culture: LA to Vegas and Beyond</h3>
+        </div>
+      </a>
+      <a href="#" class="ent-card">
+        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=500&q=85&fit=crop" alt="Family mobility" class="ent-card__img">
+        <div class="ent-card__overlay">
+          <div class="ent-card__cat">Mobility</div>
+          <h3 class="ent-card__title">Family Mobility: Safe Rides for Every Generation</h3>
+        </div>
+      </a>
+      <a href="#" class="ent-card">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=500&q=85&fit=crop" alt="Collision recovery" class="ent-card__img">
+        <div class="ent-card__overlay">
+          <div class="ent-card__cat">Recovery</div>
+          <h3 class="ent-card__title">Collision + Recovery: Stories of Resilience</h3>
+        </div>
+      </a>
+      <a href="#" class="ent-card">
+        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500&q=85&fit=crop" alt="Private driver life" class="ent-card__img">
+        <div class="ent-card__overlay">
+          <div class="ent-card__cat">Lifestyle</div>
+          <h3 class="ent-card__title">Private Driver Life: Behind the Wheel in LA</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     11. FIRST CLASS MEMBERSHIP
+     ================================ -->
+<section class="membership" id="membership">
+  <div class="membership__inner">
+    <div class="membership__brand">
+      <div class="membership__brand-label">First Class Membership</div>
+      <h2 class="membership__brand-title">The Full Operator Advantage. One Membership.</h2>
+      <p class="membership__brand-text">First Class Membership unlocks the complete HIRECAR ecosystem — credit repair, business funding, intelligence reports, operator coaching, and the exclusive HIRECAR Credit Card. Built for serious auto operators in Los Angeles and beyond.</p>
+    </div>
+    <div class="membership__perks">
+      <div class="perks-list">
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>HIRECREDIT post-collision credit recovery</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>HIRECAR Credit Card access</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>CreditWithKen 1-on-1 coaching sessions</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>SeedXchange priority funding access</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>MarketWatch Intelligence reports + MCI data</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>Luxury rental broker network access</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>Operator playbooks + framework downloads</span>
+        </div>
+        <div class="perk-item">
+          <span class="perk-check" aria-hidden="true">&#10003;</span>
+          <span>Priority support + concierge onboarding</span>
+        </div>
+      </div>
+    </div>
+    <div class="membership__cta-box">
+      <div class="membership__price">$1,380</div>
+      <div class="membership__price-label">per year</div>
+      <a href="membership/" class="btn-cta-lg">Become a Member <span aria-hidden="true">&rarr;</span></a>
+      <div class="membership__cta-note">Cancel anytime &middot; Includes all sub-brand access</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     12. HIRECAR SERVICES SCROLL
+     ================================ -->
+<section class="services-scroll">
+  <div class="services-scroll__header">
+    <div>
+      <div class="services-scroll__title">HIRECAR Services</div>
+      <div class="services-scroll__subtitle">Active now &middot; Coming Soon in 2026</div>
+    </div>
+    <div class="scroll-arrows">
+      <button class="scroll-arrow" id="scrollLeft" aria-label="Scroll left">&larr;</button>
+      <button class="scroll-arrow" id="scrollRight" aria-label="Scroll right">&rarr;</button>
+    </div>
+  </div>
+  <div class="services-track-wrap">
+    <div class="services-track" id="servicesTrack">
+      <!-- Active Services -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=85&fit=crop" alt="Credit Repair" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--active">&#9679; Active</div>
+          <div class="service-card__name">Credit Repair</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=85&fit=crop" alt="Biz Funding" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--active">&#9679; Active</div>
+          <div class="service-card__name">Biz Funding</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=400&q=85&fit=crop" alt="Auto Glass" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--active">&#9679; Active</div>
+          <div class="service-card__name">Auto Glass</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=85&fit=crop" alt="Chauffeuring" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--active">&#9679; Active</div>
+          <div class="service-card__name">Chauffeuring</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&q=85&fit=crop" alt="Private Driver" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--active">&#9679; Active</div>
+          <div class="service-card__name">Private Driver</div>
+        </div>
+      </div>
+      <!-- Coming Soon -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&q=85&fit=crop" alt="Luxury Rentals" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Luxury Rentals</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0abb?w=400&q=85&fit=crop" alt="Daily Drivers" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Daily Drivers</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?w=400&q=85&fit=crop" alt="Auto Insurance" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Auto Insurance</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=85&fit=crop" alt="Roadside Assist" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Roadside Assist</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=400&q=85&fit=crop" alt="Tire Service" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Tire Service</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&q=85&fit=crop" alt="Oil Change" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Oil Change</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=400&q=85&fit=crop" alt="Detailing" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Detailing</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=85&fit=crop" alt="Gas + EV Charge" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Gas + EV Charge</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=400&q=85&fit=crop" alt="Photography" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Photography</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=85&fit=crop" alt="Tint + Wraps" class="service-card__img">
+        <div class="service-card__body">
+          <div class="service-card__status status--coming">Coming Soon</div>
+          <div class="service-card__name">Tint + Wraps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     13. COMPANY BAR
+     ================================ -->
+<section class="company-bar">
+  <div class="company-bar__inner">
+    <div class="company-item">
+      <div class="company-item__name">HIRECAR LLC</div>
+      <div class="company-item__role">Flagship</div>
+    </div>
+    <div class="company-item">
+      <div class="company-item__name">HIRECREDIT</div>
+      <div class="company-item__role">Credit Repair</div>
+    </div>
+    <div class="company-item">
+      <div class="company-item__name">CreditWithKen</div>
+      <div class="company-item__role">Coaching</div>
+    </div>
+    <div class="company-item">
+      <div class="company-item__name">SeedXchange</div>
+      <div class="company-item__role">Business Funding</div>
+    </div>
+    <div class="company-item">
+      <div class="company-item__name">MarketWatch!</div>
+      <div class="company-item__role">Intelligence</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     14. FOOTER
+     ================================ -->
+<footer class="site-footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <img src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png" alt="HIRECAR Logo" class="footer__brand-logo">
+      <div class="footer__brand-name">MarketWatch<span>!</span></div>
+      <p class="footer__tagline">Intelligence for the auto operator economy. Credit repair, collision data, mobility insights, and operator frameworks — built in Los Angeles.</p>
+      <div class="footer__contact">
+        27200 Tourney Rd, Valencia CA 91355<br>
+        (661) 651-0858<br>
+        info@hirecar.la
+      </div>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">News Categories</div>
+      <a href="#" class="footer__link">Credit Repair</a>
+      <a href="#" class="footer__link">Collision + Claims</a>
+      <a href="#" class="footer__link">Operator Standards</a>
+      <a href="#" class="footer__link">Mobility + Rentals</a>
+      <a href="#" class="footer__link">Entertainment</a>
+      <a href="#" class="footer__link">Intelligence</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">HIRECAR Services</div>
+      <a href="#" class="footer__link">Credit Repair</a>
+      <a href="#" class="footer__link">Biz Funding</a>
+      <a href="#" class="footer__link">Auto Glass</a>
+      <a href="#" class="footer__link">Chauffeuring</a>
+      <a href="#" class="footer__link">Private Driver</a>
+      <a href="#" class="footer__link">Luxury Rentals</a>
+      <a href="#" class="footer__link">Daily Drivers</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">The Network</div>
+      <a href="about/" class="footer__link">HIRECAR LLC</a>
+      <a href="#" class="footer__link">HIRECREDIT</a>
+      <a href="#" class="footer__link">CreditWithKen</a>
+      <a href="#" class="footer__link">SeedXchange</a>
+      <a href="./" class="footer__link">MarketWatch!</a>
+      <a href="membership/" class="footer__link">First Class Membership</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <div class="footer__legal">&copy; 2024–2026 HIRECAR, LLC. All rights reserved. HIRECREDIT, CreditWithKen, SeedXchange, MarketWatch! are brands of HIRECAR, LLC.</div>
+      <div class="footer__version">v1.0.0 &middot; Build 20260226</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================
+     VANILLA JS
+     ================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ---- Masthead Date ---- */
+  const dateEl = document.getElementById('mastheadDate');
+  if (dateEl) {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+  }
+
+  /* ---- Animated Stat Counters ---- */
+  function animateCounter(el, target) {
+    const duration = 2000;
+    const start = performance.now();
+    function update(currentTime) {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString();
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        if (target) {
+          animateCounter(el, target);
+          statObserver.unobserve(el);
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[data-target]').forEach(function(el) {
+    statObserver.observe(el);
+  });
+
+  /* ---- Credit Gauge Animation ---- */
+  const gauge = document.getElementById('creditGauge');
+  if (gauge) {
+    const gaugeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          setTimeout(function() { gauge.style.width = '78%'; }, 300);
+          gaugeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    gaugeObserver.observe(gauge);
+  }
+
+  /* ---- Services Scroll Arrows ---- */
+  var track = document.getElementById('servicesTrack');
+  var leftBtn = document.getElementById('scrollLeft');
+  var rightBtn = document.getElementById('scrollRight');
+  if (track && leftBtn && rightBtn) {
+    var scrollAmount = 220;
+    leftBtn.addEventListener('click', function() {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    rightBtn.addEventListener('click', function() {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  /* ---- Sticky Nav shadow on scroll ---- */
+  var nav = document.querySelector('.primary-nav');
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 120) {
+        nav.style.boxShadow = '0 2px 12px rgba(0,0,0,.15)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    }, { passive: true });
+  }
+
+})();
+</script>
+</body>
+</html>
