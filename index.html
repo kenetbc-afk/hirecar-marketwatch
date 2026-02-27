@@ -7826,5 +7826,116 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+<!-- HIRECAR MarketWatch Data Loader — Populates content zones from data/articles.json -->
+<script>
+(function(){
+  var DATA_URL = 'data/articles.json';
+  var cityMap = {'los-angeles':'la','san-francisco':'sf'};
+
+  function loadArticles(){
+    fetch(DATA_URL).then(function(r){
+      if(!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function(data){
+      if(!data.articles || !data.articles.length) return;
+      window.__mwData = data;
+      populateFromData(data);
+      // Re-populate when edition changes
+      var sel = document.getElementById('editionSelect');
+      if(sel) sel.addEventListener('change', function(){ populateFromData(data); });
+    }).catch(function(){
+      // Silent fail — hardcoded content remains
+    });
+  }
+
+  function getCity(){
+    var sel = document.getElementById('editionSelect');
+    var val = sel ? sel.value : 'los-angeles';
+    return cityMap[val] || 'la';
+  }
+
+  function filterByCity(articles, city){
+    var filtered = articles.filter(function(a){ return a.city === city; });
+    return filtered.length ? filtered : articles;
+  }
+
+  function populateFromData(data){
+    var city = getCity();
+    var arts = filterByCity(data.articles, city);
+    if(!arts.length) return;
+
+    // 1. Hero article (first article)
+    var hero = arts[0];
+    var heroTitle = document.querySelector('.hero-title');
+    var heroBlurb = document.querySelector('.hero-blurb');
+    if(heroTitle) heroTitle.innerHTML = hero.headline;
+    if(heroBlurb) heroBlurb.textContent = hero.excerpt;
+
+    // 2. ICYMI sidebar (next 4 articles)
+    var icymiItems = document.querySelectorAll('.icymi-item');
+    for(var i = 0; i < icymiItems.length && i + 1 < arts.length; i++){
+      var a = arts[i + 1];
+      var cat = icymiItems[i].querySelector('.icymi-cat');
+      var title = icymiItems[i].querySelector('.icymi-title');
+      if(cat) cat.textContent = a.category;
+      if(title) title.textContent = a.headline;
+    }
+
+    // 3. Trending strip
+    var tItems = document.querySelectorAll('.trending-item .t-text');
+    for(var j = 0; j < tItems.length && j < arts.length; j++){
+      tItems[j].textContent = arts[j].headline;
+    }
+
+    // 4. Article rows (main content area)
+    var artRows = document.querySelectorAll('.art-row');
+    var artOffset = 1; // skip hero
+    for(var k = 0; k < artRows.length && k + artOffset < arts.length; k++){
+      var ar = arts[k + artOffset];
+      var aCat = artRows[k].querySelector('.art-cat');
+      var aTitle = artRows[k].querySelector('.art-title');
+      var aBlurb = artRows[k].querySelector('.art-blurb');
+      if(aCat) aCat.textContent = ar.category;
+      if(aTitle) aTitle.textContent = ar.headline;
+      if(aBlurb) aBlurb.textContent = ar.excerpt;
+    }
+
+    // 5. Sidebar articles (most read)
+    var sideArts = document.querySelectorAll('.side-art');
+    for(var m = 0; m < sideArts.length && m < arts.length; m++){
+      var sa = arts[m];
+      var sCat = sideArts[m].querySelector('.side-art-cat');
+      var sTitle = sideArts[m].querySelector('.side-art-title');
+      if(sCat) sCat.textContent = sa.category;
+      if(sTitle) sTitle.textContent = sa.headline;
+    }
+
+    // 6. Ticker bar
+    if(data.ticker_items && data.ticker_items.length){
+      var cityTickers = data.ticker_items.filter(function(t){ return t.city === city; });
+      if(!cityTickers.length) cityTickers = data.ticker_items;
+      var tickerContainer = document.querySelector('.ticker-items');
+      if(tickerContainer && cityTickers.length){
+        var html = '';
+        for(var n = 0; n < cityTickers.length; n++){
+          html += '<span class="t-item">' + cityTickers[n].text + '</span>';
+          html += '<span class="t-dot">\u25C6</span>';
+        }
+        // Duplicate for seamless scroll
+        html += html;
+        tickerContainer.innerHTML = html;
+      }
+    }
+  }
+
+  // Load on DOMContentLoaded or immediately if already ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', loadArticles);
+  } else {
+    loadArticles();
+  }
+})();
+</script>
+
 </body>
 </html>
