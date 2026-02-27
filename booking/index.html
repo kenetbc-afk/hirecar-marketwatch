@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment Booking | HIRECAR.LA</title>
+<meta name="description" content="Book your session with HIRECAR.LA — Credit repair, fleet onboarding, SeedXchange consultations, and more. Gamified booking experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   RESET + CUSTOM PROPERTIES
+   ========================================================= */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink:      #111820;
+  --ink-mid:  #1e2530;
+  --ink-soft: #2a3140;
+  --cta:      #c9920a;
+  --cta-glow: rgba(201, 146, 10, .35);
+  --live:     #c0392b;
+  --member:   #0f4c75;
+  --success:  #27ae60;
+  --warning:  #ff9800;
+  --bg:       #fafbfc;
+  --bg-card:  #ffffff;
+  --border:   #e2e6ea;
+  --text:     #3a4250;
+  --text-dim: #7a8494;
+
+  --serif:  'Cormorant Garant', Georgia, serif;
+  --sans:   'Nunito Sans', 'Segoe UI', sans-serif;
+  --mono:   'DM Mono', 'Courier New', monospace;
+
+  --radius:     12px;
+  --radius-sm:  8px;
+  --radius-xs:  4px;
+  --shadow:     0 2px 8px rgba(0,0,0,.06);
+  --shadow-md:  0 4px 20px rgba(0,0,0,.10);
+  --shadow-lg:  0 8px 40px rgba(0,0,0,.14);
+  --transition: .25s cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul, ol { list-style: none; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  backdrop-filter: blur(12px);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--cta), #e0a80d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.nav-brand span {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 2.5px;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: rgba(255,255,255,.6);
+  transition: color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: #fff; }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  background: linear-gradient(135deg, var(--cta), #daa520);
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: .8px;
+  border-radius: 6px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--cta-glow);
+}
+
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* =========================================================
+   HERO / PROGRESS HEADER
+   ========================================================= */
+.hero {
+  background: linear-gradient(175deg, var(--ink) 0%, var(--ink-mid) 60%, #1a2636 100%);
+  padding: 52px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(201,146,10,.12);
+  border: 1px solid rgba(201,146,10,.25);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cta);
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s infinite;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 40px;
+}
+
+/* ------- STEP PROGRESS BAR ------- */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.step-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.3);
+  background: var(--ink-soft);
+  transition: all .4s ease;
+  position: relative;
+}
+
+.step-circle .lock-icon {
+  font-size: 12px;
+}
+
+.step-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: rgba(255,255,255,.3);
+  margin-top: 8px;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  transition: color .4s ease;
+}
+
+/* Line connector */
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,.1);
+  min-width: 50px;
+  transition: background .4s ease;
+  margin: 0 -2px;
+  position: relative;
+  top: -12px;
+}
+
+/* Active step */
+.progress-step.active .step-circle {
+  border-color: var(--cta);
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--cta), #daa520);
+  box-shadow: 0 0 20px var(--cta-glow), 0 0 40px rgba(201,146,10,.15);
+  animation: stepPulse 2s infinite;
+}
+
+.progress-step.active .step-label {
+  color: var(--cta);
+  font-weight: 500;
+}
+
+/* Completed step */
+.progress-step.completed .step-circle {
+  border-color: var(--success);
+  color: #fff;
+  background: var(--success);
+  box-shadow: 0 0 12px rgba(39,174,96,.3);
+}
+
+.progress-step.completed .step-label {
+  color: var(--success);
+}
+
+.step-line.completed {
+  background: var(--success);
+}
+
+.step-line.active {
+  background: linear-gradient(90deg, var(--success), var(--cta));
+}
+
+@keyframes stepPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--cta-glow), 0 0 40px rgba(201,146,10,.15); }
+  50% { box-shadow: 0 0 28px var(--cta-glow), 0 0 56px rgba(201,146,10,.25); }
+}
+
+/* =========================================================
+   MAIN LAYOUT (with sidebar)
+   ========================================================= */
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  padding: 40px 0 60px;
+}
+
+.booking-main {
+  min-width: 0;
+}
+
+/* =========================================================
+   STEP PANELS
+   ========================================================= */
+.step-panel {
+  display: none;
+  animation: fadeUp .4s ease;
+}
+
+.step-panel.active {
+  display: block;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-heading {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+/* =========================================================
+   STEP 1: SERVICE CARDS
+   ========================================================= */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  border-color: rgba(201,146,10,.4);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.service-card.selected {
+  border-color: var(--cta);
+  box-shadow: 0 0 0 3px var(--cta-glow), var(--shadow-md);
+}
+
+.service-card.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cta), #daa520);
+}
+
+.service-card input[type="radio"] {
+  display: none;
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+
+.badge-popular {
+  background: rgba(201,146,10,.12);
+  color: var(--cta);
+  border: 1px solid rgba(201,146,10,.2);
+}
+
+.badge-free {
+  background: rgba(39,174,96,.1);
+  color: var(--success);
+  border: 1px solid rgba(39,174,96,.2);
+}
+
+.card-name {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card-duration, .card-price {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.card-price {
+  font-weight: 500;
+  color: var(--cta);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cta);
+}
+
+.card-rating .stars {
+  letter-spacing: 1px;
+}
+
+.card-select-indicator {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-size: 12px;
+  color: transparent;
+}
+
+.service-card.selected .card-select-indicator {
+  border-color: var(--cta);
+  background: var(--cta);
+  color: var(--ink);
+}
+
+/* =========================================================
+   STEP 2: CALENDAR & TIME
+   ========================================================= */
+.calendar-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.calendar-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cal-header h3 {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cal-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.cal-nav button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg-card);
+  transition: all var(--transition);
+}
+
+.cal-nav button:hover {
+  border-color: var(--cta);
+  color: var(--cta);
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.cal-weekdays span {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  padding: 4px 0;
+  letter-spacing: .5px;
+}
+
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--text);
+  border: 2px solid transparent;
+}
+
+.cal-day:hover:not(.disabled):not(.empty) {
+  background: rgba(201,146,10,.08);
+  border-color: rgba(201,146,10,.2);
+}
+
+.cal-day.today {
+  border-color: var(--member);
+  color: var(--member);
+  font-weight: 700;
+}
+
+.cal-day.available {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.cal-day.selected {
+  background: linear-gradient(135deg, var(--cta), #daa520);
+  color: var(--ink);
+  border-color: var(--cta);
+  box-shadow: 0 2px 12px var(--cta-glow);
+}
+
+.cal-day.disabled {
+  color: var(--border);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.cal-day.empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+.cal-day.past {
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Time slots */
+.time-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.time-section h3 {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.time-section .tz-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  letter-spacing: .3px;
+}
+
+.time-group {
+  margin-bottom: 20px;
+}
+
+.time-group:last-child {
+  margin-bottom: 0;
+}
+
+.time-group-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.time-slot {
+  padding: 10px 18px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--bg-card);
+}
+
+.time-slot:hover {
+  border-color: rgba(201,146,10,.4);
+  color: var(--cta);
+}
+
+.time-slot.selected {
+  background: linear-gradient(135deg, var(--cta), #daa520);
+  color: var(--ink);
+  border-color: var(--cta);
+  box-shadow: 0 2px 12px var(--cta-glow);
+  font-weight: 700;
+}
+
+.time-slot.unavailable {
+  opacity: .35;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
+/* =========================================================
+   STEP 3: FORM
+   ========================================================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.form-group label .required {
+  color: var(--live);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--bg-card);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--cta);
+  box-shadow: 0 0 0 3px var(--cta-glow);
+}
+
+.form-group input.error,
+.form-group select.error {
+  border-color: var(--live);
+  box-shadow: 0 0 0 3px rgba(192,57,43,.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group .error-msg {
+  font-size: 12px;
+  color: var(--live);
+  margin-top: 4px;
+  display: none;
+}
+
+.form-group .error-msg.visible {
+  display: block;
+}
+
+/* Member toggle */
+.member-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(15,76,117,.04);
+  border: 1px solid rgba(15,76,117,.12);
+  border-radius: var(--radius-sm);
+  grid-column: 1 / -1;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--border);
+  border-radius: 26px;
+  transition: background var(--transition);
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--member);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+.toggle-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.toggle-label small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.member-priority-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(39,174,96,.1);
+  border: 1px solid rgba(39,174,96,.2);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--success);
+  letter-spacing: .5px;
+  margin-left: auto;
+}
+
+.member-priority-badge.visible {
+  display: inline-flex;
+}
+
+.member-id-row {
+  display: none;
+  grid-column: 1 / -1;
+}
+
+.member-id-row.visible {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Checkbox */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  grid-column: 1 / -1;
+  padding-top: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--cta);
+}
+
+.checkbox-group label {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.checkbox-group label a {
+  color: var(--cta);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   STEP 4: CONFIRMATION
+   ========================================================= */
+.confirm-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.confirm-header {
+  background: linear-gradient(135deg, var(--ink), var(--ink-mid));
+  padding: 28px;
+  text-align: center;
+  position: relative;
+}
+
+.confirm-header::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.confirm-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.confirm-header h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+}
+
+.confirm-header .ref-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cta);
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+  position: relative;
+}
+
+.confirm-body {
+  padding: 28px;
+}
+
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.confirm-row:last-child {
+  border-bottom: none;
+}
+
+.confirm-row .label {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.confirm-row .value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+}
+
+.confirm-row .value.price {
+  color: var(--cta);
+  font-family: var(--mono);
+}
+
+/* Achievement badges */
+.achievement-strip {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.achievement {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .3px;
+}
+
+.achievement-xp {
+  background: rgba(201,146,10,.1);
+  border: 1px solid rgba(201,146,10,.25);
+  color: var(--cta);
+}
+
+.achievement-hbi {
+  background: rgba(39,174,96,.08);
+  border: 1px solid rgba(39,174,96,.2);
+  color: var(--success);
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-calendar {
+  padding: 12px 24px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-calendar:hover {
+  border-color: var(--cta);
+  color: var(--cta);
+}
+
+.reschedule-note {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: rgba(15,76,117,.04);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.reschedule-note strong {
+  color: var(--member);
+}
+
+/* =========================================================
+   STEP NAV BUTTONS
+   ========================================================= */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  transition: all var(--transition);
+}
+
+.btn-back:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btn-next,
+.btn-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--cta), #daa520);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  box-shadow: 0 2px 12px var(--cta-glow);
+}
+
+.btn-next:hover,
+.btn-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--cta-glow);
+}
+
+.btn-next:disabled,
+.btn-confirm:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-confirm {
+  font-size: 15px;
+  padding: 16px 40px;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+.booking-sidebar {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+
+.sidebar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.sidebar-card h3 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.benefit-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.benefit-item:first-child {
+  padding-top: 0;
+}
+
+.benefit-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.benefit-icon.gold { background: rgba(201,146,10,.1); }
+.benefit-icon.green { background: rgba(39,174,96,.08); }
+.benefit-icon.blue { background: rgba(15,76,117,.08); }
+.benefit-icon.red { background: rgba(192,57,43,.08); }
+
+.benefit-item strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.benefit-item span {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+/* Selection summary (sidebar) */
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.summary-item:last-child { border-bottom: none; }
+
+.summary-item .s-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.summary-item .s-value {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sidebar-empty {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background: var(--ink);
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,.3);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  transition: color var(--transition);
+}
+
+.footer-links a:hover { color: var(--cta); }
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .6; transform: scale(1.1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes confettiBurst {
+  0%   { transform: scale(0) rotate(0deg); opacity: 1; }
+  60%  { transform: scale(1.2) rotate(180deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+.confirm-anim {
+  animation: confettiBurst .6s ease forwards;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .calendar-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--ink);
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    gap: 16px;
+  }
+
+  .hero { padding: 40px 0 48px; }
+
+  .progress-bar { flex-wrap: nowrap; overflow-x: auto; padding: 0 16px; }
+
+  .step-line { min-width: 28px; }
+
+  .step-label { font-size: 9px; }
+
+  .service-grid { grid-template-columns: 1fr; }
+
+  .calendar-section { grid-template-columns: 1fr; }
+
+  .form-grid { grid-template-columns: 1fr; }
+
+  .booking-sidebar { grid-template-columns: 1fr; }
+
+  .confirm-actions { flex-direction: column; }
+
+  .step-heading { font-size: 1.5rem; }
+
+  .achievement-strip { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+
+  .hero { padding: 32px 0 40px; }
+
+  .step-circle { width: 34px; height: 34px; font-size: 12px; }
+
+  .step-label { font-size: 8px; }
+
+  .step-line { min-width: 18px; }
+
+  .service-card { padding: 16px; }
+
+  .card-name { font-size: 14px; }
+
+  .time-slot { padding: 8px 14px; font-size: 12px; }
+
+  .cal-day { font-size: 11px; }
+
+  .btn-next, .btn-confirm { padding: 12px 24px; font-size: 13px; }
+
+  .confirm-body { padding: 20px; }
+
+  .footer .container { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar">
+  <div class="container">
+    <a href="01-home-marketplace.html" class="nav-brand">
+      <div class="nav-logo">H</div>
+      <span>HIRECAR</span>
+    </a>
+
+    <div class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="01-home-marketplace.html">Home</a></li>
+      <li><a href="02-about-bio.html">About</a></li>
+      <li><a href="05-services-gamified.html" class="active">Services</a></li>
+      <li><a href="04-playbooks-standards.html">Playbooks</a></li>
+      <li><a href="06-members-firstclass.html">Members</a></li>
+      <li><a href="#" class="nav-cta">Start Recovery &#8594;</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO / PROGRESS HEADER
+     ============================================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        BOOKING CENTER v1.0
+      </div>
+      <h1>Book Your Session</h1>
+      <p class="hero-sub">Schedule with HIRECAR.LA advisors. Select a service, pick your time, confirm.</p>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-step active" data-step="1">
+          <div class="step-circle">1</div>
+          <span class="step-label">Select Service</span>
+        </div>
+        <div class="step-line" id="line1"></div>
+        <div class="progress-step" data-step="2">
+          <div class="step-circle"><span class="lock-icon">&#128274;</span></div>
+          <span class="step-label">Choose Date</span>
+        </div>
+        <div class="step-line" id="line2"></div>
+        <div class="progress-step" data-step="3">
+          <div class="step-circle"><span class="lock-icon">&#128274;</span></div>
+          <span class="step-label">Your Details</span>
+        </div>
+        <div class="step-line" id="line3"></div>
+        <div class="progress-step" data-step="4">
+          <div class="step-circle"><span class="lock-icon">&#128274;</span></div>
+          <span class="step-label">Confirm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<div class="container">
+  <div class="main-layout">
+
+    <!-- ====== BOOKING MAIN ====== -->
+    <div class="booking-main">
+
+      <!-- ---- STEP 1: SERVICE SELECTION ---- -->
+      <div class="step-panel active" id="step1">
+        <h2 class="step-heading">Select a Service</h2>
+        <p class="step-desc">Choose the session type that fits your current needs. Each service is tailored for a different phase of your recovery or growth journey.</p>
+
+        <div class="service-grid" id="serviceGrid">
+
+          <!-- CreditWithKen 1-on-1 -->
+          <div class="service-card" data-service="creditwithken" data-price="$150" data-duration="60 min" data-name="CreditWithKen 1-on-1">
+            <input type="radio" name="service" value="creditwithken">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#127775;</span>
+              <span class="card-badge badge-popular">&#9733; Most Popular</span>
+            </div>
+            <div class="card-name">CreditWithKen 1-on-1</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 60 min</span>
+              <span class="card-price">$150</span>
+            </div>
+            <p class="card-desc">Personal credit strategy session with Ken Eckman. Deep-dive into your credit profile, dispute strategies, and recovery timeline.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              4.9 (127 reviews)
+            </div>
+          </div>
+
+          <!-- Credit Repair Intake -->
+          <div class="service-card" data-service="credit-intake" data-price="FREE" data-duration="30 min" data-name="Credit Repair Intake">
+            <input type="radio" name="service" value="credit-intake">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#128203;</span>
+              <span class="card-badge badge-free">FREE</span>
+            </div>
+            <div class="card-name">Credit Repair Intake</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 30 min</span>
+              <span class="card-price">FREE</span>
+            </div>
+            <p class="card-desc">Initial assessment and dispute strategy planning. We review your reports, identify errors, and outline your personalized repair path.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              4.8 (84 reviews)
+            </div>
+          </div>
+
+          <!-- SeedXchange Consultation -->
+          <div class="service-card" data-service="seedxchange" data-price="$75" data-duration="45 min" data-name="SeedXchange Consultation">
+            <input type="radio" name="service" value="seedxchange">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#127793;</span>
+            </div>
+            <div class="card-name">SeedXchange Consultation</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 45 min</span>
+              <span class="card-price">$75</span>
+            </div>
+            <p class="card-desc">Business funding pre-qualification review. Evaluate your eligibility for SBA loans, microloans, and alternative capital sources.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;</span>
+              4.7 (56 reviews)
+            </div>
+          </div>
+
+          <!-- HBI Score Review -->
+          <div class="service-card" data-service="hbi-review" data-price="FREE / $50" data-duration="30 min" data-name="HBI Score Review">
+            <input type="radio" name="service" value="hbi-review">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#128202;</span>
+            </div>
+            <div class="card-name">HBI Score Review</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 30 min</span>
+              <span class="card-price">FREE for members / $50</span>
+            </div>
+            <p class="card-desc">Behavioral index deep-dive with improvement plan. Understand your HBI metrics and get actionable steps to boost your operator score.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              4.9 (41 reviews)
+            </div>
+          </div>
+
+          <!-- Fleet Onboarding -->
+          <div class="service-card" data-service="fleet-onboarding" data-price="FREE" data-duration="60 min" data-name="Fleet Onboarding">
+            <input type="radio" name="service" value="fleet-onboarding">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#128666;</span>
+              <span class="card-badge badge-free">FREE</span>
+            </div>
+            <div class="card-name">Fleet Onboarding</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 60 min</span>
+              <span class="card-price">FREE</span>
+            </div>
+            <p class="card-desc">BRE qualification walkthrough and operator setup. Complete onboarding for fleet partners including standards review and compliance checklist.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;</span>
+              4.6 (33 reviews)
+            </div>
+          </div>
+
+          <!-- PIFR Consultation -->
+          <div class="service-card" data-service="pifr" data-price="$100" data-duration="30 min" data-name="PIFR Consultation">
+            <input type="radio" name="service" value="pifr">
+            <div class="card-select-indicator">&#10003;</div>
+            <div class="card-top">
+              <span class="card-icon">&#128680;</span>
+            </div>
+            <div class="card-name">PIFR Consultation</div>
+            <div class="card-meta">
+              <span class="card-duration">&#9201; 30 min</span>
+              <span class="card-price">$100</span>
+            </div>
+            <p class="card-desc">Post-incident response planning and claims review. Navigate insurance disputes, document damage properly, and protect your operator standing.</p>
+            <div class="card-rating">
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              4.8 (29 reviews)
+            </div>
+          </div>
+
+        </div>
+
+        <div class="step-nav">
+          <div></div>
+          <button class="btn-next" id="btnNext1" disabled>
+            Continue to Date Selection &#8594;
+          </button>
+        </div>
+      </div>
+
+      <!-- ---- STEP 2: DATE & TIME ---- -->
+      <div class="step-panel" id="step2">
+        <h2 class="step-heading">Choose Date &amp; Time</h2>
+        <p class="step-desc">Select an available date and your preferred time slot.</p>
+
+        <div class="calendar-section">
+          <!-- Calendar -->
+          <div class="calendar-widget">
+            <div class="cal-header">
+              <h3 id="calMonthYear"></h3>
+              <div class="cal-nav">
+                <button id="calPrev" aria-label="Previous month">&#8249;</button>
+                <button id="calNext" aria-label="Next month">&#8250;</button>
+              </div>
+            </div>
+            <div class="cal-weekdays">
+              <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <div class="cal-days" id="calDays"></div>
+          </div>
+
+          <!-- Time Slots -->
+          <div class="time-section">
+            <h3>Select Time</h3>
+            <div class="tz-note">All times in Pacific Standard Time (PST)</div>
+
+            <div class="time-group">
+              <div class="time-group-label">Morning</div>
+              <div class="time-slots">
+                <button class="time-slot" data-time="9:00 AM">9:00 AM</button>
+                <button class="time-slot" data-time="10:00 AM">10:00 AM</button>
+                <button class="time-slot" data-time="11:00 AM">11:00 AM</button>
+              </div>
+            </div>
+
+            <div class="time-group">
+              <div class="time-group-label">Afternoon</div>
+              <div class="time-slots">
+                <button class="time-slot" data-time="1:00 PM">1:00 PM</button>
+                <button class="time-slot" data-time="2:00 PM">2:00 PM</button>
+                <button class="time-slot" data-time="3:00 PM">3:00 PM</button>
+                <button class="time-slot" data-time="4:00 PM">4:00 PM</button>
+              </div>
+            </div>
+
+            <div class="time-group">
+              <div class="time-group-label">Evening</div>
+              <div class="time-slots">
+                <button class="time-slot" data-time="5:00 PM">5:00 PM</button>
+                <button class="time-slot" data-time="6:00 PM">6:00 PM</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" id="btnBack2">&#8592; Back</button>
+          <button class="btn-next" id="btnNext2" disabled>
+            Continue to Details &#8594;
+          </button>
+        </div>
+      </div>
+
+      <!-- ---- STEP 3: YOUR DETAILS ---- -->
+      <div class="step-panel" id="step3">
+        <h2 class="step-heading">Your Details</h2>
+        <p class="step-desc">Tell us about yourself so we can prepare for your session.</p>
+
+        <div class="form-grid" id="detailsForm">
+          <div class="form-group">
+            <label>First Name <span class="required">*</span></label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+            <span class="error-msg" id="firstNameError">First name is required</span>
+          </div>
+
+          <div class="form-group">
+            <label>Last Name <span class="required">*</span></label>
+            <input type="text" id="lastName" placeholder="Enter your last name" required>
+            <span class="error-msg" id="lastNameError">Last name is required</span>
+          </div>
+
+          <div class="form-group">
+            <label>Email <span class="required">*</span></label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+            <span class="error-msg" id="emailError">Valid email is required</span>
+          </div>
+
+          <div class="form-group">
+            <label>Phone <span class="required">*</span></label>
+            <input type="tel" id="phone" placeholder="(555) 000-0000" required>
+            <span class="error-msg" id="phoneError">Phone number is required</span>
+          </div>
+
+          <!-- Member Toggle -->
+          <div class="member-toggle-wrap">
+            <label class="toggle-switch">
+              <input type="checkbox" id="memberToggle">
+              <span class="toggle-slider"></span>
+            </label>
+            <div class="toggle-label">
+              Are you a current member?
+              <small>First Class members get priority scheduling</small>
+            </div>
+            <span class="member-priority-badge" id="memberBadge">
+              &#9733; Members get priority scheduling
+            </span>
+          </div>
+
+          <!-- Member ID (hidden by default) -->
+          <div class="form-group member-id-row" id="memberIdRow">
+            <label>Member ID</label>
+            <input type="text" id="memberId" placeholder="e.g. HC-00123">
+          </div>
+
+          <div class="form-group">
+            <label>How did you hear about us?</label>
+            <select id="referralSource">
+              <option value="">Select one...</option>
+              <option value="google">Google Search</option>
+              <option value="social">Social Media</option>
+              <option value="referral">Friend / Referral</option>
+              <option value="youtube">YouTube</option>
+              <option value="podcast">Podcast</option>
+              <option value="returning">Returning Client</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Special Requests / Notes</label>
+            <textarea id="notes" placeholder="Any specific topics you'd like to cover, documents to prepare, etc."></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="termsCheck">
+            <label for="termsCheck">I agree to the <a href="03-terms-legal.html">cancellation policy</a> and <a href="03-terms-legal.html">terms of service</a>. <span class="required">*</span></label>
+          </div>
+          <span class="error-msg" id="termsError" style="grid-column:1/-1;margin-top:-10px;">You must agree to the cancellation policy</span>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" id="btnBack3">&#8592; Back</button>
+          <button class="btn-next" id="btnNext3">
+            Review Booking &#8594;
+          </button>
+        </div>
+      </div>
+
+      <!-- ---- STEP 4: CONFIRMATION ---- -->
+      <div class="step-panel" id="step4">
+        <h2 class="step-heading">Confirm Your Booking</h2>
+        <p class="step-desc">Review your session details below, then confirm to lock in your appointment.</p>
+
+        <div class="confirm-card">
+          <div class="confirm-header">
+            <div class="confirm-icon confirm-anim" style="display:none;" id="confirmIconAnim">&#127881;</div>
+            <div class="confirm-icon" id="confirmIconDefault">&#128197;</div>
+            <h3>Booking Summary</h3>
+            <div class="ref-number">REF: <span id="refNumber"></span></div>
+          </div>
+          <div class="confirm-body">
+            <div class="confirm-row">
+              <span class="label">Service</span>
+              <span class="value" id="confService">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Date</span>
+              <span class="value" id="confDate">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Time</span>
+              <span class="value" id="confTime">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Duration</span>
+              <span class="value" id="confDuration">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Name</span>
+              <span class="value" id="confName">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Email</span>
+              <span class="value" id="confEmail">--</span>
+            </div>
+            <div class="confirm-row">
+              <span class="label">Total</span>
+              <span class="value price" id="confPrice">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievement Strip -->
+        <div class="achievement-strip">
+          <div class="achievement achievement-xp">
+            &#127942; XP Earned: +50 points
+          </div>
+          <div class="achievement achievement-hbi">
+            &#128200; HBI Impact: Booking Reliability +2
+          </div>
+        </div>
+
+        <div class="confirm-actions">
+          <button class="btn-calendar" id="btnAddCal">
+            &#128197; Add to Calendar
+          </button>
+        </div>
+
+        <div class="reschedule-note">
+          <strong>Need to reschedule?</strong> No penalty within 24 hours of booking.
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" id="btnBack4">&#8592; Back</button>
+          <button class="btn-confirm" id="btnConfirm">
+            &#10003; Confirm Booking
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /booking-main -->
+
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="booking-sidebar">
+      <!-- Live Summary -->
+      <div class="sidebar-card" id="sidebarSummary">
+        <h3>Your Selection</h3>
+        <div id="summaryContent">
+          <div class="sidebar-empty">Select a service to begin</div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="sidebar-card">
+        <h3>Why Book With HIRECAR</h3>
+
+        <div class="benefit-item">
+          <div class="benefit-icon gold">&#128737;</div>
+          <div>
+            <strong>No-Show Protection</strong>
+            <span>Missed session? We auto-reschedule within 48 hours at no extra charge.</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon green">&#128197;</div>
+          <div>
+            <strong>24hr Free Cancellation</strong>
+            <span>Cancel or reschedule up to 24 hours before with zero penalties.</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon blue">&#128200;</div>
+          <div>
+            <strong>HBI Score Boost</strong>
+            <span>Every completed session improves your HIRECAR Behavioral Index rating.</span>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon red">&#9733;</div>
+          <div>
+            <strong>Member Priority Queue</strong>
+            <span>First Class members are automatically placed in the priority scheduling lane.</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /main-layout -->
+</div><!-- /container -->
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <span class="footer-copy">&copy; 2026 HIRECAR, LLC &middot; Los Angeles, CA</span>
+    <ul class="footer-links">
+      <li><a href="03-terms-legal.html">Terms</a></li>
+      <li><a href="03-terms-legal.html">Privacy</a></li>
+      <li><a href="05-services-gamified.html">Services</a></li>
+      <li><a href="02-about-bio.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT — BOOKING WIZARD
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* -------------------------------------------------------
+     STATE
+     ------------------------------------------------------- */
+  var state = {
+    currentStep: 1,
+    selectedService: null,
+    selectedDate: null,
+    selectedTime: null,
+    calYear: null,
+    calMonth: null
+  };
+
+  /* -------------------------------------------------------
+     DOM REFERENCES
+     ------------------------------------------------------- */
+  var panels     = document.querySelectorAll('.step-panel');
+  var progSteps  = document.querySelectorAll('.progress-step');
+  var progLines  = [
+    document.getElementById('line1'),
+    document.getElementById('line2'),
+    document.getElementById('line3')
+  ];
+
+  // Nav
+  var navToggle = document.getElementById('navToggle');
+  var navLinks  = document.getElementById('navLinks');
+
+  // Step 1
+  var serviceCards = document.querySelectorAll('.service-card');
+  var btnNext1     = document.getElementById('btnNext1');
+
+  // Step 2
+  var calDays   = document.getElementById('calDays');
+  var calTitle  = document.getElementById('calMonthYear');
+  var calPrev   = document.getElementById('calPrev');
+  var calNext   = document.getElementById('calNext');
+  var timeSlots = document.querySelectorAll('.time-slot');
+  var btnNext2  = document.getElementById('btnNext2');
+  var btnBack2  = document.getElementById('btnBack2');
+
+  // Step 3
+  var btnNext3  = document.getElementById('btnNext3');
+  var btnBack3  = document.getElementById('btnBack3');
+  var memberToggle = document.getElementById('memberToggle');
+  var memberBadge  = document.getElementById('memberBadge');
+  var memberIdRow  = document.getElementById('memberIdRow');
+
+  // Step 4
+  var btnConfirm = document.getElementById('btnConfirm');
+  var btnBack4   = document.getElementById('btnBack4');
+  var btnAddCal  = document.getElementById('btnAddCal');
+
+  /* -------------------------------------------------------
+     MOBILE NAV
+     ------------------------------------------------------- */
+  navToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+  });
+
+  /* -------------------------------------------------------
+     PROGRESS BAR UPDATE
+     ------------------------------------------------------- */
+  function updateProgress() {
+    progSteps.forEach(function(ps, i) {
+      var stepNum = i + 1;
+      ps.classList.remove('active', 'completed');
+
+      var circle = ps.querySelector('.step-circle');
+
+      if (stepNum < state.currentStep) {
+        ps.classList.add('completed');
+        circle.innerHTML = '&#10003;';
+      } else if (stepNum === state.currentStep) {
+        ps.classList.add('active');
+        circle.innerHTML = stepNum;
+      } else {
+        circle.innerHTML = '<span class="lock-icon">&#128274;</span>';
+      }
+    });
+
+    progLines.forEach(function(line, i) {
+      var lineStep = i + 1;
+      line.className = 'step-line';
+      if (lineStep < state.currentStep) {
+        line.classList.add('completed');
+      } else if (lineStep === state.currentStep) {
+        line.classList.add('active');
+      }
+    });
+  }
+
+  /* -------------------------------------------------------
+     STEP NAVIGATION
+     ------------------------------------------------------- */
+  function goToStep(step) {
+    state.currentStep = step;
+
+    panels.forEach(function(p) { p.classList.remove('active'); });
+    var target = document.getElementById('step' + step);
+    if (target) target.classList.add('active');
+
+    updateProgress();
+    updateSidebar();
+
+    // Scroll to hero top
+    document.querySelector('.hero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Populate confirmation on step 4
+    if (step === 4) {
+      populateConfirmation();
+    }
+  }
+
+  /* -------------------------------------------------------
+     STEP 1: SERVICE SELECTION
+     ------------------------------------------------------- */
+  serviceCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      // Deselect all
+      serviceCards.forEach(function(c) { c.classList.remove('selected'); });
+      // Select this
+      card.classList.add('selected');
+      card.querySelector('input[type="radio"]').checked = true;
+
+      state.selectedService = {
+        id:       card.getAttribute('data-service'),
+        name:     card.getAttribute('data-name'),
+        price:    card.getAttribute('data-price'),
+        duration: card.getAttribute('data-duration')
+      };
+
+      btnNext1.disabled = false;
+      updateSidebar();
+    });
+  });
+
+  btnNext1.addEventListener('click', function() {
+    if (!state.selectedService) return;
+    goToStep(2);
+  });
+
+  /* -------------------------------------------------------
+     STEP 2: CALENDAR
+     ------------------------------------------------------- */
+  var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function initCalendar() {
+    var now = new Date();
+    state.calYear  = now.getFullYear();
+    state.calMonth = now.getMonth();
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    calTitle.textContent = monthNames[state.calMonth] + ' ' + state.calYear;
+    calDays.innerHTML = '';
+
+    var firstDay    = new Date(state.calYear, state.calMonth, 1).getDay();
+    var daysInMonth = new Date(state.calYear, state.calMonth + 1, 0).getDate();
+    var today       = new Date();
+    today.setHours(0,0,0,0);
+
+    // Seed some unavailable days (weekends + random)
+    var unavailable = {};
+    for (var d = 1; d <= daysInMonth; d++) {
+      var dt = new Date(state.calYear, state.calMonth, d);
+      var dayOfWeek = dt.getDay();
+      if (dayOfWeek === 0) {
+        unavailable[d] = true; // Sundays unavailable
+      }
+    }
+
+    // Empty cells before first day
+    for (var e = 0; e < firstDay; e++) {
+      var emptyDiv = document.createElement('div');
+      emptyDiv.className = 'cal-day empty';
+      calDays.appendChild(emptyDiv);
+    }
+
+    for (var i = 1; i <= daysInMonth; i++) {
+      var dayEl = document.createElement('div');
+      dayEl.className = 'cal-day';
+      dayEl.textContent = i;
+      dayEl.setAttribute('data-day', i);
+
+      var dateObj = new Date(state.calYear, state.calMonth, i);
+      dateObj.setHours(0,0,0,0);
+
+      if (dateObj < today) {
+        dayEl.classList.add('past');
+      } else if (unavailable[i]) {
+        dayEl.classList.add('disabled');
+      } else {
+        dayEl.classList.add('available');
+
+        // Today marker
+        if (dateObj.getTime() === today.getTime()) {
+          dayEl.classList.add('today');
+        }
+
+        // Selection check
+        if (state.selectedDate) {
+          var selDate = new Date(state.selectedDate);
+          selDate.setHours(0,0,0,0);
+          if (dateObj.getTime() === selDate.getTime()) {
+            dayEl.classList.add('selected');
+          }
+        }
+
+        (function(day, el) {
+          el.addEventListener('click', function() {
+            // Deselect all
+            calDays.querySelectorAll('.cal-day').forEach(function(d) {
+              d.classList.remove('selected');
+            });
+            el.classList.add('selected');
+            state.selectedDate = new Date(state.calYear, state.calMonth, day);
+            checkStep2Complete();
+            updateSidebar();
+          });
+        })(i, dayEl);
+      }
+
+      calDays.appendChild(dayEl);
+    }
+  }
+
+  calPrev.addEventListener('click', function() {
+    var now = new Date();
+    // Don't go before current month
+    if (state.calYear === now.getFullYear() && state.calMonth === now.getMonth()) return;
+    state.calMonth--;
+    if (state.calMonth < 0) {
+      state.calMonth = 11;
+      state.calYear--;
+    }
+    renderCalendar();
+  });
+
+  calNext.addEventListener('click', function() {
+    state.calMonth++;
+    if (state.calMonth > 11) {
+      state.calMonth = 0;
+      state.calYear++;
+    }
+    renderCalendar();
+  });
+
+  // Time slots
+  timeSlots.forEach(function(slot) {
+    // Randomly make some unavailable for realism
+    if (Math.random() < 0.15) {
+      slot.classList.add('unavailable');
+    }
+
+    slot.addEventListener('click', function() {
+      if (slot.classList.contains('unavailable')) return;
+      timeSlots.forEach(function(s) { s.classList.remove('selected'); });
+      slot.classList.add('selected');
+      state.selectedTime = slot.getAttribute('data-time');
+      checkStep2Complete();
+      updateSidebar();
+    });
+  });
+
+  function checkStep2Complete() {
+    btnNext2.disabled = !(state.selectedDate && state.selectedTime);
+  }
+
+  btnNext2.addEventListener('click', function() {
+    if (!state.selectedDate || !state.selectedTime) return;
+    goToStep(3);
+  });
+
+  btnBack2.addEventListener('click', function() { goToStep(1); });
+
+  /* -------------------------------------------------------
+     STEP 3: DETAILS FORM
+     ------------------------------------------------------- */
+  memberToggle.addEventListener('change', function() {
+    if (memberToggle.checked) {
+      memberBadge.classList.add('visible');
+      memberIdRow.classList.add('visible');
+    } else {
+      memberBadge.classList.remove('visible');
+      memberIdRow.classList.remove('visible');
+    }
+  });
+
+  function validateStep3() {
+    var valid = true;
+    var fields = [
+      { id: 'firstName', errId: 'firstNameError', type: 'text' },
+      { id: 'lastName',  errId: 'lastNameError',  type: 'text' },
+      { id: 'email',     errId: 'emailError',     type: 'email' },
+      { id: 'phone',     errId: 'phoneError',     type: 'text' }
+    ];
+
+    fields.forEach(function(f) {
+      var input = document.getElementById(f.id);
+      var errEl = document.getElementById(f.errId);
+      var val   = input.value.trim();
+
+      input.classList.remove('error');
+      errEl.classList.remove('visible');
+
+      if (!val) {
+        input.classList.add('error');
+        errEl.classList.add('visible');
+        valid = false;
+      } else if (f.type === 'email') {
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(val)) {
+          input.classList.add('error');
+          errEl.classList.add('visible');
+          valid = false;
+        }
+      }
+    });
+
+    // Terms check
+    var termsCheck = document.getElementById('termsCheck');
+    var termsError = document.getElementById('termsError');
+    termsError.classList.remove('visible');
+    if (!termsCheck.checked) {
+      termsError.classList.add('visible');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  btnNext3.addEventListener('click', function() {
+    if (validateStep3()) {
+      goToStep(4);
+    }
+  });
+
+  btnBack3.addEventListener('click', function() { goToStep(2); });
+
+  /* -------------------------------------------------------
+     STEP 4: CONFIRMATION
+     ------------------------------------------------------- */
+  function generateRef() {
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var ref = '';
+    for (var i = 0; i < 8; i++) {
+      ref += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return ref;
+  }
+
+  function formatDate(d) {
+    if (!d) return '--';
+    var opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return d.toLocaleDateString('en-US', opts);
+  }
+
+  function populateConfirmation() {
+    document.getElementById('confService').textContent  = state.selectedService ? state.selectedService.name : '--';
+    document.getElementById('confDate').textContent     = formatDate(state.selectedDate);
+    document.getElementById('confTime').textContent     = state.selectedTime || '--';
+    document.getElementById('confDuration').textContent = state.selectedService ? state.selectedService.duration : '--';
+    document.getElementById('confPrice').textContent    = state.selectedService ? state.selectedService.price : '--';
+    document.getElementById('confName').textContent     = (document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim()).trim() || '--';
+    document.getElementById('confEmail').textContent    = document.getElementById('email').value.trim() || '--';
+    document.getElementById('refNumber').textContent    = generateRef();
+  }
+
+  btnBack4.addEventListener('click', function() { goToStep(3); });
+
+  btnConfirm.addEventListener('click', function() {
+    // Show success state
+    btnConfirm.innerHTML = '&#10003; Booking Confirmed!';
+    btnConfirm.style.background = 'var(--success)';
+    btnConfirm.style.boxShadow  = '0 4px 20px rgba(39,174,96,.3)';
+    btnConfirm.disabled = true;
+
+    // Swap icon
+    document.getElementById('confirmIconDefault').style.display = 'none';
+    var animIcon = document.getElementById('confirmIconAnim');
+    animIcon.style.display = 'block';
+
+    // Update progress to all-complete
+    progSteps.forEach(function(ps) {
+      ps.classList.remove('active');
+      ps.classList.add('completed');
+      ps.querySelector('.step-circle').innerHTML = '&#10003;';
+    });
+    progLines.forEach(function(l) {
+      l.className = 'step-line completed';
+    });
+
+    // Hide back button
+    btnBack4.style.display = 'none';
+  });
+
+  // Add to Calendar (creates .ics download)
+  btnAddCal.addEventListener('click', function() {
+    if (!state.selectedDate || !state.selectedTime) return;
+
+    var svc = state.selectedService ? state.selectedService.name : 'HIRECAR Session';
+    var dur = state.selectedService ? parseInt(state.selectedService.duration) : 60;
+
+    // Parse time
+    var timeParts = state.selectedTime.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!timeParts) return;
+    var hours = parseInt(timeParts[1]);
+    var mins  = parseInt(timeParts[2]);
+    var ampm  = timeParts[3].toUpperCase();
+    if (ampm === 'PM' && hours < 12) hours += 12;
+    if (ampm === 'AM' && hours === 12) hours = 0;
+
+    var startDate = new Date(state.selectedDate);
+    startDate.setHours(hours, mins, 0, 0);
+
+    var endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + dur);
+
+    function pad(n) { return n < 10 ? '0' + n : n; }
+    function icsDate(d) {
+      return d.getFullYear() +
+        pad(d.getMonth() + 1) +
+        pad(d.getDate()) + 'T' +
+        pad(d.getHours()) +
+        pad(d.getMinutes()) + '00';
+    }
+
+    var ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'DTSTART:' + icsDate(startDate),
+      'DTEND:' + icsDate(endDate),
+      'SUMMARY:' + svc + ' — HIRECAR.LA',
+      'DESCRIPTION:Your ' + svc + ' session with HIRECAR.LA. Ref: ' + document.getElementById('refNumber').textContent,
+      'LOCATION:HIRECAR.LA (Virtual or In-Person)',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    var blob = new Blob([ics], { type: 'text/calendar' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'hirecar-booking.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    btnAddCal.innerHTML = '&#10003; Calendar Event Downloaded';
+    btnAddCal.style.borderColor = 'var(--success)';
+    btnAddCal.style.color       = 'var(--success)';
+  });
+
+  /* -------------------------------------------------------
+     SIDEBAR SUMMARY
+     ------------------------------------------------------- */
+  function updateSidebar() {
+    var html = '';
+
+    if (state.selectedService) {
+      html += '<div class="summary-item"><span class="s-label">Service</span><span class="s-value">' + state.selectedService.name + '</span></div>';
+      html += '<div class="summary-item"><span class="s-label">Duration</span><span class="s-value">' + state.selectedService.duration + '</span></div>';
+      html += '<div class="summary-item"><span class="s-label">Price</span><span class="s-value">' + state.selectedService.price + '</span></div>';
+    }
+
+    if (state.selectedDate) {
+      html += '<div class="summary-item"><span class="s-label">Date</span><span class="s-value">' + formatDate(state.selectedDate) + '</span></div>';
+    }
+
+    if (state.selectedTime) {
+      html += '<div class="summary-item"><span class="s-label">Time</span><span class="s-value">' + state.selectedTime + ' PST</span></div>';
+    }
+
+    if (!html) {
+      html = '<div class="sidebar-empty">Select a service to begin</div>';
+    }
+
+    document.getElementById('summaryContent').innerHTML = html;
+  }
+
+  /* -------------------------------------------------------
+     INIT
+     ------------------------------------------------------- */
+  initCalendar();
+  updateProgress();
+
+})();
+</script>
+</body>
+</html>
