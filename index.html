@@ -3568,7 +3568,6 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   pointer-events: none;
 }
 .rh-hero-vignette {
-  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.1) 30%, rgba(0,0,0,.1) 60%, rgba(0,0,0,.65) 100%) !important;
   position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 140% 80% at 50% 110%, rgba(3,5,8,.97) 0%, rgba(3,5,8,.6) 40%, transparent 68%),
@@ -3591,38 +3590,31 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 /* ══════════════════════════════════════════════════════════════
    SECTION BACKGROUNDS (parallax on scroll-snap)
 ══════════════════════════════════════════════════════════════ */
-.rh-section-bg { /* v21: slower transitions */
-  transition: background-image 1.8s ease-in-out !important;
-
+.rh-section-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transform: scale(1.08);  /* slight overshoot for parallax without overflow */
-  transition: transform 1s cubic-bezier(.22,1,.36,1);
-  will-change: transform;
+  transform: scale(1.08);
+  transition: background-image 1.8s ease-in-out, transform 1s cubic-bezier(.22,1,.36,1);
+  will-change: transform, background-image;
 }
 .rh-overlay-left  { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(3,5,8,.94) 0%, rgba(3,5,8,.62) 45%, rgba(0,0,0,.02) 100%); }
 .rh-overlay-right { position: absolute; inset: 0; background: linear-gradient(255deg, rgba(3,5,8,.94) 0%, rgba(3,5,8,.62) 45%, rgba(0,0,0,.02) 100%); }
 .rh-overlay-dark  { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(0,0,0,.06) 0%, rgba(3,5,8,.7) 50%, rgba(3,5,8,.96) 100%); }
 
 /* ══ ENT THUMBNAIL STRIP ══════════════════════════════════════ */
-.rh-ent-strip { /* v21: borderless edge-to-edge */
-  margin-left: -16px !important; margin-right: -16px !important;
-  padding-left: 0 !important; padding-right: 0 !important;
-  gap: 0 !important;
-
+.rh-ent-strip {
   position: absolute; bottom: 80px; right: 16px; z-index: 20;
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 0;
+  margin-left: -16px; margin-right: -16px;
+  padding-left: 0; padding-right: 0;
   max-width: 80px;
 }
-.rh-ent-thumb { /* v21: borderless tiles */
-  border-radius: 0 !important; border: none !important;
-
-  cursor: pointer; border-radius: 3px; overflow: hidden;
-  border: 1.5px solid rgba(255,255,255,.12);
-  transition: border-color .2s, transform .2s;
-  opacity: .65; transition: all .2s;
+.rh-ent-thumb {
+  cursor: pointer; overflow: hidden;
+  border-radius: 0; border: none;
+  opacity: .65; transition: opacity .2s, transform .2s;
 }
-.rh-ent-thumb.active, .rh-ent-thumb:hover { opacity: 1; border-color: #c9920a; transform: scale(1.04); }
+.rh-ent-thumb.active, .rh-ent-thumb:hover { opacity: 1; transform: scale(1.04); }
 .rh-ent-thumb > div {
   height: 48px; width: 76px;
   background-size: cover; background-position: center;
@@ -7124,14 +7116,12 @@ function updateDropdownWeather(city) {
     .catch(function() {});
 }
 
-/* ── CTA handler (placeholder) ──────────────────────────────── */
+/* ── CTA handler ───────────────────────────────────────────── */
 window.rhCTA = function(product, action) {
-  // Navigate to desktop for read actions; scroll-to-apply for purchase
   if (action === 'read') { window.setMode && setMode('desktop'); return; }
-  if (action === 'purchase' || action === 'reserve') {
-    // Navigate to purchase slide
-    rhNavTo(5);
-  }
+  if (action === 'info') { rhNavTo(1); return; }
+  if (action === 'purchase' || action === 'reserve') { rhNavTo(5); return; }
+  if (action === 'broker') { rhNavTo(2); return; }
 };
 
 /* ── Push-to-Start: double-click hero activates green glow + CTA ─ */
@@ -7256,6 +7246,60 @@ const CITY_HERO_CONFIG = {
       { url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ]
+  },
+  'new-york': {
+    day: [
+      { url: 'https://images.unsplash.com/photo-1582407947304-fd86f28f8c74?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ],
+    night: [
+      { url: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 45%' },
+      { url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ]
+  },
+  'miami': {
+    day: [
+      { url: 'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ],
+    night: [
+      { url: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 45%' },
+      { url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ]
+  },
+  'chicago': {
+    day: [
+      { url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
+    ],
+    night: [
+      { url: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 45%' },
+      { url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
     ]
@@ -7553,7 +7597,7 @@ function rhUpdateTopStories(variant) {
 function rhUpdateEntLabel(cityKey) {
   var label = document.getElementById('rhEntNewsLabel');
   if (!label) return;
-  var map = { 'los-angeles': 'LA News', 'las-vegas': 'Vegas News', 'san-francisco': 'SF News' };
+  var map = { 'los-angeles': 'LA News', 'las-vegas': 'Vegas News', 'san-francisco': 'SF News', 'new-york': 'NYC News', 'miami': 'Miami News', 'chicago': 'Chicago News' };
   label.textContent = map[cityKey] || 'City News';
 }
 
@@ -7565,7 +7609,6 @@ window.setMode = function(mode, remember) {
   if (mode === 'desktop') {
     document.body.style.overflow = '';
     document.body.style.overflowY = 'auto';
-    // Clear all remote UI states
     ['rhLoadOverlay', 'rhLeadModal', 'rhPushStart', 'rhThankYou'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) { el.classList.remove('active', 'fade-out'); if (id === 'rhThankYou') el.style.display = 'none'; }
@@ -7573,16 +7616,17 @@ window.setMode = function(mode, remember) {
     var verify = document.getElementById('rhVerifyStep');
     if (verify) verify.classList.remove('active');
     rhEntryState = 'idle';
+    if (typeof window._rhCtaCycleStop === 'function') window._rhCtaCycleStop();
   }
-  
+
   if (mode === 'remote') {
     rhSetVh();
     setTimeout(function() {
       if (rhEntryState === 'idle') rhStartRemoteEntry();
     }, 100);
-    // Update entertainment label by city
     var sel = document.getElementById('editionSelect');
     if (sel) rhUpdateEntLabel(sel.value);
+    if (typeof window._rhCtaCycleStart === 'function') window._rhCtaCycleStart();
   }
 };
 
@@ -7619,7 +7663,7 @@ window.rhToggleLivePanel = function() {
     if (cw && pw) pw.textContent = cw.textContent;
   }
 };
-window.rhSelectCityFromPanel = function(key, label, emoji) {
+window.rhSelectCityFromPanel = function(key, label) {
   var opts = document.querySelectorAll('.rh-city-opt');
   opts.forEach(function(o){ if(o.dataset.city===key) rhSelectCity(o); });
   document.getElementById('rhPrefCity').textContent = label;
@@ -7650,13 +7694,14 @@ document.addEventListener('click', function(e) {
       culture: 'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=1920&q=90&fit=crop'
     }
   };
+  var ctaCycleTimers = [];
   function runCycle(secId, keys, sKey) {
     var sec = document.getElementById(secId);
     if (!sec) return;
     var btns = sec.querySelectorAll('.rh-dsel-btn');
     if (!btns.length) return;
     var i = 0;
-    setInterval(function(){
+    var id = setInterval(function(){
       btns.forEach(function(b){ b.style.outline='none'; b.style.boxShadow='none'; });
       if (btns[i]) {
         btns[i].style.outline='1px solid rgba(0,230,118,.35)';
@@ -7668,11 +7713,21 @@ document.addEventListener('click', function(e) {
       }
       i = (i+1) % keys.length;
     }, 5000);
+    ctaCycleTimers.push(id);
   }
-  setTimeout(function(){
+  function startCycles() {
+    ctaCycleTimers.forEach(clearInterval);
+    ctaCycleTimers.length = 0;
     runCycle('rhs-mobility',['read','info','reserve','purchase','broker'],'mobility');
     runCycle('rhs-ent',['trending','news','weekend','culture'],'ent');
-  }, 3000);
+  }
+  function stopCycles() {
+    ctaCycleTimers.forEach(clearInterval);
+    ctaCycleTimers.length = 0;
+  }
+  window._rhCtaCycleStart = startCycles;
+  window._rhCtaCycleStop = stopCycles;
+  setTimeout(startCycles, 3000);
 })();
 
 /* ─── v19: Init desktop hero on load ────────────────────── */
