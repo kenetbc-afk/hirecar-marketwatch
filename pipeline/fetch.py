@@ -54,8 +54,22 @@ def score_article(title, summary):
 
 
 def strip_html(text):
-    """Remove HTML tags from text."""
-    return re.sub(r"<[^>]+>", "", text or "")
+    """Remove HTML tags from text and normalize Unicode."""
+    cleaned = re.sub(r"<[^>]+>", "", text or "")
+    # Normalize common Unicode characters to ASCII-safe equivalents
+    replacements = {
+        "\u2014": " -- ",  # em dash
+        "\u2013": " - ",   # en dash
+        "\u2018": "'",     # left single quote
+        "\u2019": "'",     # right single quote
+        "\u201c": '"',     # left double quote
+        "\u201d": '"',     # right double quote
+        "\u2026": "...",   # ellipsis
+        "\u00a0": " ",     # non-breaking space
+    }
+    for char, replacement in replacements.items():
+        cleaned = cleaned.replace(char, replacement)
+    return cleaned
 
 
 def fetch_and_filter(repo_root):

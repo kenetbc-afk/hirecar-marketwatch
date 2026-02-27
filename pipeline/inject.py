@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 HIRECAR MarketWatch — Main Pipeline Orchestrator
 Fetch -> Filter -> Rewrite -> Save to data/articles.json
@@ -6,7 +7,14 @@ Fetch -> Filter -> Rewrite -> Save to data/articles.json
 import json
 import os
 import sys
+import locale
 from datetime import datetime, timezone
+
+# Ensure UTF-8 output on all platforms
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
+if sys.stderr.encoding != "utf-8":
+    sys.stderr.reconfigure(encoding="utf-8")
 
 # Add pipeline dir to path so imports work when run from repo root
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
