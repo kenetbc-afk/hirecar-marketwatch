@@ -8,7 +8,7 @@
   <meta name="description" content="HIRECAR, LLC — Est. November 2024, Valencia CA. Founded by Ken Eckman. From collision to credit file to the operator's next vehicle.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ========================================
        CSS CUSTOM PROPERTIES
@@ -24,7 +24,7 @@
       --muted: #9aa3ad;
       --border: #dde1e7;
       --slate: #3d4a58;
-      --serif: 'Cormorant Garant', Georgia, serif;
+      --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --mono: 'DM Mono', 'Courier New', monospace;
       --max-w: 1200px;
@@ -1008,6 +1008,18 @@
         padding: var(--space-md);
       }
     }
+
+    /* Footer responsive grid */
+    @media (max-width: 768px) {
+      footer .container > div:first-child {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+    @media (max-width: 480px) {
+      footer .container > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1030,11 +1042,12 @@
         <li><a href="about/" class="active">About</a></li>
         <li><a href="services/">Services</a></li>
         <li><a href="membership/">Membership</a></li>
-        <li><a href="playbooks/">Standards</a></li>
+        <li><a href="playbooks/">Playbooks</a></li>
         <li><a href="contact/">Contact</a></li>
+        <li><a href="./">MarketWatch</a></li>
       </ul>
 
-      <a href="booking/" class="nav__cta">Start Recovery &rarr;</a>
+      <a href="./" class="nav__cta">Apply to Qualify &rarr;</a>
 
       <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span>
@@ -1331,33 +1344,47 @@
   <!-- ==========================================
        9. FOOTER
        ========================================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <img
-            src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png"
-            alt="HIRECAR"
-            class="footer__logo"
-          >
-          <div class="footer__brand-text">
-            <span class="footer__brand-name">HIRECAR</span>
-            <span class="footer__tagline">Intelligence for the auto operator economy</span>
-          </div>
+  <footer style="background: #111820; color: #9aa3ad; padding: 60px 0 30px;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px;">
+        <div>
+          <h4 style="color: #fff; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">HIRECAR</h4>
+          <p style="font-size: 13px; line-height: 1.6;">Auto Operator Intelligence<br>Los Angeles, CA</p>
+          <p style="font-size: 11px; margin-top: 12px; color: #6b7a8a;">HIRECAR, LLC dba HIRECREDIT /<br>CREDITWITHKEN, LLC</p>
         </div>
-
-        <ul class="footer__links">
-          <li><a href="about/">About</a></li>
-          <li><a href="services/">Services</a></li>
-          <li><a href="membership/">Membership</a></li>
-          <li><a href="playbooks/">Standards</a></li>
-          <li><a href="contact/">Contact</a></li>
-        </ul>
+        <div>
+          <h4 style="color: #fff; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Pages</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="./" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">MarketWatch</a></li>
+            <li style="margin-bottom: 8px;"><a href="about/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">About</a></li>
+            <li style="margin-bottom: 8px;"><a href="services/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">Services</a></li>
+            <li style="margin-bottom: 8px;"><a href="booking/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">Booking</a></li>
+            <li style="margin-bottom: 8px;"><a href="membership/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">Membership</a></li>
+            <li style="margin-bottom: 8px;"><a href="playbooks/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">Playbooks</a></li>
+            <li style="margin-bottom: 8px;"><a href="contact/" style="color: #9aa3ad; font-size: 13px; transition: color .2s;">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">The Network</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="https://www.hirecar.la" style="color: #9aa3ad; font-size: 13px;">HIRECAR.LA</a></li>
+            <li style="margin-bottom: 8px;"><a href="membership/" style="color: #9aa3ad; font-size: 13px;">First Class Membership</a></li>
+            <li style="margin-bottom: 8px;"><a href="services/" style="color: #9aa3ad; font-size: 13px;">Services Command Center</a></li>
+            <li style="margin-bottom: 8px;"><a href="booking/" style="color: #9aa3ad; font-size: 13px;">Book an Appointment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Legal</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="terms/" style="color: #9aa3ad; font-size: 13px;">Terms &amp; Conditions</a></li>
+            <li style="margin-bottom: 8px;"><a href="terms/" style="color: #9aa3ad; font-size: 13px;">Privacy Policy</a></li>
+          </ul>
+        </div>
       </div>
-
-      <p class="footer__legal">
-        &copy; 2026 HIRECAR, LLC. All rights reserved.
-      </p>
+      <div style="border-top: 1px solid #1d2535; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <p style="font-size: 11px;">&copy; 2026 HIRECAR, LLC. All Rights Reserved.</p>
+        <p style="font-size: 11px;">CONFIDENTIAL / INTERNAL USE ONLY</p>
+      </div>
     </div>
   </footer>
 
