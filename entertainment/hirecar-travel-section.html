@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIRECAR MarketWatch — Entertainment & Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #c9920a;
+  --gold-light: #e8a90f;
+  --gold-pale: #f5e8c2;
+  --dark: #0a0c0f;
+  --dark-2: #111418;
+  --dark-3: #1a1e27;
+  --mid: #2c3240;
+  --text: #1a1e27;
+  --text-muted: #6b7280;
+  --border: #e8e3d9;
+  --white: #ffffff;
+  --cream: #faf8f4;
+  --red: #e53935;
+  --green: #16a34a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SECTION HEADER ─────────────────────────────────── */
+.travel-section {
+  background: var(--cream);
+  border-top: 3px solid var(--gold);
+}
+
+.travel-hero {
+  background: var(--dark);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 60% 50%, rgba(201,146,10,.12) 0%, transparent 65%),
+    url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1600&q=90&fit=crop&crop=center');
+  background-size: cover;
+  background-position: center 40%;
+  position: relative;
+  padding: 64px 48px 48px;
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.travel-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10,12,15,.92) 0%,
+    rgba(10,12,15,.75) 40%,
+    rgba(10,12,15,.45) 70%,
+    rgba(10,12,15,.2) 100%
+  );
+}
+
+.travel-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.travel-hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.travel-hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.travel-hero-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+
+.travel-hero-title em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.travel-hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+
+/* Search bar */
+.travel-search-bar {
+  display: flex;
+  gap: 0;
+  max-width: 520px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.4);
+}
+
+.travel-search-bar input {
+  flex: 1;
+  padding: 14px 18px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,.96);
+  color: var(--text);
+}
+
+.travel-search-bar input::placeholder { color: var(--text-muted); }
+
+.travel-search-btn {
+  padding: 14px 22px;
+  background: var(--gold);
+  border: none;
+  color: var(--dark);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background .2s;
+  white-space: nowrap;
+}
+
+.travel-search-btn:hover { background: var(--gold-light); }
+
+/* Hero stat badges */
+.travel-hero-stats {
+  position: absolute;
+  top: 32px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+
+.stat-pill {
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 3px;
+  padding: 10px 16px;
+  text-align: center;
+}
+
+.stat-pill-num {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.stat-pill-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-top: 3px;
+}
+
+/* ─── CATEGORY FILTER PILLS ─────────────────────────── */
+.travel-cats {
+  background: var(--dark-2);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 0 48px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.travel-cats::-webkit-scrollbar { display: none; }
+
+.travel-cats-inner {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  min-width: max-content;
+}
+
+.travel-cat-btn {
+  padding: 16px 20px;
+  border: none;
+  background: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: -1px;
+}
+
+.travel-cat-btn:hover { color: rgba(255,255,255,.8); }
+
+.travel-cat-btn.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.travel-cat-btn .cat-count {
+  background: rgba(201,146,10,.18);
+  color: var(--gold);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 20px;
+  border: 1px solid rgba(201,146,10,.3);
+}
+
+.travel-cat-btn.active .cat-count {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* ─── CAROUSEL SECTION ──────────────────────────────── */
+.travel-inner {
+  padding: 0 0 8px;
+}
+
+.deal-carousel {
+  padding: 36px 0 0;
+  position: relative;
+}
+
+.deal-carousel + .deal-carousel {
+  border-top: 1px solid var(--border);
+}
+
+.carousel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 48px 18px;
+}
+
+.carousel-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-title .c-icon {
+  font-size: 18px;
+}
+
+.carousel-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-left: 8px;
+}
+
+.badge-hot { background: rgba(229,57,53,.1); color: var(--red); border: 1px solid rgba(229,57,53,.25); }
+.badge-new { background: rgba(22,163,74,.1); color: var(--green); border: 1px solid rgba(22,163,74,.25); }
+.badge-gold { background: rgba(201,146,10,.12); color: var(--gold); border: 1px solid rgba(201,146,10,.3); }
+
+.carousel-see-all {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color .15s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.carousel-see-all:hover { color: var(--gold-light); }
+
+.carousel-scroll-wrap {
+  position: relative;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  transition: all .2s;
+}
+
+.carousel-arrow:hover {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(201,146,10,.3);
+}
+
+.carousel-arrow.left { left: 12px; }
+.carousel-arrow.right { right: 12px; }
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0 48px 24px;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* ─── DEAL CARD ─────────────────────────────────────── */
+.deal-card {
+  flex: 0 0 270px;
+  scroll-snap-align: start;
+  background: var(--white);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+
+.deal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+}
+
+.deal-card-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  background: var(--dark-3) center/cover no-repeat;
+  position: relative;
+}
+
+.deal-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.deal-card-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.35) 100%);
+  pointer-events: none;
+}
+
+.deal-badge-corner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.badge-price-drop { background: var(--red); color: white; }
+.badge-exclusive { background: var(--gold); color: var(--dark); }
+.badge-new-deal { background: var(--green); color: white; }
+.badge-members { background: var(--dark); color: var(--gold); border: 1px solid var(--gold); }
+.badge-promo { background: #7c3aed; color: white; }
+
+.deal-discount-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background: var(--red);
+  color: white;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 8px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.deal-card-body {
+  padding: 14px 16px 16px;
+}
+
+.deal-property {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deal-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.deal-location {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.deal-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.deal-price-now {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.deal-price-was {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.deal-price-night {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: -4px;
+}
+
+.deal-stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+}
+
+.stars-gold { color: var(--gold); font-size: 12px; letter-spacing: .02em; }
+.stars-count { color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 10px; }
+
+.deal-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.deal-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 2px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.deal-tag.gold-tag {
+  background: rgba(201,146,10,.08);
+  border-color: rgba(201,146,10,.25);
+  color: var(--gold);
+}
+
+/* ─── HERO DEAL CARD (wide) ─────────────────────────── */
+.deal-card-hero {
+  flex: 0 0 400px;
+  background: var(--dark);
+  border: 1px solid rgba(255,255,255,.1);
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.deal-card-hero:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(201,146,10,.2);
+}
+
+.deal-card-hero-bg {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.deal-card-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(10,12,15,.9) 100%);
+}
+
+.deal-card-hero-body {
+  padding: 16px 18px 18px;
+}
+
+.deal-card-hero .deal-title { color: var(--white); font-size: 18px; }
+.deal-card-hero .deal-property { color: rgba(255,255,255,.4); }
+.deal-card-hero .deal-location { color: rgba(255,255,255,.5); }
+.deal-card-hero .deal-price-now { color: var(--gold-light); font-size: 24px; }
+.deal-card-hero .deal-price-was { color: rgba(255,255,255,.35); }
+.deal-card-hero .deal-price-night { color: rgba(255,255,255,.35); }
+.deal-card-hero .stars-count { color: rgba(255,255,255,.4); }
+.deal-card-hero .deal-tag { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.5); }
+.deal-card-hero .deal-tag.gold-tag { background: rgba(201,146,10,.15); border-color: rgba(201,146,10,.3); color: var(--gold-light); }
+
+/* ─── TOP DESTINATIONS STRIP ────────────────────────── */
+.top-dests {
+  background: var(--dark-3);
+  padding: 28px 48px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.top-dests-head {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 16px;
+}
+
+.top-dests-grid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.top-dests-grid::-webkit-scrollbar { display: none; }
+
+.dest-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.dest-pill:hover { transform: translateY(-2px); }
+
+.dest-img {
+  width: 80px;
+  height: 60px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(255,255,255,.08);
+  transition: border-color .2s;
+}
+
+.dest-pill:hover .dest-img { border-color: var(--gold); }
+
+.dest-name {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,.7);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ─── HIRECAR PROMO BANNER ──────────────────────────── */
+.hirecar-promo-strip {
+  display: flex;
+  gap: 16px;
+  padding: 0 48px;
+  margin-bottom: 0;
+}
+
+.promo-tile {
+  flex: 1;
+  min-height: 140px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  transition: transform .2s;
+}
+
+.promo-tile:hover { transform: scale(1.01); }
+
+.promo-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(10,12,15,.85) 0%, rgba(10,12,15,.3) 100%);
+}
+
+.promo-tile-content { position: relative; z-index: 2; }
+
+.promo-tile-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.promo-tile-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.promo-tile-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 10px;
+}
+
+.promo-tile-btn {
+  display: inline-block;
+  padding: 7px 14px;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background .15s;
+}
+
+.promo-tile-btn:hover { background: var(--gold-light); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .travel-hero { padding: 40px 20px 36px; min-height: 280px; }
+  .travel-hero-stats { display: none; }
+  .travel-cats { padding: 0 16px; }
+  .carousel-head { padding: 0 20px 14px; }
+  .carousel-track { padding: 0 20px 20px; }
+  .deal-card { flex: 0 0 220px; }
+  .deal-card-hero { flex: 0 0 280px; }
+  .top-dests { padding: 20px; }
+  .hirecar-promo-strip { flex-direction: column; padding: 0 20px; }
+  .travel-search-bar { max-width: 100%; }
+  .carousel-arrow { display: none; }
+}
+
+/* ─── SECTION DIVIDER LABEL ─────────────────────────── */
+.section-rule-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 28px 48px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-rule-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── STICKY SUB-NAV ────────────────────────────────── */
+.travel-subnav {
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 0 48px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.travel-subnav::-webkit-scrollbar { display: none; }
+.travel-subnav-inner { display: flex; min-width: max-content; }
+
+.subnav-item {
+  padding: 14px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all .15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.subnav-item:hover { color: var(--text); }
+.subnav-item.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ─── BUSINESS INFO PANEL ───────────────────────────── */
+.biz-panel {
+  background: var(--dark-2);
+  padding: 40px 48px;
+  margin-top: 0;
+  border-top: 3px solid var(--gold);
+}
+
+.biz-panel-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.biz-col-head {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(201,146,10,.25);
+}
+
+.biz-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.biz-text {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.7;
+}
+
+.biz-item {
+  margin-bottom: 14px;
+  padding-left: 14px;
+  border-left: 2px solid rgba(201,146,10,.3);
+}
+
+.biz-item-head {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 3px;
+}
+
+.biz-item-text {
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .biz-panel { padding: 28px 20px; }
+  .biz-panel-inner { grid-template-columns: 1fr; gap: 28px; }
+  .section-rule-label { padding: 20px 20px 0; }
+  .travel-subnav { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     HIRECAR MARKETWATCH — ENTERTAINMENT & TRAVEL SECTION
+     ════════════════════════════════════════════════════════ -->
+
+<div class="travel-section" id="sec-ent">
+
+  <!-- HERO BANNER -->
+  <div class="travel-hero">
+    <div class="travel-hero-stats">
+      <div class="stat-pill">
+        <div class="stat-pill-num">340+</div>
+        <div class="stat-pill-label">Active Deals</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-num">Up to 65%</div>
+        <div class="stat-pill-label">Price Drops</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-num">First Class</div>
+        <div class="stat-pill-label">Member Access</div>
+      </div>
+    </div>
+
+    <div class="travel-hero-content">
+      <div class="travel-hero-eyebrow">Entertainment · Travel · City Life</div>
+      <h2 class="travel-hero-title">
+        Drive Away.<br>
+        <em>Live the Route.</em>
+      </h2>
+      <p class="travel-hero-sub">
+        Curated getaways, city breaks, and luxury road experiences — 
+        paired with the vehicle, the driver, and the membership that gets you there in First Class.
+      </p>
+      <div class="travel-search-bar">
+        <input type="text" placeholder="Search destinations, experiences, casino deals...">
+        <button class="travel-search-btn">Search Deals →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY FILTER PILLS -->
+  <div class="travel-cats">
+    <div class="travel-cats-inner">
+      <button class="travel-cat-btn active">All Deals <span class="cat-count">340</span></button>
+      <button class="travel-cat-btn">Price Drops <span class="cat-count">48</span></button>
+      <button class="travel-cat-btn">Local Getaways <span class="cat-count">62</span></button>
+      <button class="travel-cat-btn">City Breaks <span class="cat-count">54</span></button>
+      <button class="travel-cat-btn">All-Inclusive <span class="cat-count">38</span></button>
+      <button class="travel-cat-btn">Casino Deals <span class="cat-count">29</span></button>
+      <button class="travel-cat-btn">Mountain Getaways <span class="cat-count">22</span></button>
+      <button class="travel-cat-btn">Road Trips <span class="cat-count">41</span></button>
+      <button class="travel-cat-btn">Gold Getaways <span class="cat-count">18</span></button>
+      <button class="travel-cat-btn">Fishing Getaways <span class="cat-count">15</span></button>
+      <button class="travel-cat-btn">Air + Hotel <span class="cat-count">33</span></button>
+    </div>
+  </div>
+
+  <!-- STICKY SUB-NAV -->
+  <div class="travel-subnav">
+    <div class="travel-subnav-inner">
+      <a class="subnav-item active" href="#price-drops">🔥 Price Drops</a>
+      <a class="subnav-item" href="#local-getaways">🗺️ Local Getaways</a>
+      <a class="subnav-item" href="#city-breaks">🌆 City Breaks</a>
+      <a class="subnav-item" href="#all-inclusive">🌴 All-Inclusive</a>
+      <a class="subnav-item" href="#casino-deals">🎰 Casino Deals</a>
+      <a class="subnav-item" href="#mountain">⛰️ Mountain Getaways</a>
+      <a class="subnav-item" href="#road-trips">🚗 Inclusive Road Trips</a>
+      <a class="subnav-item" href="#gold-getaways">⛳ Gold Getaways</a>
+      <a class="subnav-item" href="#fishing">🎣 Fishing Getaways</a>
+    </div>
+  </div>
+
+  <!-- TOP DESTINATIONS -->
+  <div class="top-dests">
+    <div class="top-dests-head">Top Destinations — Drivable from Los Angeles</div>
+    <div class="top-dests-grid">
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1581963851516-57c0e9a9f0e1?w=200&q=80')"></div>
+        <div class="dest-name">Las Vegas</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=80')"></div>
+        <div class="dest-name">Palm Springs</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=200&q=80')"></div>
+        <div class="dest-name">Mammoth</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1565728744382-61accd4aa148?w=200&q=80')"></div>
+        <div class="dest-name">Santa Barbara</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1532751203593-7b8f7b1b5a90?w=200&q=80')"></div>
+        <div class="dest-name">Scottsdale</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1463852247062-1bbca38f7805?w=200&q=80')"></div>
+        <div class="dest-name">San Diego</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1558441440-d4111d18d48f?w=200&q=80')"></div>
+        <div class="dest-name">Sedona</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=200&q=80')"></div>
+        <div class="dest-name">Big Bear</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1533619043865-1c2e2f32ff2f?w=200&q=80')"></div>
+        <div class="dest-name">Napa Valley</div>
+      </div>
+      <div class="dest-pill">
+        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=200&q=80')"></div>
+        <div class="dest-name">Cabo</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="travel-inner">
+
+    <!-- ═══ PROMO BANNERS ═══ -->
+    <div style="padding: 28px 48px 20px;">
+      <div class="hirecar-promo-strip">
+        <div class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=80')">
+          <div class="promo-tile-content">
+            <div class="promo-tile-label">Inclusive Road Trips</div>
+            <div class="promo-tile-title">Drivable Destinations</div>
+            <div class="promo-tile-sub">Find tons to explore close to home</div>
+            <a href="#road-trips" class="promo-tile-btn">See Road Trip Deals</a>
+          </div>
+        </div>
+        <div class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80')">
+          <div class="promo-tile-content">
+            <div class="promo-tile-label">First Class Members</div>
+            <div class="promo-tile-title">Gold Getaways</div>
+            <div class="promo-tile-sub">Members unlock exclusive golf resort packages</div>
+            <a href="#gold-getaways" class="promo-tile-btn">See Golf Deals</a>
+          </div>
+        </div>
+        <div class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800&q=80')">
+          <div class="promo-tile-content">
+            <div class="promo-tile-label">All-Inclusive</div>
+            <div class="promo-tile-title">Vacation Deals</div>
+            <div class="promo-tile-sub">Mexico, Caribbean & beyond — all in one price</div>
+            <a href="#all-inclusive" class="promo-tile-btn">Browse Packages</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: PRICE DROPS ═══ -->
+    <div class="deal-carousel" id="price-drops">
+      <div class="carousel-head">
+        <div class="carousel-title">
+          <span class="c-icon">🔥</span>
+          Price Drops
+          <span class="carousel-badge badge-hot">Limited Time</span>
+        </div>
+        <a href="#" class="carousel-see-all">See all deals →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('pd-track', -1)">←</button>
+        <div class="carousel-track" id="pd-track">
+
+          <!-- Hero card -->
+          <div class="deal-card-hero">
+            <div class="deal-card-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=85')">
+              <div class="deal-badge-corner badge-price-drop">Price Drop</div>
+              <div class="deal-discount-tag">−63%</div>
+            </div>
+            <div class="deal-card-hero-body">
+              <div class="deal-property">Wynn Las Vegas</div>
+              <div class="deal-title">5-Star Las Vegas Strip Resort — Weekend Escape with HIRECAR Transfer</div>
+              <div class="deal-location">📍 Las Vegas, NV · 4.3 hrs drive</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$189</div>
+                <div class="deal-price-was">$514</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars">
+                <span class="stars-gold">★★★★★</span>
+                <span class="stars-count">(4,819)</span>
+              </div>
+              <div class="deal-tag-row">
+                <span class="deal-tag gold-tag">First Class Transfer</span>
+                <span class="deal-tag">Kids Stay Free</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-price-drop">Price Drop</div>
+              <div class="deal-discount-tag">−45%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">La Quinta Resort — Palm Springs</div>
+              <div class="deal-title">Luxury Desert Resort with Golf & Spa Access</div>
+              <div class="deal-location">📍 Palm Springs, CA · 1.8 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$214</div>
+                <div class="deal-price-was">$389</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(2,241)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Gold Getaway</span><span class="deal-tag">Pool Access</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-exclusive">Member Deal</div>
+              <div class="deal-discount-tag">−38%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Loews Santa Monica Beach</div>
+              <div class="deal-title">Oceanfront Hotel — Steps from the Pier</div>
+              <div class="deal-location">📍 Santa Monica, CA · Local</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$299</div>
+                <div class="deal-price-was">$482</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(1,088)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">City Break</span><span class="deal-tag">Breakfast Incl.</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−52%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Mammoth Mountain Inn</div>
+              <div class="deal-title">Ski-In/Ski-Out Mountain Getaway — Winter Package</div>
+              <div class="deal-location">📍 Mammoth, CA · 5.5 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$178</div>
+                <div class="deal-price-was">$371</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(892)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Mountain Getaway</span><span class="deal-tag">Lift Access</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-new-deal">New</div>
+              <div class="deal-discount-tag">−29%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Hard Rock Hotel San Diego</div>
+              <div class="deal-title">4-Star Downtown San Diego — Gaslamp Quarter</div>
+              <div class="deal-location">📍 San Diego, CA · 2.1 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$163</div>
+                <div class="deal-price-was">$230</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(3,412)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">City Break</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−60%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Hyatt Regency Scottsdale</div>
+              <div class="deal-title">5-Star Desert Resort at Gainey Ranch with Water Slides</div>
+              <div class="deal-location">📍 Scottsdale, AZ · 5.8 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$198</div>
+                <div class="deal-price-was">$495</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(2,776)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Golf Package</span><span class="deal-tag">Spa Incl.</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('pd-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: LOCAL GETAWAYS ═══ -->
+    <div class="deal-carousel" id="local-getaways">
+      <div class="carousel-head">
+        <div class="carousel-title">
+          <span class="c-icon">🗺️</span>
+          Local Getaways
+        </div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('lg-track', -1)">←</button>
+        <div class="carousel-track" id="lg-track">
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1549294413-26f195200c16?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−28%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Hotel Santa Barbara</div>
+              <div class="deal-title">Boutique Downtown Hotel — Heart of the American Riviera</div>
+              <div class="deal-location">📍 Santa Barbara, CA · 1.5 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$229</div>
+                <div class="deal-price-was">$318</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(687)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-exclusive">Member</div>
+              <div class="deal-discount-tag">−35%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Laguna Beach House</div>
+              <div class="deal-title">Oceanfront Boutique Hotel — Laguna Beach</div>
+              <div class="deal-location">📍 Laguna Beach, CA · 55 min</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$319</div>
+                <div class="deal-price-was">$491</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(412)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1444201983204-c43cbd584d93?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−21%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Parker Palm Springs</div>
+              <div class="deal-title">Iconic Desert Resort — Pool, Tennis & Spa</div>
+              <div class="deal-location">📍 Palm Springs, CA · 1.8 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$299</div>
+                <div class="deal-price-was">$379</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(1,204)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−40%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">L'Auberge del Mar</div>
+              <div class="deal-title">Clifftop Resort — Del Mar, CA with Private Beach Club</div>
+              <div class="deal-location">📍 Del Mar, CA · 1.6 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$349</div>
+                <div class="deal-price-was">$582</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(938)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">First Class Transfer</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1543332164-6e82f355badc?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−31%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Inn of the Spanish Garden</div>
+              <div class="deal-title">Adults-Only Courtyard Hotel in Old Santa Barbara</div>
+              <div class="deal-location">📍 Santa Barbara, CA · 1.5 hrs</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$249</div>
+                <div class="deal-price-was">$361</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(519)</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('lg-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: ALL-INCLUSIVE VACATION DEALS ═══ -->
+    <div class="deal-carousel" id="all-inclusive">
+      <div class="carousel-head">
+        <div class="carousel-title">
+          <span class="c-icon">🌴</span>
+          All-Inclusive Vacation Deals
+          <span class="carousel-badge badge-gold">Members Save Extra</span>
+        </div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('ai-track', -1)">←</button>
+        <div class="carousel-track" id="ai-track">
+
+          <div class="deal-card-hero">
+            <div class="deal-card-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=85')">
+              <div class="deal-badge-corner badge-exclusive">All-Inclusive</div>
+              <div class="deal-discount-tag">−50%</div>
+            </div>
+            <div class="deal-card-hero-body">
+              <div class="deal-property">Excellence Playa Mujeres — Adults Only</div>
+              <div class="deal-title">5-Star Adults-Only All-Inclusive Cancún — 4 Nights with Air</div>
+              <div class="deal-location">📍 Cancún, MX · Direct flight</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$1,299</div>
+                <div class="deal-price-was">$2,599</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(3,892)</span></div>
+              <div class="deal-tag-row">
+                <span class="deal-tag gold-tag">Air Included</span>
+                <span class="deal-tag">All Meals + Drinks</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1545579133-99bb5ad189be?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-price-drop">Deal</div>
+              <div class="deal-discount-tag">−44%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Dreams Bahia Mita — Puerto Vallarta</div>
+              <div class="deal-title">5-Star All-Inclusive — Jungle Meets Ocean</div>
+              <div class="deal-location">📍 Puerto Vallarta, MX</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$289</div>
+                <div class="deal-price-was">$516</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(2,118)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">All-Inclusive</span><span class="deal-tag">Kids Allowed</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−66%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Lifestyle Tropical Beach Resort</div>
+              <div class="deal-title">All-Inclusive Beachfront Escape — Puerto Plata</div>
+              <div class="deal-location">📍 Dominican Republic</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$196</div>
+                <div class="deal-price-was">$496</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(2,155)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-members">Members Only</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Villa del Palmar — Cabo San Lucas</div>
+              <div class="deal-title">5-Star All-Inclusive Beachfront Escape — Cabo</div>
+              <div class="deal-location">📍 Cabo San Lucas, MX</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">Sign In</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(367)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">First Class Members</span><span class="deal-tag">Kids Stay Free</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('ai-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: CITY BREAKS ═══ -->
+    <div class="deal-carousel" id="city-breaks">
+      <div class="carousel-head">
+        <div class="carousel-title"><span class="c-icon">🌆</span> City Breaks</div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('cb-track', -1)">←</button>
+        <div class="carousel-track" id="cb-track">
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−22%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">The Cosmopolitan — Las Vegas</div>
+              <div class="deal-title">4-Star Boutique Hotel on the Strip — City Weekend</div>
+              <div class="deal-location">📍 Las Vegas, NV · 4.3 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$189</div><div class="deal-price-was">$242</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(6,214)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1525498128493-380d1990a112?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-new-deal">New Deal</div>
+              <div class="deal-discount-tag">−33%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Pendry San Diego</div>
+              <div class="deal-title">Luxury Boutique Hotel in the Gaslamp Quarter</div>
+              <div class="deal-location">📍 San Diego, CA · 2.1 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$245</div><div class="deal-price-was">$366</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(1,048)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−19%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Four Seasons — San Francisco</div>
+              <div class="deal-title">5-Star City Hotel — Union Square Weekend</div>
+              <div class="deal-location">📍 San Francisco, CA · 6 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$489</div><div class="deal-price-was">$604</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(2,891)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Road Trip Package</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−27%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Hotel Valley Ho — Scottsdale</div>
+              <div class="deal-title">Midcentury Modern Icon — Downtown Scottsdale</div>
+              <div class="deal-location">📍 Scottsdale, AZ · 5.8 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$219</div><div class="deal-price-was">$300</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(1,672)</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('cb-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: CASINO DEALS ═══ -->
+    <div class="deal-carousel" id="casino-deals">
+      <div class="carousel-head">
+        <div class="carousel-title"><span class="c-icon">🎰</span> Casino Deals</div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('cas-track', -1)">←</button>
+        <div class="carousel-track" id="cas-track">
+
+          <div class="deal-card-hero">
+            <div class="deal-card-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?w=800&q=85')">
+              <div class="deal-badge-corner badge-exclusive">Casino Package</div>
+              <div class="deal-discount-tag">−41%</div>
+            </div>
+            <div class="deal-card-hero-body">
+              <div class="deal-property">MGM Grand Las Vegas</div>
+              <div class="deal-title">Vegas Weekend with $200 Casino Play Credit + HIRECAR Transfer</div>
+              <div class="deal-location">📍 Las Vegas, NV · 4.3 hrs drive</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$149</div>
+                <div class="deal-price-was">$253</div>
+                <div class="deal-price-night">/night</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(9,441)</span></div>
+              <div class="deal-tag-row">
+                <span class="deal-tag gold-tag">First Class Transfer</span>
+                <span class="deal-tag">Casino Credits</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1622371122368-39a0d1e6f5bc?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−30%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Agua Caliente Resort — Cathedral City</div>
+              <div class="deal-title">4-Star Casino Resort — Palm Springs Area Weekend</div>
+              <div class="deal-location">📍 Cathedral City, CA · 1.9 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$174</div><div class="deal-price-was">$249</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(2,340)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Casino Credits</span><span class="deal-tag">Spa Access</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−35%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Pechanga Resort & Casino</div>
+              <div class="deal-title">Largest Casino in California — Temecula Valley</div>
+              <div class="deal-location">📍 Temecula, CA · 1.3 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$139</div><div class="deal-price-was">$214</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(4,812)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-members">Members</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Bellagio — Las Vegas</div>
+              <div class="deal-title">Iconic Bellagio Hotel — Members-Only Exclusive Rate</div>
+              <div class="deal-location">📍 Las Vegas Strip, NV</div>
+              <div class="deal-price-row"><div class="deal-price-now">Sign In</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(12,441)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">First Class Only</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('cas-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: INCLUSIVE ROAD TRIPS ═══ -->
+    <div class="deal-carousel" id="road-trips">
+      <div class="carousel-head">
+        <div class="carousel-title">
+          <span class="c-icon">🚗</span>
+          Inclusive Road Trips
+          <span class="carousel-badge badge-new">HIRECAR Exclusive</span>
+        </div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('rt-track', -1)">←</button>
+        <div class="carousel-track" id="rt-track">
+
+          <div class="deal-card-hero">
+            <div class="deal-card-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=85')">
+              <div class="deal-badge-corner badge-exclusive">Road Trip Package</div>
+            </div>
+            <div class="deal-card-hero-body">
+              <div class="deal-property">PCH Coastal Package</div>
+              <div class="deal-title">LA to Big Sur: 3-Day PCH Road Trip — Vehicle + Hotels Included</div>
+              <div class="deal-location">📍 Los Angeles → Big Sur, CA</div>
+              <div class="deal-price-row">
+                <div class="deal-price-now">$849</div>
+                <div class="deal-price-was">$1,340</div>
+                <div class="deal-price-night">/person</div>
+              </div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(88)</span></div>
+              <div class="deal-tag-row">
+                <span class="deal-tag gold-tag">HIRECAR Vehicle Incl.</span>
+                <span class="deal-tag">2 Nights Hotel</span>
+                <span class="deal-tag">Route Guide</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-exclusive">HIRECAR Excl.</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Desert Circuit</div>
+              <div class="deal-title">LA → Palm Springs → Joshua Tree → Vegas Loop</div>
+              <div class="deal-location">📍 5-Day Circuit</div>
+              <div class="deal-price-row"><div class="deal-price-now">$1,249</div><div class="deal-price-night">/person</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(62)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Vehicle + Hotels</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=600&q=80')"></div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Wine Country Run</div>
+              <div class="deal-title">Santa Barbara Wine Country — 2-Night Inclusive</div>
+              <div class="deal-location">📍 Santa Ynez Valley, CA</div>
+              <div class="deal-price-row"><div class="deal-price-now">$699</div><div class="deal-price-night">/couple</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(44)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Vehicle + Hotel + Tastings</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-new-deal">New</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">National Parks Circuit</div>
+              <div class="deal-title">Zion, Bryce & Grand Canyon — 6-Day Epic Drive</div>
+              <div class="deal-location">📍 Utah / Arizona Loop</div>
+              <div class="deal-price-row"><div class="deal-price-now">$1,699</div><div class="deal-price-night">/person</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(31)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">HIRECAR SUV Incl.</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('rt-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: GOLD GETAWAYS ═══ -->
+    <div class="deal-carousel" id="gold-getaways">
+      <div class="carousel-head">
+        <div class="carousel-title">
+          <span class="c-icon">⛳</span>
+          Gold Getaways
+          <span class="carousel-badge badge-gold">Golf + Luxury</span>
+        </div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('gg-track', -1)">←</button>
+        <div class="carousel-track" id="gg-track">
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−38%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Torrey Pines Golf Resort</div>
+              <div class="deal-title">Championship Golf + Ocean View Resort Package</div>
+              <div class="deal-location">📍 La Jolla, CA · 1.6 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$449</div><div class="deal-price-was">$724</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(1,882)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">2 Rounds Incl.</span><span class="deal-tag">Breakfast</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−29%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">The Boulders Resort — Carefree, AZ</div>
+              <div class="deal-title">Golf + Spa Desert Retreat — Two 18-Hole Courses</div>
+              <div class="deal-location">📍 Carefree, AZ · 5.5 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$379</div><div class="deal-price-was">$534</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(2,214)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−45%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">La Quinta Resort & Club</div>
+              <div class="deal-title">Golf Capital of California — 6 Courses, Spa & Pools</div>
+              <div class="deal-location">📍 La Quinta, CA · 1.9 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$258</div><div class="deal-price-was">$469</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(4,112)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Gold Getaway</span><span class="deal-tag">Members Save</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1592019066823-cf0c8c5b1e85?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−33%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Pelican Hill — Newport Coast</div>
+              <div class="deal-title">Forbes 5-Star Golf & Spa — Coastal California</div>
+              <div class="deal-location">📍 Newport Coast, CA · 50 min</div>
+              <div class="deal-price-row"><div class="deal-price-now">$795</div><div class="deal-price-was">$1,188</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(981)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">First Class Transfer</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('gg-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: MOUNTAIN GETAWAYS ═══ -->
+    <div class="deal-carousel" id="mountain">
+      <div class="carousel-head">
+        <div class="carousel-title"><span class="c-icon">⛰️</span> Mountain Getaways</div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('mg-track', -1)">←</button>
+        <div class="carousel-track" id="mg-track">
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−44%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Mammoth Mountain Inn</div>
+              <div class="deal-title">Winter Ski Weekend — Slope-Side with Lift Tickets</div>
+              <div class="deal-location">📍 Mammoth Lakes, CA · 5.5 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$219</div><div class="deal-price-was">$392</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(1,441)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Ski-In/Ski-Out</span><span class="deal-tag">Lift Tickets</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−27%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Big Bear Lake Resort</div>
+              <div class="deal-title">Lakeside Cabin Resort — Year-Round Mountain Escape</div>
+              <div class="deal-location">📍 Big Bear Lake, CA · 2.5 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$189</div><div class="deal-price-was">$259</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(892)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−36%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Lake Tahoe Ski Resort</div>
+              <div class="deal-title">Heavenly Village Hotel — Tahoe South Shore</div>
+              <div class="deal-location">📍 South Lake Tahoe, CA · 7 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$249</div><div class="deal-price-was">$389</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(2,219)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag gold-tag">Road Trip Package</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('mg-track', 1)">→</button>
+      </div>
+    </div>
+
+    <!-- ═══ CAROUSEL: FISHING GETAWAYS ═══ -->
+    <div class="deal-carousel" id="fishing">
+      <div class="carousel-head">
+        <div class="carousel-title"><span class="c-icon">🎣</span> Fishing Getaways</div>
+        <a href="#" class="carousel-see-all">See all →</a>
+      </div>
+      <div class="carousel-scroll-wrap">
+        <button class="carousel-arrow left" onclick="scrollCarousel('fg-track', -1)">←</button>
+        <div class="carousel-track" id="fg-track">
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80')"></div>
+              <div class="deal-badge-corner badge-new-deal">New</div>
+              <div class="deal-discount-tag">−25%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Cabo Sport Fishing Charter</div>
+              <div class="deal-title">3-Day Deep Sea Fishing + Resort Package — Cabo</div>
+              <div class="deal-location">📍 Cabo San Lucas, MX</div>
+              <div class="deal-price-row"><div class="deal-price-now">$899</div><div class="deal-price-was">$1,199</div><div class="deal-price-night">/person</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(248)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Charter + Hotel</span><span class="deal-tag">All Tackle Incl.</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1463852247062-1bbca38f7805?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−18%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Delta King Lodge</div>
+              <div class="deal-title">Sacramento Delta Fishing Lodge — Striped Bass Run</div>
+              <div class="deal-location">📍 Sacramento Delta, CA · 6 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$329</div><div class="deal-price-was">$401</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(182)</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−32%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">Bishop Creek Lodge</div>
+              <div class="deal-title">Fly Fishing + Mountain Lodge — Eastern Sierra</div>
+              <div class="deal-location">📍 Bishop, CA · 4.5 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$189</div><div class="deal-price-was">$278</div><div class="deal-price-night">/night</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★½</span><span class="stars-count">(341)</span></div>
+              <div class="deal-tag-row"><span class="deal-tag">Guide Incl.</span></div>
+            </div>
+          </div>
+
+          <div class="deal-card">
+            <div class="deal-card-img-wrap">
+              <div class="deal-card-img" style="background-image:url('https://images.unsplash.com/photo-1532751203593-7b8f7b1b5a90?w=600&q=80')"></div>
+              <div class="deal-discount-tag">−21%</div>
+            </div>
+            <div class="deal-card-body">
+              <div class="deal-property">San Diego Sport Fishing</div>
+              <div class="deal-title">San Diego Half-Day Tuna Charter + Hotel</div>
+              <div class="deal-location">📍 San Diego, CA · 2.1 hrs</div>
+              <div class="deal-price-row"><div class="deal-price-now">$549</div><div class="deal-price-was">$695</div><div class="deal-price-night">/person</div></div>
+              <div class="deal-stars"><span class="stars-gold">★★★★</span><span class="stars-count">(614)</span></div>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('fg-track', 1)">→</button>
+      </div>
+    </div>
+
+  </div><!-- /travel-inner -->
+
+  <!-- ═══ BUSINESS INFO PANEL — How HIRECAR Gets Deals ═══ -->
+  <div class="biz-panel">
+    <div class="biz-panel-inner">
+      <div>
+        <div class="biz-col-head">How Groupon Gets Deals</div>
+        <div class="biz-title">The Groupon Model</div>
+        <div class="biz-text">Groupon acts as a <strong style="color:rgba(255,255,255,.85)">merchant of record</strong> — they negotiate directly with hotels, resorts, and experience operators to offer inventory at discounted rates, typically 30–70% off, in exchange for volume and upfront payment. They use three primary deal acquisition channels:</div>
+        <br>
+        <div class="biz-item">
+          <div class="biz-item-head">1. Direct Merchant Agreements</div>
+          <div class="biz-item-text">Hotels and resorts fill unsold inventory (especially midweek / off-season) through Groupon rather than let rooms go empty. Groupon takes a 15–25% commission. The hotel gets cash flow; Groupon gets the margin.</div>
+        </div>
+        <div class="biz-item">
+          <div class="biz-item-head">2. OTA API Feeds (Booking.com, Expedia)</div>
+          <div class="biz-item-text">Much of Groupon's travel inventory is pulled from OTA feeds. They present the same inventory with FOMO framing ("was $389, now $214") and earn referral/affiliate commissions.</div>
+        </div>
+        <div class="biz-item">
+          <div class="biz-item-head">3. Package Tour Operators</div>
+          <div class="biz-item-text">Companies like "Great Value Vacations" and "Weekender Breaks" package air + hotel and wholesale to Groupon. Groupon marks them up and adds urgency.</div>
+        </div>
+      </div>
+      <div>
+        <div class="biz-col-head">How HIRECAR Can Replicate This</div>
+        <div class="biz-title">The HIRECAR Deal Engine</div>
+        <div class="biz-text">HIRECAR has a structural advantage Groupon doesn't — a captive audience of premium vehicle users who are already traveling. Here's the playbook:</div>
+        <br>
+        <div class="biz-item">
+          <div class="biz-item-head">Phase 1: OTA Affiliate Partnerships</div>
+          <div class="biz-item-text">Sign up for Hotels.com, Expedia, and Booking.com affiliate programs. Pull live deals into this section via their APIs. Zero inventory risk — earn 4–8% commission on every booking. Low code lift to start.</div>
+        </div>
+        <div class="biz-item">
+          <div class="biz-item-head">Phase 2: HIRECAR Bundle Packages</div>
+          <div class="biz-item-text">Negotiate directly with 3–5 resorts near LA (Palm Springs, Big Bear, Temecula) to offer exclusive "HIRECAR Package" rates: Hotel + First Class Vehicle = one bundle price. HIRECAR controls pricing and earns on both sides.</div>
+        </div>
+        <div class="biz-item">
+          <div class="biz-item-head">Phase 3: First Class Member Exclusives</div>
+          <div class="biz-item-text">Gate the best deals (casino packages, golf resorts, all-inclusive) behind the $1,380/yr membership. This drives membership conversion while the deals section pays for itself via affiliate + bundle revenue.</div>
+        </div>
+        <div class="biz-item">
+          <div class="biz-item-head">Phase 4: Co-op Marketing with Casinos</div>
+          <div class="biz-item-text">MGM, Pechanga, Agua Caliente, and Primm Valley all have affiliate / referral programs. Negotiate group transport contracts with their VIP departments — casinos often comp room nights for operators who drive volume.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /travel-section -->
+
+<script>
+function scrollCarousel(trackId, dir) {
+  const track = document.getElementById(trackId);
+  if (track) {
+    track.scrollBy({ left: dir * 300, behavior: 'smooth' });
+  }
+}
+
+// Category filter buttons
+document.querySelectorAll('.travel-cat-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.travel-cat-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Sub-nav active state
+document.querySelectorAll('.subnav-item').forEach(item => {
+  item.addEventListener('click', function() {
+    document.querySelectorAll('.subnav-item').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Scroll spy for sub-nav
+const sections = document.querySelectorAll('[id]');
+const subNavItems = document.querySelectorAll('.subnav-item[href]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = '#' + entry.target.id;
+      subNavItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('#price-drops, #local-getaways, #city-breaks, #all-inclusive, #casino-deals, #mountain, #road-trips, #gold-getaways, #fishing').forEach(sec => {
+  if (sec) observer.observe(sec);
+});
+</script>
+
+</body>
+</html>
