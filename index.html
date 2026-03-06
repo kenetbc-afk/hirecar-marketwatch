@@ -1040,6 +1040,16 @@ body.dark-mode .hero-tab.active {
 body.dark-mode .hero-tab-link {
   color: rgba(201,146,10,.85);
 }
+/* New elements for shifting tabs — desktop defaults */
+.hero-tab-chevron { display: none; }
+.hero-tab-nub { display: none; }
+.hero-panel-title { display: none; }
+.hero-panel-inner { padding: 0; }
+/* Desktop: hide extra tabs (only show first 3: pifr, start, faq) */
+.hero-tab[data-tab="hirecar"],
+.hero-tab[data-tab="credit"] { display: none; }
+.hero-tab-panel[data-panel="hirecar"],
+.hero-tab-panel[data-panel="credit"] { display: none; }
 
 .credit-stat-row {
   display: grid;
@@ -3799,22 +3809,23 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.mobile-7  { object-position: 10% 50% !important; }      /* mercedes/rolls — far left to show car */
   .carousel-slide.mobile-8  { object-position: 35% 25% !important; }      /* 4.jpg city overlook — show person at top-left */
 
-  /* Gradient overlay — cinematic vignette: deep top, breathable center, heavy bottom for CTAs */
+  /* Gradient overlay — black header bleed + heavy bottom for text readability */
   .credit-icon::before {
     display: block !important;
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.62) 0%,
-      rgba(0,0,0,.28) 12%,
-      rgba(0,0,0,.06) 26%,
-      rgba(0,0,0,.02) 40%,
-      rgba(0,0,0,.01) 52%,
-      rgba(0,0,0,.06) 60%,
-      rgba(6,12,26,.32) 72%,
-      rgba(14,20,32,.65) 84%,
-      rgba(17,24,32,.88) 100%) !important;
+      rgba(0,0,0,.92) 0%,
+      rgba(0,0,0,.78) 8%,
+      rgba(0,0,0,.45) 18%,
+      rgba(0,0,0,.15) 30%,
+      rgba(0,0,0,.08) 42%,
+      rgba(0,0,0,.12) 52%,
+      rgba(0,0,0,.35) 62%,
+      rgba(0,0,0,.65) 74%,
+      rgba(0,0,0,.85) 86%,
+      rgba(0,0,0,.95) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
@@ -3906,9 +3917,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     border: 1px solid rgba(201,146,10,.3) !important;
     padding: 5px 14px !important;
     margin-bottom: 16px !important;
-    background: rgba(0,0,0,.4) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(0,0,0,.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
   .credit-headline {
     font-size: 42px !important;
@@ -3918,7 +3929,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     line-height: 0.9 !important;
     margin-bottom: 2px !important;
     letter-spacing: -0.03em !important;
-    text-shadow: 0 4px 24px rgba(0,0,0,.6), 0 1px 2px rgba(0,0,0,.4);
+    text-shadow: 0 2px 8px rgba(0,0,0,.95), 0 4px 24px rgba(0,0,0,.8), 0 8px 40px rgba(0,0,0,.6);
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
@@ -3958,7 +3969,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     text-align: center !important;
     max-width: 88% !important;
     margin: 12px auto 0 !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 3px 16px rgba(0,0,0,.7) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,1), 0 3px 16px rgba(0,0,0,.9), 0 6px 30px rgba(0,0,0,.7) !important;
     line-height: 1.5 !important;
     letter-spacing: 0.01em !important;
   }
@@ -4067,41 +4078,126 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     width: 100%;
     align-items: center;
   }
-  /* ═══ Mobile Hero Tabs ═══ */
+  /* ═══ Mobile Hero Shifting Tabs ═══ */
   .hero-tabs {
-    margin: 18px auto 0 auto !important;
-    max-width: 320px !important;
+    margin: 20px auto 0 auto !important;
+    max-width: 100% !important;
     width: 100% !important;
+    padding: 0 12px !important;
+    background: none !important;
+    position: relative !important;
+    z-index: 4 !important;
   }
   .hero-tabs-bar {
-    gap: 4px !important;
-    padding: 3px !important;
-    background: rgba(255,255,255,.05) !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    border-radius: 8px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
+  /* Show all 5 tabs on mobile */
+  .hero-tab[data-tab="hirecar"],
+  .hero-tab[data-tab="credit"] { display: inline-flex !important; }
   .hero-tab {
-    padding: 9px 8px !important;
-    font-size: 9px !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 6px !important;
+    flex: none !important;
+    padding: 6px 12px !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.04em !important;
+    border-radius: 20px !important;
+    color: rgba(255,255,255,.5) !important;
+    background: transparent !important;
+    border: none !important;
+    transition: all .2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    white-space: nowrap !important;
+  }
+  .hero-tab:hover,
+  .hero-tab.active {
+    color: rgba(255,255,255,.95) !important;
+    background: rgba(255,255,255,.1) !important;
+    box-shadow: none !important;
   }
   .hero-tab.active {
-    box-shadow: 0 2px 14px rgba(201,146,10,.35), 0 0 0 1px rgba(201,146,10,.12) !important;
+    background: rgba(255,255,255,.12) !important;
   }
+  .hero-tab-chevron {
+    display: inline-block !important;
+    width: 10px !important;
+    height: 10px !important;
+    transition: transform .2s ease !important;
+    opacity: .6 !important;
+  }
+  .hero-panel-title {
+    display: block !important;
+  }
+  .hero-tab.active .hero-tab-chevron {
+    transform: rotate(180deg) !important;
+    opacity: 1 !important;
+  }
+  /* Nub — triangle pointer from React component */
+  .hero-tab-nub {
+    display: none;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(20,20,20,.95);
+    border-left: 1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(255,255,255,.08);
+    transform: rotate(45deg);
+    z-index: 5;
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+  }
+  .hero-tab-nub.visible {
+    display: block;
+  }
+  /* Dropdown panel — from React component design */
   .hero-tab-panels {
-    margin-top: 12px !important;
-    text-align: center !important;
-    min-height: 56px !important;
+    margin-top: 14px !important;
+    text-align: left !important;
+    min-height: 0 !important;
+    max-width: 340px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+  .hero-tab-panel {
+    border-radius: 10px !important;
+  }
+  .hero-tab-panel.active {
+    background: linear-gradient(180deg, rgba(20,20,20,.92) 0%, rgba(15,15,15,.88) 100%) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  .hero-panel-inner {
+    padding: 16px 18px !important;
+  }
+  .hero-panel-title {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin: 0 0 6px 0 !important;
+    letter-spacing: 0.01em !important;
   }
   .hero-tab-text {
-    font-size: 11.5px !important;
+    font-size: 11px !important;
     line-height: 1.6 !important;
-    color: rgba(255,255,255,.55) !important;
+    color: rgba(255,255,255,.5) !important;
+    margin: 0 0 10px 0 !important;
   }
   .hero-tab-link {
     font-size: 10px !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
   .credit-cta-primary {
     flex: none !important;
@@ -4117,6 +4213,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     box-shadow: 0 4px 20px rgba(201,146,10,.25), 0 0 0 1px rgba(201,146,10,.15) !important;
     position: relative !important;
     overflow: hidden !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .credit-cta-primary::after {
     content: '' !important;
@@ -4246,10 +4344,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   /* --- DARK-TO-LIGHT TRANSITION BRIDGE — smooth bleed --- */
   .mobile-gradient-bridge {
     display: block !important;
-    height: 48px;
+    height: 64px;
     background: linear-gradient(180deg,
-      rgba(17,24,32,.0) 0%,
-      #0e1420 30%,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,.92) 30%,
+      rgba(0,0,0,.6) 60%,
       #111820 100%) !important;
     margin: 0;
     border: none;
@@ -5225,21 +5324,56 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 .rh-mode-sw-btn.active { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); }
 
 /* Language switcher */
-.rh-lang-sw {
-  display: flex; align-items: center;
+/* Language Selector Dropdown */
+.rh-lang-dropdown {
+  position: relative;
+}
+.rh-lang-trigger {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.08);
-  border-radius: 2px; overflow: hidden;
+  border-radius: 4px; padding: 5px 8px; cursor: pointer;
+  transition: all .2s ease;
 }
-.rh-lang-btn {
-  font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em;
-  text-transform: uppercase; color: rgba(255,255,255,.3);
-  background: none; border: none;
-  border-right: 1px solid rgba(255,255,255,.06);
-  padding: 7px 9px; cursor: pointer; transition: all .18s;
+.rh-lang-trigger:hover { color: rgba(255,255,255,.8); background: rgba(255,255,255,.08); }
+.rh-lang-flag { font-size: 12px; line-height: 1; }
+.rh-lang-chevron {
+  width: 10px; height: 10px;
+  transition: transform .2s ease;
+  opacity: .5;
 }
-.rh-lang-btn:last-child { border-right: none; }
-.rh-lang-btn.active { color: #c9920a; background: rgba(201,146,10,.1); }
+.rh-lang-dropdown.open .rh-lang-chevron { transform: rotate(180deg); }
+.rh-lang-menu {
+  display: none;
+  position: absolute; top: calc(100% + 6px); right: 0;
+  min-width: 180px; max-height: 280px; overflow-y: auto;
+  background: rgba(12,12,12,.96);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.6);
+  z-index: 999;
+  padding: 4px;
+  animation: langFadeIn .15s ease;
+}
+@keyframes langFadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.rh-lang-dropdown.open .rh-lang-menu { display: block; }
+.rh-lang-opt {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 5px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px;
+  color: rgba(255,255,255,.6); cursor: pointer;
+  transition: all .15s ease;
+}
+.rh-lang-opt:hover { background: rgba(255,255,255,.06); color: #fff; }
+.rh-lang-opt.active { color: #fff; }
+.rh-lang-check { display: none; margin-left: auto; color: var(--cta); }
+.rh-lang-opt.active .rh-lang-check { display: block; }
+.rh-lang-menu::-webkit-scrollbar { width: 4px; }
+.rh-lang-menu::-webkit-scrollbar-track { background: transparent; }
+.rh-lang-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 2px; }
 
 /* Apply pill */
 .rh-apply-pill {
@@ -5800,7 +5934,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 @media (max-width: 900px) {
   .rh-masthead { padding: 10px 16px; }
   .rh-logo { height: 22px; }
-  .rh-lang-sw { display: none; }
+  .rh-lang-dropdown { display: none; }
   .rh-masthead-center { gap: 5px; }
   .rh-city-name { display: none; }
   .rh-apply-pill { padding: 7px 12px; font-size: 9px; }
@@ -5971,12 +6105,28 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <button class="rh-mode-sw-btn" id="rhSwDesktop" onclick="setMode('desktop')">🖥 Desktop</button>
         <button class="rh-mode-sw-btn active" id="rhSwRemote" onclick="setMode('remote')">📱 Remote</button>
       </div>
-      <!-- Language Switcher -->
-      <div class="rh-lang-sw">
-        <button class="rh-lang-btn active" onclick="rhLang('en',this)" data-lang="en">EN</button>
-        <button class="rh-lang-btn" onclick="rhLang('es',this)" data-lang="es">ES</button>
-        <button class="rh-lang-btn" onclick="rhLang('fr',this)" data-lang="fr">FR</button>
-        <button class="rh-lang-btn" onclick="rhLang('zh',this)" data-lang="zh">中文</button>
+      <!-- Language Selector Dropdown -->
+      <div class="rh-lang-dropdown" id="rhLangDropdown">
+        <button class="rh-lang-trigger" id="rhLangTrigger" onclick="rhToggleLang()">
+          <span class="rh-lang-flag" id="rhLangFlag">🇺🇸</span>
+          <span class="rh-lang-label" id="rhLangLabel">EN</span>
+          <svg class="rh-lang-chevron" id="rhLangChevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="rh-lang-menu" id="rhLangMenu">
+          <div class="rh-lang-opt active" data-lang="en" data-flag="🇺🇸" data-label="EN" onclick="rhSelectLang(this)"><span>🇺🇸</span><span>English</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="zh-cn" data-flag="🇨🇳" data-label="中文" onclick="rhSelectLang(this)"><span>🇨🇳</span><span>简体中文</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="zh-tw" data-flag="🇹🇼" data-label="繁中" onclick="rhSelectLang(this)"><span>🇹🇼</span><span>繁體中文</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="ja" data-flag="🇯🇵" data-label="JP" onclick="rhSelectLang(this)"><span>🇯🇵</span><span>日本語</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="es" data-flag="🇪🇸" data-label="ES" onclick="rhSelectLang(this)"><span>🇪🇸</span><span>Español</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="fr" data-flag="🇫🇷" data-label="FR" onclick="rhSelectLang(this)"><span>🇫🇷</span><span>Français</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="pt-br" data-flag="🇧🇷" data-label="PT" onclick="rhSelectLang(this)"><span>🇧🇷</span><span>Português BR</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="ko" data-flag="🇰🇷" data-label="KO" onclick="rhSelectLang(this)"><span>🇰🇷</span><span>한국어</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="RU" onclick="rhSelectLang(this)"><span>🇷🇺</span><span>Русский</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="tr" data-flag="🇹🇷" data-label="TR" onclick="rhSelectLang(this)"><span>🇹🇷</span><span>Türkçe</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="id" data-flag="🇮🇩" data-label="ID" onclick="rhSelectLang(this)"><span>🇮🇩</span><span>Bahasa Indonesia</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="de" data-flag="🇩🇪" data-label="DE" onclick="rhSelectLang(this)"><span>🇩🇪</span><span>Deutsch</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="rh-lang-opt" data-lang="fa" data-flag="🇮🇷" data-label="FA" onclick="rhSelectLang(this)"><span>🇮🇷</span><span>فارسی</span><svg class="rh-lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
       </div>
     </div>
     <div class="rh-masthead-right">
@@ -7121,19 +7271,12 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <img class="carousel-slide ferrari-road" src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=900&q=80&fit=crop&crop=center" alt="Red Ferrari on the road" loading="lazy">
         <img class="carousel-slide dtla-buildings" src="img/la-night-5.jpeg" alt="Downtown LA buildings" loading="lazy">
         <img class="carousel-slide mercedes-amg" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=80&fit=crop&crop=center" alt="Mercedes AMG luxury performance" loading="lazy">
-        <!-- ═══ MOBILE-ONLY SLIDES — car-forward hero reel ═══ -->
-        <img class="carousel-slide mobile-slide mobile-1" src="img/3.jpg" alt="4th Street mural wall, LA street art" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-2" src="img/5.jpg" alt="Green supercar on LA streets" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-3" src="img/6.jpg" alt="Cars cruising LA highway" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-4" src="img/lambo-urus.jpg" alt="Lamborghini Urus in LA" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-5" src="img/cars-disney-hall.jpg" alt="Red sports car at Disney Concert Hall" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-6" src="img/14.jpg" alt="Santa Monica Pier ferris wheel beach" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-7" src="img/mercedes-classic.jpg" alt="Classic Mercedes in LA" loading="lazy">
-        <img class="carousel-slide mobile-slide mobile-8" src="img/4.jpg" alt="LA city skyline at night" loading="lazy">
+        <!-- ═══ MOBILE-ONLY SLIDES ═══ -->
+        <img class="carousel-slide mobile-slide mobile-1 active" src="img/3.jpg" alt="4th Street mural wall, LA street art" loading="lazy">
       </div>
       <div class="credit-carousel-dots" id="creditCarouselDots"></div>
       <div class="credit-overlay">
-        <div class="hero-top-tagline">Free intake · No credit pull · 24hr response</div>
+        <div class="hero-top-tagline"></div>
         <div class="credit-eyebrow" id="creditEyebrow">HIRECREDIT · Credit Recovery · Los Angeles</div>
         <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br class="desktop-br"><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
         <p class="credit-sub" id="creditSub">HIRECAR routes you from incident to resolution. One record, one timeline, one clean outcome.</p>
@@ -7161,25 +7304,51 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
             <div class="credit-stat-l">Intake Response</div>
           </div>
         </div>
-        <!-- Hero Tabs — inside overlay so visible on mobile -->
+        <!-- Hero Shifting Tabs — 5-tab dropdown menu -->
         <div class="hero-tabs" id="heroTabs">
           <div class="hero-tabs-bar">
-            <button class="hero-tab active" data-tab="pifr">What is PIFR</button>
-            <button class="hero-tab" data-tab="how">How It Works</button>
-            <button class="hero-tab" data-tab="start">Get Started</button>
+            <button class="hero-tab active" data-tab="pifr">WHAT IS PIFR <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="hero-tab" data-tab="start">GET STARTED <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="hero-tab" data-tab="faq">FAQ <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="hero-tab" data-tab="hirecar">HIRECAR <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="hero-tab" data-tab="credit">+CREDITWITHKEN <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
           </div>
-          <div class="hero-tab-panels">
+          <div class="hero-tab-nub" id="heroTabNub"></div>
+          <div class="hero-tab-panels" id="heroTabPanels">
             <div class="hero-tab-panel active" data-panel="pifr">
-              <p class="hero-tab-text">Personal Incident File & Recovery — your single record from crash to credit fix.</p>
-              <a href="about/pifr/" class="hero-tab-link">Learn more →</a>
-            </div>
-            <div class="hero-tab-panel" data-panel="how">
-              <p class="hero-tab-text">One platform routes your collision through legal, repair, rental & credit recovery.</p>
-              <a href="about/" class="hero-tab-link">See the process →</a>
+              <div class="hero-panel-inner">
+                <h4 class="hero-panel-title">Personal Incident File & Recovery</h4>
+                <p class="hero-tab-text">Your single record from crash to credit fix. One file tracks everything — legal, repair, rental, and credit recovery.</p>
+                <a href="about/pifr/" class="hero-tab-link">Learn more →</a>
+              </div>
             </div>
             <div class="hero-tab-panel" data-panel="start">
-              <p class="hero-tab-text">Free intake, no credit pull, 24-hour response. Start your recovery now.</p>
-              <a href="about/pifr/" class="hero-tab-link">Begin intake →</a>
+              <div class="hero-panel-inner">
+                <h4 class="hero-panel-title">Begin Your Recovery</h4>
+                <p class="hero-tab-text">Free intake, no credit pull, response within 24 hours. Start your recovery now.</p>
+                <a href="about/pifr/" class="hero-tab-link">Begin intake →</a>
+              </div>
+            </div>
+            <div class="hero-tab-panel" data-panel="hirecar">
+              <div class="hero-panel-inner">
+                <h4 class="hero-panel-title">About HIRECAR</h4>
+                <p class="hero-tab-text">HIRECAR LLC — collision recovery and credit repair, headquartered in Los Angeles. Est. November 2024.</p>
+                <a href="about/" class="hero-tab-link">About us →</a>
+              </div>
+            </div>
+            <div class="hero-tab-panel" data-panel="credit">
+              <div class="hero-panel-inner">
+                <h4 class="hero-panel-title">Credit Recovery with Ken</h4>
+                <p class="hero-tab-text">Personalized credit recovery guidance. Dispute inaccuracies, rebuild your score, protect your financial future.</p>
+                <a href="about/pifr/" class="hero-tab-link">Talk to Ken →</a>
+              </div>
+            </div>
+            <div class="hero-tab-panel" data-panel="faq">
+              <div class="hero-panel-inner">
+                <h4 class="hero-panel-title">Common Questions</h4>
+                <p class="hero-tab-text">How long does recovery take? What does it cost? Do I need a lawyer? Get answers to the most asked questions.</p>
+                <a href="#faq" class="hero-tab-link">View FAQ →</a>
+              </div>
             </div>
           </div>
         </div>
@@ -7189,7 +7358,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <div class="credit-module-main">
       <div class="credit-module-text">
         <p class="credit-cta-lead">Get back on track — fast.</p>
-        <p class="credit-cta-fine">Free intake · No credit pull · 24hr response</p>
+        <p class="credit-cta-fine"></p>
       </div>
     </div>
   </div>
@@ -8834,32 +9003,95 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-/* ─── HERO TABS ─── */
+/* ─── HERO SHIFTING TABS (7-tab dropdown) ─── */
 (function initHeroTabs() {
   var container = document.getElementById('heroTabs');
   if (!container) return;
   var tabs = container.querySelectorAll('.hero-tab');
   var panels = container.querySelectorAll('.hero-tab-panel');
+  var panelsWrap = document.getElementById('heroTabPanels');
+  var nub = document.getElementById('heroTabNub');
+  var currentTab = null;
+
+  function closeAll() {
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    panels.forEach(function(p) {
+      p.classList.remove('active');
+      p.style.opacity = '0';
+      p.style.transform = 'translateY(8px)';
+    });
+    if (nub) nub.classList.remove('visible');
+    if (panelsWrap) {
+      panelsWrap.style.opacity = '0';
+      panelsWrap.style.maxHeight = '0';
+    }
+    currentTab = null;
+  }
+
+  function openTab(tab) {
+    var target = tab.getAttribute('data-tab');
+    // Close others
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    panels.forEach(function(p) {
+      p.classList.remove('active');
+      p.style.opacity = '0';
+      p.style.transform = 'translateY(8px)';
+    });
+    // Activate clicked
+    tab.classList.add('active');
+    var panel = container.querySelector('[data-panel="' + target + '"]');
+    if (panel) {
+      panel.classList.add('active');
+      void panel.offsetWidth;
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+    }
+    // Show panels wrapper
+    if (panelsWrap) {
+      panelsWrap.style.opacity = '1';
+      panelsWrap.style.maxHeight = '200px';
+    }
+    // Position nub under active tab
+    if (nub) {
+      var tabRect = tab.getBoundingClientRect();
+      var containerRect = container.getBoundingClientRect();
+      var center = tabRect.left + tabRect.width / 2 - containerRect.left - 6;
+      nub.style.left = center + 'px';
+      nub.classList.add('visible');
+    }
+    currentTab = target;
+  }
+
   tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
+    tab.addEventListener('click', function(e) {
+      e.stopPropagation();
       var target = this.getAttribute('data-tab');
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      panels.forEach(function(p) {
-        p.classList.remove('active');
-        p.style.opacity = '0';
-        p.style.transform = 'translateY(6px)';
-      });
-      this.classList.add('active');
-      var panel = container.querySelector('[data-panel="' + target + '"]');
-      if (panel) {
-        panel.classList.add('active');
-        // Force reflow for transition
-        void panel.offsetWidth;
-        panel.style.opacity = '1';
-        panel.style.transform = 'translateY(0)';
+      if (currentTab === target) {
+        closeAll();
+      } else {
+        openTab(this);
       }
     });
   });
+
+  // Close when tapping outside
+  document.addEventListener('click', function(e) {
+    if (currentTab && !container.contains(e.target)) {
+      closeAll();
+    }
+  });
+
+  // Set panels wrapper for animation
+  if (panelsWrap) {
+    panelsWrap.style.transition = 'opacity .25s ease, max-height .3s ease';
+    panelsWrap.style.overflow = 'hidden';
+    panelsWrap.style.maxHeight = '200px';
+  }
+
+  // Activate first tab by default
+  if (tabs.length > 0) {
+    openTab(tabs[0]);
+  }
 })();
 
 })();
@@ -9555,20 +9787,45 @@ var LANG_DATA = {
   }
 };
 window.rhLang = function(lang, btn) {
-  var data = LANG_DATA[lang]; if (!data) return;
+  // Map new lang codes to existing LANG_DATA keys
+  var langMap = { 'zh-cn': 'zh', 'zh-tw': 'zh', 'pt-br': 'en', 'ja': 'en', 'ko': 'en', 'ru': 'en', 'tr': 'en', 'id': 'en', 'de': 'en', 'fa': 'en' };
+  var dataKey = langMap[lang] || lang;
+  var data = LANG_DATA[dataKey]; if (!data) data = LANG_DATA['en'];
   localStorage.setItem('mw_lang', lang);
-  document.querySelectorAll('.rh-lang-btn').forEach(function(b) {
-    b.classList.toggle('active', b.dataset.lang === lang);
+  // Update dropdown selector active states
+  document.querySelectorAll('.rh-lang-opt').forEach(function(o) {
+    o.classList.toggle('active', o.dataset.lang === lang);
   });
-  // Also update desktop lang buttons if present
-  document.querySelectorAll('[data-lang]').forEach(function(b) {
-    if (b.classList.contains('rh-lang-btn')) b.classList.toggle('active', b.dataset.lang === lang);
-  });
+  // Update trigger display
+  var activeOpt = document.querySelector('.rh-lang-opt[data-lang="' + lang + '"]');
+  if (activeOpt) {
+    var flag = document.getElementById('rhLangFlag');
+    var label = document.getElementById('rhLangLabel');
+    if (flag) flag.textContent = activeOpt.dataset.flag;
+    if (label) label.textContent = activeOpt.dataset.label;
+  }
   Object.keys(data).forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.innerHTML = data[id];
   });
 };
+
+/* ── Language dropdown toggle/select ──────────────────────── */
+window.rhToggleLang = function() {
+  var dd = document.getElementById('rhLangDropdown');
+  if (dd) dd.classList.toggle('open');
+};
+window.rhSelectLang = function(el) {
+  var lang = el.dataset.lang;
+  window.rhLang(lang, el);
+  var dd = document.getElementById('rhLangDropdown');
+  if (dd) dd.classList.remove('open');
+};
+// Close lang dropdown on outside click
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('rhLangDropdown');
+  if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
 
 /* ── Entertainment background switcher ─────────────────────── */
 window.rhSetEntBg = function(el, url) {
