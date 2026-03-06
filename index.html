@@ -6,7 +6,7 @@
 <title>HIRECAR MarketWatch! — HIRECAR LLC · Est. November 2024</title>
 <!-- v18: Desktop scroll fix, Remote edge-to-edge viewport, Logo wordmark cleanup, Hero city/time images, Enriched remote entry sequence, Top Stories CTA dynamic, Mobility 4-car gallery, Vegas centering, Weather-correlated travel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
 /* ═══════════════════════════════════════════
@@ -40,28 +40,35 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Scrollbar — dark/black ── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+html { scrollbar-color: #333 #000; scrollbar-width: thin; }
+
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   line-height: 1.6;
   color: var(--ink);
   background: var(--bg);
-  overflow-x: hidden; /* prevents double scrollbar when embedded in Wix iframe */
+  overflow-x: clip; /* prevents double scrollbar when embedded in Wix iframe — clip preserves sticky */
 }
 
 a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; }
 
 /* Utility */
-.serif { font-family: 'Cormorant Garamond', Georgia, serif; }
-.mono  { font-family: 'DM Mono', monospace; }
+.serif { font-family: 'Instrument Serif', Georgia, serif; }
+.mono  { font-family: 'JetBrains Mono', monospace; }
 
 /* ═══════════════════════════════════════════
    TOP UTILITY BAR — like LA Times
 ═══════════════════════════════════════════ */
 .util-bar {
-  background: var(--ink);
-  padding: 7px 0;
+  background: #000;
+  padding: 8px 0;
   border-bottom: 1px solid var(--ink-3);
 }
 .util-inner {
@@ -92,7 +99,7 @@ img { display: block; width: 100%; }
   padding: 3px 10px;
   white-space: nowrap;
   flex-shrink: 0;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .ticker-scroll {
   overflow: hidden;
@@ -161,9 +168,17 @@ img { display: block; width: 100%; }
    (LA Times centers logo; we keep left per PYMNTS/user pref)
 ═══════════════════════════════════════════ */
 .masthead {
-  background: var(--white);
-  border-bottom: 2px solid var(--ink);
+  background: rgba(var(--white-rgb, 255,255,255), .88);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--rule);
   padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 350;
+  transition: background .3s, box-shadow .3s;
 }
 .masthead-inner {
   max-width: 1340px;
@@ -172,39 +187,40 @@ img { display: block; width: 100%; }
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 80px;
-  gap: 24px;
+  min-height: 56px;
+  gap: 18px;
 }
 
 /* Brand block */
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 0;
+  gap: 12px;
+  padding: 10px 0;
   border-right: 1px solid var(--border);
-  padding-right: 24px;
+  padding-right: 20px;
 }
 .brand-logo {
-  height: 42px;
+  height: 32px;
   width: auto;
   /* Invert white logo to dark */
   filter: invert(1) brightness(0.1);
 }
 .brand-pipe {
-  width: 1.5px;
-  height: 38px;
+  width: 1px;
+  height: 30px;
   background: var(--ink);
+  opacity: .3;
   flex-shrink: 0;
 }
 .brand-mw {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
 }
 .brand-mw-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
   font-weight: 700;
   color: var(--ink);
   line-height: 1;
@@ -214,11 +230,12 @@ img { display: block; width: 100%; }
   color: var(--cta);
 }
 .brand-mw-sub {
-  font-family: 'DM Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
+  margin-top: 1px;
 }
 
 /* Masthead center — date + motto */
@@ -228,7 +245,7 @@ img { display: block; width: 100%; }
   flex: 1;
 }
 .masthead-date {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -236,7 +253,7 @@ img { display: block; width: 100%; }
   margin-bottom: 3px;
 }
 .masthead-motto {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
   font-size: 14px;
   color: var(--slate);
@@ -276,10 +293,23 @@ img { display: block; width: 100%; }
 ═══════════════════════════════════════════ */
 .primary-nav {
   background: var(--ink);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 300;
   border-bottom: 3px solid var(--cta);
+}
+/* JS adds this class when nav scrolls to the fixed masthead */
+.primary-nav.nav-fixed {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+}
+/* Spacer inserted by JS when nav becomes fixed to prevent layout jump */
+.nav-spacer {
+  display: none;
+}
+.nav-spacer.active {
+  display: block;
 }
 .nav-inner {
   max-width: 1340px;
@@ -297,7 +327,7 @@ img { display: block; width: 100%; }
 }
 .nav-link {
   display: block;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -354,7 +384,7 @@ img { display: block; width: 100%; }
 }
 .nav-item:hover .dropdown { display: grid; }
 .dd-col-head {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -378,77 +408,405 @@ img { display: block; width: 100%; }
    (Replaces LA Times streaming/video module)
 ═══════════════════════════════════════════ */
 .credit-module {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow .3s ease, background .3s ease;
+  position: relative;
+  background: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
 }
-.credit-module.scrolled {
-  box-shadow: none;
-}
-.credit-module.scrolled .credit-module-inner { min-height: 160px; }
-.credit-module.scrolled .credit-headline { font-size: 32px; }
-.credit-module.scrolled .credit-sub { display: block; }
-.credit-module.scrolled .credit-stat-row { display: grid; }
-.credit-module.scrolled .credit-icon { width: 76px; height: 76px; font-size: 30px; }
-.credit-module .credit-headline,
-.credit-module .credit-icon {
+.credit-module::before { display: none; }
+.credit-module::after { display: none; }
+.credit-module .credit-headline {
   transition: all .3s ease;
 }
 .credit-module-inner {
+  position: relative;
   max-width: 1340px;
   margin: 0 auto;
-  padding: 0 20px;
   display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 0;
-  min-height: 160px;
+  grid-template-columns: 58% 42%;
+  min-height: 480px;
+  align-items: stretch;
 }
-.credit-module-main {
-  padding: 28px 32px 28px 0;
-  border-right: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
+/* Left: image panel with text overlay */
 .credit-icon {
-  width: 76px;
-  height: 76px;
-  background: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  margin-right: -35%;
 }
-.credit-module-text {}
-.credit-eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 8.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--slate);
-  margin-bottom: 6px;
+/* Carousel container fills the panel */
+.credit-carousel {
+  position: absolute;
+  inset: 0;
 }
-.credit-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.05;
-  margin-bottom: 8px;
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
 }
-.credit-sub {
-  font-size: 13px;
-  color: var(--mid);
+.carousel-slide.active {
+  opacity: 1;
+}
+/* City skyline image — zoomed, anchored left, raised */
+.carousel-slide.city-slide {
+  object-position: 0% 50%;
+  transform: scale(1.12);
+  transform-origin: 0% 50%;
+}
+/* Porsche 911 GTS — anchored right, centered height */
+.carousel-slide.porsche-911 {
+  object-position: 18% center;
+  transform: scale(1.5);
+  transform-origin: 30% 50%;
+}
+/* Red Ferrari on road — anchored right, centered height */
+.carousel-slide.ferrari-road {
+  object-position: 45% 65%;
+  transform: scale(1.05);
+  transform-origin: 45% 60%;
+}
+/* Red Ferrari (garage) — flipped right, anchored right, centered height */
+.carousel-slide.mercedes-amg {
+  object-position: center 86%;
+  transform: translateX(2%) scale(1.1) scaleX(-1);
+  transform-origin: center 45%;
+}
+/* Cars at Disney Concert Hall — raised, anchored right */
+.carousel-slide.cars-disney {
+  object-position: 0% 92%;
+  transform: scale(1.5);
+  transform-origin: 5% 50%;
+}
+/* LA street mural — 3rd slide */
+.carousel-slide.la-mural {
+  object-position: center center;
+}
+/* Nighttime collision scene — shifted left to hide ambulance */
+.carousel-slide.collision-night {
+  object-position: 88% center;
+}
+/* Storage accident scene */
+.carousel-slide.storage-accident {
+  object-position: center center;
+}
+/* Downtown LA buildings */
+.carousel-slide.dtla-buildings {
+  object-position: center center;
+}
+/* Porsche driving shot */
+.carousel-slide.porsche-drive {
+  object-position: center center;
+}
+.credit-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+/* Dark overlay on image for text readability */
+.credit-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,12,26,.5) 0%, rgba(6,12,26,.7) 55%, rgba(6,12,26,.92) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+/* Right-edge blend into solid panel */
+.credit-icon::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 60%;
+  background: linear-gradient(to right, transparent 0%, rgba(var(--ink-rgb,17,24,32),.25) 25%, rgba(var(--ink-rgb,17,24,32),.55) 45%, rgba(var(--ink-rgb,17,24,32),.82) 65%, var(--ink) 85%);
+  z-index: 2;
+  pointer-events: none;
+}
+/* Text overlay on image — vertically centered */
+.credit-overlay {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 88%;
+  padding: 24px 28px 28px;
+  z-index: 3;
+}
+.credit-overlay .credit-sub {
+  font-size: 12px;
   line-height: 1.6;
-  max-width: 500px;
+  max-width: 420px;
+  margin-bottom: 0;
 }
-.credit-module-actions {
-  padding: 24px 0 24px 28px;
+/* Right: solid CTA panel */
+.credit-module-main {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  padding: 32px 36px 32px 20px;
+}
+.credit-module-main .credit-module-text {
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+.credit-module-main .credit-module-actions {
+  margin-top: 0;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* CTA lead line */
+.credit-cta-lead {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+  transition: none;
+}
+/* Glow animation removed — static display */
+/* CTA fine print */
+.credit-cta-fine {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-top: 16px;
+  line-height: 1.6;
+  max-width: 340px;
+  white-space: nowrap;
+}
+/* stat row now lives inside .credit-overlay */
+.credit-overlay .credit-stat-row {
+  margin-top: 14px;
+  max-width: 420px;
+  border-top-color: rgba(255,255,255,.15);
+  padding-top: 12px;
+}
+.credit-overlay .credit-stat-n {
+  font-size: 22px;
+}
+.credit-overlay .credit-stat {
+  padding: 6px 0;
+  padding-right: 14px;
+  padding-left: 14px;
+}
+.credit-overlay .credit-stat:first-child { padding-left: 0; }
+
+/* Odometer / animated counter digits */
+.odometer { display: inline-flex; overflow: hidden; }
+.odo-digit {
+  display: inline-block;
+  transition: transform 2.2s cubic-bezier(.22,1,.36,1);
+  transform: translateY(0);
+  min-width: 0.58em;
+  text-align: center;
+}
+.odo-digit.counting { transform: translateY(-100%); }
+.odo-suffix {
+  display: inline;
+  opacity: 0;
+  transition: opacity .6s ease .8s;
+}
+.odo-suffix.visible { opacity: 1; }
+
+/* Character reveal for text stats (PIFR) — smooth drop-in */
+.odo-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  min-width: 0.55em;
+  text-align: center;
+}
+.odo-char.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.odo-text { letter-spacing: 0.06em; }
+.credit-module-text {}
+.credit-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+  display: none;
+}
+.credit-headline {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.12;
+  margin-bottom: 18px;
+  letter-spacing: -.025em;
+  text-transform: none;
+  overflow: visible;
+  max-width: 720px;
+}
+/* ── Collision: impact slam animation ── */
+.credit-headline .collision-text {
+  display: inline-block;
+  opacity: 0;
+  transform: scale(1.3) translateY(-15px);
+  filter: blur(6px);
+  position: relative;
+  padding-left: 16px;
+}
+.credit-headline .collision-text.animate {
+  animation: slamImpact 1.6s cubic-bezier(.15,.82,.165,1) forwards;
+}
+/* Green dot — LEFT side of headline */
+.credit-headline .collision-text::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+/* Dot — red pulse during slam */
+.credit-headline .collision-text.dot-red::before {
+  background: #ef4444 !important;
+  box-shadow: 0 0 6px rgba(239,68,68,.6);
+  animation: pulse-dot-fast .35s ease-in-out infinite !important;
+}
+/* Dot — settled green */
+.credit-headline .collision-text.dot-settled::before {
+  background: #22c55e !important;
+  box-shadow: 0 0 8px rgba(34,197,94,.5), 0 0 2px rgba(34,197,94,.8);
+  animation: none !important;
+  opacity: 1;
+}
+.coll-left, .coll-right {
+  display: inline;
+  opacity: 1;
+}
+.coll-period {
+  color: #ffffff;
+  text-shadow: none;
+  position: relative;
+}
+.coll-period::after {
+  display: none;
+}
+.credit-headline strong {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: .88em;
+  letter-spacing: -.01em;
+  display: inline-block;
+  padding-left: 16px;
+}
+
+/* ── "We Bring It Back." — static, no animation ── */
+.credit-headline .typewriter-text {
+  display: inline-block;
+  width: auto;
+  overflow: visible;
+  white-space: nowrap;
+  border-right: none;
+}
+.type-period {
+  color: #fff;
+}
+
+/* ── Sub text — static, no animation ── */
+.credit-sub {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Keyframes ── */
+@keyframes slamImpact {
+  0%   { opacity:0; transform:scale(1.3) translateY(-15px); filter:blur(6px); }
+  25%  { opacity:1; transform:scale(.97) translateY(2px); filter:blur(0); }
+  42%  { transform:scale(1.02) translateY(-1px); }
+  58%  { transform:scale(.995) translateY(0.5px); }
+  72%  { transform:scale(1.005) translateY(0); }
+  100% { opacity:1; transform:scale(1) translateY(0); filter:blur(0); }
+}
+/* typeOut, blinkCaret, dropDownReveal removed — no longer used */
+
+/* Eyebrow dot — staged color sequence synced with headline animation */
+.credit-eyebrow { transition: color .4s, text-shadow .4s; }
+
+/* Stage 1: Red pulse during collision slam */
+.credit-eyebrow.dot-red::before {
+  background: #ef4444 !important;
+  box-shadow: 0 0 6px rgba(239,68,68,.6);
+  animation: pulse-dot-fast .35s ease-in-out infinite !important;
+}
+@keyframes pulse-dot-fast {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .5; transform: scale(.6); }
+}
+
+/* Stage 2: Yellow steady glow during typewriter */
+.credit-eyebrow.dot-yellow::before {
+  background: #eab308 !important;
+  box-shadow: 0 0 8px rgba(234,179,8,.5);
+  animation: pulse-dot-warm .8s ease-in-out infinite !important;
+}
+@keyframes pulse-dot-warm {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .7; transform: scale(.85); }
+}
+
+/* Stage 3: Green flash — final state */
+.credit-eyebrow.dot-green::before {
+  background: #22c55e !important;
+  box-shadow: 0 0 10px rgba(34,197,94,.6);
+  animation: pulse-dot-green 1.8s ease-in-out forwards !important;
+}
+@keyframes pulse-dot-green {
+  0%   { opacity: 1; transform: scale(1.3); box-shadow: 0 0 12px rgba(34,197,94,.7); }
+  30%  { opacity: .5; transform: scale(.7); box-shadow: 0 0 4px rgba(34,197,94,.3); }
+  60%  { opacity: 1; transform: scale(1.15); box-shadow: 0 0 10px rgba(34,197,94,.5); }
+  100% { opacity: 1; transform: scale(1); background: #22c55e; box-shadow: none; animation: pulse-dot 1.4s ease-in-out infinite; }
+}
+
+/* After green settles, steady consistent green glow */
+.credit-eyebrow.dot-settled::before {
+  background: #22c55e !important;
+  box-shadow: 0 0 8px rgba(34,197,94,.5), 0 0 2px rgba(34,197,94,.8);
+  animation: none !important;
+  opacity: 1;
+  transform: scale(1);
+}
+.credit-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.7;
+  max-width: 560px;
+}
+.credit-module-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 22px;
+  max-width: 300px;
 }
 .credit-cta-primary {
   display: block;
@@ -456,53 +814,76 @@ img { display: block; width: 100%; }
   color: #fff;
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 14px 20px;
+  padding: 16px 28px;
   text-align: center;
-  transition: background .2s;
+  transition: background .2s, box-shadow .3s, transform .2s;
+  box-shadow: 0 2px 8px rgba(201,146,10,.2);
+  white-space: nowrap;
+  border-radius: 2px;
 }
-.credit-cta-primary:hover { background: var(--cta-hover); }
+.credit-cta-primary:hover { background: var(--cta-hover); box-shadow: 0 6px 20px rgba(201,146,10,.35); transform: translateY(-1px); }
 .credit-cta-secondary {
   display: block;
-  background: transparent;
-  color: var(--ink);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.85);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 12px 20px;
+  padding: 16px 28px;
   text-align: center;
-  border: 1.5px solid var(--ink);
-  transition: all .2s;
+  border: 1.5px solid rgba(255,255,255,.25);
+  transition: all .25s ease;
+  white-space: nowrap;
+  border-radius: 2px;
 }
-.credit-cta-secondary:hover { background: var(--ink); color: var(--white); }
+/* Logo-style "HIRECAR" inside secondary button — matches masthead logo */
+.credit-cta-secondary .cta-brand {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1em;
+  position: relative;
+}
+.credit-cta-secondary:hover {
+  background: rgba(220,38,38,.12);
+  color: #ef4444;
+  border-color: #ef4444;
+}
 .credit-stat-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
+  margin-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 14px;
+  max-width: 100%;
 }
 .credit-stat {
-  padding: 10px 0;
-  border-right: 1px solid var(--border-lt);
-  padding-right: 20px;
-  padding-left: 20px;
+  padding: 8px 0;
+  border-right: 1px solid rgba(255,255,255,.1);
+  padding-right: 16px;
+  padding-left: 16px;
 }
 .credit-stat:first-child { padding-left: 0; }
 .credit-stat:last-child { border-right: none; }
 .credit-stat-n {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 26px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--cta);
   line-height: 1;
 }
 .credit-stat-l {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(255,255,255,.4);
   margin-top: 3px;
 }
 
@@ -519,7 +900,7 @@ img { display: block; width: 100%; }
    SECTION LABEL — LA Times style
 ═══════════════════════════════════════════ */
 .section-label {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -590,10 +971,10 @@ img { display: block; width: 100%; }
   text-transform: uppercase;
   color: var(--cta);
   margin-bottom: 9px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .hero-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 44px;
   font-weight: 700;
   color: var(--ink);
@@ -611,7 +992,7 @@ img { display: block; width: 100%; }
   max-width: 600px;
 }
 .hero-byline {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 0.06em;
@@ -626,7 +1007,7 @@ img { display: block; width: 100%; }
   padding: 24px 0 24px 24px;
 }
 .icymi-head {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -650,10 +1031,10 @@ img { display: block; width: 100%; }
   text-transform: uppercase;
   color: var(--slate);
   margin-bottom: 4px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 .icymi-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 18px;
   font-weight: 600;
   color: var(--ink);
@@ -664,7 +1045,7 @@ img { display: block; width: 100%; }
   font-size: 10px;
   color: var(--muted);
   margin-top: 5px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* ═══════════════════════════════════════════
@@ -716,10 +1097,10 @@ img { display: block; width: 100%; }
   text-transform: uppercase;
   color: var(--slate);
   margin-bottom: 6px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 .art-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 19px;
   font-weight: 600;
   color: var(--ink);
@@ -735,7 +1116,7 @@ img { display: block; width: 100%; }
   margin-top: 6px;
 }
 .art-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   color: var(--muted);
   margin-top: 10px;
@@ -763,7 +1144,7 @@ img { display: block; width: 100%; }
   border-bottom: 1px solid var(--border);
 }
 .side-head {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -781,7 +1162,7 @@ img { display: block; width: 100%; }
 .side-art:last-child { border-bottom: none; }
 .side-art:hover .side-art-title { color: var(--cta); }
 .side-art-cat {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -789,7 +1170,7 @@ img { display: block; width: 100%; }
   margin-bottom: 4px;
 }
 .side-art-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 17px;
   font-weight: 600;
   color: var(--ink-2);
@@ -797,7 +1178,7 @@ img { display: block; width: 100%; }
   transition: color .15s;
 }
 .side-art-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   color: var(--muted);
   margin-top: 4px;
@@ -811,7 +1192,7 @@ img { display: block; width: 100%; }
   background: var(--ink);
 }
 .cta-widget-eyebrow {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -819,7 +1200,7 @@ img { display: block; width: 100%; }
   margin-bottom: 8px;
 }
 .cta-widget-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--white);
@@ -858,7 +1239,7 @@ img { display: block; width: 100%; }
   gap: 0;
 }
 .trending-label {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -891,7 +1272,7 @@ img { display: block; width: 100%; }
 }
 .trending-item:hover { background: var(--bg); }
 .t-num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 28px;
   font-weight: 700;
   color: var(--border);
@@ -899,7 +1280,7 @@ img { display: block; width: 100%; }
   flex-shrink: 0;
 }
 .t-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 15px;
   font-weight: 600;
   color: var(--ink);
@@ -939,7 +1320,7 @@ img { display: block; width: 100%; }
 }
 .card-img img { width: 100%; height: 100%; object-fit: cover; }
 .card-cat {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -947,7 +1328,7 @@ img { display: block; width: 100%; }
   margin-bottom: 6px;
 }
 .card-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 19px;
   font-weight: 600;
   color: var(--ink);
@@ -963,7 +1344,7 @@ img { display: block; width: 100%; }
   margin-bottom: 8px;
 }
 .card-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   color: var(--muted);
 }
@@ -989,7 +1370,7 @@ img { display: block; width: 100%; }
   border-right: 1px solid #1f2938;
 }
 .mci-label-top {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -997,7 +1378,7 @@ img { display: block; width: 100%; }
   margin-bottom: 5px;
 }
 .mci-label-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--white);
@@ -1008,7 +1389,7 @@ img { display: block; width: 100%; }
   border-right: 1px solid #1f2938;
 }
 .mci-val {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 32px;
   font-weight: 700;
   color: var(--white);
@@ -1017,7 +1398,7 @@ img { display: block; width: 100%; }
 .mci-delta-up   { color: #111822; font-size: 16px; }
 .mci-delta-warn { color: #facc15; font-size: 16px; }
 .mci-key {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1063,7 +1444,7 @@ img { display: block; width: 100%; }
   background: var(--white);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  margin: 32px 0;
+  margin: 12px 0 32px;
 }
 .ent-section-inner {
   max-width: 1340px;
@@ -1089,7 +1470,7 @@ img { display: block; width: 100%; }
 /* When card has a background image, override hover */
 .ent-card[style*="background-image"]:hover { background: transparent; }
 .ent-cat {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1097,7 +1478,7 @@ img { display: block; width: 100%; }
   margin-bottom: 8px;
 }
 .ent-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 19px;
   font-weight: 600;
   color: var(--ink);
@@ -1114,6 +1495,21 @@ img { display: block; width: 100%; }
 .member-module {
   background: var(--member);
   margin: 32px 0;
+  position: relative;
+  background-image: url('img/la-6th-bridge.jpg');
+  background-size: cover;
+  background-position: center 40%;
+}
+.member-module::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,18,30,.92) 0%, rgba(10,18,30,.78) 50%, rgba(10,18,30,.55) 100%);
+  z-index: 0;
+}
+.member-module > * {
+  position: relative;
+  z-index: 1;
 }
 .member-inner {
   max-width: 1340px;
@@ -1124,12 +1520,63 @@ img { display: block; width: 100%; }
   gap: 0;
   align-items: center;
 }
+/* Left-aligned membership redesign */
+.member-inner--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 48px 20px 44px;
+  gap: 28px;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+.member-hero-top { max-width: 600px; }
+.member-hero-top .member-brand-title {
+  font-size: 38px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.member-perks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 820px;
+  width: 100%;
+}
+.perk-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: left;
+  transition: background .2s, border-color .2s;
+}
+.perk-card:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.2); }
+.perk-icon { font-size: 18px; flex-shrink: 0; }
+.perk-text {
+  font-size: 12px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.35;
+  font-weight: 500;
+}
+.member-cta-center {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.member-cta-center .member-price { font-size: 48px; }
+.member-cta-center .member-join-btn { padding: 16px 48px; font-size: 13px; border-radius: 4px; }
 .member-brand-col {
   border-right: 1px solid rgba(255,255,255,.15);
   padding-right: 36px;
 }
 .member-brand-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -1137,7 +1584,7 @@ img { display: block; width: 100%; }
   margin-bottom: 10px;
 }
 .member-brand-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 34px;
   font-weight: 700;
   color: var(--white);
@@ -1154,7 +1601,7 @@ img { display: block; width: 100%; }
   border-right: 1px solid rgba(255,255,255,.15);
 }
 .member-perks-head {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1190,7 +1637,7 @@ img { display: block; width: 100%; }
   align-items: flex-start;
 }
 .member-price {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 44px;
   font-weight: 700;
   color: var(--white);
@@ -1200,7 +1647,7 @@ img { display: block; width: 100%; }
   font-size: 12px;
   color: rgba(255,255,255,.5);
   margin-top: -4px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.06em;
 }
 .member-join-btn {
@@ -1257,7 +1704,7 @@ img { display: block; width: 100%; }
 .svc-item:hover { background: var(--bg); }
 .svc-icon { font-size: 20px; }
 .svc-label {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1291,7 +1738,7 @@ img { display: block; width: 100%; }
 .co-item:last-child { border-right: none; }
 .co-item:hover { background: var(--ink-2); }
 .co-type {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1299,7 +1746,7 @@ img { display: block; width: 100%; }
   margin-bottom: 6px;
 }
 .co-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--white);
@@ -1317,7 +1764,7 @@ img { display: block; width: 100%; }
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   transition: opacity .15s;
 }
 .co-item:hover .co-arrow { opacity: 1; }
@@ -1357,12 +1804,12 @@ img { display: block; width: 100%; }
 }
 .rh-car-card-body { padding: 14px 16px; }
 .rh-car-card-name {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px; font-weight: 800;
   color: var(--ink); margin-bottom: 4px;
 }
 .rh-car-card-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px; letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1374,7 +1821,7 @@ body.dark-mode .rh-car-card-meta { color: #556677; }
 .mobility-cta-btn {
   display: inline-block;
   background: var(--cta); color: #fff;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px; font-weight: 800;
   letter-spacing: .08em; text-transform: uppercase;
   padding: 12px 24px;
@@ -1412,7 +1859,7 @@ footer {
   filter: brightness(0.5);
 }
 .footer-brand-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 20px;
   font-weight: 700;
   color: #445566;
@@ -1425,7 +1872,7 @@ footer {
   margin-bottom: 16px;
 }
 .footer-contact {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9.5px;
   color: #2a3848;
   line-height: 2.1;
@@ -1435,7 +1882,7 @@ footer {
 .footer-contact a:hover { color: #e8a50e; }
 
 .footer-col-head {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.2em;
@@ -1465,13 +1912,13 @@ footer {
   gap: 10px;
 }
 .footer-legal {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   color: #1f2d3c;
   letter-spacing: .05em;
 }
 .footer-classify {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 7.5px;
   color: rgba(255,255,255,.05);
   letter-spacing: .1em;
@@ -1490,7 +1937,7 @@ footer {
   border-radius: 2px;
   padding: 5px 11px;
   cursor: pointer;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: #8899aa;
   letter-spacing: 0.08em;
@@ -1509,6 +1956,7 @@ footer {
   background: var(--edition-bar-bg, #f0f3f7);
   border-bottom: 1px solid var(--edition-bar-border, #dde1e7);
   transition: background .3s, border-color .3s;
+  margin-top: 56px; /* offset for fixed masthead */
 }
 .edition-bar-inner {
   max-width: 1340px;
@@ -1530,7 +1978,7 @@ footer {
   flex-shrink: 0;
 }
 .edition-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1538,7 +1986,7 @@ footer {
   white-space: nowrap;
 }
 .edition-select {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   color: var(--edition-select-c, #111820);
@@ -1562,29 +2010,38 @@ footer {
   display: flex;
   align-items: stretch;
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
+  min-width: 0;
 }
 .weather-panel {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 0 20px;
+  gap: 10px;
+  padding: 0 16px;
   border-right: 1px solid var(--edition-bar-border, #dde1e7);
   transition: opacity .3s;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.weather-panel > div {
+  min-width: 0;
 }
 .weather-panel.inactive { opacity: 0.38; }
 .weather-panel.active  { opacity: 1; }
 .wx-city {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--wx-city-c, #9aa3ad);
   margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .wx-temp {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--wx-temp-c, #111820);
@@ -1597,15 +2054,19 @@ footer {
   white-space: nowrap;
 }
 .wx-detail {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   color: var(--wx-detail-c, #9aa3ad);
   margin-top: 2px;
   letter-spacing: .04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.wx-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.wx-icon { font-size: 24px; line-height: 1; flex-shrink: 0; display:flex; align-items:center; justify-content:center; }
+.wx-icon svg, .local-data-icon svg { width: 1em; height: 1em; flex-shrink: 0; }
 .wx-loading {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   color: var(--wx-detail-c, #9aa3ad);
   letter-spacing: .1em;
@@ -1613,6 +2074,125 @@ footer {
   animation: wx-pulse 1.2s ease-in-out infinite;
 }
 @keyframes wx-pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+/* Edition bar — scroll-aware data cycling */
+.edition-bar {
+  position: relative;
+  z-index: 290;
+}
+
+/* Local data items — inline in edition bar */
+.edition-local-data {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-left: 1px solid var(--edition-bar-border, #dde1e7);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.local-data-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-right: 1px solid var(--edition-bar-border, #dde1e7);
+  flex-shrink: 0;
+  transition: opacity .4s, transform .4s;
+}
+.local-data-item:last-child { border-right: none; }
+.local-data-icon { font-size: 13px; line-height: 1; }
+.local-data-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--wx-detail-c, #6b7280);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.local-data-val {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+body.dark-mode .local-data-val { color: #dde5ee; }
+body.dark-mode .local-data-label { color: rgba(255,255,255,.35); }
+body.dark-mode .edition-local-data { border-left-color: #1d2535; }
+body.dark-mode .local-data-item { border-right-color: #1d2535; }
+.local-data-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--wx-detail-c, #9aa3ad);
+  white-space: nowrap;
+  line-height: 1;
+  margin-top: 1px;
+}
+body.dark-mode .local-data-sub { color: rgba(255,255,255,.25); }
+
+/* Sun countdown — live tick styling */
+#ldSunCountdown {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+
+/* Scroll-driven data cycling — one item highlights at a time */
+.local-data-item.ld-pulse .local-data-val {
+  animation: ldPulse .6s ease-out;
+}
+@keyframes ldPulse {
+  0%   { color: #22c55e; transform: scale(1.08); }
+  100% { color: var(--ink); transform: scale(1); }
+}
+body.dark-mode .local-data-item.ld-pulse .local-data-val {
+  animation: ldPulseDark .6s ease-out;
+}
+@keyframes ldPulseDark {
+  0%   { color: #22c55e; transform: scale(1.08); }
+  100% { color: #dde5ee; transform: scale(1); }
+}
+
+/* Swipe hint for horizontal scroll areas */
+.swipe-hint {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 20px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  animation: swipeHintPulse 3s ease-in-out 1.5s 2 forwards;
+  backdrop-filter: blur(4px);
+}
+.swipe-hint-arrow {
+  display: inline-block;
+  animation: swipeArrowBounce 1s ease-in-out infinite;
+}
+@keyframes swipeHintPulse {
+  0%   { opacity:0; transform:translateY(-50%) translateX(10px); }
+  15%  { opacity:1; transform:translateY(-50%) translateX(0); }
+  85%  { opacity:1; transform:translateY(-50%) translateX(0); }
+  100% { opacity:0; transform:translateY(-50%) translateX(-10px); }
+}
+@keyframes swipeArrowBounce {
+  0%,100% { transform:translateX(0); }
+  50%     { transform:translateX(5px); }
+}
 
 /* Right side of edition bar */
 .edition-bar-right {
@@ -1624,7 +2204,7 @@ footer {
   flex-shrink: 0;
 }
 .wx-source {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   color: var(--wx-detail-c, #9aa3ad);
   letter-spacing: .1em;
@@ -1654,7 +2234,7 @@ body.dark-mode {
 }
 
 /* Masthead dark */
-body.dark-mode .masthead { background: #080e17; border-bottom-color: #1d2535; }
+body.dark-mode .masthead { background: rgba(8,14,23,.92); border-bottom-color: #1d2535; }
 body.dark-mode .brand-pipe { background: #2a3545; }
 body.dark-mode .brand-mw-name { color: #ffffff; }
 body.dark-mode .brand-mw-sub { color: #6a7a8a; }
@@ -1696,17 +2276,15 @@ body.dark-mode .side-art { border-bottom-color: #1a1a1a; }
 body.dark-mode .side-art-title { color: #8899aa; }
 body.dark-mode .side-art:hover .side-art-title { color: #c9920a; }
 
-/* Credit module */
-body.dark-mode .credit-module { background: #0a1320; border-bottom-color: #1d2535; }
-body.dark-mode .credit-module.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.6); }
-body.dark-mode .credit-module-main { border-right-color: #1a1a1a; }
-body.dark-mode .credit-icon { background: #0d1a2a; }
-body.dark-mode .credit-eyebrow { color: #7a8a9a; }
-body.dark-mode .credit-headline { color: #ffffff; }
-body.dark-mode .credit-sub { color: #8899aa; }
-body.dark-mode .credit-stat-n { color: #c9920a; }
-body.dark-mode .credit-stat-l { color: #6a7a8a; }
-body.dark-mode .credit-stat { border-right-color: #1a1a1a; }
+/* Credit module — hero mode: dark overlay already applied, only fade gradient changes */
+/* Credit module — already dark, minimal dark-mode overrides needed */
+body.dark-mode .credit-module {
+  background: #060c1a;
+  border-bottom-color: #1d2535;
+}
+body.dark-mode .credit-icon::after {
+  background: linear-gradient(to right, transparent 0%, rgba(6,12,26,.4) 35%, rgba(6,12,26,.8) 70%, #060c1a 100%);
+}
 
 /* MCI bar */
 body.dark-mode .mci-bar { background: #060c1a; border-color: #1d2535; }
@@ -1849,7 +2427,7 @@ body, .masthead, .credit-module, .trending-strip, .ent-section,
   margin-bottom: 28px;
 }
 .svc-grid-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1911,7 +2489,7 @@ body, .masthead, .credit-module, .trending-strip, .ent-section,
 
 .svc-card-badge {
   display: inline-block;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -1932,7 +2510,7 @@ body, .masthead, .credit-module, .trending-strip, .ent-section,
 }
 
 .svc-card-label {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 800;
   color: var(--ink);
@@ -1962,8 +2540,8 @@ body.dark-mode .svc-badge--soon { background: #0a0a0a; color: #2a2a2a; border-co
 body.dark-mode .svc-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.6); }
 
 /* v18 — iframe embed fix: allow full page scroll in Wix iframe Desktop mode */
-html, body { width: 100%; height: auto; min-height: 100%; overflow-x: hidden; }
-body { overflow-y: auto; -webkit-text-size-adjust: 100%; }
+html { width: 100%; height: auto; min-height: 100%; overflow-x: clip; }
+body { width: 100%; height: auto; min-height: 100%; overflow-x: clip; overflow-y: auto; -webkit-text-size-adjust: 100%; }
 body.remote-mode { overflow: hidden !important; }
 
 
@@ -2024,7 +2602,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
   background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.6));
 }
 .dd-preview-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -2032,7 +2610,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
   margin-bottom: 4px;
 }
 .dd-preview-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
@@ -2047,7 +2625,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
 }
 .dd-coming-soon {
   display: inline-block;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2058,7 +2636,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
 }
 .dd-more-info {
   display: inline-block;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2087,7 +2665,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
   gap: 16px;
 }
 .svc-scroll-title {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .18em;
@@ -2095,7 +2673,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
   color: var(--cta);
 }
 .svc-scroll-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -2144,7 +2722,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
   z-index: 2;
 }
 .svc-scroll-badge {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 7.5px;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -2156,7 +2734,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
 .svc-scroll-badge.active { background: rgba(17,24,34,.85); color: #a8e6c3; border: 1px solid rgba(17,24,34,.5); }
 .svc-scroll-badge.soon   { background: rgba(0,0,0,.5); color: rgba(255,255,255,.3); border: 1px solid rgba(255,255,255,.1); }
 .svc-scroll-name {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 800;
   color: #ffffff;
@@ -2278,7 +2856,7 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .mobile-drawer-brand {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--white);
@@ -2298,7 +2876,7 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .mobile-nav-section-head {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -2307,7 +2885,7 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
 }
 .mobile-nav-link {
   display: block;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 600;
   color: rgba(255,255,255,.75);
@@ -2356,7 +2934,7 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
   border: 1px solid var(--border);
   border-radius: 2px;
   padding: 5px 10px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: var(--slate);
   cursor: pointer;
@@ -2368,6 +2946,9 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
 .mobile-theme-btn:hover { border-color: var(--ink); color: var(--ink); }
 body.dark-mode .mobile-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.5); }
 body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--cta); }
+.mobile-theme-btn svg, #mastheadWxIcon svg { width: 14px; height: 14px; vertical-align: middle; }
+#mobileThemeIcon { display: inline-flex; align-items: center; }
+#mastheadWxIcon  { display: inline-flex; align-items: center; }
 
 /* ── MOBILE RESPONSIVE ───────────────────────────────── */
 @media (max-width: 768px) {
@@ -2429,44 +3010,68 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .weather-panels::-webkit-scrollbar { display: none; }
   .weather-panel { flex-shrink: 0; padding: 0 14px; }
   .edition-bar-right { display: none; }
+  .edition-local-data { border-left: none; }
+  .local-data-item { padding: 4px 10px; }
+  .local-data-label { font-size: 6px; }
+  .local-data-val { font-size: 10px; }
+  .local-data-icon { font-size: 11px; }
 
-  /* --- CREDIT MODULE --- */
-  .credit-module { position: static; } /* remove sticky on mobile — too much real estate */
+  /* --- CREDIT MODULE (mobile: full hero overlay, single column) --- */
+  .credit-module {
+    background-image: var(--credit-hero, url('img/la-110-freeway.webp'));
+    background-size: cover;
+    background-position: center 30%;
+    min-height: auto;
+    display: flex;
+    align-items: stretch;
+    border-bottom: none;
+  }
+  .credit-module::before {
+    display: block !important;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(6,12,26,.45) 0%, rgba(6,12,26,.7) 50%, rgba(6,12,26,.92) 100%);
+    z-index: 1;
+  }
+  .credit-module::after {
+    display: block !important;
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--ink));
+    z-index: 2;
+    pointer-events: none;
+  }
   .credit-module-inner {
     display: flex !important;
-    flex-direction: column;
-    min-height: auto;
-    padding: 0;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+    padding: 36px 20px 48px !important;
+    position: relative;
+    z-index: 3;
+    min-height: auto !important;
+    align-items: flex-start !important;
   }
-  .credit-module-main {
-    flex-direction: column;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 0 0 20px 0;
-    gap: 16px;
-  }
-  .credit-icon {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 0 !important;
-    height: 200px !important;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .credit-icon img { height: 200px !important; width: 100% !important; }
-  .credit-module-text { padding: 0 16px; }
-  .credit-headline { font-size: 26px !important; }
-  .credit-sub { font-size: 13px; }
-  .credit-stat-row { grid-template-columns: repeat(3,1fr); margin: 0 16px; }
-  .credit-stat { padding: 10px 8px; }
-  .credit-module-actions {
-    padding: 16px;
-    border-top: 1px solid var(--border);
-    flex-direction: row;
-    gap: 10px;
-  }
-  .credit-cta-primary, .credit-cta-secondary { flex: 1; padding: 13px 10px; font-size: 11px; }
+  .credit-icon { display: block !important; position: static !important; overflow: visible !important; min-height: auto !important; margin-right: 0 !important; }
+  .credit-icon .credit-carousel { display: none !important; }
+  .credit-icon::before, .credit-icon::after { display: none !important; }
+  .credit-overlay { position: static !important; padding: 0 !important; width: 100% !important; transform: none !important; }
+  .credit-module-main { border-right: none; border-bottom: none; padding: 0 !important; margin-top: 24px; align-items: flex-start !important; }
+  .credit-module-main .credit-module-text { text-align: left; max-width: 100%; }
+  .credit-module-text { padding: 0; }
+  .credit-eyebrow { display: none !important; }
+  .credit-headline { font-size: 28px !important; max-width: 100% !important; color: #fff !important; }
+  .credit-sub { font-size: 12.5px; color: rgba(255,255,255,.72) !important; max-width: 100% !important; }
+  .credit-stat-row { grid-template-columns: repeat(3,1fr); max-width: 100% !important; border-top-color: rgba(255,255,255,.12) !important; }
+  .credit-stat { padding: 8px 8px; border-right-color: rgba(255,255,255,.1) !important; }
+  .credit-stat-l { color: rgba(255,255,255,.45) !important; }
+  .credit-module-actions { flex-direction: row; gap: 10px; max-width: 100%; }
+  .credit-cta-primary, .credit-cta-secondary { flex: 1; padding: 13px 10px; font-size: 10px; }
+  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.3) !important; }
+  .credit-cta-lead { text-align: left !important; }
+  .credit-cta-fine { font-size: 6.5px; letter-spacing: 0.06em; white-space: nowrap; text-align: left !important; margin-left: 0 !important; margin-right: 0 !important; }
 
   /* --- HERO AREA --- */
   .hero-area { grid-template-columns: 1fr; }
@@ -2521,8 +3126,13 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
 
   /* --- MEMBER MODULE --- */
   .member-inner { flex-direction: column; gap: 24px; padding: 32px 16px; }
+  .member-inner--centered { align-items: flex-start !important; text-align: left !important; padding: 32px 16px !important; }
   .member-brand-col, .member-perks-col, .member-cta-col { width: 100%; border: none !important; padding: 0 !important; }
-  .member-brand-title { font-size: 36px; }
+  .member-brand-title { font-size: 28px; }
+  .member-perks-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .member-hero-top .member-brand-title { font-size: 28px; }
+  .member-cta-center { align-items: flex-start !important; }
+  .member-cta-center .member-join-btn { padding: 14px 32px; width: 100%; text-align: center; }
 
   /* --- COMPANY BAR --- */
   .co-bar-inner { grid-template-columns: 1fr 1fr; gap: 0; }
@@ -2570,49 +3180,28 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
 
 /* ── TABLET (769px – 1024px) ─────────────────────── */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .masthead-inner { padding: 0 16px; gap: 16px; }
+  .masthead-inner { padding: 0 16px; gap: 14px; min-height: 50px; }
   .masthead-center { display: none; }
-  .brand-mw-name { font-size: 24px; }
+  .brand-mw-name { font-size: 20px; }
+  .brand-logo { height: 28px; }
   .hero-title { font-size: 34px; }
   .hero-area { grid-template-columns: 1fr 260px; }
   .content-grid { grid-template-columns: 1fr 260px; }
-  .credit-module-inner { grid-template-columns: 1fr 260px; }
+  .credit-module-inner { grid-template-columns: 55% 45%; }
+  .credit-module-main { padding: 28px 24px 28px 16px; }
   .card-grid { grid-template-columns: repeat(3,1fr); }
   .nav-link { font-size: 11px !important; padding: 12px 10px !important; }
 }
 
 /* ── CREDIT MODULE DYNAMIC ENHANCEMENTS ─────────────── */
+/* Eyebrow hidden — dot moved to .coll-period::after */
 .credit-eyebrow {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.credit-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cta);
-  animation: pulse-dot 1.4s ease-in-out infinite;
+  display: none !important;
 }
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.7); }
+  50%       { opacity: 0.55; transform: scale(0.85); }
 }
-body.dark-mode .credit-module {
-  border-bottom-color: #111822;
-}
-body.dark-mode .credit-module::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #111822, transparent);
-}
-.credit-module { position: relative; }
-
 /* CTA button pulse in dark mode */
 body.dark-mode .credit-cta-primary {
   animation: cta-glow 3s ease-in-out infinite;
@@ -2688,7 +3277,7 @@ body.dark-mode .qj-dot:hover, body.dark-mode .qj-dot.active {
   white-space: nowrap;
   background: var(--ink);
   color: var(--white);
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -2752,7 +3341,7 @@ body.dark-mode .qj-sep { background: #1d2535; }
   flex-wrap: wrap;
 }
 .gate-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -2763,7 +3352,7 @@ body.dark-mode .qj-sep { background: #1d2535; }
   color: var(--cta);
 }
 .gate-recommend {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   color: rgba(255,255,255,.35);
   letter-spacing: .08em;
@@ -2777,7 +3366,7 @@ body.dark-mode .qj-sep { background: #1d2535; }
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .07em;
@@ -2823,7 +3412,7 @@ body.dark-mode .qj-sep { background: #1d2535; }
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -2870,7 +3459,7 @@ body.gate-open { padding-top: 54px; }
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9.5px;
   color: rgba(255,255,255,.4);
   letter-spacing: .08em;
@@ -2904,7 +3493,7 @@ body.gate-open { padding-top: 54px; }
   justify-content: center;
   gap: 8px;
   color: #fff;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .1em;
@@ -3021,7 +3610,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   100% { opacity: 1; transform: none; filter: none; }
 }
 .rh-load-mw-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 24px; font-weight: 700;
   color: #fff; line-height: 1;
   letter-spacing: -0.01em;
@@ -3029,7 +3618,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 }
 .rh-load-mw-name .bang { color: #c9920a; text-shadow: 0 0 12px rgba(201,146,10,.5); }
 .rh-load-mw-est {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .2em;
   text-transform: uppercase;
   color: rgba(0,255,255,.35);
@@ -3037,7 +3626,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 }
 .rh-load-label {
   margin-top: 32px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .22em;
   color: rgba(0,255,255,.7);
   text-transform: uppercase;
@@ -3072,14 +3661,14 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 #rhThankYou.active { display: flex; opacity: 1; }
 #rhThankYou.fade-out { opacity: 0; }
 .rh-ty-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 32px; font-weight: 700;
   color: #fff; text-align: center;
   text-shadow: 0 0 30px rgba(0,255,255,.3);
   opacity: 0; animation: tronFadeUp .8s ease-out .2s forwards;
 }
 .rh-ty-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px; letter-spacing: .18em;
   text-transform: uppercase;
   color: rgba(0,255,255,.5);
@@ -3094,7 +3683,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 }
 #rhVerifyStep.active { display: flex; }
 .rh-verify-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(255,255,255,.4);
@@ -3108,13 +3697,13 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(0,255,255,.2);
   border-radius: 2px; text-align: center;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 20px; color: #fff;
   outline: none; transition: border-color .2s;
 }
 .rh-verify-digit:focus { border-color: rgba(0,255,255,.7); box-shadow: 0 0 12px rgba(0,255,255,.15); }
 .rh-verify-resend {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .1em;
   color: rgba(0,255,255,.45);
   background: none; border: none; cursor: pointer;
@@ -3143,12 +3732,12 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   text-align: center;
 }
 .rh-lead-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 24px; font-weight: 700;
   color: #fff; margin-bottom: 6px; line-height: 1.15;
 }
 .rh-lead-subtitle {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8.5px; letter-spacing: .14em;
   text-transform: uppercase;
   color: rgba(255,255,255,.4);
@@ -3160,7 +3749,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   border: 1px solid rgba(255,255,255,.12);
   border-radius: 2px;
   padding: 12px 14px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   color: #fff;
   margin-bottom: 14px;
@@ -3178,7 +3767,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   margin-top: 2px; cursor: pointer; flex-shrink: 0;
 }
 .rh-lead-tos-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .06em;
   color: rgba(255,255,255,.4); line-height: 1.5;
 }
@@ -3186,7 +3775,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 .rh-lead-remember {
   display: flex; align-items: center; gap: 6px;
   margin-bottom: 18px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .08em;
   text-transform: uppercase;
   color: rgba(255,255,255,.3);
@@ -3195,7 +3784,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 .rh-lead-btn {
   width: 100%;
   background: #c9920a; color: #fff;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: .1em; text-transform: uppercase;
   padding: 14px 20px; border: none;
@@ -3220,13 +3809,13 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   50% { box-shadow: 0 0 40px rgba(0,230,118,.6); }
 }
 .rh-lead-error {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px; color: #ff6b6b;
   margin-top: 8px; display: none;
 }
 .rh-lead-instruction {
   margin-top: 20px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(255,255,255,.2);
@@ -3242,7 +3831,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
   border: 1px solid rgba(0,230,118,.35);
   border-radius: 2px;
   padding: 6px 12px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .14em;
   color: #00e676;
   cursor: pointer;
@@ -3281,7 +3870,7 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 }
 .rh-pts-icon { font-size: 42px; line-height: 1; }
 .rh-pts-label {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
   letter-spacing: .22em; color: #00e676;
   margin-top: 8px; text-transform: uppercase;
 }
@@ -3303,17 +3892,17 @@ body.iframe-mode.remote-mode { overflow: hidden !important; }
 }
 .rh-news-card:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }
 .rh-news-tag {
-  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 7.5px;
   letter-spacing: .14em; text-transform: uppercase;
   color: #c9920a; margin-bottom: 5px;
 }
 .rh-news-title {
-  font-family: 'Nunito Sans', sans-serif; font-size: 11px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px;
   color: rgba(255,255,255,.82); line-height: 1.4;
   font-weight: 600;
 }
 .rh-news-time {
-  font-family: 'DM Mono', monospace; font-size: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px;
   color: rgba(255,255,255,.3); margin-top: 5px;
 }
 @media (max-width: 900px) { .rh-news-strip { display: none; } }
@@ -3353,7 +3942,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   gap: 0px; line-height: 1;
 }
 .rh-wordmark {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 17px; font-weight: 700;
   color: #fff; line-height: 1;
   letter-spacing: -0.01em;
@@ -3361,7 +3950,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 }
 .rh-wordmark .bang { color: #c9920a; }
 .rh-wordmark-est {
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 6.5px; letter-spacing: .10em;
   text-transform: uppercase;
   color: rgba(255,255,255,.25);
@@ -3389,7 +3978,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   border-radius: 2px; overflow: hidden;
 }
 .rh-mode-sw-btn {
-  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .12em;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .12em;
   text-transform: uppercase; color: rgba(255,255,255,.35);
   background: none; border: none;
   border-right: 1px solid rgba(255,255,255,.08);
@@ -3407,7 +3996,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   border-radius: 2px; overflow: hidden;
 }
 .rh-lang-btn {
-  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .1em;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em;
   text-transform: uppercase; color: rgba(255,255,255,.3);
   background: none; border: none;
   border-right: 1px solid rgba(255,255,255,.06);
@@ -3418,7 +4007,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 
 /* Apply pill */
 .rh-apply-pill {
-  font-family: 'Nunito Sans', sans-serif; font-size: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px;
   font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
   color: #fff; background: #c9920a; border: none;
   padding: 9px 18px; cursor: pointer; transition: background .2s;
@@ -3441,7 +4030,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   border-radius: 2px;
   padding: 7px 12px;
   cursor: pointer; transition: all .2s;
-  font-family: 'DM Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   color: rgba(255,255,255,.75);
 }
 .rh-city-trigger:hover {
@@ -3475,7 +4064,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 .rh-city-opt {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px;
-  font-family: 'DM Mono', monospace; font-size: 8.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(255,255,255,.45);
   cursor: pointer; transition: all .15s;
@@ -3492,20 +4081,21 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   border-bottom: 1px solid rgba(255,255,255,.1);
   background: rgba(255,255,255,.03);
 }
-.rh-drop-wx-icon { font-size: 18px; }
+.rh-drop-wx-icon { font-size: 18px; display:inline-flex; align-items:center; }
+.rh-drop-wx-icon svg { width: 1em; height: 1em; }
 .rh-drop-wx-temp {
-  font-family: 'DM Mono', monospace; font-size: 13px;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
   font-weight: 700; color: #fff; letter-spacing: -.01em;
 }
 .rh-drop-wx-desc {
-  font-family: 'Nunito Sans', sans-serif; font-size: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px;
   color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em;
 }
 /* Switch to desktop row */
 .rh-city-desktop-sw {
   display: flex; align-items: center; gap: 10px;
   padding: 11px 14px;
-  font-family: 'DM Mono', monospace; font-size: 8.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(255,255,255,.35);
   cursor: pointer; transition: all .15s;
@@ -3621,7 +4211,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 }
 .rh-ent-thumb > span {
   display: block; padding: 3px 4px; text-align: center;
-  font-family: 'DM Mono', monospace; font-size: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 7px;
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(255,255,255,.5); background: rgba(0,0,0,.6);
   white-space: nowrap;
@@ -3655,7 +4245,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 
 /* ── Typography ──────────────────────────────────────────────── */
 .rh-eyebrow {
-  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
   letter-spacing: .16em; text-transform: uppercase;
   color: rgba(255,255,255,.55);
   display: flex; align-items: center; gap: 10px;
@@ -3674,7 +4264,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 }
 
 .rh-headline {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: clamp(54px, 9vw, 114px);
   font-weight: 700; color: #fff; line-height: .92;
   letter-spacing: -.025em; margin-bottom: 24px;
@@ -3683,7 +4273,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 .rh-headline.mid { font-size: clamp(44px, 6vw, 80px); }
 
 .rh-sub {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(14px, 1.5vw, 17px);
   color: rgba(255,255,255,.72); line-height: 1.7;
   max-width: 480px; margin-bottom: 32px;
@@ -3745,12 +4335,12 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 .rh-dsel-btn:hover .rh-dsel-icon { transform: scale(1.18) rotate(-2deg); }
 
 .rh-dsel-lbl {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
   letter-spacing: .14em; text-transform: uppercase;
   color: rgba(255,255,255,.82); white-space: nowrap; display: block;
 }
 .rh-dsel-sub {
-  font-family: 'Nunito Sans', sans-serif; font-size: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px;
   color: rgba(255,255,255,.32); display: block;
 }
 
@@ -3771,7 +4361,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 .rh-next-btn { bottom: 22px; }
 .rh-prev-btn {
   top: 88px;
-  font-family: 'DM Mono', monospace; font-size: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px;
   letter-spacing: .14em; text-transform: uppercase;
 }
 .rh-next-btn:hover, .rh-prev-btn:hover { color: rgba(255,255,255,.7); }
@@ -3787,7 +4377,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
 }
 .rh-scroll-label {
-  font-family: 'DM Mono', monospace; font-size: 7.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 7.5px;
   letter-spacing: .22em; text-transform: uppercase;
 }
 
@@ -3796,7 +4386,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 ══════════════════════════════════════════════════════════════ */
 .rh-num {
   position: absolute; right: 44px; bottom: 44px;
-  font-family: 'Cormorant Garamond', serif; font-size: 120px;
+  font-family: 'Instrument Serif', serif; font-size: 120px;
   font-weight: 700; color: rgba(255,255,255,.035); line-height: 1;
   pointer-events: none; user-select: none; letter-spacing: -.04em;
   transition: opacity .8s; z-index: 2;
@@ -3823,7 +4413,7 @@ body.remote-mode .rh-sidenav { display: flex; }
 
 .rh-sidenav-tip {
   position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .1em;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em;
   text-transform: uppercase; color: rgba(255,255,255,.7);
   background: rgba(8,14,24,.88); border: 1px solid rgba(255,255,255,.1);
   padding: 5px 10px; white-space: nowrap;
@@ -3860,7 +4450,7 @@ body.remote-mode .rh-sidenav { display: flex; }
   height: 26px; width: auto; margin-bottom: 24px;
 }
 .rh-apply-hl {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: clamp(38px, 4vw, 58px); font-weight: 700;
   color: #fff; line-height: .92; letter-spacing: -.02em; margin-bottom: 16px;
 }
@@ -3868,7 +4458,7 @@ body.remote-mode .rh-sidenav { display: flex; }
   font-size: 14px; color: rgba(255,255,255,.42); line-height: 1.72; margin-bottom: 24px;
 }
 .rh-apply-meta {
-  margin-top: 14px; font-family: 'DM Mono', monospace;
+  margin-top: 14px; font-family: 'JetBrains Mono', monospace;
   font-size: 8px; letter-spacing: .15em; text-transform: uppercase;
   color: rgba(255,255,255,.15);
 }
@@ -3884,8 +4474,8 @@ body.remote-mode .rh-sidenav { display: flex; }
 .rh-slide.visible .rh-apply-stats-row { opacity: 1; transform: none; }
 .rh-apply-stats-row > div { text-align: center; padding: 0 40px; }
 .rh-stat-div { width: 1px; height: 36px; background: rgba(255,255,255,.08); }
-.rh-stat-n { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: #c9920a; line-height: 1; display: block; }
-.rh-stat-l { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-top: 4px; }
+.rh-stat-n { font-family: 'Instrument Serif', serif; font-size: 38px; font-weight: 700; color: #c9920a; line-height: 1; display: block; }
+.rh-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-top: 4px; }
 
 /* ══════════════════════════════════════════════════════════════
    PRODUCT CAROUSEL (auto-slide)
@@ -3923,11 +4513,11 @@ body.remote-mode .rh-sidenav { display: flex; }
 }
 .rh-carousel-body { padding: 20px 20px 18px; }
 .rh-carousel-cat {
-  font-family: 'DM Mono', monospace; font-size: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px;
   letter-spacing: .16em; text-transform: uppercase; color: #c9920a; margin-bottom: 8px;
 }
 .rh-carousel-name {
-  font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700;
+  font-family: 'Instrument Serif', serif; font-size: 22px; font-weight: 700;
   color: #fff; margin-bottom: 8px; line-height: 1.1;
 }
 .rh-carousel-desc {
@@ -3936,7 +4526,7 @@ body.remote-mode .rh-sidenav { display: flex; }
 .rh-carousel-btns { display: flex; gap: 4px; }
 
 .rh-cbtn {
-  flex: 1; font-family: 'DM Mono', monospace; font-size: 8px;
+  flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 8px;
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(255,255,255,.6); background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.1); padding: 8px 6px;
@@ -4108,7 +4698,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <div class="rh-city-dropdown" id="rhCityDropdown">
           <!-- Weather row inside dropdown -->
           <div class="rh-city-wx-row" id="rhDropWx">
-            <span class="rh-drop-wx-icon" id="rhDropWxIcon">🌤</span>
+            <span class="rh-drop-wx-icon" id="rhDropWxIcon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></span>
             <span class="rh-drop-wx-temp" id="rhDropWxTemp">··°F</span>
             <span class="rh-drop-wx-desc" id="rhDropWxDesc">Loading…</span>
           </div>
@@ -4156,39 +4746,39 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           <span id="rhLiveLabel">LIVE</span>
         </button>
         <div class="rh-live-panel" id="rhLivePanel" style="display:none;position:absolute;top:100%;right:0;margin-top:8px;background:rgba(8,10,14,.97);border:1px solid rgba(0,230,118,.15);border-radius:6px;padding:16px 18px;min-width:260px;z-index:9999;backdrop-filter:blur(16px);box-shadow:0 12px 40px rgba(0,0,0,.6);">
-          <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,230,118,.5);margin-bottom:12px;">⚙ Preferences</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,230,118,.5);margin-bottom:12px;">⚙ Preferences</div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <span style="font-family:'DM Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Location</span>
-            <span id="rhPrefCity" style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:#fff;">Los Angeles</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Location</span>
+            <span id="rhPrefCity" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;">Los Angeles</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <span style="font-family:'DM Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Weather</span>
-            <span id="rhPrefWx" style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:#fff;">72° ☀</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Weather</span>
+            <span id="rhPrefWx" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;">72° ☀</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <span style="font-family:'DM Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Language</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Language</span>
             <div style="display:flex;gap:4px;">
-              <button onclick="rhLang('en',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(0,230,118,.2);border-radius:2px;background:rgba(0,230,118,.12);color:#fff;cursor:pointer;font-family:'DM Mono',monospace;">EN</button>
-              <button onclick="rhLang('es',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'DM Mono',monospace;">ES</button>
-              <button onclick="rhLang('fr',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'DM Mono',monospace;">FR</button>
-              <button onclick="rhLang('zh',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'DM Mono',monospace;">中文</button>
+              <button onclick="rhLang('en',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(0,230,118,.2);border-radius:2px;background:rgba(0,230,118,.12);color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;">EN</button>
+              <button onclick="rhLang('es',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'JetBrains Mono',monospace;">ES</button>
+              <button onclick="rhLang('fr',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'JetBrains Mono',monospace;">FR</button>
+              <button onclick="rhLang('zh',this)" style="font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:'JetBrains Mono',monospace;">中文</button>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-            <span style="font-family:'DM Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Mode</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.35);width:55px;letter-spacing:.06em;text-transform:uppercase;">Mode</span>
             <div style="display:flex;gap:4px;">
-              <button onclick="setMode('desktop');rhToggleLivePanel();" style="font-size:9px;padding:4px 10px;border:1px solid rgba(255,255,255,.12);border-radius:2px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;cursor:pointer;">🖥 Desktop</button>
-              <button style="font-size:9px;padding:4px 10px;border:1px solid rgba(0,230,118,.3);border-radius:2px;background:rgba(0,230,118,.1);color:#00e676;font-family:'DM Mono',monospace;cursor:pointer;">📱 Remote</button>
+              <button onclick="setMode('desktop');rhToggleLivePanel();" style="font-size:9px;padding:4px 10px;border:1px solid rgba(255,255,255,.12);border-radius:2px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;cursor:pointer;">🖥 Desktop</button>
+              <button style="font-size:9px;padding:4px 10px;border:1px solid rgba(0,230,118,.3);border-radius:2px;background:rgba(0,230,118,.1);color:#00e676;font-family:'JetBrains Mono',monospace;cursor:pointer;">📱 Remote</button>
             </div>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:10px;">
-            <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px;">Change Location</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px;">Change Location</div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;">
-              <button onclick="rhSelectCityFromPanel('los-angeles','Los Angeles')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(0,230,118,.2);border-radius:2px;background:rgba(0,230,118,.08);color:#fff;font-family:'Nunito Sans',sans-serif;cursor:pointer;">🌆 LA</button>
-              <button onclick="rhSelectCityFromPanel('san-francisco','San Francisco')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Nunito Sans',sans-serif;cursor:pointer;">🌉 SF</button>
-              <button onclick="rhSelectCityFromPanel('new-york','New York')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Nunito Sans',sans-serif;cursor:pointer;">🗽 NYC</button>
-              <button onclick="rhSelectCityFromPanel('miami','Miami')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Nunito Sans',sans-serif;cursor:pointer;">🌴 MIA</button>
-              <button onclick="rhSelectCityFromPanel('las-vegas','Las Vegas')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Nunito Sans',sans-serif;cursor:pointer;">🎰 LV</button>
+              <button onclick="rhSelectCityFromPanel('los-angeles','Los Angeles')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(0,230,118,.2);border-radius:2px;background:rgba(0,230,118,.08);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;">🌆 LA</button>
+              <button onclick="rhSelectCityFromPanel('san-francisco','San Francisco')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;">🌉 SF</button>
+              <button onclick="rhSelectCityFromPanel('new-york','New York')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;">🗽 NYC</button>
+              <button onclick="rhSelectCityFromPanel('miami','Miami')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;">🌴 MIA</button>
+              <button onclick="rhSelectCityFromPanel('las-vegas','Las Vegas')" style="font-size:9px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:2px;background:transparent;color:rgba(255,255,255,.5);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;">🎰 LV</button>
             </div>
           </div>
         </div>
@@ -4215,7 +4805,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           style="background-image:url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1920&q=90&fit=crop&crop=center');background-position:center 40%;"></div>
         <!-- Slide 3: Supercar street culture at night -->
         <div class="rh-hero-slide" id="rhHeroSlide3"
-          style="background-image:url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1920&q=90&fit=crop&crop=center');background-position:center 45%;"></div>
+          style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=90&fit=crop&crop=center');background-position:center 45%;"></div>
         <!-- Slide 4: Mechanic working on luxury car -->
         <div class="rh-hero-slide" id="rhHeroSlide4"
           style="background-image:url('https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1920&q=90&fit=crop&crop=center');background-position:center 40%;"></div>
@@ -4431,39 +5021,39 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <div class="rh-svc-slides" style="display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:16px;padding-bottom:8px;-webkit-overflow-scrolling:touch;">
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);transform:translateY(0);transition:transform .3s;">
             <div style="height:120px;background:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
+              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Collision Repair</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Collision Repair</span></div>
           </div>
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);">
             <div style="height:110px;background:url('https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
+              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Detailing Studio</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Detailing Studio</span></div>
           </div>
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);">
             <div style="height:110px;background:url('https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
+              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Chauffeur Service</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Chauffeur Service</span></div>
           </div>
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);">
             <div style="height:110px;background:url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
+              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Insurance Broker</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Insurance Broker</span></div>
           </div>
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);">
             <div style="height:110px;background:url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
+              <div style="position:absolute;top:8px;left:8px;background:#00e676;color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">LIVE</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Credit Recovery</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.05);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;font-weight:700;">Credit Recovery</span></div>
           </div>
           <div style="scroll-snap-align:start;min-width:72%;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4);">
             <div style="height:110px;background:url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=85&fit=crop') center/cover;position:relative;">
-              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'DM Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
+              <div style="position:absolute;top:8px;left:8px;background:rgba(201,146,10,.9);color:#000;font-family:'JetBrains Mono',monospace;font-size:7px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;">COMING SOON</div>
             </div>
-            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Nunito Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Fleet Management</span></div>
+            <div style="padding:8px;background:rgba(255,255,255,.03);"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.6);font-weight:700;">Fleet Management</span></div>
           </div>
         </div></div>
       <div class="rh-num">03</div>
@@ -4782,9 +5372,9 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
     </div>
     <div class="masthead-center">
-      <div class="masthead-date">Friday, February 20, 2026 &nbsp;·&nbsp; Los Angeles, California</div>
-      <div class="masthead-wx" id="mastheadWx" style="display:flex;align-items:center;justify-content:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;font-weight:400;color:var(--muted);margin-top:2px;">
-        <span id="mastheadWxIcon">☀️</span>
+      <div class="masthead-date">Loading date... &nbsp;·&nbsp; Los Angeles, CA</div>
+      <div class="masthead-wx" id="mastheadWx" style="display:flex;align-items:center;justify-content:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;font-weight:400;color:var(--muted);margin-top:2px;">
+        <span id="mastheadWxIcon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></span>
         <span id="mastheadWxTemp">--°F</span>
         <span style="opacity:.4;">·</span>
         <span id="mastheadWxDesc" style="text-transform:capitalize;">Loading...</span>
@@ -4796,7 +5386,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div>
     <!-- Mobile-only controls -->
     <button class="mobile-theme-btn" id="mobileThemeBtn" title="Toggle theme">
-      <span id="mobileThemeIcon">☀️</span>
+      <span id="mobileThemeIcon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></span>
     </button>
     <button class="mobile-nav-toggle" id="mobileNavToggle" title="Menu" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -4813,7 +5403,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       <span class="edition-label">Local Edition</span>
       <select class="edition-select" id="editionSelect">
         <optgroup label="California">
-          <option value="los-angeles" data-zip="90001" data-lat="34.0195" data-lon="-118.2764" data-tz="America/Los_Angeles" selected>Los Angeles, CA</option>
+          <option value="los-angeles" data-zip="90013" data-lat="34.0453" data-lon="-118.2413" data-tz="America/Los_Angeles" selected>Los Angeles, CA</option>
           <option value="san-francisco" data-zip="94102" data-lat="37.7749" data-lon="-122.4194" data-tz="America/Los_Angeles">San Francisco, CA</option>
         </optgroup>
         <optgroup label="Coming Soon">
@@ -4832,9 +5422,9 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
       <!-- Los Angeles -->
       <div class="weather-panel active" id="wx-los-angeles">
-        <div class="wx-icon" id="wx-icon-los-angeles">🌤</div>
+        <div class="wx-icon" id="wx-icon-los-angeles"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></div>
         <div>
-          <div class="wx-city">Los Angeles · 90001</div>
+          <div class="wx-city">Los Angeles · 90013</div>
           <div style="display:flex;align-items:baseline;gap:8px;">
             <div class="wx-temp" id="wx-temp-los-angeles"><span class="wx-loading">···</span></div>
             <div class="wx-desc" id="wx-desc-los-angeles"></div>
@@ -4845,7 +5435,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
       <!-- San Francisco -->
       <div class="weather-panel inactive" id="wx-san-francisco">
-        <div class="wx-icon" id="wx-icon-san-francisco">🌤</div>
+        <div class="wx-icon" id="wx-icon-san-francisco"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></div>
         <div>
           <div class="wx-city">San Francisco · 94102</div>
           <div style="display:flex;align-items:baseline;gap:8px;">
@@ -4856,6 +5446,26 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         </div>
       </div>
 
+    </div>
+
+    <!-- Inline local data (tomorrow, gas, sun countdown) -->
+    <div class="edition-local-data" id="editionLocalData">
+      <div class="local-data-item" data-ld-idx="0">
+        <span class="local-data-icon" id="ldTmrwIcon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></span>
+        <div><div class="local-data-label">Tomorrow</div><div class="local-data-val" id="ldTmrw">···</div></div>
+      </div>
+      <div class="local-data-item" data-ld-idx="1">
+        <span class="local-data-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 21V6a3 3 0 013-3h6a3 3 0 013 3v15" fill="#ef4444" opacity=".15"/><path d="M4 21V6a3 3 0 013-3h6a3 3 0 013 3v15" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="6" y="6" width="8" height="5" rx="1" fill="#ef4444" opacity=".3"/><path d="M16 13h.5a2 2 0 012 2v2.5a1.5 1.5 0 003 0V10l-3-3" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/><line x1="4" y1="21" x2="16" y2="21" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <div>
+          <div class="local-data-label">Gas · LA / Nat'l</div>
+          <div class="local-data-val" id="ldGasPrice">$4.89 / $3.52</div>
+          <div class="local-data-sub" id="ldGasTimestamp">Mar 5, 2026</div>
+        </div>
+      </div>
+      <div class="local-data-item" data-ld-idx="2">
+        <span class="local-data-icon" id="ldSunIcon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12l-3-3" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><path d="M12 12l3-3" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="4" x2="12" y2="12" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><path d="M5 17a7 7 0 0114 0" fill="#f97316" opacity=".2"/><path d="M5 17a7 7 0 0114 0" stroke="#f97316" stroke-width="2" stroke-linecap="round" fill="none"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round" opacity=".5"><line x1="2.93" y1="14.93" x2="4.34" y2="13.52"/><line x1="19.66" y1="13.52" x2="21.07" y2="14.93"/></g><line x1="1" y1="20" x2="23" y2="20" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" opacity=".4"/></svg></span>
+        <div><div class="local-data-label" id="ldSunLabel">Sunset in</div><div class="local-data-val" id="ldSunCountdown">···</div></div>
+      </div>
     </div>
 
     <!-- Right: source + member zip hint -->
@@ -5202,35 +5812,60 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 <!-- ═══ HIRECREDIT LEAD MODULE (replaces LA Times streaming module) ═══ -->
 <div class="credit-module" id="sec-credit">
   <div class="credit-module-inner">
-    <div class="credit-module-main">
-      <div class="credit-icon" style="padding:0;overflow:hidden;border-radius:4px;min-width:280px;max-width:340px;flex-shrink:0;">
-        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=680&q=90&fit=crop&crop=faces,center"
-             alt="Financial stress — credit recovery" 
-             style="width:100%;height:220px;object-fit:cover;display:block;filter:grayscale(15%);">
+    <!-- Left: image carousel with text overlay -->
+    <div class="credit-icon">
+      <div class="credit-carousel" id="creditCarousel">
+        <img class="carousel-slide active city-slide" src="img/la-110-freeway.webp" alt="LA 110 freeway heading downtown" loading="eager">
+        <img class="carousel-slide cars-disney" src="img/cars-disney-hall.jpg" alt="Cars at Walt Disney Concert Hall" loading="lazy">
+        <img class="carousel-slide la-mural" src="img/la-night-6.jpeg" alt="LA street mural scene" loading="lazy">
+        <img class="carousel-slide collision-night" src="img/la-dtla-fog.avif" alt="Nighttime collision scene LA" loading="lazy">
+        <img class="carousel-slide porsche-911" src="img/porsche-911.avif" alt="White Porsche 911 GTS California hills" loading="lazy">
+        <img class="carousel-slide storage-accident" src="img/la-night-4.jpeg" alt="Nighttime accident scene" loading="lazy">
+        <img class="carousel-slide ferrari-road" src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=900&q=80&fit=crop&crop=center" alt="Red Ferrari on the road" loading="lazy">
+        <img class="carousel-slide dtla-buildings" src="img/la-night-5.jpeg" alt="Downtown LA buildings" loading="lazy">
+        <img class="carousel-slide mercedes-amg" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=80&fit=crop&crop=center" alt="Mercedes AMG luxury performance" loading="lazy">
+        <img class="carousel-slide porsche-drive" src="img/la-night-2.avif" alt="Porsche driving California coast" loading="lazy">
       </div>
-      <div class="credit-module-text">
-        <div class="credit-eyebrow">Credit Repair · Lead Category · Q1 2026 — HIRECREDIT dba HIRECAR, LLC</div>
-        <h1 class="credit-headline serif">Your Credit Took a Hit.<br>We Bring It Back.</h1>
-        <p class="credit-sub">Incidents become credit events. Billing fog becomes collections. HIRECREDIT routes you from event to resolution — one record, one timeline, one clean outcome.</p>
-        <div class="credit-stat-row" style="margin-top:18px; border-top:1px solid var(--border-lt); padding-top:14px;">
+      <div class="credit-overlay">
+        <div class="credit-eyebrow" id="creditEyebrow">Credit Repair · Lead Category · Q1 2026 — HIRECREDIT dba HIRECAR, LLC</div>
+        <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
+        <p class="credit-sub" id="creditSub">Incidents become credit events. Billing fog becomes collections. HIRECAR routes you from event to resolution — one record, one timeline, one clean outcome.</p>
+        <div class="credit-stat-row">
           <div class="credit-stat">
-            <div class="credit-stat-n serif">810K+</div>
+            <div class="credit-stat-n serif" data-count-to="810" data-count-suffix="K+">
+              <span class="odometer" data-digits="810">
+                <span class="odo-digit" data-target="8">0</span><span class="odo-digit" data-target="1">0</span><span class="odo-digit" data-target="0">0</span>
+              </span><span class="odo-suffix">K+</span>
+            </div>
             <div class="credit-stat-l">LA Collisions · 2024</div>
           </div>
           <div class="credit-stat">
-            <div class="credit-stat-n serif">PIFR</div>
+            <div class="credit-stat-n serif odo-text" data-reveal="PIFR">
+              <span class="odo-char" data-char="P">–</span><span class="odo-char" data-char="I">–</span><span class="odo-char" data-char="F">–</span><span class="odo-char" data-char="R">–</span>
+            </div>
             <div class="credit-stat-l">Recovery SKU Active</div>
           </div>
           <div class="credit-stat">
-            <div class="credit-stat-n serif">24hr</div>
+            <div class="credit-stat-n serif" data-count-to="24" data-count-suffix="hr">
+              <span class="odometer" data-digits="24">
+                <span class="odo-digit" data-target="2">0</span><span class="odo-digit" data-target="4">0</span>
+              </span><span class="odo-suffix">hr</span>
+            </div>
             <div class="credit-stat-l">Intake Response</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="credit-module-actions">
-      <a href="booking/" class="credit-cta-primary">Start Credit Recovery →</a>
-      <a href="about/" class="credit-cta-secondary">How HIRECREDIT Works</a>
+    <!-- Right: solid panel with CTAs -->
+    <div class="credit-module-main">
+      <div class="credit-module-text">
+        <p class="credit-cta-lead">Get back on track — fast.</p>
+        <div class="credit-module-actions">
+          <a href="booking/" class="credit-cta-primary">Start Credit Recovery →</a>
+          <a href="about/" class="credit-cta-secondary">How <span class="cta-brand">HireCar</span> Works</a>
+        </div>
+        <p class="credit-cta-fine">Free intake · No credit pull · 24hr response</p>
+      </div>
     </div>
   </div>
 </div>
@@ -5245,9 +5880,9 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   <div class="hero-area">
     <div class="hero-main">
       <div class="hero-img-placeholder" style="
-        background-image: url('https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=1400&q=90&fit=crop&crop=center');
+        background-image: url('https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=1400&q=90&fit=crop&crop=center');
         background-size: cover;
-        background-position: center 40%;
+        background-position: center 30%;
         height: 380px;
         border-radius: 0;
         position: relative;
@@ -5256,7 +5891,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.55) 100%);"></div>
         <div style="position:absolute;bottom:18px;left:20px;display:flex;align-items:center;gap:8px;">
           <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#e53935;animation:pulse-dot 1.4s ease-in-out infinite;"></span>
-          <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);">Live Coverage · Los Angeles</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);">Live Coverage · Los Angeles</span>
         </div>
       </div>
       <div class="hero-cat-tag">Collision + Claims</div>
@@ -5514,34 +6149,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
 </div><!-- /page-wrap -->
 
-<!-- ═══ MCI INTELLIGENCE BAR ═══ -->
-<div class="mci-bar">
-  <div class="mci-inner">
-    <div class="mci-label">
-      <div class="mci-label-top">MARKETWATCH Intelligence</div>
-      <div class="mci-label-name serif">MCI<br>Live<br>Feb '26</div>
-    </div>
-    <div class="mci-metric">
-      <div class="mci-val serif">810,839 <span class="mci-delta-up">↑</span></div>
-      <div class="mci-key">LA Collisions · 2024</div>
-      <div class="mci-sub">Structural incident demand confirmed</div>
-    </div>
-    <div class="mci-metric">
-      <div class="mci-val serif">239,725</div>
-      <div class="mci-key">2025 Partial Export</div>
-      <div class="mci-sub">+ 459,612 person records</div>
-    </div>
-    <div class="mci-metric">
-      <div class="mci-val serif">HBI &gt;80 <span class="mci-delta-up">✓</span></div>
-      <div class="mci-key">Revenue Lane Threshold</div>
-      <div class="mci-sub">Below 80 = Cure Lane routing</div>
-    </div>
-    <div class="mci-actions">
-      <a href="playbooks/" class="mci-btn">View Full MCI Reports →</a>
-      <a href="playbooks/" class="mci-btn outline">HBI Score Report</a>
-    </div>
-  </div>
-</div>
+<!-- MCI Intelligence Bar — removed per redesign -->
 
 <div class="page-wrap">
 
@@ -5606,7 +6214,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">HIRECAR-certified collision centers working on Lamborghinis, Rolls-Royces, and Tesla Plaids — a behind-the-scenes look.</p>
         </div>
       </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
         <div style="position:relative;z-index:2;">
           <div class="ent-cat">Private Driver Life</div>
@@ -5620,30 +6228,25 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
 <!-- ═══ MEMBER PAGE MODULE ═══ -->
 <div class="member-module" id="sec-member">
-  <div class="member-inner">
-    <div class="member-brand-col">
+  <div class="member-inner member-inner--centered">
+    <div class="member-hero-top">
       <div class="member-brand-label">First Class · Member Access</div>
-      <div class="member-brand-title serif">HIRECAR<br>First Class<br>Membership</div>
+      <div class="member-brand-title serif">HIRECAR First Class Membership</div>
       <p class="member-brand-desc">The all-in auto membership for LA operators who don't have time for gaps in coverage, service, or intelligence. One membership. Everything covered.</p>
     </div>
-    <div class="member-perks-col">
-      <div class="member-perks-head">What's Included</div>
-      <ul class="perk-list">
-        <li><span class="perk-check">✓</span>Priority HIRECREDIT intake &amp; recovery</li>
-        <li><span class="perk-check">✓</span>HIRECAR Credit Card access + cashback</li>
-        <li><span class="perk-check">✓</span>Roadside, glass, tire, oil — all covered</li>
-        <li><span class="perk-check">✓</span>Airport transfers + private driver access</li>
-        <li><span class="perk-check">✓</span>SeedXchange funding pre-qualification</li>
-        <li><span class="perk-check">✓</span>MARKETWATCH Intelligence full access</li>
-        <li><span class="perk-check">✓</span>HBI + BRE standards coaching</li>
-        <li><span class="perk-check">✓</span>CreditWithKen session credit (1/qtr)</li>
-      </ul>
+    <div class="member-perks-grid">
+      <div class="perk-card"><span class="perk-icon">🛡️</span><span class="perk-text">Priority HIRECREDIT intake &amp; recovery</span></div>
+      <div class="perk-card"><span class="perk-icon">💳</span><span class="perk-text">HIRECAR Credit Card access + cashback</span></div>
+      <div class="perk-card"><span class="perk-icon">🔧</span><span class="perk-text">Roadside, glass, tire, oil — all covered</span></div>
+      <div class="perk-card"><span class="perk-icon">✈️</span><span class="perk-text">Airport transfers + private driver access</span></div>
+      <div class="perk-card"><span class="perk-icon">💰</span><span class="perk-text">SeedXchange funding pre-qualification</span></div>
+      <div class="perk-card"><span class="perk-icon">📊</span><span class="perk-text">MARKETWATCH Intelligence full access</span></div>
+      <div class="perk-card"><span class="perk-icon">📋</span><span class="perk-text">HBI + BRE standards coaching</span></div>
+      <div class="perk-card"><span class="perk-icon">🎓</span><span class="perk-text">CreditWithKen session credit (1/qtr)</span></div>
     </div>
-    <div class="member-cta-col">
-      <div>
-        <div class="member-price serif">$1,380</div>
-        <div class="member-price-sub">per year · cancel anytime</div>
-      </div>
+    <div class="member-cta-center">
+      <div class="member-price serif">$1,380</div>
+      <div class="member-price-sub">per year · cancel anytime</div>
       <a href="membership/" class="member-join-btn">Become a Member →</a>
       <a href="membership/" class="member-login-link">Already a member? Sign in →</a>
     </div>
@@ -5652,14 +6255,16 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
 <!-- ═══ HIRECAR SERVICES — Horizontal Scroll ═══ -->
 <div class="svc-scroll-section" id="sec-services">
-  <div class="svc-scroll-head-row">
-    <div class="svc-scroll-title">HIRECAR Services</div>
+  <div class="svc-scroll-head-row" id="svcToggleHead" style="cursor:pointer;" onclick="(function(){var b=document.getElementById('svcBody');var a=document.getElementById('svcChevron');if(b.style.display==='none'){b.style.display='';a.textContent='▾';}else{b.style.display='none';a.textContent='▸';}})()">
+    <div class="svc-scroll-title">HIRECAR Services <span id="svcChevron" style="font-size:14px;opacity:.6;">▾</span></div>
     <div class="svc-scroll-sub">Active now · Coming Soon in 2026</div>
-    <div class="svc-scroll-nav">
+    <div class="svc-scroll-nav" onclick="event.stopPropagation()">
       <button class="svc-scroll-btn" id="svcPrev" onclick="document.getElementById('svcTrack').scrollBy({left:-440,behavior:'smooth'})">←</button>
       <button class="svc-scroll-btn" id="svcNext" onclick="document.getElementById('svcTrack').scrollBy({left:440,behavior:'smooth'})">→</button>
     </div>
   </div>
+  <div id="svcBody">
+  <div class="swipe-hint" id="svcSwipeHint">Swipe <span class="swipe-hint-arrow">→</span></div>
   <div class="svc-scroll-track" id="svcTrack">
 
     <a href="services/" class="svc-scroll-item">
@@ -5798,6 +6403,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div>
 
   </div>
+  </div><!-- /svcBody -->
 </div>
 
 <!-- ═══ COMPANY BAR ═══ -->
@@ -5972,66 +6578,44 @@ function getDeviceRecommendation() {
   return window.innerWidth < 900 ? 'remote' : 'desktop';
 }
 
+/* ─── REMOTE MODE DISABLED (March 2026) ───────────────────
+   Remote mode toggle has been disabled. setMode always forces desktop.
+   To re-enable, restore the original setMode function from version control.
+   ──────────────────────────────────────────────────────────── */
 window.setMode = function(mode, remember) {
-  if (mode !== 'desktop' && mode !== 'remote') return;
-  
-  // If switching TO remote, show loading overlay for 2 seconds
-  const wasRemote = document.body.classList.contains('remote-mode');
-  if (mode === 'remote' && !wasRemote) {
-    const overlay = document.getElementById('rhLoadOverlay');
-    if (overlay) {
-      overlay.classList.add('active');
-      setTimeout(() => {
-        overlay.classList.remove('active');
-      }, 2000);
-    }
-  }
-  
-  // Apply class
-  document.body.classList.toggle('dark-mode',   mode === 'remote');
-  document.body.classList.toggle('remote-mode', mode === 'remote');
-  // Persist if remember=true (or remember not specified = respect existing pref)
-  if (remember !== false) localStorage.setItem(MODE_KEY, mode);
-  // Update mode toggle buttons
-  const mtbD = document.getElementById('mtbDesktop');
-  const mtbR = document.getElementById('mtbRemote');
-  if (mtbD) mtbD.classList.toggle('active', mode === 'desktop');
-  if (mtbR) mtbR.classList.toggle('active', mode === 'remote');
-  // Show/hide remote bottom bar
-  const bar = document.getElementById('remoteBottomBar');
-  if (bar && mode === 'remote') {
-    setTimeout(() => bar.classList.add('visible'), 300);
-  } else if (bar) {
-    bar.classList.remove('visible');
-  }
-  // Sync remote masthead mode buttons
-  const rhD = document.getElementById('rhSwDesktop');
-  const rhR = document.getElementById('rhSwRemote');
-  if (rhD) rhD.classList.toggle('active', mode === 'desktop');
-  if (rhR) rhR.classList.toggle('active', mode === 'remote');
-  // Mobile nav toggle color
-  document.querySelectorAll('.mobile-nav-toggle span').forEach(s => {
-    s.style.background = mode === 'remote' ? 'rgba(255,255,255,0.5)' : '';
-  });
-  // Scroll to top on mode switch
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // DISABLED: Always force desktop mode regardless of requested mode
+  mode = 'desktop';
+  document.body.classList.remove('dark-mode', 'remote-mode');
+  localStorage.setItem(MODE_KEY, 'desktop');
+  // Update toggle buttons to show desktop active
+  var mtbD = document.getElementById('mtbDesktop');
+  var mtbR = document.getElementById('mtbRemote');
+  if (mtbD) mtbD.classList.add('active');
+  if (mtbR) mtbR.classList.remove('active');
+  // Hide remote bottom bar
+  var bar = document.getElementById('remoteBottomBar');
+  if (bar) bar.classList.remove('visible');
+  // Hide remote hub
+  var hub = document.getElementById('remoteHub');
+  if (hub) hub.style.display = 'none';
+  // Hide mode toggle UI elements
+  document.querySelectorAll('.mode-toggle').forEach(function(el) { el.style.display = 'none'; });
 };
 
 function initMode() {
-  const saved = getSavedMode();
-  if (saved) {
-    setMode(saved, false); // don't re-save on restore
-    hideModeGate();
-  } else {
-    // First visit — always default to desktop
-    setMode('desktop', false);
-    // Only show the mode gate on mobile devices (prompt to try remote)
-    if (window.innerWidth < 900) {
-      showModeGate();
-    } else {
-      hideModeGate();
-    }
-  }
+  // DISABLED: Always force desktop, never show mode gate
+  setMode('desktop', true);
+  hideModeGate();
+  // Clear any saved remote preference
+  localStorage.setItem(MODE_KEY, 'desktop');
+  // Hide mode gate banner immediately
+  var banner = document.getElementById('modeGateBanner');
+  if (banner) banner.style.display = 'none';
+  // Hide Remote Hub
+  var hub = document.getElementById('remoteHub');
+  if (hub) hub.style.display = 'none';
+  // Hide all mode toggle buttons
+  document.querySelectorAll('.mode-toggle').forEach(function(el) { el.style.display = 'none'; });
 }
 
 /* ─── MODE GATE BANNER ──────────────────────────────────── */
@@ -6120,11 +6704,22 @@ if (window.MutationObserver && mobileIcon) {
 }
 
 /* ─── WEATHER ────────────────────────────────────────────── */
+/* Inline SVG weather icons — clean, scalable, no emoji */
+const WX_SVG = {
+  sun: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>',
+  partlyCloudy: '<svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="7" r="3.5" fill="#eab308" opacity=".9"/><g stroke="#eab308" stroke-width="1.5" stroke-linecap="round" opacity=".6"><line x1="8" y1="1" x2="8" y2="2.5"/><line x1="2.5" y1="7" x2="1" y2="7"/><line x1="4.05" y1="2.55" x2="5.1" y2="3.6"/><line x1="11.95" y1="2.55" x2="10.9" y2="3.6"/></g><path d="M8.5 15a4 4 0 014-4h.5a4 4 0 013.7 2.5A3.5 3.5 0 0117.5 20H9.5a4 4 0 01-1-7.9z" fill="#94a3b8" opacity=".85"/></svg>',
+  cloudy: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 19a5 5 0 01-.7-9.9C6.1 5.9 9.2 4 12.5 4a7 7 0 016.8 5.3A4.5 4.5 0 0119 18H6z" fill="#94a3b8" opacity=".8"/><path d="M3 16.5a3.5 3.5 0 013.5-3.5h.2a4.5 4.5 0 014.3-3.5 4.5 4.5 0 014.3 3.2A3.5 3.5 0 0115.5 19H4.5A3.5 3.5 0 013 16.5z" fill="#b0bec5" opacity=".45"/></svg>',
+  fog: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 14a4 4 0 01-.6-8C5.5 3.6 8 2 11 2a6 6 0 015.8 4.5A3.5 3.5 0 0117 13H5.5z" fill="#94a3b8" opacity=".65"/><g stroke="#94a3b8" stroke-width="2" stroke-linecap="round"><line x1="3" y1="17" x2="21" y2="17" opacity=".7"/><line x1="5" y1="20.5" x2="19" y2="20.5" opacity=".45"/><line x1="8" y1="23" x2="16" y2="23" opacity=".25"/></g></svg>',
+  rain: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 13a4 4 0 01-.6-8C5.5 2.6 8 1 11 1a6 6 0 015.8 4.5A3.5 3.5 0 0117 12H5.5z" fill="#94a3b8" opacity=".75"/><g stroke="#60a5fa" stroke-width="2" stroke-linecap="round" opacity=".9"><line x1="8" y1="15" x2="7" y2="19"/><line x1="12" y1="15" x2="11" y2="21"/><line x1="16" y1="15" x2="15" y2="19"/></g><circle cx="7" cy="20" r="1" fill="#60a5fa" opacity=".6"/><circle cx="11" cy="22" r="1" fill="#60a5fa" opacity=".6"/><circle cx="15" cy="20" r="1" fill="#60a5fa" opacity=".6"/></svg>',
+  snow: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 12a4 4 0 01-.6-8C5.5 1.6 8 0 11 0a6 6 0 015.8 4.5A3.5 3.5 0 0117 11H5.5z" fill="#94a3b8" opacity=".7"/><g fill="#bfdbfe"><circle cx="7" cy="15" r="1.3"/><circle cx="12" cy="16" r="1.3"/><circle cx="17" cy="15" r="1.3"/><circle cx="9.5" cy="19.5" r="1.1" opacity=".7"/><circle cx="14.5" cy="19.5" r="1.1" opacity=".7"/><circle cx="12" cy="22.5" r="1" opacity=".5"/></g></svg>',
+  storm: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 13a4 4 0 01-.6-8C5.5 2.6 8 1 11 1a6 6 0 015.8 4.5A3.5 3.5 0 0117 12H5.5z" fill="#64748b" opacity=".85"/><path d="M13 13l-2.5 5h4l-2.5 5" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="7.5" y1="15" x2="7" y2="18" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" opacity=".5"/><line x1="17" y1="14.5" x2="16.5" y2="17.5" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" opacity=".5"/></svg>'
+};
 const WX_CODE_MAP = {
-  0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',
-  51:'🌧',53:'🌧',55:'🌧',61:'🌧',63:'🌧',65:'🌧',
-  71:'🌨',73:'🌨',75:'🌨',80:'🌧',81:'🌧',82:'🌧',
-  95:'⛈',96:'⛈',99:'⛈'
+  0:WX_SVG.sun, 1:WX_SVG.partlyCloudy, 2:WX_SVG.partlyCloudy, 3:WX_SVG.cloudy,
+  45:WX_SVG.fog, 48:WX_SVG.fog,
+  51:WX_SVG.rain, 53:WX_SVG.rain, 55:WX_SVG.rain, 61:WX_SVG.rain, 63:WX_SVG.rain, 65:WX_SVG.rain,
+  71:WX_SVG.snow, 73:WX_SVG.snow, 75:WX_SVG.snow, 80:WX_SVG.rain, 81:WX_SVG.rain, 82:WX_SVG.rain,
+  95:WX_SVG.storm, 96:WX_SVG.storm, 99:WX_SVG.storm
 };
 const WX_DESC_MAP = {
   0:'Clear',1:'Mainly Clear',2:'Partly Cloudy',3:'Overcast',
@@ -6160,7 +6755,7 @@ function fetchWeather(editionKey) {
     const tempEl   = q('.wx-temp');
     const descEl   = q('.wx-desc');
     const detailEl = q('.wx-detail');
-    if (iconEl)   iconEl.textContent   = icon;
+    if (iconEl)   iconEl.innerHTML      = icon;
     if (tempEl)   tempEl.textContent   = tempF + '°F';
     if (descEl)   descEl.textContent   = desc;
     if (detailEl) detailEl.textContent = `Feels ${feelsF}° · Wind ${windMph} mph`;
@@ -6172,6 +6767,88 @@ function fetchWeather(editionKey) {
 
 function fetchAllWeather() {
   Object.keys(EDITIONS).forEach(fetchWeather);
+}
+
+/* ─── LOCAL DATA: sunrise/sunset + tomorrow weather ────── */
+/* ─── Sun countdown state ─── */
+var _sunTimes = { sunrise: null, sunset: null, tomorrowSunrise: null };
+var _sunCountdownTimer = null;
+
+function fetchLocalData() {
+  var saved = localStorage.getItem('mw_edition') || 'los-angeles';
+  var ed = EDITIONS[saved];
+  if (!ed) return;
+  var url = WX_API + '?latitude=' + ed.lat + '&longitude=' + ed.lon +
+    '&daily=sunrise,sunset,weathercode,temperature_2m_max,temperature_2m_min' +
+    '&timezone=' + encodeURIComponent(ed.tz) + '&forecast_days=2&timeformat=iso8601';
+  fetch(url).then(function(r){return r.json();}).then(function(data) {
+    var daily = data.daily;
+    if (!daily) return;
+
+    // Store sun times for countdown
+    _sunTimes.sunrise = daily.sunrise && daily.sunrise[0] ? new Date(daily.sunrise[0]) : null;
+    _sunTimes.sunset  = daily.sunset  && daily.sunset[0]  ? new Date(daily.sunset[0])  : null;
+    _sunTimes.tomorrowSunrise = daily.sunrise && daily.sunrise[1] ? new Date(daily.sunrise[1]) : null;
+
+    // Start countdown ticker (every second)
+    if (!_sunCountdownTimer) {
+      updateSunCountdown();
+      _sunCountdownTimer = setInterval(updateSunCountdown, 1000);
+    }
+
+    // Tomorrow forecast (index 1)
+    if (daily.temperature_2m_max && daily.temperature_2m_max[1] != null) {
+      var hiF = Math.round(daily.temperature_2m_max[1] * 9/5 + 32);
+      var loF = Math.round(daily.temperature_2m_min[1] * 9/5 + 32);
+      var code = daily.weathercode ? daily.weathercode[1] : 0;
+      var icon = WX_CODE_MAP[code] || WX_SVG.cloudy;
+      var desc = WX_DESC_MAP[code] || '';
+      var tmrwEl = document.getElementById('ldTmrw');
+      var tmrwIc = document.getElementById('ldTmrwIcon');
+      if (tmrwEl) tmrwEl.textContent = hiF + '°/' + loF + '° ' + desc;
+      if (tmrwIc) tmrwIc.innerHTML = icon;
+    }
+  }).catch(function(){});
+}
+
+function updateSunCountdown() {
+  var now = new Date();
+  var label = document.getElementById('ldSunLabel');
+  var val   = document.getElementById('ldSunCountdown');
+  var icon  = document.getElementById('ldSunIcon');
+  if (!label || !val) return;
+
+  var target = null;
+  var targetName = '';
+  var targetIcon = '';
+
+  var sunsetSvg  = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 12l-3-3" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><path d="M12 12l3-3" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="4" x2="12" y2="12" stroke="#f97316" stroke-width="2" stroke-linecap="round"/><path d="M5 17a7 7 0 0114 0" fill="#f97316" opacity=".2"/><path d="M5 17a7 7 0 0114 0" stroke="#f97316" stroke-width="2" stroke-linecap="round" fill="none"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round" opacity=".5"><line x1="2.93" y1="14.93" x2="4.34" y2="13.52"/><line x1="19.66" y1="13.52" x2="21.07" y2="14.93"/></g><line x1="1" y1="20" x2="23" y2="20" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" opacity=".4"/></svg>';
+  var sunriseSvg = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 5l-3 3" stroke="#eab308" stroke-width="2" stroke-linecap="round"/><path d="M12 5l3 3" stroke="#eab308" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="5" x2="12" y2="12" stroke="#eab308" stroke-width="2" stroke-linecap="round"/><path d="M5 17a7 7 0 0114 0" fill="#f97316" opacity=".25"/><path d="M5 17a7 7 0 0114 0" stroke="#f97316" stroke-width="2" stroke-linecap="round" fill="none"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round" opacity=".6"><line x1="2.93" y1="14.93" x2="4.34" y2="13.52"/><line x1="19.66" y1="13.52" x2="21.07" y2="14.93"/></g><line x1="1" y1="20" x2="23" y2="20" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" opacity=".4"/></svg>';
+
+  if (_sunTimes.sunset && now < _sunTimes.sunset) {
+    target = _sunTimes.sunset;
+    targetName = 'Sunset in';
+    targetIcon = sunsetSvg;
+  } else if (_sunTimes.tomorrowSunrise) {
+    target = _sunTimes.tomorrowSunrise;
+    targetName = 'Sunrise in';
+    targetIcon = sunriseSvg;
+  } else if (_sunTimes.sunrise && now < _sunTimes.sunrise) {
+    target = _sunTimes.sunrise;
+    targetName = 'Sunrise in';
+    targetIcon = sunriseSvg;
+  }
+
+  if (!target) { val.textContent = '—'; return; }
+
+  var diff = Math.max(0, Math.floor((target - now) / 1000));
+  var h = Math.floor(diff / 3600);
+  var m = Math.floor((diff % 3600) / 60);
+  var s = diff % 60;
+
+  label.textContent = targetName;
+  if (icon) icon.innerHTML = targetIcon;
+  val.textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm ' + (s < 10 ? '0' : '') + s + 's';
 }
 
 /* ─── EDITION SELECTOR ──────────────────────────────────── */
@@ -6198,6 +6875,38 @@ function setActiveEdition(key) {
 /* ─── BOOT ───────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
 
+  // 0. Fixed nav on scroll — pin primary-nav below masthead once edition-bar scrolls away
+  (function stickyNav() {
+    var nav = document.querySelector('.primary-nav');
+    var edBar = document.querySelector('.edition-bar');
+    if (!nav || !edBar) return;
+
+    // Create spacer placeholder (same height as nav)
+    var spacer = document.createElement('div');
+    spacer.className = 'nav-spacer';
+    spacer.style.height = nav.offsetHeight + 'px';
+    nav.parentNode.insertBefore(spacer, nav.nextSibling);
+
+    var mastH = 56;
+    var pinned = false;
+
+    function onScroll() {
+      var edBottom = edBar.getBoundingClientRect().bottom;
+      if (edBottom <= mastH && !pinned) {
+        nav.classList.add('nav-fixed');
+        spacer.classList.add('active');
+        pinned = true;
+      } else if (edBottom > mastH && pinned) {
+        nav.classList.remove('nav-fixed');
+        spacer.classList.remove('active');
+        pinned = false;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on load
+  })();
+
   // 1. Init mode FIRST (before layout computations — per methodology)
   initMode();
   bindModeGate();
@@ -6213,9 +6922,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   setActiveEdition(savedEd);
 
-  // 3. Weather
+  // 3. Weather + local data (gas, EV, sunrise/sunset, tomorrow)
   fetchAllWeather();
+  fetchLocalData();
   setInterval(fetchAllWeather, 15 * 60 * 1000);
+  setInterval(fetchLocalData, 30 * 60 * 1000);
 
   // 4. Live clock in masthead
   (function liveClock() {
@@ -6224,13 +6935,142 @@ document.addEventListener('DOMContentLoaded', function() {
     function tick() {
       const now  = new Date();
       const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+      const timeStr = now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
       const saved = localStorage.getItem('mw_edition') || 'los-angeles';
       const ed    = EDITIONS[saved];
       el.textContent = now.toLocaleDateString('en-US', opts) +
-        '  ·  ' + (ed ? ed.label : 'Los Angeles');
+        '  ·  ' + timeStr + '  ·  ' + (ed ? ed.label : 'Los Angeles');
     }
     tick();
-    setInterval(tick, 60000);
+    setInterval(tick, 30000);
+  })();
+
+  // 5a. Swipe hints — hide on scroll
+  (function initSwipeHints() {
+    var svcTrack = document.getElementById('svcTrack');
+    var svcHint  = document.getElementById('svcSwipeHint');
+    if (svcTrack && svcHint) {
+      svcTrack.addEventListener('scroll', function() {
+        if (svcTrack.scrollLeft > 20) svcHint.style.display = 'none';
+      }, { passive: true });
+    }
+  })();
+
+  // 5b-pre. Credit hero image carousel with dissolve crossfade
+  // Golden hour (4–6 PM PST) includes sunset slide · all other hours → luxury cars only
+  (function creditCarousel() {
+    var allSlides = document.querySelectorAll('#creditCarousel .carousel-slide');
+    var mod = document.querySelector('.credit-module');
+    if (!allSlides.length || !mod) return;
+
+    // Determine if golden hour
+    var now = new Date();
+    var pstStr = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', hour12: false });
+    var hour = parseInt(pstStr, 10);
+    var isSunset = (hour >= 16 && hour < 18);
+
+    // Build active slide pool
+    var slides = Array.from(allSlides);
+
+    // Start on first slide
+    slides.forEach(function(s) { s.classList.remove('active'); });
+    var idx = 0;
+    slides[0].classList.add('active');
+
+    // Set mobile bg from first slide
+    mod.style.setProperty('--credit-hero', "url('" + slides[0].src.replace('w=900', 'w=1200') + "')");
+
+    // Rotate every 6 seconds with dissolve
+    setInterval(function() {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+      // Update mobile bg variable
+      mod.style.setProperty('--credit-hero', "url('" + slides[idx].src.replace('w=900', 'w=1200') + "')");
+    }, 6000);
+  })();
+
+  // 5b-count. Animated odometer counters + character reveals for stat row
+  (function statCounters() {
+    var statRow = document.querySelector('.credit-stat-row');
+    if (!statRow) return;
+    var fired = false;
+
+    function animateDigits() {
+      if (fired) return;
+      fired = true;
+
+      // Animate numeric odometer digits (810K+, 24hr) — smooth spinning count
+      var digits = statRow.querySelectorAll('.odo-digit');
+      digits.forEach(function(d, i) {
+        var target = parseInt(d.getAttribute('data-target'), 10);
+        var delay = i * 120;
+        setTimeout(function() {
+          var start = performance.now();
+          var duration = 2200;
+          function tick(now) {
+            var t = Math.min((now - start) / duration, 1);
+            // smooth ease-out quart for buttery spin
+            var eased = 1 - Math.pow(1 - t, 4);
+            d.textContent = Math.round(eased * target);
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }, delay + 200);
+      });
+
+      // Show suffixes (K+, hr) after digits finish
+      var suffixes = statRow.querySelectorAll('.odo-suffix');
+      suffixes.forEach(function(s) {
+        setTimeout(function() { s.classList.add('visible'); }, 1800);
+      });
+
+      // Reveal text characters (PIFR) — smooth staggered drop-in
+      var chars = statRow.querySelectorAll('.odo-char');
+      chars.forEach(function(c, i) {
+        setTimeout(function() {
+          c.textContent = c.getAttribute('data-char');
+          c.classList.add('revealed');
+        }, 500 + i * 240);
+      });
+    }
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) animateDigits();
+      });
+    }, { threshold: 0.5 });
+    obs.observe(statRow);
+  })();
+
+  // 5b. Credit headline animation — slam + left dot, synced with PIFR stats
+  (function creditAnimations() {
+    var collText = document.getElementById('collisionText');
+    if (!collText) return;
+
+    function clearDotClasses() {
+      collText.classList.remove('dot-red', 'dot-settled');
+    }
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          // Stage 1 — 0ms: Red dot + impact slam
+          clearDotClasses();
+          collText.classList.add('dot-red');
+          collText.classList.add('animate');
+
+          // Stage 2 — 2000ms: Settle to green (syncs with PIFR reveal)
+          setTimeout(function() {
+            clearDotClasses();
+            collText.classList.add('dot-settled');
+          }, 2000);
+
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(collText.closest('.credit-module') || collText);
   })();
 
   // 5. Remote bottom bar — show after scrolling 100px in remote mode
@@ -6243,17 +7083,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   }
 
-  // 6. Credit module sticky detection
+  // 6. Credit module — hero mode, no sticky detection needed
+
+  // 6b. Edition bar — local data cycling on scroll
   (function() {
-    const cm = document.querySelector('.credit-module');
-    if (!cm) return;
-    const cmOffset = cm.offsetTop;
-    function checkCreditScroll() {
-      const scrolled = window.scrollY > (cmOffset + 10);
-      cm.classList.toggle('scrolled', scrolled);
-    }
-    window.addEventListener('scroll', checkCreditScroll, { passive: true });
-    checkCreditScroll();
+    var ldContainer = document.getElementById('editionLocalData');
+    if (!ldContainer) return;
+    var ldItems = ldContainer.querySelectorAll('.local-data-item');
+    if (!ldItems.length) return;
+    var cycleIdx = 0;
+    var cycling = false;
+    var cycleTimer = null;
+
+    // Start cycling when edition bar is visible
+    var edObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting && !cycling) {
+          cycling = true;
+          cycleTimer = setInterval(function() {
+            ldItems.forEach(function(item) { item.classList.remove('ld-pulse'); });
+            void ldItems[cycleIdx].offsetWidth;
+            ldItems[cycleIdx].classList.add('ld-pulse');
+            cycleIdx = (cycleIdx + 1) % ldItems.length;
+          }, 3000);
+        } else if (!e.isIntersecting && cycling) {
+          cycling = false;
+          clearInterval(cycleTimer);
+        }
+      });
+    }, { threshold: 0.1 });
+    edObs.observe(ldContainer);
   })();
 
   // 7. Counter animation for credit stats
@@ -6367,9 +7226,9 @@ const EDITIONS = {
   'los-angeles': {
     label: 'Los Angeles, CA',
     sub:   'HIRECAR LLC · Est. November 2024',
-    zip:   '90001',
-    lat:   34.0195,
-    lon:  -118.2764,
+    zip:   '90013',
+    lat:   34.0453,
+    lon:  -118.2413,
     tz:   'America/Los_Angeles'
   },
   'san-francisco': {
@@ -6389,19 +7248,19 @@ const NIGHT_START = 18; // 18:00
 
 /* ─── WEATHER CODES → icon + description ───────────────── */
 function wxInterpret(code) {
-  if (code === 0)              return { icon: '☀️',  desc: 'Clear' };
-  if (code === 1)              return { icon: '🌤',  desc: 'Mostly Clear' };
-  if (code === 2)              return { icon: '⛅',  desc: 'Partly Cloudy' };
-  if (code === 3)              return { icon: '☁️',  desc: 'Overcast' };
-  if ([45,48].includes(code)) return { icon: '🌫',  desc: 'Foggy' };
-  if (code >= 51 && code <= 57) return { icon: '🌦', desc: 'Drizzle' };
-  if (code >= 61 && code <= 67) return { icon: '🌧', desc: 'Rain' };
-  if (code >= 71 && code <= 77) return { icon: '❄️', desc: 'Snow' };
-  if (code >= 80 && code <= 82) return { icon: '🌦', desc: 'Showers' };
-  if (code >= 85 && code <= 86) return { icon: '🌨', desc: 'Snow Showers' };
-  if (code === 95)             return { icon: '⛈',  desc: 'Thunderstorm' };
-  if (code >= 96)              return { icon: '⛈',  desc: 'Heavy Thunderstorm' };
-  return { icon: '🌡', desc: 'Conditions' };
+  if (code === 0)              return { icon: WX_SVG.sun,          desc: 'Clear' };
+  if (code === 1)              return { icon: WX_SVG.partlyCloudy, desc: 'Mostly Clear' };
+  if (code === 2)              return { icon: WX_SVG.partlyCloudy, desc: 'Partly Cloudy' };
+  if (code === 3)              return { icon: WX_SVG.cloudy,       desc: 'Overcast' };
+  if ([45,48].includes(code)) return { icon: WX_SVG.fog,          desc: 'Foggy' };
+  if (code >= 51 && code <= 57) return { icon: WX_SVG.rain,       desc: 'Drizzle' };
+  if (code >= 61 && code <= 67) return { icon: WX_SVG.rain,       desc: 'Rain' };
+  if (code >= 71 && code <= 77) return { icon: WX_SVG.snow,       desc: 'Snow' };
+  if (code >= 80 && code <= 82) return { icon: WX_SVG.rain,       desc: 'Showers' };
+  if (code >= 85 && code <= 86) return { icon: WX_SVG.snow,       desc: 'Snow Showers' };
+  if (code === 95)             return { icon: WX_SVG.storm,       desc: 'Thunderstorm' };
+  if (code >= 96)              return { icon: WX_SVG.storm,       desc: 'Heavy Thunderstorm' };
+  return { icon: WX_SVG.cloudy, desc: 'Conditions' };
 }
 
 /* ─── FETCH WEATHER for one edition ────────────────────── */
@@ -6418,7 +7277,7 @@ async function fetchWeather(editionKey) {
 
     // Update icon
     const iconEl = document.getElementById('wx-icon-' + key);
-    if (iconEl) iconEl.textContent = wx.icon;
+    if (iconEl) iconEl.innerHTML = wx.icon;
 
     // Update temp
     const tempEl = document.getElementById('wx-temp-' + key);
@@ -6439,7 +7298,7 @@ async function fetchWeather(editionKey) {
       var mhIcon = document.getElementById('mastheadWxIcon');
       var mhTemp = document.getElementById('mastheadWxTemp');
       var mhDesc = document.getElementById('mastheadWxDesc');
-      if (mhIcon) mhIcon.textContent = wx.icon;
+      if (mhIcon) mhIcon.innerHTML = wx.icon;
       if (mhTemp) mhTemp.textContent = Math.round(c.temperature_2m) + '°F';
       if (mhDesc) mhDesc.textContent = wx.desc;
     }
@@ -6469,13 +7328,15 @@ function applyTheme(mode) {
   const body        = document.body;
   const iconEl      = document.getElementById('themeIcon');
   const labelEl     = document.getElementById('themeLabel');
+  var moonSvg = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 109.2 11.5c.3-.8-.5-1.6-1.3-1.3A6.5 6.5 0 0112.5 3h-.3z" fill="#94a3b8"/></svg>';
+  var daySvg  = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="#eab308"/><circle cx="12" cy="12" r="6" fill="#eab308" opacity=".15"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.22"/></g></svg>';
   if (mode === 'dark') {
     body.classList.add('dark-mode');
-    if (iconEl)  iconEl.textContent  = '🌙';
+    if (iconEl)  iconEl.innerHTML   = moonSvg;
     if (labelEl) labelEl.textContent = 'Night';
   } else {
     body.classList.remove('dark-mode');
-    if (iconEl)  iconEl.textContent  = '☀️';
+    if (iconEl)  iconEl.innerHTML   = daySvg;
     if (labelEl) labelEl.textContent = 'Day';
   }
   localStorage.setItem('mw_theme_pref', mode);
@@ -6570,7 +7431,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Keep mobile icon in sync with theme
   const origApply = window._mwApplyTheme || null;
   function syncMobileIcon(mode) {
-    if (mobileIcon) mobileIcon.textContent = mode === 'dark' ? '🌙' : '☀️';
+    var _moonSvg = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 109.2 11.5c.3-.8-.5-1.6-1.3-1.3A6.5 6.5 0 0112.5 3h-.3z" fill="#94a3b8"/></svg>';
+    var _daySvg  = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="#eab308"/><circle cx="12" cy="12" r="6" fill="#eab308" opacity=".15"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.22"/></g></svg>';
+    if (mobileIcon) mobileIcon.innerHTML = mode === 'dark' ? _moonSvg : _daySvg;
   }
   // Patch applyTheme to also sync mobile icon
   const _origApplyTheme = window.applyTheme || applyTheme;
@@ -6629,20 +7492,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 60 * 60 * 1000);
 
 
-  // ── 8. Credit module sticky scroll detection ──────────────
-  (function() {
-    const cm = document.querySelector('.credit-module');
-    if (!cm) return;
-    const cmOffset = cm.offsetTop;
-    const scroller = document.scrollingElement || document.documentElement;
-    function checkCreditScroll() {
-      const scrolled = (scroller.scrollTop || window.scrollY || window.pageYOffset) > (cmOffset + 10);
-      cm.classList.toggle('scrolled', scrolled);
-    }
-    window.addEventListener('scroll', checkCreditScroll, { passive: true });
-    document.addEventListener('scroll', checkCreditScroll, { passive: true });
-    checkCreditScroll();
-  })();
+  // ── 8. Credit module — hero mode, no sticky detection needed ──────────────
 
   // ── 9. Counter animation for credit stats ──────────────────
   function animateCounter(el, target, suffix, duration) {
@@ -7103,7 +7953,7 @@ function updateDropdownWeather(city) {
   var iconEl = document.getElementById('rhDropWxIcon');
   var tempEl = document.getElementById('rhDropWxTemp');
   var descEl = document.getElementById('rhDropWxDesc');
-  if (iconEl) iconEl.textContent = data.wx.split(' ')[1] || '🌡';
+  if (iconEl) iconEl.innerHTML = WX_SVG.sun;
   if (tempEl) tempEl.textContent = data.wx.split(' ')[0] || '--°';
   if (descEl) descEl.textContent = data.label;
   // Fetch live weather
@@ -7120,11 +7970,10 @@ function updateDropdownWeather(city) {
   fetch('https://api.open-meteo.com/v1/forecast?latitude=' + coords.lat + '&longitude=' + coords.lon + '&current=temperature_2m,weathercode&temperature_unit=fahrenheit&timezone=auto')
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      var WX = {0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌧',61:'🌧',80:'🌧',95:'⛈'};
       var code = d.current.weathercode;
-      var icon = WX[code] || '🌡';
+      var icon = WX_CODE_MAP[code] || WX_SVG.cloudy;
       var temp = Math.round(d.current.temperature_2m);
-      if (iconEl) iconEl.textContent = icon;
+      if (iconEl) iconEl.innerHTML = icon;
       if (tempEl) tempEl.textContent = temp + '°F';
       if (descEl) descEl.textContent = data.label;
       // Also update city trigger
@@ -7221,7 +8070,7 @@ const CITY_HERO_CONFIG = {
       { url: 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
-      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
     ],
@@ -7276,7 +8125,7 @@ const CITY_HERO_CONFIG = {
       { url: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
-      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
     ],
     night: [
@@ -7294,7 +8143,7 @@ const CITY_HERO_CONFIG = {
       { url: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
-      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
     ],
     night: [
@@ -7312,7 +8161,7 @@ const CITY_HERO_CONFIG = {
       { url: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
-      { url: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
+      { url: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' }
     ],
     night: [
@@ -7495,8 +8344,8 @@ function rhShowCarStart() {
   ov.innerHTML = '<div style="opacity:0;animation:tronFadeUp 1s ease-out .2s forwards;margin-bottom:16px;">' +
     '<img src="' + logoSrc + '" alt="HIRECAR" style="height:32px;filter:brightness(0) invert(1);">' +
     '</div>' +
-    '<div style="font-family:Cormorant Garamond,serif;font-size:32px;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(0,255,255,.3);opacity:0;animation:tronFadeUp 1s ease-out .5s forwards;">Welcome, ' + rhLeadFirstName + '</div>' +
-    '<div style="font-family:DM Mono,monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,255,255,.5);margin-top:12px;opacity:0;animation:tronFadeUp .8s ease-out .9s forwards;">Preferences saved · ' + cityTxt + '</div>' +
+    '<div style="font-family:Instrument Serif,serif;font-size:32px;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(0,255,255,.3);opacity:0;animation:tronFadeUp 1s ease-out .5s forwards;">Welcome, ' + rhLeadFirstName + '</div>' +
+    '<div style="font-family:JetBrains Mono,monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,255,255,.5);margin-top:12px;opacity:0;animation:tronFadeUp .8s ease-out .9s forwards;">Preferences saved · ' + cityTxt + '</div>' +
     '<div style="margin-top:28px;opacity:0;animation:tronFadeUp .6s ease-out 1.3s forwards;">' +
     '<div style="width:40px;height:40px;border:2px solid rgba(0,230,118,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:carBtnPulse 1.5s ease-in-out infinite;"><span style="font-size:20px;">🏎️</span></div></div>';
   document.body.appendChild(ov);
