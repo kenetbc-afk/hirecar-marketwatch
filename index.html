@@ -237,9 +237,57 @@ img { display: block; width: 100%; }
   line-height: 1.15;
   letter-spacing: -0.01em;
   transition: color .4s ease;
+  white-space: nowrap;
+}
+.brand-mw-name .mw-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: mwSpellIn .12s steps(1) forwards;
+}
+.brand-mw-name .mw-letter:nth-child(1)  { animation-delay: .1s; }
+.brand-mw-name .mw-letter:nth-child(2)  { animation-delay: .15s; }
+.brand-mw-name .mw-letter:nth-child(3)  { animation-delay: .2s; }
+.brand-mw-name .mw-letter:nth-child(4)  { animation-delay: .25s; }
+.brand-mw-name .mw-letter:nth-child(5)  { animation-delay: .3s; }
+.brand-mw-name .mw-letter:nth-child(6)  { animation-delay: .35s; }
+.brand-mw-name .mw-letter:nth-child(7)  { animation-delay: .4s; }
+.brand-mw-name .mw-letter:nth-child(8)  { animation-delay: .45s; }
+.brand-mw-name .mw-letter:nth-child(9)  { animation-delay: .5s; }
+.brand-mw-name .mw-letter:nth-child(10) { animation-delay: .55s; }
+.brand-mw-name .mw-letter:nth-child(11) { animation-delay: .6s; }
+.brand-mw-name .mw-letter:nth-child(12) { animation-delay: .65s; animation-name: mwBangIn; animation-duration: .6s; }
+@keyframes mwSpellIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes mwBangIn {
+  0%   { opacity: 0; transform: translateY(4px); color: #ffffff; text-shadow: none; }
+  40%  { opacity: 1; transform: translateY(0); color: var(--cta); text-shadow: 0 0 14px rgba(201,146,10,.8); }
+  100% { opacity: 1; transform: translateY(0); color: var(--cta); text-shadow: 0 0 8px rgba(201,146,10,.5); }
 }
 .brand-mw-name .bang {
   color: var(--cta);
+  transition: color .4s ease, text-shadow .4s ease;
+}
+.brand-mw-name .bang.glow {
+  color: var(--cta);
+  text-shadow: 0 0 8px rgba(201,146,10,.5);
+}
+.brand-mw-tag {
+  transition: color .5s ease, text-shadow .5s ease, opacity .8s ease;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(255,255,255,.35);
+  margin-top: 2px;
+  line-height: 1;
+  letter-spacing: 1.3px;
+  animation: tagHintPulse 2.4s ease 2.4s 3;
+}
+@keyframes tagHintPulse {
+  0%   { color: rgba(255,255,255,.35); text-shadow: none; }
+  40%  { color: rgba(201,146,10,.6); text-shadow: 0 0 4px rgba(201,146,10,.25); }
+  100% { color: rgba(255,255,255,.35); text-shadow: none; }
 }
 .brand-mw-sub {
   font-family: 'JetBrains Mono', monospace;
@@ -469,10 +517,12 @@ img { display: block; width: 100%; }
   object-position: center 30%;
   display: block;
   opacity: 0;
-  transition: opacity 1.8s ease-in-out;
+  transform: scale(1.06);
+  transition: opacity 2.4s cubic-bezier(.4,0,.2,1), transform 3.5s cubic-bezier(.4,0,.2,1);
 }
 .carousel-slide.active {
   opacity: 1;
+  transform: scale(1.0);
 }
 /* City skyline image — zoomed, anchored left, raised */
 .carousel-slide.city-slide {
@@ -520,8 +570,12 @@ img { display: block; width: 100%; }
 .carousel-slide.dtla-buildings {
   object-position: center center;
 }
+/* Mobile-only slides — hidden on desktop */
+.carousel-slide.mobile-slide { display: none !important; }
 /* Carousel dots — hidden on desktop, shown on mobile */
 .credit-carousel-dots { display: none; }
+/* Hero top tagline — hidden on desktop, shown on mobile */
+.hero-top-tagline { display: none; }
 /* Gradient bridge — hidden on desktop, shown on mobile */
 .mobile-gradient-bridge { display: none; }
 .credit-icon img {
@@ -631,7 +685,7 @@ img { display: block; width: 100%; }
 .odometer { display: inline-flex; overflow: hidden; }
 .odo-digit {
   display: inline-block;
-  transition: transform 2.2s cubic-bezier(.22,1,.36,1);
+  transition: transform 4.5s cubic-bezier(.22,1,.36,1);
   transform: translateY(0);
   min-width: 0.58em;
   text-align: center;
@@ -648,16 +702,37 @@ img { display: block; width: 100%; }
 .odo-char {
   display: inline-block;
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  transform: scale(0.3);
+  filter: blur(6px);
+  transition: opacity .9s ease-out, transform .8s cubic-bezier(.16,1,.3,1), filter .7s ease-out;
   min-width: 0.55em;
   text-align: center;
 }
 .odo-char.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
+  filter: blur(0);
 }
-.odo-text { letter-spacing: 0.06em; }
+.odo-text {
+  letter-spacing: 0.06em;
+  transition: text-shadow 1.2s ease-out, filter .8s ease;
+}
+/* Yellow glow on entry — pulses once then settles to subtle */
+.odo-text.pifr-glow {
+  animation: pifrGlowPulse 2.4s ease-out forwards;
+}
+@keyframes pifrGlowPulse {
+  0%   { text-shadow: 0 0 0 rgba(201,146,10,0); }
+  30%  { text-shadow: 0 0 18px rgba(201,146,10,.7), 0 0 40px rgba(201,146,10,.35), 0 0 60px rgba(201,146,10,.15); }
+  60%  { text-shadow: 0 0 10px rgba(201,146,10,.4), 0 0 24px rgba(201,146,10,.2); }
+  100% { text-shadow: 0 0 6px rgba(201,146,10,.2), 0 0 14px rgba(201,146,10,.08); }
+}
+/* Hover — re-activate the warm glow */
+.odo-text:hover,
+.odo-text.pifr-glow:hover {
+  text-shadow: 0 0 14px rgba(201,146,10,.6), 0 0 32px rgba(201,146,10,.3), 0 0 50px rgba(201,146,10,.12) !important;
+  cursor: default;
+}
 .credit-module-text {}
 .credit-eyebrow {
   font-family: 'JetBrains Mono', monospace;
@@ -875,6 +950,97 @@ img { display: block; width: 100%; }
   color: #ef4444;
   border-color: #ef4444;
 }
+
+/* ═══ Hero Tabs Component ═══ */
+.hero-tabs {
+  margin-top: 22px;
+  max-width: 340px;
+  width: 100%;
+}
+.hero-tabs-bar {
+  display: flex;
+  gap: 6px;
+  padding: 3px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero-tab {
+  flex: 1;
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  white-space: nowrap;
+  position: relative;
+}
+.hero-tab:hover {
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.04);
+}
+.hero-tab.active {
+  color: #fff;
+  background: var(--cta);
+  box-shadow: 0 2px 12px rgba(201,146,10,.3), 0 0 0 1px rgba(201,146,10,.15);
+}
+/* Tab panels */
+.hero-tab-panels {
+  margin-top: 14px;
+  min-height: 60px;
+}
+.hero-tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.hero-tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-tab-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.6);
+  margin: 0 0 10px 0;
+}
+.hero-tab-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cta);
+  text-decoration: none;
+  transition: color .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.hero-tab-link:hover {
+  color: var(--cta-hover);
+}
+/* Dark mode adjustments */
+body.dark-mode .hero-tab.active {
+  background: var(--cta);
+  color: #fff;
+}
+body.dark-mode .hero-tab-link {
+  color: rgba(201,146,10,.85);
+}
+
 .credit-stat-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2807,6 +2973,120 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
   .dropdown:has(.dd-preview) { grid-template-columns: 1fr 1fr !important; width: auto !important; }
 }
 
+/* ═══ MOBILE BOTTOM NAV ═══ */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 400;
+  background: rgba(9,9,11,.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 6px 4px 22px;
+  justify-content: space-around;
+  align-items: flex-end;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.5);
+  transition: background .4s ease, border-color .4s ease;
+}
+@media (max-width: 768px) {
+  .mobile-bottom-nav { display: flex; }
+  body { padding-bottom: 72px; }
+}
+.mbn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  min-width: 52px;
+  transition: transform .25s ease;
+}
+.mbn-item:active {
+  transform: scale(0.92);
+}
+.mbn-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), color .3s ease;
+}
+.mbn-icon svg {
+  width: 20px;
+  height: 20px;
+  color: rgba(255,255,255,.35);
+  transition: color .3s ease;
+}
+.mbn-item.active .mbn-icon {
+  animation: mbnBounce .5s ease;
+}
+.mbn-item.active .mbn-icon svg {
+  color: var(--cta);
+}
+.mbn-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  transition: color .3s ease, opacity .3s ease;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+}
+.mbn-label.active {
+  max-width: 60px;
+  opacity: 1;
+  color: var(--cta);
+}
+/* Underline on active */
+.mbn-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--lineWidth, 20px);
+  height: 2px;
+  background: var(--cta);
+  border-radius: 1px;
+  transition: width .3s ease;
+}
+@keyframes mbnBounce {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-4px); }
+  40% { transform: translateY(0); }
+  60% { transform: translateY(-2px); }
+  80% { transform: translateY(0); }
+}
+/* Day mode overrides */
+body:not(.dark-mode) .mobile-bottom-nav {
+  background: rgba(255,255,255,.92);
+  border-top-color: rgba(0,0,0,.08);
+  box-shadow: 0 -4px 24px rgba(0,0,0,.08);
+}
+body:not(.dark-mode) .mbn-icon svg {
+  color: rgba(0,0,0,.30);
+}
+body:not(.dark-mode) .mbn-item.active .mbn-icon svg {
+  color: var(--cta);
+}
+body:not(.dark-mode) .mbn-label {
+  color: rgba(0,0,0,.20);
+}
+body:not(.dark-mode) .mbn-label.active {
+  color: var(--cta);
+}
 
 /* Scrollable card rows on mobile */
 @media (max-width: 768px) {
@@ -2947,43 +3227,108 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
 }
 
 /* ════════════════════════════════════════════════════
-   MOBILE THEME TOGGLE IN MASTHEAD (mobile only)
+   PILL-SHAPED THEME TOGGLE (replaces old mobile-theme-btn)
 ════════════════════════════════════════════════════ */
-.mobile-theme-btn {
+.pill-toggle {
   display: none;
-  background: rgba(0,0,0,.05);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 5px 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  color: var(--slate);
+  position: relative;
+  width: 56px;
+  height: 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: #09090b;
   cursor: pointer;
-  letter-spacing: .06em;
-  white-space: nowrap;
-  transition: all .2s;
+  padding: 0;
   flex-shrink: 0;
+  transition: background .3s, border-color .3s;
+  overflow: hidden;
 }
-.mobile-theme-btn:hover { border-color: var(--ink); color: var(--ink); }
-body.dark-mode .mobile-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.5); }
-body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--cta); }
-.mobile-theme-btn svg, #mastheadWxIcon svg { width: 14px; height: 14px; vertical-align: middle; }
-#mobileThemeIcon { display: inline-flex; align-items: center; }
+/* Background icons (faded, opposite side of knob) */
+.pill-toggle-bg-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.35;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .3s;
+}
+.pill-toggle-sun-bg {
+  right: 6px;
+  color: rgba(255,255,255,.4);
+}
+.pill-toggle-moon-bg {
+  left: 6px;
+  color: rgba(107,114,128,.5);
+}
+/* Sliding knob */
+.pill-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #27272a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s ease, background .3s;
+  z-index: 1;
+}
+.pill-knob-icon { display: none; }
+/* ── DARK MODE STATE (default: knob left, moon icon) ── */
+body.dark-mode .pill-toggle {
+  background: #09090b;
+  border-color: rgba(255,255,255,.15);
+}
+body.dark-mode .pill-toggle-knob {
+  transform: translateX(0);
+  background: #27272a;
+}
+body.dark-mode .pill-knob-moon { display: block; }
+body.dark-mode .pill-knob-sun  { display: none; }
+body.dark-mode .pill-toggle-sun-bg { opacity: 0.35; }
+body.dark-mode .pill-toggle-moon-bg { opacity: 0; }
+
+/* ── LIGHT MODE STATE (knob right, sun icon) ── */
+body:not(.dark-mode) .pill-toggle {
+  background: #ffffff;
+  border-color: #e4e4e7;
+}
+body:not(.dark-mode) .pill-toggle-knob {
+  transform: translateX(28px);
+  background: #e5e7eb;
+}
+body:not(.dark-mode) .pill-knob-moon { display: none; }
+body:not(.dark-mode) .pill-knob-sun  { display: block; }
+body:not(.dark-mode) .pill-toggle-sun-bg { opacity: 0; }
+body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
+
+/* Hover effects */
+.pill-toggle:hover .pill-toggle-knob {
+  filter: brightness(1.2);
+}
+
+#mastheadWxIcon svg { width: 14px; height: 14px; vertical-align: middle; }
 #mastheadWxIcon  { display: inline-flex; align-items: center; }
 
 /* ── MOBILE RESPONSIVE ───────────────────────────────── */
 @media (max-width: 768px) {
 
-  body { padding-top: 48px !important; } /* match mobile masthead height */
+  body { padding-top: 44px !important; background: #111820 !important; color: #c8d0db !important; } /* match mobile masthead height */
 
   /* --- UTIL BAR (BREAKING ticker) — fixed at top, stays on scroll --- */
   .util-bar {
     position: fixed !important;
-    top: 44px !important;
+    top: 54px !important;
     left: 0;
     right: 0;
     z-index: 910;
     background: transparent !important;
+    transition: top .35s cubic-bezier(.4,0,.2,1) !important;
     border-bottom: none !important;
     border-top: none !important;
     padding: 2px 0 !important;
@@ -2991,13 +3336,14 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .util-bar .util-label,
   .util-bar .ticker-text,
   .util-bar .ticker-sep { color: #fff !important; }
-  .util-bar .util-hot { font-size: 8px !important; padding: 2px 7px !important; }
+  .util-bar .util-hot { font-size: 9px !important; padding: 3px 8px !important; }
   .util-bar .t-item,
-  .util-bar .t-dot { font-size: 10px !important; }
+  .util-bar .t-dot { font-size: 11px !important; }
   .util-inner { padding: 0 10px; gap: 6px; }
+  .util-bar .util-label { font-size: 9px !important; }
   .util-right { display: none; }
 
-  /* --- MASTHEAD with black bleed into hero --- */
+  /* --- MASTHEAD anchored to bottom --- */
   .masthead {
     background: #000 !important;
     backdrop-filter: none !important;
@@ -3008,11 +3354,11 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .masthead::after {
     content: '';
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
     left: 0;
     right: 0;
-    height: 50px;
-    background: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 50%, transparent 100%);
+    height: 60px;
+    background: linear-gradient(180deg, #000 0%, rgba(0,0,0,.7) 40%, rgba(0,0,0,.3) 70%, transparent 100%);
     pointer-events: none;
     z-index: 339;
   }
@@ -3025,10 +3371,44 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    min-height: 48px;
-    gap: 10px;
+    justify-content: flex-start;
+    padding: 8px 8px 2px 6px;
+    min-height: 44px;
+    gap: 8px;
+    position: relative;
+    transition: padding .35s cubic-bezier(.4,0,.2,1), min-height .35s cubic-bezier(.4,0,.2,1), gap .35s ease;
+  }
+  /* Compact header on scroll */
+  .masthead.compact .masthead-inner {
+    padding: 4px 8px 2px 6px;
+    min-height: 34px;
+    gap: 6px;
+  }
+  .masthead.compact .brand-logo {
+    height: 20px !important;
+    transition: height .35s cubic-bezier(.4,0,.2,1);
+  }
+  .masthead.compact .brand-pipe {
+    height: 20px !important;
+    transition: height .35s cubic-bezier(.4,0,.2,1);
+  }
+  .masthead.compact .brand-mw-name {
+    font-size: 11px !important;
+    transition: font-size .35s cubic-bezier(.4,0,.2,1);
+  }
+  .masthead.compact .brand-mw-tag {
+    font-size: 6px !important;
+    transition: font-size .35s cubic-bezier(.4,0,.2,1);
+  }
+  .masthead.compact .pill-toggle {
+    transform: scale(0.55) translateY(-50%) !important;
+  }
+  .masthead.compact .mobile-nav-toggle {
+    min-width: 28px; min-height: 28px;
+  }
+  .masthead.compact + .masthead-spacer ~ .util-bar,
+  .masthead.compact ~ .util-bar {
+    top: 52px !important;
   }
   .masthead-center { display: none; }
   .masthead-right { display: none; }
@@ -3036,30 +3416,50 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     border-right: none;
     padding-right: 0;
     padding: 0;
-    flex: 1;
+    flex: none;
     min-width: 0;
-    gap: 10px;
+    gap: 6px;
   }
-  .brand-logo { height: 22px; }
-  .brand-pipe { display: none; }
+  .brand-logo { height: 26px; transition: height .35s cubic-bezier(.4,0,.2,1); }
+  .brand-pipe {
+    display: block;
+    width: 1.6px;
+    height: 27px;
+    background: rgba(255,255,255,.15);
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    flex-shrink: 0;
+    transition: height .35s cubic-bezier(.4,0,.2,1);
+  }
+  .brand-pipe::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--scroll-pct, 0%);
+    background: linear-gradient(180deg, rgba(255,195,50,.9) 0%, rgba(201,146,10,1) 50%, rgba(201,146,10,.6) 100%);
+    box-shadow: 0 0 6px rgba(201,146,10,.4);
+    border-radius: 1px;
+    transition: height .08s linear;
+  }
   .brand-mw {
     gap: 1px;
+    transform: translateY(1px);
   }
-  .brand-mw-name { font-size: 21px !important; line-height: 1.1 !important; letter-spacing: -.01em; }
+  .brand-mw-name { font-size: 14px !important; line-height: 1.1 !important; letter-spacing: 0.01em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
   .brand-mw-sub { display: none !important; }
 
-  /* Mobile controls row — compact, clean spacing */
-  .mobile-theme-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 6px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.05);
-    border-radius: 4px;
-    min-width: 32px;
-    min-height: 32px;
+  /* Mobile controls — absolute so they don't affect centering */
+  .pill-toggle {
+    display: block !important;
+    transform: scale(0.7);
+    transform-origin: right center;
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: scale(0.7) translateY(-50%);
   }
   .mobile-nav-toggle {
     display: flex !important;
@@ -3068,8 +3468,226 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     min-height: 32px;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .mobile-nav-toggle span { background: rgba(255,255,255,.5); }
+
+  /* --- Mobile weather — aligned with day/night toggle --- */
+  .mh-wx-pill {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.55);
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    right: 88px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.85);
+    transform-origin: right center;
+    transition: opacity .35s ease, color .4s ease;
+    white-space: nowrap;
+  }
+  .mh-wx-ico { display: inline-flex; align-items: center; }
+  .mh-wx-ico svg { width: 14px; height: 14px; fill: rgba(255,255,255,.55); transition: fill .4s ease; }
+  /* Night mode weather styling */
+  body.dark-mode .mh-wx-pill { color: rgba(201,146,10,.6); }
+  body.dark-mode .mh-wx-ico svg { fill: rgba(201,146,10,.6); }
+  .masthead:not(.compact) .mh-wx-pill { display: inline-flex; }
+  /* Align weather vertically with pill-toggle center */
+  .masthead:not(.compact) .mh-wx-pill { top: 50%; }
+  .masthead.compact .mh-wx-pill {
+    display: inline-flex !important;
+    opacity: .85;
+    position: static;
+    transform: none;
+    font-size: 10px;
+    order: 2;
+  }
+
+  /* --- Compact reveal: edition selector + weather under logo on scroll --- */
+  .mh-compact-actions {
+    display: none;
+    position: absolute;
+    left: 4px;
+    bottom: -2px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease .1s;
+    align-items: center;
+    gap: 2px;
+  }
+  /* Show on compact */
+  .masthead.compact .mh-compact-actions {
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mh-edition-select { order: 1; }
+  /* Compact weather separator dot */
+  .masthead.compact .mh-compact-actions .mh-wx-pill::before {
+    content: '·';
+    margin-right: 3px;
+    color: rgba(255,255,255,.25);
+    font-size: 11px;
+  }
+  /* When compact, add bottom padding for the edition + weather line */
+  .masthead.compact .masthead-inner {
+    padding-bottom: 22px !important;
+  }
+
+  /* Edition select container */
+  .mh-edition-select {
+    position: relative;
+  }
+  .mh-edition-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 2px;
+    background: none;
+    cursor: pointer;
+    transition: all .25s ease;
+    min-height: 28px;
+  }
+  .mh-edition-trigger:hover {
+    background: rgba(255,255,255,.06);
+  }
+  .mh-edition-trigger:active {
+    background: rgba(255,255,255,.10);
+  }
+  .mh-edition-icon {
+    font-size: 8px;
+    line-height: 1;
+  }
+  .mh-edition-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.40);
+  }
+  .mh-edition-chevron {
+    font-size: 7px;
+    color: rgba(255,255,255,.25);
+    transition: transform .25s ease;
+  }
+  .mh-edition-select.open .mh-edition-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown panel — use fixed positioning to avoid masthead clip */
+  .mh-edition-dropdown {
+    display: none;
+    position: fixed;
+    top: auto;
+    left: 6px;
+    min-width: 220px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 4px;
+    background: #0c0c0e;
+    box-shadow: 0 12px 40px rgba(0,0,0,.7);
+    overflow: hidden;
+    z-index: 500;
+  }
+  .mh-edition-select.open .mh-edition-dropdown {
+    display: block;
+  }
+  .mh-edition-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .mh-edition-head-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .mh-edition-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.5);
+    font-size: 8px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .mh-edition-close:hover {
+    background: rgba(255,255,255,.15);
+    color: #fff;
+  }
+  .mh-edition-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background .2s;
+    text-align: left;
+  }
+  .mh-edition-option:hover {
+    background: rgba(255,255,255,.05);
+  }
+  .mh-edition-option.active {
+    background: rgba(201,146,10,.08);
+  }
+  .mh-edition-opt-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+  }
+  .mh-edition-opt-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .mh-edition-opt-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,.85);
+  }
+  .mh-edition-opt-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .03em;
+    margin-top: 1px;
+  }
+  .mh-edition-option.active .mh-edition-opt-name {
+    color: var(--cta);
+  }
 
   /* --- PRIMARY NAV (desktop) — hidden on mobile --- */
   .primary-nav { display: none; }
@@ -3105,16 +3723,21 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .local-data-val { font-size: 10px; color: rgba(255,255,255,.7) !important; }
   .local-data-icon { font-size: 11px; }
 
-  /* --- CREDIT MODULE (mobile: desktop-aligned, edge-to-edge) --- */
+  /* --- CREDIT MODULE (mobile: cinematic full-bleed hero) --- */
   .credit-module {
     min-height: auto;
     display: flex;
     align-items: stretch;
     border-bottom: none !important;
-    background: #000;
+    background: #0a0a0a;
     margin: 0;
-    margin-top: -48px !important; /* pull hero up behind masthead */
-    padding-top: 0 !important;
+    margin-top: -48px !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
   }
   .credit-module::before { display: none !important; }
   .credit-module::after { display: none !important; }
@@ -3132,12 +3755,12 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     width: 100% !important;
   }
 
-  /* ── Carousel panel — full-bleed hero image (extends behind header) ── */
+  /* ── Carousel panel — immersive full-bleed (extends behind header) ── */
   .credit-icon {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    min-height: calc(75vh + 48px) !important;
+    min-height: calc(82vh + 48px) !important;
     max-height: none;
     margin-right: 0 !important;
     width: 100% !important;
@@ -3147,118 +3770,385 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     position: absolute !important;
     inset: 0 !important;
   }
-  /* Mobile carousel — no zoom transforms, max zoom-out */
-  .carousel-slide {
-    transform: none !important;
+  /* Mobile carousel — hide desktop slides, show mobile slides */
+  .carousel-slide:not(.mobile-slide) { display: none !important; }
+  .carousel-slide.mobile-slide {
+    display: block !important;
+    transform: scale(1.08) !important;
     transform-origin: center center !important;
     object-position: center center !important;
+    opacity: 0;
+    transition: opacity 2.8s cubic-bezier(.4,0,.2,1), transform 9s cubic-bezier(.25,0,.3,1) !important;
   }
-  /* Per-slide focal tuning — balanced for portrait mobile crop */
-  .carousel-slide.city-slide      { object-position: 40% 50% !important; }
-  .carousel-slide.porsche-911     { object-position: 35% 45% !important; }
-  .carousel-slide.ferrari-road    { object-position: center 50% !important; }
-  .carousel-slide.mercedes-amg    { object-position: center 55% !important; }
-  .carousel-slide.cars-disney     { object-position: 40% 65% !important; }
-  .carousel-slide.collision-night { object-position: center center !important; }
-  .carousel-slide.la-mural        { object-position: center 40% !important; }
-  .carousel-slide.storage-accident { object-position: center center !important; }
-  .carousel-slide.dtla-buildings   { object-position: center 40% !important; }
+  .carousel-slide.mobile-slide.active {
+    opacity: 1;
+    transform: scale(1.0) !important;
+    animation: mobileKenBurns 10s ease-in-out infinite alternate;
+  }
+  @keyframes mobileKenBurns {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.05); }
+  }
+  /* Per mobile-slide focal tuning — car-focused positioning */
+  .carousel-slide.mobile-1  { object-fit: cover !important; object-position: 40% 50% !important; }   /* 3.jpg mural — shift right to show "Made in DTLA" billboard */
+  .carousel-slide.mobile-2  { object-position: center 35% !important; }   /* 5.jpg green supercar */
+  .carousel-slide.mobile-3  { object-position: center 40% !important; }   /* 6.jpg cars on highway */
+  .carousel-slide.mobile-4  { object-position: center 30% !important; }   /* lambo-urus */
+  .carousel-slide.mobile-5  { object-position: 30% 75% !important; }      /* cars-disney-hall — car at bottom-left */
+  .carousel-slide.mobile-6  { object-position: 55% 0% !important; }       /* 14.jpg ferris wheel/beach — show moon/sky at very top */
+  .carousel-slide.mobile-7  { object-position: 10% 50% !important; }      /* mercedes/rolls — far left to show car */
+  .carousel-slide.mobile-8  { object-position: 35% 25% !important; }      /* 4.jpg city overlook — show person at top-left */
 
-  /* Gradient overlay — heavy dark bleed top (header) → clear middle → dark bleed bottom */
+  /* Gradient overlay — cinematic vignette: deep top, breathable center, heavy bottom for CTAs */
   .credit-icon::before {
     display: block !important;
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.92) 0%,
-      rgba(0,0,0,.7) 10%,
-      rgba(0,0,0,.35) 22%,
-      rgba(0,0,0,.08) 40%,
-      rgba(0,0,0,.05) 55%,
-      rgba(0,0,0,.15) 68%,
-      rgba(0,0,0,.55) 80%,
-      rgba(0,0,0,.88) 92%,
-      rgba(0,0,0,.95) 100%) !important;
+      rgba(0,0,0,.62) 0%,
+      rgba(0,0,0,.28) 12%,
+      rgba(0,0,0,.06) 26%,
+      rgba(0,0,0,.02) 40%,
+      rgba(0,0,0,.01) 52%,
+      rgba(0,0,0,.06) 60%,
+      rgba(6,12,26,.32) 72%,
+      rgba(14,20,32,.65) 84%,
+      rgba(17,24,32,.88) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
   .credit-icon::after { display: none !important; }
 
-  /* ── Carousel indicator dots — HIDDEN on mobile ── */
+  /* ── Carousel progress bar — thin line at bottom of hero ── */
+  .credit-carousel-dots {
+    display: flex !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 5 !important;
+    height: 2px !important;
+    background: rgba(255,255,255,.08) !important;
+    gap: 2px !important;
+    padding: 0 !important;
+    justify-content: stretch !important;
+  }
+  .credit-carousel-dots .dot {
+    flex: 1 !important;
+    height: 2px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(255,255,255,.12) !important;
+    border: none !important;
+    transition: background .5s ease, box-shadow .5s ease !important;
+    cursor: default !important;
+    display: block !important;
+  }
+  .credit-carousel-dots .dot.active {
+    background: var(--cta) !important;
+    box-shadow: 0 0 8px rgba(201,146,10,.4) !important;
+  }
+
+  /* ── Hero top tagline — floats near top of hero image ── */
+  .hero-top-tagline {
+    display: block !important;
+    position: absolute !important;
+    top: -190px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    white-space: nowrap;
+    text-shadow: 0 1px 6px rgba(0,0,0,.7);
+    z-index: 10;
+    padding: 5px 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 2px;
+  }
+
+  /* ── Hide carousel counter dots on mobile ── */
   .credit-carousel-dots {
     display: none !important;
   }
 
-  /* ── Overlay text — positioned in upper third so it stands on top of image ── */
+  /* ── Overlay text — lower-third cinematic placement ── */
   .credit-overlay {
     position: absolute !important;
-    top: 18% !important;
+    top: 58% !important;
     bottom: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    transform: none !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
     padding: 0 20px !important;
     width: 100% !important;
+    max-width: 400px !important;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    box-sizing: border-box;
   }
   .credit-eyebrow {
-    display: block !important;
+    display: inline-block !important;
     font-size: 7px !important;
-    letter-spacing: .2em !important;
-    color: rgba(255,255,255,.55) !important;
-    margin-bottom: 6px !important;
+    letter-spacing: 0.28em !important;
+    color: var(--cta) !important;
+    border: 1px solid rgba(201,146,10,.3) !important;
+    padding: 5px 14px !important;
+    margin-bottom: 16px !important;
+    background: rgba(0,0,0,.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
   }
   .credit-headline {
-    font-size: 28px !important;
+    font-size: 42px !important;
     max-width: 100% !important;
+    width: 100% !important;
     color: #fff !important;
-    line-height: 1.08 !important;
-    margin-bottom: 8px !important;
-    letter-spacing: -0.02em !important;
-    text-shadow: 0 2px 16px rgba(0,0,0,.7), 0 1px 4px rgba(0,0,0,.5);
+    line-height: 0.9 !important;
+    margin-bottom: 2px !important;
+    letter-spacing: -0.03em !important;
+    text-shadow: 0 4px 24px rgba(0,0,0,.6), 0 1px 2px rgba(0,0,0,.4);
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0px !important;
+    padding: 0 8px !important;
+  }
+  /* Kill collision-text left padding + dot on mobile for true center */
+  .credit-headline .collision-text {
+    padding-left: 0 !important;
+    display: block !important;
+    text-align: center !important;
+  }
+  .credit-headline .collision-text::before {
+    display: none !important;
+  }
+  .credit-headline .desktop-br {
+    display: none !important;
+  }
+  .credit-headline strong {
+    padding-left: 0 !important;
+    display: block !important;
+    text-align: center !important;
+    color: var(--cta) !important;
+    -webkit-text-fill-color: var(--cta) !important;
+    margin-top: -4px !important;
+    line-height: 0.9 !important;
+    font-size: 1em !important;
+    width: 100% !important;
   }
   .credit-sub {
     display: block !important;
-    color: rgba(255,255,255,.88) !important;
-    font-size: 12.5px !important;
+    color: rgba(255,255,255,.95) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
     text-align: center !important;
     max-width: 88% !important;
-    margin: 4px auto 0 !important;
-    text-shadow: 0 1px 8px rgba(0,0,0,.6);
-    line-height: 1.45 !important;
+    margin: 12px auto 0 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 3px 16px rgba(0,0,0,.7) !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.01em !important;
   }
   .credit-stat-row {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 28px !important;
+    margin-top: 28px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  .credit-stat {
+    text-align: center !important;
+    padding: 0 !important;
+    border-right: none !important;
+    position: relative !important;
+  }
+  .credit-stat::after {
+    content: '·' !important;
+    position: absolute !important;
+    right: -17px !important;
+    top: 4px !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    background: none !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: rgba(255,255,255,.3) !important;
+    line-height: 1 !important;
+  }
+  .credit-stat:last-child::after {
     display: none !important;
   }
-
-  /* ── CTA panel — pulled UP into hero, compact buttons ── */
-  .credit-module-main {
-    border-right: none;
-    border-bottom: none;
-    padding: 0 20px 18px !important;
-    margin-top: -52vh;
-    position: relative;
-    z-index: 4;
-    align-items: center !important;
-    background: none !important;
-    border-top: none;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    min-height: 52vh;
+  .credit-stat-n {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    text-shadow: 0 2px 16px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.5) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1 !important;
   }
-  .credit-module-main .credit-module-text { text-align: center; max-width: 100%; }
+  .credit-stat-l {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 6.5px !important;
+    font-weight: 600 !important;
+    color: rgba(255,255,255,.65) !important;
+    letter-spacing: 0.12em !important;
+    margin-top: 3px !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,.7) !important;
+    text-transform: uppercase !important;
+  }
+
+  /* ── CTA panel — hidden on mobile; pill tabs cloned into overlay via JS ── */
+  .credit-module-main {
+    display: none !important;
+  }
+  /* ── Mobile overlay CTA (cloned buttons) ── */
+  .mobile-overlay-cta {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .mobile-overlay-cta .credit-cta-primary,
+  .mobile-overlay-cta .credit-cta-secondary {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .mobile-overlay-cta .credit-cta-fine {
+    font-size: 8px;
+    color: rgba(255,255,255,.45);
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .credit-module-main .credit-module-text {
+    text-align: center;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
+  }
   .credit-module-text { padding: 0; }
-  .credit-cta-lead { text-align: center !important; font-size: 12px !important; letter-spacing: -0.01em !important; margin-bottom: 6px !important; text-shadow: 0 1px 8px rgba(0,0,0,.6); color: rgba(255,255,255,.8) !important; }
-  .credit-module-actions { flex-direction: column; gap: 8px; max-width: 320px; margin: 0 auto; width: 100%; align-items: center; }
-  .credit-cta-primary, .credit-cta-secondary { flex: none; width: 100%; max-width: 280px; padding: 10px 16px; font-size: 11px; border-radius: 4px; text-align: center; letter-spacing: 0.04em; }
-  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.18) !important; background: rgba(255,255,255,.06) !important; }
-  .credit-cta-fine { font-size: 7px; letter-spacing: 0.08em; white-space: nowrap; text-align: center !important; margin-left: 0 !important; margin-right: 0 !important; color: rgba(255,255,255,.35) !important; margin-top: 8px !important; }
+  .credit-cta-lead {
+    display: none !important;
+  }
+  .credit-module-actions {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+  /* ═══ Mobile Hero Tabs ═══ */
+  .hero-tabs {
+    margin: 18px auto 0 auto !important;
+    max-width: 320px !important;
+    width: 100% !important;
+  }
+  .hero-tabs-bar {
+    gap: 4px !important;
+    padding: 3px !important;
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 8px !important;
+  }
+  .hero-tab {
+    padding: 9px 8px !important;
+    font-size: 9px !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 6px !important;
+  }
+  .hero-tab.active {
+    box-shadow: 0 2px 14px rgba(201,146,10,.35), 0 0 0 1px rgba(201,146,10,.12) !important;
+  }
+  .hero-tab-panels {
+    margin-top: 12px !important;
+    text-align: center !important;
+    min-height: 56px !important;
+  }
+  .hero-tab-text {
+    font-size: 11.5px !important;
+    line-height: 1.6 !important;
+    color: rgba(255,255,255,.55) !important;
+  }
+  .hero-tab-link {
+    font-size: 10px !important;
+    justify-content: center !important;
+  }
+  .credit-cta-primary {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    padding: 16px 24px !important;
+    font-size: 11px !important;
+    border-radius: 2px !important;
+    text-align: center !important;
+    letter-spacing: 0.14em !important;
+    background: var(--cta) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(201,146,10,.25), 0 0 0 1px rgba(201,146,10,.15) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .credit-cta-primary::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: -100% !important;
+    width: 100% !important; height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent) !important;
+    animation: ctaShimmer 3s ease-in-out infinite !important;
+  }
+  @keyframes ctaShimmer {
+    0%   { left: -100%; }
+    50%  { left: 100%; }
+    100% { left: 100%; }
+  }
+  .credit-cta-secondary {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    padding: 14px 20px !important;
+    font-size: 11px !important;
+    border-radius: 2px !important;
+    text-align: center !important;
+    letter-spacing: 0.08em !important;
+    color: rgba(255,255,255,.85) !important;
+    border-color: rgba(255,255,255,.18) !important;
+    background: rgba(255,255,255,.06) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  .credit-cta-fine {
+    display: none !important; /* moved to hero-top-tagline at top of hero */
+  }
 
   /* --- HERO AREA --- */
   .hero-area { grid-template-columns: 1fr; border-bottom: none; }
@@ -3356,25 +4246,13 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   /* --- DARK-TO-LIGHT TRANSITION BRIDGE — smooth bleed --- */
   .mobile-gradient-bridge {
     display: block !important;
-    height: 36px;
+    height: 48px;
     background: linear-gradient(180deg,
-      #060c1a 0%,
-      #0d1425 15%,
-      #1a2030 30%,
-      #3a3d42 48%,
-      #8a8680 60%,
-      #c8c4be 72%,
-      #e8e5df 84%,
-      #f8f6f2 100%);
+      rgba(17,24,32,.0) 0%,
+      #0e1420 30%,
+      #111820 100%) !important;
     margin: 0;
     border: none;
-  }
-  body.dark-mode .mobile-gradient-bridge {
-    background: linear-gradient(180deg,
-      #060c1a 0%,
-      #0a0f18 25%,
-      #0e1219 50%,
-      #111820 100%) !important;
   }
 
   /* --- PAGE WRAP + SCROLL --- */
@@ -3390,9 +4268,57 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .content-side { padding-top: 16px; }
   .side-block { margin-bottom: 20px; }
   .side-block-head { font-size: 10px; }
-  .trending-strip { border-bottom: 1px solid var(--border); }
   .member-inner { padding: 28px 16px !important; }
-  .ent-section { border-bottom: 1px solid var(--border); }
+
+  /* ── MOBILE NIGHT MODE — black top bleeding into ink blue ── */
+  .page-wrap,
+  .content-main,
+  .content-side,
+  .side-block,
+  .card,
+  .art-row,
+  .trending-strip,
+  .trending-item,
+  .ent-section,
+  .ent-card,
+  .member-cta,
+  .svc-section,
+  .svc-item,
+  .rh-section,
+  .rh-car-card,
+  footer {
+    background: transparent !important;
+    color: #c8d0db !important;
+  }
+  .art-hed, .art-hed a, .card-title, .card-title a,
+  .ent-card-name, .rh-news-title, .rh-car-card-name,
+  .svc-item-name, .side-block-head, .trending-label,
+  h2, h3, h4 {
+    color: #e8ecf2 !important;
+  }
+  .art-byline, .art-tag, .card-byline, .card-tag,
+  .ent-card-role, .rh-news-meta, .rh-car-card-meta,
+  .svc-item-desc, .trending-item {
+    color: rgba(255,255,255,.45) !important;
+  }
+  .art-row { border-bottom-color: rgba(255,255,255,.06) !important; }
+  .art-row:hover { background: rgba(255,255,255,.03) !important; }
+  .card:hover { background: rgba(255,255,255,.03) !important; }
+  .ent-card { border-color: rgba(255,255,255,.08) !important; }
+  .ent-card:hover { background: rgba(255,255,255,.04) !important; }
+  .trending-strip { border-bottom-color: rgba(255,255,255,.06) !important; }
+  .trending-item:hover { background: rgba(255,255,255,.05) !important; }
+  .ent-section { border-bottom-color: rgba(255,255,255,.06) !important; }
+  .mci-bar { background: #060c1a !important; border-color: #1d2535 !important; }
+  .mci-label-name, .mci-val { color: #fff !important; }
+  .mci-key, .mci-sub { color: rgba(255,255,255,.4) !important; }
+  .rh-car-card { background: #0a0e14 !important; border-color: #1d2535 !important; }
+  .art-thumb { background: #0d1826 !important; }
+  .edition-bar { background: #080d14 !important; border-color: #161e2c !important; }
+  .section-rule { border-color: rgba(255,255,255,.08) !important; }
+  hr { border-color: rgba(255,255,255,.08) !important; }
+  a { color: #e8ecf2; }
+  a:hover { color: var(--cta); }
 }
 
 /* ═══ MOBILE SCROLL PROGRESS BAR ═══ */
@@ -3414,7 +4340,7 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   border-radius: 0 2px 2px 0;
 }
 @media (max-width: 768px) {
-  #mobileScrollProgress { display: block; }
+  #mobileScrollProgress { display: none !important; }
 }
 
 @media (max-width: 480px) {
@@ -3423,21 +4349,24 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .co-bar-inner { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .mci-metric { min-width: 100%; }
-  .credit-module-actions { flex-direction: column; gap: 6px; max-width: 260px !important; }
+  .credit-module-actions { flex-direction: column; gap: 8px; max-width: 280px !important; }
   .hero-title { font-size: 24px !important; }
   .brand-mw-name { font-size: 14px !important; }
-  .brand-logo { height: 20px !important; }
+  .brand-logo { height: 26px !important; }
+  .brand { gap: 4px !important; }
   .mci-actions { flex-direction: column; }
   .hero-img-placeholder { height: 200px !important; }
-  .credit-icon { min-height: calc(70vh + 48px) !important; max-height: none !important; }
-  .credit-headline { font-size: 22px !important; margin-bottom: 6px !important; }
-  .credit-sub { font-size: 11px !important; max-width: 95% !important; }
+  .credit-icon { min-height: calc(78vh + 48px) !important; max-height: none !important; }
+  .credit-headline { font-size: 26px !important; margin-bottom: 8px !important; }
+  .credit-sub { font-size: 11.5px !important; max-width: 100% !important; }
   .credit-stat-n { font-size: 18px !important; }
   .credit-stat-l { font-size: 6px !important; }
-  .credit-overlay { padding: 0 14px !important; top: 16% !important; }
-  .credit-cta-primary, .credit-cta-secondary { padding: 9px 14px !important; font-size: 10.5px !important; max-width: 240px !important; }
-  .credit-cta-lead { font-size: 10.5px !important; text-align: center !important; }
-  .credit-module-main { padding: 0 14px 14px !important; margin-top: -50vh !important; min-height: 50vh !important; }
+  .credit-overlay { padding: 0 20px !important; max-width: 360px !important; bottom: 26% !important; }
+  .credit-eyebrow { font-size: 6.5px !important; padding: 4px 10px !important; margin-bottom: 12px !important; }
+  .credit-cta-primary, .credit-cta-secondary { padding: 14px 16px !important; font-size: 10.5px !important; max-width: 260px !important; }
+  .credit-cta-lead { font-size: 13px !important; text-align: center !important; }
+  .credit-module-main { display: none !important; }
+  .mobile-overlay-cta { max-width: 280px !important; }
   .mobile-gradient-bridge { height: 48px; }
 }
 
@@ -5678,7 +6607,8 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </a>
       <div class="brand-pipe"></div>
       <div class="brand-mw">
-        <div class="brand-mw-name">MarketWatch<span class="bang">!</span></div>
+        <div class="brand-mw-name"><span class="mw-letter">M</span><span class="mw-letter">a</span><span class="mw-letter">r</span><span class="mw-letter">k</span><span class="mw-letter">e</span><span class="mw-letter">t</span><span class="mw-letter">W</span><span class="mw-letter">a</span><span class="mw-letter">t</span><span class="mw-letter">c</span><span class="mw-letter">h</span><span class="mw-letter bang">!</span></div>
+        <div class="brand-mw-tag">{NEWS+MEDIA}</div>
         <div class="brand-mw-sub" id="mastheadEditionSub">Auto Operator Intelligence · Los Angeles</div>
       </div>
     </div>
@@ -5696,9 +6626,65 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       <a href="booking/" class="mh-apply">Apply to Qualify →</a>
     </div>
     <!-- Mobile-only controls -->
-    <button class="mobile-theme-btn" id="mobileThemeBtn" title="Toggle theme">
-      <span id="mobileThemeIcon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg></span>
+    <!-- Pill-shaped theme toggle -->
+    <button class="pill-toggle" id="pillThemeToggle" title="Toggle theme" aria-label="Toggle dark/light mode">
+      <span class="pill-toggle-bg-icon pill-toggle-sun-bg">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </span>
+      <span class="pill-toggle-bg-icon pill-toggle-moon-bg">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </span>
+      <span class="pill-toggle-knob" id="pillToggleKnob">
+        <svg class="pill-knob-icon pill-knob-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="pill-knob-icon pill-knob-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </span>
     </button>
+    <!-- Mobile weather pill — next to day/night toggle -->
+    <span class="mh-wx-pill" id="mhWxPill" title="Weather"><span id="mhWxIcon" class="mh-wx-ico"></span><span id="mhWxText">--°</span></span>
+    <!-- Compact reveal: local edition selector shown on scroll -->
+    <div class="mh-compact-actions" id="mhCompactActions">
+      <div class="mh-edition-select" id="mhEditionSelect">
+        <button class="mh-edition-trigger" id="mhEditionTrigger">
+          <span class="mh-edition-icon">📍</span>
+          <span class="mh-edition-label" id="mhEditionLabel">Los Angeles</span>
+          <span class="mh-edition-chevron" id="mhEditionChevron">▾</span>
+        </button>
+        <div class="mh-edition-dropdown" id="mhEditionDropdown">
+          <div class="mh-edition-head">
+            <span class="mh-edition-head-title">Choose Edition</span>
+            <button class="mh-edition-close" id="mhEditionClose">✕</button>
+          </div>
+          <button class="mh-edition-option active" data-city="los-angeles" data-label="Los Angeles">
+            <span class="mh-edition-opt-icon">🌴</span>
+            <div class="mh-edition-opt-info">
+              <span class="mh-edition-opt-name">Los Angeles</span>
+              <span class="mh-edition-opt-desc">Southern California · Pacific</span>
+            </div>
+          </button>
+          <button class="mh-edition-option" data-city="new-york" data-label="New York">
+            <span class="mh-edition-opt-icon">🗽</span>
+            <div class="mh-edition-opt-info">
+              <span class="mh-edition-opt-name">New York</span>
+              <span class="mh-edition-opt-desc">Tri-State Area · Eastern</span>
+            </div>
+          </button>
+          <button class="mh-edition-option" data-city="houston" data-label="Houston">
+            <span class="mh-edition-opt-icon">🤠</span>
+            <div class="mh-edition-opt-info">
+              <span class="mh-edition-opt-name">Houston</span>
+              <span class="mh-edition-opt-desc">Gulf Coast · Central</span>
+            </div>
+          </button>
+          <button class="mh-edition-option" data-city="atlanta" data-label="Atlanta">
+            <span class="mh-edition-opt-icon">🍑</span>
+            <div class="mh-edition-opt-info">
+              <span class="mh-edition-opt-name">Atlanta</span>
+              <span class="mh-edition-opt-desc">Metro Atlanta · Eastern</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
     <button class="mobile-nav-toggle" id="mobileNavToggle" title="Menu" aria-label="Open navigation">
       <span></span><span></span><span></span>
     </button>
@@ -6135,12 +7121,22 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <img class="carousel-slide ferrari-road" src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=900&q=80&fit=crop&crop=center" alt="Red Ferrari on the road" loading="lazy">
         <img class="carousel-slide dtla-buildings" src="img/la-night-5.jpeg" alt="Downtown LA buildings" loading="lazy">
         <img class="carousel-slide mercedes-amg" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=80&fit=crop&crop=center" alt="Mercedes AMG luxury performance" loading="lazy">
+        <!-- ═══ MOBILE-ONLY SLIDES — car-forward hero reel ═══ -->
+        <img class="carousel-slide mobile-slide mobile-1" src="img/3.jpg" alt="4th Street mural wall, LA street art" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-2" src="img/5.jpg" alt="Green supercar on LA streets" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-3" src="img/6.jpg" alt="Cars cruising LA highway" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-4" src="img/lambo-urus.jpg" alt="Lamborghini Urus in LA" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-5" src="img/cars-disney-hall.jpg" alt="Red sports car at Disney Concert Hall" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-6" src="img/14.jpg" alt="Santa Monica Pier ferris wheel beach" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-7" src="img/mercedes-classic.jpg" alt="Classic Mercedes in LA" loading="lazy">
+        <img class="carousel-slide mobile-slide mobile-8" src="img/4.jpg" alt="LA city skyline at night" loading="lazy">
       </div>
       <div class="credit-carousel-dots" id="creditCarouselDots"></div>
       <div class="credit-overlay">
-        <div class="credit-eyebrow" id="creditEyebrow">Credit Repair · Lead Category · Q1 2026 — HIRECREDIT dba HIRECAR, LLC</div>
-        <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
-        <p class="credit-sub" id="creditSub">Incidents become credit events. Billing fog becomes collections. HIRECAR routes you from event to resolution — one record, one timeline, one clean outcome.</p>
+        <div class="hero-top-tagline">Free intake · No credit pull · 24hr response</div>
+        <div class="credit-eyebrow" id="creditEyebrow">HIRECREDIT · Credit Recovery · Los Angeles</div>
+        <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br class="desktop-br"><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
+        <p class="credit-sub" id="creditSub">HIRECAR routes you from incident to resolution. One record, one timeline, one clean outcome.</p>
         <div class="credit-stat-row">
           <div class="credit-stat">
             <div class="credit-stat-n serif" data-count-to="810" data-count-suffix="K+">
@@ -6165,16 +7161,34 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
             <div class="credit-stat-l">Intake Response</div>
           </div>
         </div>
+        <!-- Hero Tabs — inside overlay so visible on mobile -->
+        <div class="hero-tabs" id="heroTabs">
+          <div class="hero-tabs-bar">
+            <button class="hero-tab active" data-tab="pifr">What is PIFR</button>
+            <button class="hero-tab" data-tab="how">How It Works</button>
+            <button class="hero-tab" data-tab="start">Get Started</button>
+          </div>
+          <div class="hero-tab-panels">
+            <div class="hero-tab-panel active" data-panel="pifr">
+              <p class="hero-tab-text">Personal Incident File & Recovery — your single record from crash to credit fix.</p>
+              <a href="about/pifr/" class="hero-tab-link">Learn more →</a>
+            </div>
+            <div class="hero-tab-panel" data-panel="how">
+              <p class="hero-tab-text">One platform routes your collision through legal, repair, rental & credit recovery.</p>
+              <a href="about/" class="hero-tab-link">See the process →</a>
+            </div>
+            <div class="hero-tab-panel" data-panel="start">
+              <p class="hero-tab-text">Free intake, no credit pull, 24-hour response. Start your recovery now.</p>
+              <a href="about/pifr/" class="hero-tab-link">Begin intake →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Right: solid panel with CTAs -->
+    <!-- Right: solid panel with CTAs (hidden on mobile) -->
     <div class="credit-module-main">
       <div class="credit-module-text">
         <p class="credit-cta-lead">Get back on track — fast.</p>
-        <div class="credit-module-actions">
-          <a href="booking/" class="credit-cta-primary">Start Credit Recovery →</a>
-          <a href="about/" class="credit-cta-secondary">How <span class="cta-brand">HireCar</span> Works</a>
-        </div>
         <p class="credit-cta-fine">Free intake · No credit pull · 24hr response</p>
       </div>
     </div>
@@ -7019,7 +8033,7 @@ if (window.MutationObserver && mobileIcon) {
 
 /* ─── WEATHER ────────────────────────────────────────────── */
 /* Inline SVG weather icons — clean, scalable, no emoji */
-const WX_SVG = {
+var WX_SVG = window.WX_SVG = {
   sun: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" fill="#eab308"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>',
   partlyCloudy: '<svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="7" r="3.5" fill="#eab308" opacity=".9"/><g stroke="#eab308" stroke-width="1.5" stroke-linecap="round" opacity=".6"><line x1="8" y1="1" x2="8" y2="2.5"/><line x1="2.5" y1="7" x2="1" y2="7"/><line x1="4.05" y1="2.55" x2="5.1" y2="3.6"/><line x1="11.95" y1="2.55" x2="10.9" y2="3.6"/></g><path d="M8.5 15a4 4 0 014-4h.5a4 4 0 013.7 2.5A3.5 3.5 0 0117.5 20H9.5a4 4 0 01-1-7.9z" fill="#94a3b8" opacity=".85"/></svg>',
   cloudy: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 19a5 5 0 01-.7-9.9C6.1 5.9 9.2 4 12.5 4a7 7 0 016.8 5.3A4.5 4.5 0 0119 18H6z" fill="#94a3b8" opacity=".8"/><path d="M3 16.5a3.5 3.5 0 013.5-3.5h.2a4.5 4.5 0 014.3-3.5 4.5 4.5 0 014.3 3.2A3.5 3.5 0 0115.5 19H4.5A3.5 3.5 0 013 16.5z" fill="#b0bec5" opacity=".45"/></svg>',
@@ -7028,14 +8042,14 @@ const WX_SVG = {
   snow: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 12a4 4 0 01-.6-8C5.5 1.6 8 0 11 0a6 6 0 015.8 4.5A3.5 3.5 0 0117 11H5.5z" fill="#94a3b8" opacity=".7"/><g fill="#bfdbfe"><circle cx="7" cy="15" r="1.3"/><circle cx="12" cy="16" r="1.3"/><circle cx="17" cy="15" r="1.3"/><circle cx="9.5" cy="19.5" r="1.1" opacity=".7"/><circle cx="14.5" cy="19.5" r="1.1" opacity=".7"/><circle cx="12" cy="22.5" r="1" opacity=".5"/></g></svg>',
   storm: '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 13a4 4 0 01-.6-8C5.5 2.6 8 1 11 1a6 6 0 015.8 4.5A3.5 3.5 0 0117 12H5.5z" fill="#64748b" opacity=".85"/><path d="M13 13l-2.5 5h4l-2.5 5" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="7.5" y1="15" x2="7" y2="18" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" opacity=".5"/><line x1="17" y1="14.5" x2="16.5" y2="17.5" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" opacity=".5"/></svg>'
 };
-const WX_CODE_MAP = {
+var WX_CODE_MAP = {
   0:WX_SVG.sun, 1:WX_SVG.partlyCloudy, 2:WX_SVG.partlyCloudy, 3:WX_SVG.cloudy,
   45:WX_SVG.fog, 48:WX_SVG.fog,
   51:WX_SVG.rain, 53:WX_SVG.rain, 55:WX_SVG.rain, 61:WX_SVG.rain, 63:WX_SVG.rain, 65:WX_SVG.rain,
   71:WX_SVG.snow, 73:WX_SVG.snow, 75:WX_SVG.snow, 80:WX_SVG.rain, 81:WX_SVG.rain, 82:WX_SVG.rain,
   95:WX_SVG.storm, 96:WX_SVG.storm, 99:WX_SVG.storm
 };
-const WX_DESC_MAP = {
+var WX_DESC_MAP = {
   0:'Clear',1:'Mainly Clear',2:'Partly Cloudy',3:'Overcast',
   45:'Foggy',48:'Foggy',51:'Drizzle',53:'Drizzle',55:'Heavy Drizzle',
   61:'Rain',63:'Rain',65:'Heavy Rain',71:'Snow',73:'Snow',75:'Heavy Snow',
@@ -7186,6 +8200,124 @@ function setActiveEdition(key) {
   localStorage.setItem('mw_edition', key);
 }
 
+/* ─── MOBILE: move CTA buttons into overlay so they sit right below stats ─── */
+(function mobileCTAMove() {
+  if (window.innerWidth > 768) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.querySelector('.credit-overlay');
+    var actions = document.querySelector('.credit-module-actions');
+    var fine = document.querySelector('.credit-cta-fine');
+    if (!overlay || !actions) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'mobile-overlay-cta';
+    wrap.appendChild(actions.cloneNode(true));
+    if (fine) wrap.appendChild(fine.cloneNode(true));
+    overlay.appendChild(wrap);
+  });
+})();
+
+/* ─── MOBILE BOTTOM NAV ─── */
+(function initMobileBottomNav() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var nav = document.getElementById('mobileBottomNav');
+    if (!nav) return;
+    var items = nav.querySelectorAll('.mbn-item');
+    var labels = nav.querySelectorAll('.mbn-label');
+
+    function measureLine(item) {
+      var label = item.querySelector('.mbn-label');
+      if (label) {
+        var w = label.offsetWidth;
+        item.style.setProperty('--lineWidth', w + 'px');
+      }
+    }
+
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        // Deactivate all
+        items.forEach(function(i) {
+          i.classList.remove('active');
+          i.querySelector('.mbn-label').classList.remove('active');
+        });
+        // Activate clicked
+        item.classList.add('active');
+        item.querySelector('.mbn-label').classList.add('active');
+        // Measure after label expands
+        setTimeout(function() { measureLine(item); }, 50);
+      });
+    });
+
+    // Initial measure
+    var active = nav.querySelector('.mbn-item.active');
+    if (active) setTimeout(function() { measureLine(active); }, 100);
+
+    window.addEventListener('resize', function() {
+      var act = nav.querySelector('.mbn-item.active');
+      if (act) measureLine(act);
+    });
+  });
+})();
+
+/* ─── EDITION SELECTOR (compact header) ─── */
+(function initEditionSelect() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var select = document.getElementById('mhEditionSelect');
+    var trigger = document.getElementById('mhEditionTrigger');
+    var dropdown = document.getElementById('mhEditionDropdown');
+    var closeBtn = document.getElementById('mhEditionClose');
+    var label = document.getElementById('mhEditionLabel');
+    if (!select || !trigger) return;
+
+    function positionDropdown() {
+      if (!dropdown) return;
+      var rect = trigger.getBoundingClientRect();
+      dropdown.style.top = (rect.bottom + 4) + 'px';
+      dropdown.style.left = rect.left + 'px';
+    }
+
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      select.classList.toggle('open');
+      if (select.classList.contains('open')) positionDropdown();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        select.classList.remove('open');
+      });
+    }
+
+    // Option selection
+    var options = select.querySelectorAll('.mh-edition-option');
+    options.forEach(function(opt) {
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        options.forEach(function(o) { o.classList.remove('active'); });
+        opt.classList.add('active');
+        var city = opt.getAttribute('data-city');
+        var cityLabel = opt.getAttribute('data-label');
+        if (label) label.textContent = cityLabel;
+        select.classList.remove('open');
+        // Hook into existing city selection if available
+        if (typeof rhSelectCityFromPanel === 'function') {
+          rhSelectCityFromPanel(city, cityLabel);
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function() {
+      select.classList.remove('open');
+    });
+    if (dropdown) {
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+  });
+})();
+
 /* ─── BOOT ───────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -7286,57 +8418,140 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })();
 
-  // 5b-pre. Credit hero image carousel with dissolve crossfade + mobile dots
+  // 5b-pre. Credit hero image carousel with dissolve crossfade + mobile/desktop split
   (function creditCarousel() {
     var allSlides = document.querySelectorAll('#creditCarousel .carousel-slide');
     var mod = document.querySelector('.credit-module');
     var dotsContainer = document.getElementById('creditCarouselDots');
     if (!allSlides.length || !mod) return;
 
-    var slides = Array.from(allSlides);
+    var isMobile = window.matchMedia('(max-width: 768px)');
+    var slides = [];
+    var idx = 0;
 
-    // Build dot indicators
-    if (dotsContainer) {
+    function getActiveSlides() {
+      var mobile = isMobile.matches;
+      return Array.from(allSlides).filter(function(s) {
+        var isMobileSlide = s.classList.contains('mobile-slide');
+        return mobile ? isMobileSlide : !isMobileSlide;
+      });
+    }
+
+    function buildDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
       slides.forEach(function(_, i) {
         var dot = document.createElement('span');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dotsContainer.appendChild(dot);
       });
     }
-    var dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
-
-    // Start on first slide
-    slides.forEach(function(s) { s.classList.remove('active'); });
-    var idx = 0;
-    slides[0].classList.add('active');
 
     function updateDots(i) {
-      dots.forEach(function(d, j) {
-        d.classList.toggle('active', j === i);
-      });
+      var dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+      dots.forEach(function(d, j) { d.classList.toggle('active', j === i); });
     }
 
-    // Rotate every 5.5 seconds with dissolve
+    function resetSlides() {
+      Array.from(allSlides).forEach(function(s) { s.classList.remove('active'); });
+      slides = getActiveSlides();
+      idx = 0;
+      if (slides.length) slides[0].classList.add('active');
+      buildDots();
+    }
+
+    resetSlides();
+    isMobile.addEventListener('change', resetSlides);
+
+    // Rotate every 9 seconds with powerful dissolve + scale
     setInterval(function() {
+      if (slides.length <= 1) return;
       slides[idx].classList.remove('active');
       idx = (idx + 1) % slides.length;
       slides[idx].classList.add('active');
       updateDots(idx);
-    }, 5500);
+    }, 9000);
   })();
 
-  // Mobile scroll progress bar
+  // Brand-pipe scroll progress + bang glow + tag color + compact header
   (function scrollProgress() {
-    var bar = document.getElementById('mobileScrollProgress');
-    if (!bar) return;
+    var pipe = document.querySelector('.brand-pipe');
+    var bang = document.querySelector('.brand-mw-name .bang');
+    var tag  = document.querySelector('.brand-mw-tag');
+    var masthead = document.querySelector('.masthead');
+    var utilBar = document.querySelector('.util-bar');
+    if (!pipe) return;
+
+    // Find the first section after the hero to use as threshold for tag color
+    var heroSection = document.querySelector('.credit-icon') || document.querySelector('.hero');
+    var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : window.innerHeight;
+
     var ticking = false;
+    var bangGlowing = false;
+    var tagGold = false;
+    var hintStopped = false;
+    var isCompact = false;
+    var compactThreshold = 80; // px scrolled before going compact
+
     window.addEventListener('scroll', function() {
       if (!ticking) {
         requestAnimationFrame(function() {
           var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
           var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-          bar.style.width = pct + '%';
+
+          // Stop hint pulse once user starts scrolling
+          if (!hintStopped && tag && scrollTop > 10) {
+            tag.style.animationPlayState = 'paused';
+            hintStopped = true;
+          }
+
+          // 1. Pipe fill
+          pipe.style.setProperty('--scroll-pct', pct + '%');
+
+          // 2. Bang (!) turns gold after 5% scroll
+          if (bang) {
+            if (pct > 5 && !bangGlowing) {
+              bang.classList.add('glow');
+              bangGlowing = true;
+            } else if (pct <= 5 && bangGlowing) {
+              bang.classList.remove('glow');
+              bangGlowing = false;
+            }
+          }
+
+          // 3. Tag turns gold once scrolled past hero section
+          if (tag) {
+            var pastHero = scrollTop > heroBottom * 0.7;
+            if (pastHero && !tagGold) {
+              tag.style.color = 'var(--cta)';
+              tag.style.textShadow = '0 0 6px rgba(201,146,10,.3)';
+              tagGold = true;
+            } else if (!pastHero && tagGold) {
+              tag.style.color = '';
+              tag.style.textShadow = '';
+              tagGold = false;
+            }
+          }
+
+          // 4. Compact header on scroll + move weather into compact-actions
+          if (masthead) {
+            var wxPill = document.getElementById('mhWxPill');
+            var compactActions = document.getElementById('mhCompactActions');
+            var mastheadInner = masthead.querySelector('.masthead-inner');
+            if (scrollTop > compactThreshold && !isCompact) {
+              masthead.classList.add('compact');
+              if (utilBar) utilBar.style.top = '54px';
+              if (wxPill && compactActions) compactActions.appendChild(wxPill);
+              isCompact = true;
+            } else if (scrollTop <= compactThreshold && isCompact) {
+              masthead.classList.remove('compact');
+              if (utilBar) utilBar.style.top = '';
+              if (wxPill && mastheadInner) mastheadInner.appendChild(wxPill);
+              isCompact = false;
+            }
+          }
+
           ticking = false;
         });
         ticking = true;
@@ -7345,6 +8560,25 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // Mobile util-bar: no scroll behavior needed — stays fixed via CSS
+
+  // 5b-info. Populate mobile weather pill (icon + temp) from main weather fetch
+  (function mobileWxPill() {
+    var wxText = document.getElementById('mhWxText');
+    var wxIcon = document.getElementById('mhWxIcon');
+    if (!wxText) return;
+    var count = 0;
+    var poll = setInterval(function() {
+      count++;
+      var mainTemp = document.getElementById('mastheadWxTemp');
+      var mainIcon = document.getElementById('mastheadWxIcon');
+      if (mainTemp && mainTemp.textContent && mainTemp.textContent !== '--°F') {
+        wxText.textContent = mainTemp.textContent.replace('°F','°');
+        if (wxIcon && mainIcon && mainIcon.innerHTML) wxIcon.innerHTML = mainIcon.innerHTML;
+        clearInterval(poll);
+      }
+      if (count > 40) clearInterval(poll);
+    }, 500);
+  })();
 
   // 5b-count. Animated odometer counters + character reveals for stat row
   (function statCounters() {
@@ -7356,39 +8590,60 @@ document.addEventListener('DOMContentLoaded', function() {
       if (fired) return;
       fired = true;
 
-      // Animate numeric odometer digits (810K+, 24hr) — smooth spinning count
+      // Slot-machine spin: fast random cycling → smooth decelerate → land on target
       var digits = statRow.querySelectorAll('.odo-digit');
       digits.forEach(function(d, i) {
         var target = parseInt(d.getAttribute('data-target'), 10);
-        var delay = i * 120;
+        var delay = i * 180;
         setTimeout(function() {
           var start = performance.now();
-          var duration = 2200;
+          var totalDuration = 5500; // total spin time
+          var fastPhase = 0.65;     // 65% fast random cycling
           function tick(now) {
-            var t = Math.min((now - start) / duration, 1);
-            // smooth ease-out quart for buttery spin
-            var eased = 1 - Math.pow(1 - t, 4);
-            d.textContent = Math.round(eased * target);
+            var elapsed = now - start;
+            var t = Math.min(elapsed / totalDuration, 1);
+            if (t < fastPhase) {
+              // Fast random cycling — slot machine blur
+              d.textContent = Math.floor(Math.random() * 10);
+            } else {
+              // Smooth decelerate to target — ease-out quint
+              var settleT = (t - fastPhase) / (1 - fastPhase);
+              var eased = 1 - Math.pow(1 - settleT, 5);
+              d.textContent = Math.round(eased * target);
+            }
             if (t < 1) requestAnimationFrame(tick);
+            else d.textContent = target; // ensure exact landing
           }
           requestAnimationFrame(tick);
         }, delay + 200);
       });
 
-      // Show suffixes (K+, hr) after digits finish
+      // Show suffixes (K+, hr) after spin finishes
       var suffixes = statRow.querySelectorAll('.odo-suffix');
       suffixes.forEach(function(s) {
-        setTimeout(function() { s.classList.add('visible'); }, 1800);
+        setTimeout(function() { s.classList.add('visible'); }, 5200);
       });
 
-      // Reveal text characters (PIFR) — smooth staggered drop-in
+      // Reveal PIFR — 2s after numbers start, dissolve from center of I·F outward
+      // Label stays static (always visible)
       var chars = statRow.querySelectorAll('.odo-char');
+      // P=0, I=1, F=2, R=3 — center is between I and F (1.5)
+      var center = 1.5;
       chars.forEach(function(c, i) {
+        var distFromCenter = Math.abs(i - center); // I,F = 0.5; P,R = 1.5
+        var delay = Math.round(distFromCenter * 500);
         setTimeout(function() {
           c.textContent = c.getAttribute('data-char');
           c.classList.add('revealed');
-        }, 500 + i * 240);
+        }, 800 + delay);
       });
+      // Yellow glow pulse on the odo-text container after reveal
+      var pifrContainer = statRow.querySelector('.odo-text');
+      if (pifrContainer) {
+        setTimeout(function() {
+          pifrContainer.classList.add('pifr-glow');
+        }, 800 + 500 + 300); // after I,F reveal
+      }
     }
 
     var obs = new IntersectionObserver(function(entries) {
@@ -7471,14 +8726,21 @@ document.addEventListener('DOMContentLoaded', function() {
     edObs.observe(ldContainer);
   })();
 
-  // 7. Counter animation for credit stats
+  // 7. Counter animation for credit stats — slot-machine spin then settle
   function animateCounter(el, target, suffix, duration) {
     const start = performance.now();
+    const fastPhase = 0.6;
     function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased    = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target).toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
+      const t = Math.min((now - start) / duration, 1);
+      if (t < fastPhase) {
+        el.textContent = Math.floor(Math.random() * target).toLocaleString() + suffix;
+      } else {
+        const settleT = (t - fastPhase) / (1 - fastPhase);
+        const eased = 1 - Math.pow(1 - settleT, 5);
+        el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+      }
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString() + suffix;
     }
     requestAnimationFrame(tick);
   }
@@ -7488,10 +8750,10 @@ document.addEventListener('DOMContentLoaded', function() {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         document.querySelectorAll('.credit-stat-n').forEach(n => {
-          if (n.textContent.trim() === '810K+') animateCounter(n, 810, 'K+', 3800);
+          if (n.textContent.trim() === '810K+') animateCounter(n, 810, 'K+', 6000);
           else if (n.textContent.trim() === '24hr') {
             let t = 0;
-            const iv = setInterval(() => { n.textContent = t + 'hr'; if (++t > 24) clearInterval(iv); }, 160);
+            const iv = setInterval(() => { n.textContent = t + 'hr'; if (++t > 24) clearInterval(iv); }, 250);
           }
         });
         obs.disconnect();
@@ -7572,6 +8834,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+/* ─── HERO TABS ─── */
+(function initHeroTabs() {
+  var container = document.getElementById('heroTabs');
+  if (!container) return;
+  var tabs = container.querySelectorAll('.hero-tab');
+  var panels = container.querySelectorAll('.hero-tab-panel');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var target = this.getAttribute('data-tab');
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) {
+        p.classList.remove('active');
+        p.style.opacity = '0';
+        p.style.transform = 'translateY(6px)';
+      });
+      this.classList.add('active');
+      var panel = container.querySelector('[data-panel="' + target + '"]');
+      if (panel) {
+        panel.classList.add('active');
+        // Force reflow for transition
+        void panel.offsetWidth;
+        panel.style.opacity = '1';
+        panel.style.transform = 'translateY(0)';
+      }
+    });
+  });
+})();
+
 })();
 </script><script>
 (function() {
@@ -7603,20 +8893,22 @@ const DAY_START  = 7;   // 07:00
 const NIGHT_START = 18; // 18:00
 
 /* ─── WEATHER CODES → icon + description ───────────────── */
+/* Reference WX_SVG from global scope (defined in previous script block) */
+var _WX = window.WX_SVG || (typeof WX_SVG !== 'undefined' ? WX_SVG : {});
 function wxInterpret(code) {
-  if (code === 0)              return { icon: WX_SVG.sun,          desc: 'Clear' };
-  if (code === 1)              return { icon: WX_SVG.partlyCloudy, desc: 'Mostly Clear' };
-  if (code === 2)              return { icon: WX_SVG.partlyCloudy, desc: 'Partly Cloudy' };
-  if (code === 3)              return { icon: WX_SVG.cloudy,       desc: 'Overcast' };
-  if ([45,48].includes(code)) return { icon: WX_SVG.fog,          desc: 'Foggy' };
-  if (code >= 51 && code <= 57) return { icon: WX_SVG.rain,       desc: 'Drizzle' };
-  if (code >= 61 && code <= 67) return { icon: WX_SVG.rain,       desc: 'Rain' };
-  if (code >= 71 && code <= 77) return { icon: WX_SVG.snow,       desc: 'Snow' };
-  if (code >= 80 && code <= 82) return { icon: WX_SVG.rain,       desc: 'Showers' };
-  if (code >= 85 && code <= 86) return { icon: WX_SVG.snow,       desc: 'Snow Showers' };
-  if (code === 95)             return { icon: WX_SVG.storm,       desc: 'Thunderstorm' };
-  if (code >= 96)              return { icon: WX_SVG.storm,       desc: 'Heavy Thunderstorm' };
-  return { icon: WX_SVG.cloudy, desc: 'Conditions' };
+  if (code === 0)              return { icon: _WX.sun || '',          desc: 'Clear' };
+  if (code === 1)              return { icon: _WX.partlyCloudy || '', desc: 'Mostly Clear' };
+  if (code === 2)              return { icon: _WX.partlyCloudy || '', desc: 'Partly Cloudy' };
+  if (code === 3)              return { icon: _WX.cloudy || '',       desc: 'Overcast' };
+  if ([45,48].includes(code)) return { icon: _WX.fog || '',          desc: 'Foggy' };
+  if (code >= 51 && code <= 57) return { icon: _WX.rain || '',       desc: 'Drizzle' };
+  if (code >= 61 && code <= 67) return { icon: _WX.rain || '',       desc: 'Rain' };
+  if (code >= 71 && code <= 77) return { icon: _WX.snow || '',       desc: 'Snow' };
+  if (code >= 80 && code <= 82) return { icon: _WX.rain || '',       desc: 'Showers' };
+  if (code >= 85 && code <= 86) return { icon: _WX.snow || '',       desc: 'Snow Showers' };
+  if (code === 95)             return { icon: _WX.storm || '',       desc: 'Thunderstorm' };
+  if (code >= 96)              return { icon: _WX.storm || '',       desc: 'Heavy Thunderstorm' };
+  return { icon: _WX.cloudy || '', desc: 'Conditions' };
 }
 
 /* ─── FETCH WEATHER for one edition ────────────────────── */
@@ -7657,6 +8949,11 @@ async function fetchWeather(editionKey) {
       if (mhIcon) mhIcon.innerHTML = wx.icon;
       if (mhTemp) mhTemp.textContent = Math.round(c.temperature_2m) + '°F';
       if (mhDesc) mhDesc.textContent = wx.desc;
+      // Also update mobile weather pill
+      var mhWxText = document.getElementById('mhWxText');
+      var mhWxIco = document.getElementById('mhWxIcon');
+      if (mhWxText) mhWxText.textContent = Math.round(c.temperature_2m) + '°';
+      if (mhWxIco) mhWxIco.innerHTML = wx.icon;
     }
 
   } catch (e) {
@@ -7775,34 +9072,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'Escape') closeDrawer();
   });
 
-  // ── MOBILE THEME TOGGLE ───────────────────────────────
-  const mobileTBtn  = document.getElementById('mobileThemeBtn');
-  const mobileIcon  = document.getElementById('mobileThemeIcon');
-  if (mobileTBtn) {
-    mobileTBtn.addEventListener('click', function() {
+  // ── PILL THEME TOGGLE ───────────────────────────────
+  const pillToggle = document.getElementById('pillThemeToggle');
+  if (pillToggle) {
+    pillToggle.addEventListener('click', function() {
       const isDark = document.body.classList.contains('dark-mode');
       applyTheme(isDark ? 'light' : 'dark');
     });
   }
-  // Keep mobile icon in sync with theme
-  const origApply = window._mwApplyTheme || null;
-  function syncMobileIcon(mode) {
-    var _moonSvg = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 109.2 11.5c.3-.8-.5-1.6-1.3-1.3A6.5 6.5 0 0112.5 3h-.3z" fill="#94a3b8"/></svg>';
-    var _daySvg  = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="#eab308"/><circle cx="12" cy="12" r="6" fill="#eab308" opacity=".15"/><g stroke="#eab308" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.22"/></g></svg>';
-    if (mobileIcon) mobileIcon.innerHTML = mode === 'dark' ? _moonSvg : _daySvg;
-  }
-  // Patch applyTheme to also sync mobile icon
-  const _origApplyTheme = window.applyTheme || applyTheme;
-  // sync on init after applyTheme runs:
-  setTimeout(function() {
-    syncMobileIcon(document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    // Observe body class changes
-    if (window.MutationObserver) {
-      new MutationObserver(function() {
-        syncMobileIcon(document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-      }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    }
-  }, 0);
 
 
   initTheme();
@@ -7850,15 +9127,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── 8. Credit module — hero mode, no sticky detection needed ──────────────
 
-  // ── 9. Counter animation for credit stats ──────────────────
+  // ── 9. Counter animation for credit stats — slot-machine spin then settle ──
   function animateCounter(el, target, suffix, duration) {
     const start = performance.now();
+    const fastPhase = 0.6;
     function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.round(eased * target);
-      el.textContent = value.toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
+      const t = Math.min((now - start) / duration, 1);
+      if (t < fastPhase) {
+        el.textContent = Math.floor(Math.random() * target).toLocaleString() + suffix;
+      } else {
+        const settleT = (t - fastPhase) / (1 - fastPhase);
+        const eased = 1 - Math.pow(1 - settleT, 5);
+        el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+      }
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString() + suffix;
     }
     requestAnimationFrame(tick);
   }
@@ -7872,14 +9155,14 @@ document.addEventListener('DOMContentLoaded', function() {
           const nums = document.querySelectorAll('.credit-stat-n');
           nums.forEach(function(n) {
             const text = n.textContent.trim();
-            if (text === '810K+') animateCounter(n, 810, 'K+', 3800);
+            if (text === '810K+') animateCounter(n, 810, 'K+', 6000);
             else if (text === '24hr') {
               let t = 0;
               const iv = setInterval(function() {
                 n.textContent = t + 'hr';
                 t++;
                 if (t > 24) clearInterval(iv);
-              }, 160);
+              }, 250);
             }
           });
           obs.disconnect();
@@ -9108,6 +10391,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 })();
 </script>
+
+<!-- ═══ MOBILE BOTTOM NAV ═══ -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav" role="navigation">
+  <button class="mbn-item active" data-nav="home">
+    <div class="mbn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+    <strong class="mbn-label active">home</strong>
+  </button>
+  <button class="mbn-item" data-nav="services">
+    <div class="mbn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></div>
+    <strong class="mbn-label">services</strong>
+  </button>
+  <button class="mbn-item" data-nav="book">
+    <div class="mbn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div>
+    <strong class="mbn-label">book</strong>
+  </button>
+  <button class="mbn-item" data-nav="pifr">
+    <div class="mbn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
+    <strong class="mbn-label">pifr</strong>
+  </button>
+  <button class="mbn-item" data-nav="account">
+    <div class="mbn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    <strong class="mbn-label">account</strong>
+  </button>
+</nav>
 
 </body>
 </html>
