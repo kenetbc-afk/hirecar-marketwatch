@@ -2974,16 +2974,47 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
 /* ── MOBILE RESPONSIVE ───────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* --- UTIL BAR --- */
-  .util-inner { padding: 0 12px; gap: 8px; }
+  body { padding-top: 48px !important; } /* match mobile masthead height */
+
+  /* --- UTIL BAR (BREAKING ticker) — fixed at top, stays on scroll --- */
+  .util-bar {
+    position: fixed !important;
+    top: 44px !important;
+    left: 0;
+    right: 0;
+    z-index: 910;
+    background: transparent !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    padding: 2px 0 !important;
+  }
+  .util-bar .util-label,
+  .util-bar .ticker-text,
+  .util-bar .ticker-sep { color: #fff !important; }
+  .util-bar .util-hot { font-size: 8px !important; padding: 2px 7px !important; }
+  .util-bar .t-item,
+  .util-bar .t-dot { font-size: 10px !important; }
+  .util-inner { padding: 0 10px; gap: 6px; }
   .util-right { display: none; }
 
-  /* --- MASTHEAD --- */
+  /* --- MASTHEAD with black bleed into hero --- */
   .masthead {
     background: #000 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-bottom: none !important;
+    overflow: visible !important;
+  }
+  .masthead::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 339;
   }
   .masthead.scrolled {
     background: #000 !important;
@@ -3014,8 +3045,8 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .brand-mw {
     gap: 1px;
   }
-  .brand-mw-name { font-size: 16px !important; line-height: 1.1 !important; }
-  .brand-mw-sub { display: block !important; font-size: 5.5px !important; color: rgba(255,255,255,.3) !important; letter-spacing: .08em !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+  .brand-mw-name { font-size: 21px !important; line-height: 1.1 !important; letter-spacing: -.01em; }
+  .brand-mw-sub { display: none !important; }
 
   /* Mobile controls row — compact, clean spacing */
   .mobile-theme-btn {
@@ -3046,17 +3077,15 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   /* --- MOBILE NAV DRAWER --- */
   .mobile-nav-drawer { display: block; }
 
-  /* --- EDITION BAR --- */
+  /* --- EDITION BAR (hidden on mobile — hero takes full space) --- */
   .edition-bar {
-    background: #000 !important;
-    border-top: 1px solid rgba(255,255,255,.06) !important;
-    border-bottom: none !important;
+    display: none !important;
   }
   .edition-bar-inner {
     display: flex;
     flex-wrap: nowrap;
     padding: 0 16px;
-    min-height: 38px;
+    min-height: 34px;
     overflow-x: auto;
     gap: 0;
   }
@@ -3084,6 +3113,8 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     border-bottom: none !important;
     background: #000;
     margin: 0;
+    margin-top: -48px !important; /* pull hero up behind masthead */
+    padding-top: 0 !important;
   }
   .credit-module::before { display: none !important; }
   .credit-module::after { display: none !important; }
@@ -3101,13 +3132,13 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     width: 100% !important;
   }
 
-  /* ── Carousel panel — full-bleed hero image ── */
+  /* ── Carousel panel — full-bleed hero image (extends behind header) ── */
   .credit-icon {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    min-height: 58vh !important;
-    max-height: 480px;
+    min-height: calc(75vh + 48px) !important;
+    max-height: none;
     margin-right: 0 !important;
     width: 100% !important;
   }
@@ -3116,109 +3147,118 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     position: absolute !important;
     inset: 0 !important;
   }
-  /* Gradient overlay — stronger at bottom for text legibility */
+  /* Mobile carousel — no zoom transforms, max zoom-out */
+  .carousel-slide {
+    transform: none !important;
+    transform-origin: center center !important;
+    object-position: center center !important;
+  }
+  /* Per-slide focal tuning — balanced for portrait mobile crop */
+  .carousel-slide.city-slide      { object-position: 40% 50% !important; }
+  .carousel-slide.porsche-911     { object-position: 35% 45% !important; }
+  .carousel-slide.ferrari-road    { object-position: center 50% !important; }
+  .carousel-slide.mercedes-amg    { object-position: center 55% !important; }
+  .carousel-slide.cars-disney     { object-position: 40% 65% !important; }
+  .carousel-slide.collision-night { object-position: center center !important; }
+  .carousel-slide.la-mural        { object-position: center 40% !important; }
+  .carousel-slide.storage-accident { object-position: center center !important; }
+  .carousel-slide.dtla-buildings   { object-position: center 40% !important; }
+
+  /* Gradient overlay — heavy dark bleed top (header) → clear middle → dark bleed bottom */
   .credit-icon::before {
     display: block !important;
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.08) 0%,
-      rgba(0,0,0,.05) 25%,
-      rgba(0,0,0,.25) 50%,
-      rgba(0,0,0,.75) 80%,
+      rgba(0,0,0,.92) 0%,
+      rgba(0,0,0,.7) 10%,
+      rgba(0,0,0,.35) 22%,
+      rgba(0,0,0,.08) 40%,
+      rgba(0,0,0,.05) 55%,
+      rgba(0,0,0,.15) 68%,
+      rgba(0,0,0,.55) 80%,
+      rgba(0,0,0,.88) 92%,
       rgba(0,0,0,.95) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
   .credit-icon::after { display: none !important; }
 
-  /* ── Carousel indicator dots ── */
+  /* ── Carousel indicator dots — HIDDEN on mobile ── */
   .credit-carousel-dots {
-    display: flex !important;
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    gap: 5px;
-  }
-  .credit-carousel-dots .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(255,255,255,.25);
-    transition: all .4s ease;
-    cursor: pointer;
-  }
-  .credit-carousel-dots .dot.active {
-    background: rgba(255,255,255,.85);
-    width: 20px; border-radius: 3px;
+    display: none !important;
   }
 
-  /* ── Overlay text on carousel — desktop-aligned left positioning ── */
+  /* ── Overlay text — positioned in upper third so it stands on top of image ── */
   .credit-overlay {
     position: absolute !important;
-    bottom: 0 !important;
+    top: 18% !important;
+    bottom: auto !important;
     left: 0 !important;
     right: 0 !important;
-    top: auto !important;
-    padding: 0 20px 42px !important;
-    width: 100% !important;
     transform: none !important;
+    padding: 0 20px !important;
+    width: 100% !important;
     z-index: 3;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
   }
   .credit-eyebrow {
     display: block !important;
-    font-size: 7.5px !important;
+    font-size: 7px !important;
     letter-spacing: .2em !important;
-    color: rgba(255,255,255,.45) !important;
+    color: rgba(255,255,255,.55) !important;
     margin-bottom: 6px !important;
   }
   .credit-headline {
-    font-size: 32px !important;
+    font-size: 28px !important;
     max-width: 100% !important;
     color: #fff !important;
     line-height: 1.08 !important;
     margin-bottom: 8px !important;
     letter-spacing: -0.02em !important;
+    text-shadow: 0 2px 16px rgba(0,0,0,.7), 0 1px 4px rgba(0,0,0,.5);
   }
   .credit-sub {
-    font-size: 12.5px;
-    color: rgba(255,255,255,.55) !important;
-    max-width: 100% !important;
-    line-height: 1.55 !important;
+    display: block !important;
+    color: rgba(255,255,255,.88) !important;
+    font-size: 12.5px !important;
+    text-align: center !important;
+    max-width: 88% !important;
+    margin: 4px auto 0 !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,.6);
+    line-height: 1.45 !important;
   }
   .credit-stat-row {
-    grid-template-columns: repeat(3,1fr);
-    max-width: 100% !important;
-    border-top-color: rgba(255,255,255,.1) !important;
-    margin-top: 12px !important;
-    padding-top: 10px !important;
-    gap: 0 !important;
+    display: none !important;
   }
-  .credit-stat { padding: 4px 8px; border-right-color: rgba(255,255,255,.08) !important; }
-  .credit-stat-n { font-size: 22px !important; }
-  .credit-stat-l { color: rgba(255,255,255,.35) !important; font-size: 7px !important; }
 
-  /* ── CTA panel — desktop-style solid dark panel below carousel ── */
+  /* ── CTA panel — pulled UP into hero, compact buttons ── */
   .credit-module-main {
     border-right: none;
     border-bottom: none;
-    padding: 22px 20px 26px !important;
-    margin-top: 0;
-    align-items: flex-start !important;
-    background: #060c1a;
-    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 0 20px 18px !important;
+    margin-top: -52vh;
+    position: relative;
+    z-index: 4;
+    align-items: center !important;
+    background: none !important;
+    border-top: none;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    min-height: 52vh;
   }
-  .credit-module-main .credit-module-text { text-align: left; max-width: 100%; }
+  .credit-module-main .credit-module-text { text-align: center; max-width: 100%; }
   .credit-module-text { padding: 0; }
-  .credit-module-actions { flex-direction: row; gap: 10px; max-width: 100%; }
-  .credit-cta-primary, .credit-cta-secondary { flex: 1; padding: 14px 10px; font-size: 10px; border-radius: 2px; }
-  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.15) !important; background: rgba(255,255,255,.04) !important; }
-  .credit-cta-lead { text-align: left !important; font-size: 14px !important; letter-spacing: -0.01em !important; }
-  .credit-cta-fine { font-size: 7px; letter-spacing: 0.08em; white-space: nowrap; text-align: left !important; margin-left: 0 !important; margin-right: 0 !important; color: rgba(255,255,255,.25) !important; }
+  .credit-cta-lead { text-align: center !important; font-size: 12px !important; letter-spacing: -0.01em !important; margin-bottom: 6px !important; text-shadow: 0 1px 8px rgba(0,0,0,.6); color: rgba(255,255,255,.8) !important; }
+  .credit-module-actions { flex-direction: column; gap: 8px; max-width: 320px; margin: 0 auto; width: 100%; align-items: center; }
+  .credit-cta-primary, .credit-cta-secondary { flex: none; width: 100%; max-width: 280px; padding: 10px 16px; font-size: 11px; border-radius: 4px; text-align: center; letter-spacing: 0.04em; }
+  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.18) !important; background: rgba(255,255,255,.06) !important; }
+  .credit-cta-fine { font-size: 7px; letter-spacing: 0.08em; white-space: nowrap; text-align: center !important; margin-left: 0 !important; margin-right: 0 !important; color: rgba(255,255,255,.35) !important; margin-top: 8px !important; }
 
   /* --- HERO AREA --- */
   .hero-area { grid-template-columns: 1fr; border-bottom: none; }
@@ -3311,16 +3351,20 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .footer-legal { font-size: 9px; padding: 14px 16px; }
 
   /* --- SECTION LABELS --- */
-  .section-label { font-size: 10px !important; padding: 18px 0 10px; letter-spacing: .16em !important; }
+  .section-label { font-size: 10px !important; padding: 12px 0 8px; letter-spacing: .16em !important; }
 
-  /* --- DARK-TO-LIGHT TRANSITION BRIDGE --- */
+  /* --- DARK-TO-LIGHT TRANSITION BRIDGE — smooth bleed --- */
   .mobile-gradient-bridge {
     display: block !important;
-    height: 60px;
+    height: 36px;
     background: linear-gradient(180deg,
       #060c1a 0%,
-      #0a1020 20%,
-      #f8f6f2 80%,
+      #0d1425 15%,
+      #1a2030 30%,
+      #3a3d42 48%,
+      #8a8680 60%,
+      #c8c4be 72%,
+      #e8e5df 84%,
       #f8f6f2 100%);
     margin: 0;
     border: none;
@@ -3328,7 +3372,8 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   body.dark-mode .mobile-gradient-bridge {
     background: linear-gradient(180deg,
       #060c1a 0%,
-      #0e1219 40%,
+      #0a0f18 25%,
+      #0e1219 50%,
       #111820 100%) !important;
   }
 
@@ -3378,16 +3423,21 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .co-bar-inner { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .mci-metric { min-width: 100%; }
-  .credit-module-actions { flex-direction: column; gap: 8px; }
+  .credit-module-actions { flex-direction: column; gap: 6px; max-width: 260px !important; }
   .hero-title { font-size: 24px !important; }
   .brand-mw-name { font-size: 14px !important; }
   .brand-logo { height: 20px !important; }
   .mci-actions { flex-direction: column; }
   .hero-img-placeholder { height: 200px !important; }
-  .credit-icon { min-height: 52vh !important; }
-  .credit-headline { font-size: 26px !important; }
-  .credit-stat-n { font-size: 20px !important; }
-  .credit-cta-primary, .credit-cta-secondary { padding: 13px 10px; font-size: 10px; }
+  .credit-icon { min-height: calc(70vh + 48px) !important; max-height: none !important; }
+  .credit-headline { font-size: 22px !important; margin-bottom: 6px !important; }
+  .credit-sub { font-size: 11px !important; max-width: 95% !important; }
+  .credit-stat-n { font-size: 18px !important; }
+  .credit-stat-l { font-size: 6px !important; }
+  .credit-overlay { padding: 0 14px !important; top: 16% !important; }
+  .credit-cta-primary, .credit-cta-secondary { padding: 9px 14px !important; font-size: 10.5px !important; max-width: 240px !important; }
+  .credit-cta-lead { font-size: 10.5px !important; text-align: center !important; }
+  .credit-module-main { padding: 0 14px 14px !important; margin-top: -50vh !important; min-height: 50vh !important; }
   .mobile-gradient-bridge { height: 48px; }
 }
 
@@ -3716,7 +3766,7 @@ body.gate-open { padding-top: 54px; }
 }
 .mobile-apply-bar .mab-arrow { font-size: 14px; }
 @media (max-width: 768px) {
-  .mobile-apply-bar { display: block; }
+  .mobile-apply-bar { display: none; }
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -7293,6 +7343,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, { passive: true });
   })();
+
+  // Mobile util-bar: no scroll behavior needed — stays fixed via CSS
 
   // 5b-count. Animated odometer counters + character reveals for stat row
   (function statCounters() {
