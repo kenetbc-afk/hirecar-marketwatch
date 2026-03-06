@@ -6,6 +6,18 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["serve.py", "8080"],
       "port": 8080
+    },
+    {
+      "name": "hirecar-workers",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "8787"],
+      "port": 8787
+    },
+    {
+      "name": "payment-orchestration",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "8788"],
+      "port": 8788
     }
   ]
 }
