@@ -8392,18 +8392,7 @@ function setActiveEdition(key) {
 
 /* ─── MOBILE: move CTA buttons into overlay so they sit right below stats ─── */
 (function mobileCTAMove() {
-  if (window.innerWidth > 768) return;
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.querySelector('.credit-overlay');
-    var actions = document.querySelector('.credit-module-actions');
-    var fine = document.querySelector('.credit-cta-fine');
-    if (!overlay || !actions) return;
-    var wrap = document.createElement('div');
-    wrap.className = 'mobile-overlay-cta';
-    wrap.appendChild(actions.cloneNode(true));
-    if (fine) wrap.appendChild(fine.cloneNode(true));
-    overlay.appendChild(wrap);
-  });
+  /* Mobile CTA buttons removed — desktop only */
 })();
 
 /* ─── MOBILE BOTTOM NAV ─── */
