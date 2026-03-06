@@ -522,6 +522,8 @@ img { display: block; width: 100%; }
 }
 /* Carousel dots — hidden on desktop, shown on mobile */
 .credit-carousel-dots { display: none; }
+/* Gradient bridge — hidden on desktop, shown on mobile */
+.mobile-gradient-bridge { display: none; }
 .credit-icon img {
   width: 100%;
   height: 100%;
@@ -2977,13 +2979,24 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .util-right { display: none; }
 
   /* --- MASTHEAD --- */
+  .masthead {
+    background: #000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: none !important;
+  }
+  .masthead.scrolled {
+    background: #000 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
   .masthead-inner {
     display: flex !important;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
-    min-height: 50px;
+    padding: 0 16px;
+    min-height: 48px;
     gap: 10px;
   }
   .masthead-center { display: none; }
@@ -2996,12 +3009,12 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     min-width: 0;
     gap: 10px;
   }
-  .brand-logo { height: 24px; }
+  .brand-logo { height: 22px; }
   .brand-pipe { display: none; }
   .brand-mw {
     gap: 1px;
   }
-  .brand-mw-name { font-size: 17px !important; line-height: 1.1 !important; }
+  .brand-mw-name { font-size: 16px !important; line-height: 1.1 !important; }
   .brand-mw-sub { display: block !important; font-size: 5.5px !important; color: rgba(255,255,255,.3) !important; letter-spacing: .08em !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
 
   /* Mobile controls row — compact, clean spacing */
@@ -3034,17 +3047,22 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .mobile-nav-drawer { display: block; }
 
   /* --- EDITION BAR --- */
+  .edition-bar {
+    background: #000 !important;
+    border-top: 1px solid rgba(255,255,255,.06) !important;
+    border-bottom: none !important;
+  }
   .edition-bar-inner {
     display: flex;
     flex-wrap: nowrap;
-    padding: 0 12px;
-    min-height: 44px;
+    padding: 0 16px;
+    min-height: 38px;
     overflow-x: auto;
     gap: 0;
   }
   .edition-bar-inner::-webkit-scrollbar { display: none; }
   .edition-block {
-    border-right: 1px solid var(--edition-bar-border, #1a2030);
+    border-right: 1px solid rgba(255,255,255,.08);
     padding: 0 12px 0 0;
     flex-shrink: 0;
   }
@@ -3054,41 +3072,42 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .edition-bar-right { display: none; }
   .edition-local-data { border-left: none; }
   .local-data-item { padding: 4px 10px; }
-  .local-data-label { font-size: 6px; }
-  .local-data-val { font-size: 10px; }
+  .local-data-label { font-size: 6px; color: rgba(255,255,255,.35) !important; }
+  .local-data-val { font-size: 10px; color: rgba(255,255,255,.7) !important; }
   .local-data-icon { font-size: 11px; }
 
-  /* --- CREDIT MODULE (mobile: live carousel with overlay) --- */
+  /* --- CREDIT MODULE (mobile: desktop-aligned, edge-to-edge) --- */
   .credit-module {
     min-height: auto;
     display: flex;
     align-items: stretch;
-    border-bottom: none;
+    border-bottom: none !important;
     background: #000;
+    margin: 0;
   }
-  .credit-module::before {
-    display: none !important;
-  }
-  .credit-module::after {
-    display: none !important;
-  }
+  .credit-module::before { display: none !important; }
+  .credit-module::after { display: none !important; }
   .credit-module-inner {
     display: flex !important;
     flex-direction: column !important;
     grid-template-columns: unset !important;
     padding: 0 !important;
+    margin: 0 !important;
     position: relative;
     z-index: 1;
     min-height: auto !important;
     align-items: stretch !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
-  /* Show live carousel on mobile as full-bleed hero */
+
+  /* ── Carousel panel — full-bleed hero image ── */
   .credit-icon {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    min-height: 54vh !important;
-    max-height: 420px;
+    min-height: 58vh !important;
+    max-height: 480px;
     margin-right: 0 !important;
     width: 100% !important;
   }
@@ -3097,52 +3116,52 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     position: absolute !important;
     inset: 0 !important;
   }
+  /* Gradient overlay — stronger at bottom for text legibility */
   .credit-icon::before {
     display: block !important;
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.15) 0%,
-      rgba(0,0,0,.08) 30%,
-      rgba(0,0,0,.35) 60%,
-      rgba(0,0,0,.88) 100%) !important;
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,.05) 25%,
+      rgba(0,0,0,.25) 50%,
+      rgba(0,0,0,.75) 80%,
+      rgba(0,0,0,.95) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
-  .credit-icon::after {
-    display: none !important;
-  }
-  /* Carousel indicator dots */
+  .credit-icon::after { display: none !important; }
+
+  /* ── Carousel indicator dots ── */
   .credit-carousel-dots {
     display: flex !important;
     position: absolute;
-    bottom: 14px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-    gap: 6px;
+    gap: 5px;
   }
   .credit-carousel-dots .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.3);
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,.25);
     transition: all .4s ease;
+    cursor: pointer;
   }
   .credit-carousel-dots .dot.active {
-    background: rgba(255,255,255,.9);
-    width: 18px;
-    border-radius: 3px;
+    background: rgba(255,255,255,.85);
+    width: 20px; border-radius: 3px;
   }
-  /* Overlay sits on top of the carousel image */
+
+  /* ── Overlay text on carousel — desktop-aligned left positioning ── */
   .credit-overlay {
     position: absolute !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     top: auto !important;
-    padding: 0 20px 44px !important;
+    padding: 0 20px 42px !important;
     width: 100% !important;
     transform: none !important;
     z-index: 3;
@@ -3150,42 +3169,56 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
     flex-direction: column;
     align-items: flex-start;
   }
+  .credit-eyebrow {
+    display: block !important;
+    font-size: 7.5px !important;
+    letter-spacing: .2em !important;
+    color: rgba(255,255,255,.45) !important;
+    margin-bottom: 6px !important;
+  }
+  .credit-headline {
+    font-size: 32px !important;
+    max-width: 100% !important;
+    color: #fff !important;
+    line-height: 1.08 !important;
+    margin-bottom: 8px !important;
+    letter-spacing: -0.02em !important;
+  }
+  .credit-sub {
+    font-size: 12.5px;
+    color: rgba(255,255,255,.55) !important;
+    max-width: 100% !important;
+    line-height: 1.55 !important;
+  }
+  .credit-stat-row {
+    grid-template-columns: repeat(3,1fr);
+    max-width: 100% !important;
+    border-top-color: rgba(255,255,255,.1) !important;
+    margin-top: 12px !important;
+    padding-top: 10px !important;
+    gap: 0 !important;
+  }
+  .credit-stat { padding: 4px 8px; border-right-color: rgba(255,255,255,.08) !important; }
+  .credit-stat-n { font-size: 22px !important; }
+  .credit-stat-l { color: rgba(255,255,255,.35) !important; font-size: 7px !important; }
+
+  /* ── CTA panel — desktop-style solid dark panel below carousel ── */
   .credit-module-main {
     border-right: none;
     border-bottom: none;
-    padding: 20px 20px 28px !important;
+    padding: 22px 20px 26px !important;
     margin-top: 0;
     align-items: flex-start !important;
-    background: rgba(6,12,26,.95);
+    background: #060c1a;
     border-top: 1px solid rgba(255,255,255,.06);
   }
   .credit-module-main .credit-module-text { text-align: left; max-width: 100%; }
   .credit-module-text { padding: 0; }
-  .credit-eyebrow {
-    display: block !important;
-    font-size: 7px !important;
-    letter-spacing: .18em !important;
-    color: rgba(255,255,255,.4) !important;
-    margin-bottom: 8px !important;
-  }
-  .credit-headline { font-size: 30px !important; max-width: 100% !important; color: #fff !important; line-height: 1.08 !important; margin-bottom: 10px !important; }
-  .credit-sub { font-size: 12px; color: rgba(255,255,255,.55) !important; max-width: 100% !important; line-height: 1.55 !important; }
-  .credit-stat-row {
-    grid-template-columns: repeat(3,1fr);
-    max-width: 100% !important;
-    border-top-color: rgba(255,255,255,.08) !important;
-    margin-top: 14px !important;
-    padding-top: 12px !important;
-    gap: 0 !important;
-  }
-  .credit-stat { padding: 6px 6px; border-right-color: rgba(255,255,255,.08) !important; }
-  .credit-stat-n { font-size: 22px !important; }
-  .credit-stat-l { color: rgba(255,255,255,.35) !important; font-size: 7px !important; }
   .credit-module-actions { flex-direction: row; gap: 10px; max-width: 100%; }
   .credit-cta-primary, .credit-cta-secondary { flex: 1; padding: 14px 10px; font-size: 10px; border-radius: 2px; }
-  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.2) !important; background: rgba(255,255,255,.06) !important; }
-  .credit-cta-lead { text-align: left !important; font-size: 13px !important; }
-  .credit-cta-fine { font-size: 7px; letter-spacing: 0.08em; white-space: nowrap; text-align: left !important; margin-left: 0 !important; margin-right: 0 !important; color: rgba(255,255,255,.3) !important; }
+  .credit-cta-secondary { color: rgba(255,255,255,.85) !important; border-color: rgba(255,255,255,.15) !important; background: rgba(255,255,255,.04) !important; }
+  .credit-cta-lead { text-align: left !important; font-size: 14px !important; letter-spacing: -0.01em !important; }
+  .credit-cta-fine { font-size: 7px; letter-spacing: 0.08em; white-space: nowrap; text-align: left !important; margin-left: 0 !important; margin-right: 0 !important; color: rgba(255,255,255,.25) !important; }
 
   /* --- HERO AREA --- */
   .hero-area { grid-template-columns: 1fr; border-bottom: none; }
@@ -3280,6 +3313,25 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   /* --- SECTION LABELS --- */
   .section-label { font-size: 10px !important; padding: 18px 0 10px; letter-spacing: .16em !important; }
 
+  /* --- DARK-TO-LIGHT TRANSITION BRIDGE --- */
+  .mobile-gradient-bridge {
+    display: block !important;
+    height: 60px;
+    background: linear-gradient(180deg,
+      #060c1a 0%,
+      #0a1020 20%,
+      #f8f6f2 80%,
+      #f8f6f2 100%);
+    margin: 0;
+    border: none;
+  }
+  body.dark-mode .mobile-gradient-bridge {
+    background: linear-gradient(180deg,
+      #060c1a 0%,
+      #0e1219 40%,
+      #111820 100%) !important;
+  }
+
   /* --- PAGE WRAP + SCROLL --- */
   .page-wrap { padding: 0 16px; }
 
@@ -3328,14 +3380,15 @@ body.dark-mode .mobile-theme-btn:hover { border-color: var(--cta); color: var(--
   .mci-metric { min-width: 100%; }
   .credit-module-actions { flex-direction: column; gap: 8px; }
   .hero-title { font-size: 24px !important; }
-  .brand-mw-name { font-size: 15px !important; }
-  .brand-logo { height: 22px !important; }
+  .brand-mw-name { font-size: 14px !important; }
+  .brand-logo { height: 20px !important; }
   .mci-actions { flex-direction: column; }
   .hero-img-placeholder { height: 200px !important; }
-  .credit-icon { min-height: 48vh !important; }
+  .credit-icon { min-height: 52vh !important; }
   .credit-headline { font-size: 26px !important; }
   .credit-stat-n { font-size: 20px !important; }
   .credit-cta-primary, .credit-cta-secondary { padding: 13px 10px; font-size: 10px; }
+  .mobile-gradient-bridge { height: 48px; }
 }
 
 /* ── TABLET (769px – 1024px) ─────────────────────── */
@@ -6077,6 +6130,9 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div>
   </div>
 </div>
+
+<!-- ═══ GRADIENT BRIDGE (mobile: dark → light transition) ═══ -->
+<div class="mobile-gradient-bridge"></div>
 
 <!-- ═══ MAIN CONTENT ═══ -->
 <div class="page-wrap">
