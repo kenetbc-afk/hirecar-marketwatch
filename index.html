@@ -478,7 +478,7 @@ img { display: block; width: 100%; }
 ═══════════════════════════════════════════ */
 .credit-module {
   position: relative;
-  background: var(--ink);
+  background: #080e1c;
   border-bottom: 1px solid var(--rule);
   overflow: hidden;
 }
@@ -600,7 +600,7 @@ img { display: block; width: 100%; }
   position: absolute;
   top: 0; right: 0; bottom: 0;
   width: 60%;
-  background: linear-gradient(to right, transparent 0%, rgba(var(--ink-rgb,17,24,32),.25) 25%, rgba(var(--ink-rgb,17,24,32),.55) 45%, rgba(var(--ink-rgb,17,24,32),.82) 65%, var(--ink) 85%);
+  background: linear-gradient(to right, transparent 0%, rgba(6,10,22,.25) 25%, rgba(6,10,22,.55) 45%, rgba(6,10,22,.82) 65%, #080e1c 85%);
   z-index: 2;
   pointer-events: none;
 }
@@ -629,6 +629,13 @@ img { display: block; width: 100%; }
   justify-content: center;
   align-items: center;
   padding: 32px 36px 32px 20px;
+  background: linear-gradient(180deg,
+    #06080f 0%,
+    #080e1c 15%,
+    #0a1428 35%,
+    #0c1a34 55%,
+    #0e1e3e 75%,
+    #102248 100%);
 }
 .credit-module-main .credit-module-text {
   width: 100%;
@@ -2480,7 +2487,7 @@ body.dark-mode .credit-module {
   border-bottom-color: #1d2535;
 }
 body.dark-mode .credit-icon::after {
-  background: linear-gradient(to right, transparent 0%, rgba(6,12,26,.4) 35%, rgba(6,12,26,.8) 70%, #060c1a 100%);
+  background: linear-gradient(to right, transparent 0%, rgba(6,10,22,.4) 35%, rgba(6,10,22,.8) 70%, #06080f 100%);
 }
 
 /* MCI bar */
@@ -2991,14 +2998,19 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
   left: 0;
   right: 0;
   z-index: 400;
-  background: rgba(9,9,11,.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255,255,255,.06);
+  background: linear-gradient(0deg,
+    rgba(4,8,18,.95) 0%,
+    rgba(6,12,26,.90) 25%,
+    rgba(8,16,34,.82) 50%,
+    rgba(10,20,42,.72) 75%,
+    rgba(12,24,50,.60) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(14,28,56,.3);
   padding: 6px 4px 22px;
   justify-content: space-around;
   align-items: flex-end;
-  box-shadow: 0 -4px 24px rgba(0,0,0,.5);
+  box-shadow: 0 -4px 24px rgba(4,8,18,.5);
   transition: background .4s ease, border-color .4s ease;
 }
 @media (max-width: 768px) {
@@ -3355,9 +3367,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 
   /* --- MASTHEAD anchored to bottom --- */
   .masthead {
-    background: #000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(6,12,26,.95) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: none !important;
     overflow: visible !important;
   }
@@ -3368,12 +3380,12 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(180deg, #000 0%, rgba(0,0,0,.7) 40%, rgba(0,0,0,.3) 70%, transparent 100%);
+    background: linear-gradient(180deg, rgba(6,12,26,.95) 0%, rgba(6,12,26,.6) 40%, rgba(6,12,26,.2) 70%, transparent 100%);
     pointer-events: none;
     z-index: 339;
   }
   .masthead.scrolled {
-    background: #000 !important;
+    background: rgba(6,12,26,.98) !important;
     border-bottom: none !important;
     box-shadow: none !important;
   }
@@ -3382,16 +3394,16 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 8px 8px 2px 6px;
-    min-height: 44px;
+    padding: 10px 12px 8px 10px;
+    min-height: 48px;
     gap: 8px;
     position: relative;
     transition: padding .35s cubic-bezier(.4,0,.2,1), min-height .35s cubic-bezier(.4,0,.2,1), gap .35s ease;
   }
   /* Compact header on scroll */
   .masthead.compact .masthead-inner {
-    padding: 4px 8px 2px 6px;
-    min-height: 34px;
+    padding: 6px 12px 4px 10px;
+    min-height: 38px;
     gap: 6px;
   }
   .masthead.compact .brand-logo {
@@ -3800,7 +3812,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     100% { transform: scale(1.05); }
   }
   /* Per mobile-slide focal tuning — car-focused positioning */
-  .carousel-slide.mobile-1  { object-fit: cover !important; object-position: 40% 50% !important; }   /* 3.jpg mural — shift right to show "Made in DTLA" billboard */
+  .carousel-slide.mobile-1  { object-fit: cover !important; object-position: 30% 42% !important; }   /* 3.jpg mural — center both girls */
   .carousel-slide.mobile-2  { object-position: center 35% !important; }   /* 5.jpg green supercar */
   .carousel-slide.mobile-3  { object-position: center 40% !important; }   /* 6.jpg cars on highway */
   .carousel-slide.mobile-4  { object-position: center 30% !important; }   /* lambo-urus */
@@ -3809,23 +3821,23 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.mobile-7  { object-position: 10% 50% !important; }      /* mercedes/rolls — far left to show car */
   .carousel-slide.mobile-8  { object-position: 35% 25% !important; }      /* 4.jpg city overlook — show person at top-left */
 
-  /* Gradient overlay — black header bleed + heavy bottom for text readability */
+  /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
     display: block !important;
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.92) 0%,
-      rgba(0,0,0,.78) 8%,
-      rgba(0,0,0,.45) 18%,
-      rgba(0,0,0,.15) 30%,
-      rgba(0,0,0,.08) 42%,
-      rgba(0,0,0,.12) 52%,
-      rgba(0,0,0,.35) 62%,
-      rgba(0,0,0,.65) 74%,
-      rgba(0,0,0,.85) 86%,
-      rgba(0,0,0,.95) 100%) !important;
+      rgba(6,12,26,.88) 0%,
+      rgba(6,12,26,.65) 10%,
+      rgba(6,12,26,.25) 22%,
+      rgba(6,12,26,.08) 35%,
+      rgba(6,12,26,.06) 48%,
+      rgba(6,12,26,.15) 58%,
+      rgba(6,12,26,.4) 68%,
+      rgba(6,12,26,.7) 80%,
+      rgba(6,12,26,.9) 92%,
+      rgba(6,12,26,.96) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
@@ -3917,19 +3929,19 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     border: 1px solid rgba(201,146,10,.3) !important;
     padding: 5px 14px !important;
     margin-bottom: 16px !important;
-    background: rgba(0,0,0,.6) !important;
+    background: rgba(6,12,26,.5) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
   }
   .credit-headline {
-    font-size: 42px !important;
+    font-size: 48px !important;
     max-width: 100% !important;
     width: 100% !important;
     color: #fff !important;
-    line-height: 0.9 !important;
-    margin-bottom: 2px !important;
+    line-height: 0.88 !important;
+    margin-bottom: 6px !important;
     letter-spacing: -0.03em !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,.95), 0 4px 24px rgba(0,0,0,.8), 0 8px 40px rgba(0,0,0,.6);
+    text-shadow: 0 2px 8px rgba(6,12,26,.95), 0 4px 24px rgba(6,12,26,.8), 0 8px 40px rgba(6,12,26,.6);
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
@@ -3963,15 +3975,16 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
   .credit-sub {
     display: block !important;
-    color: rgba(255,255,255,.95) !important;
-    font-size: 12px !important;
+    color: rgba(255,255,255,.9) !important;
+    font-size: 12.5px !important;
     font-weight: 500 !important;
     text-align: center !important;
-    max-width: 88% !important;
-    margin: 12px auto 0 !important;
-    text-shadow: 0 1px 4px rgba(0,0,0,1), 0 3px 16px rgba(0,0,0,.9), 0 6px 30px rgba(0,0,0,.7) !important;
-    line-height: 1.5 !important;
-    letter-spacing: 0.01em !important;
+    max-width: 320px !important;
+    margin: 10px auto 0 !important;
+    text-shadow: 0 1px 4px rgba(6,12,26,.95), 0 3px 16px rgba(6,12,26,.85), 0 6px 30px rgba(6,12,26,.6) !important;
+    line-height: 1.55 !important;
+    letter-spacing: 0.015em !important;
+    padding: 0 4px !important;
   }
   .credit-stat-row {
     display: flex !important;
@@ -4346,9 +4359,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     display: block !important;
     height: 64px;
     background: linear-gradient(180deg,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,.92) 30%,
-      rgba(0,0,0,.6) 60%,
+      rgba(6,12,26,.96) 0%,
+      rgba(6,12,26,.88) 30%,
+      rgba(10,16,28,.6) 60%,
       #111820 100%) !important;
     margin: 0;
     border: none;
@@ -4456,7 +4469,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .mci-actions { flex-direction: column; }
   .hero-img-placeholder { height: 200px !important; }
   .credit-icon { min-height: calc(78vh + 48px) !important; max-height: none !important; }
-  .credit-headline { font-size: 26px !important; margin-bottom: 8px !important; }
+  .credit-headline { font-size: 34px !important; margin-bottom: 6px !important; }
   .credit-sub { font-size: 11.5px !important; max-width: 100% !important; }
   .credit-stat-n { font-size: 18px !important; }
   .credit-stat-l { font-size: 6px !important; }
@@ -7358,7 +7371,11 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <div class="credit-module-main">
       <div class="credit-module-text">
         <p class="credit-cta-lead">Get back on track — fast.</p>
-        <p class="credit-cta-fine"></p>
+        <div class="credit-module-actions">
+          <a href="about/pifr/" class="credit-cta-primary">START YOUR RECOVERY</a>
+          <a href="about/" class="credit-cta-secondary">LEARN ABOUT <span class="cta-brand">HIRECAR</span></a>
+        </div>
+        <p class="credit-cta-fine">Free intake · No credit pull · 24hr response</p>
       </div>
     </div>
   </div>
