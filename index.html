@@ -18,7 +18,7 @@
 <meta property="og:description" content="LA's premier auto operator intelligence platform. Collision data, credit repair, fleet operations, and market analytics for HIRECAR operators.">
 <meta property="og:image" content="https://hirecar-marketwatch.pages.dev/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="900">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://hirecar-marketwatch.pages.dev">
 <meta property="og:site_name" content="HIRECAR MarketWatch!">
 
@@ -5201,7 +5201,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
   /* Per-image crop positions — object-fit:cover handles all framing,
      no scale/translate hacks needed. Pure zoom pulls evenly on all. */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: 50% 55% !important; transform-origin: 50% 55% !important; } /* 32.jpg — Ritz building + white car centered — cropped in tight */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: 50% 100% !important; transform-origin: 50% 100% !important; } /* 32.jpg — Ritz building, anchored bottom, 200% crop */
   .carousel-slide.hero-kb[data-kb="1"] { object-position: center 100% !important; } /* 31.jpg LA night skyline — PORTRAIT */
   .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 50% !important; } /* 40.jpg aerial skyline */
   .carousel-slide.hero-kb[data-kb="3"] { object-position: 75% 50% !important; } /* 50.jpg 6th St Viaduct night */
@@ -5235,10 +5235,10 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     0%   { transform: scale(1.00); }
     100% { transform: scale(1.25); }
   }
-  /* Ritz building — moderate crop, white car visible */
+  /* Ritz building — 200% crop, anchored bottom, slow zoom */
   @keyframes kbZoomIn0 {
-    0%   { transform: scale(1.40); }
-    100% { transform: scale(1.60); }
+    0%   { transform: scale(2.00); }
+    100% { transform: scale(2.20); }
   }
   /* Audi — start cropped in at 1.50, zoom to 1.70 */
   @keyframes kbZoomIn7 {
