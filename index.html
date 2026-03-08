@@ -2001,7 +2001,7 @@ body.dark-mode .icymi-nav button { border-color: rgba(255,255,255,0.12); }
   background: var(--white);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  margin: 12px 0 32px;
+  margin: 0;
 }
 .ent-section-inner {
   max-width: 1340px;
@@ -2051,7 +2051,7 @@ body.dark-mode .icymi-nav button { border-color: rgba(255,255,255,0.12); }
 ═══════════════════════════════════════════ */
 .member-module {
   background: var(--member);
-  margin: 32px 0;
+  margin: 0;
   position: relative;
   background-image: url('img/la-6th-bridge.jpg');
   background-size: cover;
@@ -2936,7 +2936,7 @@ body:not(.dark-mode) .dark-only-slide { display: none !important; }
    --dm-gold:  #c9920a  (gold accent retained)
 ═══════════════════════════════════════════ */
 body.dark-mode {
-  background: #0d1117;
+  background: #000;
   color: #c8d0db;
 }
 
@@ -3039,7 +3039,7 @@ body.dark-mode .credit-icon::after {
 }
 
 /* MCI bar */
-body.dark-mode .mci-bar { background: #060c1a; border-color: #1d2535; }
+body.dark-mode .mci-bar { background: #000; border-color: #1d2535; }
 body.dark-mode .mci-val { color: #c9920a; }
 body.dark-mode .mci-delta-up { color: #5db87a; }
 body.dark-mode .mci-key { color: #6a7a8a; }
@@ -3049,7 +3049,7 @@ body.dark-mode .mci-btn.outline { background: transparent; color: #c9920a; borde
 body.dark-mode .mci-btn:hover { background: #c9920a; border-color: #c9920a; color: #fff; }
 
 /* Trending strip */
-body.dark-mode .trending-strip { background: #070d1a; border-top-color: #1d2535; border-bottom-color: #c9920a; }
+body.dark-mode .trending-strip { background: #000; border-top-color: #1d2535; border-bottom-color: #c9920a; }
 body.dark-mode .trending-item { border-right-color: #1a1a1a; }
 body.dark-mode .trending-item:hover { background: #0f1a2a; }
 body.dark-mode .t-num { color: #2a3a4a; }
@@ -3071,7 +3071,7 @@ body.dark-mode .card-blurb { color: #6a7a8a; }
 body.dark-mode .card:hover .card-title { color: #c9920a; }
 
 /* Ent section */
-body.dark-mode .ent-section { background: #060c18; border-top-color: #1d2535; border-bottom-color: #1d2535; }
+body.dark-mode .ent-section { background: #000; border-top-color: #1d2535; border-bottom-color: #1d2535; }
 body.dark-mode .ent-card { border-right-color: #1a1a1a; }
 body.dark-mode .ent-card:hover { background: #0f1924; }
 body.dark-mode .ent-title { color: #ffffff; }
@@ -3079,7 +3079,7 @@ body.dark-mode .ent-desc { color: #6a7a8a; }
 body.dark-mode .ent-cat { color: #6a7a8a; }
 
 /* Member module dark */
-body.dark-mode .member-module { background: linear-gradient(135deg, #0a1a35 0%, #0f2545 100%); border-top: 3px solid #1a5fa8; }
+body.dark-mode .member-module { background: #000; border-top: 3px solid #1a5fa8; }
 body.dark-mode .member-brand-label { color: #7ab4e8; letter-spacing: .18em; }
 body.dark-mode .member-brand-title { color: #ffffff; }
 body.dark-mode .member-brand-desc { color: #6a7a8a; }
@@ -3091,7 +3091,7 @@ body.dark-mode .member-join-btn:hover { background: #2a80da; color: #fff; }
 body.dark-mode .member-login-link { color: #6a7a8a; }
 
 /* Company bar dark */
-body.dark-mode .co-bar { background: #080e1a; border-top-color: #1d2535; border-bottom-color: #1d2535; }
+body.dark-mode .co-bar { background: #000; border-top-color: #1d2535; border-bottom-color: #1d2535; }
 body.dark-mode .co-item { border-right-color: #1a1a1a; }
 body.dark-mode .co-type { color: #6a7a8a; }
 body.dark-mode .co-name { color: #ffffff; }
@@ -3116,7 +3116,7 @@ body.dark-mode .svc-card--active:hover .svc-card-label { color: #111822; }
 body.dark-mode .page-wrap { background: transparent; }
 
 /* Nav — pure black + green underline, gold on lead */
-body.dark-mode .primary-nav { background: #060b14; border-bottom-color: #1d2535; }
+body.dark-mode .primary-nav { background: #000; border-bottom-color: #1d2535; }
 body.dark-mode .nav-link { color: #7a8899; }
 body.dark-mode .nav-item:hover .nav-link,
 body.dark-mode .nav-link:hover { color: #ffffff; border-bottom-color: #c9920a; }
@@ -3127,7 +3127,7 @@ body.dark-mode .theme-toggle { background: rgba(201,146,10,.08); border-color: r
 body.dark-mode .theme-toggle:hover { color: #c9920a; background: rgba(201,146,10,.12); }
 
 /* Footer dark */
-body.dark-mode footer { border-top-color: #1a1a1a; }
+body.dark-mode footer { background: #000; border-top-color: #1a1a1a; }
 body.dark-mode .footer-col-head { color: #7a8899; border-bottom-color: #1d2535; }
 body.dark-mode .footer-links a { color: #6a7a8a; }
 body.dark-mode .footer-links a:hover { color: #c9920a; }
@@ -3530,7 +3530,7 @@ body.dark-mode .scroll-arrow:hover { background: #111822; border-color: #111822;
 .svc-scroll-btn:hover { background: var(--cta); border-color: var(--cta); color: #fff; }
 
 /* Dark mode scroll section */
-body.dark-mode .svc-scroll-section { background: #060b14; border-top-color: #c9920a; }
+body.dark-mode .svc-scroll-section { background: #000; border-top-color: #c9920a; }
 body.dark-mode .svc-scroll-title { color: #c9920a; }
 
 
@@ -5201,7 +5201,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
   /* Per-image crop positions — object-fit:cover handles all framing,
      no scale/translate hacks needed. Pure zoom pulls evenly on all. */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: 70% 28% !important; } /* 32.jpg — Ritz building */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: 70% 28% !important; transform-origin: 70% 28% !important; } /* 32.jpg — Ritz building — cropped in tight */
   .carousel-slide.hero-kb[data-kb="1"] { object-position: center 100% !important; } /* 31.jpg LA night skyline — PORTRAIT */
   .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 50% !important; } /* 40.jpg aerial skyline */
   .carousel-slide.hero-kb[data-kb="3"] { object-position: 75% 50% !important; } /* 50.jpg 6th St Viaduct night */
@@ -5219,6 +5219,10 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.hero-kb.active {
     animation: kbZoomIn 18s ease-out forwards !important;
   }
+  /* Ritz (kb0) — start cropped in */
+  .carousel-slide.hero-kb[data-kb="0"].active {
+    animation: kbZoomIn0 18s ease-out forwards !important;
+  }
   /* Audi (kb6) + Airport (kb7) — start already cropped in, zoom further */
   .carousel-slide.hero-kb[data-kb="6"].active {
     animation: kbZoomIn7 18s ease-out forwards !important;
@@ -5231,10 +5235,15 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     0%   { transform: scale(1.00); }
     100% { transform: scale(1.25); }
   }
-  /* Audi — start cropped in at 1.40, zoom to 1.60 */
+  /* Ritz building — start cropped in at 1.35, zoom to 1.55 */
+  @keyframes kbZoomIn0 {
+    0%   { transform: scale(1.35); }
+    100% { transform: scale(1.55); }
+  }
+  /* Audi — start cropped in at 1.50, zoom to 1.70 */
   @keyframes kbZoomIn7 {
-    0%   { transform: scale(1.40); }
-    100% { transform: scale(1.60); }
+    0%   { transform: scale(1.50); }
+    100% { transform: scale(1.70); }
   }
   /* Airport — start cropped in at 1.35, zoom to 1.55 */
   @keyframes kbZoomIn8 {
@@ -5874,25 +5883,25 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
      below the first page-wrap get the regular dark-mode slate background
      instead of transparent/black body bleed-through */
   body.dark-mode .ent-section {
-    background-color: #111820 !important;
+    background-color: #000 !important;
     border-top: 1px solid rgba(255,255,255,.08) !important;
   }
   /* Page-wraps after the first (Top Stories) one */
   body.dark-mode .page-wrap + .page-wrap {
-    background-color: #111820 !important;
+    background-color: #000 !important;
   }
   body.dark-mode .member-module {
-    background-color: #111820 !important;
+    background-color: #000 !important;
   }
   body.dark-mode footer {
-    background-color: #111820 !important;
+    background-color: #000 !important;
   }
-  body.dark-mode .mci-bar { background: #060c1a !important; border-color: #1d2535 !important; }
+  body.dark-mode .mci-bar { background: #000 !important; border-color: #1d2535 !important; }
   body.dark-mode .mci-label-name, body.dark-mode .mci-val { color: #fff !important; }
   body.dark-mode .mci-key, body.dark-mode .mci-sub { color: rgba(255,255,255,.4) !important; }
   body.dark-mode .rh-car-card { background: #0a0e14 !important; border-color: #1d2535 !important; }
   body.dark-mode .art-thumb { background: #0d1826 !important; }
-  body.dark-mode .edition-bar { background: #080d14 !important; border-color: #161e2c !important; }
+  body.dark-mode .edition-bar { background: #000 !important; border-color: #161e2c !important; }
   body.dark-mode .section-rule { border-color: rgba(255,255,255,.08) !important; }
   body.dark-mode hr { border-color: rgba(255,255,255,.08) !important; }
   body.dark-mode a { color: #e8ecf2; }
