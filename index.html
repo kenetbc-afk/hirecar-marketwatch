@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>HIRECAR MarketWatch! — HIRECAR LLC · Est. November 2024</title>
 <!-- v18: Desktop scroll fix, Remote edge-to-edge viewport, Logo wordmark cleanup, Hero city/time images, Enriched remote entry sequence, Top Stories CTA dynamic, Mobility 4-car gallery, Vegas centering, Weather-correlated travel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3737,7 +3740,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 @media (max-width: 768px) {
 
   /* ── Fixed masthead at top — body padding-top offsets hero below header ── */
-  body { padding-top: 44px !important; padding-bottom: 0 !important; }
+  body { padding-top: calc(44px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; }
   body.dark-mode { background: #000000 !important; color: #c8d0db !important; }
   body:not(.dark-mode) { background: var(--bg) !important; color: var(--ink) !important; }
 
@@ -3784,6 +3787,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     overflow: visible !important;
     position: fixed !important;
     top: 0 !important;
+    padding-top: env(safe-area-inset-top, 0px) !important;
     bottom: auto !important;
     left: 0 !important;
     right: 0 !important;
