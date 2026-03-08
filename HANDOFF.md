@@ -38,9 +38,9 @@ find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 
 - Custom keyframe selectors updated to match new numbering
 
 ### Ritz Building Crop (kb0 — 32.jpg) (DONE)
-- `object-position: 50% 55%` — centers on white car + Ritz Carlton building
-- `transform-origin: 50% 55%` — zoom focuses on same point
-- Custom `kbZoomIn0`: scale 1.40 → 1.60 (moderate crop, white car visible)
+- `object-position: 30% 50%` — anchored left to feature white car
+- `transform-origin: 30% 50%` — zoom focuses on same point
+- Custom `kbZoomIn0`: scale 1.00 → 1.20 (fully zoomed out, natural Ken Burns)
 
 ### Audi Crop (kb6 — IMG_0256.jpg) (DONE)
 - `object-position: center 55%` with matching `transform-origin`
@@ -70,7 +70,7 @@ find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 
 
 | kb# | File | Description | Custom Zoom | Object-Position |
 |-----|------|-------------|-------------|-----------------|
-| 0 | 32.jpg | Ritz Carlton + white car, urban road | kbZoomIn0 (1.40→1.60) | 50% 55% |
+| 0 | 32.jpg | Ritz Carlton + white car, urban road | kbZoomIn0 (1.00→1.20) | 30% 50% |
 | 1 | 31.jpg | LA night skyline (portrait) | default (1.00→1.25) | center 100% |
 | 2 | 40.jpg | LA aerial skyline | default | 55% 50% |
 | 3 | 50.jpg | 6th St Viaduct night skyline | default | 75% 50% |
@@ -102,7 +102,7 @@ find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 
 1. **Base rule** (`.carousel-slide.hero-kb`): `object-fit: cover`, absolute positioning, full viewport
 2. **Per-slide positioning** (`[data-kb="N"]`): `object-position` crops the image, `transform-origin` sets zoom focal point
 3. **Animation trigger** (`.hero-kb.active`): Applies the Ken Burns keyframe on `.active` class
-4. **Custom keyframes** (`kbZoomIn0`, `kbZoomIn7`, `kbZoomIn8`): Start at a higher scale for slides that need tighter crops
+4. **Custom keyframes** (`kbZoomIn0`, `kbZoomIn7`, `kbZoomIn8`): Override default zoom range per slide (kb0 is fully zoomed out; kb6/kb7 start pre-zoomed for tighter crops)
 
 ### JS Logic
 ```
@@ -156,9 +156,17 @@ For each image, add HTML, CSS `object-position`, preview at 375×812, get owner 
 
 ---
 
-## Git History (This Session)
+### OG Thumbnail Updated (DONE)
+- Fresh 1200×630 Playwright screenshot of the front page as it appears on first load
+- Shows headline, Ritz imagery, nav, CTAs
+- `og:image:height` meta tag corrected to 630
+
+## Git History (Recent Commits)
 
 ```
+a856d19 Zoom out Ritz white car fully (scale 1.00→1.20), anchor left at 30%
+8052a64 Ritz 200% crop anchored bottom, update OG thumbnail to match front page
+97c592a Update HANDOFF.md with current carousel state, line refs, and session history
 0c558cb Zoom out Ritz building crop (1.40→1.60) for better white car visibility
 acd8888 Crop Ritz building much tighter (1.65→1.85), center white car
 525fa17 Crop in Ritz + Audi tighter, close section gaps, unify dark backgrounds to #000
