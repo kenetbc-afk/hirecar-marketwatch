@@ -1,0 +1,65 @@
+name: Deploy Public Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'home/**'
+      - 'about/**'
+      - 'services/**'
+      - 'booking/**'
+      - 'contact/**'
+      - 'membership/**'
+      - 'entertainment/**'
+      - 'terms/**'
+      - 'playbooks/**'
+      - 'data/**'
+      - 'CNAME'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build site manifest
+        run: |
+          echo "=== HIRECAR Public Site Deploy ==="
+          echo "Commit: ${{ github.sha }}"
+          echo "Time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "---"
+          find . -name "*.html" -not -path "./.git/*" | sort | head -50
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=hirecar-marketwatch --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verify deployment
+        run: |
+          echo "Deployed to marketwatch.hirecar.la"
+          echo "Verifying DNS..."
+          dig +short marketwatch.hirecar.la || echo "DNS lookup skipped in CI"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          if [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ]; then
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"🚨 HIRECAR Deploy FAILED — commit ${{ github.sha }} by ${{ github.actor }}"}' \
+              "${{ secrets.SLACK_WEBHOOK_URL }}"
+          fi
