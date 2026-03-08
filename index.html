@@ -5857,6 +5857,25 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   body.dark-mode .trending-strip { border-bottom-color: rgba(255,255,255,.06) !important; }
   body.dark-mode .trending-item:hover { background: rgba(255,255,255,.05) !important; }
   body.dark-mode .ent-section { border-bottom-color: rgba(255,255,255,.06) !important; }
+
+  /* ── Break out of the dark Top Stories frame ──
+     Entertainment section (inside .ss-items) and all content sections
+     below the first page-wrap get the regular dark-mode slate background
+     instead of transparent/black body bleed-through */
+  body.dark-mode .ent-section {
+    background-color: #111820 !important;
+    border-top: 1px solid rgba(255,255,255,.08) !important;
+  }
+  /* Page-wraps after the first (Top Stories) one */
+  body.dark-mode .page-wrap + .page-wrap {
+    background-color: #111820 !important;
+  }
+  body.dark-mode .member-module {
+    background-color: #111820 !important;
+  }
+  body.dark-mode footer {
+    background-color: #111820 !important;
+  }
   body.dark-mode .mci-bar { background: #060c1a !important; border-color: #1d2535 !important; }
   body.dark-mode .mci-label-name, body.dark-mode .mci-val { color: #fff !important; }
   body.dark-mode .mci-key, body.dark-mode .mci-sub { color: rgba(255,255,255,.4) !important; }
