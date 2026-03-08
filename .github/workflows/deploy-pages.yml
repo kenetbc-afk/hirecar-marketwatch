@@ -15,6 +15,7 @@ on:
       - 'terms/**'
       - 'playbooks/**'
       - 'data/**'
+      - 'img/**'
       - 'CNAME'
   workflow_dispatch:
 
