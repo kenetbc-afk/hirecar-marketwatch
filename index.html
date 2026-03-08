@@ -1174,7 +1174,7 @@ body.dark-mode .hero-tab-link {
   background: #000;
   color: #fff;
   border-bottom-color: #222;
-  padding: 14px 20px 10px;
+  padding: 8px 20px 6px;
   margin: 0;
   position: sticky;
   top: var(--ss-header-h, 100px);
@@ -1253,8 +1253,8 @@ body.dark-mode .hero-tab-link {
 }
 .ss-item {
   scroll-snap-align: start;
-  min-height: 35vh;
-  padding: 0 20px 1.5vh;
+  min-height: auto;
+  padding: 14px 20px 18px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1263,6 +1263,8 @@ body.dark-mode .hero-tab-link {
   box-sizing: border-box;
 }
 .ss-item.active { opacity: 1; }
+/* First item doesn't snap — allows user to scroll UP and exit the section */
+.ss-item:first-child { scroll-snap-align: none; }
 .ss-item-cat {
   display: inline-block;
   font-size: 10px;
@@ -1303,8 +1305,8 @@ body.dark-mode .hero-tab-link {
   text-shadow: 0 1px 4px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5);
 }
 .ss-item-meta .sep { color: #334155; }
-/* End spacer — must be large enough so last card's snap-point is reachable */
-.ss-spacer { height: calc(100vh - var(--ss-header-h, 100px) - 44vh); }
+/* End spacer — enough for last card snap-point */
+.ss-spacer { height: 15vh; }
 
 /* ICYMI strip — below the scroll container */
 .icymi-strip {
@@ -5270,15 +5272,15 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     height: calc(100vh - var(--ss-header-h, 96px));
   }
   .ss-hero-wrap {
-    min-height: 180px;
-    height: 36%;
+    min-height: 200px;
+    height: 42%;
   }
   .ss-hero-img {
     background-position: center 40%;
   }
   .ss-item {
-    min-height: 38vh;
-    padding: 0 16px 7vh;
+    min-height: auto;
+    padding: 12px 16px 16px;
   }
   .ss-item-title {
     font-size: 22px !important;
@@ -9225,6 +9227,21 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       trendWrap.parentNode.insertBefore(ent, trendWrap);
     }
   }
+})();
+
+/* ── STICKY STORIES EXIT: scroll up from top → exit section ── */
+(function() {
+  var ss = document.getElementById('stickyStories');
+  if (!ss) return;
+  var touchY = 0;
+  ss.addEventListener('touchstart', function(e) { touchY = e.touches[0].clientY; }, {passive: true});
+  ss.addEventListener('touchmove', function(e) {
+    if (ss.scrollTop <= 0 && e.touches[0].clientY > touchY) {
+      /* User is at top and swiping down → let page scroll take over */
+      ss.style.overflowY = 'hidden';
+      setTimeout(function() { ss.style.overflowY = 'auto'; }, 400);
+    }
+  }, {passive: true});
 })();
 
 /* ═══════════════════════════════════════════════════════════
