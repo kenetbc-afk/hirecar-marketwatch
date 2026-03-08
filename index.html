@@ -1186,7 +1186,8 @@ body.dark-mode .hero-tab-link {
   height: calc(100vh - var(--ss-header-h, 100px));
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 50%;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   overscroll-behavior-y: auto;
@@ -1251,6 +1252,11 @@ body.dark-mode .hero-tab-link {
   position: relative;
   z-index: 2;
 }
+.ss-items::after {
+  content: '';
+  display: block;
+  height: 45vh;
+}
 .ss-item {
   scroll-snap-align: start;
   min-height: auto;
@@ -1263,8 +1269,6 @@ body.dark-mode .hero-tab-link {
   box-sizing: border-box;
 }
 .ss-item.active { opacity: 1; }
-/* First item doesn't snap — allows user to scroll UP and exit the section */
-.ss-item:first-child { scroll-snap-align: none; }
 .ss-item-cat {
   display: inline-block;
   font-size: 10px;
@@ -4800,7 +4804,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     will-change: transform, opacity;
   }
   /* Per-image crop positions — landscape vs portrait */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: 70% 28% !important; } /* 32.jpg — crop in to the right */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: center 28% !important; } /* 32.jpg — undo right crop, back to center */
   .carousel-slide.hero-kb[data-kb="1"] { object-position: center 16% !important; } /* 5.jpg — raise slightly higher */
   .carousel-slide.hero-kb[data-kb="2"] { object-position: center 6% !important; } /* 30.jpg — raise higher, buildings above headline */
   .carousel-slide.hero-kb[data-kb="3"] { object-position: center 0% !important; } /* 31.jpg PORTRAIT — raise all the way up */
@@ -5252,6 +5256,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   /* --- STICKY SCROLL STORIES (mobile) --- */
   .sticky-stories {
     height: calc(100vh - var(--ss-header-h, 96px));
+    scroll-padding-top: 42%;
   }
   .ss-hero-wrap {
     min-height: 200px;
@@ -10170,23 +10175,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, { passive: true });
 
-    // ── First story ready: auto-scroll container to first item when section enters view ──
-    var secStories = document.getElementById('sec-stories');
-    if (secStories && 'IntersectionObserver' in window) {
-      var entryObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            /* Ensure first story is visible with smooth scroll */
-            var firstItem = container.querySelector('.ss-item:first-child');
-            if (firstItem && container.scrollTop < 10) {
-              setActive(0);
-              container.scrollTo({ top: firstItem.offsetTop + wrapOffset, behavior: 'smooth' });
-            }
-          }
-        });
-      }, { threshold: 0.3 });
-      entryObserver.observe(secStories);
-    }
+    // ── First story ready: ensure container starts at top (hero + first item visible) ──
+    setActive(0);
+    container.scrollTop = 0;
 
     // ── Section-snap: swipe from hero lands on Top Stories ──
     var secSnap = document.getElementById('sec-stories');
