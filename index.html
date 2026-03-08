@@ -1223,7 +1223,7 @@ body.dark-mode .hero-tab-link {
 }
 .ss-hero-badge {
   position: absolute;
-  bottom: 14px;
+  top: 12px;
   left: 16px;
   display: flex;
   align-items: center;
@@ -4616,26 +4616,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
   }
 
-  /* HIRECAR logo in menu — visible only when expanded */
-  .het-logo {
-    width: 80px;
-    height: 14px;
-    opacity: .55;
-    margin: 0 12px 4px auto;
-    transition: max-height 1.2s cubic-bezier(.4,0,.2,1),
-                opacity .8s cubic-bezier(.4,0,.2,1),
-                margin 1s cubic-bezier(.4,0,.2,1);
-    max-height: 20px;
-    overflow: hidden;
-    filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
-  }
-  .het-logo svg { width: 100%; height: 100%; }
-  .hero-exp-tabs.het-collapsed .het-logo {
-    max-height: 0;
-    opacity: 0;
-    margin: 0;
-    overflow: hidden;
-  }
+  /* (HIRECAR logo removed from menu) */
 
   /* Collapsed state — only the menu button visible */
   .hero-exp-tabs.het-collapsed .het-btn:not(.het-menu-btn) {
@@ -4819,12 +4800,12 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     will-change: transform, opacity;
   }
   /* Per-image crop positions — landscape vs portrait */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: center 40% !important; } /* 32.jpg landscape — urban road */
-  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 35% !important; } /* 5.jpg landscape — skyline */
-  .carousel-slide.hero-kb[data-kb="2"] { object-position: center 30% !important; } /* 30.jpg landscape — rooftop */
-  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 25% !important; } /* 31.jpg PORTRAIT — crop upper */
-  .carousel-slide.hero-kb[data-kb="4"] { object-position: center 20% !important; } /* 34.jpg PORTRAIT — crop upper */
-  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 22% !important; } /* 36.jpg PORTRAIT — crop upper */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: center 28% !important; } /* 32.jpg landscape — urban road, raise to show buildings */
+  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 22% !important; } /* 5.jpg landscape — skyline, raise to capture skyline */
+  .carousel-slide.hero-kb[data-kb="2"] { object-position: center 18% !important; } /* 30.jpg landscape — rooftop, raise for building tops */
+  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 15% !important; } /* 31.jpg PORTRAIT — raise to show more buildings */
+  .carousel-slide.hero-kb[data-kb="4"] { object-position: center 12% !important; } /* 34.jpg PORTRAIT — raise for architecture */
+  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 14% !important; } /* 36.jpg PORTRAIT — raise for architecture */
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
@@ -4855,16 +4836,17 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     inset: 0 !important;
     background: linear-gradient(180deg,
       rgba(0,0,0,.96) 0%,
-      rgba(0,1,5,.88) 4%,
-      rgba(2,5,14,.65) 10%,
-      rgba(6,12,26,.22) 20%,
-      rgba(6,12,26,.06) 32%,
-      rgba(6,12,26,.04) 50%,
-      rgba(5,10,22,.14) 60%,
-      rgba(3,6,16,.42) 70%,
-      rgba(1,3,9,.70) 82%,
-      rgba(0,0,0,.90) 93%,
-      rgba(0,0,0,.96) 100%) !important;
+      rgba(0,1,5,.90) 3%,
+      rgba(2,5,14,.72) 8%,
+      rgba(6,12,26,.38) 16%,
+      rgba(6,12,26,.12) 28%,
+      rgba(6,12,26,.04) 42%,
+      rgba(6,12,26,.03) 55%,
+      rgba(5,10,22,.08) 65%,
+      rgba(3,6,16,.22) 75%,
+      rgba(1,3,9,.42) 86%,
+      rgba(0,0,0,.58) 94%,
+      rgba(0,0,0,.68) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
@@ -8505,11 +8487,6 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   </div>
   <!-- Expandable tabs — floating section nav at bottom of hero -->
   <div class="hero-exp-tabs" id="heroExpTabs">
-    <div class="het-logo" aria-hidden="true">
-      <svg viewBox="0 0 120 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="13" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="white" letter-spacing="2">HIRECAR</text>
-      </svg>
-    </div>
     <button class="het-btn" data-scroll="#sec-stories" aria-label="Top Stories">
       <svg class="het-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
       <span class="het-label">Top Stories</span>
@@ -10193,6 +10170,24 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, { passive: true });
 
+    // ── First story ready: auto-scroll container to first item when section enters view ──
+    var secStories = document.getElementById('sec-stories');
+    if (secStories && 'IntersectionObserver' in window) {
+      var entryObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            /* Ensure first story is visible with smooth scroll */
+            var firstItem = container.querySelector('.ss-item:first-child');
+            if (firstItem && container.scrollTop < 10) {
+              setActive(0);
+              container.scrollTo({ top: firstItem.offsetTop + wrapOffset, behavior: 'smooth' });
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      entryObserver.observe(secStories);
+    }
+
     // ── Section-snap: swipe from hero lands on Top Stories ──
     var secSnap = document.getElementById('sec-stories');
     if (secSnap) {
@@ -11498,15 +11493,40 @@ if (document.readyState === 'loading') {
     }
   }
   window.addEventListener('scroll', applyCollapse, { passive: true });
-  applyCollapse();
 
-  /* Auto-collapse after 7 seconds on the hero (first section) */
+  /* ── Page-load animation sequence: collapsed → expand+glow → collapse → ambient glow ── */
+  tabs.classList.add('het-collapsed');            /* Start collapsed */
+  tabs.style.opacity = '0';
+  tabs.style.transition = 'opacity .8s ease';
+
+  setTimeout(function() {
+    tabs.style.opacity = '1';                    /* 1) Fade in (0.8s) */
+  }, 400);
+
+  setTimeout(function() {
+    tabs.classList.add('het-glow-close');         /* 2) Glow pulse */
+  }, 1200);
+
+  setTimeout(function() {
+    tabs.classList.remove('het-collapsed');       /* 3) Expand out smoothly */
+  }, 1800);
+
+  setTimeout(function() {
+    tabs.classList.remove('het-glow-close');      /* 4) Remove glow after expand */
+  }, 3000);
+
   var autoCollapseTimer = setTimeout(function() {
     if (!menuOpen && !tabs.classList.contains('het-collapsed')) {
       btns.forEach(function(b) { b.classList.remove('active'); });
-      tabs.classList.add('het-collapsed');
+      tabs.classList.add('het-glow-close');       /* 5) Glow on collapse */
+      setTimeout(function() {
+        tabs.classList.add('het-collapsed');      /* 6) Collapse */
+        setTimeout(function() {
+          tabs.classList.remove('het-glow-close');/* 7) Ambient glow fades */
+        }, 900);
+      }, 400);
     }
-  }, 7000);
+  }, 5500);
 
   /* Cancel auto-collapse if user scrolls past hero (scroll-collapse takes over) */
   window.addEventListener('scroll', function cancelAutoCollapse() {
@@ -11581,14 +11601,14 @@ if (document.readyState === 'loading') {
         btn.classList.add('active');
         /* close menu overlay if open */
         menuOpen = false;
-        /* after slide animation, scroll to target */
+        /* after 2.5s pause, scroll to target section */
         setTimeout(function() {
           var sel = btn.getAttribute('data-scroll');
           if (sel) {
             var el = document.querySelector(sel);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 420);
+        }, 2500);
       } else {
         menuOpen = false;
         applyCollapse();
