@@ -9911,34 +9911,55 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, { passive: true });
 
-    // ── Snap-lock: when stories section enters viewport, scroll page to lock it ──
-    var secLabel = document.getElementById('sec-stories');
-    var lockTarget = secLabel || container;
-    var locked = false;
+    // ── Section-snap: swipe from hero lands on Top Stories ──
+    var secSnap = document.getElementById('sec-stories');
+    if (secSnap) {
+      var _ty0 = 0, _ts0 = 0, _snapping = false;
 
-    function checkSnapLock() {
-      if (locked) return;
-      var rect = lockTarget.getBoundingClientRect();
-      // When the TOP STORIES label is within 40px of the header bottom, snap
-      if (rect.top <= headerH + 40 && rect.top > headerH - window.innerHeight * 0.5) {
-        locked = true;
-        var scrollTarget = window.pageYOffset + rect.top - headerH;
-        window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-        // Unlock after animation so user can scroll past later
-        setTimeout(function() { locked = false; }, 900);
-      }
+      document.addEventListener('touchstart', function(e) {
+        _ty0 = e.touches[0].clientY;
+        _ts0 = Date.now();
+      }, { passive: true });
+
+      document.addEventListener('touchend', function(e) {
+        if (_snapping) return;
+        var dy = _ty0 - e.changedTouches[0].clientY; // positive = swipe up (scroll down)
+        if (dy < 50) return; // ignore taps and small gestures
+
+        var snapTarget = secSnap.offsetTop - headerH;
+        var cur = window.pageYOffset;
+
+        // Only snap when user is in the hero zone (above or near stories)
+        if (cur < snapTarget - 20) {
+          _snapping = true;
+          // Brief delay lets momentum start, then override it
+          setTimeout(function() {
+            var elapsed = Date.now() - _ts0;
+            var speed = Math.abs(dy) / Math.max(elapsed, 1); // px/ms
+            // Faster swipe → snappier feel; slow swipe → gentler
+            var dur = Math.max(280, Math.min(600, 500 - speed * 150));
+
+            var from = window.pageYOffset;
+            var dist = snapTarget - from;
+            var start = performance.now();
+
+            function ease(t) { return 1 - Math.pow(1 - t, 3); } // easeOutCubic
+
+            function step(ts) {
+              var t = Math.min((ts - start) / dur, 1);
+              window.scrollTo(0, from + dist * ease(t));
+              if (t < 1) {
+                requestAnimationFrame(step);
+              } else {
+                window.scrollTo(0, snapTarget);
+                setTimeout(function() { _snapping = false; }, 300);
+              }
+            }
+            requestAnimationFrame(step);
+          }, 60);
+        }
+      }, { passive: true });
     }
-
-    var pageTicking = false;
-    window.addEventListener('scroll', function() {
-      if (!pageTicking) {
-        requestAnimationFrame(function() {
-          checkSnapLock();
-          pageTicking = false;
-        });
-        pageTicking = true;
-      }
-    }, { passive: true });
 
     // Initialize first card
     setActive(0);
