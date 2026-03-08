@@ -2991,7 +2991,11 @@ body.dark-mode .bang { color: #c9920a; }
 body.dark-mode .brand-mw-name .bang { color: #ffffff; }
 
 /* Dark mode mobile drawer */
-body.dark-mode .mobile-nav-drawer { background: #080e17; }
+body.dark-mode .mobile-nav-drawer {
+  background: radial-gradient(ellipse at 70% 12%, rgba(16,28,65,.4) 0%, transparent 50%),
+              radial-gradient(ellipse at 15% 75%, rgba(12,20,55,.3) 0%, transparent 45%),
+              #000000;
+}
 body.dark-mode .mobile-drawer-header { border-bottom-color: rgba(255,255,255,.06); }
 body.dark-mode .mobile-nav-link { color: rgba(255,255,255,.6); border-bottom-color: rgba(255,255,255,.04); }
 body.dark-mode .mobile-nav-link:hover { color: #c9920a; }
@@ -3562,8 +3566,12 @@ body:not(.dark-mode) .mbn-label.active {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--ink);
-  z-index: 500;
+  background: radial-gradient(ellipse at 70% 12%, rgba(16,28,65,.4) 0%, transparent 50%),
+              radial-gradient(ellipse at 15% 75%, rgba(12,20,55,.3) 0%, transparent 45%),
+              #000000;
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  z-index: 950;
   overflow-y: auto;
   transform: translateX(100%);
   transition: transform .3s ease;
@@ -4044,19 +4052,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     margin-left: 4px;
   }
   .mobile-nav-toggle {
-    display: flex !important;
-    padding: 6px;
-    min-width: 32px;
-    min-height: 32px;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 8px;
-    top: 24px;
-    transform: none;
+    display: none !important;
   }
-  .mobile-nav-toggle span { background: rgba(255,255,255,.5); }
-  body:not(.dark-mode) .mobile-nav-toggle span { background: rgba(17,24,32,.7); }
 
   /* --- Mobile weather — aligned with day/night toggle --- */
   .mh-wx-pill {
@@ -4599,51 +4596,99 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .credit-module::before { display: none !important; }
   .credit-module::after { display: none !important; }
 
-  /* +TOP STORIES shortcut — bottom-right of hero section */
-  .hero-next-section {
+  /* ── Expandable Tabs — vertical stack, right side of hero ── */
+  .hero-exp-tabs {
     position: absolute;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    right: calc(14px + env(safe-area-inset-right, 0px));
+    bottom: 24px;
+    right: calc(10px + env(safe-area-inset-right, 0px));
     z-index: 50;
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    background: transparent;
+  }
+
+  /* Tab button — icon only by default, label expands LEFT on tap */
+  .het-btn {
+    position: relative;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 5px;
-    padding: 7px 13px 7px 10px;
-    background: rgba(0,0,0,.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 20px;
-    color: rgba(255,255,255,.75);
+    justify-content: flex-end;
+    gap: 0;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.35);
+    border-radius: 24px;
+    cursor: pointer;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 9.5px;
     font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    cursor: pointer;
+    white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
-    transition: background .25s ease, color .25s ease, border-color .25s ease;
+    transition: color .4s cubic-bezier(.16,1,.3,1),
+                gap .5s cubic-bezier(.16,1,.3,1),
+                background .35s cubic-bezier(.16,1,.3,1),
+                padding .4s cubic-bezier(.16,1,.3,1);
     text-decoration: none;
+    outline: none;
   }
-  .hero-next-section:active {
-    background: rgba(255,255,255,.12);
-    color: #fff;
+  .het-btn:not(.active):active {
+    color: rgba(255,255,255,.55);
   }
-  .hero-next-section .hns-plus {
+
+  /* Active — pill expands, label slides in LEFT of icon */
+  .het-btn.active {
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.92);
+    gap: 8px;
+    padding: 10px 14px;
+  }
+
+  /* Icon — pinned RIGHT via flex order */
+  .het-btn .het-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    order: 2;
+    transition: color .35s ease;
+  }
+  .het-btn.active .het-icon {
     color: rgba(201,146,10,.9);
-    font-weight: 700;
-    font-size: 11px;
   }
-  .hero-next-section .hns-arrow {
+
+  /* Label — LEFT of icon (order:1), spring-expands from 0 width */
+  .het-label {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-left: 2px;
-    opacity: .6;
-    transition: transform .25s ease;
+    order: 1;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width .5s cubic-bezier(.16,1,.3,1),
+                opacity .3s cubic-bezier(.16,1,.3,1) .06s;
   }
-  .hero-next-section:active .hns-arrow {
-    transform: translateY(2px);
+  .het-btn.active .het-label {
+    max-width: 130px;
+    opacity: 1;
+  }
+
+  /* Separator — horizontal line between groups */
+  .het-sep {
+    width: 18px;
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    margin: 2px 12px 2px auto;
+    flex-shrink: 0;
+    border-radius: 1px;
   }
 
   .credit-module-inner {
@@ -4745,8 +4790,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   /* ── Overlay text — anchored to bottom of hero (above BREAKING+masthead) ── */
   .credit-overlay {
     position: absolute !important;
+    top: 0 !important;
     bottom: 0 !important;
-    top: auto !important;
     left: 0 !important;
     right: 0 !important;
     transform: none !important;
@@ -4757,10 +4802,10 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-end !important;
+    justify-content: center !important;
     text-align: center !important;
     box-sizing: border-box;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.55) 30%, rgba(0,0,0,.82) 70%, rgba(0,0,0,.92) 100%) !important;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.25) 20%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.75) 65%, rgba(0,0,0,.85) 100%) !important;
   }
   .credit-overlay > * {
     text-align: center !important;
@@ -5373,7 +5418,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .credit-sub { font-size: 11.5px !important; max-width: 100% !important; }
   .credit-stat-n { font-size: 28px !important; }
   .credit-stat-l { font-size: 6px !important; }
-  .credit-overlay { padding: 0 20px !important; max-width: 360px !important; bottom: 26% !important; }
+  .credit-overlay { padding: 0 20px !important; max-width: 100% !important; }
   .credit-eyebrow { font-size: 6.5px !important; padding: 4px 10px !important; margin-bottom: 12px !important; }
   .credit-cta-primary, .credit-cta-secondary { padding: 14px 16px !important; font-size: 10.5px !important; max-width: 260px !important; }
   .credit-cta-lead { font-size: 13px !important; text-align: center !important; }
@@ -7656,8 +7701,8 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div>
   </nav>
   <div class="mobile-drawer-footer">
-    <a href="booking/" class="mobile-drawer-cta">Apply to Qualify →</a>
-    <a href="membership/" class="mobile-drawer-secondary" onclick="closeDrawer()">Sign In to Member Portal</a>
+    <a href="membership/" class="mobile-drawer-cta" onclick="closeDrawer()">Join Now →</a>
+    <a href="membership/" class="mobile-drawer-secondary" onclick="closeDrawer()">Member Login</a>
   </div>
 </div>
 
@@ -8341,11 +8386,31 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
     </div>
   </div>
-  <!-- +TOP STORIES shortcut — tap to scroll to next section -->
-  <a class="hero-next-section" id="heroNextSection" href="#sec-stories" aria-label="Skip to Top Stories">
-    <span class="hns-plus">+</span>TOP STORIES
-    <svg class="hns-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-  </a>
+  <!-- Expandable tabs — floating section nav at bottom of hero -->
+  <div class="hero-exp-tabs" id="heroExpTabs">
+    <button class="het-btn" data-scroll="#sec-stories" aria-label="Top Stories">
+      <svg class="het-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      <span class="het-label">Top Stories</span>
+    </button>
+    <div class="het-sep" aria-hidden="true"></div>
+    <button class="het-btn" data-scroll="#sec-credit-repair" aria-label="Credit">
+      <svg class="het-icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+      <span class="het-label">Credit</span>
+    </button>
+    <button class="het-btn" data-scroll="#sec-services" aria-label="Services">
+      <svg class="het-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <span class="het-label">Services</span>
+    </button>
+    <button class="het-btn" data-scroll="#sec-ent" aria-label="Entertainment">
+      <svg class="het-icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      <span class="het-label">Culture</span>
+    </button>
+    <div class="het-sep" aria-hidden="true"></div>
+    <button class="het-btn het-menu-btn" data-action="menu" aria-label="Menu">
+      <svg class="het-icon" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      <span class="het-label">Menu</span>
+    </button>
+  </div>
 </div>
 
 <!-- ═══ GRADIENT BRIDGE (mobile: dark → light transition) ═══ -->
@@ -11246,16 +11311,48 @@ if (document.readyState === 'loading') {
   init();
 }
 
-/* ── +TOP STORIES smooth scroll shortcut ── */
+/* ── Expandable tabs — hero section nav ── */
 (function(){
-  var btn = document.getElementById('heroNextSection');
-  if (btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      var target = document.getElementById('sec-stories');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var tabs = document.getElementById('heroExpTabs');
+  if (!tabs) return;
+  var btns = tabs.querySelectorAll('.het-btn');
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      /* Menu button — open nav drawer instead of scrolling */
+      if (btn.getAttribute('data-action') === 'menu') {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var drawer = document.getElementById('mobileNavDrawer');
+        if (drawer) {
+          drawer.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+        return;
+      }
+      var wasActive = btn.classList.contains('active');
+      /* collapse all */
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      if (!wasActive) {
+        btn.classList.add('active');
+        /* after expand animation, scroll to target */
+        setTimeout(function() {
+          var sel = btn.getAttribute('data-scroll');
+          if (sel) {
+            var el = document.querySelector(sel);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 380);
+      }
     });
-  }
+  });
+
+  /* click-outside collapses active tab */
+  document.addEventListener('click', function(e) {
+    if (!tabs.contains(e.target)) {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+    }
+  });
 })();
 
 /* Hook into setMode for remote hub init + button sync */
