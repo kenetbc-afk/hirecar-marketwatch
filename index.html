@@ -11,6 +11,25 @@
 <meta name="msapplication-navbutton-color" content="#000000">
 <meta name="msapplication-TileColor" content="#000000">
 <title>HIRECAR MarketWatch! — HIRECAR LLC · Est. November 2024</title>
+
+<!-- Open Graph / Link Preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="HIRECAR MarketWatch! — Auto Operator Intelligence">
+<meta property="og:description" content="LA's premier auto operator intelligence platform. Collision data, credit repair, fleet operations, and market analytics for HIRECAR operators.">
+<meta property="og:image" content="https://hirecar-marketwatch.pages.dev/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://hirecar-marketwatch.pages.dev">
+<meta property="og:site_name" content="HIRECAR MarketWatch!">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HIRECAR MarketWatch! — Auto Operator Intelligence">
+<meta name="twitter:description" content="LA's premier auto operator intelligence platform. Collision data, credit repair, fleet operations, and market analytics.">
+<meta name="twitter:image" content="https://hirecar-marketwatch.pages.dev/img/og-image.jpg">
+
+<!-- General SEO -->
+<meta name="description" content="HIRECAR MarketWatch! — LA's premier auto operator intelligence platform. Collision data, credit repair, fleet operations, and market analytics for HIRECAR operators.">
 <!-- v18: Desktop scroll fix, Remote edge-to-edge viewport, Logo wordmark cleanup, Hero city/time images, Enriched remote entry sequence, Top Stories CTA dynamic, Mobility 4-car gallery, Vegas centering, Weather-correlated travel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1310,35 +1329,155 @@ body.dark-mode .hero-tab-link {
 }
 .ss-item-meta .sep { color: #334155; }
 /* End spacer — enough for last card snap-point */
-.ss-spacer { height: 15vh; }
+.ss-spacer { height: 2vh; }
 
-/* ICYMI strip — below the scroll container */
+/* ICYMI strip — gallery hover carousel */
 .icymi-strip {
   border-top: 1px solid var(--border);
-  padding: 14px 20px 0;
+  padding: 14px 16px 18px;
+}
+.icymi-strip .icymi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.icymi-strip .icymi-head {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.icymi-nav {
+  display: flex;
+  gap: 6px;
+}
+.icymi-nav button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+  padding: 0;
+}
+.icymi-nav button:disabled { opacity: 0.25; cursor: default; }
+.icymi-nav button:not(:disabled):hover {
+  background: var(--cta, #c9920a);
+  border-color: var(--cta, #c9920a);
 }
 .icymi-scroll {
   display: flex;
+  gap: 12px;
   overflow-x: auto;
-  gap: 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 .icymi-scroll::-webkit-scrollbar { display: none; }
+
+/* ---- ICYMI Card Items ---- */
 .icymi-strip .icymi-item {
-  min-width: 220px;
-  max-width: 260px;
+  position: relative;
+  min-width: 165px;
+  width: 165px;
+  height: 210px;
   flex-shrink: 0;
-  padding: 10px 16px 10px 0;
-  border-right: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: none;
+  padding: 0;
 }
 .icymi-strip .icymi-item:last-child { border-right: none; }
+.icymi-card-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.icymi-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80%;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 50%, transparent 100%);
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+.icymi-card-body {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 10px 12px;
+  z-index: 2;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.icymi-strip .icymi-cat {
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cta, #c9920a);
+  margin-bottom: 3px;
+  font-weight: 800;
+}
+.icymi-strip .icymi-title {
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: #fff;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.4s;
+}
+.icymi-arrow {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  opacity: 0;
+  transform: rotate(0deg);
+  transition: opacity 0.35s, transform 0.35s;
+  z-index: 3;
+  background: rgba(0,0,0,0.3);
+}
+@media (hover: hover) {
+  .icymi-strip .icymi-item:hover .icymi-card-img { height: 42%; }
+  .icymi-strip .icymi-item:hover .icymi-card-img::after { opacity: 0; }
+  .icymi-strip .icymi-item:hover .icymi-card-body {
+    height: 58%;
+    background: rgba(12, 14, 24, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .icymi-strip .icymi-item:hover .icymi-title { -webkit-line-clamp: 4; color: #f0f0f0; }
+  .icymi-strip .icymi-item:hover .icymi-arrow { opacity: 1; transform: rotate(-45deg); }
+}
 
 /* Dark mode sticky-stories */
 body.dark-mode .ss-item-title { color: #f1f5f9; text-shadow: 0 1px 8px rgba(0,0,0,.85), 0 2px 16px rgba(0,0,0,.5), 0 0 3px rgba(0,0,0,.7); }
 body.dark-mode .ss-item-blurb { color: #c8d0dc; text-shadow: 0 1px 6px rgba(0,0,0,.8), 0 0 2px rgba(0,0,0,.6); }
 body.dark-mode .icymi-strip { border-top-color: #1a1a1a; }
-body.dark-mode .icymi-strip .icymi-item { border-right-color: #1a1a1a; }
+body.dark-mode .icymi-nav button { border-color: rgba(255,255,255,0.12); }
 
 /* ═══════════════════════════════════════════
    HERO AREA — LA Times layout (legacy desktop)
@@ -4607,6 +4746,248 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .credit-module::after { display: none !important; }
 
   /* ── Expandable Tabs — fixed vertical stack, right side ── */
+  /* Inline mode — horizontal row inside hero overlay (replaces stat bar) */
+  /* ── Expandable Tabs (inline) ── */
+  .hero-exp-tabs.het-inline {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0px;
+    margin-top: 14px;
+    padding: 4px 2px;
+    border-top: none;
+    background: transparent;
+    border-radius: 0;
+    width: auto;
+    margin-left: 8px;
+    margin-right: 8px;
+    justify-content: center;
+  }
+
+  /* ── Button base: icon-only ── */
+  .hero-exp-tabs.het-inline .het-btn {
+    flex-direction: row;
+    gap: 0;
+    padding: 6px 5px;
+    justify-content: center;
+    align-items: center;
+    transform: none;
+    flex: 0 0 auto;
+    min-width: 0;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: rgba(255,255,255,.35);
+    background: transparent;
+    border-radius: 0;
+    transition: gap .45s cubic-bezier(.4,0,.2,1),
+                padding .45s cubic-bezier(.4,0,.2,1),
+                color .4s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  /* ── Glitch transition effect ── */
+  @keyframes hetGlitch {
+    0%   { transform: translate(0,0); opacity:1; filter: none; }
+    10%  { transform: translate(-3px,1px); opacity:.7; filter: hue-rotate(40deg) brightness(1.4); }
+    20%  { transform: translate(2px,-1px); opacity:1; filter: hue-rotate(-30deg) brightness(1.2); }
+    30%  { transform: translate(-1px,2px); opacity:.5; filter: hue-rotate(60deg) brightness(1.6); }
+    40%  { transform: translate(3px,0); opacity:.9; filter: hue-rotate(-20deg); }
+    50%  { transform: translate(-2px,-2px) skewX(4deg); opacity:.4; filter: hue-rotate(90deg) brightness(1.8); }
+    60%  { transform: translate(1px,1px) skewX(-2deg); opacity:.8; filter: hue-rotate(-50deg) brightness(1.3); }
+    70%  { transform: translate(-1px,0); opacity:.6; filter: hue-rotate(30deg) brightness(1.5); }
+    80%  { transform: translate(2px,-1px); opacity:.9; filter: hue-rotate(-10deg); }
+    90%  { transform: translate(0,1px); opacity:.7; filter: hue-rotate(15deg) brightness(1.1); }
+    100% { transform: translate(0,0); opacity:1; filter: none; }
+  }
+  .het-glitching .het-btn .het-icon {
+    animation: hetGlitch .5s steps(1) 2;
+  }
+  .het-glitching .het-btn .het-label {
+    animation: hetGlitch .5s steps(1) 2;
+  }
+
+  /* ── Active (expanded) button — no pill, just glow ── */
+  .hero-exp-tabs.het-inline .het-btn.het-active {
+    gap: 5px;
+    padding: 6px 6px;
+    background: transparent;
+    color: rgba(255,255,255,1);
+    text-shadow: 0 0 6px rgba(255,255,255,.6),
+                 0 0 14px rgba(255,220,160,.3),
+                 0 0 28px rgba(255,200,120,.12);
+  }
+
+  /* ── Label: collapsed by default, expands on active ── */
+  .hero-exp-tabs.het-inline .het-btn .het-label {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    transition: max-width .45s cubic-bezier(.4,0,.2,1),
+                opacity .35s ease .05s;
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active .het-label {
+    max-width: 160px;
+    opacity: 1;
+    white-space: normal;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  /* ── Icon base ── */
+  .hero-exp-tabs.het-inline .het-btn .het-icon {
+    width: 30px;
+    height: 30px;
+    stroke: rgba(255,255,255,.4);
+    fill: none;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,.15));
+    transition: filter .5s ease, stroke .4s ease;
+  }
+
+  /* ── Active icon: bright glow (base — overridden per-icon below) ── */
+  .hero-exp-tabs.het-inline .het-btn.het-active .het-icon {
+    stroke: rgba(255,255,255,1);
+  }
+
+  /* ── Per-icon colored glows (ACTIVE — strong) ── */
+  /* News+Media — Red */
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="News+Media"] {
+    text-shadow: 0 0 6px rgba(255,255,255,.7), 0 0 16px rgba(255,68,68,.8), 0 0 32px rgba(220,40,40,.5);
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="News+Media"] .het-icon {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.7))
+            drop-shadow(0 0 12px rgba(255,68,68,.85))
+            drop-shadow(0 0 26px rgba(220,40,40,.55))
+            drop-shadow(0 0 44px rgba(180,20,20,.3));
+  }
+
+  /* Top Stories — Blue */
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Top Stories"] {
+    text-shadow: 0 0 6px rgba(255,255,255,.7), 0 0 16px rgba(74,158,255,.8), 0 0 32px rgba(50,120,220,.5);
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Top Stories"] .het-icon {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.7))
+            drop-shadow(0 0 12px rgba(74,158,255,.85))
+            drop-shadow(0 0 26px rgba(50,120,220,.55))
+            drop-shadow(0 0 44px rgba(30,80,180,.3));
+  }
+
+  /* Credit Help & Auto Insurance — Green */
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Credit Help & Auto Insurance"] {
+    text-shadow: 0 0 6px rgba(255,255,255,.7), 0 0 16px rgba(74,222,128,.8), 0 0 32px rgba(40,180,80,.5);
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Credit Help & Auto Insurance"] .het-icon {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.7))
+            drop-shadow(0 0 12px rgba(74,222,128,.85))
+            drop-shadow(0 0 26px rgba(40,180,80,.55))
+            drop-shadow(0 0 44px rgba(20,140,50,.3));
+  }
+
+  /* Auto Service — Orange */
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Auto Service"] {
+    text-shadow: 0 0 6px rgba(255,255,255,.7), 0 0 16px rgba(255,160,0,.8), 0 0 32px rgba(220,120,0,.5);
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Auto Service"] .het-icon {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.7))
+            drop-shadow(0 0 12px rgba(255,160,0,.85))
+            drop-shadow(0 0 26px rgba(220,120,0,.55))
+            drop-shadow(0 0 44px rgba(180,80,0,.3));
+  }
+
+  /* Culture & Travel — Purple */
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Culture & Travel"] {
+    text-shadow: 0 0 6px rgba(255,255,255,.7), 0 0 16px rgba(167,139,250,.8), 0 0 32px rgba(130,100,220,.5);
+  }
+  .hero-exp-tabs.het-inline .het-btn.het-active[aria-label="Culture & Travel"] .het-icon {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.7))
+            drop-shadow(0 0 12px rgba(167,139,250,.85))
+            drop-shadow(0 0 26px rgba(130,100,220,.55))
+            drop-shadow(0 0 44px rgba(90,60,180,.3));
+  }
+
+  /* ── Ambient glow pulse keyframes (per-icon color) ── */
+  @keyframes ambientRed {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(255,68,68,.3)) drop-shadow(0 0 6px rgba(220,40,40,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(255,68,68,.55)) drop-shadow(0 0 12px rgba(220,40,40,.35)); }
+  }
+  @keyframes ambientBlue {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(74,158,255,.3)) drop-shadow(0 0 6px rgba(50,120,220,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(74,158,255,.55)) drop-shadow(0 0 12px rgba(50,120,220,.35)); }
+  }
+  @keyframes ambientGreen {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(74,222,128,.3)) drop-shadow(0 0 6px rgba(40,180,80,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(74,222,128,.55)) drop-shadow(0 0 12px rgba(40,180,80,.35)); }
+  }
+  @keyframes ambientOrange {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(255,160,0,.3)) drop-shadow(0 0 6px rgba(220,120,0,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(255,160,0,.55)) drop-shadow(0 0 12px rgba(220,120,0,.35)); }
+  }
+  @keyframes ambientPurple {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(167,139,250,.3)) drop-shadow(0 0 6px rgba(130,100,220,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(167,139,250,.55)) drop-shadow(0 0 12px rgba(130,100,220,.35)); }
+  }
+  @keyframes ambientGold {
+    0%,100% { filter: drop-shadow(0 0 3px rgba(255,215,0,.3)) drop-shadow(0 0 6px rgba(220,180,0,.15)); }
+    50%     { filter: drop-shadow(0 0 5px rgba(255,215,0,.55)) drop-shadow(0 0 12px rgba(220,180,0,.35)); }
+  }
+
+  /* ── Per-icon IDLE colored glows (persistent ambient pulse after intro) ── */
+  .hero-exp-tabs.het-inline.het-intro-done .het-btn[aria-label="News+Media"] .het-icon {
+    animation: ambientRed 3s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-btn[aria-label="Top Stories"] .het-icon {
+    animation: ambientBlue 3.4s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-btn[aria-label="Credit Help & Auto Insurance"] .het-icon {
+    animation: ambientGreen 2.8s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-btn[aria-label="Auto Service"] .het-icon {
+    animation: ambientOrange 3.2s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-btn[aria-label="Culture & Travel"] .het-icon {
+    animation: ambientPurple 3.6s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-menu-btn .het-icon {
+    animation: ambientGold 3.1s ease-in-out infinite;
+  }
+  .hero-exp-tabs.het-inline.het-intro-done .het-menu-btn .het-icon line {
+    stroke: rgba(255,255,255,.55);
+  }
+
+  .hero-exp-tabs.het-inline .het-menu-btn .het-icon {
+    stroke: rgba(255,255,255,.5);
+  }
+
+  /* ── Separator ── */
+  .hero-exp-tabs.het-inline .het-sep {
+    width: 1px;
+    height: 22px;
+    margin: 0 2px;
+    background: rgba(255,255,255,.1);
+    flex-shrink: 0;
+  }
+
+  /* Inline mode never collapses */
+  .hero-exp-tabs.het-inline.het-collapsed .het-btn:not(.het-menu-btn),
+  .hero-exp-tabs.het-inline.het-collapsed .het-sep {
+    max-height: 50px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0;
+    overflow: visible;
+  }
+
   .hero-exp-tabs {
     position: fixed;
     bottom: 24px;
@@ -4693,13 +5074,28 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transform: translateX(-4px);
   }
 
-  /* Menu button — glow only on the three hamburger lines */
+  /* Menu button — no background box, transparent */
+  .het-menu-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  /* Menu button — glow on the SVG, not individual lines */
+  .het-menu-btn .het-icon {
+    filter: none;
+    transition: filter .5s ease;
+  }
   .het-menu-btn .het-icon line {
-    filter: drop-shadow(0 0 5px rgba(255,255,255,.6))
-            drop-shadow(0 0 10px rgba(255,255,255,.35))
-            drop-shadow(0 0 18px rgba(255,200,120,.2))
-            drop-shadow(0 0 28px rgba(255,180,80,.1));
-    stroke: rgba(255,255,255,.85);
+    stroke: rgba(255,255,255,.4);
+    transition: stroke .4s ease;
+  }
+  /* Menu button glow state — Gold (applied to SVG container) */
+  .het-menu-btn.het-glow .het-icon {
+    filter: drop-shadow(0 0 4px rgba(255,215,0,.7))
+            drop-shadow(0 0 10px rgba(220,180,0,.45));
+  }
+  .het-menu-btn.het-glow .het-icon line {
+    stroke: rgba(255,255,255,.95);
   }
 
   /* Glow pulse on collapse — warm flash on all icons signals close */
@@ -4800,16 +5196,17 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     object-fit: cover !important;
     transform-origin: center center !important;
     filter: none !important;
-    transition: opacity 2.5s ease !important;
+    transition: opacity 5s ease !important;
     will-change: transform, opacity;
   }
   /* Per-image crop positions — landscape vs portrait */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: center 28% !important; } /* 32.jpg — undo right crop, back to center */
-  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 16% !important; } /* 5.jpg — raise slightly higher */
-  .carousel-slide.hero-kb[data-kb="2"] { object-position: center 6% !important; } /* 30.jpg — raise higher, buildings above headline */
-  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 0% !important; } /* 31.jpg PORTRAIT — raise all the way up */
-  .carousel-slide.hero-kb[data-kb="4"] { object-position: 25% 12% !important; } /* 34.jpg PORTRAIT — crop in to the left */
-  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 0% !important; } /* 36.jpg PORTRAIT — raise all the way up */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: 35% 28% !important; } /* 32.jpg */
+  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 100% !important; } /* 31.jpg PORTRAIT */
+  .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 50% !important; } /* 40.jpg aerial skyline */
+  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 0% !important; } /* 36.jpg PORTRAIT */
+  .carousel-slide.hero-kb[data-kb="4"] { object-position: 75% 50% !important; } /* 50.jpg 6th St Viaduct night */
+  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 50% !important; } /* 14.jpg Santa Monica Pier PORTRAIT */
+  .carousel-slide.hero-kb[data-kb="6"] { object-position: center 50% !important; } /* 18.jpg PORTRAIT */
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
@@ -4820,17 +5217,19 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.hero-kb[data-kb="3"] { animation: kbPull3 10s linear forwards; }
   .carousel-slide.hero-kb[data-kb="4"] { animation: kbPull4 10s linear forwards; }
   .carousel-slide.hero-kb[data-kb="5"] { animation: kbPull5 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="6"] { animation: kbPull6 10s linear forwards; }
   /* Paused by default — JS plays when active */
   .carousel-slide.hero-kb { animation-play-state: paused !important; }
   .carousel-slide.hero-kb.kb-playing { animation-play-state: running !important; }
 
   /* Pull-IN: start small → end larger. Each picks up where last left off. */
-  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.06); } }
-  @keyframes kbPull1 { from { transform: scale(1.06); } to { transform: scale(1.12); } }
-  @keyframes kbPull2 { from { transform: scale(1.12); } to { transform: scale(1.18); } }
-  @keyframes kbPull3 { from { transform: scale(1.18); } to { transform: scale(1.24); } }
-  @keyframes kbPull4 { from { transform: scale(1.24); } to { transform: scale(1.30); } }
-  @keyframes kbPull5 { from { transform: scale(1.30); } to { transform: scale(1.36); } }
+  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
+  @keyframes kbPull1 { from { transform: scale(3.0) translateY(-13.5%) translateX(-2%); } to { transform: scale(3.36) translateY(-13.5%) translateX(-2%); } }
+  @keyframes kbPull2 { from { transform: scale(1.2) translateY(-8%); } to { transform: scale(1.34) translateY(-8%); } }
+  @keyframes kbPull3 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
+  @keyframes kbPull4 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
+  @keyframes kbPull5 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
+  @keyframes kbPull6 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
@@ -5256,7 +5655,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   /* --- STICKY SCROLL STORIES (mobile) --- */
   .sticky-stories {
     height: calc(100vh - var(--ss-header-h, 96px));
-    scroll-padding-top: 42%;
+    scroll-padding-top: 10%;
   }
   .ss-hero-wrap {
     min-height: 200px;
@@ -5265,9 +5664,21 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .ss-hero-img {
     background-position: center 40%;
   }
+  .ss-items {
+    margin-top: -170px;
+  }
   .ss-item {
     min-height: auto;
     padding: 12px 16px 16px;
+  }
+  .ss-item[data-idx="0"] {
+    scroll-margin-top: 61px; /* anchor item 0 at scroll 0 */
+  }
+  .ss-item[data-idx="1"] {
+    scroll-margin-top: 30px; /* keep item 1 at ~101px from top */
+  }
+  .ss-item[data-idx="2"] {
+    scroll-margin-top: 35px; /* lower item 2 text more */
   }
   .ss-item-title {
     font-size: 22px !important;
@@ -5282,13 +5693,15 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     overflow: hidden;
   }
   .icymi-strip {
-    padding: 8px 16px 0;
-    margin-top: -4px;
+    padding: 10px 16px 14px;
+    margin-top: 0;
   }
   .icymi-strip .icymi-item {
-    min-width: 200px;
+    min-width: 155px;
+    width: 155px;
+    height: 195px;
   }
-  .icymi-strip .icymi-title { font-size: 15px; }
+  .icymi-strip .icymi-title { font-size: 11.5px; }
 
   /* --- HERO AREA (legacy) --- */
   .hero-area { grid-template-columns: 1fr; border-bottom: none; }
@@ -5418,7 +5831,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   body.dark-mode .rh-section,
   body.dark-mode .rh-car-card,
   body.dark-mode footer {
-    background: transparent !important;
+    background-color: transparent !important;
     color: #c8d0db !important;
   }
   body.dark-mode .art-hed, body.dark-mode .art-hed a,
@@ -8393,42 +8806,47 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       <div class="credit-carousel" id="creditCarousel">
         <!-- Ken Burns pull-in carousel — continuous zoom with cross-dissolve -->
         <img class="carousel-slide hero-kb active" data-kb="0" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="eager">
-        <img class="carousel-slide hero-kb" data-kb="1" src="img/5.jpg" alt="LA downtown skyline at night — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="2" src="img/30.jpg" alt="LA rooftop cityscape — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="3" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="4" src="img/34.jpg" alt="LA 6th Street scene — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="5" src="img/36.jpg" alt="Downtown LA architecture — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="1" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="2" src="img/40.jpg" alt="LA aerial skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="3" src="img/36.jpg" alt="Downtown LA architecture — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="4" src="img/50.jpg" alt="6th Street Viaduct night skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="5" src="img/14.jpg" alt="Santa Monica Pier sunset — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="6" src="img/18.jpg" alt="LA scene — HIRECAR" loading="lazy">
       </div>
       <div class="credit-overlay">
         <div class="hero-top-tagline"></div>
         <div class="credit-eyebrow" id="creditEyebrow">HIRECREDIT · Credit Recovery · Los Angeles</div>
         <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br class="desktop-br"><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
         <p class="credit-sub" id="creditSub">HIRECAR routes you from incident to resolution.<br>One record, one timeline, one clean outcome.</p>
-        <div class="credit-stat-row">
-          <div class="credit-stat">
-            <div class="credit-stat-n serif" data-count-to="810" data-count-suffix="K+">
-              <span class="odometer" data-digits="810">
-                <span class="odo-digit" data-target="8">0</span><span class="odo-digit" data-target="1">0</span><span class="odo-digit" data-target="0">0</span>
-              </span><span class="odo-suffix">K+</span>
-            </div>
-            <div class="credit-stat-l">LA Collisions · 2024</div>
-          </div>
-          <div class="credit-stat">
-            <div class="credit-stat-n serif odo-text" data-reveal="PIFR">
-              <span class="odo-char" data-char="P">–</span><span class="odo-char" data-char="I">–</span><span class="odo-char" data-char="F">–</span><span class="odo-char" data-char="R">–</span>
-            </div>
-            <div class="credit-stat-l">Recovery SKU Active</div>
-          </div>
-          <div class="credit-stat">
-            <div class="credit-stat-n serif" data-count-to="24" data-count-suffix="hr">
-              <span class="odometer" data-digits="24">
-                <span class="odo-digit" data-target="2">0</span><span class="odo-digit" data-target="4">0</span>
-              </span><span class="odo-suffix">hr</span>
-            </div>
-            <div class="credit-stat-l">Intake Response</div>
-          </div>
+        <!-- Inline nav menu (replaces stat row) -->
+        <div class="hero-exp-tabs het-inline" id="heroExpTabs">
+          <button class="het-btn" data-scroll="#sec-stories" aria-label="News+Media">
+            <svg class="het-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+            <span class="het-label">News+Media</span>
+          </button>
+          <div class="het-sep" aria-hidden="true"></div>
+          <button class="het-btn" data-scroll="#sec-stories" aria-label="Top Stories">
+            <svg class="het-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            <span class="het-label">Top Stories</span>
+          </button>
+          <button class="het-btn" data-scroll="#sec-credit-repair" aria-label="Credit Help &amp; Auto Insurance">
+            <svg class="het-icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            <span class="het-label">Credit Help &amp;<br>Auto Insurance</span>
+          </button>
+          <button class="het-btn" data-scroll="#sec-services" aria-label="Auto Service">
+            <svg class="het-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+            <span class="het-label">Auto Service</span>
+          </button>
+          <button class="het-btn" data-scroll="#sec-ent" aria-label="Culture &amp; Travel">
+            <svg class="het-icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span class="het-label">Culture &amp;<br>Travel</span>
+          </button>
+          <div class="het-sep" aria-hidden="true"></div>
+          <button class="het-btn het-menu-btn" data-action="menu" aria-label="Main Menu">
+            <svg class="het-icon" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            <span class="het-label">Main Menu</span>
+          </button>
         </div>
-        <!-- Hero Shifting Tabs — 5-tab dropdown menu -->
         <div class="hero-tabs" id="heroTabs">
           <div class="hero-tabs-bar">
             <button class="hero-tab active" data-tab="pifr">WHAT IS PIFR <svg class="hero-tab-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -8490,31 +8908,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
     </div>
   </div>
-  <!-- Expandable tabs — floating section nav at bottom of hero -->
-  <div class="hero-exp-tabs" id="heroExpTabs">
-    <button class="het-btn" data-scroll="#sec-stories" aria-label="Top Stories">
-      <svg class="het-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-      <span class="het-label">Top Stories</span>
-    </button>
-    <div class="het-sep" aria-hidden="true"></div>
-    <button class="het-btn" data-scroll="#sec-credit-repair" aria-label="Credit">
-      <svg class="het-icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-      <span class="het-label">Credit</span>
-    </button>
-    <button class="het-btn" data-scroll="#sec-services" aria-label="Services">
-      <svg class="het-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-      <span class="het-label">Services</span>
-    </button>
-    <button class="het-btn" data-scroll="#sec-ent" aria-label="Entertainment">
-      <svg class="het-icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-      <span class="het-label">Culture</span>
-    </button>
-    <div class="het-sep" aria-hidden="true"></div>
-    <button class="het-btn het-menu-btn" data-action="menu" aria-label="Menu">
-      <svg class="het-icon" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-      <span class="het-label">Menu</span>
-    </button>
-  </div>
+  <!-- (menu moved inline into credit-overlay) -->
 </div>
 
 <!-- ═══ GRADIENT BRIDGE (mobile: dark → light transition) ═══ -->
@@ -8586,35 +8980,98 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         </div>
       </div>
       <div class="ss-spacer"></div>
+
+      <!-- ICYMI strip — gallery hover carousel -->
+      <div class="icymi-strip">
+        <div class="icymi-header">
+          <div class="icymi-head">In Case You Missed It</div>
+          <div class="icymi-nav">
+            <button class="icymi-prev" aria-label="Previous" disabled>‹</button>
+            <button class="icymi-next" aria-label="Next">›</button>
+          </div>
+        </div>
+        <div class="icymi-scroll">
+          <div class="icymi-item">
+            <div class="icymi-card-img" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80&fit=crop')"></div>
+            <div class="icymi-card-body">
+              <div class="icymi-cat">Operator Standards</div>
+              <div class="icymi-title serif">Why Admin Failure — Not the Incident — Is Destroying Operator Margins in LA</div>
+            </div>
+            <span class="icymi-arrow">→</span>
+          </div>
+          <div class="icymi-item">
+            <div class="icymi-card-img" style="background-image:url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&q=80&fit=crop')"></div>
+            <div class="icymi-card-body">
+              <div class="icymi-cat">Credit Repair</div>
+              <div class="icymi-title serif">Auto Credit After a Collision: How an Incident Becomes a Credit Event</div>
+            </div>
+            <span class="icymi-arrow">→</span>
+          </div>
+          <div class="icymi-item">
+            <div class="icymi-card-img" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80&fit=crop')"></div>
+            <div class="icymi-card-body">
+              <div class="icymi-cat">Small Business Funding</div>
+              <div class="icymi-title serif">SeedXchange Q1 2026: What Auto Operators Can Qualify For</div>
+            </div>
+            <span class="icymi-arrow">→</span>
+          </div>
+          <div class="icymi-item">
+            <div class="icymi-card-img" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80&fit=crop')"></div>
+            <div class="icymi-card-body">
+              <div class="icymi-cat">MW Intelligence</div>
+              <div class="icymi-title serif">Cure Window Sensitivity: When to Tighten and When to Hold in Q1 2026</div>
+            </div>
+            <span class="icymi-arrow">→</span>
+          </div>
+          <div class="icymi-item">
+            <div class="icymi-card-img" style="background-image:url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=400&q=80&fit=crop')"></div>
+            <div class="icymi-card-body">
+              <div class="icymi-cat">Operator Playbooks</div>
+              <div class="icymi-title serif">HBI Scoring: The 5 Behaviors That Move Vendors Into Premium Volume Lanes</div>
+            </div>
+            <span class="icymi-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TRENDING STRIP ═══ -->
+      <div class="scroll-section" style="position:relative;">
+        <div class="scroll-arrow" onclick="this.closest('.scroll-section').querySelector('.trending-inner').scrollBy({left:300,behavior:'smooth'})">→</div>
+        <div class="trending-strip" id="trendingStrip" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <div class="trending-inner">
+            <div class="trending-label">Trending</div>
+            <div class="trending-items">
+              <div class="trending-item">
+                <span class="t-num">1</span>
+                <span class="t-text serif">810K LA Collisions — What It Means for Operators</span>
+              </div>
+              <div class="trending-item">
+                <span class="t-num">2</span>
+                <span class="t-text serif">HIRECREDIT: Credit Recovery After an Incident</span>
+              </div>
+              <div class="trending-item">
+                <span class="t-num">3</span>
+                <span class="t-text serif">Admin Failure Is the Real Margin Killer</span>
+              </div>
+              <div class="trending-item">
+                <span class="t-num">4</span>
+                <span class="t-text serif">SeedXchange Q1 2026 — Apply Now</span>
+              </div>
+              <div class="trending-item">
+                <span class="t-num">5</span>
+                <span class="t-text serif">HBI Scoring: Revenue Lane vs Cure Lane</span>
+              </div>
+              <div class="trending-item">
+                <span class="t-num">6</span>
+                <span class="t-text serif">Custody Log Standards: What HIRECAR Requires</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /scroll-section trending -->
+
     </div>
 
-  </div>
-
-  <!-- ICYMI strip — outside scroll container -->
-  <div class="icymi-strip">
-    <div class="icymi-head">In Case You Missed It</div>
-    <div class="icymi-scroll">
-      <div class="icymi-item">
-        <div class="icymi-cat">Operator Standards</div>
-        <div class="icymi-title serif">Why Admin Failure — Not the Incident — Is Destroying Operator Margins in LA</div>
-      </div>
-      <div class="icymi-item">
-        <div class="icymi-cat">Credit Repair</div>
-        <div class="icymi-title serif">Auto Credit After a Collision: How an Incident Becomes a Credit Event</div>
-      </div>
-      <div class="icymi-item">
-        <div class="icymi-cat">Small Business Funding</div>
-        <div class="icymi-title serif">SeedXchange Q1 2026: What Auto Operators Can Qualify For</div>
-      </div>
-      <div class="icymi-item">
-        <div class="icymi-cat">MW Intelligence</div>
-        <div class="icymi-title serif">Cure Window Sensitivity: When to Tighten and When to Hold in Q1 2026</div>
-      </div>
-      <div class="icymi-item">
-        <div class="icymi-cat">Operator Playbooks</div>
-        <div class="icymi-title serif">HBI Scoring: The 5 Behaviors That Move Vendors Into Premium Volume Lanes</div>
-      </div>
-    </div>
   </div>
 
 </div><!-- /page-wrap -->
@@ -8625,7 +9082,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <div class="scroll-arrow" style="top:40px;background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);color:#fff;" onclick="var g=document.querySelector('.ent-grid');g.scrollBy ? g.scrollBy({left:300,behavior:'smooth'}) : g.scrollLeft+=300">→</div>
     <div class="section-label">Entertainment · Culture · Auto · City Life</div>
     <div class="ent-grid">
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
         <div style="position:relative;z-index:2;">
           <div class="ent-cat">Road Trip Culture</div>
@@ -8633,7 +9090,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">The best road trips start with the right vehicle. We follow real couples and families on California's most iconic drives.</p>
         </div>
       </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
         <div style="position:relative;z-index:2;">
           <div class="ent-cat">Family Mobility</div>
@@ -8641,7 +9098,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">From Malibu to Joshua Tree — families choosing First Class mobility over traditional rentals are setting a new standard.</p>
         </div>
       </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1562441289-f82a53fe2dd5?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
         <div style="position:relative;z-index:2;">
           <div class="ent-cat">Collision + Recovery</div>
@@ -8649,7 +9106,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">HIRECAR-certified collision centers working on Lamborghinis, Rolls-Royces, and Tesla Plaids — a behind-the-scenes look.</p>
         </div>
       </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
         <div style="position:relative;z-index:2;">
           <div class="ent-cat">Private Driver Life</div>
@@ -8661,41 +9118,6 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   </div>
 </div>
 
-<!-- ═══ TRENDING STRIP ═══ -->
-<div class="scroll-section" style="position:relative;">
-<div class="scroll-arrow" onclick="this.closest('.scroll-section').querySelector('.trending-inner').scrollBy({left:300,behavior:'smooth'})">→</div>
-<div class="trending-strip" id="trendingStrip" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-  <div class="trending-inner">
-    <div class="trending-label">Trending</div>
-    <div class="trending-items">
-      <div class="trending-item">
-        <span class="t-num">1</span>
-        <span class="t-text serif">810K LA Collisions — What It Means for Operators</span>
-      </div>
-      <div class="trending-item">
-        <span class="t-num">2</span>
-        <span class="t-text serif">HIRECREDIT: Credit Recovery After an Incident</span>
-      </div>
-      <div class="trending-item">
-        <span class="t-num">3</span>
-        <span class="t-text serif">Admin Failure Is the Real Margin Killer</span>
-      </div>
-      <div class="trending-item">
-        <span class="t-num">4</span>
-        <span class="t-text serif">SeedXchange Q1 2026 — Apply Now</span>
-      </div>
-      <div class="trending-item">
-        <span class="t-num">5</span>
-        <span class="t-text serif">HBI Scoring: Revenue Lane vs Cure Lane</span>
-      </div>
-      <div class="trending-item">
-        <span class="t-num">6</span>
-        <span class="t-text serif">Custody Log Standards: What HIRECAR Requires</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div><!-- /scroll-section trending -->
 
 <div class="page-wrap">
 
@@ -9936,7 +10358,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var total = slides.length;
     var idx = 0;
     var SLIDE_DURATION = 9000;   /* ms each slide is fully visible */
-    var DISSOLVE_TIME  = 2500;   /* ms cross-dissolve overlap */
+    var DISSOLVE_TIME  = 5000;   /* ms cross-dissolve overlap */
 
     /* Reset all slides: hide and pause their animations */
     function resetAll() {
@@ -9984,9 +10406,11 @@ document.addEventListener('DOMContentLoaded', function() {
     startSlide(0);
 
     /* Advance at interval: SLIDE_DURATION minus overlap so dissolve starts before end */
+    /* FROZEN FOR IMAGE CROPPING
     setInterval(function() {
       advanceSlide();
     }, SLIDE_DURATION - DISSOLVE_TIME / 2);
+    */
   })();
 
   // Brand-pipe scroll progress + bang glow + tag color + compact header
@@ -10140,6 +10564,8 @@ document.addEventListener('DOMContentLoaded', function() {
       activeIdx = idx;
       for (var i = 0; i < total; i++) {
         items[i].classList.toggle('active', i === idx);
+        // Hide items that have scrolled past (above active); show upcoming items at default opacity
+        items[i].style.opacity = (i < idx) ? '0' : '';
         if (imgs[i]) imgs[i].classList.toggle('active', i === idx);
       }
     }
@@ -10150,11 +10576,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function onScroll() {
       var scrollTop = container.scrollTop;
+      var scrollPad = container.offsetHeight * 0.10; // match CSS scroll-padding-top
       var closestIdx = 0;
       var closestDist = Infinity;
       for (var i = 0; i < total; i++) {
         var itemTop = items[i].offsetTop + wrapOffset;
-        var dist = Math.abs(itemTop - scrollTop);
+        var scrollMargin = parseFloat(getComputedStyle(items[i]).scrollMarginTop) || 0;
+        var snapPoint = Math.max(0, itemTop - scrollMargin - scrollPad);
+        var dist = Math.abs(snapPoint - scrollTop);
         if (dist < closestDist) {
           closestDist = dist;
           closestIdx = i;
@@ -10231,6 +10660,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize first card
     setActive(0);
+  })();
+
+  // ICYMI gallery carousel navigation
+  (function icymiNav() {
+    var scroll = document.querySelector('.icymi-strip .icymi-scroll');
+    var prev = document.querySelector('.icymi-prev');
+    var next = document.querySelector('.icymi-next');
+    if (!scroll || !prev || !next) return;
+
+    var step = 177; // card width + gap
+
+    function updateBtns() {
+      prev.disabled = scroll.scrollLeft <= 2;
+      next.disabled = scroll.scrollLeft + scroll.offsetWidth >= scroll.scrollWidth - 2;
+    }
+
+    prev.addEventListener('click', function() { scroll.scrollBy({ left: -step, behavior: 'smooth' }); });
+    next.addEventListener('click', function() { scroll.scrollBy({ left: step, behavior: 'smooth' }); });
+    scroll.addEventListener('scroll', updateBtns, { passive: true });
+    updateBtns();
   })();
 
   // 5b-count. Animated odometer counters + character reveals for stat row
@@ -11465,15 +11914,18 @@ if (document.readyState === 'loading') {
   if (!tabs) return;
   var btns = tabs.querySelectorAll('.het-btn');
   var menuOpen = false;   /* true when user expanded tabs via collapsed menu tap */
+  var isInline = tabs.classList.contains('het-inline');
 
   /* ── Scroll-based collapse: past Top Stories → collapse to menu only ── */
   var storiesSection = document.getElementById('sec-stories');
   function shouldBeCollapsed() {
+    if (isInline) return false;
     if (!storiesSection) return false;
     return storiesSection.getBoundingClientRect().top < window.innerHeight * 0.5;
   }
   function applyCollapse() {
-    if (menuOpen) return;                  /* user is interacting, don't collapse */
+    if (isInline) return;
+    if (menuOpen) return;
     if (shouldBeCollapsed()) {
       if (!tabs.classList.contains('het-collapsed')) {
         btns.forEach(function(b) { b.classList.remove('active'); });
@@ -11483,49 +11935,191 @@ if (document.readyState === 'loading') {
       tabs.classList.remove('het-collapsed');
     }
   }
-  window.addEventListener('scroll', applyCollapse, { passive: true });
+  if (!isInline) {
+    window.addEventListener('scroll', applyCollapse, { passive: true });
+  }
 
-  /* ── Page-load animation sequence: collapsed → expand+glow → collapse → ambient glow ── */
-  tabs.classList.add('het-collapsed');            /* Start collapsed */
-  tabs.style.opacity = '0';
-  tabs.style.transition = 'opacity .8s ease';
+  /* ── Expandable tabs: 1st tap → expand label, 2nd tap → navigate ── */
+  if (isInline) {
+    var hetBtns = tabs.querySelectorAll('.het-btn');
 
-  setTimeout(function() {
-    tabs.style.opacity = '1';                    /* 1) Fade in (0.8s) */
-  }, 400);
+    hetBtns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var wasActive = btn.classList.contains('het-active');
 
-  setTimeout(function() {
-    tabs.classList.add('het-glow-close');         /* 2) Glow pulse */
-  }, 1200);
+        if (wasActive) {
+          /* ── 2nd tap: navigate to section ── */
+          clearTimeout(tabs._expandTimer);
+          var sel = btn.getAttribute('data-scroll');
+          var act = btn.getAttribute('data-action');
+          if (sel) {
+            var target = document.querySelector(sel);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else if (act === 'menu') {
+            /* Open nav drawer */
+            var drawer = document.getElementById('mobileNavDrawer');
+            if (drawer) {
+              drawer.classList.add('open');
+              document.body.style.overflow = 'hidden';
+            }
+          }
+          /* Collapse after navigating */
+          hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+        } else {
+          /* ── 1st tap: expand label, collapse others ── */
+          hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+          btn.classList.add('het-active');
 
-  setTimeout(function() {
-    tabs.classList.remove('het-collapsed');       /* 3) Expand out smoothly */
-  }, 1800);
+          /* Auto-collapse after 4s if no 2nd tap */
+          clearTimeout(tabs._expandTimer);
+          tabs._expandTimer = setTimeout(function() {
+            btn.classList.remove('het-active');
+          }, 4000);
+        }
+      });
+    });
 
-  setTimeout(function() {
-    tabs.classList.remove('het-glow-close');      /* 4) Remove glow after expand */
-  }, 3000);
+    /* Click outside tabs → collapse all */
+    document.addEventListener('click', function(e) {
+      if (!tabs.contains(e.target)) {
+        hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+        clearTimeout(tabs._expandTimer);
+      }
+    });
 
-  var autoCollapseTimer = setTimeout(function() {
-    if (!menuOpen && !tabs.classList.contains('het-collapsed')) {
-      btns.forEach(function(b) { b.classList.remove('active'); });
-      tabs.classList.add('het-glow-close');       /* 5) Glow on collapse */
+    /* ── Intro animation: cycle through each icon showing label ── */
+    var introButtons = [];
+    hetBtns.forEach(function(b) {
+      if (!b.classList.contains('het-menu-btn')) introButtons.push(b);
+    });
+    var menuBtn = tabs.querySelector('.het-menu-btn');
+    var introCancelled = false;
+    tabs._introRunning = true;
+
+    function runGlitchFinish() {
+      if (introCancelled) { tabs._introRunning = false; tabs.classList.add('het-intro-done'); return; }
+      hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+      /* Glitch phase: rapid random flickers across all icons */
+      tabs.classList.add('het-glitching');
+      var flickerCount = 0;
+      var flickerMax = 8;
+      var flickerTimer = setInterval(function() {
+        if (introCancelled) { clearInterval(flickerTimer); tabs.classList.remove('het-glitching'); return; }
+        hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+        /* Pick a random icon to flash */
+        var ri = Math.floor(Math.random() * introButtons.length);
+        introButtons[ri].classList.add('het-active');
+        flickerCount++;
+        if (flickerCount >= flickerMax) {
+          clearInterval(flickerTimer);
+          /* Final settle: clear all, pause, then land on News+Media */
+          hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+          setTimeout(function() {
+            tabs.classList.remove('het-glitching');
+            if (introCancelled) { tabs._introRunning = false; tabs.classList.add('het-intro-done'); return; }
+            /* Land on News+Media */
+            introButtons[0].classList.add('het-active');
+            tabs._introRunning = false;
+            tabs.classList.add('het-intro-done');
+            /* Auto-collapse after 4s like normal tap */
+            tabs._expandTimer = setTimeout(function() {
+              introButtons[0].classList.remove('het-active');
+            }, 4000);
+          }, 200);
+        }
+      }, 120);
+    }
+
+    function runIntro(index) {
+      if (introCancelled || index >= introButtons.length) {
+        /* All icons done — show Main Menu with label, then glitch to News+Media */
+        hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+        if (menuBtn && !introCancelled) {
+          menuBtn.classList.add('het-active');
+          menuBtn.classList.add('het-glow');
+          setTimeout(function() {
+            if (introCancelled) { menuBtn.classList.remove('het-active'); menuBtn.classList.remove('het-glow'); runGlitchFinish(); return; }
+            menuBtn.classList.remove('het-active');
+            menuBtn.classList.remove('het-glow');
+            /* Brief pause then glitch */
+            setTimeout(function() {
+              runGlitchFinish();
+            }, 300);
+          }, 6200);
+        } else {
+          runGlitchFinish();
+        }
+        return;
+      }
+      /* Expand this icon's label — synced with hero carousel transitions */
+      var iconHold = (index === 0) ? 8700 : 6200; /* first icon gets extra delay */
+      hetBtns.forEach(function(b) { b.classList.remove('het-active'); });
+      introButtons[index].classList.add('het-active');
+
+      /* Hold then collapse and move to next */
       setTimeout(function() {
-        tabs.classList.add('het-collapsed');      /* 6) Collapse */
+        if (introCancelled) return;
+        introButtons[index].classList.remove('het-active');
+        /* Brief pause before next icon */
         setTimeout(function() {
-          tabs.classList.remove('het-glow-close');/* 7) Ambient glow fades */
-        }, 900);
-      }, 400);
+          if (introCancelled) return;
+          runIntro(index + 1);
+        }, 300);
+      }, iconHold);
     }
-  }, 5500);
 
-  /* Cancel auto-collapse if user scrolls past hero (scroll-collapse takes over) */
-  window.addEventListener('scroll', function cancelAutoCollapse() {
-    if (shouldBeCollapsed()) {
-      clearTimeout(autoCollapseTimer);
-      window.removeEventListener('scroll', cancelAutoCollapse);
-    }
-  }, { passive: true });
+    /* Start intro after a short delay */
+    setTimeout(function() { runIntro(0); }, 800);
+
+    /* Cancel intro on any user tap */
+    tabs.addEventListener('click', function cancelIntro() {
+      introCancelled = true;
+      tabs._introRunning = false;
+      tabs.classList.add('het-intro-done');
+      tabs.removeEventListener('click', cancelIntro);
+    }, { once: true });
+  }
+
+  if (!isInline) {
+    tabs.classList.add('het-collapsed');
+    tabs.style.opacity = '0';
+    tabs.style.transition = 'opacity .8s ease';
+
+    setTimeout(function() {
+      tabs.style.opacity = '1';
+    }, 400);
+    setTimeout(function() {
+      tabs.classList.add('het-glow-close');
+    }, 1200);
+    setTimeout(function() {
+      tabs.classList.remove('het-collapsed');
+    }, 1800);
+    setTimeout(function() {
+      tabs.classList.remove('het-glow-close');
+    }, 3000);
+
+    var autoCollapseTimer = setTimeout(function() {
+      if (!menuOpen && !tabs.classList.contains('het-collapsed')) {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        tabs.classList.add('het-glow-close');
+        setTimeout(function() {
+          tabs.classList.add('het-collapsed');
+          setTimeout(function() {
+            tabs.classList.remove('het-glow-close');
+          }, 900);
+        }, 400);
+      }
+    }, 5500);
+
+    window.addEventListener('scroll', function cancelAutoCollapse() {
+      if (shouldBeCollapsed()) {
+        clearTimeout(autoCollapseTimer);
+        window.removeEventListener('scroll', cancelAutoCollapse);
+      }
+    }, { passive: true });
+  }
 
   /* Close expanded menu and re-collapse — with glow signal */
   var menuAutoCloseTimer = null;
@@ -11555,6 +12149,7 @@ if (document.readyState === 'loading') {
 
   btns.forEach(function(btn) {
     btn.addEventListener('click', function(e) {
+      if (isInline) return;   /* inline mode has its own handler */
       e.stopPropagation();
 
       /* ── Menu button ── */
