@@ -5210,26 +5210,33 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
-  /* Pull-IN = zoom from small toward larger — continuous across all slides */
-  .carousel-slide.hero-kb[data-kb="0"] { animation: kbPull0 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="1"] { animation: kbPull1 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="2"] { animation: kbPull2 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="3"] { animation: kbPull3 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="4"] { animation: kbPull4 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="5"] { animation: kbPull5 10s linear forwards; }
-  .carousel-slide.hero-kb[data-kb="6"] { animation: kbPull6 10s linear forwards; }
-  /* Paused by default — JS plays when active */
-  .carousel-slide.hero-kb { animation-play-state: paused !important; }
-  .carousel-slide.hero-kb.kb-playing { animation-play-state: running !important; }
+  /* Ken Burns pull — each slide zooms for exactly its visible duration.
+     Animation starts when .kb-playing is added, holds at end with forwards. */
+  .carousel-slide.hero-kb {
+    animation-play-state: paused !important;
+    animation-fill-mode: forwards !important;
+    animation-timing-function: ease-in-out !important;
+  }
+  .carousel-slide.hero-kb.kb-playing {
+    animation-play-state: running !important;
+  }
+  /* 9s matches SLIDE_DURATION in JS — pull stays in sync with each transition */
+  .carousel-slide.hero-kb[data-kb="0"] { animation: kbPull0 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="1"] { animation: kbPull1 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="2"] { animation: kbPull2 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="3"] { animation: kbPull3 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="4"] { animation: kbPull4 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="5"] { animation: kbPull5 9s ease-in-out forwards; }
+  .carousel-slide.hero-kb[data-kb="6"] { animation: kbPull6 9s ease-in-out forwards; }
 
-  /* Pull-IN: start small → end larger. Each picks up where last left off. */
-  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
-  @keyframes kbPull1 { from { transform: scale(3.0) translateY(-13.5%) translateX(-2%); } to { transform: scale(3.36) translateY(-13.5%) translateX(-2%); } }
-  @keyframes kbPull2 { from { transform: scale(1.2) translateY(-8%); } to { transform: scale(1.34) translateY(-8%); } }
-  @keyframes kbPull3 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
-  @keyframes kbPull4 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
-  @keyframes kbPull5 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
-  @keyframes kbPull6 { from { transform: scale(1.00); } to { transform: scale(1.12); } }
+  /* Each slide pulls from 1.0→1.14 during its time on screen */
+  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
+  @keyframes kbPull1 { from { transform: scale(3.0) translateY(-13.5%) translateX(-2%); } to { transform: scale(3.42) translateY(-14%) translateX(-1.5%); } }
+  @keyframes kbPull2 { from { transform: scale(1.20) translateY(-8%); } to { transform: scale(1.37) translateY(-6%); } }
+  @keyframes kbPull3 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
+  @keyframes kbPull4 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
+  @keyframes kbPull5 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
+  @keyframes kbPull6 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
@@ -10402,17 +10409,16 @@ document.addEventListener('DOMContentLoaded', function() {
       var nextIdx = (idx + 1) % total;
       var nextSlide = slides[nextIdx];
 
-      /* If we're cycling back to 0, reset its animation for fresh zoom-out start */
-      if (nextIdx === 0) {
-        nextSlide.style.animation = 'none';
-        void nextSlide.offsetWidth;
-        nextSlide.style.animation = '';
-      }
+      /* Reset next slide's animation so the pull starts fresh */
+      nextSlide.classList.remove('kb-playing');
+      nextSlide.style.animation = 'none';
+      void nextSlide.offsetWidth;          /* force reflow */
+      nextSlide.style.animation = '';      /* re-apply CSS animation */
 
-      /* Start next slide (zoomed in, picks up from where last was heading) */
+      /* Activate next — opacity fades in, pull starts */
       nextSlide.classList.add('active','kb-playing');
 
-      /* After dissolve finishes, remove old slide fully */
+      /* After dissolve finishes, fully hide the old slide */
       setTimeout(function() {
         currentSlide.classList.remove('active','kb-playing');
       }, DISSOLVE_TIME + 200);
@@ -10424,12 +10430,11 @@ document.addEventListener('DOMContentLoaded', function() {
     resetAll();
     startSlide(0);
 
-    /* Advance at interval: SLIDE_DURATION minus overlap so dissolve starts before end */
-    /* FROZEN FOR IMAGE CROPPING
+    /* Advance every SLIDE_DURATION. The dissolve overlaps the tail of
+       one slide with the head of the next, so both are pulling at once. */
     setInterval(function() {
       advanceSlide();
-    }, SLIDE_DURATION - DISSOLVE_TIME / 2);
-    */
+    }, SLIDE_DURATION);
   })();
 
   // Brand-pipe scroll progress + bang glow + tag color + compact header
