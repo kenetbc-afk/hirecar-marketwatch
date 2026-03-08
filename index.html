@@ -5199,44 +5199,41 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: opacity 5s ease !important;
     will-change: transform, opacity;
   }
-  /* Per-image crop positions — landscape vs portrait */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: 35% 28% !important; } /* 32.jpg */
-  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 100% !important; } /* 31.jpg PORTRAIT */
-  .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 50% !important; } /* 40.jpg aerial skyline */
-  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 0% !important; } /* 36.jpg PORTRAIT */
+  /* Per-image crop positions — object-fit:cover handles all framing,
+     no scale/translate hacks needed. Pure zoom pulls evenly on all. */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: 35% 28% !important; } /* 32.jpg downtown road */
+  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 65% !important; } /* 31.jpg LA night skyline */
+  .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 40% !important; } /* 40.jpg aerial skyline */
+  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 20% !important; } /* 36.jpg DTLA architecture */
   .carousel-slide.hero-kb[data-kb="4"] { object-position: 75% 50% !important; } /* 50.jpg 6th St Viaduct night */
-  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 50% !important; } /* 14.jpg Santa Monica Pier PORTRAIT */
-  .carousel-slide.hero-kb[data-kb="6"] { object-position: center 50% !important; } /* 18.jpg PORTRAIT */
+  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 45% !important; } /* 14.jpg Santa Monica Pier */
+  .carousel-slide.hero-kb[data-kb="6"] { object-position: center 50% !important; } /* 18.jpg LA scene */
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
-  /* Ken Burns pull — each slide zooms for exactly its visible duration.
-     Animation starts when .kb-playing is added, holds at end with forwards. */
+  /* Ken Burns pull — ONE continuous forward zoom that NEVER stops.
+     All slides animate all the time. Staggered offsets mean each image
+     is at a different zoom depth — when one dissolves into the next
+     the pull feels like it never paused. */
   .carousel-slide.hero-kb {
-    animation-play-state: paused !important;
-    animation-fill-mode: forwards !important;
-    animation-timing-function: ease-in-out !important;
+    animation: kbPullInfinite 25s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
   }
-  .carousel-slide.hero-kb.kb-playing {
-    animation-play-state: running !important;
-  }
-  /* 9s matches SLIDE_DURATION in JS — pull stays in sync with each transition */
-  .carousel-slide.hero-kb[data-kb="0"] { animation: kbPull0 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="1"] { animation: kbPull1 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="2"] { animation: kbPull2 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="3"] { animation: kbPull3 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="4"] { animation: kbPull4 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="5"] { animation: kbPull5 9s ease-in-out forwards; }
-  .carousel-slide.hero-kb[data-kb="6"] { animation: kbPull6 9s ease-in-out forwards; }
+  /* Stagger each slide so they're at different zoom points */
+  .carousel-slide.hero-kb[data-kb="0"] { animation-delay:  0s !important; }
+  .carousel-slide.hero-kb[data-kb="1"] { animation-delay: -3.5s !important; }
+  .carousel-slide.hero-kb[data-kb="2"] { animation-delay: -7s !important; }
+  .carousel-slide.hero-kb[data-kb="3"] { animation-delay: -10.5s !important; }
+  .carousel-slide.hero-kb[data-kb="4"] { animation-delay: -14s !important; }
+  .carousel-slide.hero-kb[data-kb="5"] { animation-delay: -17.5s !important; }
+  .carousel-slide.hero-kb[data-kb="6"] { animation-delay: -21s !important; }
 
-  /* Each slide pulls from 1.0→1.14 during its time on screen */
-  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
-  @keyframes kbPull1 { from { transform: scale(3.0) translateY(-13.5%) translateX(-2%); } to { transform: scale(3.42) translateY(-14%) translateX(-1.5%); } }
-  @keyframes kbPull2 { from { transform: scale(1.20) translateY(-8%); } to { transform: scale(1.37) translateY(-6%); } }
-  @keyframes kbPull3 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
-  @keyframes kbPull4 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
-  @keyframes kbPull5 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
-  @keyframes kbPull6 { from { transform: scale(1.00); } to { transform: scale(1.14); } }
+  /* Continuous pull — slow breathe from 1.0 up to 1.22 and back.
+     The user only sees ~9s of this per slide, always mid-pull. */
+  @keyframes kbPullInfinite {
+    0%   { transform: scale(1.00); }
+    50%  { transform: scale(1.22); }
+    100% { transform: scale(1.00); }
+  }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
@@ -10386,47 +10383,36 @@ document.addEventListener('DOMContentLoaded', function() {
     var SLIDE_DURATION = 9000;   /* ms each slide is fully visible */
     var DISSOLVE_TIME  = 5000;   /* ms cross-dissolve overlap */
 
-    /* Reset all slides: hide and pause their animations */
+    /* Hide all slides (animations keep running — never stop) */
     function resetAll() {
       slides.forEach(function(s) {
-        s.classList.remove('active','kb-playing');
-        s.style.animation = 'none';
-        /* force reflow to reset animation */
-        void s.offsetWidth;
-        s.style.animation = '';
+        s.classList.remove('active');
       });
     }
 
-    /* Start the first slide */
+    /* Show a slide — animation is already running continuously */
     function startSlide(i) {
-      var slide = slides[i];
-      slide.classList.add('active','kb-playing');
+      slides[i].classList.add('active');
     }
 
-    /* Transition from current to next with cross-dissolve */
+    /* Cross-dissolve to next — pull never pauses */
     function advanceSlide() {
       var currentSlide = slides[idx];
       var nextIdx = (idx + 1) % total;
       var nextSlide = slides[nextIdx];
 
-      /* Reset next slide's animation so the pull starts fresh */
-      nextSlide.classList.remove('kb-playing');
-      nextSlide.style.animation = 'none';
-      void nextSlide.offsetWidth;          /* force reflow */
-      nextSlide.style.animation = '';      /* re-apply CSS animation */
+      /* Fade in next (its zoom is already mid-pull from infinite animation) */
+      nextSlide.classList.add('active');
 
-      /* Activate next — opacity fades in, pull starts */
-      nextSlide.classList.add('active','kb-playing');
-
-      /* After dissolve finishes, fully hide the old slide */
+      /* After dissolve finishes, hide outgoing */
       setTimeout(function() {
-        currentSlide.classList.remove('active','kb-playing');
+        currentSlide.classList.remove('active');
       }, DISSOLVE_TIME + 200);
 
       idx = nextIdx;
     }
 
-    /* Initialize — start first slide immediately */
+    /* Initialize — all animations already running, just show first slide */
     resetAll();
     startSlide(0);
 
