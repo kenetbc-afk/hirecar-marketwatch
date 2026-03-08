@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRECAR Invoice</title>
+  <style>
+    /* Print-friendly: fits on one US Letter page */
+    @page { size: letter; margin: 0.6in; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .no-print { display: none !important; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: #111820;
+      background: #F5F5F5;
+      line-height: 1.5;
+    }
+
+    .invoice-page {
+      max-width: 700px;
+      margin: 24px auto;
+      background: #FFFFFF;
+      border: 1px solid #E0E0E0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .inv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 32px 36px 24px;
+      border-bottom: 3px solid #C9920A;
+    }
+    .inv-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: #C9920A;
+      letter-spacing: 2px;
+    }
+    .inv-brand-sub {
+      font-size: 11px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+    .inv-title-block { text-align: right; }
+    .inv-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #111820;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .inv-number {
+      font-size: 13px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+
+    /* Info Grid */
+    .inv-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 24px 36px;
+      gap: 24px;
+    }
+    .inv-info-block { flex: 1; }
+    .inv-info-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+    .inv-info-block p {
+      font-size: 13px;
+      color: #374151;
+      margin-bottom: 2px;
+    }
+    .inv-info-block p strong { color: #111820; }
+
+    /* Line Items Table */
+    .inv-table-wrap { padding: 0 36px 24px; }
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .inv-table thead th {
+      background: #111820;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .inv-table thead th:nth-child(4),
+    .inv-table thead th:nth-child(5),
+    .inv-table thead th:nth-child(6) { text-align: right; }
+    .inv-table tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #F3F4F6;
+      vertical-align: top;
+    }
+    .inv-table tbody td:nth-child(4),
+    .inv-table tbody td:nth-child(5),
+    .inv-table tbody td:nth-child(6) { text-align: right; }
+    .inv-table tbody tr:hover { background: #FAFAFA; }
+    .inv-table .item-desc { color: #6B7280; font-size: 11px; }
+
+    /* Summary */
+    .inv-summary {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 36px 24px;
+    }
+    .inv-summary-table {
+      width: 240px;
+      font-size: 13px;
+    }
+    .inv-summary-table td {
+      padding: 5px 0;
+    }
+    .inv-summary-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    .inv-summary-table .total-row td {
+      padding-top: 10px;
+      border-top: 2px solid #111820;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111820;
+    }
+
+    /* Payment */
+    .inv-payment {
+      background: #F9FAFB;
+      padding: 20px 36px;
+      border-top: 1px solid #E5E7EB;
+    }
+    .inv-payment-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9CA3AF;
+      margin-bottom: 10px;
+    }
+    .inv-payment-methods {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .inv-method {
+      font-size: 13px;
+      color: #374151;
+    }
+    .inv-method strong { color: #111820; }
+
+    /* Footer */
+    .inv-footer {
+      padding: 20px 36px;
+      border-top: 1px solid #E5E7EB;
+      font-size: 11px;
+      color: #9CA3AF;
+      text-align: center;
+      line-height: 1.7;
+    }
+    .inv-footer a { color: #0F4C75; text-decoration: none; }
+
+    /* QR Placeholder */
+    .qr-placeholder {
+      width: 64px;
+      height: 64px;
+      background: #E5E7EB;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .inv-header, .inv-info, .inv-table-wrap, .inv-summary, .inv-payment, .inv-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .inv-info { flex-direction: column; gap: 16px; }
+      .inv-header { flex-direction: column; gap: 12px; }
+      .inv-title-block { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="invoice-page">
+
+  <!-- Header -->
+  <div class="inv-header">
+    <div>
+      <div class="inv-brand">HIRECAR</div>
+      <div class="inv-brand-sub">Financial Services for Rideshare Operators</div>
+    </div>
+    <div class="inv-title-block">
+      <div class="inv-title">Invoice</div>
+      <div class="inv-number">#[INV-2026-XXXXX]</div>
+    </div>
+  </div>
+
+  <!-- Info Grid -->
+  <div class="inv-info">
+    <div class="inv-info-block">
+      <div class="inv-info-label">From</div>
+      <p><strong>HIRECAR</strong></p>
+      <p>Los Angeles, CA</p>
+      <p>support@hirecar.la</p>
+      <p>(213) 768-6311</p>
+    </div>
+    <div class="inv-info-block">
+      <div class="inv-info-label">Bill To</div>
+      <p><strong>[Member Name]</strong></p>
+      <p>[Member Address]</p>
+      <p>[Member Email]</p>
+    </div>
+    <div class="inv-info-block">
+      <div class="inv-info-label">Details</div>
+      <p><strong>Invoice Date:</strong> [MM/DD/YYYY]</p>
+      <p><strong>Due Date:</strong> [MM/DD/YYYY]</p>
+      <p><strong>Member ID:</strong> [HC-2026-XXXXX]</p>
+    </div>
+  </div>
+
+  <!-- Line Items -->
+  <div class="inv-table-wrap">
+    <table class="inv-table">
+      <thead>
+        <tr>
+          <th style="width:5%;">#</th>
+          <th style="width:35%;">Service</th>
+          <th style="width:25%;">Description</th>
+          <th style="width:10%;">Qty</th>
+          <th style="width:12%;">Rate</th>
+          <th style="width:13%;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>[Service Name]<br><span class="item-desc">[Package tier or service detail]</span></td>
+          <td>[Brief description]</td>
+          <td>1</td>
+          <td>$[0.00]</td>
+          <td>$[0.00]</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>[Service Name]</td>
+          <td>[Brief description]</td>
+          <td>1</td>
+          <td>$[0.00]</td>
+          <td>$[0.00]</td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div class="inv-summary">
+    <table class="inv-summary-table">
+      <tr>
+        <td>Subtotal</td>
+        <td>$[0.00]</td>
+      </tr>
+      <tr>
+        <td>Tax</td>
+        <td>$0.00</td>
+      </tr>
+      <tr class="total-row">
+        <td>Total Due</td>
+        <td>$[0.00]</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Payment Methods -->
+  <div class="inv-payment">
+    <div class="inv-payment-title">Payment Methods</div>
+    <div class="inv-payment-methods">
+      <div class="inv-method"><strong>Stripe:</strong> Credit / Debit Card</div>
+      <div class="inv-method"><strong>PayPal:</strong> paypal.me/hirecar</div>
+      <div class="inv-method"><strong>CashApp:</strong> $HIRECAR</div>
+      <div class="qr-placeholder">QR Code</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="inv-footer">
+    Payment due within <strong style="color:#111820;">7 days</strong> of invoice date. Late fees may apply after 15 days.<br>
+    Questions? Contact <a href="mailto:support@hirecar.la">support@hirecar.la</a> or call <a href="tel:+12137686311">(213) 768-6311</a>.<br><br>
+    Thank you for trusting HIRECAR.<br>
+    <span style="color:#C9920A;">&mdash;</span>
+  </div>
+
+</div>
+
+</body>
+</html>

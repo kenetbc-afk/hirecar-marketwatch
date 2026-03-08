@@ -1,0 +1,31 @@
+name: HIRECAR Health Check
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run health check
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          chmod +x HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/health-check.sh
+          bash HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/health-check.sh
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"🔴 HIRECAR Health Check FAILED — see GitHub Actions for details"}' \
+              "$SLACK_WEBHOOK_URL"
+          fi

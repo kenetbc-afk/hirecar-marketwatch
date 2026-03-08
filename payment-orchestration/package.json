@@ -1,0 +1,27 @@
+{
+  "name": "hirecar-payment-api",
+  "version": "1.1.0",
+  "description": "HIRECAR Payment Orchestration API — ARCH-HC-0302 v1.1.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "db:migrate": "wrangler d1 execute hirecar-db --file=d1-migration-001-payment-orchestration.sql && wrangler d1 execute hirecar-db --file=d1-migration-002-sms-audit.sql",
+    "db:migrate:local": "wrangler d1 execute hirecar-db --local --file=d1-migration-001-payment-orchestration.sql && wrangler d1 execute hirecar-db --local --file=d1-migration-002-sms-audit.sql",
+    "tail": "wrangler tail",
+    "test": "echo 'No test framework configured yet'"
+  },
+  "keywords": ["hirecar", "payment", "cloudflare-workers", "d1"],
+  "author": "HIRECAR Engineering",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

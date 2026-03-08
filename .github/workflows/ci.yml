@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Type check
+        run: npm run type-check --if-present
+
+      - name: Test
+        run: npm run test --if-present -- --coverage
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.node-version }}
+          path: coverage/
+          retention-days: 7
+
+  html-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML files
+        run: |
+          echo "=== Checking HTML file sizes ==="
+          for f in $(find . -name "*.html" -not -path "./.git/*" -not -path "./node_modules/*"); do
+            size=$(stat -c%s "$f" 2>/dev/null || stat -f%z "$f" 2>/dev/null)
+            echo "$f: ${size} bytes"
+            if [ "$size" -gt 5000000 ]; then
+              echo "WARNING: $f exceeds 5MB"
+            fi
+          done
+
+      - name: Check for broken internal links
+        run: |
+          echo "=== Checking internal links ==="
+          python3 -c "
+          import os, re
+          html_files = []
+          for root, dirs, files in os.walk('.'):
+              if '.git' in root or 'node_modules' in root:
+                  continue
+              for f in files:
+                  if f.endswith('.html'):
+                      html_files.append(os.path.join(root, f))
+          print(f'Found {len(html_files)} HTML files')
+          for hf in html_files:
+              print(f'  {hf}')
+          "

@@ -1,0 +1,194 @@
+{
+  "templateId": "hirecar-credit-dispute-pass",
+  "name": "HIRECAR Credit Dispute Access Pass",
+  "description": "Digital wallet pass granting access to personalized Credit Dispute Playbook",
+  "passType": "generic",
+  "organizationName": "HIRECAR",
+
+  "design": {
+    "colors": {
+      "backgroundColor": "#111820",
+      "foregroundColor": "#FFFFFF",
+      "labelColor": "#C9920A"
+    },
+    "images": {
+      "logo": {
+        "note": "Upload hirecar-logo-light.png (160x50 @1x, 320x100 @2x, 480x150 @3x)",
+        "status": "PENDING_UPLOAD"
+      },
+      "icon": {
+        "note": "Upload hirecar-icon.png (29x29 @1x, 58x58 @2x, 87x87 @3x)",
+        "status": "PENDING_UPLOAD"
+      },
+      "strip": {
+        "note": "Optional gold accent strip (375x123 @1x, 750x246 @2x)",
+        "status": "OPTIONAL"
+      }
+    },
+    "barcode": {
+      "format": "PKBarcodeFormatQR",
+      "messageEncoding": "iso-8859-1",
+      "message": "{{playbook_url}}?pin={{access_pin}}"
+    }
+  },
+
+  "fields": {
+    "headerFields": [
+      {
+        "key": "dispute_status",
+        "label": "STATUS",
+        "value": "{{dispute_status}}",
+        "changeMessage": "Your dispute status changed to %@",
+        "defaultValue": "ACTIVE"
+      }
+    ],
+    "primaryFields": [
+      {
+        "key": "client_name",
+        "label": "MEMBER",
+        "value": "{{client_name}}"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "dispute_id",
+        "label": "DISPUTE ID",
+        "value": "{{dispute_id}}"
+      },
+      {
+        "key": "membership_tier",
+        "label": "TIER",
+        "value": "{{membership_tier}}",
+        "defaultValue": "Standard"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "score_range",
+        "label": "CREDIT RANGE",
+        "value": "{{score_range}}"
+      },
+      {
+        "key": "dispute_date",
+        "label": "FILED",
+        "value": "{{dispute_date}}"
+      },
+      {
+        "key": "advisor_name",
+        "label": "ADVISOR",
+        "value": "{{advisor_name}}"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "playbook_url",
+        "label": "Your Credit Dispute Playbook",
+        "value": "{{playbook_url}}",
+        "attributedValue": "<a href='{{playbook_url}}'>Open Playbook</a>"
+      },
+      {
+        "key": "access_pin",
+        "label": "Playbook Access PIN",
+        "value": "{{access_pin}}"
+      },
+      {
+        "key": "negative_items",
+        "label": "Items Under Dispute",
+        "value": "{{negative_items}}"
+      },
+      {
+        "key": "next_steps",
+        "label": "Next Steps",
+        "value": "Check your playbook for bureau response deadlines and follow-up actions."
+      },
+      {
+        "key": "support_contact",
+        "label": "Support",
+        "value": "HIRECAR Member Services\nsupport@hirecar.la\nhirecar.la/support"
+      },
+      {
+        "key": "legal_notice",
+        "label": "Notice",
+        "value": "This pass provides access to educational credit repair resources. HIRECAR is not a credit repair organization. Consult a certified credit counselor for personalized advice. HIRECAR, LLC dba HIRECREDIT."
+      }
+    ]
+  },
+
+  "updatableFields": [
+    "dispute_status",
+    "score_range",
+    "membership_tier",
+    "negative_items",
+    "next_steps"
+  ],
+
+  "pushNotifications": {
+    "enabled": true,
+    "events": {
+      "status_change": "Your HIRECAR dispute status has been updated. Open your pass to view.",
+      "score_update": "Your credit range has been updated! Check your pass for details.",
+      "tier_upgrade": "Congratulations! Your HIRECAR membership tier has been upgraded."
+    }
+  },
+
+  "relevantLocations": [
+    {
+      "latitude": 34.0522,
+      "longitude": -118.2437,
+      "relevantText": "Near HIRECAR Los Angeles — Visit us for in-person credit consultation"
+    },
+    {
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "relevantText": "Near HIRECAR San Francisco — Visit us for in-person credit consultation"
+    }
+  ],
+
+  "api": {
+    "endpoint": "https://api.pub1.passkit.io",
+    "auth": "Bearer {{PASSKIT_API_KEY}}",
+    "note": "Store API key as environment variable PASSKIT_API_KEY. NEVER hardcode in production.",
+    "createPass": {
+      "method": "POST",
+      "path": "/members/member",
+      "contentType": "application/json",
+      "examplePayload": {
+        "tierId": "{{HIRECAR_TIER_ID}}",
+        "memberId": "{{dispute_id}}",
+        "person": {
+          "displayName": "{{client_name}}",
+          "emailAddress": "{{client_email}}"
+        },
+        "metaData": {
+          "dispute_id": "{{dispute_id}}",
+          "playbook_url": "{{playbook_url}}",
+          "access_pin": "{{access_pin}}",
+          "score_range": "{{score_range}}",
+          "dispute_status": "ACTIVE",
+          "advisor_name": "{{advisor_name}}",
+          "membership_tier": "{{membership_tier}}",
+          "negative_items": "{{negative_items}}",
+          "dispute_date": "{{dispute_date}}"
+        }
+      }
+    },
+    "updatePass": {
+      "method": "PUT",
+      "path": "/members/member",
+      "note": "Use same payload structure with updated fields"
+    },
+    "getPassUrl": {
+      "method": "GET",
+      "path": "/members/member/{{memberId}}",
+      "responseField": "passUrl",
+      "note": "Returns the wallet download URL for SMS delivery"
+    }
+  },
+
+  "security": {
+    "pinGeneration": "4-digit random numeric, generated per client",
+    "urlProtection": "Non-guessable UUID-based playbook URLs",
+    "deviceAuth": "Back fields require device authentication (Face ID / Touch ID / PIN)",
+    "transport": "HTTPS / TLS 1.3 minimum"
+  }
+}

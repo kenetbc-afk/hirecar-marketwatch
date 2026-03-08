@@ -1,0 +1,113 @@
+{
+  "contextId": "CTX-HC-0001",
+  "version": "1.1.0",
+  "name": "HC Format Naming Convention and Document Control",
+  "organization": "HIRECAR",
+  "confidentiality": "INTERNAL",
+  "createdDate": "2026-03-04T03:11:40.441Z",
+  "description": "Comprehensive document classification, naming, and control system for HIRECAR enterprise operations",
+  "documentClasses": {
+    "GOV": {
+      "name": "Governance",
+      "priority": "P1",
+      "requiresApproval": true,
+      "approvalLevel": "Director",
+      "description": "Governance documents, policies, standards"
+    },
+    "PLN": {
+      "name": "Plan",
+      "priority": "P1",
+      "requiresApproval": true,
+      "approvalLevel": "Director",
+      "description": "Strategic and tactical plans"
+    },
+    "RPT": {
+      "name": "Report",
+      "priority": "P1",
+      "requiresApproval": true,
+      "approvalLevel": "Director",
+      "description": "Analysis, findings, and status reports"
+    },
+    "ARC": {
+      "name": "Architecture",
+      "priority": "P1",
+      "requiresApproval": true,
+      "approvalLevel": "Director",
+      "description": "Technical architecture and system design"
+    },
+    "WPK": {
+      "name": "Workspace Package",
+      "priority": "P2",
+      "requiresApproval": true,
+      "approvalLevel": "Manager",
+      "description": "Curated packages for specific workspaces"
+    },
+    "BDL": {
+      "name": "Bundle",
+      "priority": "P2",
+      "requiresApproval": true,
+      "approvalLevel": "Manager",
+      "description": "Collections of related assets and configurations"
+    },
+    "CFG": {
+      "name": "Configuration",
+      "priority": "P2",
+      "requiresApproval": true,
+      "approvalLevel": "Manager",
+      "description": "System and application configurations"
+    },
+    "SCN": {
+      "name": "Scenario",
+      "priority": "P2",
+      "requiresApproval": true,
+      "approvalLevel": "Manager",
+      "description": "Use case and integration scenarios"
+    },
+    "SKL": {
+      "name": "Skill",
+      "priority": "P3",
+      "requiresApproval": false,
+      "approvalLevel": "None",
+      "description": "Skills, prompts, and agent instructions"
+    },
+    "TMP": {
+      "name": "Template",
+      "priority": "P3",
+      "requiresApproval": false,
+      "approvalLevel": "None",
+      "description": "Email, SMS, and document templates"
+    },
+    "REF": {
+      "name": "Reference",
+      "priority": "P3",
+      "requiresApproval": false,
+      "approvalLevel": "None",
+      "description": "Reference materials and documentation"
+    },
+    "BOT": {
+      "name": "Bot/Automation",
+      "priority": "P2",
+      "requiresApproval": true,
+      "approvalLevel": "Manager",
+      "description": "Bot skills and automation workflows"
+    }
+  },
+  "namingConvention": {
+    "pattern": "{CLASS}-HC-{SEQ}_{ShortTitle}_v{version}.{ext}",
+    "example": "PLN-HC-0001_HIRECARPlan_v1.0.0.docx",
+    "components": {
+      "CLASS": "Two-letter document class code",
+      "HC": "Literal HC identifier",
+      "SEQ": "Four-digit zero-padded sequence number",
+      "ShortTitle": "CamelCase title (no spaces)",
+      "version": "Semantic version (v1.0.0)",
+      "ext": "File extension"
+    }
+  },
+  "workspaceAssignment": {
+    "WS1": "Infrastructure and Payments",
+    "WS2": "Bot Building and Enrollment",
+    "WS3": "Content and Playbooks",
+    "WS4": "Execution and Monitoring"
+  }
+}

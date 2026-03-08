@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HIRECAR: Engineering consent and transparency for LA rideshare operators. Recovery services, credit repair, and market intelligence.">
+    <meta name="theme-color" content="#0F4C75">
+    <title>HIRECAR - Rideshare Operator Services & Support</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            line-height: 1.5;
+            color: #111820;
+            background-color: #FAFAF8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #111820;
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
+        h4 { font-size: 1.25rem; }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 2.5rem 0;
+            }
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0F4C75;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #111820;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #C9920A;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FAFAF8 0%, #F0F4F8 100%);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(15, 76, 117, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            color: #111820;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #444;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.875rem 2.5rem;
+            background-color: #C9920A;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid #C9920A;
+            cursor: pointer;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .cta-button:hover {
+            background-color: #B07F08;
+            border-color: #B07F08;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(201, 146, 10, 0.2);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Service Cards Section */
+        .services {
+            background-color: white;
+        }
+
+        .services-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-title h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .services-title p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #F0F4F8;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #E8EEF4;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(15, 76, 117, 0.1);
+            background-color: white;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #0F4C75;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            min-height: 3rem;
+        }
+
+        .service-card a {
+            color: #C9920A;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        .service-card a:hover {
+            color: #B07F08;
+            text-decoration: underline;
+        }
+
+        /* Social Proof Section */
+        .testimonials {
+            background-color: #F0F4F8;
+        }
+
+        .testimonials-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-title h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #C9920A;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #0F4C75;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-role {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .pilot-badge {
+            display: inline-block;
+            background-color: #E8F0FA;
+            color: #0F4C75;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: white;
+        }
+
+        .how-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .how-title h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 3.5rem;
+            left: 110%;
+            width: 20%;
+            height: 2px;
+            background-color: #E0E0E0;
+            display: none;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .steps-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .step::after {
+                display: block;
+            }
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #0F4C75;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step h4 {
+            margin-bottom: 0.75rem;
+            color: #0F4C75;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Banner Section */
+        .cta-banner {
+            background: linear-gradient(135deg, #0F4C75 0%, #1A5FA0 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 146, 10, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-banner h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        .cta-button-white {
+            background-color: #C9920A;
+            color: white;
+            padding: 0.875rem 2.5rem;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid #C9920A;
+            cursor: pointer;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .cta-button-white:hover {
+            background-color: white;
+            color: #0F4C75;
+            border-color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111820;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #C9920A;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #BDBDBD;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #C9920A;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #C9920A;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo-text {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(201, 146, 10, 0.2);
+            border-radius: 4px;
+            color: #C9920A;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: #C9920A;
+            color: white;
+        }
+
+        .footer-divider {
+            border-top: 1px solid #333;
+            margin: 2rem 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-legal a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #C9920A;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-legal {
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero::before {
+                width: 300px;
+                height: 300px;
+                right: -50px;
+                top: -100px;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step::after {
+                display: none !important;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">HIRECAR</a>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#how">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="/enrollment-form.html" class="cta-button">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Engineering consent, not just delivering services.</h1>
+                <p class="hero-subtitle">
+                    Rideshare operators in Los Angeles deserve transparency, support, and control. HIRECAR delivers comprehensive services designed to help you recover from incidents, rebuild your credit, understand market dynamics, and manage your fleet with confidence.
+                </p>
+                <a href="/enrollment-form.html" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section reveal">
+        <div class="container">
+            <div class="services-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions designed for rideshare operators</p>
+            </div>
+            <div class="services-grid">
+                <!-- PIFR Card -->
+                <div class="service-card reveal">
+                    <span class="service-icon">🛡️</span>
+                    <h3>PIFR</h3>
+                    <p>Post-Incident Recovery services guide you through vehicle repairs, insurance claims, and operational continuity following accidents or incidents.</p>
+                    <a href="#learn-more">Learn More →</a>
+                </div>
+
+                <!-- HIRECREDIT Card -->
+                <div class="service-card reveal">
+                    <span class="service-icon">💳</span>
+                    <h3>HIRECREDIT</h3>
+                    <p>Comprehensive credit repair and financial wellness programs to restore and strengthen your credit profile for better opportunities.</p>
+                    <a href="#learn-more">Learn More →</a>
+                </div>
+
+                <!-- MarketWatch Card -->
+                <div class="service-card reveal">
+                    <span class="service-icon">📊</span>
+                    <h3>MarketWatch</h3>
+                    <p>Real-time market intelligence and analytics to help you optimize earnings, understand demand patterns, and make data-driven operational decisions.</p>
+                    <a href="#learn-more">Learn More →</a>
+                </div>
+
+                <!-- Fleet Services Card -->
+                <div class="service-card reveal">
+                    <span class="service-icon">🚗</span>
+                    <h3>Fleet Services</h3>
+                    <p>Vehicle management solutions including maintenance tracking, compliance monitoring, and fleet optimization to maximize uptime and efficiency.</p>
+                    <a href="#learn-more">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section reveal">
+        <div class="container">
+            <div class="testimonials-title">
+                <h2>Community Voices</h2>
+                <p>Real stories from rideshare operators we're helping</p>
+            </div>
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-text">
+                        "After my accident, I was overwhelmed. HIRECAR's PIFR team handled everything—insurance, repairs, even helped me stay online. I was back earning within days."
+                    </p>
+                    <div class="testimonial-author">Marcus T.</div>
+                    <div class="testimonial-role">Rideshare Operator, Los Angeles</div>
+                    <span class="pilot-badge">Pilot Program</span>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-text">
+                        "The credit repair support was exactly what I needed. Within months, my score improved and I qualified for better financing. HIRECAR actually cares about your success."
+                    </p>
+                    <div class="testimonial-author">Jasmine L.</div>
+                    <div class="testimonial-role">Independent Driver, Los Angeles</div>
+                    <span class="pilot-badge">Pilot Program</span>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-text">
+                        "MarketWatch gives me insights I never had before. I can see surge patterns and demand trends in real-time, which helps me work smarter and earn more."
+                    </p>
+                    <div class="testimonial-author">David P.</div>
+                    <div class="testimonial-role">Fleet Operator, Los Angeles</div>
+                    <span class="pilot-badge">Pilot Program</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="how-it-works section reveal">
+        <div class="container">
+            <div class="how-title">
+                <h2>How It Works</h2>
+                <p>Your journey to success in four simple steps</p>
+            </div>
+            <div class="steps-container">
+                <div class="step reveal">
+                    <div class="step-number">1</div>
+                    <h4>Enroll</h4>
+                    <p>Submit your information and tell us about your situation. No jargon, just straightforward intake.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">2</div>
+                    <h4>Get Assessed</h4>
+                    <p>Receive a personalized assessment covering your recovery needs, financial goals, and operational challenges.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">3</div>
+                    <h4>Follow Your Playbook</h4>
+                    <p>Execute step-by-step guidance tailored to your situation. Access resources, templates, and expert support.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">4</div>
+                    <h4>Level Up</h4>
+                    <p>Achieve measurable progress. Build resilience, improve financials, and optimize operations long-term.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner Section -->
+    <section class="cta-banner reveal">
+        <div class="container">
+            <div class="cta-banner-content">
+                <h2>Ready to take control? Start your journey today.</h2>
+                <a href="/enrollment-form.html" class="cta-button-white">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-section">
+                    <div class="footer-logo">HIRECAR</div>
+                    <div class="footer-logo-text">
+                        Engineering consent and transparency for rideshare operators across Los Angeles.
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://facebook.com/hirecar" title="Facebook" aria-label="Facebook">f</a>
+                        <a href="https://x.com/hirecar" title="Twitter" aria-label="Twitter">𝕏</a>
+                        <a href="https://linkedin.com/company/hirecar" title="LinkedIn" aria-label="LinkedIn">in</a>
+                        <a href="https://instagram.com/hirecar" title="Instagram" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">PIFR</a></li>
+                        <li><a href="#services">HIRECREDIT</a></li>
+                        <li><a href="#services">MarketWatch</a></li>
+                        <li><a href="#services">Fleet Services</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Section -->
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="/enrollment-form.html">Get Started</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#status">System Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2026 HIRECAR, LLC dba HIRECREDIT. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#accessibility">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript for Scroll Animations -->
+    <script>
+        // Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all reveal elements
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Performance: Preload critical resources
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = '/enrollment-form.html';
+                document.head.appendChild(link);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+{
+  "_deprecated": "DEPRECATED as of 2026-03-04. Enrollment chain now runs as Cloudflare Worker at api.hirecar.la/enroll. This scenario is retained for historical reference only. See HC-CFG-014-A for current implementation.",
+  "name": "HIRECAR Credit Dispute → Playbook → Pass → Notify (DEPRECATED)",
+  "description": "HC-SCN-001 [DEPRECATED]: Automates the full credit dispute enrollment chain. Triggered by Zoho CRM webhook when a new credit dispute is created. DEPRECATED: Use Cloudflare Worker at api.hirecar.la/enroll instead.",
+  "teamId": 1939114,
+  "scheduling": {
+    "type": "indefinitely",
+    "interval": 900
+  },
+  "blueprint": {
+    "name": "Credit Dispute Enrollment Chain",
+    "flow": [
+      {
+        "id": 1,
+        "module": "gateway:CustomWebHook",
+        "version": 1,
+        "metadata": {
+          "name": "Zoho CRM Dispute Webhook",
+          "note": "Receives new credit dispute data from Zoho CRM workflow rule"
+        },
+        "parameters": {
+          "hook": "{{WEBHOOK_ID}}",
+          "maxResults": 1
+        },
+        "expectedPayload": {
+          "event": "credit_dispute_created",
+          "client_name": "string",
+          "client_email": "string",
+          "client_phone": "string (E.164 format: +12135551234)",
+          "dispute_id": "string (DSP-2026-XXXX)",
+          "score_range": "string (e.g. 580-669)",
+          "negative_items": "string (e.g. 3 collections, 1 late payment)",
+          "advisor_name": "string",
+          "membership_tier": "string (Standard|Operator|First Class|Elite)",
+          "dispute_date": "string (YYYY-MM-DD)"
+        }
+      },
+      {
+        "id": 2,
+        "module": "util:SetVariable",
+        "version": 1,
+        "metadata": {
+          "name": "Generate Access PIN",
+          "note": "Creates 4-digit random PIN for playbook access"
+        },
+        "mapper": {
+          "name": "access_pin",
+          "value": "{{floor(random * 9000 + 1000)}}"
+        }
+      },
+      {
+        "id": 3,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Create Bit.ai Playbook",
+          "note": "Creates a new document from template with client-specific merge variables"
+        },
+        "parameters": {},
+        "mapper": {
+          "url": "https://api.bit.ai/v1/documents",
+          "method": "POST",
+          "headers": [
+            { "name": "Authorization", "value": "Bearer {{BITAI_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "title": "Credit Dispute Playbook — {{1.client_name}} ({{1.dispute_id}})",
+            "content": "{{BITAI_TEMPLATE_CONTENT_WITH_MERGE_VARS}}",
+            "workspaceId": "{{BITAI_WORKSPACE_ID}}",
+            "folderId": "{{BITAI_PLAYBOOKS_FOLDER_ID}}"
+          },
+          "note": "Template content uses HTML from credit-dispute-playbook-template.html with merge variables replaced"
+        }
+      },
+      {
+        "id": 4,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Set Playbook Password",
+          "note": "Password-protects the Bit.ai document with the client's 4-digit PIN"
+        },
+        "mapper": {
+          "url": "https://api.bit.ai/v1/documents/{{3.id}}/password",
+          "method": "PUT",
+          "headers": [
+            { "name": "Authorization", "value": "Bearer {{BITAI_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "password": "{{2.access_pin}}"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Create PassKit Access Pass",
+          "note": "Creates digital wallet pass with QR code linking to the playbook"
+        },
+        "mapper": {
+          "url": "https://api.pub1.passkit.io/members/member",
+          "method": "POST",
+          "headers": [
+            { "name": "Authorization", "value": "Bearer {{PASSKIT_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "tierId": "{{PASSKIT_TIER_ID}}",
+            "memberId": "HC-{{1.dispute_id}}",
+            "person": {
+              "displayName": "{{1.client_name}}",
+              "emailAddress": "{{1.client_email}}"
+            },
+            "metaData": {
+              "dispute_id": "{{1.dispute_id}}",
+              "playbook_url": "{{3.shareUrl}}",
+              "access_pin": "{{2.access_pin}}",
+              "score_range": "{{1.score_range}}",
+              "dispute_status": "ACTIVE",
+              "advisor_name": "{{1.advisor_name}}",
+              "membership_tier": "{{1.membership_tier}}",
+              "negative_items": "{{1.negative_items}}",
+              "dispute_date": "{{1.dispute_date}}"
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Send Welcome Email (SendGrid)",
+          "note": "Sends dynamic template email with pass URL, PIN, and dispute details"
+        },
+        "mapper": {
+          "url": "https://api.sendgrid.com/v3/mail/send",
+          "method": "POST",
+          "headers": [
+            { "name": "Authorization", "value": "Bearer {{SENDGRID_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "from": { "email": "noreply@hirecar.la", "name": "HIRECAR" },
+            "personalizations": [{
+              "to": [{ "email": "{{1.client_email}}", "name": "{{1.client_name}}" }],
+              "dynamic_template_data": {
+                "client_name": "{{1.client_name}}",
+                "dispute_id": "{{1.dispute_id}}",
+                "dispute_date": "{{1.dispute_date}}",
+                "score_range": "{{1.score_range}}",
+                "negative_items": "{{1.negative_items}}",
+                "advisor_name": "{{1.advisor_name}}",
+                "membership_tier": "{{1.membership_tier}}",
+                "access_pin": "{{2.access_pin}}",
+                "pass_url": "{{5.passUrl}}"
+              }
+            }],
+            "template_id": "{{SENDGRID_TEMPLATE_ID}}"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Send SMS (Twilio)",
+          "note": "Sends pass download link and PIN via SMS"
+        },
+        "mapper": {
+          "url": "https://api.twilio.com/2010-04-01/Accounts/{{TWILIO_ACCOUNT_SID}}/Messages.json",
+          "method": "POST",
+          "headers": [
+            { "name": "Authorization", "value": "Basic {{base64(TWILIO_ACCOUNT_SID:TWILIO_AUTH_TOKEN)}}" },
+            { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
+          ],
+          "body": "To={{1.client_phone}}&From={{TWILIO_FROM_NUMBER}}&Body=HIRECAR: Your Credit Dispute Playbook is ready! Add your Access Pass: {{5.passUrl}} PIN: {{2.access_pin}} Reply STOP to opt out"
+        }
+      }
+    ]
+  },
+  "operationBudget": {
+    "opsPerExecution": 7,
+    "monthlyLimit": 1000,
+    "maxExecutionsPerMonth": 142,
+    "note": "Free plan: 1,000 ops/month. Each dispute enrollment uses 7 ops. Reserve ~50 ops for WS4 monitoring scenario."
+  },
+  "setupInstructions": {
+    "step1": "Create webhook in Make.com → copy webhook URL",
+    "step2": "Add webhook URL to Zoho CRM Workflow Rule (trigger: new Credit Dispute record)",
+    "step3": "Replace placeholder variables: BITAI_API_KEY, BITAI_WORKSPACE_ID, BITAI_PLAYBOOKS_FOLDER_ID, PASSKIT_API_KEY, PASSKIT_TIER_ID, SENDGRID_API_KEY, SENDGRID_TEMPLATE_ID, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER",
+    "step4": "Upload SendGrid dynamic template (sendgrid-welcome-template.html)",
+    "step5": "Test with sample webhook payload",
+    "step6": "Activate scenario"
+  }
+}

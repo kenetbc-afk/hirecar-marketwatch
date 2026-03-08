@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRECAR Membership — Choose Your Lane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
+       HIRECAR Design Tokens
+       ═══════════════════════════════════════════════ */
+    :root {
+      --ink: #111820;
+      --cta-gold: #C9920A;
+      --cta-gold-hover: #A87808;
+      --live-red: #C0392B;
+      --member-blue: #0F4C75;
+      --bg-light: #F5F5F5;
+      --bg-dark: #0A0F14;
+      --border: #CCCCCC;
+      --success: #27AE60;
+      --warning: #F39C12;
+      --white: #FFFFFF;
+      --text-muted: #6B7280;
+      --card-shadow: 0 4px 24px rgba(17, 24, 32, 0.08);
+      --card-shadow-hover: 0 12px 40px rgba(17, 24, 32, 0.15);
+      --gold-glow: 0 0 30px rgba(201, 146, 10, 0.15);
+
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Reset & Base
+       ═══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--bg-light);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Hero Section
+       ═══════════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #1A2332 50%, var(--member-blue) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(201, 146, 10, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 30%, rgba(15, 76, 117, 0.08) 0%, transparent 50%);
+      animation: subtleRotate 60s linear infinite;
+    }
+
+    @keyframes subtleRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cta-gold);
+      border: 1px solid rgba(201, 146, 10, 0.3);
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span { color: var(--cta-gold); }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Billing Toggle
+       ═══════════════════════════════════════════════ */
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 40px auto 0;
+    }
+
+    .toggle-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .toggle-label.active { color: var(--white); }
+
+    .toggle-track {
+      width: 52px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle-track.annual { background: rgba(201, 146, 10, 0.3); }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-track.annual .toggle-thumb { transform: translateX(24px); }
+
+    .save-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--cta-gold);
+      background: rgba(201, 146, 10, 0.12);
+      padding: 3px 10px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.3s;
+    }
+
+    .save-badge.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════════
+       Pricing Grid
+       ═══════════════════════════════════════════════ */
+    .pricing-section {
+      max-width: 1200px;
+      margin: -30px auto 0;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       Card Base
+       ═══════════════════════════════════════════════ */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 28px 32px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    /* Popular badge */
+    .card.popular {
+      border-color: var(--cta-gold);
+      box-shadow: var(--card-shadow), var(--gold-glow);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cta-gold);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 5px 18px;
+      border-radius: 20px;
+    }
+
+    .card-tier {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-name {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      min-height: 40px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Pricing Display
+       ═══════════════════════════════════════════════ */
+    .price-block { margin-bottom: 24px; }
+
+    .price-amount {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .price-amount .dollar { font-size: 1.6rem; vertical-align: top; position: relative; top: 6px; }
+
+    .price-cycle {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .price-effective {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cta-gold);
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Features List
+       ═══════════════════════════════════════════════ */
+    .features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .features li {
+      font-size: 0.88rem;
+      color: var(--ink);
+      padding: 7px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .features li::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .features li.highlight::before { color: var(--cta-gold); }
+
+    /* ═══════════════════════════════════════════════
+       CTA Button
+       ═══════════════════════════════════════════════ */
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .cta-btn.primary {
+      background: var(--cta-gold);
+      color: var(--white);
+    }
+
+    .cta-btn.primary:hover {
+      background: var(--cta-gold-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(201, 146, 10, 0.3);
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--border);
+    }
+
+    .cta-btn.secondary:hover {
+      border-color: var(--ink);
+      background: rgba(17, 24, 32, 0.03);
+    }
+
+    .cta-btn.elite {
+      background: var(--ink);
+      color: var(--cta-gold);
+    }
+
+    .cta-btn.elite:hover {
+      background: #1A2332;
+      box-shadow: 0 4px 16px rgba(17, 24, 32, 0.25);
+    }
+
+    /* ═══════════════════════════════════════════════
+       FAQ / Trust Section
+       ═══════════════════════════════════════════════ */
+    .trust-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .trust-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--ink);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 20px 0;
+    }
+
+    .faq-q {
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--ink);
+    }
+
+    .faq-q::after {
+      content: '+';
+      font-size: 1.4rem;
+      color: var(--cta-gold);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 12px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Bottom CTA
+       ═══════════════════════════════════════════════ */
+    .bottom-cta {
+      background: var(--bg-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .bottom-cta h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .bottom-cta p {
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 28px;
+      font-size: 1rem;
+    }
+
+    .bottom-cta .cta-btn {
+      display: inline-block;
+      width: auto;
+      padding: 14px 40px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       Footer
+       ═══════════════════════════════════════════════ */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .footer a { color: var(--member-blue); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Membership Plans</div>
+      <h1>Choose Your <span>Lane</span></h1>
+      <p>From solo drivers to fleet operators — HIRECAR scales with your hustle. Every tier unlocks tools, bots, and support built for the road.</p>
+
+      <div class="toggle-wrap">
+        <span class="toggle-label active" id="lbl-monthly">Monthly</span>
+        <div class="toggle-track" id="billingToggle" onclick="toggleBilling()">
+          <div class="toggle-thumb"></div>
+        </div>
+        <span class="toggle-label" id="lbl-annual">Annual</span>
+        <span class="save-badge" id="saveBadge">Save 17%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PRICING CARDS ═══════════ -->
+  <section class="pricing-section">
+    <div class="pricing-grid">
+
+      <!-- STANDARD -->
+      <div class="card" id="card-standard">
+        <div class="card-tier">Tier 1</div>
+        <div class="card-name">Standard</div>
+        <div class="card-desc">Essential tools for solo drivers getting started</div>
+        <div class="price-block">
+          <div class="price-amount"><span class="dollar">$</span><span id="price-standard">29</span></div>
+          <div class="price-cycle" id="cycle-standard">every 2 months</div>
+          <div class="price-effective" id="eff-standard">~$14.50/mo</div>
+        </div>
+        <ul class="features">
+          <li>HIRE Bot #01 — Enrollment assistant</li>
+          <li>Credit monitoring dashboard</li>
+          <li>Basic service marketplace access</li>
+          <li>Community Discord channel</li>
+          <li>Monthly progress report</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_00w8wO3F95E7e720yZ43S0f" class="cta-btn secondary" id="btn-standard" target="_blank" rel="noopener">Get Started</a>
+      </div>
+
+      <!-- OPERATOR — Popular -->
+      <div class="card popular" id="card-operator">
+        <div class="popular-tag">Most Popular</div>
+        <div class="card-tier">Tier 2</div>
+        <div class="card-name">Operator</div>
+        <div class="card-desc">For active drivers scaling their operation</div>
+        <div class="price-block">
+          <div class="price-amount"><span class="dollar">$</span><span id="price-operator">59</span></div>
+          <div class="price-cycle" id="cycle-operator">every 2 months</div>
+          <div class="price-effective" id="eff-operator">~$29.50/mo</div>
+        </div>
+        <ul class="features">
+          <li class="highlight">Everything in Standard</li>
+          <li class="highlight">HIRE Bot Fleet — 5 specialized bots</li>
+          <li>Priority service provider matching</li>
+          <li>Dispute resolution support</li>
+          <li>Bi-weekly strategy calls</li>
+          <li>HBI score optimization tools</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_cNi5kCcbF2rV3soa9z43S0g" class="cta-btn primary" id="btn-operator" target="_blank" rel="noopener">Start Operating</a>
+      </div>
+
+      <!-- FIRST CLASS -->
+      <div class="card" id="card-firstclass">
+        <div class="card-tier">Tier 3</div>
+        <div class="card-name">First Class</div>
+        <div class="card-desc">Full fleet management & premium support</div>
+        <div class="price-block">
+          <div class="price-amount"><span class="dollar">$</span><span id="price-firstclass">99</span></div>
+          <div class="price-cycle" id="cycle-firstclass">per month</div>
+          <div class="price-effective" id="eff-firstclass"></div>
+        </div>
+        <ul class="features">
+          <li class="highlight">Everything in Operator</li>
+          <li class="highlight">Full 16-bot HIRE Fleet access</li>
+          <li>Multi-vehicle fleet dashboard</li>
+          <li>Dedicated account manager</li>
+          <li>Revenue lane optimization</li>
+          <li>Cash transaction protocol</li>
+          <li>White-label service listings</li>
+        </ul>
+        <a href="#contact-sales" class="cta-btn primary" id="btn-firstclass">Go First Class</a>
+      </div>
+
+      <!-- ELITE -->
+      <div class="card" id="card-elite">
+        <div class="card-tier">Tier 4</div>
+        <div class="card-name">Elite</div>
+        <div class="card-desc">Enterprise-level for fleet operators & partners</div>
+        <div class="price-block">
+          <div class="price-amount"><span class="dollar">$</span><span id="price-elite">199</span></div>
+          <div class="price-cycle" id="cycle-elite">per month</div>
+          <div class="price-effective" id="eff-elite"></div>
+        </div>
+        <ul class="features">
+          <li class="highlight">Everything in First Class</li>
+          <li class="highlight">All 20 HIRE Bots + Payment Layer</li>
+          <li>SeedXchange partnership access</li>
+          <li>Custom API integrations</li>
+          <li>Priority dispute arbitration</li>
+          <li>Quarterly business review</li>
+          <li>CREDITWITHKEN credit services</li>
+          <li>Crypto payment channels</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_5kQbJ05Nh0jN8MI1D343S0e" class="cta-btn elite" id="btn-elite" target="_blank" rel="noopener">Go Elite</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section class="trust-section">
+    <h2>Common Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What's bimonthly billing?</div>
+      <div class="faq-a">Standard and Operator plans bill every two months instead of monthly. This means fewer charges on your statement and a lower effective rate. You get the same continuous access — just billed less frequently.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I upgrade or downgrade anytime?</div>
+      <div class="faq-a">Yes. Tier changes take effect at your next billing cycle. Upgrades unlock new bots and features immediately. Downgrades preserve your data — you just lose access to premium features at renewal.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What are HIRE Bots?</div>
+      <div class="faq-a">HIRE Bots are AI-powered assistants that handle specific tasks across your operation — from enrollment and credit monitoring to payment processing and dispute resolution. Higher tiers unlock more bots covering more of your workflow.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is there a free trial?</div>
+      <div class="faq-a">We offer a 7-day money-back guarantee on all plans. Try any tier risk-free — if it's not the right fit, contact us within 7 days for a full refund. No questions asked.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?</div>
+      <div class="faq-a">We accept all major credit/debit cards through Stripe, PayPal, Cash App, and even cash payments through our Cash Transaction Protocol. Elite members also have access to crypto payment channels.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BOTTOM CTA ═══════════ -->
+  <section class="bottom-cta">
+    <h2>Ready to Hit the Road?</h2>
+    <p>Join HIRECAR today and let our bots handle the business while you drive.</p>
+    <a href="https://buy.stripe.com/test_cNi5kCcbF2rV3soa9z43S0g" class="cta-btn primary" target="_blank" rel="noopener">Start with Operator — $59/2mo</a>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <p>&copy; 2026 HIRECAR, LLC dba HIRECREDIT · All rights reserved</p>
+    <p style="margin-top: 6px;">
+      <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="mailto:support@hirecar.la">support@hirecar.la</a>
+    </p>
+  </footer>
+
+  <!-- ═══════════ SCRIPT ═══════════ -->
+  <script>
+    // ── Stripe Payment Links & Price Data ──
+    const PLANS = {
+      standard: {
+        bimonthly: { amount: 29, cycle: 'every 2 months', effective: '~$14.50/mo', link: 'https://buy.stripe.com/test_00w8wO3F95E7e720yZ43S0f' },
+        annual: null // No annual option for Standard
+      },
+      operator: {
+        bimonthly: { amount: 59, cycle: 'every 2 months', effective: '~$29.50/mo', link: 'https://buy.stripe.com/test_cNi5kCcbF2rV3soa9z43S0g' },
+        annual: null // No annual option for Operator
+      },
+      firstclass: {
+        monthly: { amount: 99, cycle: 'per month', effective: '', link: '#contact-sales' },
+        annual: { amount: 79, cycle: 'per month, billed annually', effective: '$948/year — save $240', link: '#contact-sales' }
+      },
+      elite: {
+        monthly: { amount: 199, cycle: 'per month', effective: '', link: 'https://buy.stripe.com/test_5kQbJ05Nh0jN8MI1D343S0e' },
+        annual: { amount: 166, cycle: 'per month, billed annually', effective: '$1,990/year — save $398', link: 'https://buy.stripe.com/test_5kQbJ05Nh0jN8MI1D343S0e' }
+      }
+    };
+
+    let isAnnual = false;
+
+    function toggleBilling() {
+      isAnnual = !isAnnual;
+      const track = document.getElementById('billingToggle');
+      const lblM = document.getElementById('lbl-monthly');
+      const lblA = document.getElementById('lbl-annual');
+      const badge = document.getElementById('saveBadge');
+
+      track.classList.toggle('annual', isAnnual);
+      lblM.classList.toggle('active', !isAnnual);
+      lblA.classList.toggle('active', isAnnual);
+      badge.classList.toggle('visible', isAnnual);
+
+      updatePrices();
+    }
+
+    function updatePrices() {
+      // Standard — bimonthly only (no annual)
+      // Stays the same regardless of toggle
+
+      // First Class
+      const fc = isAnnual ? PLANS.firstclass.annual : PLANS.firstclass.monthly;
+      document.getElementById('price-firstclass').textContent = fc.amount;
+      document.getElementById('cycle-firstclass').textContent = fc.cycle;
+      document.getElementById('eff-firstclass').textContent = fc.effective;
+      document.getElementById('btn-firstclass').href = fc.link;
+
+      // Elite
+      const el = isAnnual ? PLANS.elite.annual : PLANS.elite.monthly;
+      document.getElementById('price-elite').textContent = el.amount;
+      document.getElementById('cycle-elite').textContent = el.cycle;
+      document.getElementById('eff-elite').textContent = el.effective;
+      document.getElementById('btn-elite').href = el.link;
+    }
+
+    function toggleFaq(el) {
+      el.parentElement.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

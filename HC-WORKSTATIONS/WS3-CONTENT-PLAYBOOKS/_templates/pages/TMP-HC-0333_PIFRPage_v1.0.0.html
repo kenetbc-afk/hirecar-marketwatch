@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIFR — Post-Incident Financial Recovery | HIRECAR</title>
+  <meta name="description" content="When an accident derails your income, PIFR gets you back on the road. Insurance claims, income documentation, legal referrals, and emergency fleet access for rideshare operators.">
+  <meta name="keywords" content="rideshare accident recovery, uber driver accident help, lyft incident recovery, gig driver insurance claims, rideshare post-accident support">
+  <meta property="og:title" content="PIFR — Post-Incident Financial Recovery for Rideshare Operators">
+  <meta property="og:description" content="Insurance claims. Income documentation. Legal referrals. Emergency fleet access. Get back on the road.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hirecar.io/pifr">
+  <link rel="canonical" href="https://hirecar.io/pifr">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "PIFR — Post-Incident Financial Recovery",
+    "provider": {
+      "@type": "Organization",
+      "name": "HIRECAR",
+      "url": "https://hirecar.io"
+    },
+    "description": "Post-incident financial recovery service for rideshare operators — insurance claims, income documentation, legal referrals, emergency fleet access",
+    "areaServed": "US",
+    "serviceType": "Incident Recovery and Claims Assistance"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Nunito Sans', Arial, Helvetica, sans-serif;
+      color: #111820; background: #FFFFFF; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --ink: #111820; --gold: #C9920A; --gold-hover: #B07E08;
+      --blue: #0F4C75; --blue-hover: #0A3A5C;
+      --red: #DC2626; --red-light: #FEE2E2;
+      --gray-50: #F9FAFB; --gray-100: #F3F4F6; --gray-200: #E5E7EB;
+      --gray-400: #9CA3AF; --gray-500: #6B7280; --gray-700: #374151;
+      --white: #FFFFFF; --max-w: 1100px; --section-pad: 80px 24px;
+    }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink); border-bottom: 3px solid var(--gold);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+    }
+    .nav-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px; font-weight: bold; color: var(--gold); letter-spacing: 3px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--gray-400); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      padding: 8px 20px; background: var(--red); color: var(--white) !important;
+      border-radius: 5px; font-weight: 700 !important; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #B91C1C; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--gold); margin: 5px 0; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1A0A0A 0%, #2D1010 40%, var(--ink) 100%);
+      padding: 100px 24px 80px; text-align: center; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(220,38,38,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px;
+      background: rgba(220,38,38,0.15); color: var(--red);
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 44px; font-weight: bold; color: var(--white);
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero p { font-size: 18px; color: #B0BEC5; line-height: 1.7; margin-bottom: 36px; }
+    .hero-cta {
+      display: inline-block; padding: 16px 40px; background: var(--red);
+      color: var(--white); font-size: 16px; font-weight: 700;
+      border-radius: 6px; transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: #B91C1C; transform: translateY(-2px); }
+
+    /* Section shared */
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px; font-weight: bold; color: var(--ink); line-height: 1.2;
+    }
+
+    /* What PIFR Covers */
+    .covers { padding: var(--section-pad); background: var(--white); }
+    .covers-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .covers-card {
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-top: 3px solid var(--red); border-radius: 10px;
+      padding: 28px 20px; text-align: center;
+    }
+    .covers-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--red-light); color: var(--red);
+      font-size: 22px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .covers-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px; font-weight: bold; color: var(--ink); margin-bottom: 8px;
+    }
+    .covers-card p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+    /* EVD Callout */
+    .evd {
+      padding: 48px 24px;
+      background: var(--gray-50);
+    }
+    .evd-card {
+      max-width: var(--max-w); margin: 0 auto;
+      background: var(--white); border: 2px solid var(--gold);
+      border-radius: 12px; padding: 40px;
+      display: flex; gap: 32px; align-items: center;
+    }
+    .evd-badge {
+      flex-shrink: 0; width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(201,146,10,0.1); color: var(--gold);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px; font-weight: bold; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; line-height: 1.2;
+    }
+    .evd-content h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px; font-weight: bold; color: var(--ink); margin-bottom: 8px;
+    }
+    .evd-content p { font-size: 15px; color: var(--gray-700); line-height: 1.7; }
+
+    /* Process */
+    .process { padding: var(--section-pad); background: var(--white); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+    }
+    .process-step { text-align: center; position: relative; }
+    .process-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--red); color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px; font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .process-step h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px; font-weight: bold; color: var(--ink); margin-bottom: 6px;
+    }
+    .process-step p { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+    /* Tiers */
+    .tiers { padding: var(--section-pad); background: var(--gray-50); }
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .tier-card {
+      background: var(--white); border: 2px solid var(--gray-200);
+      border-radius: 10px; padding: 32px 24px; text-align: center;
+      transition: transform 0.2s;
+    }
+    .tier-card.featured { border-color: var(--red); position: relative; }
+    .tier-card.featured::after {
+      content: 'Full Coverage'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      padding: 4px 14px; background: var(--red); color: var(--white);
+      font-size: 11px; font-weight: 700; border-radius: 12px; text-transform: uppercase;
+    }
+    .tier-card:hover { transform: translateY(-4px); }
+    .tier-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px; font-weight: bold; color: var(--ink); margin-bottom: 12px;
+    }
+    .tier-desc {
+      font-size: 14px; color: var(--gray-500); margin-bottom: 20px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .tier-features {
+      list-style: none; text-align: left; margin-bottom: 24px;
+    }
+    .tier-features li {
+      font-size: 14px; color: var(--gray-700); padding: 5px 0 5px 22px; position: relative;
+    }
+    .tier-features li::before {
+      content: '\2713'; position: absolute; left: 0; color: #16A34A; font-weight: bold;
+    }
+    .tier-btn {
+      display: block; width: 100%; padding: 12px; border: 2px solid var(--blue);
+      color: var(--blue); background: transparent; font-size: 14px; font-weight: 700;
+      border-radius: 6px; cursor: pointer; transition: 0.2s;
+    }
+    .tier-btn:hover { background: var(--blue); color: var(--white); }
+    .tier-card.featured .tier-btn {
+      background: var(--red); border-color: var(--red); color: var(--white);
+    }
+    .tier-card.featured .tier-btn:hover { background: #B91C1C; border-color: #B91C1C; }
+
+    /* CTA */
+    .cta-section {
+      padding: 72px 24px;
+      background: linear-gradient(135deg, #1A0A0A 0%, var(--ink) 100%);
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px; font-weight: bold; color: var(--white); margin-bottom: 16px;
+    }
+    .cta-section p { font-size: 17px; color: #B0BEC5; margin-bottom: 32px; }
+    .cta-btn {
+      display: inline-block; padding: 16px 44px; background: var(--red);
+      color: var(--white); font-size: 16px; font-weight: 700; border-radius: 6px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { background: #B91C1C; transform: translateY(-2px); }
+
+    /* Footer */
+    .footer {
+      padding: 48px 24px 32px; background: var(--ink); border-top: 3px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+    }
+    .footer-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px; font-weight: bold; color: var(--gold); letter-spacing: 2px; margin-bottom: 12px;
+    }
+    .footer-desc { font-size: 13px; color: var(--gray-400); line-height: 1.7; margin-bottom: 16px; }
+    .footer-contact { font-size: 13px; color: var(--gray-400); line-height: 2; }
+    .footer-contact a { color: var(--gold); }
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--gray-400); margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 14px; color: var(--gray-500);
+      padding: 4px 0; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: var(--max-w); margin: 32px auto 0; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center; font-size: 12px; color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .covers-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: repeat(3, 1fr); }
+      .tier-grid { grid-template-columns: 1fr; }
+      .evd-card { flex-direction: column; text-align: center; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 50px; }
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 28px; }
+      .covers-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 20px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--ink);
+        padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">HIRECAR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="hirecredit.html">HIRECREDIT</a>
+        <a href="#coverage">Coverage</a>
+        <a href="enrollment-form.html?goal=pifr" class="nav-cta">Get Protected</a>
+      </div>
+      <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Post-Incident Financial Recovery</div>
+      <h1>When an Accident Derails Your Income, <em>PIFR Gets You Back</em></h1>
+      <p>Accidents happen. Lost income, insurance nightmares, and mounting bills don&rsquo;t have to break you. PIFR gives rideshare operators the documentation, claims support, and recovery plan to get back on the road.</p>
+      <a href="enrollment-form.html?goal=pifr" class="hero-cta">Enroll in PIFR Protection &rarr;</a>
+    </div>
+  </section>
+
+  <!-- What PIFR Covers -->
+  <section class="covers" id="coverage">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Complete Recovery Support</div>
+        <h2 class="section-title">What PIFR Covers</h2>
+      </div>
+      <div class="covers-grid">
+        <div class="covers-card">
+          <div class="covers-icon">&#9888;</div>
+          <h3>Insurance Claims</h3>
+          <p>We guide you through filing claims with your personal insurance, rideshare platform coverage, and third-party carriers.</p>
+        </div>
+        <div class="covers-card">
+          <div class="covers-icon">&#9776;</div>
+          <h3>Income Documentation</h3>
+          <p>Proper documentation of lost earnings using rideshare platform data, tax records, and income verification methods.</p>
+        </div>
+        <div class="covers-card">
+          <div class="covers-icon">&#9878;</div>
+          <h3>Legal Referral Network</h3>
+          <p>Access to vetted attorneys specializing in rideshare accidents, personal injury, and insurance disputes.</p>
+        </div>
+        <div class="covers-card">
+          <div class="covers-icon">&#9881;</div>
+          <h3>Emergency Fleet Access</h3>
+          <p>Get back to earning with temporary vehicle access while your car is in the shop or claims are being processed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVD Doctrine Callout -->
+  <section class="evd">
+    <div class="evd-card">
+      <div class="evd-badge">EVD</div>
+      <div class="evd-content">
+        <h3>Evidence Velocity Doctrine</h3>
+        <p>HIRECAR captures and preserves evidence immediately when incidents happen. Dashcam footage, platform screenshots, communication logs, medical records, and financial statements — all documented in the first 72 hours when evidence is most accessible. This is our differentiator: speed of evidence collection directly correlates with claim success rates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Your Recovery Path</div>
+        <h2 class="section-title">The PIFR Process</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-num">1</div>
+          <h3>Report</h3>
+          <p>Notify HIRECAR of your incident through the app or phone line.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">2</div>
+          <h3>Evidence</h3>
+          <p>EVD kicks in — we help collect and preserve all critical evidence.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">3</div>
+          <h3>Claims</h3>
+          <p>Insurance claims filed with proper documentation and follow-up.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">4</div>
+          <h3>Recovery</h3>
+          <p>Your personalized recovery plan — financial, legal, and operational.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">5</div>
+          <h3>Back to Earning</h3>
+          <p>Vehicle repaired or replaced, claims settled, you&rsquo;re back on the road.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tier Breakdown -->
+  <section class="tiers">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Protection Levels</div>
+        <h2 class="section-title">PIFR Coverage Tiers</h2>
+      </div>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-name">Basic</div>
+          <div class="tier-desc">Documentation support only. You handle the claims, we help you build the evidence package.</div>
+          <ul class="tier-features">
+            <li>Evidence collection guidance</li>
+            <li>Income documentation templates</li>
+            <li>Insurance claims checklist</li>
+            <li>Community support access</li>
+          </ul>
+          <a href="enrollment-form.html?goal=pifr" class="tier-btn">Enroll</a>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">Standard</div>
+          <div class="tier-desc">Documentation plus active claims assistance. We work with you through the entire process.</div>
+          <ul class="tier-features">
+            <li>Everything in Basic</li>
+            <li>Claims filing assistance</li>
+            <li>Insurance company follow-up</li>
+            <li>Legal referral network</li>
+            <li>Bi-weekly status updates</li>
+          </ul>
+          <a href="enrollment-form.html?goal=pifr" class="tier-btn">Enroll</a>
+        </div>
+        <div class="tier-card featured">
+          <div class="tier-name">Premium</div>
+          <div class="tier-desc">Full recovery management. We handle everything so you can focus on getting back to earning.</div>
+          <ul class="tier-features">
+            <li>Everything in Standard</li>
+            <li>Dedicated recovery advisor</li>
+            <li>Emergency fleet vehicle access</li>
+            <li>Full claims management</li>
+            <li>Financial recovery planning</li>
+            <li>Weekly 1-on-1 check-ins</li>
+          </ul>
+          <a href="enrollment-form.html?goal=pifr" class="tier-btn">Enroll</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Don&rsquo;t Wait for an Accident to Get Protected</h2>
+    <p>Enroll in PIFR today. When the unexpected happens, you&rsquo;ll be ready.</p>
+    <a href="enrollment-form.html?goal=pifr" class="cta-btn">Enroll in PIFR Protection &rarr;</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">HIRECAR</div>
+        <p class="footer-desc">Financial services designed specifically for rideshare operators.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@hirecar.la">support@hirecar.la</a><br>
+          <a href="tel:+12137686311">(213) 768-6311</a><br>
+          Los Angeles, CA
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="hirecredit.html">HIRECREDIT</a>
+        <a href="pifr.html">PIFR</a>
+        <a href="#">MarketWatch</a>
+        <a href="#">Fleet Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 HIRECAR. All rights reserved. HIRECAR provides educational tools and resources. We are not a law firm, insurance company, or financial advisor.
+    </div>
+  </footer>
+
+</body>
+</html>

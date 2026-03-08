@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enroll — HIRECAR</title>
+  <meta name="description" content="Join HIRECAR — credit repair, financial recovery, and business tools built for rideshare operators.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cta-gold: #C9920A;
+      --cta-gold-hover: #B07E08;
+      --member-blue: #0F4C75;
+      --ink: #111820;
+      --bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --border: #E0E0E0;
+      --muted: #6B7280;
+      --error: #DC2626;
+      --success: #16A34A;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Nunito Sans', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* --- Header --- */
+    .hc-header {
+      background: var(--ink);
+      padding: 16px 24px;
+      text-align: center;
+    }
+    .hc-header .logo {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--cta-gold);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    /* --- Container --- */
+    .form-container {
+      max-width: 640px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    .form-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .form-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    /* --- Progress Bar --- */
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .progress-bar::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 32px;
+      right: 32px;
+      height: 3px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 3px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all 0.3s ease;
+    }
+    .step-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+    .progress-step.active .step-circle {
+      border-color: var(--cta-gold);
+      color: var(--cta-gold);
+      background: #FEF9E7;
+    }
+    .progress-step.completed .step-circle {
+      border-color: var(--success);
+      background: var(--success);
+      color: #fff;
+    }
+    .progress-step.completed .step-label,
+    .progress-step.active .step-label {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* --- Card --- */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-heading {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* --- Form Fields --- */
+    .field-group { margin-bottom: 18px; }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    label .req { color: var(--error); }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--cta-gold);
+      box-shadow: 0 0 0 3px rgba(201,146,10,0.12);
+    }
+    input.invalid, select.invalid, textarea.invalid {
+      border-color: var(--error);
+    }
+    .field-error {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    /* --- Checkboxes & Radio --- */
+    .checkbox-group, .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .checkbox-item, .radio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .checkbox-item input, .radio-item input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--cta-gold);
+      flex-shrink: 0;
+    }
+    .checkbox-item span, .radio-item span { font-size: 14px; line-height: 1.4; }
+
+    /* --- Urgency Slider --- */
+    .urgency-wrap { display: flex; align-items: center; gap: 12px; }
+    .urgency-wrap input[type="range"] {
+      flex: 1;
+      accent-color: var(--cta-gold);
+      height: 6px;
+      border: none;
+      padding: 0;
+    }
+    .urgency-label { font-size: 13px; color: var(--muted); min-width: 40px; }
+    .urgency-value {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--cta-gold);
+      min-width: 24px;
+      text-align: center;
+    }
+
+    /* --- Tier Cards --- */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 480px) {
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+    .tier-card {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .tier-card:hover { border-color: var(--cta-gold); }
+    .tier-card.selected {
+      border-color: var(--cta-gold);
+      background: #FEF9E7;
+    }
+    .tier-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .tier-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+    .tier-price {
+      font-weight: 700;
+      color: var(--cta-gold);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .tier-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* --- Review Summary --- */
+    .review-section { margin-bottom: 20px; }
+    .review-section h4 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--member-blue);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 4px 0;
+    }
+    .review-row .label { color: var(--muted); }
+    .review-row .value { font-weight: 600; text-align: right; max-width: 60%; word-break: break-word; }
+
+    .tc-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px;
+      background: #F9FAFB;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .tc-check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--cta-gold); flex-shrink: 0; }
+    .tc-check span { font-size: 13px; line-height: 1.5; }
+    .tc-check a { color: var(--member-blue); }
+
+    /* --- Buttons --- */
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-back {
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+    }
+    .btn-back:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-next, .btn-submit {
+      background: var(--cta-gold);
+      color: #fff;
+      margin-left: auto;
+    }
+    .btn-next:hover, .btn-submit:hover { background: var(--cta-gold-hover); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* --- Success --- */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-panel.active { display: block; }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--success);
+      color: #fff;
+      font-size: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .success-panel h2 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .success-panel p { color: var(--muted); font-size: 15px; }
+
+    /* --- Footer --- */
+    .hc-footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 32px;
+    }
+    .hc-footer a { color: var(--member-blue); text-decoration: none; }
+
+    /* --- Responsive --- */
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+      .form-card { padding: 24px 18px; }
+      .btn-row { flex-direction: column-reverse; }
+      .btn { width: 100%; text-align: center; }
+      .btn-next, .btn-submit { margin-left: 0; }
+      .step-label { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hc-header">
+    <a href="/" class="logo">HIRECAR</a>
+  </header>
+
+  <div class="form-container">
+    <h1 class="form-title">Start Your Journey</h1>
+    <p class="form-subtitle">Join the community of rideshare operators taking control of their financial future.</p>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-step active" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Contact</div>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Vehicle</div>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Goals</div>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-circle">4</div>
+        <div class="step-label">Program</div>
+      </div>
+      <div class="progress-step" data-step="5">
+        <div class="step-circle">5</div>
+        <div class="step-label">Review</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form id="enrollmentForm" novalidate>
+        <input type="hidden" name="form_type" value="enrollment">
+
+        <!-- ===== STEP 1: Contact Info ===== -->
+        <div class="step-panel active" data-step="1">
+          <h2 class="step-heading">Contact Information</h2>
+          <p class="step-desc">Let us know how to reach you.</p>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="firstName">First Name <span class="req">*</span></label>
+              <input type="text" id="firstName" name="first_name" required placeholder="e.g. Marcus">
+              <div class="field-error">First name is required.</div>
+            </div>
+            <div class="field-group">
+              <label for="lastName">Last Name <span class="req">*</span></label>
+              <input type="text" id="lastName" name="last_name" required placeholder="e.g. Johnson">
+              <div class="field-error">Last name is required.</div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com">
+            <div class="field-error">Please enter a valid email address.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" required placeholder="(213) 555-0100">
+              <div class="field-error">Phone number is required.</div>
+            </div>
+            <div class="field-group">
+              <label for="area">City / Area <span class="req">*</span></label>
+              <select id="area" name="area" required>
+                <option value="">Select area...</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="San Diego">San Diego</option>
+                <option value="Sacramento">Sacramento</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="field-error">Please select your area.</div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-next" onclick="nextStep(1)">Continue</button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 2: Vehicle Info ===== -->
+        <div class="step-panel" data-step="2">
+          <h2 class="step-heading">Vehicle Information</h2>
+          <p class="step-desc">Tell us about your ride. All fields are optional but help us serve you better.</p>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="vehicleYear">Vehicle Year</label>
+              <input type="number" id="vehicleYear" name="vehicle_year" placeholder="e.g. 2021" min="1990" max="2030">
+            </div>
+            <div class="field-group">
+              <label for="vehicleMake">Make</label>
+              <input type="text" id="vehicleMake" name="vehicle_make" placeholder="e.g. Toyota">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="vehicleModel">Model</label>
+              <input type="text" id="vehicleModel" name="vehicle_model" placeholder="e.g. Camry">
+            </div>
+            <div class="field-group">
+              <label for="tlcPermit">TLC / Permit Number</label>
+              <input type="text" id="tlcPermit" name="tlc_permit" placeholder="Optional">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="platform">Rideshare Platform <span class="req">*</span></label>
+            <select id="platform" name="platform" required>
+              <option value="">Select platform...</option>
+              <option value="Uber">Uber</option>
+              <option value="Lyft">Lyft</option>
+              <option value="Both">Both (Uber & Lyft)</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="field-error">Please select your platform.</div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="prevStep(2)">Back</button>
+            <button type="button" class="btn btn-next" onclick="nextStep(2)">Continue</button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 3: Goals & Situation ===== -->
+        <div class="step-panel" data-step="3">
+          <h2 class="step-heading">Goals &amp; Situation</h2>
+          <p class="step-desc">What brought you to HIRECAR? Check all that apply.</p>
+
+          <div class="field-group">
+            <label>What are you looking for? <span class="req">*</span></label>
+            <div class="checkbox-group" id="goalsGroup">
+              <label class="checkbox-item">
+                <input type="checkbox" name="goals" value="Credit Repair"> <span>Credit Repair</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="goals" value="Insurance Help"> <span>Insurance Help</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="goals" value="Rental/Fleet"> <span>Rental / Fleet Access</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="goals" value="Business Funding"> <span>Business Funding</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="goals" value="Other"> <span>Other</span>
+              </label>
+            </div>
+            <div class="field-error" id="goalsError">Please select at least one goal.</div>
+          </div>
+
+          <div class="field-group">
+            <label for="situation">Describe your situation</label>
+            <textarea id="situation" name="situation" placeholder="Tell us a little about what you're dealing with. The more detail, the better we can help."></textarea>
+          </div>
+
+          <div class="field-group">
+            <label>How urgent is this for you?</label>
+            <div class="urgency-wrap">
+              <span class="urgency-label">Low</span>
+              <input type="range" id="urgency" name="urgency" min="1" max="5" value="3" oninput="document.getElementById('urgencyVal').textContent=this.value">
+              <span class="urgency-label">High</span>
+              <span class="urgency-value" id="urgencyVal">3</span>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="prevStep(3)">Back</button>
+            <button type="button" class="btn btn-next" onclick="nextStep(3)">Continue</button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 4: Program Selection ===== -->
+        <div class="step-panel" data-step="4">
+          <h2 class="step-heading">Choose Your Program</h2>
+          <p class="step-desc">Select the tier that fits your needs. You can upgrade anytime.</p>
+
+          <div class="tier-grid" id="tierGrid">
+            <label class="tier-card" onclick="selectTier(this)">
+              <input type="radio" name="tier" value="Standard" required>
+              <div class="tier-name">Standard</div>
+              <div class="tier-price">$49/mo</div>
+              <div class="tier-desc">Credit playbook access, dispute templates, community support. Ideal for getting started.</div>
+            </label>
+            <label class="tier-card" onclick="selectTier(this)">
+              <input type="radio" name="tier" value="Operator">
+              <div class="tier-name">Operator</div>
+              <div class="tier-price">$99/mo</div>
+              <div class="tier-desc">Everything in Standard plus score tracking, personal roadmap, and advisor check-ins.</div>
+            </label>
+            <label class="tier-card" onclick="selectTier(this)">
+              <input type="radio" name="tier" value="First Class">
+              <div class="tier-name">First Class</div>
+              <div class="tier-price">$199/mo</div>
+              <div class="tier-desc">Full credit repair management, business credit building, priority support, and funding referrals.</div>
+            </label>
+            <label class="tier-card" onclick="selectTier(this)">
+              <input type="radio" name="tier" value="Elite">
+              <div class="tier-name">Elite</div>
+              <div class="tier-price">$349/mo</div>
+              <div class="tier-desc">White-glove service. Dedicated advisor, all services included, fleet consulting, and VIP access.</div>
+            </label>
+          </div>
+          <div class="field-error" id="tierError" style="margin-top:8px;">Please select a program tier.</div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="prevStep(4)">Back</button>
+            <button type="button" class="btn btn-next" onclick="nextStep(4)">Continue</button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 5: Review & Submit ===== -->
+        <div class="step-panel" data-step="5">
+          <h2 class="step-heading">Review &amp; Submit</h2>
+          <p class="step-desc">Please review your information before submitting.</p>
+
+          <div id="reviewContent"></div>
+
+          <div class="tc-check">
+            <input type="checkbox" id="tcAgree" required>
+            <span>I have read and agree to the <a href="/terms" target="_blank">HIRECAR Terms &amp; Conditions</a> and acknowledge that HIRECAR provides educational tools and resources, not legal or financial advice.</span>
+          </div>
+          <div class="field-error" id="tcError" style="margin-top:4px;">You must agree to the Terms &amp; Conditions.</div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="prevStep(5)">Back</button>
+            <button type="submit" class="btn btn-submit" id="submitBtn">Submit Enrollment</button>
+          </div>
+        </div>
+
+        <!-- ===== Success ===== -->
+        <div class="success-panel" id="successPanel">
+          <div class="success-icon">&#10003;</div>
+          <h2>Welcome to HIRECAR!</h2>
+          <p>Your enrollment has been received. Check your email for next steps and your welcome packet.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="hc-footer">
+    &copy; 2026 HIRECAR. All rights reserved. &nbsp;|&nbsp; <a href="/terms">Terms</a> &nbsp;|&nbsp; <a href="/privacy">Privacy</a> &nbsp;|&nbsp; <a href="mailto:support@hirecar.la">support@hirecar.la</a>
+  </footer>
+
+  <script>
+    // ---- Pre-fill goal from URL param (?goal=credit or ?goal=pifr) ----
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const goal = (params.get('goal') || '').toLowerCase();
+      const goalMap = {
+        'credit': 'Credit Repair',
+        'insurance': 'Insurance Help',
+        'rental': 'Rental/Fleet',
+        'fleet': 'Rental/Fleet',
+        'funding': 'Business Funding',
+        'pifr': 'Insurance Help'
+      };
+      if (goalMap[goal]) {
+        const cb = document.querySelector('input[name="goals"][value="' + goalMap[goal] + '"]');
+        if (cb) cb.checked = true;
+      }
+    })();
+
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function updateProgress() {
+      document.querySelectorAll('.progress-step').forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'completed');
+        if (s === currentStep) el.classList.add('active');
+        else if (s < currentStep) el.classList.add('completed');
+      });
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.querySelector('.step-panel[data-step="' + step + '"]');
+      if (panel) panel.classList.add('active');
+      currentStep = step;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function clearErrors(step) {
+      const panel = document.querySelector('.step-panel[data-step="' + step + '"]');
+      if (!panel) return;
+      panel.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+      panel.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+    }
+
+    function validateStep(step) {
+      clearErrors(step);
+      let valid = true;
+      const panel = document.querySelector('.step-panel[data-step="' + step + '"]');
+
+      if (step === 1) {
+        ['firstName', 'lastName', 'email', 'phone', 'area'].forEach(id => {
+          const el = document.getElementById(id);
+          if (!el.value.trim() || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+            el.classList.add('invalid');
+            el.parentElement.querySelector('.field-error').classList.add('show');
+            valid = false;
+          }
+        });
+      }
+
+      if (step === 2) {
+        const plat = document.getElementById('platform');
+        if (!plat.value) {
+          plat.classList.add('invalid');
+          plat.parentElement.querySelector('.field-error').classList.add('show');
+          valid = false;
+        }
+      }
+
+      if (step === 3) {
+        const checked = document.querySelectorAll('input[name="goals"]:checked');
+        if (checked.length === 0) {
+          document.getElementById('goalsError').classList.add('show');
+          valid = false;
+        }
+      }
+
+      if (step === 4) {
+        const tier = document.querySelector('input[name="tier"]:checked');
+        if (!tier) {
+          document.getElementById('tierError').classList.add('show');
+          valid = false;
+        }
+      }
+
+      if (step === 5) {
+        if (!document.getElementById('tcAgree').checked) {
+          document.getElementById('tcError').classList.add('show');
+          valid = false;
+        }
+      }
+
+      return valid;
+    }
+
+    function nextStep(from) {
+      if (!validateStep(from)) return;
+      if (from + 1 === 5) buildReview();
+      showStep(from + 1);
+    }
+
+    function prevStep(from) {
+      showStep(from - 1);
+    }
+
+    function selectTier(card) {
+      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      card.querySelector('input[type="radio"]').checked = true;
+      document.getElementById('tierError').classList.remove('show');
+    }
+
+    function val(id) { return (document.getElementById(id)?.value || '').trim(); }
+
+    function buildReview() {
+      const goals = Array.from(document.querySelectorAll('input[name="goals"]:checked')).map(c => c.value).join(', ');
+      const tier = document.querySelector('input[name="tier"]:checked')?.value || '';
+      const vehicle = [val('vehicleYear'), val('vehicleMake'), val('vehicleModel')].filter(Boolean).join(' ') || 'Not provided';
+
+      const html = `
+        <div class="review-section">
+          <h4>Contact</h4>
+          <div class="review-row"><span class="label">Name</span><span class="value">${val('firstName')} ${val('lastName')}</span></div>
+          <div class="review-row"><span class="label">Email</span><span class="value">${val('email')}</span></div>
+          <div class="review-row"><span class="label">Phone</span><span class="value">${val('phone')}</span></div>
+          <div class="review-row"><span class="label">Area</span><span class="value">${val('area')}</span></div>
+        </div>
+        <div class="review-section">
+          <h4>Vehicle</h4>
+          <div class="review-row"><span class="label">Vehicle</span><span class="value">${vehicle}</span></div>
+          <div class="review-row"><span class="label">Platform</span><span class="value">${val('platform')}</span></div>
+        </div>
+        <div class="review-section">
+          <h4>Goals</h4>
+          <div class="review-row"><span class="label">Selected</span><span class="value">${goals}</span></div>
+          <div class="review-row"><span class="label">Urgency</span><span class="value">${val('urgency')} / 5</span></div>
+        </div>
+        <div class="review-section">
+          <h4>Program</h4>
+          <div class="review-row"><span class="label">Tier</span><span class="value">${tier}</span></div>
+        </div>`;
+      document.getElementById('reviewContent').innerHTML = html;
+    }
+
+    // ---- Submit ----
+    document.getElementById('enrollmentForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!validateStep(5)) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      const goals = Array.from(document.querySelectorAll('input[name="goals"]:checked')).map(c => c.value);
+      const tier = document.querySelector('input[name="tier"]:checked')?.value || '';
+
+      const payload = {
+        form_type: 'enrollment',
+        first_name: val('firstName'),
+        last_name: val('lastName'),
+        email: val('email'),
+        phone: val('phone'),
+        area: val('area'),
+        vehicle_year: val('vehicleYear'),
+        vehicle_make: val('vehicleMake'),
+        vehicle_model: val('vehicleModel'),
+        tlc_permit: val('tlcPermit'),
+        platform: val('platform'),
+        goals: goals,
+        situation: val('situation'),
+        urgency: parseInt(val('urgency')),
+        tier: tier,
+        submitted_at: new Date().toISOString()
+      };
+
+      try {
+        // POST to Cloudflare Worker endpoint (replace URL when deployed)
+        const resp = await fetch('https://api.hirecar.io/enrollment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!resp.ok) throw new Error('Server error');
+
+        // Show success
+        document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('successPanel').classList.add('active');
+        document.getElementById('progressBar').style.display = 'none';
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Submit Enrollment';
+        alert('Something went wrong. Please try again or contact support@hirecar.la.');
+      }
+    });
+  </script>
+
+</body>
+</html>

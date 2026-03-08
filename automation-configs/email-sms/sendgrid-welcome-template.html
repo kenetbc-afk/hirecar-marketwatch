@@ -1,0 +1,120 @@
+<!--
+  HIRECAR SendGrid Dynamic Template — Credit Dispute Pass Welcome
+  Document ID: HC-TMP-002-A
+  Template Name: hirecar_credit_pass_welcome
+
+  SendGrid Handlebars merge variables:
+  {{client_name}}, {{dispute_id}}, {{dispute_date}}, {{score_range}},
+  {{negative_items}}, {{advisor_name}}, {{membership_tier}},
+  {{access_pin}}, {{pass_url}}
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your HIRECAR Access Pass is Ready</title>
+</head>
+<body style="margin:0; padding:0; background:#F5F5F5; font-family:'Nunito Sans',Arial,sans-serif;">
+
+<!-- Header -->
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#111820;">
+  <tr>
+    <td align="center" style="padding:24px 20px;">
+      <!-- Replace with hosted logo URL -->
+      <span style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; color:#FFFFFF; letter-spacing:3px; font-weight:700;">HIRECAR</span>
+      <br>
+      <span style="font-size:11px; color:#C9920A; letter-spacing:2px; text-transform:uppercase;">Auto Operator Intelligence</span>
+    </td>
+  </tr>
+</table>
+
+<!-- Body -->
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin:0 auto;">
+  <tr>
+    <td style="padding:32px 24px; background:#FFFFFF;">
+
+      <p style="font-size:16px; color:#111820; margin:0 0 16px 0;">
+        Hi {{client_name}},
+      </p>
+
+      <p style="font-size:15px; color:#333; line-height:1.6; margin:0 0 24px 0;">
+        Your Credit Dispute Playbook has been created and your digital Access Pass is ready. This pass gives you instant access to your personalized dispute strategy, timeline, and bureau letter templates.
+      </p>
+
+      <!-- CTA Button -->
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="center" style="padding:8px 0 24px 0;">
+            <a href="{{pass_url}}" style="display:inline-block; background:#C9920A; color:#FFFFFF; text-decoration:none; padding:14px 36px; border-radius:8px; font-size:16px; font-weight:700; letter-spacing:1px;">
+              ADD PASS TO WALLET
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Info Box -->
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#F8F9FA; border-radius:8px; margin-bottom:24px;">
+        <tr>
+          <td style="padding:20px;">
+            <p style="font-size:13px; color:#C9920A; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin:0 0 12px 0;">
+              Your Playbook Access
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr><td style="padding:4px 0; font-size:14px; color:#666;">Playbook PIN</td><td style="padding:4px 0; font-size:14px; color:#111820; font-weight:700; text-align:right; font-family:'DM Mono',monospace;">{{access_pin}}</td></tr>
+              <tr><td style="padding:4px 0; font-size:14px; color:#666;">Dispute ID</td><td style="padding:4px 0; font-size:14px; color:#111820; text-align:right;">{{dispute_id}}</td></tr>
+              <tr><td style="padding:4px 0; font-size:14px; color:#666;">Filed</td><td style="padding:4px 0; font-size:14px; color:#111820; text-align:right;">{{dispute_date}}</td></tr>
+              <tr><td style="padding:4px 0; font-size:14px; color:#666;">Credit Range</td><td style="padding:4px 0; font-size:14px; color:#111820; text-align:right;">{{score_range}}</td></tr>
+              <tr><td style="padding:4px 0; font-size:14px; color:#666;">Items Under Review</td><td style="padding:4px 0; font-size:14px; color:#111820; text-align:right;">{{negative_items}}</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Steps -->
+      <p style="font-size:13px; color:#C9920A; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin:0 0 12px 0;">
+        What Happens Next
+      </p>
+
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="padding:8px 0; font-size:14px; color:#333; vertical-align:top; width:32px; font-weight:700; color:#C9920A;">1.</td>
+          <td style="padding:8px 0; font-size:14px; color:#333;">Add your Access Pass to Apple Wallet or Google Wallet</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0; font-size:14px; color:#333; vertical-align:top; width:32px; font-weight:700; color:#C9920A;">2.</td>
+          <td style="padding:8px 0; font-size:14px; color:#333;">Flip your pass to find your Playbook link and QR code</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0; font-size:14px; color:#333; vertical-align:top; width:32px; font-weight:700; color:#C9920A;">3.</td>
+          <td style="padding:8px 0; font-size:14px; color:#333;">Enter your PIN (<strong style="font-family:'DM Mono',monospace;">{{access_pin}}</strong>) to unlock your playbook</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0; font-size:14px; color:#333; vertical-align:top; width:32px; font-weight:700; color:#C9920A;">4.</td>
+          <td style="padding:8px 0; font-size:14px; color:#333;"><strong style="color:#C0392B;">Complete Step 1 within 48 hours</strong> for fastest results</td>
+        </tr>
+      </table>
+
+      <p style="font-size:14px; color:#666; margin:24px 0 0 0; line-height:1.6;">
+        Your advisor <strong>{{advisor_name}}</strong> is monitoring your case. You'll receive push notifications on your pass when your dispute status changes.
+      </p>
+
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="padding:24px; text-align:center; background:#F8F9FA;">
+      <p style="font-size:12px; color:#999; margin:0 0 8px 0;">
+        Questions? Reply to this email or visit <a href="https://hirecar.la/support" style="color:#0F4C75;">hirecar.la/support</a>
+      </p>
+      <p style="font-size:11px; color:#BBB; margin:0;">
+        HIRECAR, LLC dba HIRECREDIT | hirecar.la | @hirecar.la<br>
+        This is an educational service. Not a credit repair organization under CROA.
+      </p>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

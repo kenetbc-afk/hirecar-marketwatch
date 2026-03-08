@@ -1,0 +1,18 @@
+{
+  "name": "hirecar-api",
+  "version": "1.0.0",
+  "description": "HIRECAR API — Payment Pipeline, Lead Capture, Notifications (Cloudflare Workers + D1)",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "db:create": "wrangler d1 create hirecar-db",
+    "db:migrate": "wrangler d1 execute hirecar-db --file=src/sql/schema.sql",
+    "db:migrate:local": "wrangler d1 execute hirecar-db --local --file=src/sql/schema.sql",
+    "db:seed": "wrangler d1 execute hirecar-db --local --file=src/sql/seed.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR PassKit Card Design Specification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #111820;
+            background-color: #FAFAF8;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 3px solid #0F4C75;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3em;
+            color: #111820;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .spec-section {
+            margin-bottom: 50px;
+        }
+
+        .spec-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            color: #0F4C75;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #C9920A;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .card-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #111820;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Card dimensions: 85.6mm × 53.98mm (standard pass card size) */
+        /* Rendered at ~100% scale with proper aspect ratio */
+        .pass-card {
+            width: 320px;
+            height: 200px;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        /* Standard Tier */
+        .card-standard {
+            background: linear-gradient(135deg, #B8B8B8 0%, #8A8A8A 100%);
+            color: #111820;
+        }
+
+        .card-standard .logo {
+            color: #111820;
+            font-weight: 700;
+        }
+
+        .card-standard .badge {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Operator Tier */
+        .card-operator {
+            background: linear-gradient(135deg, #C9920A 0%, #A67808 100%);
+            color: #111820;
+        }
+
+        .card-operator .logo {
+            color: white;
+            font-weight: 700;
+        }
+
+        .card-operator .badge {
+            background-color: #8A6007;
+            color: white;
+        }
+
+        /* First Class Tier */
+        .card-first-class {
+            background-color: #111820;
+            color: #C9920A;
+        }
+
+        .card-first-class .logo {
+            color: #C9920A;
+            font-weight: 700;
+        }
+
+        .card-first-class .badge {
+            background-color: #C9920A;
+            color: #111820;
+            font-weight: 700;
+        }
+
+        /* Elite Operator Tier */
+        .card-elite {
+            background: linear-gradient(45deg, #111820 0%, #1a2a3a 25%, #0f4c75 50%, #1a2a3a 75%, #111820 100%);
+            background-size: 400% 400%;
+            animation: holographic 15s ease infinite;
+            color: #C9920A;
+        }
+
+        @keyframes holographic {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-elite .logo {
+            color: #C9920A;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(201, 146, 10, 0.3);
+        }
+
+        .card-elite .badge {
+            background: linear-gradient(90deg, #C9920A, #E8B923);
+            color: #111820;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(201, 146, 10, 0.4);
+        }
+
+        /* Card content structure */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .badge {
+            font-size: 9px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .member-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .member-id {
+            font-size: 11px;
+            opacity: 0.85;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.3px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .qr-code {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            gap: 1px;
+            padding: 3px;
+            border-radius: 2px;
+        }
+
+        .card-elite .qr-code {
+            border-color: rgba(201, 146, 10, 0.3);
+        }
+
+        .qr-code-block {
+            background-color: #333;
+            border-radius: 1px;
+        }
+
+        .qr-code-block:nth-child(odd) {
+            background-color: #555;
+        }
+
+        .icon-placeholder {
+            width: 30px;
+            height: 30px;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        /* Specification details section */
+        .spec-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #C9920A;
+        }
+
+        .spec-details h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            color: #0F4C75;
+            margin-bottom: 15px;
+        }
+
+        .spec-details p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin: 10px 0;
+            border-left: 3px solid #C9920A;
+        }
+
+        .tier-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tier-spec-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .tier-spec-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: #111820;
+            margin-bottom: 12px;
+        }
+
+        .tier-spec-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tier-spec-card li {
+            padding: 5px 0;
+            font-size: 0.9em;
+            color: #555;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tier-spec-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #C9920A;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .table-spec {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        .table-spec th {
+            background-color: #0F4C75;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #ddd;
+        }
+
+        .table-spec td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        .table-spec tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .implementation-notes {
+            background-color: #fff8dc;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #C9920A;
+            margin-top: 20px;
+        }
+
+        .implementation-notes h4 {
+            color: #111820;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .implementation-notes ul {
+            padding-left: 20px;
+        }
+
+        .implementation-notes li {
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #0F4C75;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .version-info {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HIRECAR PassKit Card Design</h1>
+            <p class="subtitle">Membership Card Specification for Apple Wallet & Google Pay</p>
+        </header>
+
+        <!-- Brand Guidelines -->
+        <div class="spec-section">
+            <h2>Brand Guidelines</h2>
+            <div class="spec-details">
+                <h3>Typography</h3>
+                <p><strong>Headings:</strong> Cormorant Garamond (400, 500, 600, 700 weights)</p>
+                <p><strong>Body Text:</strong> Nunito Sans (400, 500, 600, 700 weights)</p>
+
+                <h3 style="margin-top: 20px;">Color Palette</h3>
+                <p>
+                    <span class="color-swatch" style="background-color: #111820;"></span> Ink: #111820<br>
+                    <span class="color-swatch" style="background-color: #C9920A;"></span> CTA Gold: #C9920A<br>
+                    <span class="color-swatch" style="background-color: #0F4C75;"></span> Member Blue: #0F4C75<br>
+                    <span class="color-swatch" style="background-color: #FAFAF8;"></span> Background: #FAFAF8
+                </p>
+            </div>
+        </div>
+
+        <!-- Card Mockups -->
+        <div class="spec-section">
+            <h2>Card Design Mockups</h2>
+            <p style="margin-bottom: 30px; color: #666;">Each card is rendered at standard pass dimensions (85.6mm × 53.98mm). Interact with the cards to see the holographic animation on Elite tier.</p>
+
+            <div class="cards-grid">
+                <!-- Standard Tier -->
+                <div class="card-wrapper">
+                    <div class="card-label">Standard Tier</div>
+                    <div class="pass-card card-standard">
+                        <div class="card-header">
+                            <div class="logo">HIRECAR</div>
+                            <div class="badge">STANDARD</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="member-name">MEMBER NAME</div>
+                            <div class="member-id">HC-2026-00001</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="icon-placeholder">✓</div>
+                            <div class="qr-code">
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operator Tier -->
+                <div class="card-wrapper">
+                    <div class="card-label">Operator Tier</div>
+                    <div class="pass-card card-operator">
+                        <div class="card-header">
+                            <div class="logo">HIRECAR</div>
+                            <div class="badge">OPERATOR</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="member-name">MEMBER NAME</div>
+                            <div class="member-id">HC-2026-00002</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="icon-placeholder">⚙</div>
+                            <div class="qr-code">
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- First Class Tier -->
+                <div class="card-wrapper">
+                    <div class="card-label">First Class Tier</div>
+                    <div class="pass-card card-first-class">
+                        <div class="card-header">
+                            <div class="logo">HIRECAR</div>
+                            <div class="badge">FIRST CLASS</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="member-name">MEMBER NAME</div>
+                            <div class="member-id">HC-2026-00003</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="icon-placeholder">★</div>
+                            <div class="qr-code">
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elite Operator Tier -->
+                <div class="card-wrapper">
+                    <div class="card-label">Elite Operator Tier</div>
+                    <div class="pass-card card-elite">
+                        <div class="card-header">
+                            <div class="logo">HIRECAR</div>
+                            <div class="badge">ELITE</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="member-name">MEMBER NAME</div>
+                            <div class="member-id">HC-2026-00004</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="icon-placeholder">👑</div>
+                            <div class="qr-code">
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                                <div class="qr-code-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier Specifications -->
+        <div class="spec-section">
+            <h2>Tier Specifications</h2>
+            <div class="tier-specs">
+                <div class="tier-spec-card">
+                    <h4>Standard Tier</h4>
+                    <ul>
+                        <li>Background: #B8B8B8 → #8A8A8A</li>
+                        <li>Gradient: 135deg</li>
+                        <li>Text Color: #111820</li>
+                        <li>Badge: #555 bg</li>
+                        <li>Font: Cormorant Garamond</li>
+                        <li>Use Case: Basic membership</li>
+                    </ul>
+                </div>
+
+                <div class="tier-spec-card">
+                    <h4>Operator Tier</h4>
+                    <ul>
+                        <li>Background: #C9920A → #A67808</li>
+                        <li>Gradient: 135deg</li>
+                        <li>Text Color: White</li>
+                        <li>Badge: #8A6007 bg</li>
+                        <li>Icon: Gear (⚙)</li>
+                        <li>Use Case: Operators</li>
+                    </ul>
+                </div>
+
+                <div class="tier-spec-card">
+                    <h4>First Class Tier</h4>
+                    <ul>
+                        <li>Background: #111820 (matte black)</li>
+                        <li>Text Color: #C9920A</li>
+                        <li>Badge: Gold bg with black text</li>
+                        <li>Icon: Star (★)</li>
+                        <li>Premium feel: Minimal, elegant</li>
+                        <li>Use Case: Premium members</li>
+                    </ul>
+                </div>
+
+                <div class="tier-spec-card">
+                    <h4>Elite Operator</h4>
+                    <ul>
+                        <li>Background: Animated gradient</li>
+                        <li>Primary Color: #C9920A</li>
+                        <li>Holographic effect: CSS animation</li>
+                        <li>Icon: Crown (👑)</li>
+                        <li>Glow effect: Text shadow</li>
+                        <li>Use Case: All-access members</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specifications -->
+        <div class="spec-section">
+            <h2>Technical Specifications</h2>
+
+            <div class="spec-details">
+                <h3>Pass Dimensions & Format</h3>
+                <table class="table-spec">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Card Width</td>
+                            <td>85.6mm (336px @ 100ppi)</td>
+                            <td>Standard pass width</td>
+                        </tr>
+                        <tr>
+                            <td>Card Height</td>
+                            <td>53.98mm (212px @ 100ppi)</td>
+                            <td>Standard pass height</td>
+                        </tr>
+                        <tr>
+                            <td>Aspect Ratio</td>
+                            <td>1.58:1</td>
+                            <td>ISO/IEC 7810 ID-1 card standard</td>
+                        </tr>
+                        <tr>
+                            <td>Border Radius</td>
+                            <td>12px</td>
+                            <td>Apple Wallet standard</td>
+                        </tr>
+                        <tr>
+                            <td>Format Support</td>
+                            <td>pkpass (Apple) & Google Pay</td>
+                            <td>Both platforms supported</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 25px;">QR Code Specifications</h3>
+                <p><strong>Dimensions:</strong> 50px × 50px (displayed on card)</p>
+                <p><strong>Encoding:</strong> Member Profile URL or Member ID (HC-2026-XXXXX)</p>
+                <p><strong>Error Correction:</strong> Level H (high - can recover 30% damaged)</p>
+                <p><strong>Format:</strong> URL structure: https://hirecar.com/member/{{memberId}}</p>
+                <p><strong>Example QR Data:</strong> https://hirecar.com/member/HC-2026-00001</p>
+
+                <h3 style="margin-top: 25px;">Color Specifications</h3>
+                <table class="table-spec">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Standard</th>
+                            <th>Operator</th>
+                            <th>First Class</th>
+                            <th>Elite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Primary BG</td>
+                            <td>#B8B8B8</td>
+                            <td>#C9920A</td>
+                            <td>#111820</td>
+                            <td>Animated</td>
+                        </tr>
+                        <tr>
+                            <td>Secondary BG</td>
+                            <td>#8A8A8A</td>
+                            <td>#A67808</td>
+                            <td>—</td>
+                            <td>#0F4C75</td>
+                        </tr>
+                        <tr>
+                            <td>Text Color</td>
+                            <td>#111820</td>
+                            <td>White</td>
+                            <td>#C9920A</td>
+                            <td>#C9920A</td>
+                        </tr>
+                        <tr>
+                            <td>Badge BG</td>
+                            <td>#555</td>
+                            <td>#8A6007</td>
+                            <td>#C9920A</td>
+                            <td>#C9920A</td>
+                        </tr>
+                        <tr>
+                            <td>Badge Text</td>
+                            <td>White</td>
+                            <td>White</td>
+                            <td>#111820</td>
+                            <td>#111820</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 25px;">Font Specifications</h3>
+                <table class="table-spec">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Font</th>
+                            <th>Size</th>
+                            <th>Weight</th>
+                            <th>Tracking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Logo (HIRECAR)</td>
+                            <td>Cormorant Garamond</td>
+                            <td>18px</td>
+                            <td>700</td>
+                            <td>2px</td>
+                        </tr>
+                        <tr>
+                            <td>Member Name</td>
+                            <td>Nunito Sans</td>
+                            <td>14px</td>
+                            <td>600</td>
+                            <td>0.5px</td>
+                        </tr>
+                        <tr>
+                            <td>Member ID</td>
+                            <td>Courier New (monospace)</td>
+                            <td>11px</td>
+                            <td>400</td>
+                            <td>0.3px</td>
+                        </tr>
+                        <tr>
+                            <td>Badge</td>
+                            <td>Nunito Sans</td>
+                            <td>9px</td>
+                            <td>700</td>
+                            <td>1px</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Front & Back Field Mapping -->
+        <div class="spec-section">
+            <h2>PassKit Field Mapping</h2>
+
+            <div class="spec-details">
+                <h3>Front Side Fields (Primary Display)</h3>
+                <div class="code-block">primaryFields:
+  - key: "logo"
+    label: ""
+    value: "HIRECAR"
+    textAlignment: "left"
+
+secondaryFields:
+  - key: "memberName"
+    label: ""
+    value: "{{firstName}} {{lastName}}"
+    textAlignment: "left"
+
+auxiliaryFields:
+  - key: "memberId"
+    label: ""
+    value: "{{memberID}}"
+    textAlignment: "left"</div>
+
+                <h3>Back Side Fields (Details & QR)</h3>
+                <div class="code-block">backFields:
+  - key: "tier"
+    label: "Membership Tier"
+    value: "{{tierName}}"
+
+  - key: "joinDate"
+    label: "Member Since"
+    value: "{{joinDate}}"
+
+  - key: "benefits"
+    label: "Benefits"
+    value: "{{benefitsList}}"
+
+  - key: "contact"
+    label: "Support"
+    value: "support@hirecar.com"</div>
+
+                <h3>Barcode / QR Code</h3>
+                <div class="code-block">barcodes:
+  - format: "QR"
+    message: "{{qrData}}"
+    messageEncoding: "iso-8859-1"
+    altText: "Member ID: {{memberID}}"</div>
+
+                <h3>Dynamic Fields</h3>
+                <p>The following variables should be replaced with actual member data when generating passes:</p>
+                <ul style="margin-left: 20px;">
+                    <li><code>{{firstName}}</code> - Member's first name</li>
+                    <li><code>{{lastName}}</code> - Member's last name</li>
+                    <li><code>{{memberID}}</code> - Unique member identifier (HC-2026-XXXXX)</li>
+                    <li><code>{{tierName}}</code> - STANDARD, OPERATOR, FIRST CLASS, or ELITE</li>
+                    <li><code>{{joinDate}}</code> - Date member joined (MM/DD/YYYY)</li>
+                    <li><code>{{qrData}}</code> - QR code content (URL or member ID)</li>
+                    <li><code>{{benefitsList}}</code> - Comma-separated benefits for tier</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="spec-section">
+            <h2>Implementation Guide</h2>
+
+            <div class="implementation-notes">
+                <h4>PassKit Dashboard Configuration</h4>
+                <ul>
+                    <li><strong>Team ID:</strong> Required from Apple Developer Account</li>
+                    <li><strong>Pass Type ID:</strong> Set consistent identifier (e.g., pass.com.hirecar.membership)</li>
+                    <li><strong>Certificate:</strong> Upload WWDR certificate and Pass Signing Certificate</li>
+                    <li><strong>Expiration:</strong> Set renewal cadence (annual recommended)</li>
+                    <li><strong>Logos:</strong> Provide @1x (163×61px) and @2x (326×122px) logo files</li>
+                </ul>
+            </div>
+
+            <div class="implementation-notes">
+                <h4>JSON Structure Example (pkpass)</h4>
+                <div class="code-block">{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.hirecar.membership",
+  "serialNumber": "HC-2026-00001",
+  "teamIdentifier": "YOUR_TEAM_ID",
+  "organizationName": "HIRECAR",
+  "description": "HIRECAR Membership Card",
+  "foregroundColor": "rgb(17, 24, 32)",
+  "backgroundColor": "rgb(184, 184, 184)",
+  "labelColor": "rgb(255, 255, 255)",
+  "logoText": "HIRECAR",
+  "barcode": {
+    "format": "PKBarcodeFormatQR",
+    "message": "https://hirecar.com/member/HC-2026-00001",
+    "messageEncoding": "iso-8859-1"
+  }
+}</div>
+            </div>
+
+            <div class="implementation-notes">
+                <h4>Tier-Specific Badge Implementation</h4>
+                <ul>
+                    <li><strong>Standard:</strong> Silver appearance, suitable for basic members</li>
+                    <li><strong>Operator:</strong> Gold/premium appearance, highlighted benefits</li>
+                    <li><strong>First Class:</strong> Black matte with gold accents, luxury feel</li>
+                    <li><strong>Elite:</strong> Animated holographic effect, premium positioning</li>
+                    <li><strong>Validation:</strong> Backend system validates tier before pass generation</li>
+                </ul>
+            </div>
+
+            <div class="implementation-notes">
+                <h4>Distribution Methods</h4>
+                <ul>
+                    <li><strong>Email:</strong> Send pkpass file as attachment or via secure link</li>
+                    <li><strong>Web:</strong> Host pass files on secure server with HTTPS</li>
+                    <li><strong>Mobile App:</strong> Generate dynamically within native app</li>
+                    <li><strong>SMS:</strong> Send passbook link via short code</li>
+                    <li><strong>QR Registration:</strong> Members can scan QR to add to wallet</li>
+                </ul>
+            </div>
+
+            <div class="implementation-notes">
+                <h4>Maintenance & Updates</h4>
+                <ul>
+                    <li><strong>Expiration:</strong> Passes should expire annually; prompt renewal</li>
+                    <li><strong>Updates:</strong> Use push notifications to update pass when tier changes</li>
+                    <li><strong>Revocation:</strong> Implement system to revoke compromised passes</li>
+                    <li><strong>Analytics:</strong> Track pass views, taps, and unlock events</li>
+                    <li><strong>Testing:</strong> Test on iOS Wallet and Android Pay before deployment</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quality Assurance -->
+        <div class="spec-section">
+            <h2>Quality Assurance Checklist</h2>
+
+            <div class="spec-details">
+                <h3>Visual Testing</h3>
+                <ul style="margin-left: 20px;">
+                    <li>All four tiers display correctly on iOS Wallet</li>
+                    <li>All four tiers display correctly on Android Google Pay</li>
+                    <li>Colors are accurate and meet WCAG contrast requirements</li>
+                    <li>Text is legible at small sizes (11px minimum)</li>
+                    <li>QR codes are scannable and high contrast</li>
+                    <li>Gradient effects render smoothly across devices</li>
+                    <li>Elite tier animation performs smoothly without lag</li>
+                </ul>
+
+                <h3 style="margin-top: 20px;">Functional Testing</h3>
+                <ul style="margin-left: 20px;">
+                    <li>QR code scans and directs to correct member profile</li>
+                    <li>Member data populates correctly in all fields</li>
+                    <li>Expiration date functionality works as expected</li>
+                    <li>Pass updates push successfully when tier changes</li>
+                    <li>Revocation process works without errors</li>
+                    <li>Member can add/remove pass from wallet</li>
+                    <li>Analytics tracking captures all events</li>
+                </ul>
+
+                <h3 style="margin-top: 20px;">Compliance Testing</h3>
+                <ul style="margin-left: 20px;">
+                    <li>All certificates are valid and current</li>
+                    <li>Pass Type ID matches provisioning profile</li>
+                    <li>PII is encrypted and transmitted securely</li>
+                    <li>GDPR compliance verified for EU members</li>
+                    <li>Signature and manifest files are valid</li>
+                    <li>No deprecated APIs or features used</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Version & Metadata -->
+        <footer>
+            <p><strong>HIRECAR PassKit Card Design Specification</strong></p>
+            <p>Last Updated: March 4, 2026</p>
+            <p class="version-info">Version 1.0 | Production Ready</p>
+            <p style="margin-top: 15px; font-size: 0.85em;">
+                This specification covers Apple Wallet (pkpass) and Google Pay compatibility.
+                For support or technical questions, contact: developers@hirecar.com
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

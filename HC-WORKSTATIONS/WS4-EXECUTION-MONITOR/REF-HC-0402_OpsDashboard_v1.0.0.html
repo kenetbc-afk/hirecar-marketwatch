@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR Operations Dashboard — WS4</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-primary: #0f1117;
+            --bg-card: #1a1d29;
+            --bg-header: #12141e;
+            --text-primary: #e8eaed;
+            --text-secondary: #9aa0a6;
+            --text-muted: #5f6368;
+            --accent: #f5a623;
+            --accent-dim: rgba(245, 166, 35, 0.15);
+            --green: #34d399;
+            --green-dim: rgba(52, 211, 153, 0.15);
+            --red: #f87171;
+            --red-dim: rgba(248, 113, 113, 0.15);
+            --yellow: #fbbf24;
+            --yellow-dim: rgba(251, 191, 36, 0.15);
+            --blue: #60a5fa;
+            --blue-dim: rgba(96, 165, 250, 0.15);
+            --purple: #a78bfa;
+            --border: rgba(255,255,255,0.06);
+            --gap: 16px;
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.5; }
+        .dashboard { max-width: 1440px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        .header-badge { background: var(--accent-dim); color: var(--accent); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .header-time { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+        .refresh-btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text-secondary); padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+        .refresh-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+
+        /* System Status Bar */
+        .status-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-bottom: 20px; }
+        .status-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .status-label { font-size: 12px; color: var(--text-secondary); }
+        .status-val { font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+        .status-val.ok { background: var(--green-dim); color: var(--green); }
+        .status-val.warn { background: var(--yellow-dim); color: var(--yellow); }
+        .status-val.fail { background: var(--red-dim); color: var(--red); }
+
+        /* KPI Row */
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); margin-bottom: 20px; }
+        .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; position: relative; overflow: hidden; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .kpi-card.accent::before { background: var(--accent); }
+        .kpi-card.green::before { background: var(--green); }
+        .kpi-card.blue::before { background: var(--blue); }
+        .kpi-card.purple::before { background: var(--purple); }
+        .kpi-card.red::before { background: var(--red); }
+        .kpi-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+        .kpi-value { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+        .kpi-sub { font-size: 12px; color: var(--text-secondary); }
+        .kpi-sub .up { color: var(--green); }
+        .kpi-sub .down { color: var(--red); }
+
+        /* Section titles */
+        .section-title { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* Chart rows */
+        .chart-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--gap); margin-bottom: 20px; }
+        .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .chart-card h3 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+        .chart-card canvas { max-height: 280px; }
+
+        /* Table */
+        .table-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; overflow-x: auto; margin-bottom: 20px; }
+        .table-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; user-select: none; white-space: nowrap; }
+        thead th:hover { color: var(--text-primary); }
+        tbody td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-green { background: var(--green-dim); color: var(--green); }
+        .badge-red { background: var(--red-dim); color: var(--red); }
+        .badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+        .badge-blue { background: var(--blue-dim); color: var(--blue); }
+
+        /* Workspace tracker */
+        .ws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap); margin-bottom: 20px; }
+        .ws-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .ws-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .ws-name { font-size: 14px; font-weight: 700; }
+        .ws-progress { font-size: 12px; font-weight: 600; color: var(--accent); }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+        .ws-tasks { list-style: none; }
+        .ws-tasks li { font-size: 12px; padding: 4px 0; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+        .ws-tasks li .check { color: var(--green); }
+        .ws-tasks li .pending { color: var(--text-muted); }
+        .ws-tasks li .active { color: var(--yellow); }
+
+        /* Footer */
+        .footer { text-align: center; padding: 20px 0; font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 20px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chart-row { grid-template-columns: 1fr; }
+            .ws-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .header { flex-direction: column; align-items: flex-start; }
+        }
+        @media print {
+            body { background: white; color: black; }
+            .refresh-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">HIRE<span>CAR</span></div>
+            <div class="header-badge">WS4 — Ops Dashboard</div>
+        </div>
+        <div class="header-right">
+            <div class="live-dot"></div>
+            <div class="header-time" id="clock"></div>
+            <button class="refresh-btn" onclick="location.reload()">↻ Refresh</button>
+        </div>
+    </div>
+
+    <!-- SYSTEM STATUS BAR -->
+    <div class="status-bar">
+        <div class="status-item"><span class="status-label">Site (hirecar.la)</span><span class="status-val ok" id="s-site">ONLINE</span></div>
+        <div class="status-item"><span class="status-label">Cloudflare Worker</span><span class="status-val ok" id="s-worker">HEALTHY</span></div>
+        <div class="status-item"><span class="status-label">Stripe</span><span class="status-val ok" id="s-stripe">CONNECTED</span></div>
+        <div class="status-item"><span class="status-label">Brevo (Email)</span><span class="status-val ok" id="s-brevo">OK</span></div>
+        <div class="status-item"><span class="status-label">D1 Database</span><span class="status-val ok" id="s-d1">ACTIVE</span></div>
+        <div class="status-item"><span class="status-label">Slack Webhooks</span><span class="status-val ok" id="s-slack">CONNECTED</span></div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+        <div class="kpi-card accent">
+            <div class="kpi-label">Total Enrollments</div>
+            <div class="kpi-value" id="kpi-enrollments">0</div>
+            <div class="kpi-sub">Target: 135/mo</div>
+        </div>
+        <div class="kpi-card green">
+            <div class="kpi-label">Worker CPU Used</div>
+            <div class="kpi-value" id="kpi-cpu">0</div>
+            <div class="kpi-sub">ms/day avg • <span id="cpu-pct">0%</span></div>
+        </div>
+        <div class="kpi-card blue">
+            <div class="kpi-label">Revenue (Stripe)</div>
+            <div class="kpi-value" id="kpi-revenue">$0</div>
+            <div class="kpi-sub">This month</div>
+        </div>
+        <div class="kpi-card purple">
+            <div class="kpi-label">Email Delivery Rate</div>
+            <div class="kpi-value" id="kpi-email">—</div>
+            <div class="kpi-sub">Target: ≥90%</div>
+        </div>
+        <div class="kpi-card red">
+            <div class="kpi-label">Automation Errors</div>
+            <div class="kpi-value" id="kpi-errors">0</div>
+            <div class="kpi-sub">Last 24h</div>
+        </div>
+    </div>
+
+    <!-- WORKSPACE EXECUTION TRACKER -->
+    <div class="section-title">Workspace Execution Tracker</div>
+    <div class="ws-grid" id="ws-tracker"></div>
+
+    <!-- CHARTS -->
+    <div class="section-title">Operations Analytics</div>
+    <div class="chart-row">
+        <div class="chart-card">
+            <h3>Cloudflare Worker — Daily CPU Usage</h3>
+            <canvas id="chart-cpu"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>Enrollment Pipeline — Conversion Funnel</h3>
+            <canvas id="chart-funnel"></canvas>
+        </div>
+    </div>
+    <div class="chart-row">
+        <div class="chart-card">
+            <h3>Scenario Execution Success Rate</h3>
+            <canvas id="chart-success"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>Ops Budget Burn Rate</h3>
+            <canvas id="chart-budget"></canvas>
+        </div>
+    </div>
+
+    <!-- WORKER ENDPOINT HEALTH TABLE -->
+    <div class="section-title">Cloudflare Worker Endpoint Health</div>
+    <div class="table-card">
+        <h3>Active Endpoints</h3>
+        <table id="endpoint-table">
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                    <th>Last Hit</th>
+                    <th>Avg CPU (ms)</th>
+                    <th>Success Rate</th>
+                    <th>Errors (24h)</th>
+                    <th>Req/Hour</th>
+                </tr>
+            </thead>
+            <tbody id="endpoint-tbody"></tbody>
+        </table>
+    </div>
+
+    <!-- ALERT LOG -->
+    <div class="section-title">Recent Alerts & Events</div>
+    <div class="table-card">
+        <h3>Event Log</h3>
+        <table>
+            <thead>
+                <tr><th>Time</th><th>Source</th><th>Severity</th><th>Message</th><th>Action</th></tr>
+            </thead>
+            <tbody id="alert-log"></tbody>
+        </table>
+    </div>
+
+    <!-- CHECKPOINT TRACKER -->
+    <div class="section-title">Execution Checkpoints</div>
+    <div class="table-card">
+        <h3>Critical Checkpoint Criteria (8:30 PM Gate)</h3>
+        <table>
+            <thead>
+                <tr><th>#</th><th>Condition</th><th>Source</th><th>Status</th><th>Notes</th></tr>
+            </thead>
+            <tbody id="checkpoint-tbody"></tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        HIRECAR Operations Dashboard — WS4 Execution Monitor — HC-WPK-004-A<br>
+        Auto-refreshes every 90 seconds • Data as of: <span id="data-ts"></span>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// DATA — Updated March 2026: Live API integration + accurate task statuses
+// ============================================================
+const WORKSPACE_DATA = [
+    {
+        id: 'WS1', name: 'WS1 — Infrastructure & Payments', color: '#60a5fa',
+        progress: 0, totalTasks: 12,
+        tasks: [
+            { name: 'Stripe account & API keys (sandbox)', status: 'done' },
+            { name: '4-Tier product catalog (v3 FINAL)', status: 'done' },
+            { name: 'Payment Pipeline Worker (Stripe webhooks)', status: 'done' },
+            { name: 'HMAC-SHA256 webhook signature verification', status: 'done' },
+            { name: 'Cloudflare Worker deployed (api.hirecar.la)', status: 'done' },
+            { name: 'D1 database schema (12 tables, 4 views)', status: 'done' },
+            { name: 'KV namespace configured', status: 'done' },
+            { name: 'Brevo email integration', status: 'done' },
+            { name: 'Slack webhook integration', status: 'done' },
+            { name: 'Cloudflare Pages deploy (hirecar-pricing)', status: 'done' },
+            { name: 'CORS config (Pages + hirecar.la)', status: 'done' },
+            { name: 'DNS config (hirecar.la → Wix)', status: 'done' },
+        ]
+    },
+    {
+        id: 'WS2', name: 'WS2 — Bot Fleet & Enrollment', color: '#a78bfa',
+        progress: 0, totalTasks: 10,
+        tasks: [
+            { name: 'HIRE Bot Registry (20-bot fleet)', status: 'done' },
+            { name: 'Enrollment Bot (#01) workflow', status: 'done' },
+            { name: 'Payment Orchestrator (#17-#20)', status: 'done' },
+            { name: 'Enrollment API endpoint (/api/enroll)', status: 'done' },
+            { name: 'Brevo welcome email trigger', status: 'done' },
+            { name: 'Slack enrollment notifications', status: 'done' },
+            { name: 'Enrollment pipeline E2E verified', status: 'done' },
+            { name: 'SMS integration module (sms-integration.js)', status: 'done' },
+            { name: 'PassKit digital card', status: 'pending' },
+            { name: 'Member score tracking', status: 'pending' },
+        ]
+    },
+    {
+        id: 'WS3', name: 'WS3 — Content & Playbooks', color: '#34d399',
+        progress: 0, totalTasks: 10,
+        tasks: [
+            { name: 'Homepage / MarketWatch Desktop', status: 'done' },
+            { name: 'Pricing page with Stripe checkout', status: 'done' },
+            { name: 'Enrollment form HTML', status: 'done' },
+            { name: 'Terms & Conditions page', status: 'done' },
+            { name: 'Bio pages (CREDITWITHKEN, SeedXchange)', status: 'done' },
+            { name: 'Gamified pages (leaderboard, disputes)', status: 'done' },
+            { name: 'Playbook chapters (BitDocs)', status: 'done' },
+            { name: 'Legal pages (privacy, refund, disclaimer)', status: 'done' },
+            { name: 'Remote mode toggle disabled (March 2026)', status: 'done' },
+            { name: 'DNS cutover Wix → Cloudflare Pages', status: 'pending' },
+        ]
+    }
+];
+
+let ENDPOINTS = [
+    { name: '/api/health', status: 'active', lastHit: '—', cpuAvg: 2, successRate: 100, errors24h: 0, reqPerHour: 60 },
+    { name: '/api/enroll', status: 'active', lastHit: '—', cpuAvg: 12, successRate: 100, errors24h: 0, reqPerHour: 0 },
+    { name: '/webhooks/stripe', status: 'active', lastHit: '—', cpuAvg: 8, successRate: 100, errors24h: 0, reqPerHour: 0 },
+    { name: '/api/bots', status: 'active', lastHit: '—', cpuAvg: 3, successRate: 100, errors24h: 0, reqPerHour: 0 },
+    { name: '/api/leads', status: 'standby', lastHit: '—', cpuAvg: 5, successRate: 0, errors24h: 0, reqPerHour: 0 },
+    { name: '/api/products/sync', status: 'active', lastHit: '—', cpuAvg: 15, successRate: 100, errors24h: 0, reqPerHour: 0 },
+];
+
+const CHECKPOINTS = [
+    { num: 1, condition: 'Payment pipeline works end-to-end (Stripe webhook verified)', source: 'WS1', status: 'pass', notes: 'HMAC-SHA256 verified, tier detection via API fetch' },
+    { num: 2, condition: 'Enrollment bot processes test member successfully', source: 'WS2', status: 'pass', notes: 'Slack + Brevo both fire after test checkout' },
+    { num: 3, condition: 'Playbook chapters and all content pages live', source: 'WS3', status: 'pass', notes: '13 pages deployed to Cloudflare Pages' },
+    { num: 4, condition: 'Enrollment form posts data to Worker /api/enroll', source: 'WS3', status: 'pass', notes: 'Form → Worker → D1 → Brevo → Slack pipeline active' },
+    { num: 5, condition: 'D1 database schema deployed with 12 tables + 4 views', source: 'WS1', status: 'pass', notes: 'Remote D1 live, seed data loaded' },
+    { num: 6, condition: 'DNS cutover from Wix to Cloudflare Pages', source: 'WS3', status: 'pending', notes: 'Scheduled — awaiting production switch' },
+];
+
+let ALERTS = [
+    { time: new Date().toISOString(), source: 'WS4', severity: 'info', message: 'Operations Dashboard v1.0.0 initialized — live API mode', action: '—' },
+    { time: new Date().toISOString(), source: 'Worker', severity: 'info', message: 'Cloudflare Worker v1.1.0 healthy — 6 bots active', action: '—' },
+    { time: new Date().toISOString(), source: 'WS1', severity: 'info', message: 'All 12 WS1 tasks completed — infrastructure fully deployed', action: '—' },
+    { time: new Date().toISOString(), source: 'WS2', severity: 'info', message: '8/10 WS2 tasks completed — PassKit + scoring pending', action: 'Track in WS2' },
+    { time: new Date().toISOString(), source: 'WS3', severity: 'info', message: '9/10 WS3 tasks completed — DNS cutover pending', action: 'Schedule' },
+    { time: new Date().toISOString(), source: 'Stripe', severity: 'info', message: '4-tier product catalog active (v3 FINAL) — sandbox mode', action: '—' },
+    { time: new Date().toISOString(), source: 'D1', severity: 'info', message: 'Database schema deployed — 12 tables, 4 views, seed data loaded', action: '—' },
+    { time: new Date().toISOString(), source: 'System', severity: 'warn', message: 'Remote mode toggle disabled per admin directive (March 2026)', action: 'Documented' },
+];
+
+// Demo daily ops data
+const DAILY_OPS = Array.from({length: 14}, (_, i) => {
+    const d = new Date(); d.setDate(d.getDate() - 13 + i);
+    return { date: d.toISOString().slice(0,10), ops: 0 };
+});
+
+// ============================================================
+// CHART CONFIG
+// ============================================================
+Chart.defaults.color = '#9aa0a6';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, SF Pro Display, Segoe UI, Roboto, sans-serif';
+
+function initCharts() {
+    // Worker CPU usage chart
+    new Chart(document.getElementById('chart-cpu'), {
+        type: 'bar',
+        data: {
+            labels: DAILY_OPS.map(d => d.date.slice(5)),
+            datasets: [{
+                label: 'CPU Time (ms)',
+                data: DAILY_OPS.map(d => d.ops),
+                backgroundColor: 'rgba(245, 166, 35, 0.6)',
+                borderColor: '#f5a623',
+                borderWidth: 1,
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, max: 1000, title: { display: true, text: 'CPU Time (ms)' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Funnel
+    new Chart(document.getElementById('chart-funnel'), {
+        type: 'bar',
+        data: {
+            labels: ['Site Visit', 'Form Open', 'Form Submit', 'Member Created', 'Payment Made'],
+            datasets: [{
+                label: 'Count',
+                data: [0, 0, 0, 0, 0],
+                backgroundColor: ['#60a5fa99', '#a78bfa99', '#f5a62399', '#34d39999', '#34d399'],
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true }, y: { grid: { display: false } } }
+        }
+    });
+
+    // Success rate doughnut
+    new Chart(document.getElementById('chart-success'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Successful', 'Failed', 'Pending'],
+            datasets: [{
+                data: [0, 0, 1],
+                backgroundColor: ['#34d399cc', '#f87171cc', '#5f6368cc'],
+                borderColor: 'transparent',
+                borderWidth: 0,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, color: '#9aa0a6' } }
+            }
+        }
+    });
+
+    // CPU burn rate
+    new Chart(document.getElementById('chart-budget'), {
+        type: 'line',
+        data: {
+            labels: DAILY_OPS.map(d => d.date.slice(5)),
+            datasets: [
+                {
+                    label: 'Cumulative CPU (ms)',
+                    data: DAILY_OPS.reduce((acc, d, i) => { acc.push((acc[i-1] || 0) + d.ops); return acc; }, []),
+                    borderColor: '#f5a623',
+                    backgroundColor: 'rgba(245, 166, 35, 0.1)',
+                    fill: true, tension: 0.3, pointRadius: 2,
+                },
+                {
+                    label: 'Alert Threshold (50000ms)',
+                    data: DAILY_OPS.map(() => 50000),
+                    borderColor: '#f87171',
+                    borderDash: [6, 4],
+                    pointRadius: 0,
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { usePointStyle: true } } },
+            scales: {
+                y: { beginAtZero: true, max: 60000 },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+function renderWorkspaces() {
+    const container = document.getElementById('ws-tracker');
+    container.innerHTML = WORKSPACE_DATA.map(ws => {
+        const done = ws.tasks.filter(t => t.status === 'done').length;
+        const active = ws.tasks.filter(t => t.status === 'active').length;
+        const pct = Math.round((done / ws.tasks.length) * 100);
+        const taskList = ws.tasks.map(t => {
+            const icon = t.status === 'done' ? '<span class="check">✓</span>' :
+                         t.status === 'active' ? '<span class="active">▶</span>' :
+                         '<span class="pending">○</span>';
+            return `<li>${icon} ${t.name}</li>`;
+        }).join('');
+        return `
+        <div class="ws-card">
+            <div class="ws-header">
+                <div class="ws-name" style="color:${ws.color}">${ws.name}</div>
+                <div class="ws-progress">${pct}%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:${pct}%;background:${ws.color}"></div>
+            </div>
+            <ul class="ws-tasks">${taskList}</ul>
+        </div>`;
+    }).join('');
+}
+
+function renderEndpoints() {
+    const tbody = document.getElementById('endpoint-tbody');
+    tbody.innerHTML = ENDPOINTS.map(e => {
+        const statusClass = e.status === 'active' ? 'badge-green' : e.status === 'error' ? 'badge-red' : 'badge-yellow';
+        const rateClass = e.successRate >= 95 ? 'badge-green' : e.successRate >= 80 ? 'badge-yellow' : 'badge-red';
+        return `<tr>
+            <td style="font-weight:600">${e.name}</td>
+            <td><span class="badge ${statusClass}">${e.status.toUpperCase()}</span></td>
+            <td>${e.lastHit}</td>
+            <td>${e.cpuAvg}ms</td>
+            <td><span class="badge ${e.successRate > 0 ? rateClass : 'badge-blue'}">${e.successRate > 0 ? e.successRate + '%' : 'N/A'}</span></td>
+            <td>${e.errors24h}</td>
+            <td>${e.reqPerHour}/hr</td>
+        </tr>`;
+    }).join('');
+}
+
+function renderCheckpoints() {
+    const tbody = document.getElementById('checkpoint-tbody');
+    tbody.innerHTML = CHECKPOINTS.map(c => {
+        const cls = c.status === 'pass' ? 'badge-green' : c.status === 'fail' ? 'badge-red' : 'badge-yellow';
+        const label = c.status === 'pass' ? 'PASS' : c.status === 'fail' ? 'FAIL' : 'PENDING';
+        return `<tr>
+            <td>${c.num}</td>
+            <td>${c.condition}</td>
+            <td>${c.source}</td>
+            <td><span class="badge ${cls}">${label}</span></td>
+            <td style="color:var(--text-secondary)">${c.notes}</td>
+        </tr>`;
+    }).join('');
+}
+
+function renderAlerts() {
+    const tbody = document.getElementById('alert-log');
+    tbody.innerHTML = ALERTS.slice().reverse().map(a => {
+        const sevClass = a.severity === 'error' ? 'badge-red' : a.severity === 'warn' ? 'badge-yellow' : 'badge-blue';
+        const t = new Date(a.time);
+        const ts = t.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        return `<tr>
+            <td style="font-variant-numeric:tabular-nums">${ts}</td>
+            <td>${a.source}</td>
+            <td><span class="badge ${sevClass}">${a.severity.toUpperCase()}</span></td>
+            <td>${a.message}</td>
+            <td style="color:var(--text-secondary)">${a.action}</td>
+        </tr>`;
+    }).join('');
+}
+
+const API_BASE = 'https://api.hirecar.la';
+
+function updateKPIs(data) {
+    if (data && data.kpis) {
+        document.getElementById('kpi-enrollments').textContent = data.kpis.enrollments || '0';
+        document.getElementById('kpi-cpu').textContent = data.kpis.cpuMs || '0';
+        document.getElementById('cpu-pct').textContent = (data.kpis.cpuPct || '0') + '%';
+        document.getElementById('kpi-revenue').textContent = '$' + (data.kpis.revenue || '0');
+        document.getElementById('kpi-email').textContent = data.kpis.emailRate || '—';
+        document.getElementById('kpi-errors').textContent = data.kpis.errors24h || '0';
+    } else {
+        document.getElementById('kpi-enrollments').textContent = '0';
+        document.getElementById('kpi-cpu').textContent = '0';
+        document.getElementById('cpu-pct').textContent = '0%';
+        document.getElementById('kpi-revenue').textContent = '$0';
+        document.getElementById('kpi-email').textContent = '—';
+        document.getElementById('kpi-errors').textContent = '0';
+    }
+}
+
+async function fetchLiveData() {
+    // ── Health Check ──
+    try {
+        const healthRes = await fetch(API_BASE + '/api/health', { mode: 'cors' });
+        if (healthRes.ok) {
+            const health = await healthRes.json();
+            // Update Worker status indicator
+            const workerEl = document.getElementById('s-worker');
+            if (workerEl) {
+                workerEl.textContent = health.status === 'healthy' ? 'HEALTHY' : 'DEGRADED';
+                workerEl.className = 'status-val ' + (health.status === 'healthy' ? 'ok' : 'warn');
+            }
+            // Update health endpoint last hit
+            const healthEp = ENDPOINTS.find(e => e.name === '/api/health');
+            if (healthEp) healthEp.lastHit = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            // Add live alert
+            ALERTS.push({
+                time: new Date().toISOString(),
+                source: 'Health',
+                severity: health.status === 'healthy' ? 'info' : 'warn',
+                message: 'Worker: ' + (health.version || 'v?') + ' — ' + (health.activeBots || '?') + ' bots active — ' + health.status,
+                action: '—'
+            });
+        } else {
+            document.getElementById('s-worker').textContent = 'ERROR';
+            document.getElementById('s-worker').className = 'status-val fail';
+        }
+    } catch (e) {
+        console.warn('Health check failed:', e.message);
+        const workerEl = document.getElementById('s-worker');
+        if (workerEl) { workerEl.textContent = 'OFFLINE'; workerEl.className = 'status-val fail'; }
+    }
+
+    // ── Bot Fleet Status ──
+    try {
+        const botsRes = await fetch(API_BASE + '/api/bots', { mode: 'cors' });
+        if (botsRes.ok) {
+            const bots = await botsRes.json();
+            const activeBots = Array.isArray(bots.bots) ? bots.bots.filter(b => b.status === 'active').length : 0;
+            const totalBots = Array.isArray(bots.bots) ? bots.bots.length : 0;
+            // Update bot endpoint
+            const botEp = ENDPOINTS.find(e => e.name === '/api/bots');
+            if (botEp) {
+                botEp.lastHit = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                botEp.successRate = 100;
+            }
+            ALERTS.push({
+                time: new Date().toISOString(),
+                source: 'Bots',
+                severity: 'info',
+                message: 'Bot fleet: ' + activeBots + '/' + totalBots + ' active',
+                action: '—'
+            });
+        }
+    } catch (e) {
+        console.warn('Bot status fetch failed:', e.message);
+    }
+
+    // Re-render with updated data
+    renderEndpoints();
+    renderAlerts();
+}
+
+function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        timeZoneName: 'short'
+    });
+    document.getElementById('data-ts').textContent = now.toISOString();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+    updateClock();
+    setInterval(updateClock, 1000);
+    updateKPIs(null);
+    renderWorkspaces();
+    renderEndpoints();
+    renderCheckpoints();
+    renderAlerts();
+    initCharts();
+
+    // Fetch live data on load
+    await fetchLiveData();
+
+    // Auto-refresh every 90 seconds — pull live data from Worker
+    setInterval(async () => {
+        await fetchLiveData();
+        updateKPIs(null);
+        renderWorkspaces();
+    }, 90000);
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "_deprecated": "DEPRECATED as of 2026-03-04. Payment webhooks now handled by Cloudflare Worker at api.hirecar.la/webhooks/stripe. This scenario is retained for historical reference only. See HC-CFG-014-A for current implementation.",
+  "name": "HIRECAR Payment Pipeline (DEPRECATED)",
+  "description": "HC-SCN-002 [DEPRECATED]: Processes Stripe and PayPal payment webhooks. Logs to Payments data store, sends confirmation email via Zoho/SendGrid, posts to Slack ops channel. DEPRECATED: Use Cloudflare Worker direct webhook integration instead.",
+  "teamId": 1939114,
+  "scheduling": {
+    "type": "indefinitely",
+    "interval": 900
+  },
+  "blueprint": {
+    "name": "Payment Pipeline",
+    "flow": [
+      {
+        "id": 1,
+        "module": "gateway:CustomWebHook",
+        "version": 1,
+        "metadata": {
+          "name": "Payment Webhook",
+          "note": "Receives Stripe webhook events and PayPal IPN notifications"
+        },
+        "parameters": {
+          "hook": "{{PAYMENT_WEBHOOK_ID}}",
+          "maxResults": 1
+        },
+        "expectedPayload_stripe": {
+          "type": "payment_intent.succeeded",
+          "data": {
+            "object": {
+              "id": "pi_xxxx",
+              "amount": 2900,
+              "currency": "usd",
+              "receipt_email": "member@example.com",
+              "metadata": {
+                "member_id": "HC-2026-00001",
+                "tier": "standard"
+              }
+            }
+          }
+        },
+        "expectedPayload_paypal": {
+          "txn_type": "web_accept",
+          "payment_status": "Completed",
+          "mc_gross": "29.00",
+          "payer_email": "member@example.com",
+          "txn_id": "xxxx"
+        }
+      },
+      {
+        "id": 2,
+        "module": "json:ParseJSON",
+        "version": 1,
+        "metadata": {
+          "name": "Parse Payment Payload",
+          "note": "Parses the raw webhook body into structured data"
+        },
+        "mapper": {
+          "json": "{{1.body}}"
+        }
+      },
+      {
+        "id": "router",
+        "module": "builtin:BasicRouter",
+        "metadata": {
+          "name": "Route by Provider",
+          "note": "Route 1: Stripe events (body.type exists). Route 2: PayPal IPN (body.txn_type exists)"
+        },
+        "routes": [
+          {
+            "name": "Stripe Route",
+            "filter": {
+              "condition": "{{2.type}} is not empty"
+            },
+            "modules": [3, 4, 5, 6]
+          },
+          {
+            "name": "PayPal Route",
+            "filter": {
+              "condition": "{{2.txn_type}} is not empty"
+            },
+            "modules": [7, 8, 9, 10]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "module": "util:SetVariable",
+        "version": 1,
+        "metadata": {
+          "name": "Normalize Stripe Data",
+          "note": "Extracts and normalizes Stripe payment fields"
+        },
+        "mapper": {
+          "name": "payment",
+          "value": {
+            "payment_id": "{{2.data.object.id}}",
+            "member_email": "{{2.data.object.receipt_email}}",
+            "amount": "{{2.data.object.amount / 100}}",
+            "method": "stripe",
+            "date": "{{now}}",
+            "status": "completed",
+            "reference_id": "{{2.data.object.id}}"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "module": "datastore:addRecord",
+        "version": 1,
+        "metadata": {
+          "name": "Write to Payments Store",
+          "note": "Logs payment to HIRECAR Payments data store"
+        },
+        "parameters": {
+          "dataStore": "{{PAYMENTS_DATASTORE_ID}}"
+        },
+        "mapper": {
+          "key": "{{3.payment.payment_id}}",
+          "payment_id": "{{3.payment.payment_id}}",
+          "member_email": "{{3.payment.member_email}}",
+          "amount": "{{3.payment.amount}}",
+          "method": "stripe",
+          "date": "{{now}}",
+          "status": "completed",
+          "reference_id": "{{3.payment.reference_id}}"
+        }
+      },
+      {
+        "id": 5,
+        "module": "zohomail:sendEmail",
+        "version": 1,
+        "metadata": {
+          "name": "Send Payment Confirmation",
+          "note": "Sends receipt email from noreply@hirecar.la via Zoho Mail"
+        },
+        "parameters": {
+          "connection": "{{ZOHO_CONNECTION_ID}}"
+        },
+        "mapper": {
+          "from": "noreply@hirecar.la",
+          "to": "{{3.payment.member_email}}",
+          "subject": "HIRECAR Payment Confirmed — ${{3.payment.amount}}",
+          "body": "<html><body><h2>Payment Confirmed</h2><p>Amount: ${{3.payment.amount}}</p><p>Date: {{3.payment.date}}</p><p>Reference: {{3.payment.reference_id}}</p><p>Thank you for your membership!</p><p>— HIRECAR</p></body></html>",
+          "contentType": "text/html"
+        }
+      },
+      {
+        "id": 6,
+        "module": "slack:sendMessage",
+        "version": 1,
+        "metadata": {
+          "name": "Slack Ops Notification",
+          "note": "Posts payment notification to #hirecar-ops"
+        },
+        "parameters": {
+          "connection": "{{SLACK_CONNECTION_ID}}"
+        },
+        "mapper": {
+          "channel": "{{HIRECAR_OPS_CHANNEL_ID}}",
+          "text": ":moneybag: *PAYMENT RECEIVED*\n━━━━━━━━━━━━━━━━━━\n*Amount:* ${{3.payment.amount}}\n*Email:* {{3.payment.member_email}}\n*Method:* Stripe\n*Reference:* {{3.payment.reference_id}}\n━━━━━━━━━━━━━━━━━━\n_Processed {{now}}_"
+        }
+      },
+      {
+        "id": 7,
+        "module": "util:SetVariable",
+        "version": 1,
+        "metadata": {
+          "name": "Normalize PayPal Data",
+          "note": "Extracts and normalizes PayPal IPN fields"
+        },
+        "mapper": {
+          "name": "payment",
+          "value": {
+            "payment_id": "{{2.txn_id}}",
+            "member_email": "{{2.payer_email}}",
+            "amount": "{{2.mc_gross}}",
+            "method": "paypal",
+            "date": "{{now}}",
+            "status": "completed",
+            "reference_id": "{{2.txn_id}}"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "module": "http:ActionSendData",
+        "version": 3,
+        "metadata": {
+          "name": "Verify PayPal IPN",
+          "note": "POSTs IPN message back to PayPal for verification"
+        },
+        "mapper": {
+          "url": "https://ipnpb.paypal.com/cgi-bin/webscr?cmd=_notify-validate",
+          "method": "POST",
+          "body": "{{1.body}}",
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
+          ]
+        }
+      },
+      {
+        "id": 9,
+        "module": "datastore:addRecord",
+        "version": 1,
+        "metadata": {
+          "name": "Write PayPal to Payments Store",
+          "note": "Logs PayPal payment (only if IPN verified)"
+        },
+        "parameters": {
+          "dataStore": "{{PAYMENTS_DATASTORE_ID}}"
+        },
+        "mapper": {
+          "key": "{{7.payment.payment_id}}",
+          "payment_id": "{{7.payment.payment_id}}",
+          "member_email": "{{7.payment.member_email}}",
+          "amount": "{{7.payment.amount}}",
+          "method": "paypal",
+          "date": "{{now}}",
+          "status": "completed",
+          "reference_id": "{{7.payment.reference_id}}"
+        }
+      },
+      {
+        "id": 10,
+        "module": "slack:sendMessage",
+        "version": 1,
+        "metadata": {
+          "name": "Slack Ops Notification (PayPal)",
+          "note": "Posts PayPal payment to #hirecar-ops"
+        },
+        "parameters": {
+          "connection": "{{SLACK_CONNECTION_ID}}"
+        },
+        "mapper": {
+          "channel": "{{HIRECAR_OPS_CHANNEL_ID}}",
+          "text": ":moneybag: *PAYMENT RECEIVED*\n━━━━━━━━━━━━━━━━━━\n*Amount:* ${{7.payment.amount}}\n*Email:* {{7.payment.member_email}}\n*Method:* PayPal\n*Reference:* {{7.payment.reference_id}}\n━━━━━━━━━━━━━━━━━━\n_Processed {{now}}_"
+        }
+      }
+    ],
+    "errorHandler": {
+      "on": 4,
+      "module": "zohomail:sendEmail",
+      "metadata": {
+        "name": "Error Alert",
+        "note": "Sends alert to ops if data store write fails"
+      },
+      "mapper": {
+        "from": "noreply@hirecar.la",
+        "to": "ops@hirecar.la",
+        "subject": "[ALERT] Payment Pipeline Error — {{now}}",
+        "body": "Payment data store write failed. Check Make.com execution log. Payment ID: {{3.payment.payment_id}}"
+      }
+    }
+  },
+  "notes": {
+    "free_plan_warning": "This is Scenario 2 of 2 on Make.com Free Plan. No more scenarios can be created without upgrading.",
+    "placeholder_vars": [
+      "{{PAYMENT_WEBHOOK_ID}} — Create webhook in Make.com, get ID",
+      "{{PAYMENTS_DATASTORE_ID}} — HIRECAR Payments data store ID (create first)",
+      "{{ZOHO_CONNECTION_ID}} — Connect Zoho Mail in Make.com",
+      "{{SLACK_CONNECTION_ID}} — Connect Slack in Make.com",
+      "{{HIRECAR_OPS_CHANNEL_ID}} — Get channel ID from Slack"
+    ]
+  }
+}

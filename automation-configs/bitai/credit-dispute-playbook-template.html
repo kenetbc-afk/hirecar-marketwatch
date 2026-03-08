@@ -1,0 +1,258 @@
+<!--
+  HIRECAR Credit Dispute Playbook — Bit.ai Template
+  Document ID: HC-TMP-001-A
+
+  This HTML template is converted to Bit.ai document format via API.
+  Merge variables use {{variable_name}} syntax, populated by Cloudflare Worker.
+  Password-protected: Each client gets a unique 4-digit PIN.
+
+  NOTE: This template is consumed by the Cloudflare Worker enrollment chain at api.hirecar.la/enroll.
+  Legacy Make.com scenario (HC-SCN-001) is deprecated — use Worker API instead.
+-->
+
+<style>
+  :root {
+    --ink: #111820;
+    --gold: #C9920A;
+    --red: #C0392B;
+    --blue: #0F4C75;
+    --bg: #F8F9FA;
+  }
+  body { font-family: 'Nunito Sans', Arial, sans-serif; color: var(--ink); line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .header-bar { background: var(--ink); color: white; padding: 24px 32px; }
+  .gold { color: var(--gold); }
+  .status-badge { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+  .status-active { background: #E8F5E9; color: #2E7D32; }
+  .status-pending { background: #FFF3E0; color: #E65100; }
+  .action-box { background: var(--bg); border-left: 4px solid var(--gold); padding: 16px 20px; margin: 16px 0; }
+  .deadline { color: var(--red); font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th { background: var(--ink); color: white; padding: 10px 16px; text-align: left; }
+  td { padding: 10px 16px; border-bottom: 1px solid #E0E0E0; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0; border-bottom: 1px solid #F0F0F0; }
+  .checklist li::before { content: "☐ "; color: var(--gold); font-size: 18px; }
+</style>
+
+<!-- ============================================ -->
+<!-- SECTION 1: COVER & CLIENT INFO               -->
+<!-- ============================================ -->
+
+<div class="header-bar">
+  <h1 style="color: white; margin: 0;">HIRECAR</h1>
+  <p style="color: #C9920A; margin: 4px 0 0 0; font-size: 14px;">CREDIT DISPUTE PLAYBOOK</p>
+</div>
+
+<h2>Client Profile</h2>
+
+<table>
+  <tr><td><strong>Name</strong></td><td>{{client_name}}</td></tr>
+  <tr><td><strong>Dispute ID</strong></td><td>{{dispute_id}}</td></tr>
+  <tr><td><strong>Filed Date</strong></td><td>{{dispute_date}}</td></tr>
+  <tr><td><strong>Credit Range</strong></td><td>{{score_range}}</td></tr>
+  <tr><td><strong>Items Under Dispute</strong></td><td>{{negative_items}}</td></tr>
+  <tr><td><strong>Membership Tier</strong></td><td>{{membership_tier}}</td></tr>
+  <tr><td><strong>Assigned Advisor</strong></td><td>{{advisor_name}}</td></tr>
+  <tr><td><strong>Status</strong></td><td><span class="status-badge status-active">ACTIVE</span></td></tr>
+</table>
+
+<!-- ============================================ -->
+<!-- SECTION 2: YOUR DISPUTE TIMELINE             -->
+<!-- ============================================ -->
+
+<h2>Your Dispute Timeline</h2>
+
+<p>Under the Fair Credit Reporting Act (FCRA), credit bureaus must investigate your dispute within <strong>30 days</strong> (45 days if you submit additional information). Here's what to expect:</p>
+
+<table>
+  <tr><th>Day</th><th>Milestone</th><th>Action Required</th></tr>
+  <tr><td>Day 0</td><td>Dispute Filed</td><td>✅ Completed — {{dispute_date}}</td></tr>
+  <tr><td>Day 1-3</td><td>Bureau Acknowledgment</td><td>Watch for confirmation emails from bureaus</td></tr>
+  <tr><td>Day 5-7</td><td>Investigation Begins</td><td>No action needed — bureaus contact creditors</td></tr>
+  <tr><td>Day 14</td><td>Midpoint Check</td><td>Log into bureau portals to check status</td></tr>
+  <tr><td>Day 25-30</td><td>Results Due</td><td class="deadline">⚠️ Bureau must respond by this date</td></tr>
+  <tr><td>Day 30+</td><td>Review Results</td><td>Check updated reports for corrections</td></tr>
+  <tr><td>Day 35</td><td>Follow-Up Window</td><td>If unresolved: Request "method of verification"</td></tr>
+</table>
+
+<!-- ============================================ -->
+<!-- SECTION 3: DISPUTE LETTERS (READY TO SEND)  -->
+<!-- ============================================ -->
+
+<h2>Step 1: Send Your Dispute Letters</h2>
+
+<div class="action-box">
+  <strong>⏰ Deadline:</strong> <span class="deadline">Send within 48 hours of receiving this playbook</span><br>
+  <strong>Method:</strong> Certified mail with return receipt requested<br>
+  <strong>Send to:</strong> All 3 bureaus (addresses below)
+</div>
+
+<h3>Bureau Mailing Addresses</h3>
+<table>
+  <tr><th>Bureau</th><th>Address</th></tr>
+  <tr><td>Experian</td><td>P.O. Box 4500, Allen, TX 75013</td></tr>
+  <tr><td>Equifax</td><td>P.O. Box 740256, Atlanta, GA 30374</td></tr>
+  <tr><td>TransUnion</td><td>P.O. Box 2000, Chester, PA 19016</td></tr>
+</table>
+
+<h3>Dispute Letter Template</h3>
+
+<div style="background: #F8F9FA; padding: 20px; border: 1px solid #E0E0E0; font-family: 'DM Mono', 'Courier New', monospace; font-size: 13px; line-height: 1.8;">
+{{client_name}}<br>
+[Your Address]<br>
+[City, State ZIP]<br>
+<br>
+{{dispute_date}}<br>
+<br>
+[Bureau Name]<br>
+[Bureau Address from table above]<br>
+<br>
+RE: Dispute of Inaccurate Information<br>
+<br>
+To Whom It May Concern:<br>
+<br>
+I am writing to dispute the following information in my credit file. The item(s) I dispute are:<br>
+<br>
+<strong>[List each item — account name, account number (last 4), specific error]</strong><br>
+<br>
+This information is inaccurate because: <strong>[State specific reason — wrong balance, not my account, wrong date, paid but showing unpaid, etc.]</strong><br>
+<br>
+Under the Fair Credit Reporting Act (15 U.S.C. § 1681i), you are required to investigate this dispute within 30 days and remove any information that cannot be verified.<br>
+<br>
+I am requesting that these items be removed or corrected immediately.<br>
+<br>
+Enclosed:<br>
+- Copy of government-issued photo ID<br>
+- Proof of current address (utility bill or bank statement)<br>
+- [Any supporting documentation]<br>
+<br>
+Sincerely,<br>
+{{client_name}}<br>
+</div>
+
+<p><em>Print 3 copies — one for each bureau. Keep copies for your records. Send via USPS Certified Mail.</em></p>
+
+<!-- ============================================ -->
+<!-- SECTION 4: SCORE OPTIMIZATION STRATEGY       -->
+<!-- ============================================ -->
+
+<h2>Step 2: Optimize Your Score While Waiting</h2>
+
+<p>While your disputes are being investigated (30 days), take these actions to boost your score independently:</p>
+
+<h3>Quick Wins (This Week)</h3>
+<ul class="checklist">
+  <li>Pay all credit cards below 30% utilization (below 10% is ideal)</li>
+  <li>Sign up for Experian Boost (adds utility/phone payments to report)</li>
+  <li>Do NOT close any old credit card accounts</li>
+  <li>Do NOT apply for any new credit (no hard inquiries)</li>
+</ul>
+
+<h3>AZEO Strategy (Advanced)</h3>
+<p><strong>All Zero Except One</strong> — Pay every card balance to $0 before statement closing date. Leave ONE card with a small balance (1-3% of limit). This produces the optimal utilization ratio.</p>
+
+<div class="action-box">
+  <strong>Example:</strong> If you have 3 cards with $5,000 total limit:<br>
+  Card A ($2,000 limit): Pay to $0<br>
+  Card B ($2,000 limit): Pay to $0<br>
+  Card C ($1,000 limit): Leave $30 balance (3%)<br>
+  <strong>Result:</strong> 0.6% aggregate utilization — optimal FICO range
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 5: CREDIT UTILIZATION CALCULATOR     -->
+<!-- ============================================ -->
+
+<h2>Credit Utilization Tracker</h2>
+
+<table>
+  <tr><th>Card / Account</th><th>Credit Limit</th><th>Current Balance</th><th>Utilization %</th><th>Target Balance</th></tr>
+  <tr><td>[Card 1]</td><td>$_______</td><td>$_______</td><td>______%</td><td>$_______</td></tr>
+  <tr><td>[Card 2]</td><td>$_______</td><td>$_______</td><td>______%</td><td>$_______</td></tr>
+  <tr><td>[Card 3]</td><td>$_______</td><td>$_______</td><td>______%</td><td>$_______</td></tr>
+  <tr><td>[Card 4]</td><td>$_______</td><td>$_______</td><td>______%</td><td>$_______</td></tr>
+  <tr><td><strong>TOTAL</strong></td><td>$_______</td><td>$_______</td><td><strong>______%</strong></td><td>—</td></tr>
+</table>
+
+<p><strong>Target:</strong> Keep total utilization below 10%. Per-card utilization matters too — no single card above 30%.</p>
+
+<!-- ============================================ -->
+<!-- SECTION 6: RECOVERY TIMELINE                 -->
+<!-- ============================================ -->
+
+<h2>Expected Recovery Timeline</h2>
+
+<p>Based on your current score range (<strong>{{score_range}}</strong>) and {{negative_items}} under dispute:</p>
+
+<table>
+  <tr><th>Negative Item Type</th><th>Score Impact</th><th>Recovery Time</th><th>Report Duration</th></tr>
+  <tr><td>Late Payment (30-day)</td><td>-60 to -110 pts</td><td>9-18 months</td><td>7 years</td></tr>
+  <tr><td>Late Payment (60-day)</td><td>-70 to -120 pts</td><td>12-24 months</td><td>7 years</td></tr>
+  <tr><td>Collection Account</td><td>-50 to -100 pts</td><td>12-24 months</td><td>7 years</td></tr>
+  <tr><td>Charge-Off</td><td>-80 to -150 pts</td><td>18-36 months</td><td>7 years</td></tr>
+  <tr><td>Hard Inquiry</td><td>-5 to -10 pts</td><td>3-6 months</td><td>2 years</td></tr>
+</table>
+
+<p><em>If disputed items are removed, score impact reverses within 30-60 days of removal.</em></p>
+
+<!-- ============================================ -->
+<!-- SECTION 7: HIRECAR IMPACT                    -->
+<!-- ============================================ -->
+
+<h2>How This Affects Your HIRECAR Membership</h2>
+
+<p>Your Credit Readiness Index (CRI) is one of 6 scores in the HIRECAR Health & Business Index (HBI). Improving your credit directly impacts:</p>
+
+<table>
+  <tr><th>Benefit</th><th>Current Impact</th><th>After Repair</th></tr>
+  <tr><td>Vehicle Financing Rate</td><td>Subprime (8-15% APR)</td><td>Standard (4-7% APR)</td></tr>
+  <tr><td>Insurance Premiums</td><td>Higher premiums</td><td>Reduced by 10-25%</td></tr>
+  <tr><td>Fleet Expansion Eligibility</td><td>Single vehicle only</td><td>Multi-vehicle approval</td></tr>
+  <tr><td>Membership Tier</td><td>{{membership_tier}}</td><td>Eligible for next tier</td></tr>
+</table>
+
+<div class="action-box">
+  <strong>Tier Advancement:</strong> CRI improvement of 50+ points within 6 months qualifies you for HIRECAR tier review. Contact your advisor {{advisor_name}} when your score updates.
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 8: FOLLOW-UP CHECKLIST               -->
+<!-- ============================================ -->
+
+<h2>30-Day Follow-Up Checklist</h2>
+
+<ul class="checklist">
+  <li>Dispute letters mailed (certified) to all 3 bureaus</li>
+  <li>Return receipts saved/photographed</li>
+  <li>Bureau acknowledgment emails received</li>
+  <li>Day 14: Checked bureau portals for investigation status</li>
+  <li>All card utilizations below 10% (AZEO applied)</li>
+  <li>Experian Boost activated</li>
+  <li>Day 30: Bureau results received</li>
+  <li>Updated credit reports pulled from AnnualCreditReport.com</li>
+  <li>Score change documented</li>
+  <li>Advisor {{advisor_name}} notified of results</li>
+  <li>If items not removed: "Method of Verification" letter sent</li>
+</ul>
+
+<!-- ============================================ -->
+<!-- SECTION 9: SUPPORT & LEGAL                   -->
+<!-- ============================================ -->
+
+<h2>Support & Legal Information</h2>
+
+<p><strong>Your HIRECAR Advisor:</strong> {{advisor_name}}<br>
+<strong>Email:</strong> support@hirecar.la<br>
+<strong>Phone:</strong> (213) XXX-XXXX<br>
+<strong>Portal:</strong> hirecar.la/dashboard</p>
+
+<div style="background: #FFF3E0; padding: 16px 20px; border-left: 4px solid #E65100; margin-top: 24px;">
+  <strong>⚠️ Important Disclaimer:</strong> This playbook contains educational information about credit repair processes. HIRECAR is not a credit repair organization as defined by the Credit Repair Organizations Act (CROA). This is not personalized financial advice. For complex credit situations, consult a certified credit counselor. HIRECAR, LLC dba HIRECREDIT. Standards layer operated by CREDITWITHKEN, LLC.
+</div>
+
+<div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #E0E0E0; text-align: center; color: #999; font-size: 12px;">
+  HIRECAR | Auto Operator Intelligence<br>
+  hirecar.la | @hirecar.la<br>
+  Dispute ID: {{dispute_id}} | Generated: {{dispute_date}}
+</div>

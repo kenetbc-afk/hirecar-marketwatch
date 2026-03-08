@@ -1,0 +1,1822 @@
+{
+  "contextId": "CTX-HC-0001",
+  "registryVersion": "v1.0.0",
+  "generatedDate": "2026-03-04T03:11:40.443Z",
+  "totalDocuments": 49,
+  "organization": "HIRECAR",
+  "confidentiality": "INTERNAL",
+  "documents": [
+    {
+      "id": "DOC-00001",
+      "contextId": "CTX-HC-0001",
+      "documentId": "PLN-HC-0001",
+      "title": "HIRECARPlan",
+      "class": "PLN",
+      "sequence": "0001",
+      "filename": "PLN-HC-0001_HIRECARPlan_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00002",
+      "contextId": "CTX-HC-0001",
+      "documentId": "PLN-HC-0002",
+      "title": "HIRECARProjectPlan",
+      "class": "PLN",
+      "sequence": "0002",
+      "filename": "PLN-HC-0002_HIRECARProjectPlan_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00003",
+      "contextId": "CTX-HC-0001",
+      "documentId": "PLN-HC-0003",
+      "title": "HIRECARRepublishPlan",
+      "class": "PLN",
+      "sequence": "0003",
+      "filename": "PLN-HC-0003_HIRECARRepublishPlan_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00004",
+      "contextId": "CTX-HC-0001",
+      "documentId": "PLN-HC-0004",
+      "title": "BasePlan",
+      "class": "PLN",
+      "sequence": "0004",
+      "filename": "PLN-HC-0004_BasePlan_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00005",
+      "contextId": "CTX-HC-0001",
+      "documentId": "PLN-HC-0005",
+      "title": "UXRoadmap",
+      "class": "PLN",
+      "sequence": "0005",
+      "filename": "PLN-HC-0005_UXRoadmap_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00006",
+      "contextId": "CTX-HC-0001",
+      "documentId": "ARC-HC-0001",
+      "title": "ExpandedArchitecture",
+      "class": "ARC",
+      "sequence": "0001",
+      "filename": "ARC-HC-0001_ExpandedArchitecture_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00007",
+      "contextId": "CTX-HC-0001",
+      "documentId": "RPT-HC-0001",
+      "title": "GapAnalysis",
+      "class": "RPT",
+      "sequence": "0001",
+      "filename": "RPT-HC-0001_GapAnalysis_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00008",
+      "contextId": "CTX-HC-0001",
+      "documentId": "RPT-HC-0002",
+      "title": "ProductionGapAnalysis",
+      "class": "RPT",
+      "sequence": "0002",
+      "filename": "RPT-HC-0002_ProductionGapAnalysis_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00009",
+      "contextId": "CTX-HC-0001",
+      "documentId": "RPT-HC-0003",
+      "title": "ProductionReadinessReport",
+      "class": "RPT",
+      "sequence": "0003",
+      "filename": "RPT-HC-0003_ProductionReadinessReport_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00010",
+      "contextId": "CTX-HC-0001",
+      "documentId": "RPT-HC-0004",
+      "title": "FindingsLetter",
+      "class": "RPT",
+      "sequence": "0004",
+      "filename": "RPT-HC-0004_FindingsLetter_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00011",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0001",
+      "title": "ExecutivePublishingPackage",
+      "class": "WPK",
+      "sequence": "0001",
+      "filename": "WPK-HC-0001_ExecutivePublishingPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00012",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0002",
+      "title": "WorkspaceExecutionPlan",
+      "class": "WPK",
+      "sequence": "0002",
+      "filename": "WPK-HC-0002_WorkspaceExecutionPlan_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00013",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0005",
+      "title": "PassKitBitAiAutomationPackage",
+      "class": "WPK",
+      "sequence": "0005",
+      "filename": "WPK-HC-0005_PassKitBitAiAutomationPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00014",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0010",
+      "title": "InfrastructurePaymentsPackage",
+      "class": "WPK",
+      "sequence": "0010",
+      "filename": "WPK-HC-0010_InfrastructurePaymentsPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00015",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0020",
+      "title": "BotBuildingEnrollmentPackage",
+      "class": "WPK",
+      "sequence": "0020",
+      "filename": "WPK-HC-0020_BotBuildingEnrollmentPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00016",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0030",
+      "title": "ContentPlaybooksBitDocsPackage",
+      "class": "WPK",
+      "sequence": "0030",
+      "filename": "WPK-HC-0030_ContentPlaybooksBitDocsPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00017",
+      "contextId": "CTX-HC-0001",
+      "documentId": "WPK-HC-0040",
+      "title": "ExecutionMonitorPackage",
+      "class": "WPK",
+      "sequence": "0040",
+      "filename": "WPK-HC-0040_ExecutionMonitorPackage_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00018",
+      "contextId": "CTX-HC-0001",
+      "documentId": "BDL-HC-0010",
+      "title": "DeploymentBundle",
+      "class": "BDL",
+      "sequence": "0010",
+      "filename": "BDL-HC-0010_DeploymentBundle_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00019",
+      "contextId": "CTX-HC-0001",
+      "documentId": "BDL-HC-0020",
+      "title": "DeploymentBundle",
+      "class": "BDL",
+      "sequence": "0020",
+      "filename": "BDL-HC-0020_DeploymentBundle_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00020",
+      "contextId": "CTX-HC-0001",
+      "documentId": "BDL-HC-0030",
+      "title": "DeploymentBundle",
+      "class": "BDL",
+      "sequence": "0030",
+      "filename": "BDL-HC-0030_DeploymentBundle_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00021",
+      "contextId": "CTX-HC-0001",
+      "documentId": "BDL-HC-0040",
+      "title": "DeploymentBundle",
+      "class": "BDL",
+      "sequence": "0040",
+      "filename": "BDL-HC-0040_DeploymentBundle_v1.0.0.docx",
+      "extension": "docx",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Admin"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial creation from legacy files"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvedBy": "System Admin",
+        "approvalDate": "2026-03-04T03:11:40.444Z",
+        "approvalNotes": "Auto-approved on workspace initialization"
+      }
+    },
+    {
+      "id": "DOC-00022",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0100",
+      "title": "cloudflare-pages-workers",
+      "class": "SKL",
+      "sequence": "0100",
+      "filename": "SKL-HC-0100_cloudflare-pages-workers_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00023",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0101",
+      "title": "deploying-to-production",
+      "class": "SKL",
+      "sequence": "0101",
+      "filename": "SKL-HC-0101_deploying-to-production_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00024",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0102",
+      "title": "email-systems",
+      "class": "SKL",
+      "sequence": "0102",
+      "filename": "SKL-HC-0102_email-systems_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00025",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0103",
+      "title": "payment-integration",
+      "class": "SKL",
+      "sequence": "0103",
+      "filename": "SKL-HC-0103_payment-integration_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00026",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0104",
+      "title": "sendgrid-automation",
+      "class": "SKL",
+      "sequence": "0104",
+      "filename": "SKL-HC-0104_sendgrid-automation_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00027",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0105",
+      "title": "stripe-best-practices",
+      "class": "SKL",
+      "sequence": "0105",
+      "filename": "SKL-HC-0105_stripe-best-practices_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00028",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0106",
+      "title": "stripe-integration",
+      "class": "SKL",
+      "sequence": "0106",
+      "filename": "SKL-HC-0106_stripe-integration_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00029",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0107",
+      "title": "vercel-deploy",
+      "class": "SKL",
+      "sequence": "0107",
+      "filename": "SKL-HC-0107_vercel-deploy_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00030",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0200",
+      "title": "auth-security-expert",
+      "class": "SKL",
+      "sequence": "0200",
+      "filename": "SKL-HC-0200_auth-security-expert_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00031",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0201",
+      "title": "authentication-flow-rules",
+      "class": "SKL",
+      "sequence": "0201",
+      "filename": "SKL-HC-0201_authentication-flow-rules_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00032",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0202",
+      "title": "credit-repair-strategist",
+      "class": "SKL",
+      "sequence": "0202",
+      "filename": "SKL-HC-0202_credit-repair-strategist_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00033",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0203",
+      "title": "nextjs-master",
+      "class": "SKL",
+      "sequence": "0203",
+      "filename": "SKL-HC-0203_nextjs-master_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00034",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0204",
+      "title": "react-nextjs-development",
+      "class": "SKL",
+      "sequence": "0204",
+      "filename": "SKL-HC-0204_react-nextjs-development_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00035",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0205",
+      "title": "security-architect",
+      "class": "SKL",
+      "sequence": "0205",
+      "filename": "SKL-HC-0205_security-architect_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00036",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0206",
+      "title": "senior-frontend",
+      "class": "SKL",
+      "sequence": "0206",
+      "filename": "SKL-HC-0206_senior-frontend_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00037",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0207",
+      "title": "zoho-crm-automation",
+      "class": "SKL",
+      "sequence": "0207",
+      "filename": "SKL-HC-0207_zoho-crm-automation_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS2"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00038",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0300",
+      "title": "content-creator",
+      "class": "SKL",
+      "sequence": "0300",
+      "filename": "SKL-HC-0300_content-creator_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00039",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0301",
+      "title": "content-marketer",
+      "class": "SKL",
+      "sequence": "0301",
+      "filename": "SKL-HC-0301_content-marketer_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00040",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0302",
+      "title": "frontend-landings",
+      "class": "SKL",
+      "sequence": "0302",
+      "filename": "SKL-HC-0302_frontend-landings_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00041",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0303",
+      "title": "landing-page-builder",
+      "class": "SKL",
+      "sequence": "0303",
+      "filename": "SKL-HC-0303_landing-page-builder_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00042",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0304",
+      "title": "seo-content-writer",
+      "class": "SKL",
+      "sequence": "0304",
+      "filename": "SKL-HC-0304_seo-content-writer_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS3"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00043",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0400",
+      "title": "ci-cd-pipelines",
+      "class": "SKL",
+      "sequence": "0400",
+      "filename": "SKL-HC-0400_ci-cd-pipelines_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00044",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0401",
+      "title": "github-actions-cicd",
+      "class": "SKL",
+      "sequence": "0401",
+      "filename": "SKL-HC-0401_github-actions-cicd_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00045",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0402",
+      "title": "stripe-billing",
+      "class": "SKL",
+      "sequence": "0402",
+      "filename": "SKL-HC-0402_stripe-billing_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00046",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-0403",
+      "title": "stripe-payments",
+      "class": "SKL",
+      "sequence": "0403",
+      "filename": "SKL-HC-0403_stripe-payments_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00047",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-3000",
+      "title": "cloudflare-nextjs-deployment",
+      "class": "SKL",
+      "sequence": "3000",
+      "filename": "SKL-HC-3000_cloudflare-nextjs-deployment_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00048",
+      "contextId": "CTX-HC-0001",
+      "documentId": "SKL-HC-3001",
+      "title": "oauth2-authentication",
+      "class": "SKL",
+      "sequence": "3001",
+      "filename": "SKL-HC-3001_oauth2-authentication_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Skills Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial skill catalog"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    },
+    {
+      "id": "DOC-00049",
+      "contextId": "CTX-HC-0001",
+      "documentId": "BOT-HC-0001",
+      "title": "DocApprovalRouter",
+      "class": "BOT",
+      "sequence": "0001",
+      "filename": "BOT-HC-0001_DocApprovalRouter_v1.0.0.md",
+      "extension": "md",
+      "version": "v1.0.0",
+      "status": "ACTIVE",
+      "createdDate": "2026-03-04T03:11:40.444Z",
+      "lastModified": "2026-03-04T03:11:40.444Z",
+      "workstations": [
+        "WS1",
+        "WS2",
+        "WS3",
+        "WS4"
+      ],
+      "owners": [
+        "HIRECAR Automation Team"
+      ],
+      "confidentiality": "INTERNAL",
+      "retentionPeriod": "7 years",
+      "revisionHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "2026-03-04T03:11:40.444Z",
+          "author": "HIRECAR Build System",
+          "change": "Initial bot creation"
+        }
+      ],
+      "approvalRecord": {
+        "status": "ACTIVE",
+        "approvalType": "AUTO"
+      }
+    }
+  ],
+  "classificationSummary": {
+    "PLN": 5,
+    "ARC": 1,
+    "RPT": 4,
+    "WPK": 7,
+    "BDL": 4,
+    "SKL": 27
+  },
+  "workstationAssignment": {
+    "WS1": [
+      "DOC-00001",
+      "DOC-00002",
+      "DOC-00003",
+      "DOC-00004",
+      "DOC-00006",
+      "DOC-00014",
+      "DOC-00018",
+      "DOC-00022",
+      "DOC-00023",
+      "DOC-00024",
+      "DOC-00025",
+      "DOC-00026",
+      "DOC-00027",
+      "DOC-00028",
+      "DOC-00029",
+      "DOC-00047",
+      "DOC-00048"
+    ],
+    "WS2": [
+      "DOC-00001",
+      "DOC-00002",
+      "DOC-00003",
+      "DOC-00004",
+      "DOC-00006",
+      "DOC-00013",
+      "DOC-00015",
+      "DOC-00019",
+      "DOC-00030",
+      "DOC-00031",
+      "DOC-00032",
+      "DOC-00033",
+      "DOC-00034",
+      "DOC-00035",
+      "DOC-00036",
+      "DOC-00037",
+      "DOC-00047",
+      "DOC-00048"
+    ],
+    "WS3": [
+      "DOC-00001",
+      "DOC-00002",
+      "DOC-00005",
+      "DOC-00006",
+      "DOC-00016",
+      "DOC-00020",
+      "DOC-00038",
+      "DOC-00039",
+      "DOC-00040",
+      "DOC-00041",
+      "DOC-00042",
+      "DOC-00047",
+      "DOC-00048"
+    ],
+    "WS4": [
+      "DOC-00001",
+      "DOC-00002",
+      "DOC-00006",
+      "DOC-00007",
+      "DOC-00008",
+      "DOC-00009",
+      "DOC-00010",
+      "DOC-00011",
+      "DOC-00012",
+      "DOC-00017",
+      "DOC-00021",
+      "DOC-00043",
+      "DOC-00044",
+      "DOC-00045",
+      "DOC-00046",
+      "DOC-00047",
+      "DOC-00048"
+    ],
+    "SHARED": []
+  }
+}

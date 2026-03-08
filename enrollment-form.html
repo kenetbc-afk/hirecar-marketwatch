@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR Member Enrollment</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Nunito+Sans:wght@400&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #111820;
+            background-color: #FAFAF8;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        code, .code {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: #0F4C75;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #C9920A;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #C9920A;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 11px;
+            opacity: 0.95;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            padding: 16px 20px;
+            background-color: #f5f5f3;
+            border-bottom: 1px solid #e0e0de;
+        }
+
+        .progress-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #0F4C75;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #e0e0de;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #C9920A;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Form Container */
+        .form-wrapper {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #111820;
+        }
+
+        label.required::after {
+            content: " *";
+            color: #C0392B;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 12px;
+            border: 1px solid #d0cfd0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #111820;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #C9920A;
+            box-shadow: 0 0 0 3px rgba(201, 146, 10, 0.1);
+        }
+
+        input[type="text"].error,
+        input[type="email"].error,
+        input[type="tel"].error,
+        input[type="number"].error,
+        select.error,
+        textarea.error {
+            border-color: #C0392B;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        /* Radio & Checkbox Groups */
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"],
+        .radio-item input[type="radio"] {
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #C9920A;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item label,
+        .radio-item label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Urgency Buttons */
+        .urgency-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .urgency-btn {
+            padding: 12px 8px;
+            border: 2px solid #d0cfd0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .urgency-btn:hover {
+            border-color: #C9920A;
+        }
+
+        .urgency-btn.selected {
+            background-color: #C9920A;
+            color: white;
+            border-color: #C9920A;
+        }
+
+        /* Program Cards */
+        .program-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .program-card {
+            border: 2px solid #d0cfd0;
+            border-radius: 4px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .program-card:hover {
+            border-color: #C9920A;
+            background-color: #fafaf0;
+        }
+
+        .program-card.selected {
+            border-color: #C9920A;
+            background-color: #faf8f3;
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .program-card input[type="radio"] {
+            margin: 0;
+            cursor: pointer;
+            accent-color: #C9920A;
+            width: 18px;
+            height: 18px;
+        }
+
+        .program-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: #111820;
+        }
+
+        .program-price {
+            color: #0F4C75;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .program-desc {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Review Section */
+        .review-section {
+            background-color: #f5f5f3;
+            border-radius: 4px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .review-item {
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .review-label {
+            font-weight: 600;
+            color: #0F4C75;
+        }
+
+        .review-value {
+            color: #111820;
+            margin-top: 2px;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: #C0392B;
+            font-size: 11px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Navigation Buttons */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            justify-content: space-between;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 16px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background-color: #e0e0de;
+            color: #111820;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0cd;
+        }
+
+        .btn-primary {
+            background-color: #C9920A;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #b08408;
+        }
+
+        .btn-primary:disabled {
+            background-color: #d0cfd0;
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            background-color: #0F4C75;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #0a3455;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 20px;
+            background-color: #f5f5f3;
+            border-top: 1px solid #e0e0de;
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .footer a {
+            color: #0F4C75;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile First */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            body {
+                font-size: 13px;
+            }
+
+            label {
+                font-size: 13px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .form-wrapper {
+                padding: 30px;
+                border-radius: 8px;
+                background-color: white;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* Very small screens (375px) */
+        @media (max-width: 400px) {
+            .container {
+                padding: 0;
+            }
+
+            .form-wrapper {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .urgency-container {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .urgency-btn {
+                padding: 10px 4px;
+                font-size: 10px;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>HIRECAR</h1>
+            <p>Member Enrollment</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-label">Step <span id="currentStep">1</span> of 5</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-wrapper">
+            <form class="form" id="enrollmentForm">
+                <input type="hidden" name="form_type" value="enrollment">
+
+                <!-- STEP 1: Contact Info -->
+                <div class="step active" id="step1">
+                    <h2>Contact Information</h2>
+
+                    <div class="form-group">
+                        <label for="firstName" class="required">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name">
+                        <div class="error-message" id="firstNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="required">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name">
+                        <div class="error-message" id="lastNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="required">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cityArea" class="required">City / Area</label>
+                        <select id="cityArea" name="cityArea">
+                            <option value="">Select your city or area</option>
+                            <option value="Los Angeles">Los Angeles</option>
+                            <option value="San Francisco">San Francisco</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="cityAreaError"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Vehicle Info -->
+                <div class="step" id="step2">
+                    <h2>Vehicle Information</h2>
+
+                    <div class="form-group">
+                        <label for="vehicleYear">Vehicle Year</label>
+                        <input type="number" id="vehicleYear" name="vehicleYear" placeholder="e.g., 2021" min="1990" max="2099">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicleMake">Make</label>
+                        <input type="text" id="vehicleMake" name="vehicleMake" placeholder="e.g., Toyota">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicleModel">Model</label>
+                        <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g., Camry">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tlcPermit">TLC / Permit Number (Optional)</label>
+                        <input type="text" id="tlcPermit" name="tlcPermit" placeholder="Enter your TLC or permit number">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Rideshare Platform</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="uber" name="rideshare" value="Uber">
+                                <label for="uber">Uber</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="lyft" name="rideshare" value="Lyft">
+                                <label for="lyft">Lyft</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="both" name="rideshare" value="Both">
+                                <label for="both">Both</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="other" name="rideshare" value="Other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="rideshareError"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Goals & Situation -->
+                <div class="step" id="step3">
+                    <h2>Goals & Situation</h2>
+
+                    <div class="form-group">
+                        <label class="required">What brought you to HIRECAR?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="creditRepair" name="goals" value="Credit Repair">
+                                <label for="creditRepair">Credit Repair</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="insuranceHelp" name="goals" value="Insurance Help">
+                                <label for="insuranceHelp">Insurance Help</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="rentalFleet" name="goals" value="Rental/Fleet">
+                                <label for="rentalFleet">Rental / Fleet Management</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="businessFunding" name="goals" value="Business Funding">
+                                <label for="businessFunding">Business Funding</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="goalsOther" name="goals" value="Other">
+                                <label for="goalsOther">Other</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="goalsError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="situation" class="required">Describe Your Situation</label>
+                        <textarea id="situation" name="situation" placeholder="Tell us about your current situation and what you hope to achieve..."></textarea>
+                        <div class="error-message" id="situationError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Urgency Level</label>
+                        <div class="urgency-container">
+                            <button type="button" class="urgency-btn" data-urgency="1">
+                                <div style="font-size: 14px; margin-bottom: 2px;">1</div>
+                                <div style="font-size: 9px;">Low</div>
+                            </button>
+                            <button type="button" class="urgency-btn" data-urgency="2">
+                                <div style="font-size: 14px; margin-bottom: 2px;">2</div>
+                            </button>
+                            <button type="button" class="urgency-btn" data-urgency="3">
+                                <div style="font-size: 14px; margin-bottom: 2px;">3</div>
+                            </button>
+                            <button type="button" class="urgency-btn" data-urgency="4">
+                                <div style="font-size: 14px; margin-bottom: 2px;">4</div>
+                            </button>
+                            <button type="button" class="urgency-btn" data-urgency="5">
+                                <div style="font-size: 14px; margin-bottom: 2px;">5</div>
+                                <div style="font-size: 9px;">Critical</div>
+                            </button>
+                        </div>
+                        <div class="error-message" id="urgencyError"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Program Selection -->
+                <div class="step" id="step4">
+                    <h2>Program Selection</h2>
+                    <p style="font-size: 12px; color: #555; margin-bottom: 16px;">Choose the membership tier that best fits your needs.</p>
+
+                    <div class="program-container">
+                        <label class="program-card" id="programStandard">
+                            <div class="program-header">
+                                <input type="radio" name="program" value="Standard">
+                                <div>
+                                    <div class="program-title">Standard</div>
+                                    <div class="program-price">$XX/month</div>
+                                </div>
+                            </div>
+                            <div class="program-desc">Core access to playbooks and essential tools to get you started.</div>
+                        </label>
+
+                        <label class="program-card" id="programOperator">
+                            <div class="program-header">
+                                <input type="radio" name="program" value="Operator">
+                                <div>
+                                    <div class="program-title">Operator</div>
+                                    <div class="program-price">$XX/month</div>
+                                </div>
+                            </div>
+                            <div class="program-desc">Full toolkit including dispute support and advanced resources.</div>
+                        </label>
+
+                        <label class="program-card" id="programFirstClass">
+                            <div class="program-header">
+                                <input type="radio" name="program" value="First Class">
+                                <div>
+                                    <div class="program-title">First Class</div>
+                                    <div class="program-price">$XX/month</div>
+                                </div>
+                            </div>
+                            <div class="program-desc">Priority support and business credit building programs included.</div>
+                        </label>
+
+                        <label class="program-card" id="programElite">
+                            <div class="program-header">
+                                <input type="radio" name="program" value="Elite Operator">
+                                <div>
+                                    <div class="program-title">Elite Operator</div>
+                                    <div class="program-price">$XX/month</div>
+                                </div>
+                            </div>
+                            <div class="program-desc">All-access membership with dedicated advisor and premium support.</div>
+                        </label>
+                    </div>
+                    <div class="error-message" id="programError"></div>
+                </div>
+
+                <!-- STEP 5: Review & Submit -->
+                <div class="step" id="step5">
+                    <h2>Review & Submit</h2>
+                    <p style="font-size: 12px; color: #555; margin-bottom: 16px;">Please review your information before submitting.</p>
+
+                    <div class="review-section">
+                        <div class="review-item">
+                            <div class="review-label">Contact Information</div>
+                            <div class="review-value" id="reviewContact"></div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Vehicle Information</div>
+                            <div class="review-value" id="reviewVehicle"></div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Goals</div>
+                            <div class="review-value" id="reviewGoals"></div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Situation Summary</div>
+                            <div class="review-value" id="reviewSituation"></div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Urgency Level</div>
+                            <div class="review-value" id="reviewUrgency"></div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Selected Program</div>
+                            <div class="review-value" id="reviewProgram"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="termsAccept" name="termsAccept">
+                            <label for="termsAccept">I agree to the <a href="/terms/" style="color: #0F4C75; text-decoration: none;">Terms & Conditions</a></label>
+                        </div>
+                        <div class="error-message" id="termsError"></div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" id="backBtn" style="display: none;">← Back</button>
+                    <button type="button" class="btn-primary" id="nextBtn">Next →</button>
+                    <button type="submit" class="btn-submit" id="submitBtn" style="display: none;">Submit Enrollment</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>HIRECAR Member Enrollment &copy; 2026. All rights reserved.</p>
+            <p><a href="/terms/">Terms & Conditions</a> | <a href="/privacy/">Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Form State
+        const formData = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            cityArea: '',
+            vehicleYear: '',
+            vehicleMake: '',
+            vehicleModel: '',
+            tlcPermit: '',
+            rideshare: '',
+            goals: [],
+            situation: '',
+            urgency: '',
+            program: '',
+            termsAccept: false
+        };
+
+        let currentStep = 1;
+        const totalSteps = 5;
+        const form = document.getElementById('enrollmentForm');
+
+        // Initialize
+        function init() {
+            setupEventListeners();
+            checkURLParameters();
+            updateProgress();
+        }
+
+        // URL Parameter Handling
+        function checkURLParameters() {
+            const params = new URLSearchParams(window.location.search);
+            const goal = params.get('goal');
+
+            if (goal) {
+                const checkboxId = {
+                    'credit-repair': 'creditRepair',
+                    'insurance': 'insuranceHelp',
+                    'rental': 'rentalFleet',
+                    'funding': 'businessFunding',
+                    'other': 'goalsOther'
+                }[goal.toLowerCase()];
+
+                if (checkboxId) {
+                    const checkbox = document.getElementById(checkboxId);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                }
+            }
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Form fields
+            document.getElementById('firstName').addEventListener('input', (e) => {
+                formData.firstName = e.target.value;
+                clearError('firstNameError');
+            });
+
+            document.getElementById('lastName').addEventListener('input', (e) => {
+                formData.lastName = e.target.value;
+                clearError('lastNameError');
+            });
+
+            document.getElementById('email').addEventListener('input', (e) => {
+                formData.email = e.target.value;
+                clearError('emailError');
+            });
+
+            document.getElementById('phone').addEventListener('input', (e) => {
+                formData.phone = e.target.value;
+                clearError('phoneError');
+            });
+
+            document.getElementById('cityArea').addEventListener('change', (e) => {
+                formData.cityArea = e.target.value;
+                clearError('cityAreaError');
+            });
+
+            // Step 2
+            document.getElementById('vehicleYear').addEventListener('input', (e) => {
+                formData.vehicleYear = e.target.value;
+            });
+
+            document.getElementById('vehicleMake').addEventListener('input', (e) => {
+                formData.vehicleMake = e.target.value;
+            });
+
+            document.getElementById('vehicleModel').addEventListener('input', (e) => {
+                formData.vehicleModel = e.target.value;
+            });
+
+            document.getElementById('tlcPermit').addEventListener('input', (e) => {
+                formData.tlcPermit = e.target.value;
+            });
+
+            document.querySelectorAll('input[name="rideshare"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.rideshare = e.target.value;
+                    clearError('rideshareError');
+                });
+            });
+
+            // Step 3
+            document.querySelectorAll('input[name="goals"]').forEach(checkbox => {
+                checkbox.addEventListener('change', updateGoals);
+            });
+
+            document.getElementById('situation').addEventListener('input', (e) => {
+                formData.situation = e.target.value;
+                clearError('situationError');
+            });
+
+            // Urgency buttons
+            document.querySelectorAll('.urgency-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.urgency-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    formData.urgency = btn.dataset.urgency;
+                    clearError('urgencyError');
+                });
+            });
+
+            // Step 4 - Program Selection
+            document.querySelectorAll('input[name="program"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.program = e.target.value;
+                    clearError('programError');
+                    updateProgramCard();
+                });
+            });
+
+            // Step 5 - Terms
+            document.getElementById('termsAccept').addEventListener('change', (e) => {
+                formData.termsAccept = e.target.checked;
+                clearError('termsError');
+            });
+
+            // Navigation
+            document.getElementById('backBtn').addEventListener('click', previousStep);
+            document.getElementById('nextBtn').addEventListener('click', nextStep);
+            form.addEventListener('submit', submitForm);
+        }
+
+        function updateGoals() {
+            formData.goals = Array.from(document.querySelectorAll('input[name="goals"]:checked'))
+                .map(cb => cb.value);
+            clearError('goalsError');
+        }
+
+        function updateProgramCard() {
+            document.querySelectorAll('.program-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            const selectedRadio = document.querySelector('input[name="program"]:checked');
+            if (selectedRadio) {
+                selectedRadio.closest('.program-card').classList.add('selected');
+            }
+        }
+
+        // Validation
+        function validateStep(step) {
+            let isValid = true;
+
+            if (step === 1) {
+                if (!formData.firstName.trim()) {
+                    showError('firstNameError', 'First name is required');
+                    isValid = false;
+                }
+                if (!formData.lastName.trim()) {
+                    showError('lastNameError', 'Last name is required');
+                    isValid = false;
+                }
+                if (!validateEmail(formData.email)) {
+                    showError('emailError', 'Valid email is required');
+                    isValid = false;
+                }
+                if (!validatePhone(formData.phone)) {
+                    showError('phoneError', 'Valid phone number is required');
+                    isValid = false;
+                }
+                if (!formData.cityArea) {
+                    showError('cityAreaError', 'Please select a city or area');
+                    isValid = false;
+                }
+            }
+
+            if (step === 2) {
+                if (!formData.rideshare) {
+                    showError('rideshareError', 'Please select a rideshare platform');
+                    isValid = false;
+                }
+            }
+
+            if (step === 3) {
+                if (formData.goals.length === 0) {
+                    showError('goalsError', 'Please select at least one goal');
+                    isValid = false;
+                }
+                if (!formData.situation.trim()) {
+                    showError('situationError', 'Please describe your situation');
+                    isValid = false;
+                }
+                if (!formData.urgency) {
+                    showError('urgencyError', 'Please select an urgency level');
+                    isValid = false;
+                }
+            }
+
+            if (step === 4) {
+                if (!formData.program) {
+                    showError('programError', 'Please select a membership tier');
+                    isValid = false;
+                }
+            }
+
+            if (step === 5) {
+                if (!formData.termsAccept) {
+                    showError('termsError', 'You must agree to the terms and conditions');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length >= 10;
+        }
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+        }
+
+        function clearError(elementId) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.classList.remove('show');
+            errorEl.textContent = '';
+        }
+
+        // Navigation
+        function nextStep(e) {
+            e.preventDefault();
+
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            if (currentStep < totalSteps) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+
+                if (currentStep === totalSteps) {
+                    populateReview();
+                }
+
+                updateProgress();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function previousStep(e) {
+            e.preventDefault();
+
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep--;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateProgress();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Progress
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('currentStep').textContent = currentStep;
+
+            // Update button visibility
+            document.getElementById('backBtn').style.display = currentStep === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').style.display = currentStep === totalSteps ? 'none' : 'block';
+            document.getElementById('submitBtn').style.display = currentStep === totalSteps ? 'block' : 'none';
+        }
+
+        // Review Population
+        function populateReview() {
+            document.getElementById('reviewContact').innerHTML =
+                `${formData.firstName} ${formData.lastName}<br>${formData.email}<br>${formData.phone}<br>${formData.cityArea}`;
+
+            const vehicleInfo = [formData.vehicleYear, formData.vehicleMake, formData.vehicleModel]
+                .filter(v => v).join(' ') || 'Not provided';
+            document.getElementById('reviewVehicle').innerHTML =
+                `${vehicleInfo}<br>${formData.tlcPermit ? 'Permit: ' + formData.tlcPermit : 'No permit provided'}<br>Platform: ${formData.rideshare}`;
+
+            document.getElementById('reviewGoals').textContent = formData.goals.join(', ');
+            document.getElementById('reviewSituation').textContent = formData.situation;
+            document.getElementById('reviewUrgency').textContent = `Level ${formData.urgency} - ${
+                {1: 'Low', 2: 'Moderate', 3: 'Moderate-High', 4: 'High', 5: 'Critical'}[formData.urgency]
+            }`;
+            document.getElementById('reviewProgram').textContent = formData.program;
+        }
+
+        // Submit
+        function submitForm(e) {
+            e.preventDefault();
+
+            if (!validateStep(5)) {
+                return;
+            }
+
+            // Prepare submission data
+            const submissionData = {
+                form_type: 'enrollment',
+                ...formData,
+                goals: formData.goals.join(','),
+                timestamp: new Date().toISOString()
+            };
+
+            // POST to HIRECAR Worker API enrollment endpoint
+            const webhookUrl = 'https://api.hirecar.la/api/enroll';
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(submissionData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success - show confirmation or redirect
+                    alert('Thank you for enrolling! We will contact you shortly.');
+                    // Optionally redirect: window.location.href = '/confirmation/';
+                } else {
+                    alert('There was an error submitting your form. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                alert('There was an error submitting your form. Please try again.');
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

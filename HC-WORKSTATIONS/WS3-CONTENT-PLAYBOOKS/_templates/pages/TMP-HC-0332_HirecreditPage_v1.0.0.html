@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRECREDIT — Credit Repair for Rideshare Operators | HIRECAR</title>
+  <meta name="description" content="HIRECREDIT helps Uber and Lyft drivers repair credit, dispute inaccuracies, and build financial power. Start with Chapter 1 of the Credit Playbook.">
+  <meta name="keywords" content="rideshare credit repair, uber driver credit help, lyft operator credit score, gig economy credit repair, rideshare driver credit fix">
+  <meta property="og:title" content="HIRECREDIT — Credit Repair for Rideshare Operators">
+  <meta property="og:description" content="Fix your credit. Unlock better rates. Take back control. Credit repair tools built for the gig economy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hirecar.io/hirecredit">
+  <link rel="canonical" href="https://hirecar.io/hirecredit">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "HIRECREDIT",
+    "provider": {
+      "@type": "Organization",
+      "name": "HIRECAR",
+      "url": "https://hirecar.io"
+    },
+    "description": "Credit repair and financial education service designed for rideshare operators",
+    "areaServed": "US",
+    "serviceType": "Credit Education and Dispute Assistance"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Nunito Sans', Arial, Helvetica, sans-serif;
+      color: #111820;
+      background: #FFFFFF;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --ink: #111820;
+      --gold: #C9920A;
+      --gold-hover: #B07E08;
+      --blue: #0F4C75;
+      --blue-hover: #0A3A5C;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-700: #374151;
+      --white: #FFFFFF;
+      --max-w: 1100px;
+      --section-pad: 80px 24px;
+    }
+
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink); border-bottom: 3px solid var(--gold);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+    }
+    .nav-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px; font-weight: bold; color: var(--gold); letter-spacing: 3px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--gray-400); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      padding: 8px 20px; background: var(--gold); color: var(--white) !important;
+      border-radius: 5px; font-weight: 700 !important; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-hover); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--gold); margin: 5px 0; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, #0D3B5C 50%, var(--ink) 100%);
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-content { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px;
+      background: rgba(201,146,10,0.15); color: var(--gold);
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 44px; font-weight: bold; color: var(--white);
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero p { font-size: 18px; color: #B0BEC5; line-height: 1.7; margin-bottom: 36px; }
+    .hero-cta {
+      display: inline-block; padding: 16px 40px; background: var(--gold);
+      color: var(--white); font-size: 16px; font-weight: 700;
+      border-radius: 6px; transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--gold-hover); transform: translateY(-2px); }
+
+    /* Pain Points */
+    .pain {
+      padding: 60px 24px;
+      background: var(--gray-50);
+    }
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .pain-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-top: 3px solid #DC2626; border-radius: 8px; padding: 28px 24px;
+    }
+    .pain-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px; font-weight: bold; color: var(--ink); margin-bottom: 8px;
+    }
+    .pain-card p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+    /* Section Shared */
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px; font-weight: bold; color: var(--ink); line-height: 1.2;
+    }
+
+    /* How It Works */
+    .how-section { padding: var(--section-pad); background: var(--white); }
+    .how-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    }
+    .how-step { text-align: center; }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--blue); color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px; font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .how-step h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px; font-weight: bold; color: var(--ink); margin-bottom: 8px;
+    }
+    .how-step p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+    /* Features */
+    .features { padding: var(--section-pad); background: var(--gray-50); }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .feature-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 10px; padding: 32px 28px;
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .feature-icon {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(15,76,117,0.1); color: var(--blue);
+      font-size: 20px; display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px; font-weight: bold; color: var(--ink); margin-bottom: 6px;
+    }
+    .feature-card p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+    .feature-badge {
+      display: inline-block; padding: 2px 8px; background: #FEF3C7;
+      color: #92400E; font-size: 11px; font-weight: 600; border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* Pricing */
+    .pricing { padding: var(--section-pad); background: var(--white); }
+    .tier-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .tier-card {
+      background: var(--gray-50); border: 2px solid var(--gray-200);
+      border-radius: 10px; padding: 28px 20px; text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tier-card.popular {
+      border-color: var(--gold); position: relative;
+    }
+    .tier-card.popular::after {
+      content: 'Most Popular';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      padding: 4px 14px; background: var(--gold); color: var(--white);
+      font-size: 11px; font-weight: 700; border-radius: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .tier-card:hover { transform: translateY(-4px); }
+    .tier-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px; font-weight: bold; color: var(--ink); margin-bottom: 4px;
+    }
+    .tier-price {
+      font-size: 32px; font-weight: 700; color: var(--blue); margin-bottom: 4px;
+    }
+    .tier-price span { font-size: 14px; font-weight: 400; color: var(--gray-500); }
+    .tier-desc {
+      font-size: 13px; color: var(--gray-500); margin-bottom: 20px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .tier-features {
+      list-style: none; text-align: left; margin-bottom: 24px;
+    }
+    .tier-features li {
+      font-size: 13px; color: var(--gray-700); padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    .tier-features li::before {
+      content: '\2713'; position: absolute; left: 0;
+      color: #16A34A; font-weight: bold;
+    }
+    .tier-btn {
+      display: block; width: 100%; padding: 10px; border: 2px solid var(--blue);
+      color: var(--blue); background: transparent; font-size: 14px; font-weight: 700;
+      border-radius: 6px; cursor: pointer; transition: 0.2s;
+    }
+    .tier-btn:hover { background: var(--blue); color: var(--white); }
+    .tier-card.popular .tier-btn {
+      background: var(--gold); border-color: var(--gold); color: var(--white);
+    }
+    .tier-card.popular .tier-btn:hover { background: var(--gold-hover); border-color: var(--gold-hover); }
+
+    /* CTA */
+    .cta-section {
+      padding: 72px 24px;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--blue) 100%);
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px; font-weight: bold; color: var(--white); margin-bottom: 16px;
+    }
+    .cta-section p { font-size: 17px; color: #B0BEC5; margin-bottom: 32px; }
+    .cta-btn {
+      display: inline-block; padding: 16px 44px; background: var(--gold);
+      color: var(--white); font-size: 16px; font-weight: 700; border-radius: 6px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { background: var(--gold-hover); transform: translateY(-2px); }
+
+    /* Footer (same as homepage) */
+    .footer {
+      padding: 48px 24px 32px; background: var(--ink); border-top: 3px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+    }
+    .footer-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px; font-weight: bold; color: var(--gold); letter-spacing: 2px; margin-bottom: 12px;
+    }
+    .footer-desc { font-size: 13px; color: var(--gray-400); line-height: 1.7; margin-bottom: 16px; }
+    .footer-contact { font-size: 13px; color: var(--gray-400); line-height: 2; }
+    .footer-contact a { color: var(--gold); }
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--gray-400); margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 14px; color: var(--gray-500);
+      padding: 4px 0; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: var(--max-w); margin: 32px auto 0; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center; font-size: 12px; color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .pain-grid { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 50px; }
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 28px; }
+      .how-steps { grid-template-columns: 1fr; gap: 24px; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--ink);
+        padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">HIRECAR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="pifr.html">PIFR</a>
+        <a href="#pricing">Pricing</a>
+        <a href="enrollment-form.html?goal=credit" class="nav-cta">Start Free</a>
+      </div>
+      <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">HIRECREDIT</div>
+      <h1>Your Credit Score Is <em>Holding You Back</em>. Fix It.</h1>
+      <p>Denied loans. Sky-high insurance rates. Limited options. HIRECREDIT gives rideshare operators the playbook, tools, and support to repair credit and unlock real financial opportunity.</p>
+      <a href="enrollment-form.html?goal=credit" class="hero-cta">Start with Chapter 1 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section class="pain">
+    <div class="pain-grid">
+      <div class="pain-card">
+        <h3>Denied for Loans</h3>
+        <p>Bad credit means higher down payments, rejected applications, and predatory terms on the financing you need to keep driving.</p>
+      </div>
+      <div class="pain-card">
+        <h3>High Insurance Rates</h3>
+        <p>Your credit score directly impacts your insurance premiums. A lower score means you pay more every month to stay on the road.</p>
+      </div>
+      <div class="pain-card">
+        <h3>Limited Options</h3>
+        <p>When your credit is damaged, every financial decision gets harder — from renting an apartment to expanding your fleet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How HIRECREDIT Works -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">The Process</div>
+        <h2 class="section-title">How HIRECREDIT Works</h2>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <h3>Credit Assessment</h3>
+          <p>We review your credit reports across all three bureaus and identify every item that can be challenged or improved.</p>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <h3>Dispute Strategy</h3>
+          <p>Using FCRA-based dispute letters, we build a targeted strategy to address inaccuracies, collections, and negative marks.</p>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <h3>Active Repair</h3>
+          <p>You follow the playbook step by step — sending disputes, tracking responses, and escalating when needed.</p>
+        </div>
+        <div class="how-step">
+          <div class="step-num">4</div>
+          <h3>Score Building</h3>
+          <p>Beyond disputes, you learn to build positive credit with authorized user strategies, secured cards, and smart utilization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">What You Get</div>
+        <h2 class="section-title">HIRECREDIT Tools &amp; Resources</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9776;</div>
+          <div>
+            <h3>Q1 Credit Playbook</h3>
+            <p>4 comprehensive chapters covering credit fundamentals, dispute strategy, collections defense, and positive credit building.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9998;</div>
+          <div>
+            <h3>Dispute Letter Templates</h3>
+            <p>5 ready-to-use templates — inaccuracy disputes, identity theft blocks, debt validation, cease &amp; desist, and goodwill requests.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9670;</div>
+          <div>
+            <h3>Dispute Builder</h3>
+            <p>Interactive tool that generates customized dispute letters based on your specific credit report items.</p>
+            <span class="feature-badge">Coming Soon</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9733;</div>
+          <div>
+            <h3>Personal Roadmap</h3>
+            <p>Your personalized credit repair roadmap with milestones, timelines, and next actions based on your assessment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Choose Your Tier</div>
+        <h2 class="section-title">Membership Plans</h2>
+      </div>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-name">Standard</div>
+          <div class="tier-price">$49<span>/mo</span></div>
+          <div class="tier-desc">Self-guided credit repair</div>
+          <ul class="tier-features">
+            <li>Q1 Credit Playbook access</li>
+            <li>5 Dispute Letter Templates</li>
+            <li>Community access</li>
+            <li>Email support</li>
+          </ul>
+          <a href="enrollment-form.html?goal=credit" class="tier-btn">Get Started</a>
+        </div>
+        <div class="tier-card popular">
+          <div class="tier-name">Operator</div>
+          <div class="tier-price">$99<span>/mo</span></div>
+          <div class="tier-desc">Guided credit strategy</div>
+          <ul class="tier-features">
+            <li>Everything in Standard</li>
+            <li>Monthly advisor check-in</li>
+            <li>Score tracking dashboard</li>
+            <li>Priority dispute review</li>
+          </ul>
+          <a href="enrollment-form.html?goal=credit" class="tier-btn">Get Started</a>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">First Class</div>
+          <div class="tier-price">$199<span>/mo</span></div>
+          <div class="tier-desc">Full credit management</div>
+          <ul class="tier-features">
+            <li>Everything in Operator</li>
+            <li>Bi-weekly advisor calls</li>
+            <li>Dispute Builder access</li>
+            <li>Credit monitoring alerts</li>
+          </ul>
+          <a href="enrollment-form.html?goal=credit" class="tier-btn">Get Started</a>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">Elite</div>
+          <div class="tier-price">$349<span>/mo</span></div>
+          <div class="tier-desc">White-glove service</div>
+          <ul class="tier-features">
+            <li>Everything in First Class</li>
+            <li>Weekly 1-on-1 sessions</li>
+            <li>Full dispute management</li>
+            <li>Financial coaching</li>
+          </ul>
+          <a href="enrollment-form.html?goal=credit" class="tier-btn">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Start with Chapter 1 — Understanding Your Credit</h2>
+    <p>Your first step to financial freedom. No commitment required to begin learning.</p>
+    <a href="enrollment-form.html?goal=credit" class="cta-btn">Enroll in HIRECREDIT &rarr;</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">HIRECAR</div>
+        <p class="footer-desc">Financial services designed specifically for rideshare operators.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@hirecar.la">support@hirecar.la</a><br>
+          <a href="tel:+12137686311">(213) 768-6311</a><br>
+          Los Angeles, CA
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="hirecredit.html">HIRECREDIT</a>
+        <a href="pifr.html">PIFR</a>
+        <a href="#">MarketWatch</a>
+        <a href="#">Fleet Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 HIRECAR. All rights reserved. HIRECAR provides educational tools and resources. We are not a law firm, credit repair organization under CROA, or financial advisor.
+    </div>
+  </footer>
+
+</body>
+</html>

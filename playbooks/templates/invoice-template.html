@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR Invoice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #111820;
+            background-color: #FAFAF8;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background-color: #FAFAF8;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1in;
+            border-bottom: 2px solid #C9920A;
+            padding-bottom: 0.3in;
+        }
+
+        .header-left h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #C9920A;
+            margin-bottom: 0.1in;
+        }
+
+        .header-left p {
+            font-size: 11px;
+            color: #111820;
+            line-height: 1.4;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+        }
+
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5in;
+            font-size: 12px;
+        }
+
+        .invoice-details-left, .invoice-details-right {
+            flex: 1;
+        }
+
+        .invoice-details label {
+            font-weight: 600;
+            color: #0F4C75;
+        }
+
+        .invoice-details-left {
+            padding-right: 0.5in;
+        }
+
+        .bill-to {
+            margin-bottom: 0.5in;
+            font-size: 12px;
+        }
+
+        .bill-to h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+            font-weight: 600;
+        }
+
+        .bill-to p {
+            margin: 2px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.3in 0;
+            font-size: 12px;
+        }
+
+        table thead {
+            background-color: #0F4C75;
+            color: #ffffff;
+        }
+
+        table th {
+            padding: 0.1in;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #0F4C75;
+        }
+
+        table td {
+            padding: 0.08in;
+            border: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .subtotal-section {
+            margin: 0.3in 0;
+            font-size: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.08in;
+        }
+
+        .summary-label {
+            width: 2in;
+            font-weight: 600;
+            color: #0F4C75;
+            text-align: right;
+            padding-right: 0.2in;
+        }
+
+        .summary-value {
+            width: 1in;
+            text-align: right;
+            padding-right: 0.2in;
+        }
+
+        .total-due {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.2in;
+            padding-top: 0.2in;
+            border-top: 2px solid #C9920A;
+        }
+
+        .total-due .summary-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111820;
+        }
+
+        .total-due .summary-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #C9920A;
+        }
+
+        .payment-section {
+            margin: 0.3in 0;
+            padding: 0.2in;
+            background-color: #f0f0f0;
+            border-left: 4px solid #C9920A;
+            font-size: 12px;
+        }
+
+        .payment-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+            font-weight: 600;
+        }
+
+        .payment-methods {
+            margin: 0.1in 0;
+            line-height: 1.5;
+        }
+
+        .qr-placeholder {
+            width: 1in;
+            height: 1in;
+            border: 2px dashed #C9920A;
+            display: inline-block;
+            text-align: center;
+            line-height: 1in;
+            font-size: 10px;
+            color: #999;
+            margin-top: 0.1in;
+        }
+
+        .footer {
+            margin-top: 0.3in;
+            padding-top: 0.2in;
+            border-top: 1px solid #e0e0e0;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0.5in;
+                page-break-after: avoid;
+            }
+            @page {
+                size: letter;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>HIRECAR</h1>
+                <p>123 Market Street<br>
+                San Francisco, CA 94103<br>
+                hirecar.la</p>
+            </div>
+            <div class="header-right">
+                <h2>INVOICE</h2>
+            </div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div class="invoice-details">
+            <div class="invoice-details-left">
+                <p><label>Invoice #:</label> INV-2026-00001</p>
+                <p><label>Date:</label> March 04, 2026</p>
+                <p><label>Due Date:</label> March 11, 2026</p>
+            </div>
+            <div class="invoice-details-right">
+            </div>
+        </div>
+
+        <!-- Bill To -->
+        <div class="bill-to">
+            <h3>Bill To</h3>
+            <p><strong>[Member Name]</strong></p>
+            <p>[Street Address]<br>
+            [City, State, ZIP Code]<br>
+            [Email Address]<br>
+            [Phone Number]</p>
+        </div>
+
+        <!-- Line Items Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 25%;">Service</th>
+                    <th style="width: 30%;">Description</th>
+                    <th style="width: 10%; text-align: center;">Qty</th>
+                    <th style="width: 15%; text-align: right;">Rate</th>
+                    <th style="width: 15%; text-align: right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td>[Service Name]</td>
+                    <td>[Service Description]</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$0.00</td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>[Service Name]</td>
+                    <td>[Service Description]</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$0.00</td>
+                </tr>
+                <tr style="background-color: #f0f0f0; font-weight: 600;">
+                    <td colspan="5" style="text-align: right; border: none;">Subtotal:</td>
+                    <td style="text-align: right; border: none;">$0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Summary Section -->
+        <div class="subtotal-section">
+            <div class="summary-row">
+                <div class="summary-label">Subtotal:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Tax:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+            <div class="total-due">
+                <div class="summary-label">Total Due:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <h3>Payment Methods</h3>
+            <div class="payment-methods">
+                <p><strong>Stripe (Credit/Debit Card):</strong> [Stripe Link]</p>
+                <p><strong>PayPal:</strong> [PayPal Link]</p>
+                <p><strong>CashApp:</strong> $HIRECAR</p>
+            </div>
+            <div class="qr-placeholder">[QR Code]</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Payment due within 7 days of invoice date. Late fees may apply. For support, contact support@hirecar.la</p>
+        </div>
+    </div>
+</body>
+</html>

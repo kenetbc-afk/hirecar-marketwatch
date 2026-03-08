@@ -10,13 +10,13 @@
     {
       "name": "hirecar-workers",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "8787"],
+      "runtimeArgs": ["--prefix", "hirecar-workers", "run", "dev", "--", "--port", "8787"],
       "port": 8787
     },
     {
       "name": "payment-orchestration",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "8788"],
+      "runtimeArgs": ["--prefix", "payment-orchestration", "run", "dev", "--", "--port", "8788"],
       "port": 8788
     }
   ]

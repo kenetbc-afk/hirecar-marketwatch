@@ -1,0 +1,118 @@
+{
+  "$schema": "HIRECAR Alert Configuration — HC-WPK-004-A",
+  "version": "1.0.0",
+  "channels": {
+    "slack": {
+      "webhook_url": "${SLACK_WEBHOOK_URL}",
+      "channel": "#hirecar-ops",
+      "enabled": true,
+      "severity_filter": ["error", "critical", "warn"]
+    },
+    "email": {
+      "from": "ops@hirecar.la",
+      "to": ["owner@hirecar.la"],
+      "provider": "sendgrid",
+      "api_key": "${SENDGRID_API_KEY}",
+      "enabled": true,
+      "severity_filter": ["error", "critical"]
+    }
+  },
+  "alert_rules": [
+    {
+      "id": "enrollment-chain-failure",
+      "name": "Enrollment Chain Failure",
+      "source": "cloudflare-worker",
+      "condition": "api_enroll_status == 'failed'",
+      "endpoint": "/api/enroll",
+      "severity": "critical",
+      "channels": ["slack", "email"],
+      "cooldown_minutes": 5,
+      "message_template": "🚨 Enrollment chain FAILED — Endpoint: /api/enroll | Error: {{error_message}} | Request ID: {{request_id}}"
+    },
+    {
+      "id": "worker-cpu-warning",
+      "name": "Cloudflare Worker CPU Warning",
+      "source": "cloudflare-worker",
+      "condition": "cpu_time_consumed > 80",
+      "severity": "warn",
+      "channels": ["slack"],
+      "cooldown_minutes": 1440,
+      "message_template": "⚠️ Worker CPU time at {{cpu_time_consumed}}% of monthly allocation. Monitor performance and optimize if needed."
+    },
+    {
+      "id": "worker-cpu-critical",
+      "name": "Cloudflare Worker CPU Critical",
+      "source": "cloudflare-worker",
+      "condition": "cpu_time_consumed > 95",
+      "severity": "critical",
+      "channels": ["slack", "email"],
+      "cooldown_minutes": 60,
+      "message_template": "🚨 Worker CPU time at {{cpu_time_consumed}}% of monthly allocation! Check usage immediately to avoid throttling."
+    },
+    {
+      "id": "stripe-payment-failure",
+      "name": "Stripe Payment Failure",
+      "source": "stripe",
+      "condition": "payment_intent.status == 'failed'",
+      "severity": "error",
+      "channels": ["slack", "email"],
+      "cooldown_minutes": 0,
+      "message_template": "💳 Payment FAILED — Amount: ${{amount}} | Customer: {{customer_email}} | Error: {{failure_message}}"
+    },
+    {
+      "id": "stripe-success-rate-low",
+      "name": "Stripe Success Rate Low",
+      "source": "stripe",
+      "condition": "daily_success_rate < 95",
+      "severity": "warn",
+      "channels": ["slack"],
+      "cooldown_minutes": 1440,
+      "message_template": "⚠️ Stripe payment success rate: {{success_rate}}% (threshold: 95%). Review failed payments."
+    },
+    {
+      "id": "email-delivery-low",
+      "name": "Email Delivery Rate Low",
+      "source": "sendgrid",
+      "condition": "delivery_rate < 90",
+      "severity": "warn",
+      "channels": ["slack"],
+      "cooldown_minutes": 1440,
+      "message_template": "📧 Email delivery rate: {{delivery_rate}}% (threshold: 90%). Check domain auth and content."
+    },
+    {
+      "id": "sms-delivery-low",
+      "name": "SMS Delivery Rate Low",
+      "source": "twilio",
+      "condition": "delivery_rate < 85",
+      "severity": "warn",
+      "channels": ["slack"],
+      "cooldown_minutes": 1440,
+      "message_template": "📱 SMS delivery rate: {{delivery_rate}}% (threshold: 85%). Check Twilio account balance."
+    },
+    {
+      "id": "site-down",
+      "name": "Site Down",
+      "source": "cloudflare",
+      "condition": "uptime < 99.5",
+      "severity": "critical",
+      "channels": ["slack", "email"],
+      "cooldown_minutes": 15,
+      "message_template": "🔴 hirecar.la is DOWN — Uptime: {{uptime}}% | Check Cloudflare status and DNS."
+    },
+    {
+      "id": "api-slow",
+      "name": "API Response Time High",
+      "source": "monitoring",
+      "condition": "avg_response_time_ms > 2000",
+      "severity": "warn",
+      "channels": ["slack"],
+      "cooldown_minutes": 60,
+      "message_template": "🐢 API response time: {{avg_response_time}}ms (threshold: 2000ms). Investigate bottleneck."
+    }
+  ],
+  "escalation": {
+    "auto_escalate_after_minutes": 30,
+    "escalation_channel": "email",
+    "escalation_contacts": ["owner@hirecar.la"]
+  }
+}

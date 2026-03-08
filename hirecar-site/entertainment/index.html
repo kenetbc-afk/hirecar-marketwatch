@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIRECAR Travel Playbook — Family Trips, Airport Transfers & Drivable Getaways · Los Angeles</title>
+<meta name="description" content="HIRECAR plans the whole trip. Airport curb-to-curb pickup from LAX and all California airports. Sedans, SUVs, Sprinter vans and RVs. Family itineraries, casino weekends, golf resorts and more.">
+<meta property="og:title" content="HIRECAR Travel Playbook — We Plan It. You Live It.">
+<meta property="og:description" content="Curated family road trips, airport transfers from all CA airports, and every vehicle from a sedan to a Sprinter — powered by HIRECAR First Class.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1200&q=85">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#111820">
+
+<!-- ═══════════════════════════════════════════════
+  AFFILIATE TRACKING — CONFIGURE BEFORE LAUNCH
+  ▸ Expedia Affiliate Network (EAN):  YOUR_EAN_CID
+  ▸ Booking.com Affiliate:            YOUR_BOOKING_AID
+  ▸ Viator Partner:                   YOUR_VIATOR_PID
+  ▸ Amazon Associates:                YOUR_AMZN_TAG
+  ▸ RVshare Affiliate:                YOUR_RVSHARE_AFF
+  ▸ Outdoorsy Affiliate:              YOUR_OUTDOORSY_AFF
+  ▸ GetYourGuide Partner:             YOUR_GYG_ID
+════════════════════════════════════════════════ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --ink:       #111820;
+  --ink-2:     #1e2530;
+  --ink-3:     #2d3540;
+  --slate:     #3d4a58;
+  --mid:       #6b7280;
+  --muted:     #9aa3ad;
+  --border:    #dde1e7;
+  --border-lt: #edf0f3;
+  --bg:        #ffffff;
+  --cream:     #faf8f4;
+  --white:     #ffffff;
+  --cta:       #c9920a;
+  --cta-hover: #b07d06;
+  --cta-light: #e8a90f;
+  --cta-pale:  #fef3d0;
+  --live:      #c0392b;
+  --green:     #16a34a;
+  --member:    #0f4c75;
+  --member-lt: #e8f2f9;
+  --purple:    #7c3aed;
+  --teal:      #0d7d77;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+.serif { font-family: 'Cormorant Garant', Georgia, serif; }
+.mono  { font-family: 'DM Mono', monospace; }
+
+/* ═══════════════════════════════════════════
+   UTIL BAR
+═══════════════════════════════════════════ */
+.util-bar { background: var(--ink); padding: 7px 0; border-bottom: 1px solid var(--ink-3); }
+.util-inner {
+  max-width: 1340px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.util-ticker { flex: 1; overflow: hidden; display: flex; align-items: center; gap: 10px; }
+.util-hot {
+  background: var(--live); color: #fff;
+  font-size: 9px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; padding: 3px 10px; white-space: nowrap; flex-shrink: 0;
+}
+.ticker-scroll { overflow: hidden; flex: 1; }
+.ticker-items {
+  display: flex; white-space: nowrap;
+  animation: tickrun 65s linear infinite;
+}
+.ticker-items:hover { animation-play-state: paused; }
+@keyframes tickrun { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.t-item { font-size: 11px; color: #aab4be; padding-right: 36px; font-weight: 500; }
+.t-item strong { color: var(--white); }
+.t-dot { color: var(--slate); margin-right: 36px; }
+.util-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.util-link {
+  font-size: 11px; font-weight: 600; letter-spacing: .05em;
+  color: #778899; text-transform: uppercase; transition: color .2s;
+}
+.util-link:hover { color: var(--white); }
+.util-airport-btn {
+  background: var(--teal); color: #fff; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px; transition: background .2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.util-airport-btn:hover { background: #0a6560; }
+.util-member-btn {
+  background: var(--member); color: var(--white); font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px; transition: background .2s;
+}
+.util-member-btn:hover { background: #0a3a5c; }
+
+/* ═══════════════════════════════════════════
+   MASTHEAD
+═══════════════════════════════════════════ */
+.masthead { background: var(--white); border-bottom: 2px solid var(--ink); }
+.masthead-inner {
+  max-width: 1340px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; min-height: 80px; gap: 24px;
+}
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 24px 14px 0; border-right: 1px solid var(--border);
+}
+.brand-logo { height: 40px; width: auto; filter: invert(1) brightness(0.1); }
+.brand-pipe { width: 1.5px; height: 36px; background: var(--ink); flex-shrink: 0; }
+.brand-mw { display: flex; flex-direction: column; gap: 1px; }
+.brand-mw-name {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1; letter-spacing: -.01em;
+}
+.brand-mw-name .bang { color: var(--cta); }
+.brand-mw-sub { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.brand-section-tag { display: flex; flex-direction: column; gap: 2px; padding-left: 20px; }
+.bst-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.bst-name { font-family: 'Cormorant Garant', serif; font-size: 18px; font-weight: 700; color: var(--cta); line-height: 1; }
+.masthead-center { text-align: center; flex: 1; padding: 0 20px; }
+.masthead-date { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.masthead-motto { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 14px; color: var(--slate); }
+.masthead-right { display: flex; align-items: center; gap: 10px; padding-left: 24px; border-left: 1px solid var(--border); }
+.mh-login { font-size: 12px; font-weight: 600; color: var(--ink); padding: 8px 14px; border: 1px solid var(--border); transition: border-color .2s; }
+.mh-login:hover { border-color: var(--ink); }
+.mh-apply { background: var(--cta); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 10px 22px; transition: background .2s; }
+.mh-apply:hover { background: var(--cta-hover); }
+
+/* ═══════════════════════════════════════════
+   PRIMARY NAV
+═══════════════════════════════════════════ */
+.primary-nav { background: var(--ink); position: sticky; top: 0; z-index: 300; border-bottom: 3px solid var(--cta); }
+.nav-inner {
+  max-width: 1340px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-link {
+  display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: #8899aa; padding: 14px 15px;
+  white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -3px;
+  transition: color .15s, border-color .15s;
+}
+.nav-link:hover { color: var(--white); border-bottom-color: var(--white); }
+.nav-link.active { color: var(--cta); border-bottom-color: var(--cta); }
+.nav-link.nav-airport { color: #5bbcb8; }
+.nav-link.nav-airport:hover { color: #7cd4d0; border-bottom-color: #5bbcb8; }
+.nav-push { margin-left: auto; }
+.nav-back { font-size: 11px; color: #556677; padding: 14px 14px; border-left: 1px solid #222; white-space: nowrap; transition: color .15s; }
+.nav-back:hover { color: var(--white); }
+
+/* ═══════════════════════════════════════════
+   HERO — TRAVEL PLAYBOOK
+═══════════════════════════════════════════ */
+.travel-hero {
+  background: var(--ink);
+  /* LA 110 Freeway / downtown at golden hour — home to every SoCal driver */
+  background-image: url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1800&q=92&fit=crop&crop=center');
+  background-size: cover;
+  background-position: center 60%;
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.travel-hero::before {
+  content: ''; position: absolute; inset: 0;
+  /* Left-heavy vignette so city light bleeds through on right — cinematic */
+  background:
+    linear-gradient(to right, rgba(10,12,15,.96) 0%, rgba(10,12,15,.86) 28%, rgba(10,12,15,.52) 55%, rgba(10,12,15,.08) 100%),
+    linear-gradient(to top,   rgba(10,12,15,.65) 0%, transparent 40%);
+}
+.travel-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1340px; margin: 0 auto; padding: 80px 24px 64px;
+  width: 100%;
+}
+.travel-hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(201,146,10,.75);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+}
+.travel-hero-eyebrow::before {
+  content: ''; display: block; width: 28px; height: 1px; background: rgba(201,146,10,.45);
+}
+.travel-hero-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(44px, 5.5vw, 76px);
+  font-weight: 700; color: var(--white); line-height: 1.0;
+  margin-bottom: 8px; letter-spacing: -.02em;
+}
+.travel-hero-title em { color: var(--cta-light); font-style: italic; }
+.hero-tagline {
+  font-family: 'Cormorant Garant', serif;
+  font-style: italic; font-size: 18px; color: rgba(255,255,255,.5);
+  margin-bottom: 18px; letter-spacing: .01em;
+}
+.travel-hero-sub {
+  font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.75; margin-bottom: 30px; max-width: 540px;
+}
+.travel-search-bar {
+  display: flex; max-width: 540px;
+  border-radius: 3px; overflow: hidden; box-shadow: 0 6px 32px rgba(0,0,0,.5);
+}
+.travel-search-bar input {
+  flex: 1; padding: 15px 20px;
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px;
+  border: none; outline: none; background: rgba(255,255,255,.97); color: var(--ink); min-width: 0;
+}
+.travel-search-bar input::placeholder { color: var(--muted); }
+.travel-search-btn {
+  padding: 15px 22px; background: rgba(201,146,10,.9); border: none; color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; cursor: pointer; transition: background .2s; white-space: nowrap; flex-shrink: 0;
+}
+.travel-search-btn:hover { background: var(--cta); }
+
+/* Quiet anchor links below search */
+.hero-quiet-links {
+  margin-top: 18px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.hql {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.38);
+  transition: color .18s; text-decoration: none;
+}
+.hql:hover { color: rgba(255,255,255,.72); }
+.hql.hql-gold { color: rgba(201,146,10,.6); }
+.hql.hql-gold:hover { color: var(--cta-light); }
+.hql-dot { color: rgba(255,255,255,.15); font-size: 12px; }
+.travel-hero-stats { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+.stat-pill {
+  background: rgba(255,255,255,.07); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.12); border-radius: 2px; padding: 12px 20px;
+  text-align: center; min-width: 140px;
+}
+.stat-pill-num { font-family: 'Cormorant Garant', serif; font-size: 24px; font-weight: 700; color: var(--cta-light); line-height: 1; }
+.stat-pill-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: 4px; }
+
+/* ═══════════════════════════════════════════
+   AIRPORT TRANSFER MODULE (hero section)
+═══════════════════════════════════════════ */
+.airport-module {
+  background: var(--ink-2);
+  border-bottom: 3px solid var(--teal);
+}
+.airport-module-inner {
+  max-width: 1340px; margin: 0 auto; padding: 28px 24px;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 36px;
+}
+.airport-module-label {
+  display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;
+}
+.aml-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: #5bbcb8;
+}
+.aml-title {
+  font-family: 'Cormorant Garant', serif; font-size: 22px; font-weight: 700; color: var(--white); line-height: 1.1;
+}
+.aml-sub { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 2px; }
+.airport-grid {
+  display: flex; flex-wrap: wrap; gap: 8px; flex: 1;
+}
+.airport-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 2px; padding: 8px 13px; cursor: pointer; transition: all .18s;
+  text-decoration: none;
+}
+.airport-pill:hover {
+  background: rgba(91,188,184,.1); border-color: rgba(91,188,184,.4);
+}
+.airport-pill-code {
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  color: #5bbcb8; letter-spacing: .05em;
+}
+.airport-pill-city { font-size: 11px; color: rgba(255,255,255,.52); }
+.airport-pill-tag {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .1em;
+  background: rgba(201,146,10,.2); color: var(--cta); padding: 2px 6px; border-radius: 1px; text-transform: uppercase;
+}
+.airport-cta-col { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; text-align: right; }
+.airport-book-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--teal); color: var(--white);
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; padding: 12px 22px; border-radius: 2px; transition: background .18s; text-decoration: none;
+}
+.airport-book-btn:hover { background: #0a6560; }
+.airport-book-sub { font-size: 11px; color: rgba(255,255,255,.35); }
+
+/* ═══════════════════════════════════════════
+   FLEET SELECTOR
+═══════════════════════════════════════════ */
+.fleet-module {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+.fleet-inner {
+  max-width: 1340px; margin: 0 auto; padding: 0 24px;
+}
+.fleet-head-row {
+  display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px;
+}
+.fleet-head {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+}
+.fleet-head-sub { font-size: 12px; color: var(--muted); }
+.fleet-cards { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.fleet-cards::-webkit-scrollbar { display: none; }
+.fleet-card {
+  flex: 0 0 220px; background: var(--white); border: 1px solid var(--border);
+  border-radius: 5px; overflow: hidden; cursor: pointer; transition: all .2s; text-decoration: none;
+}
+.fleet-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,.1); border-color: var(--cta); }
+.fleet-card-img {
+  width: 100%; height: 136px; background-size: cover; background-position: center;
+  position: relative;
+}
+.fleet-card-type {
+  position: absolute; bottom: 8px; left: 10px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; background: var(--ink); color: var(--cta);
+  padding: 3px 9px; border-radius: 2px;
+}
+.fleet-card-body { padding: 12px 14px 14px; }
+.fleet-card-name {
+  font-family: 'Cormorant Garant', serif; font-size: 16px; font-weight: 700;
+  color: var(--ink); margin-bottom: 4px;
+}
+.fleet-card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.fleet-card-capacity {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--slate); letter-spacing: .06em;
+}
+.fleet-card-cta {
+  margin-top: 10px; padding: 8px 14px;
+  background: var(--cta); color: var(--ink);
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; border-radius: 2px; display: inline-block; transition: background .15s;
+}
+.fleet-card:hover .fleet-card-cta { background: var(--cta-light); }
+
+/* ═══════════════════════════════════════════
+   CATEGORY FILTER TABS
+═══════════════════════════════════════════ */
+.cat-tabs { background: var(--ink-2); border-bottom: 1px solid rgba(255,255,255,.06); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.cat-tabs::-webkit-scrollbar { display: none; }
+.cat-tabs-inner { max-width: 1340px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; min-width: max-content; }
+.cat-tab {
+  padding: 15px 18px; border: none; background: none;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.38); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  white-space: nowrap; display: flex; align-items: center; gap: 7px;
+  transition: color .18s, border-color .18s;
+}
+.cat-tab:hover { color: rgba(255,255,255,.72); }
+.cat-tab.active { color: var(--cta-light); border-bottom-color: var(--cta); }
+.cat-count {
+  background: rgba(201,146,10,.15); color: var(--cta); font-size: 9px;
+  padding: 2px 7px; border-radius: 20px; border: 1px solid rgba(201,146,10,.28);
+}
+.cat-tab.active .cat-count { background: var(--cta); color: var(--ink); border-color: var(--cta); }
+
+/* ═══════════════════════════════════════════
+   STICKY SECTION NAV
+═══════════════════════════════════════════ */
+.section-nav {
+  background: var(--white); border-bottom: 2px solid var(--border-lt);
+  position: sticky; top: 49px; z-index: 200;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.section-nav::-webkit-scrollbar { display: none; }
+.section-nav-inner { max-width: 1340px; margin: 0 auto; padding: 0 24px; display: flex; min-width: max-content; }
+.snav-item {
+  padding: 13px 18px; font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: .11em; text-transform: uppercase; color: var(--muted);
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  white-space: nowrap; display: flex; align-items: center; gap: 6px;
+  cursor: pointer; transition: color .15s, border-color .15s; text-decoration: none;
+}
+.snav-item:hover { color: var(--ink); }
+.snav-item.active { color: var(--cta); border-bottom-color: var(--cta); }
+
+/* ═══════════════════════════════════════════
+   TOP DESTINATIONS STRIP
+═══════════════════════════════════════════ */
+.top-dests-wrap { background: var(--ink-3); border-bottom: 1px solid rgba(255,255,255,.06); padding: 24px 0; }
+.top-dests-head-row { max-width: 1340px; margin: 0 auto; padding: 0 24px 16px; display: flex; align-items: center; justify-content: space-between; }
+.top-dests-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+.top-dests-sub { font-size: 11px; color: rgba(255,255,255,.25); }
+.top-dests-scroll { max-width: 1340px; margin: 0 auto; padding: 0 24px; display: flex; gap: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.top-dests-scroll::-webkit-scrollbar { display: none; }
+.dest-pill { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; cursor: pointer; transition: transform .18s; text-decoration: none; }
+.dest-pill:hover { transform: translateY(-3px); }
+.dest-img { width: 90px; height: 64px; border-radius: 3px; background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,.07); transition: border-color .18s; }
+.dest-pill:hover .dest-img { border-color: var(--cta); }
+.dest-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.6); text-align: center; white-space: nowrap; }
+.dest-drive { font-family: 'DM Mono', monospace; font-size: 8.5px; color: rgba(255,255,255,.28); text-align: center; margin-top: -4px; }
+
+/* ═══════════════════════════════════════════
+   PROMO TILES
+═══════════════════════════════════════════ */
+.promo-row { max-width: 1340px; margin: 0 auto; padding: 28px 24px 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.promo-tile {
+  border-radius: 4px; overflow: hidden; position: relative; min-height: 156px;
+  background-size: cover; background-position: center; display: flex;
+  align-items: flex-end; padding: 22px 22px; cursor: pointer;
+  transition: transform .2s, box-shadow .2s; text-decoration: none;
+}
+.promo-tile:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.2); }
+.promo-tile::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,12,15,.9) 0%, rgba(10,12,15,.25) 100%); }
+.promo-content { position: relative; z-index: 2; }
+.promo-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--cta); margin-bottom: 5px; }
+.promo-title { font-family: 'Cormorant Garant', serif; font-size: 21px; font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 6px; }
+.promo-sub { font-size: 12px; color: rgba(255,255,255,.6); margin-bottom: 12px; line-height: 1.4; }
+.promo-btn { display: inline-block; padding: 7px 16px; background: var(--cta); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; border-radius: 2px; transition: background .15s; }
+.promo-tile:hover .promo-btn { background: var(--cta-light); }
+
+/* ═══════════════════════════════════════════
+   DEAL CAROUSELS
+═══════════════════════════════════════════ */
+.deal-section { background: var(--cream); padding: 40px 0 8px; border-top: 1px solid var(--border); }
+.carousel-head { max-width: 1340px; margin: 0 auto; padding: 0 24px 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.carousel-title { font-family: 'Cormorant Garant', serif; font-size: 24px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+.carousel-title .icon { font-size: 20px; }
+.c-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+.badge-hot  { background: rgba(192,57,43,.1);  color: var(--live);   border: 1px solid rgba(192,57,43,.22); }
+.badge-new  { background: rgba(22,163,74,.1);  color: var(--green);  border: 1px solid rgba(22,163,74,.22); }
+.badge-gold { background: rgba(201,146,10,.1); color: var(--cta);    border: 1px solid rgba(201,146,10,.28); }
+.badge-excl { background: rgba(15,76,117,.1);  color: var(--member); border: 1px solid rgba(15,76,117,.22); }
+.badge-fam  { background: rgba(13,125,119,.1); color: var(--teal);   border: 1px solid rgba(13,125,119,.28); }
+.carousel-see-all { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--cta); display: flex; align-items: center; gap: 5px; transition: color .15s; flex-shrink: 0; }
+.carousel-see-all:hover { color: var(--cta-hover); }
+.carousel-wrap { position: relative; overflow: hidden; }
+.c-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+  width: 38px; height: 38px; background: var(--white); border: 1px solid var(--border);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px; color: var(--ink); box-shadow: 0 3px 14px rgba(0,0,0,.12);
+  transition: all .18s;
+}
+.c-arrow:hover { background: var(--cta); color: var(--white); border-color: var(--cta); box-shadow: 0 6px 18px rgba(201,146,10,.3); }
+.c-arrow.left { left: 8px; }
+.c-arrow.right { right: 8px; }
+.c-track {
+  display: flex; gap: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 24px 24px;
+}
+.c-track::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════
+   FAMILY PLAYBOOK CARD (special)
+═══════════════════════════════════════════ */
+.fpc {
+  flex: 0 0 340px; scroll-snap-align: start;
+  background: var(--ink); border-radius: 5px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08); cursor: pointer;
+  transition: transform .2s, box-shadow .2s; text-decoration: none; color: inherit; display: block;
+}
+.fpc:hover { transform: translateY(-4px); box-shadow: 0 16px 44px rgba(13,125,119,.2); }
+.fpc-img {
+  height: 200px; background-size: cover; background-position: center;
+  position: relative; overflow: hidden;
+}
+.fpc-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, rgba(10,12,15,.95) 100%); }
+.fpc-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 3;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; padding: 4px 9px; border-radius: 2px;
+}
+.fpc-badge-playbook { background: var(--teal); color: #fff; }
+.fpc-badge-family   { background: rgba(201,146,10,.9); color: var(--ink); }
+.fpc-badge-rv       { background: var(--green); color: #fff; }
+.fpc-nights {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  background: rgba(0,0,0,.6); color: var(--white); padding: 4px 9px; border-radius: 2px;
+}
+.fpc-body { padding: 16px 18px 20px; }
+.fpc-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #5bbcb8; margin-bottom: 7px; }
+.fpc-title { font-family: 'Cormorant Garant', serif; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 8px; }
+.fpc-desc { font-size: 12.5px; color: rgba(255,255,255,.52); line-height: 1.65; margin-bottom: 14px; }
+.fpc-itinerary { margin-bottom: 14px; }
+.fpc-day {
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 7px; padding-bottom: 7px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.fpc-day:last-child { border-bottom: none; margin-bottom: 0; }
+.fpc-day-num { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--cta); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; padding-top: 2px; min-width: 36px; }
+.fpc-day-text { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.5; }
+.fpc-meta {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+}
+.fpc-tag {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .08em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 2px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.5);
+}
+.fpc-tag-teal { background: rgba(13,125,119,.18); border-color: rgba(13,125,119,.35); color: #5bbcb8; }
+.fpc-tag-gold { background: rgba(201,146,10,.14); border-color: rgba(201,146,10,.3); color: var(--cta-light); }
+.fpc-price-row { display: flex; align-items: baseline; gap: 8px; }
+.fpc-price { font-family: 'Cormorant Garant', serif; font-size: 26px; font-weight: 700; color: var(--cta-light); }
+.fpc-per { font-size: 12px; color: rgba(255,255,255,.35); }
+.fpc-was { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: line-through; }
+.fpc-cta-btn {
+  margin-top: 14px; width: 100%; padding: 11px;
+  background: var(--cta); color: var(--ink); border: none; cursor: pointer;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; border-radius: 2px; transition: background .18s;
+  display: block; text-align: center; text-decoration: none;
+}
+.fpc-cta-btn:hover { background: var(--cta-light); }
+
+/* ═══════════════════════════════════════════
+   STANDARD DEAL CARD
+═══════════════════════════════════════════ */
+.dc {
+  flex: 0 0 272px; scroll-snap-align: start; background: var(--white); border-radius: 5px;
+  overflow: hidden; border: 1px solid var(--border); cursor: pointer;
+  transition: transform .2s, box-shadow .2s; text-decoration: none; color: inherit; display: block;
+}
+.dc:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.12); }
+.dc-img-wrap { position: relative; overflow: hidden; }
+.dc-img { width: 100%; height: 174px; background-size: cover; background-position: center; display: block; transition: transform .35s; }
+.dc:hover .dc-img { transform: scale(1.04); }
+.dc-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.28) 100%); pointer-events: none; }
+.dc-corner-badge { position: absolute; top: 10px; left: 10px; z-index: 3; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 2px; }
+.dcb-drop   { background: var(--live);   color: #fff; }
+.dcb-excl   { background: var(--cta);    color: var(--ink); }
+.dcb-new    { background: var(--green);  color: #fff; }
+.dcb-member { background: var(--ink);    color: var(--cta); border: 1px solid var(--cta); }
+.dcb-teal   { background: var(--teal);   color: #fff; }
+.dc-pct-off { position: absolute; top: 10px; right: 10px; z-index: 3; background: var(--live); color: #fff; font-family: 'DM Mono', monospace; font-size: 12px; padding: 5px 8px; border-radius: 2px; line-height: 1; }
+.dc-body { padding: 14px 16px 16px; }
+.dc-prop { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dc-title { font-family: 'Cormorant Garant', serif; font-size: 16.5px; font-weight: 600; color: var(--ink); line-height: 1.28; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dc-loc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.dc-price-row { display: flex; align-items: baseline; gap: 7px; margin-bottom: 8px; }
+.dc-price-now { font-family: 'Cormorant Garant', serif; font-size: 21px; font-weight: 700; color: var(--ink); line-height: 1; }
+.dc-price-was { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+.dc-per { font-size: 11px; color: var(--muted); margin-left: -4px; }
+.dc-stars { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+.dc-stars-gold { color: var(--cta); font-size: 12px; }
+.dc-stars-ct { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+.dc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.dc-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .09em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: var(--cream); border: 1px solid var(--border); color: var(--muted); }
+.dc-tag-gold { background: rgba(201,146,10,.08); border-color: rgba(201,146,10,.25); color: var(--cta); }
+.dc-tag-member { background: var(--member-lt); border-color: rgba(15,76,117,.25); color: var(--member); }
+.dc-tag-teal { background: rgba(13,125,119,.08); border-color: rgba(13,125,119,.25); color: var(--teal); }
+
+/* Wide hero card */
+.dc-hero { flex: 0 0 400px; scroll-snap-align: start; background: var(--ink); border-radius: 5px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .2s, box-shadow .2s; text-decoration: none; color: inherit; display: block; }
+.dc-hero:hover { transform: translateY(-4px); box-shadow: 0 16px 44px rgba(201,146,10,.18); }
+.dc-hero-img { height: 220px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+.dc-hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 25%, rgba(10,12,15,.95) 100%); }
+.dc-hero-body { padding: 16px 20px 20px; }
+.dc-hero .dc-prop  { color: rgba(255,255,255,.35); }
+.dc-hero .dc-title { color: var(--white); font-size: 19px; }
+.dc-hero .dc-loc   { color: rgba(255,255,255,.42); }
+.dc-hero .dc-price-now { color: var(--cta-light); font-size: 26px; }
+.dc-hero .dc-price-was { color: rgba(255,255,255,.3); }
+.dc-hero .dc-per   { color: rgba(255,255,255,.3); }
+.dc-hero .dc-stars-ct  { color: rgba(255,255,255,.38); }
+.dc-hero .dc-tag   { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.45); }
+.dc-hero .dc-tag-gold { background: rgba(201,146,10,.14); border-color: rgba(201,146,10,.3); color: var(--cta-light); }
+.dc-hero .dc-tag-teal { background: rgba(13,125,119,.18); border-color: rgba(13,125,119,.35); color: #5bbcb8; }
+
+/* ═══════════════════════════════════════════
+   AFFILIATE INTERSTITIAL STRIPS
+═══════════════════════════════════════════ */
+.aff-strip { background: var(--ink); border-top: 3px solid var(--cta); padding: 28px 24px; }
+.aff-strip-inner { max-width: 1340px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.aff-strip-text { display: flex; flex-direction: column; gap: 3px; }
+.aff-strip-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--cta); }
+.aff-strip-title { font-family: 'Cormorant Garant', serif; font-size: 20px; font-weight: 700; color: var(--white); }
+.aff-strip-sub { font-size: 13px; color: rgba(255,255,255,.5); }
+.aff-strip-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.aff-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; transition: all .18s; cursor: pointer; text-decoration: none; }
+.aff-btn-primary { background: var(--cta); color: var(--ink); }
+.aff-btn-primary:hover { background: var(--cta-light); }
+.aff-btn-teal { background: var(--teal); color: #fff; }
+.aff-btn-teal:hover { background: #0a6560; }
+.aff-btn-outline { background: transparent; color: rgba(255,255,255,.65); border: 1px solid rgba(255,255,255,.2); }
+.aff-btn-outline:hover { background: rgba(255,255,255,.06); color: var(--white); }
+
+/* ═══════════════════════════════════════════
+   MEMBER CTA
+═══════════════════════════════════════════ */
+.member-cta { background: linear-gradient(135deg, var(--member) 0%, #0a3a5c 100%); padding: 52px 24px; border-top: 3px solid var(--cta); }
+.member-cta-inner { max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+.mci-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+.mci-title { font-family: 'Cormorant Garant', serif; font-size: 38px; font-weight: 700; color: var(--white); line-height: 1.05; margin-bottom: 14px; letter-spacing: -.01em; }
+.mci-title .cta-word { color: var(--cta-light); }
+.mci-sub { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; max-width: 520px; margin-bottom: 24px; }
+.mci-perks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.mci-perk { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.75); padding: 6px 12px; border-radius: 2px; }
+.mci-btn-primary { display: inline-block; padding: 14px 32px; background: var(--cta); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; transition: background .18s; border-radius: 2px; text-decoration: none; margin-right: 12px; }
+.mci-btn-primary:hover { background: var(--cta-light); }
+.mci-btn-ghost { display: inline-block; padding: 14px 28px; background: transparent; color: rgba(255,255,255,.65); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.22); transition: all .18s; border-radius: 2px; text-decoration: none; }
+.mci-btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,.55); }
+.mci-price-box { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 4px; padding: 28px 36px; text-align: center; backdrop-filter: blur(12px); flex-shrink: 0; }
+.mci-price { font-family: 'Cormorant Garant', serif; font-size: 52px; font-weight: 700; color: var(--cta-light); line-height: 1; }
+.mci-price-sub { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.38); margin-top: 6px; }
+.mci-price-savings { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 8px; }
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════════ */
+.hiw { background: var(--ink-2); border-top: 1px solid rgba(255,255,255,.05); padding: 52px 24px; }
+.hiw-inner { max-width: 1340px; margin: 0 auto; }
+.hiw-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cta); margin-bottom: 8px; }
+.hiw-title { font-family: 'Cormorant Garant', serif; font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 36px; }
+.hiw-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.hiw-step { padding-left: 0; }
+.hiw-step-num { font-family: 'Cormorant Garant', serif; font-size: 48px; font-weight: 700; color: rgba(201,146,10,.18); line-height: 1; margin-bottom: 12px; }
+.hiw-step-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.hiw-step-text { font-size: 13px; color: rgba(255,255,255,.48); line-height: 1.7; }
+.hiw-step-icon { font-size: 28px; margin-bottom: 10px; }
+
+/* ═══════════════════════════════════════════
+   EXPLAINER
+═══════════════════════════════════════════ */
+.explainer { background: var(--ink-3); border-top: 1px solid rgba(255,255,255,.04); padding: 48px 24px; }
+.explainer-inner { max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.explainer-head { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--cta); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(201,146,10,.22); }
+.explainer-title { font-family: 'Cormorant Garant', serif; font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.15; }
+.explainer-text { font-size: 13px; color: rgba(255,255,255,.52); line-height: 1.75; margin-bottom: 20px; }
+.exp-item { margin-bottom: 18px; padding-left: 16px; border-left: 2px solid rgba(201,146,10,.28); }
+.exp-item-head { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.82); margin-bottom: 4px; }
+.exp-item-text { font-size: 12px; color: rgba(255,255,255,.42); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   AFFILIATE DISCLOSURE + FOOTER
+═══════════════════════════════════════════ */
+.aff-disclosure { background: var(--cream); border-top: 1px solid var(--border); padding: 20px 24px; }
+.aff-disclosure-inner { max-width: 1340px; margin: 0 auto; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.7; letter-spacing: .02em; }
+.aff-disclosure-inner strong { color: var(--slate); }
+
+footer { background: var(--ink); padding: 52px 24px 32px; border-top: 3px solid var(--cta); }
+.footer-inner { max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+.footer-brand-name { font-family: 'Cormorant Garant', serif; font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.footer-brand-name .bang { color: var(--cta); }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.7; max-width: 280px; margin-bottom: 18px; }
+.footer-contact { font-size: 12px; color: rgba(255,255,255,.35); line-height: 1.8; }
+.footer-contact a { color: rgba(255,255,255,.5); transition: color .15s; }
+.footer-contact a:hover { color: var(--cta); }
+.footer-col-head { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .15s; }
+.footer-links a:hover { color: var(--cta); }
+.footer-bottom { max-width: 1340px; margin: 36px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer-bottom-text { font-family: 'DM Mono', monospace; font-size: 9.5px; color: rgba(255,255,255,.22); letter-spacing: .06em; }
+.footer-bottom-links { display: flex; gap: 16px; }
+.footer-bottom-links a { font-family: 'DM Mono', monospace; font-size: 9.5px; color: rgba(255,255,255,.28); letter-spacing: .06em; transition: color .15s; }
+.footer-bottom-links a:hover { color: var(--cta); }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   TRAVEL PLAYBOOK SECTION — Cinematic split-panel explorer
+   Left: numbered selector rail | Right: full-bleed image stage
+═══════════════════════════════════════════════════════════════════ */
+
+.pb-section {
+  background: var(--ink);
+  border-top: 2px solid var(--ink-3);
+  position: relative;
+}
+
+/* ── Header bar ─────────────────────────────────────────────────── */
+.pb-header {
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.pb-header-inner {
+  max-width: 100%; padding: 0 0 0 0;
+  display: flex; align-items: stretch;
+}
+.pb-header-left {
+  display: flex; align-items: center; gap: 16px;
+  padding: 0 28px; border-right: 1px solid rgba(255,255,255,.07);
+}
+.pb-section-label {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--cta); white-space: nowrap; flex-shrink: 0;
+}
+.pb-header-rule {
+  display: block; width: 1px; height: 16px;
+  background: rgba(255,255,255,.12); flex-shrink: 0;
+}
+.pb-section-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 15px; font-weight: 700; color: rgba(255,255,255,.78);
+  white-space: nowrap;
+}
+.pb-vehicle-filter {
+  display: flex; align-items: center; gap: 2px;
+  padding: 0 20px; flex: 1;
+}
+.pb-filter-label {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.28); margin-right: 8px;
+  white-space: nowrap;
+}
+.pbv-btn {
+  padding: 14px 16px; background: transparent; border: none; cursor: pointer;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.35);
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: all .18s; white-space: nowrap;
+}
+.pbv-btn:hover { color: rgba(255,255,255,.7); }
+.pbv-btn.active { color: var(--cta); border-bottom-color: var(--cta); }
+.pb-see-all {
+  font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.28);
+  padding: 0 24px; display: flex; align-items: center; margin-left: auto;
+  border-left: 1px solid rgba(255,255,255,.07); white-space: nowrap;
+  transition: color .18s;
+}
+.pb-see-all:hover { color: var(--cta); }
+
+/* ── Main panel: selector rail + image stage ─────────────────────── */
+.pb-panel {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 600px;
+}
+
+/* ── LEFT: Numbered trip selector list ───────────────────────────── */
+.pb-selector {
+  background: var(--ink-2);
+  border-right: 1px solid rgba(255,255,255,.06);
+  overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(201,146,10,.2) transparent;
+  display: flex; flex-direction: column;
+}
+.pb-selector::-webkit-scrollbar { width: 3px; }
+.pb-selector::-webkit-scrollbar-thumb { background: rgba(201,146,10,.25); border-radius: 2px; }
+
+.pb-trip-tab {
+  position: relative; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,.05);
+  transition: background .2s;
+}
+.pb-trip-tab:hover { background: rgba(255,255,255,.04); }
+.pb-trip-tab.active { background: rgba(201,146,10,.06); }
+
+.pb-tab-inner {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px;
+}
+.pb-tab-num {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 28px; font-weight: 700;
+  color: rgba(255,255,255,.1);
+  line-height: 1; flex-shrink: 0; width: 36px; text-align: center;
+  transition: color .2s;
+}
+.pb-trip-tab.active .pb-tab-num { color: rgba(201,146,10,.4); }
+.pb-tab-content { flex: 1; min-width: 0; }
+.pb-tab-name {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 16px; font-weight: 700;
+  color: rgba(255,255,255,.55);
+  line-height: 1.2; margin-bottom: 4px;
+  transition: color .2s;
+}
+.pb-trip-tab.active .pb-tab-name,
+.pb-trip-tab:hover .pb-tab-name { color: rgba(255,255,255,.9); }
+.pb-tab-meta {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.22);
+  transition: color .2s; line-height: 1.5;
+}
+.pb-trip-tab.active .pb-tab-meta { color: rgba(201,146,10,.55); }
+.pb-tab-price {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 15px; font-weight: 700;
+  color: rgba(201,146,10,.5);
+  flex-shrink: 0; text-align: right;
+  transition: color .2s;
+}
+.pb-trip-tab.active .pb-tab-price { color: var(--cta); }
+
+/* Active indicator bar — left edge gold line */
+.pb-tab-bar {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--cta);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.pb-trip-tab.active .pb-tab-bar { transform: scaleY(1); }
+
+/* Thumbnail strip below tab name */
+.pb-tab-thumb {
+  width: 100%; height: 52px;
+  background-size: cover; background-position: center;
+  opacity: 0; max-height: 0; overflow: hidden;
+  transition: opacity .4s, max-height .4s;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.pb-trip-tab.active .pb-tab-thumb {
+  opacity: 1; max-height: 52px;
+}
+
+/* ── RIGHT: Immersive image stage ────────────────────────────────── */
+.pb-viewer {
+  position: relative; overflow: hidden;
+  background: var(--ink);
+}
+
+/* Background slides — Ken Burns cross-fade */
+.pb-slides {
+  position: absolute; inset: 0;
+}
+.pb-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity 1.2s cubic-bezier(.4,0,.2,1),
+    transform 1.2s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.pb-slide.active {
+  opacity: 1; transform: scale(1);
+}
+
+/* Vignette — dark left edge to hold overlay text */
+.pb-vignette {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(to right, rgba(10,12,15,.92) 0%, rgba(10,12,15,.6) 32%, rgba(10,12,15,.08) 72%, transparent 100%),
+    linear-gradient(to top, rgba(10,12,15,.88) 0%, transparent 50%);
+}
+
+/* Content overlay — text sits on top of image */
+.pb-overlay-content {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; align-items: flex-end;
+}
+.pb-trip-panel {
+  display: none;
+  padding: 0 0 44px 48px;
+  width: 100%; max-width: 680px;
+  animation: pbFadeUp .6s cubic-bezier(.22,1,.36,1) both;
+}
+.pb-trip-panel.active { display: flex; flex-direction: column; }
+@keyframes pbFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Vehicle type badge */
+.pb-vehicle-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.14);
+  padding: 5px 12px; margin-bottom: 14px; width: fit-content;
+  background: rgba(10,12,15,.5); backdrop-filter: blur(8px);
+}
+.pb-vehicle-badge--rv {
+  color: #5bbcb8; border-color: rgba(91,188,184,.3);
+  background: rgba(13,125,119,.12);
+}
+.pbvb-icon { font-size: 13px; }
+
+/* Trip title */
+.pb-trip-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(32px, 3.8vw, 54px);
+  font-weight: 700; color: var(--white);
+  line-height: 1.0; letter-spacing: -.01em;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 24px rgba(0,0,0,.6);
+}
+
+/* Day-by-day itinerary row */
+.pb-days-row {
+  display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.pb-day {
+  background: rgba(10,12,15,.7); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 12px 16px; flex: 1; min-width: 140px; max-width: 220px;
+}
+.pb-day-n {
+  font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--cta); margin-bottom: 6px;
+}
+.pb-day-t {
+  font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.6;
+}
+
+/* Bottom row: pricing + CTAs */
+.pb-bottom-row {
+  display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+}
+.pb-pricing {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.pb-price {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 42px; font-weight: 700;
+  color: var(--cta-light); line-height: 1;
+}
+.pb-price-sub {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.4);
+}
+.pb-price-was {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,.28); text-decoration: line-through;
+}
+
+/* CTA group */
+.pb-cta-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.pb-book-btn {
+  display: inline-block; padding: 13px 24px;
+  background: var(--cta); color: var(--ink);
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; border-radius: 2px;
+  transition: background .18s; text-decoration: none; white-space: nowrap;
+}
+.pb-book-btn:hover { background: var(--cta-light); }
+.pb-vehicle-btn {
+  display: inline-block; padding: 13px 18px;
+  background: transparent; color: rgba(255,255,255,.55);
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 2px; transition: all .18s; text-decoration: none; white-space: nowrap;
+}
+.pb-vehicle-btn:hover { color: var(--white); border-color: rgba(255,255,255,.5); }
+
+/* Navigation arrows — top-right of viewer */
+.pb-nav {
+  position: absolute; z-index: 10;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.7);
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; cursor: pointer;
+  transition: all .18s; border-radius: 2px;
+}
+.pb-nav:hover { background: var(--cta); color: var(--ink); border-color: var(--cta); }
+.pb-nav--prev { top: 20px; right: 68px; }
+.pb-nav--next { top: 20px; right: 20px; }
+
+/* Progress dots */
+.pb-dots {
+  position: absolute; bottom: 20px; right: 24px; z-index: 10;
+  display: flex; gap: 5px; align-items: center;
+}
+.pb-dot {
+  width: 20px; height: 2px;
+  background: rgba(255,255,255,.2);
+  border: none; padding: 0; cursor: pointer;
+  transition: all .3s;
+}
+.pb-dot.active { background: var(--cta); width: 32px; }
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .pb-panel { grid-template-columns: 1fr; grid-template-rows: auto auto; }
+  .pb-selector { max-height: 240px; overflow-y: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .pb-viewer { min-height: 480px; }
+  .pb-trip-panel { padding: 0 24px 32px; max-width: 100%; }
+  .pb-vehicle-filter { display: none; }
+}
+@media (max-width: 600px) {
+  .pb-trip-title { font-size: 28px; }
+  .pb-days-row { flex-direction: column; gap: 8px; }
+  .pb-day { max-width: 100%; }
+  .pb-bottom-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+
+/* ═══════════════════════════════════════════
+   MARKETWATCH! TRENDING NEWS — v13 editorial match
+═══════════════════════════════════════════ */
+.mw-news-section {
+  background: var(--white);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+.mw-news-inner { max-width: 1340px; margin: 0 auto; }
+
+/* Header bar — v13 trending-label pattern */
+.mw-news-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  min-height: 46px;
+}
+.mw-news-header-left { display: flex; align-items: center; gap: 14px; }
+.mw-news-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--white);
+  background: var(--ink); padding: 14px 18px; margin: 0 -0px;
+  white-space: nowrap; flex-shrink: 0; self-align: stretch;
+  display: flex; align-items: center;
+}
+.mw-news-rule {
+  display: block; width: 1px; height: 18px; background: var(--border); flex-shrink: 0;
+}
+.mw-news-head-text {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10.5px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink);
+}
+.mw-news-geo {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); padding-left: 4px;
+}
+.mw-news-all {
+  font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--cta); transition: color .15s;
+  white-space: nowrap;
+}
+.mw-news-all:hover { color: var(--cta-hover); }
+
+/* 3-zone grid: lead | secondary col | side rail */
+.mw-news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1fr;
+  border-top: none;
+}
+
+/* LEAD CARD */
+.mw-lead-card {
+  display: block; text-decoration: none; color: inherit;
+  border-right: 1px solid var(--border);
+  transition: background .12s; padding-bottom: 24px;
+}
+.mw-lead-card:hover { background: #f8f9fb; }
+.mw-lead-img {
+  height: 260px; background-size: cover; background-position: center;
+  position: relative; overflow: hidden;
+}
+.mw-lead-img:after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(10,12,15,.55) 100%);
+}
+.mw-live-badge {
+  position: absolute; bottom: 12px; left: 16px; z-index: 2;
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; color: #fff;
+  background: rgba(192,57,43,.88); padding: 4px 10px;
+}
+.mw-live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #fff; flex-shrink: 0;
+  animation: mwpulse 1.5s ease-in-out infinite;
+}
+@keyframes mwpulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.mw-lead-body { padding: 18px 22px 0; }
+.mw-lead-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.25;
+  margin-bottom: 8px;
+}
+.mw-lead-card:hover .mw-lead-title { color: var(--cta); }
+
+/* SHARED card parts */
+.mw-card-cat {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--slate); margin-bottom: 7px;
+}
+.mw-card-blurb { font-size: 13px; color: var(--mid); line-height: 1.6; margin-bottom: 10px; }
+.mw-card-meta {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .04em;
+  color: var(--muted);
+}
+
+/* SECONDARY 2-stack */
+.mw-secondary-col {
+  display: flex; flex-direction: column;
+  border-right: 1px solid var(--border);
+}
+.mw-sec-card {
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  border-bottom: 1px solid var(--border); flex: 1; transition: background .12s;
+}
+.mw-sec-card:last-child { border-bottom: none; }
+.mw-sec-card:hover { background: #f8f9fb; }
+.mw-sec-img {
+  height: 130px; background-size: cover; background-position: center; flex-shrink: 0;
+}
+.mw-sec-body { padding: 14px 18px 16px; flex: 1; }
+.mw-sec-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 17px; font-weight: 600; color: var(--ink-2); line-height: 1.28;
+  margin-bottom: 8px; transition: color .15s;
+}
+.mw-sec-card:hover .mw-sec-title { color: var(--cta); }
+
+/* SIDE RAIL */
+.mw-side-rail {
+  display: flex; flex-direction: column;
+  padding: 0;
+}
+.mw-side-head {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--ink);
+  padding: 14px 18px 12px;
+  border-bottom: 2px solid var(--ink);
+}
+.mw-side-art {
+  display: block; padding: 12px 18px;
+  border-bottom: 1px solid var(--border-lt);
+  text-decoration: none; color: inherit;
+  transition: background .12s;
+}
+.mw-side-art:hover { background: #f8f9fb; }
+.mw-side-art-cat {
+  font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+}
+.mw-side-art-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 15.5px; font-weight: 600; color: var(--ink-2); line-height: 1.3;
+  transition: color .15s;
+}
+.mw-side-art:hover .mw-side-art-title { color: var(--cta); }
+.mw-side-art-meta {
+  font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--muted); margin-top: 5px;
+}
+/* Side CTA widget — v13 cta-widget pattern */
+.mw-side-cta {
+  margin-top: auto;
+  padding: 18px 18px 20px;
+  background: var(--ink);
+}
+.mw-side-cta-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: .2em;
+  text-transform: uppercase; color: #667788; margin-bottom: 7px;
+}
+.mw-side-cta-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 12px;
+}
+.mw-side-cta-btn {
+  display: inline-block; font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--cta); border-bottom: 1px solid rgba(201,146,10,.3);
+  padding-bottom: 2px; transition: color .15s, border-color .15s;
+}
+.mw-side-cta-btn:hover { color: var(--cta-light); border-color: var(--cta); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .explainer-inner { gap: 32px; }
+  .promo-row { grid-template-columns: 1fr; gap: 12px; }
+  .hiw-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .airport-module-inner { grid-template-columns: 1fr; gap: 20px; }
+  .airport-cta-col { text-align: left; }
+  .mw-news-grid { grid-template-columns: 1fr 1fr; }
+  .mw-side-rail { display: none; }
+}
+@media (max-width: 768px) {
+  .masthead-center { display: none; }
+  .brand-mw-name { font-size: 22px; }
+  .travel-hero-inner { grid-template-columns: 1fr; }
+  .travel-hero-stats { flex-direction: row; justify-content: flex-start; }
+  .stat-pill { min-width: auto; padding: 8px 14px; }
+  .stat-pill-num { font-size: 18px; }
+  .travel-hero { min-height: 420px; }
+  .mw-news-grid { grid-template-columns: 1fr; }
+  .mw-secondary-col { border-right: none; border-top: 1px solid var(--border); }
+  .mw-lead-card { border-right: none; }
+  .dc { flex: 0 0 224px; }
+  .dc-hero { flex: 0 0 288px; }
+  .fpc { flex: 0 0 288px; }
+  .dc-img { height: 150px; }
+  .c-track { padding: 4px 16px 20px; }
+  .carousel-head { padding: 0 16px 14px; }
+  .c-arrow { display: none; }
+  .promo-row { padding: 20px 16px 8px; }
+  .member-cta-inner { grid-template-columns: 1fr; }
+  .mci-price-box { text-align: left; padding: 20px 24px; }
+  .explainer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .hiw-steps { grid-template-columns: 1fr; gap: 20px; }
+  footer { padding: 36px 16px 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .aff-strip-inner { flex-direction: column; align-items: flex-start; }
+  .fleet-cards { gap: 12px; }
+  .fleet-card { flex: 0 0 180px; }
+  .util-right .util-member-btn { display: none; }
+}
+@media (max-width: 480px) {
+  .travel-hero-title { font-size: 38px; }
+  .travel-hero-stats { display: none; }
+  .brand-section-tag { display: none; }
+  .mci-title { font-size: 30px; }
+  .airport-grid { gap: 6px; }
+  .airport-pill-city { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════
+  UTIL BAR
+<div class="util-bar">
+  <div class="util-inner">
+    <div class="util-ticker">
+      <span class="util-hot">Live Deals</span>
+      <div class="ticker-scroll">
+        <div class="ticker-items">
+          <span class="t-item">✈️ <strong>LAX Pickup:</strong> Curb-to-curb private transfer from $89 · Book today</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🚐 <strong>New:</strong> Sprinter Van Family Packages — Palm Springs 3-Day from $1,299 all-in</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🎰 <strong>Casino Deal:</strong> MGM Grand Vegas + $200 play credit — $149/night · HIRECAR Transfer Incl.</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🏌️ <strong>Gold Getaway:</strong> Pelican Hill Newport Coast — $795/night · First Class Transfer Included</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🌴 <strong>All-Inclusive:</strong> Excellence Playa Mujeres 5-Star Cancún — 4 nights w/ air from $1,299</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🚐 <strong>Sprinter RV:</strong> National Parks Circuit — Zion + Bryce + Grand Canyon from $1,699/person</span>
+          <span class="t-dot">·</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="t-item">✈️ <strong>LAX Pickup:</strong> Curb-to-curb private transfer from $89 · Book today</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🚐 <strong>New:</strong> Sprinter Van Family Packages — Palm Springs 3-Day from $1,299 all-in</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🎰 <strong>Casino Deal:</strong> MGM Grand Vegas + $200 play credit — $149/night · HIRECAR Transfer Incl.</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🏌️ <strong>Gold Getaway:</strong> Pelican Hill Newport Coast — $795/night · First Class Transfer Included</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🌴 <strong>All-Inclusive:</strong> Excellence Playa Mujeres 5-Star Cancún — 4 nights w/ air from $1,299</span>
+          <span class="t-dot">·</span>
+          <span class="t-item">🚐 <strong>Sprinter RV:</strong> National Parks Circuit — Zion + Bryce + Grand Canyon from $1,699/person</span>
+          <span class="t-dot">·</span>
+        </div>
+      </div>
+    </div>
+    <div class="util-right">
+      <a href="https://www.hirecar.la" class="util-link">HIRECAR.LA</a>
+      <a href="#airport-transfers" class="util-airport-btn">✈️ Airport Pickup</a>
+      <a href="#member-cta" class="util-member-btn">First Class →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  MASTHEAD
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="https://www.hirecar.la" class="brand">
+      <img class="brand-logo" src="https://static.wixstatic.com/media/986625_47da05cc98a9403f96591630138d5056~mv2.png" alt="HIRECAR" onerror="this.style.display='none'">
+      <div class="brand-pipe"></div>
+      <div class="brand-mw">
+        <div class="brand-mw-name">MarketWatch<span class="bang">!</span></div>
+        <div class="brand-mw-sub">Auto · Mobility · Intelligence</div>
+      </div>
+    </a>
+    <div class="brand-section-tag">
+      <div class="bst-label">Section</div>
+      <div class="bst-name">Travel Playbook™</div>
+    </div>
+    <div class="masthead-center">
+      <div class="masthead-date" id="mh-date">Sunday, March 01, 2026 · Los Angeles, CA</div>
+      <div class="masthead-motto">We Plan It. You Live It. HIRECAR Moves You.</div>
+    </div>
+    <div class="masthead-right">
+      <a href="https://www.hirecar.la/sign-in" class="mh-login">Sign In</a>
+      <a href="https://www.hirecar.la/first-class" class="mh-apply">First Class →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════
+  PRIMARY NAV
+<nav class="primary-nav" role="navigation">
+  <div class="nav-inner">
+    <a href="#airport-transfers" class="nav-link nav-airport">✈️ Airport Transfers</a>
+    <a href="#family-playbooks" class="nav-link active">Family Playbooks</a>
+    <a href="#price-drops" class="nav-link">Price Drops 🔥</a>
+    <a href="#casino-deals" class="nav-link">Casino Deals</a>
+    <a href="#gold-getaways" class="nav-link">Golf Resorts</a>
+    <a href="#all-inclusive" class="nav-link">All-Inclusive</a>
+    <a href="#road-trips" class="nav-link">Road Trips</a>
+    <a href="#rv-adventures" class="nav-link">RV Adventures</a>
+    <a href="#fishing" class="nav-link">Fishing</a>
+    <div class="nav-push"></div>
+    <a href="https://www.hirecar.la/marketwatch" class="nav-back">← MarketWatch!</a>
+    <a href="https://www.hirecar.la" class="nav-back">HIRECAR.LA</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════
+  HERO — TRAVEL PLAYBOOK
+<div class="travel-hero">
+  <div class="travel-hero-inner">
+    <div>
+      <div class="travel-hero-eyebrow">HIRECAR MarketWatch! · Travel Playbook™ · Southern California</div>
+      <h1 class="travel-hero-title">The Road<br><em>Is Yours.</em></h1>
+      <p class="travel-hero-sub">From the 405 to the PCH. LAX curb to resort lobby. Sedans, Sprinters, RVs — and a full family itinerary written before you leave the driveway.</p>
+      <div class="travel-search-bar">
+        <input type="text" id="travel-search" placeholder="Destination, airport, trip type…" autocomplete="off">
+        <button class="travel-search-btn" onclick="handleSearch()">Plan My Trip →</button>
+      </div>
+      <div class="hero-quiet-links">
+        <a href="#airport-transfers" class="hql">✈ Airport Transfers</a>
+        <span class="hql-dot">·</span>
+        <a href="#family-playbooks" class="hql">Family Playbooks</a>
+        <span class="hql-dot">·</span>
+        <a href="#family-playbooks" class="hql">RV Adventures</a>
+        <span class="hql-dot">·</span>
+        <a href="#member-cta" class="hql hql-gold">First Class →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  AIRPORT TRANSFER MODULE
+<div class="airport-module" id="airport-transfers">
+  <div class="airport-module-inner">
+    <div class="airport-module-label">
+      <div class="aml-eyebrow">✈️ HIRECAR · Private Transfer Service</div>
+      <div class="aml-title">Airport Pickup &amp; Curb-to-Curb<br>Transfer — All California Airports</div>
+      <div class="aml-sub">Private vehicles · Meet &amp; greet · Luggage assist · No hidden fees</div>
+    </div>
+    <div class="airport-grid">
+      <a href="https://www.hirecar.la/airport-transfer?airport=LAX&utm_source=travel-playbook&utm_medium=airport-module" class="airport-pill">
+        <span class="airport-pill-code">LAX</span>
+        <span class="airport-pill-city">Los Angeles</span>
+        <span class="airport-pill-tag">Primary</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=BUR&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">BUR</span><span class="airport-pill-city">Burbank</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=LGB&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">LGB</span><span class="airport-pill-city">Long Beach</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SNA&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SNA</span><span class="airport-pill-city">Orange County</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=ONT&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">ONT</span><span class="airport-pill-city">Ontario</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=PSP&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">PSP</span><span class="airport-pill-city">Palm Springs</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SAN&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SAN</span><span class="airport-pill-city">San Diego</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SFO&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SFO</span><span class="airport-pill-city">San Francisco</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SJC&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SJC</span><span class="airport-pill-city">San Jose</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=OAK&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">OAK</span><span class="airport-pill-city">Oakland</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SMF&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SMF</span><span class="airport-pill-city">Sacramento</span>
+      </a>
+      <a href="https://www.hirecar.la/airport-transfer?airport=SBA&utm_source=travel-playbook" class="airport-pill">
+        <span class="airport-pill-code">SBA</span><span class="airport-pill-city">Santa Barbara</span>
+      </a>
+    </div>
+    <div class="airport-cta-col">
+      <a href="https://www.hirecar.la/airport-transfer?utm_source=travel-playbook&utm_medium=airport-module&utm_campaign=hero" class="airport-book-btn">Book Airport Transfer →</a>
+      <div class="airport-book-sub">Sedan from $89 · SUV from $129 · Sprinter from $249</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  FLEET SELECTOR
+<div class="fleet-module">
+  <div class="fleet-inner">
+    <div class="fleet-head-row">
+      <div class="fleet-head">Choose Your Vehicle · HIRECAR First Class Fleet</div>
+      <div class="fleet-head-sub">From airport pickup to road trips — right-size your ride</div>
+    </div>
+    <div class="fleet-cards">
+      <a href="https://www.hirecar.la/book?vehicle=sedan&utm_source=travel-playbook&utm_medium=fleet-selector" class="fleet-card">
+        <div class="fleet-card-img" style="background-image:url('https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500&q=80')">
+          <div class="fleet-card-type">Sedan</div>
+        </div>
+        <div class="fleet-card-body">
+          <div class="fleet-card-name">Executive Sedan</div>
+          <div class="fleet-card-desc">Airport runs, date nights, solo business travel. Clean, private, punctual.</div>
+          <div class="fleet-card-capacity">👤 1–3 passengers · 2 bags</div>
+          <span class="fleet-card-cta">Book from $89 →</span>
+        </div>
+      </a>
+      <a href="https://www.hirecar.la/book?vehicle=suv&utm_source=travel-playbook&utm_medium=fleet-selector" class="fleet-card">
+        <div class="fleet-card-img" style="background-image:url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500&q=80')">
+          <div class="fleet-card-type">SUV</div>
+        </div>
+        <div class="fleet-card-body">
+          <div class="fleet-card-name">Luxury SUV</div>
+          <div class="fleet-card-desc">Family airport runs, group outings, comfortable road trips to Palm Springs or Vegas.</div>
+          <div class="fleet-card-capacity">👤 1–6 passengers · 4 bags</div>
+          <span class="fleet-card-cta">Book from $129 →</span>
+        </div>
+      </a>
+      <a href="https://www.hirecar.la/book?vehicle=sprinter&utm_source=travel-playbook&utm_medium=fleet-selector" class="fleet-card">
+        <div class="fleet-card-img" style="background-image:url('https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500&q=80')">
+          <div class="fleet-card-type">Sprinter Van</div>
+        </div>
+        <div class="fleet-card-body">
+          <div class="fleet-card-name">Sprinter Van</div>
+          <div class="fleet-card-desc">Family vacations, group airport runs, wine country, casino trips. Everyone travels together.</div>
+          <div class="fleet-card-capacity">👤 7–14 passengers · Full luggage</div>
+          <span class="fleet-card-cta">Book from $249 →</span>
+        </div>
+      </a>
+      <a href="https://www.hirecar.la/book?vehicle=party-bus&utm_source=travel-playbook&utm_medium=fleet-selector" class="fleet-card">
+        <div class="fleet-card-img" style="background-image:url('https://images.unsplash.com/photo-1473445730015-841f29a9490b?w=500&q=80')">
+          <div class="fleet-card-type">Party Bus</div>
+        </div>
+        <div class="fleet-card-body">
+          <div class="fleet-card-name">Party Bus / Coach</div>
+          <div class="fleet-card-desc">Group events, casino runs, weddings, and corporate outings. HIRECAR moves the whole crew.</div>
+          <div class="fleet-card-capacity">👤 15–40 passengers · Event-ready</div>
+          <span class="fleet-card-cta">Get a Quote →</span>
+        </div>
+      </a>
+      <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="fleet-card">
+        <div class="fleet-card-img" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=500&q=80')">
+          <div class="fleet-card-type">RV / Motorhome</div>
+        </div>
+        <div class="fleet-card-body">
+          <div class="fleet-card-name">RV Adventure</div>
+          <div class="fleet-card-desc">National parks, Mammoth, Tahoe — fully equipped RVs for the full family getaway.</div>
+          <div class="fleet-card-capacity">👤 2–8 passengers · Home on wheels</div>
+          <span class="fleet-card-cta">Browse RVs →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  HOW THE PLAYBOOK WORKS
+<div class="hiw">
+  <div class="hiw-inner">
+    <div class="hiw-head">The HIRECAR Travel Playbook™</div>
+    <div class="hiw-title">Your family trip, fully planned before you leave the driveway.</div>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-step-icon">📋</div>
+        <div class="hiw-step-num">01</div>
+        <div class="hiw-step-title">You Tell Us the Trip</div>
+        <div class="hiw-step-text">Dates, group size, budget, vibe. A quick call or form is all we need. We take it from there — hotel, route, activities, everything.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-step-icon">🗺️</div>
+        <div class="hiw-step-num">02</div>
+        <div class="hiw-step-title">We Write the Playbook</div>
+        <div class="hiw-step-text">Day-by-day itinerary with sightseeing stops, dining suggestions, event recommendations, and driving directions — delivered to your phone.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-step-icon">🚐</div>
+        <div class="hiw-step-num">03</div>
+        <div class="hiw-step-title">Right Vehicle, Right Size</div>
+        <div class="hiw-step-text">Sedan for two. SUV for a family of five. Sprinter for the whole crew. RV for the full adventure. We match the vehicle to the trip, not the other way around.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-step-icon">🏁</div>
+        <div class="hiw-step-num">04</div>
+        <div class="hiw-step-title">Curb-to-Curb. Door-to-Door.</div>
+        <div class="hiw-step-text">We pick you up at your house or your airport terminal. We drop you at your hotel. Every stop on the itinerary is in the app. You just live it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  MARKETWATCH! TRENDING TRAVEL NEWS
+  Editorial card grid — matches v13 design system
+<div class="mw-news-section">
+  <div class="mw-news-inner">
+
+    <!-- Section header — identical to v13 trending label pattern -->
+    <div class="mw-news-header">
+      <div class="mw-news-header-left">
+        <span class="mw-news-label">MarketWatch!</span>
+        <span class="mw-news-rule"></span>
+        <span class="mw-news-head-text">Trending Travel News</span>
+        <span class="mw-news-geo">Southern California &amp; SoCal Commuter</span>
+      </div>
+      <a href="https://www.hirecar.la/marketwatch" class="mw-news-all">All Coverage →</a>
+    </div>
+
+    <!-- 3-up card grid + sidebar — v13 art-row / card-grid pattern -->
+    <div class="mw-news-grid">
+
+      <!-- LEAD STORY -->
+      <a href="https://www.hirecar.la/marketwatch/lax-renovation?utm_source=travel-playbook" class="mw-lead-card">
+        <div class="mw-lead-img" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=85')">
+          <span class="mw-live-badge"><span class="mw-live-dot"></span>Developing</span>
+        </div>
+        <div class="mw-lead-body">
+          <div class="mw-card-cat">LAX · Infrastructure</div>
+          <div class="mw-lead-title">LAX Terminals 2 &amp; 3 Fully Reopened After $1.6B Renovation — Here's What's Different for SoCal Travelers</div>
+          <div class="mw-card-blurb">Faster security lanes, consolidated TBIT connections, and a new curbside pickup zone. What it means for your next HIRECAR transfer pickup time.</div>
+          <div class="mw-card-meta">MarketWatch! Travel Desk · March 2026 · 4 min read</div>
+        </div>
+      </a>
+
+      <!-- 2-column secondary stories -->
+      <div class="mw-secondary-col">
+
+        <a href="https://www.hirecar.la/marketwatch/gas-prices-socal?utm_source=travel-playbook" class="mw-sec-card">
+          <div class="mw-sec-img" style="background-image:url('https://images.unsplash.com/photo-1526628953301-3cd6e5de1890?w=600&q=80')"></div>
+          <div class="mw-sec-body">
+            <div class="mw-card-cat">Fuel · SoCal Roads</div>
+            <div class="mw-sec-title">LA Gas Prices Drop Below $4.20 — Best Window in 18 Months for a SoCal Road Trip</div>
+            <div class="mw-card-meta">MarketWatch! · March 2026</div>
+          </div>
+        </a>
+
+        <a href="https://www.hirecar.la/marketwatch/405-express-lanes?utm_source=travel-playbook" class="mw-sec-card">
+          <div class="mw-sec-img" style="background-image:url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=600&q=80')"></div>
+          <div class="mw-sec-body">
+            <div class="mw-card-cat">Commuter · Infrastructure</div>
+            <div class="mw-sec-title">405 Express Lanes Now Extend to Sherman Oaks — HIRECAR Transfer Times Through the Valley Cut by 22 Min</div>
+            <div class="mw-card-meta">MarketWatch! · Feb 2026</div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- RIGHT RAIL — quick reads, v13 side-art style -->
+      <div class="mw-side-rail">
+        <div class="mw-side-head">Quick Reads</div>
+
+        <a href="https://www.expedia.com/Palm-Springs-Hotels.d553248.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=news-rail" target="_blank" rel="noopener sponsored" class="mw-side-art">
+          <div class="mw-side-art-cat">Palm Springs · Hotels</div>
+          <div class="mw-side-art-title">Best New Hotel Openings in Palm Springs for Spring 2026 — From Boutique to 5-Star</div>
+          <div class="mw-side-art-meta">via Expedia · Sponsored</div>
+        </a>
+
+        <a href="https://www.hirecar.la/marketwatch/amtrak-vs-hirecar?utm_source=travel-playbook" class="mw-side-art">
+          <div class="mw-side-art-cat">Transit · Analysis</div>
+          <div class="mw-side-art-title">Amtrak Pacific Surfliner vs. HIRECAR Transfer: The Real Cost LA → San Diego in 2026</div>
+          <div class="mw-side-art-meta">MarketWatch! Analysis · 6 min</div>
+        </a>
+
+        <a href="https://www.hirecar.la/marketwatch/joshua-tree-entry?utm_source=travel-playbook" class="mw-side-art">
+          <div class="mw-side-art-cat">National Parks · Permit</div>
+          <div class="mw-side-art-title">Joshua Tree Now Requiring Timed Entry on Weekends — Plan Your Visit Early</div>
+          <div class="mw-side-art-meta">MarketWatch! · Feb 2026</div>
+        </a>
+
+        <a href="https://www.hirecar.la/marketwatch/pch-closures-2026?utm_source=travel-playbook" class="mw-side-art">
+          <div class="mw-side-art-cat">PCH · Road Conditions</div>
+          <div class="mw-side-art-title">PCH Malibu Reopens After Storm Damage — What Sections Are Still Restricted in Spring 2026</div>
+          <div class="mw-side-art-meta">MarketWatch! · March 2026</div>
+        </a>
+
+        <!-- v13-style CTA widget embedded in rail -->
+        <div class="mw-side-cta">
+          <div class="mw-side-cta-eyebrow">HIRECAR First Class</div>
+          <div class="mw-side-cta-title">Priority airport pickup &amp; member travel rates</div>
+          <a href="https://www.hirecar.la/first-class?utm_source=travel-playbook&utm_medium=news-rail" class="mw-side-cta-btn">Learn More →</a>
+        </div>
+      </div>
+
+    </div><!-- /mw-news-grid -->
+  </div>
+</div>
+
+<!-- ════════════════════════
+  CATEGORY TABS
+<div class="cat-tabs">
+  <div class="cat-tabs-inner">
+    <button class="cat-tab active" data-filter="all">All Deals <span class="cat-count">340+</span></button>
+    <button class="cat-tab" data-filter="family">Family Playbooks <span class="cat-count">24</span></button>
+    <button class="cat-tab" data-filter="airport">Airport Transfers <span class="cat-count">12</span></button>
+    <button class="cat-tab" data-filter="rv">RV Adventures <span class="cat-count">19</span></button>
+    <button class="cat-tab" data-filter="price-drops">Price Drops <span class="cat-count">48</span></button>
+    <button class="cat-tab" data-filter="casino">Casino Deals <span class="cat-count">29</span></button>
+    <button class="cat-tab" data-filter="golf">Golf Resorts <span class="cat-count">18</span></button>
+    <button class="cat-tab" data-filter="allinc">All-Inclusive <span class="cat-count">38</span></button>
+    <button class="cat-tab" data-filter="road">Road Trips <span class="cat-count">41</span></button>
+    <button class="cat-tab" data-filter="mountain">Mountain <span class="cat-count">22</span></button>
+    <button class="cat-tab" data-filter="fishing">Fishing <span class="cat-count">15</span></button>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  STICKY SUB NAV
+<div class="section-nav">
+  <div class="section-nav-inner">
+    <a href="#airport-transfers" class="snav-item">✈️ Airports</a>
+    <a href="#family-playbooks" class="snav-item active">🗺️ Trip Playbooks</a>
+    <a href="#price-drops" class="snav-item">🔥 Price Drops</a>
+    <a href="#casino-deals" class="snav-item">🎰 Casino</a>
+    <a href="#gold-getaways" class="snav-item">⛳ Golf Resorts</a>
+    <a href="#all-inclusive" class="snav-item">🌴 All-Inclusive</a>
+    <a href="#road-trips" class="snav-item">🚗 Road Trips</a>
+    <a href="#fishing" class="snav-item">🎣 Fishing</a>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  DESTINATIONS STRIP
+<div class="top-dests-wrap">
+  <div class="top-dests-head-row">
+    <div class="top-dests-head">Top Destinations — Drivable from Los Angeles</div>
+    <div class="top-dests-sub">All under 6 hrs · Sedan, SUV, Sprinter &amp; RV available</div>
+  </div>
+  <div class="top-dests-scroll">
+    <a href="#casino-deals" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1581963851516-57c0e9a9f0e1?w=200&q=80')"></div><div class="dest-name">Las Vegas</div><div class="dest-drive">4.3 hrs</div></a>
+    <a href="#family-playbooks" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1444201983204-c43cbd584d93?w=200&q=80')"></div><div class="dest-name">Palm Springs</div><div class="dest-drive">1.8 hrs</div></a>
+    <a href="#rv-adventures" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=200&q=80')"></div><div class="dest-name">Mammoth</div><div class="dest-drive">5.5 hrs</div></a>
+    <a href="#family-playbooks" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1549294413-26f195200c16?w=200&q=80')"></div><div class="dest-name">Santa Barbara</div><div class="dest-drive">1.5 hrs</div></a>
+    <a href="#gold-getaways" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=200&q=80')"></div><div class="dest-name">Scottsdale</div><div class="dest-drive">5.8 hrs</div></a>
+    <a href="#family-playbooks" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1463852247062-1bbca38f7805?w=200&q=80')"></div><div class="dest-name">San Diego</div><div class="dest-drive">2.1 hrs</div></a>
+    <a href="#rv-adventures" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1558441440-d4111d18d48f?w=200&q=80')"></div><div class="dest-name">Sedona</div><div class="dest-drive">5.5 hrs</div></a>
+    <a href="#rv-adventures" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=200&q=80')"></div><div class="dest-name">Big Bear</div><div class="dest-drive">2.5 hrs</div></a>
+    <a href="#road-trips" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1533619043865-1c2e2f32ff2f?w=200&q=80')"></div><div class="dest-name">Napa Valley</div><div class="dest-drive">6 hrs</div></a>
+    <a href="#all-inclusive" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=200&q=80')"></div><div class="dest-name">Cabo</div><div class="dest-drive">Direct flight</div></a>
+    <a href="#fishing" class="dest-pill"><div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1532751203593-7b8f7b1b5a90?w=200&q=80')"></div><div class="dest-name">Lake Tahoe</div><div class="dest-drive">7 hrs</div></a>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  PROMO TILES
+<div class="promo-row">
+  <a href="#family-playbooks" class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=900&q=85')">
+    <div class="promo-content">
+      <div class="promo-label">Family Travel Playbook™</div>
+      <div class="promo-title">Full-Family Road Trips</div>
+      <div class="promo-sub">Sprinter vans, itineraries, sightseeing &amp; hotels — we plan it all</div>
+      <span class="promo-btn">See Family Deals</span>
+    </div>
+  </a>
+  <a href="#airport-transfers" class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=85')">
+    <div class="promo-content">
+      <div class="promo-label">Curb-to-Curb · All CA Airports</div>
+      <div class="promo-title">Private Airport Transfer</div>
+      <div class="promo-sub">LAX, BUR, SNA, SFO, SAN &amp; 8 more airports — meet &amp; greet service</div>
+      <span class="promo-btn">Book Transfer</span>
+    </div>
+  </a>
+  <a href="#family-playbooks" class="promo-tile" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=900&q=85')">
+    <div class="promo-content">
+      <div class="promo-label">RV Adventures</div>
+      <div class="promo-title">National Parks &amp; Beyond</div>
+      <div class="promo-sub">RVs from $99/night — Zion, Bryce, Grand Canyon, Yosemite, Tahoe</div>
+      <span class="promo-btn">Browse RVs</span>
+    </div>
+  </a>
+</div>
+
+<!-- ════════════════════════
+  AFFILIATE STRIP — HOTELS
+<div class="aff-strip">
+  <div class="aff-strip-inner">
+    <div class="aff-strip-text">
+      <div class="aff-strip-label">Powered by Expedia Affiliate Network · Booking.com · Viator</div>
+      <div class="aff-strip-title">Search 1M+ Hotels, Resorts &amp; Experiences</div>
+      <div class="aff-strip-sub">Real-time availability · Best price guarantee · Affiliate commissions fund this editorial platform</div>
+    </div>
+    <div class="aff-strip-btns">
+      <a href="https://www.expedia.com/?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_medium=aff-strip" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-primary">Search Expedia →</a>
+      <a href="https://www.booking.com/?aid=YOUR_BOOKING_AID&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-outline">Booking.com →</a>
+      <a href="https://www.viator.com/?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-outline">Viator Tours →</a>
+      <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-teal">RVshare →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+  COMBINED: FAMILY & ADVENTURE PLAYBOOKS
+  Immersive full-bleed tab-slider — trip selector + live image
+<section class="pb-section" id="family-playbooks" data-also="rv-adventures">
+
+  <!-- Section header bar -->
+  <div class="pb-header">
+    <div class="pb-header-inner">
+      <div class="pb-header-left">
+        <span class="pb-section-label">HIRECAR Travel Playbook™</span>
+        <span class="pb-header-rule"></span>
+        <span class="pb-section-title">Family &amp; Adventure Trips</span>
+      </div>
+      <div class="pb-vehicle-filter" id="pbVehicleFilter">
+        <span class="pb-filter-label">Show trips for:</span>
+        <button class="pbv-btn active" data-v="all">All Vehicles</button>
+        <button class="pbv-btn" data-v="suv">SUV / Sedan</button>
+        <button class="pbv-btn" data-v="sprinter">Sprinter Van</button>
+        <button class="pbv-btn" data-v="rv">RV / Motorhome</button>
+      </div>
+      <a href="https://www.hirecar.la/travel-playbook?utm_source=travel-page" class="pb-see-all">Plan a custom trip →</a>
+    </div>
+  </div>
+
+  <!-- Main slide panel -->
+  <div class="pb-panel">
+
+    <!-- LEFT: Trip selector list -->
+    <div class="pb-selector" id="pbSelector">
+
+      <div class="pb-trip-tab active" data-trip="0" data-vehicle="suv sprinter">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">01</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">San Diego Family</div>
+            <div class="pb-tab-meta">3 days · SUV or Sprinter · Zoo, Coronado, Old Town</div>
+          </div>
+          <div class="pb-tab-price">from $1,299</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1619540920960-24e9b2f98c0d?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="1" data-vehicle="suv sprinter">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">02</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">Palm Springs Desert</div>
+            <div class="pb-tab-meta">2–4 days · SUV or Sprinter · Aerial Tramway, Joshua Tree</div>
+          </div>
+          <div class="pb-tab-price">from $1,149</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1444201983204-c43cbd584d93?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="2" data-vehicle="sprinter">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">03</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">Las Vegas — Family Edition</div>
+            <div class="pb-tab-meta">3 days · Sprinter Van · Fremont St, High Roller, Hoover Dam</div>
+          </div>
+          <div class="pb-tab-price">from $1,599</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="3" data-vehicle="suv">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">04</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">Santa Barbara Coastal</div>
+            <div class="pb-tab-meta">2 days · SUV · Wharf, Zoo, Solvang Wine Country</div>
+          </div>
+          <div class="pb-tab-price">from $849</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1549294413-26f195200c16?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="4" data-vehicle="suv sprinter">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">05</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">PCH Big Sur Road Trip</div>
+            <div class="pb-tab-meta">3–4 days · SUV or Sprinter · Malibu → Carmel</div>
+          </div>
+          <div class="pb-tab-price">from $1,499</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="5" data-vehicle="rv">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">06</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">National Parks Grand Circuit</div>
+            <div class="pb-tab-meta">6 days · Full RV · Zion, Bryce, Grand Canyon</div>
+          </div>
+          <div class="pb-tab-price">from $1,699</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="6" data-vehicle="rv">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">07</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">Yosemite RV Family</div>
+            <div class="pb-tab-meta">5 days · Class A RV · Glacier Point, Valley Floor, Mariposa</div>
+          </div>
+          <div class="pb-tab-price">from $189/night</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=400&q=80')"></div>
+      </div>
+
+      <div class="pb-trip-tab" data-trip="7" data-vehicle="rv sprinter">
+        <div class="pb-tab-inner">
+          <div class="pb-tab-num">08</div>
+          <div class="pb-tab-content">
+            <div class="pb-tab-name">PCH Coast RV Run</div>
+            <div class="pb-tab-meta">4 days · RV or Sprinter Camper · Pismo, Big Sur, Tahoe</div>
+          </div>
+          <div class="pb-tab-price">from $249/night</div>
+        </div>
+        <div class="pb-tab-bar"></div>
+        <div class="pb-tab-thumb" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80')"></div>
+      </div>
+
+    </div><!-- /pb-selector -->
+
+    <!-- RIGHT: Immersive slide viewer -->
+    <div class="pb-viewer" id="pbViewer">
+
+      <!-- Background images — one per trip -->
+      <div class="pb-slides">
+        <div class="pb-slide active" style="background-image:url('https://images.unsplash.com/photo-1619540920960-24e9b2f98c0d?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1444201983204-c43cbd584d93?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1549294413-26f195200c16?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1200&q=88')"></div>
+        <div class="pb-slide" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=88')"></div>
+      </div>
+
+      <!-- Vignette over slide -->
+      <div class="pb-vignette"></div>
+
+      <!-- Content overlay — swaps on tab change -->
+      <div class="pb-overlay-content" id="pbContent">
+
+        <!-- Trip 0: San Diego -->
+        <div class="pb-trip-panel active" data-panel="0">
+          <div class="pb-vehicle-badge"><span class="pbvb-icon">🚐</span> SUV or Sprinter Van · Up to 14</div>
+          <div class="pb-trip-title">San Diego<br>Family Playbook</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">LA departure. Old Town San Diego. Hotel check-in. Casa Guadalajara dinner.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">San Diego Zoo (full day). Balboa Park. Gaslamp Quarter evening.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3</div><div class="pb-day-t">Coronado Island. Ferry crossing. Seaport Village. Coastal I-5 drive home.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$1,299</span><span class="pb-price-sub">/family · hotel + vehicle</span>
+              <span class="pb-price-was">was $1,899</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.expedia.com/San-Diego-Hotels.d178282.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=family-playbook" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book This Playbook</a>
+              <a href="https://www.hirecar.la/book?vehicle=sprinter&utm_source=travel-page" class="pb-vehicle-btn">Reserve Sprinter →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 1: Palm Springs -->
+        <div class="pb-trip-panel" data-panel="1">
+          <div class="pb-vehicle-badge"><span class="pbvb-icon">🚙</span> SUV or Sprinter · Up to 14</div>
+          <div class="pb-trip-title">Palm Springs<br>Desert Playbook</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">LA to Palm Springs. Resort check-in. Pool day. El Mirasol dinner.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">Aerial Tramway morning. Indian Canyons hike. Palm Canyon Drive.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3</div><div class="pb-day-t">Joshua Tree National Park. Skull Rock. Cholla Garden. Sunset drive home.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$1,149</span><span class="pb-price-sub">/family · 2 nights</span>
+              <span class="pb-price-was">was $1,699</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.expedia.com/Palm-Springs-Hotels.d553248.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=family-playbook" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book This Playbook</a>
+              <a href="https://www.hirecar.la/book?vehicle=suv&utm_source=travel-page" class="pb-vehicle-btn">Reserve SUV →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 2: Las Vegas -->
+        <div class="pb-trip-panel" data-panel="2">
+          <div class="pb-vehicle-badge"><span class="pbvb-icon">🚐</span> Sprinter Van · 7–14 people</div>
+          <div class="pb-trip-title">Las Vegas<br>Family Edition</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">Sprinter departs 8am. Hotel check-in. Strip walk. LINQ High Roller sunset.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">Fremont Street. Pinball Hall of Fame. Venetian gondola. Bellagio fountains.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3</div><div class="pb-day-t">Hoover Dam tour. Boulder City lunch. Scenic desert return to LA.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$1,599</span><span class="pb-price-sub">/family · 2 nights</span>
+              <span class="pb-price-was">was $2,299</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.expedia.com/Las-Vegas-Hotels.d178307.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=family-playbook" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book This Playbook</a>
+              <a href="https://www.hirecar.la/book?vehicle=sprinter&utm_source=travel-page" class="pb-vehicle-btn">Reserve Sprinter →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 3: Santa Barbara -->
+        <div class="pb-trip-panel" data-panel="3">
+          <div class="pb-vehicle-badge"><span class="pbvb-icon">🚙</span> Luxury SUV · Up to 6</div>
+          <div class="pb-trip-title">Santa Barbara<br>Coastal Playbook</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">LA to SB. Stearn's Wharf lunch. State Street. Brophy Bros dinner at sunset.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">Santa Barbara Zoo. Santa Ynez wine country. Solvang Danish village. Return.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$849</span><span class="pb-price-sub">/family · 1 night</span>
+              <span class="pb-price-was">was $1,299</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.expedia.com/Santa-Barbara-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=family-playbook" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book This Playbook</a>
+              <a href="https://www.hirecar.la/book?vehicle=suv&utm_source=travel-page" class="pb-vehicle-btn">Reserve SUV →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 4: PCH Big Sur -->
+        <div class="pb-trip-panel" data-panel="4">
+          <div class="pb-vehicle-badge"><span class="pbvb-icon">🚐</span> SUV or Sprinter · PCH Route</div>
+          <div class="pb-trip-title">PCH Big Sur<br>Road Trip</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">Malibu coast. Santa Barbara lunch. Pismo Beach check-in. Dunes at sunset.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">Elephant seals. Big Sur arrival. Bixby Bridge. McWay Falls. Julia Pfeiffer.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3</div><div class="pb-day-t">17-Mile Drive. Carmel-by-the-Sea. Point Lobos. Coastal return to LA.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$1,499</span><span class="pb-price-sub">/family · 2 nights</span>
+              <span class="pb-price-was">was $2,099</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.viator.com/?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=family-playbook" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book This Playbook</a>
+              <a href="https://www.hirecar.la/book?vehicle=sprinter&utm_source=travel-page" class="pb-vehicle-btn">Reserve Sprinter →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 5: National Parks RV -->
+        <div class="pb-trip-panel" data-panel="5">
+          <div class="pb-vehicle-badge pb-vehicle-badge--rv"><span class="pbvb-icon">🏕️</span> Full RV · Sleeps 6–8</div>
+          <div class="pb-trip-title">National Parks<br>Grand Circuit</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1–2</div><div class="pb-day-t">RV pickup LA. Zion National Park. Angels Landing. Emerald Pools.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3–4</div><div class="pb-day-t">Bryce Canyon hoodoos. Sunrise at Inspiration Point. Grand Canyon South Rim.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 5–6</div><div class="pb-day-t">Grand Canyon full day. Mather Point. Drive Kingman + Barstow home to LA.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$1,699</span><span class="pb-price-sub">/person · 5 nights all-in</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel&utm_campaign=rv-adventures" target="_blank" rel="noopener sponsored" class="pb-book-btn">Book on RVshare</a>
+              <a href="https://www.outdoorsy.com/?utm_source=hirecar-travel&aff_id=YOUR_OUTDOORSY_AFF" target="_blank" rel="noopener sponsored" class="pb-vehicle-btn">Browse Outdoorsy →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 6: Yosemite RV -->
+        <div class="pb-trip-panel" data-panel="6">
+          <div class="pb-vehicle-badge pb-vehicle-badge--rv"><span class="pbvb-icon">🏕️</span> Class A Motorhome · Sleeps 6</div>
+          <div class="pb-trip-title">Yosemite Valley<br>Family RV</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">LA to Yosemite Valley. RV campsite. Mirror Lake evening walk.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2–3</div><div class="pb-day-t">Valley Floor loop. Glacier Point. Half Dome views. Mariposa Grove giant sequoias.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 4–5</div><div class="pb-day-t">Tuolumne Meadows. Tioga Pass. Mono Lake. Return via I-395.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$189</span><span class="pb-price-sub">/night RV · 5 nights</span>
+              <span class="pb-price-was">was $289/night</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.outdoorsy.com/?utm_source=hirecar-travel&aff_id=YOUR_OUTDOORSY_AFF" target="_blank" rel="noopener sponsored" class="pb-book-btn">Browse on Outdoorsy</a>
+              <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="pb-vehicle-btn">Also on RVshare →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip 7: PCH RV Coast -->
+        <div class="pb-trip-panel" data-panel="7">
+          <div class="pb-vehicle-badge pb-vehicle-badge--rv"><span class="pbvb-icon">🚐</span> RV or Sprinter Camper</div>
+          <div class="pb-trip-title">PCH Coast<br>RV Run</div>
+          <div class="pb-days-row">
+            <div class="pb-day"><div class="pb-day-n">Day 1</div><div class="pb-day-t">LA to Pismo Beach. Dunes. Sunset at Oceano Campground.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 2</div><div class="pb-day-t">Big Sur coast. McWay Falls. Bixby Bridge. Pfeiffer Beach. Campfire night.</div></div>
+            <div class="pb-day"><div class="pb-day-n">Day 3–4</div><div class="pb-day-t">Carmel. 17-Mile Drive. Pebble Beach. Optional: Tahoe loop via 395.</div></div>
+          </div>
+          <div class="pb-bottom-row">
+            <div class="pb-pricing">
+              <span class="pb-price">$249</span><span class="pb-price-sub">/night RV · luxury Class A</span>
+              <span class="pb-price-was">was $339/night</span>
+            </div>
+            <div class="pb-cta-group">
+              <a href="https://www.outdoorsy.com/?utm_source=hirecar-travel&aff_id=YOUR_OUTDOORSY_AFF" target="_blank" rel="noopener sponsored" class="pb-book-btn">Browse on Outdoorsy</a>
+              <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="pb-vehicle-btn">Also on RVshare →</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /pb-overlay-content -->
+
+      <!-- Progress dots -->
+      <div class="pb-dots" id="pbDots">
+        <div class="pb-dot active"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+        <div class="pb-dot"></div>
+      </div>
+
+      <!-- Navigation arrows (viewer-level) -->
+      <button class="pb-nav pb-nav--prev" id="pbPrev" aria-label="Previous trip">←</button>
+      <button class="pb-nav pb-nav--next" id="pbNext" aria-label="Next trip">→</button>
+
+    </div><!-- /pb-viewer -->
+
+  </div><!-- /pb-panel -->
+
+</section><!-- /pb-section -->
+
+<!-- Affiliate strip between sections -->
+<div class="aff-strip">
+  <div class="aff-strip-inner">
+    <div class="aff-strip-text">
+      <div class="aff-strip-label">Powered by Expedia · Booking.com · Viator · RVshare · Outdoorsy</div>
+      <div class="aff-strip-title">Search 1M+ Hotels, Resorts &amp; RVs</div>
+      <div class="aff-strip-sub">Real-time availability · Affiliate commissions fund this editorial platform</div>
+    </div>
+    <div class="aff-strip-btns">
+      <a href="https://www.expedia.com/?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_medium=aff-strip" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-primary">Search Expedia →</a>
+      <a href="https://www.booking.com/?aid=YOUR_BOOKING_AID&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-outline">Booking.com →</a>
+      <a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF&utm_source=hirecar-travel" target="_blank" rel="noopener sponsored" class="aff-btn aff-btn-teal">RVshare →</a>
+    </div>
+  </div>
+</div>
+
+<div class="deal-section" id="price-drops">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">🔥</span> Price Drops <span class="c-badge badge-hot">Limited Time</span></div>
+    <a href="https://www.expedia.com/?affcid=YOUR_EAN_CID&deal=pricedrops&utm_source=hirecar-travel" target="_blank" rel="noopener" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('pd',−1)">←</button>
+    <div class="c-track" id="pd">
+
+      <a href="https://www.expedia.com/Las-Vegas-Hotels.d178307.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=price-drops" target="_blank" rel="noopener sponsored" class="dc-hero">
+        <div class="dc-hero-img" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=85')">
+          <div class="dc-corner-badge dcb-drop">Price Drop</div>
+          <div class="dc-pct-off">−63%</div>
+        </div>
+        <div class="dc-hero-body">
+          <div class="dc-prop">Wynn Las Vegas</div>
+          <div class="dc-title">5-Star Las Vegas Strip — Weekend Escape with HIRECAR Transfer</div>
+          <div class="dc-loc">📍 Las Vegas, NV · 4.3 hrs or Sprinter pickup</div>
+          <div class="dc-price-row"><span class="dc-price-now">$189</span><span class="dc-price-was">$514</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(4,819)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Sprinter Pickup Available</span><span class="dc-tag">Kids Stay Free</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Palm-Springs-Hotels.d553248.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=price-drops" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80')"></div><div class="dc-pct-off">−45%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">La Quinta Resort &amp; Club</div>
+          <div class="dc-title">Luxury Desert Resort with Golf &amp; Spa Access</div>
+          <div class="dc-loc">📍 Palm Springs, CA · 1.8 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$214</span><span class="dc-price-was">$389</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★½</span><span class="dc-stars-ct">(2,241)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">SUV or Sprinter</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Scottsdale-Hotels.d179898.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=price-drops" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80')"></div><div class="dc-pct-off">−60%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Hyatt Regency Scottsdale — Gainey Ranch</div>
+          <div class="dc-title">5-Star Desert Resort — Championship Golf + Water Park</div>
+          <div class="dc-loc">📍 Scottsdale, AZ · 5.8 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$198</span><span class="dc-price-was">$495</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(2,776)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Golf Package</span><span class="dc-tag">Family Playbook Available</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/San-Diego-Hotels.d178282.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=price-drops" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80')"></div><div class="dc-corner-badge dcb-new">New</div><div class="dc-pct-off">−29%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Hotel del Coronado — San Diego</div>
+          <div class="dc-title">Iconic Victorian Beach Hotel — Coronado Island</div>
+          <div class="dc-loc">📍 San Diego, CA · 2.1 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$389</span><span class="dc-price-was">$549</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(5,144)</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Mammoth-Lakes-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=price-drops" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&q=80')"></div><div class="dc-pct-off">−52%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Mammoth Mountain Inn</div>
+          <div class="dc-title">Ski-In/Ski-Out Winter Package — Lift Tickets Included</div>
+          <div class="dc-loc">📍 Mammoth Lakes, CA · 5.5 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$178</span><span class="dc-price-was">$371</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★</span><span class="dc-stars-ct">(892)</span></div>
+          <div class="dc-tags"><span class="dc-tag">Ski Lift Incl.</span><span class="dc-tag dc-tag-teal">RV Site Available</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('pd',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  SECTION: CASINO DEALS
+════════════════════════════════════════ -->
+<div class="deal-section" id="casino-deals">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">🎰</span> Casino Deals</div>
+    <a href="https://www.expedia.com/Las-Vegas-Hotels.d178307.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel" target="_blank" rel="noopener" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('cas',−1)">←</button>
+    <div class="c-track" id="cas">
+
+      <a href="https://www.expedia.com/Las-Vegas-Hotels.d178307.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=casino" target="_blank" rel="noopener sponsored" class="dc-hero">
+        <div class="dc-hero-img" style="background-image:url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?w=800&q=85')">
+          <div class="dc-corner-badge dcb-excl">Casino Package</div>
+          <div class="dc-pct-off">−41%</div>
+        </div>
+        <div class="dc-hero-body">
+          <div class="dc-prop">MGM Grand Las Vegas</div>
+          <div class="dc-title">Vegas Weekend + $200 Casino Credit + HIRECAR Sprinter Transfer</div>
+          <div class="dc-loc">📍 Las Vegas Strip · Sprinter pickup from LA</div>
+          <div class="dc-price-row"><span class="dc-price-now">$149</span><span class="dc-price-was">$253</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★</span><span class="dc-stars-ct">(9,441)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Sprinter Transfer Incl.</span><span class="dc-tag">$200 Casino Credits</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Palm-Springs-Hotels.d553248.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=casino" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1622371122368-39a0d1e6f5bc?w=600&q=80')"></div><div class="dc-pct-off">−30%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Agua Caliente — Cathedral City</div>
+          <div class="dc-title">Palm Springs Area Casino Resort — 4-Star Weekend</div>
+          <div class="dc-loc">📍 Cathedral City, CA · 1.9 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$174</span><span class="dc-price-was">$249</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★</span><span class="dc-stars-ct">(2,340)</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Temecula-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=casino" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80')"></div><div class="dc-pct-off">−35%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Pechanga Resort &amp; Casino</div>
+          <div class="dc-title">Largest Casino in California — Temecula Valley</div>
+          <div class="dc-loc">📍 Temecula, CA · 1.3 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$139</span><span class="dc-price-was">$214</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★½</span><span class="dc-stars-ct">(4,812)</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Las-Vegas-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=casino" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?w=600&q=80')"></div><div class="dc-pct-off">−44%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Venetian Resort Las Vegas</div>
+          <div class="dc-title">5-Star Venetian — Gondolas, Casino &amp; Spa Weekend</div>
+          <div class="dc-loc">📍 Las Vegas Strip, NV</div>
+          <div class="dc-price-row"><span class="dc-price-now">$219</span><span class="dc-price-was">$391</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(8,821)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Sprinter Available</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('cas',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  SECTION: GOLF RESORTS
+<div class="deal-section" id="gold-getaways">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">⛳</span> Gold Getaways — Golf Resorts <span class="c-badge badge-gold">Golf + Luxury</span></div>
+    <a href="https://www.expedia.com/Golf-Resorts?affcid=YOUR_EAN_CID&utm_source=hirecar-travel" target="_blank" rel="noopener" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('gg',−1)">←</button>
+    <div class="c-track" id="gg">
+
+      <a href="https://www.expedia.com/La-Jolla-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=golf" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80')"></div><div class="dc-pct-off">−38%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Torrey Pines Golf Resort</div>
+          <div class="dc-title">Championship Golf + Ocean View — 2 Rounds Included</div>
+          <div class="dc-loc">📍 La Jolla, CA · SUV or Sedan from LA</div>
+          <div class="dc-price-row"><span class="dc-price-now">$449</span><span class="dc-price-was">$724</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(1,882)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">2 Rounds Incl.</span><span class="dc-tag">Breakfast</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Newport-Coast-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=golf" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1592019066823-cf0c8c5b1e85?w=600&q=80')"></div><div class="dc-pct-off">−33%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Pelican Hill — Newport Coast</div>
+          <div class="dc-title">Forbes 5-Star Golf Resort — Coastal California</div>
+          <div class="dc-loc">📍 Newport Coast, CA · 50 min from LA</div>
+          <div class="dc-price-row"><span class="dc-price-now">$795</span><span class="dc-price-was">$1,188</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(981)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">First Class Transfer Incl.</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Palm-Springs-Hotels.d553248.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=golf" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=600&q=80')"></div><div class="dc-pct-off">−45%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">La Quinta Resort &amp; Club</div>
+          <div class="dc-title">Golf Capital of California — 6 Courses, Spa &amp; Pools</div>
+          <div class="dc-loc">📍 La Quinta, CA · 1.9 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$258</span><span class="dc-price-was">$469</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(4,112)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Golf Playbook Available</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Scottsdale-Hotels.d179898.Travel-Guide-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=golf" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80')"></div><div class="dc-pct-off">−29%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Boulders Resort — Carefree, AZ</div>
+          <div class="dc-title">Two 18-Hole Championship Courses — Desert Spa &amp; Golf</div>
+          <div class="dc-loc">📍 Carefree, AZ · 5.5 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$379</span><span class="dc-price-was">$534</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(2,214)</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('gg',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  SECTION: ALL-INCLUSIVE
+<div class="deal-section" id="all-inclusive">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">🌴</span> All-Inclusive Vacation Deals</div>
+    <a href="https://www.expedia.com/All-Inclusive-Resorts?affcid=YOUR_EAN_CID&utm_source=hirecar-travel" target="_blank" rel="noopener" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('ai',−1)">←</button>
+    <div class="c-track" id="ai">
+
+      <a href="https://www.expedia.com/Cancun-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=all-inclusive" target="_blank" rel="noopener sponsored" class="dc-hero">
+        <div class="dc-hero-img" style="background-image:url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=85')">
+          <div class="dc-corner-badge dcb-excl">All-Inclusive</div>
+          <div class="dc-pct-off">−50%</div>
+        </div>
+        <div class="dc-hero-body">
+          <div class="dc-prop">Excellence Playa Mujeres — Adults Only</div>
+          <div class="dc-title">5-Star All-Inclusive — 4 Nights + Air from LAX (LAX Pickup Incl.)</div>
+          <div class="dc-loc">📍 Cancún, MX · LAX Pickup → Direct Flight</div>
+          <div class="dc-price-row"><span class="dc-price-now">$1,299</span><span class="dc-price-was">$2,599</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(3,892)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">LAX Pickup Included</span><span class="dc-tag">Air + Hotel</span><span class="dc-tag">All Meals + Drinks</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Cabo-San-Lucas-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=all-inclusive" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1545579133-99bb5ad189be?w=600&q=80')"></div><div class="dc-pct-off">−38%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Hacienda del Mar — Cabo</div>
+          <div class="dc-title">5-Star Beachfront All-Inclusive — Cabo San Lucas</div>
+          <div class="dc-loc">📍 Cabo, MX · LAX Pickup Available</div>
+          <div class="dc-price-row"><span class="dc-price-now">$349</span><span class="dc-price-was">$563</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(1,641)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">LAX Transfer</span><span class="dc-tag">Kids Stay Free</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Puerto-Vallarta-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=all-inclusive" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80')"></div><div class="dc-pct-off">−44%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Dreams Bahia Mita</div>
+          <div class="dc-title">5-Star All-Inclusive — Puerto Vallarta Jungle Meets Ocean</div>
+          <div class="dc-loc">📍 Puerto Vallarta, MX</div>
+          <div class="dc-price-row"><span class="dc-price-now">$289</span><span class="dc-price-was">$516</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(2,118)</span></div>
+          <div class="dc-tags"><span class="dc-tag">All-Inclusive</span><span class="dc-tag">Family Playbook Available</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.booking.com/searchresults.html?dest_type=city&dest_id=all-inclusive&aid=YOUR_BOOKING_AID&utm_source=hirecar-travel&utm_campaign=all-inclusive" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=600&q=80')"></div><div class="dc-corner-badge dcb-new">New</div><div class="dc-pct-off">−29%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Punta Cana — Dominican Republic</div>
+          <div class="dc-title">Hard Rock All-Inclusive — Punta Cana 5-Star</div>
+          <div class="dc-loc">📍 Punta Cana, DR · Via MIA or JFK</div>
+          <div class="dc-price-row"><span class="dc-price-now">$399</span><span class="dc-price-was">$562</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(6,344)</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('ai',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  SECTION: ROAD TRIPS
+<div class="deal-section" id="road-trips">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">🚗</span> Inclusive Road Trips <span class="c-badge badge-new">HIRECAR Excl.</span></div>
+    <a href="https://www.hirecar.la/road-trips?utm_source=travel-page" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('rt',−1)">←</button>
+    <div class="c-track" id="rt">
+
+      <a href="https://www.viator.com/?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=road-trips" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=600&q=80')"></div><div class="dc-corner-badge dcb-teal">HIRECAR</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">PCH Package · HIRECAR Exclusive</div>
+          <div class="dc-title">LA to Big Sur — 3-Day Pacific Coast Highway with SUV</div>
+          <div class="dc-loc">📍 LA → Malibu → SB → Big Sur → Carmel</div>
+          <div class="dc-price-row"><span class="dc-price-now">$849</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(88)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">SUV + 2 Nights Hotel</span><span class="dc-tag">Full Route Guide</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.viator.com/?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=desert-circuit" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80')"></div><div class="dc-corner-badge dcb-teal">HIRECAR</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Desert Circuit · Sprinter Van</div>
+          <div class="dc-title">LA → Palm Springs → Joshua Tree → Vegas Loop</div>
+          <div class="dc-loc">📍 SoCal + Nevada · 5-Day Loop</div>
+          <div class="dc-price-row"><span class="dc-price-now">$1,249</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★½</span><span class="dc-stars-ct">(62)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Sprinter + Hotels</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.viator.com/?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=wine-country" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1533619043865-1c2e2f32ff2f?w=600&q=80')"></div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Wine Country Run · Sedan or SUV</div>
+          <div class="dc-title">Santa Barbara Wine Country — 2-Night with Tastings</div>
+          <div class="dc-loc">📍 Santa Ynez Valley, CA</div>
+          <div class="dc-price-row"><span class="dc-price-now">$699</span><span class="dc-per">/couple</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(44)</span></div>
+          <div class="dc-tags"><span class="dc-tag">Vehicle + Hotel + Tastings</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.getyourguide.com/?partner_id=YOUR_GYG_ID&utm_source=hirecar-travel&utm_campaign=napa" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=600&q=80')"></div><div class="dc-corner-badge dcb-new">New Route</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Napa Harvest Circuit · Sprinter</div>
+          <div class="dc-title">Napa Valley Wine Train + 3 Vineyard Tastings — 3 Days</div>
+          <div class="dc-loc">📍 Napa Valley, CA · 7 hrs</div>
+          <div class="dc-price-row"><span class="dc-price-now">$1,399</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★★</span><span class="dc-stars-ct">(39)</span></div>
+          <div class="dc-tags"><span class="dc-tag dc-tag-gold">Wine Train Incl.</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('rt',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  SECTION: FISHING GETAWAYS
+<div class="deal-section" id="fishing">
+  <div class="carousel-head">
+    <div class="carousel-title"><span class="icon">🎣</span> Fishing Getaways</div>
+    <a href="https://www.viator.com/fishing?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel" target="_blank" rel="noopener" class="carousel-see-all">See all →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="c-arrow left" onclick="scrollTrack('fg',−1)">←</button>
+    <div class="c-track" id="fg">
+
+      <a href="https://www.viator.com/Cabo-San-Lucas-tours/Fishing?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=fishing" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80')"></div><div class="dc-corner-badge dcb-new">New</div><div class="dc-pct-off">−25%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Cabo Sport Fishing</div>
+          <div class="dc-title">3-Day Deep Sea Fishing + 4-Star Resort — Cabo San Lucas</div>
+          <div class="dc-loc">📍 Cabo, MX · LAX pickup + flight</div>
+          <div class="dc-price-row"><span class="dc-price-now">$899</span><span class="dc-price-was">$1,199</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★½</span><span class="dc-stars-ct">(248)</span></div>
+          <div class="dc-tags"><span class="dc-tag">Charter + Hotel</span><span class="dc-tag dc-tag-gold">LAX Pickup Incl.</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.viator.com/San-Diego-tours/Fishing?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=fishing" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1463852247062-1bbca38f7805?w=600&q=80')"></div><div class="dc-pct-off">−21%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">San Diego Sport Fishing</div>
+          <div class="dc-title">Half-Day Tuna Charter + Hotel — SUV from LA</div>
+          <div class="dc-loc">📍 San Diego, CA · SUV from LA</div>
+          <div class="dc-price-row"><span class="dc-price-now">$549</span><span class="dc-price-was">$695</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★</span><span class="dc-stars-ct">(614)</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.expedia.com/Bishop-Hotels?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&utm_campaign=fishing" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80')"></div><div class="dc-pct-off">−32%</div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Bishop Creek Lodge</div>
+          <div class="dc-title">Fly Fishing + Mountain Lodge — Eastern Sierra</div>
+          <div class="dc-loc">📍 Bishop, CA · 4.5 hrs · RV or SUV</div>
+          <div class="dc-price-row"><span class="dc-price-now">$189</span><span class="dc-price-was">$278</span><span class="dc-per">/night</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★½</span><span class="dc-stars-ct">(341)</span></div>
+          <div class="dc-tags"><span class="dc-tag">Guide Included</span><span class="dc-tag dc-tag-teal">RV Site Available</span></div>
+        </div>
+      </a>
+
+      <a href="https://www.viator.com/Los-Angeles-tours/Fishing?pid=YOUR_VIATOR_PID&utm_source=hirecar-travel&utm_campaign=fishing" target="_blank" rel="noopener sponsored" class="dc">
+        <div class="dc-img-wrap"><div class="dc-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80')"></div></div>
+        <div class="dc-body">
+          <div class="dc-prop">Long Beach Sport Fishing</div>
+          <div class="dc-title">Deep Sea Half-Day from Long Beach — Local Day Trip</div>
+          <div class="dc-loc">📍 Long Beach, CA · Local</div>
+          <div class="dc-price-row"><span class="dc-price-now">$89</span><span class="dc-price-was">$109</span><span class="dc-per">/person</span></div>
+          <div class="dc-stars"><span class="dc-stars-gold">★★★★</span><span class="dc-stars-ct">(1,219)</span></div>
+          <div class="dc-tags"><span class="dc-tag">Sedan or SUV pickup</span></div>
+        </div>
+      </a>
+
+    </div>
+    <button class="c-arrow right" onclick="scrollTrack('fg',1)">→</button>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  MEMBER CTA
+<div class="member-cta" id="member-cta">
+  <div class="member-cta-inner">
+    <div>
+      <div class="mci-eyebrow">HIRECAR First Class · Annual Membership · $1,380/yr</div>
+      <h2 class="mci-title">Unlock Every<br><span class="cta-word">Playbook Deal.</span></h2>
+      <p class="mci-sub">First Class members get priority airport transfer booking, member-only casino and resort rates, exclusive RV and Sprinter packages, and access to every HIRECAR service under one annual membership. The vehicle, the itinerary, the deal — all in one.</p>
+      <div class="mci-perks">
+        <span class="mci-perk">Priority Airport Transfers</span>
+        <span class="mci-perk">Member Travel Rates</span>
+        <span class="mci-perk">Sprinter + RV Access</span>
+        <span class="mci-perk">Family Playbook Planning</span>
+        <span class="mci-perk">HIRECREDIT Recovery</span>
+        <span class="mci-perk">HIRECAR Credit Card</span>
+        <span class="mci-perk">SeedXchange Pre-Qual</span>
+        <span class="mci-perk">24/7 Roadside Assist</span>
+        <span class="mci-perk">CreditWithKen Session</span>
+      </div>
+      <a href="https://www.hirecar.la/first-class?utm_source=travel-playbook&utm_medium=member-cta" class="mci-btn-primary">Become a Member →</a>
+      <a href="https://www.hirecar.la/sign-in" class="mci-btn-ghost">Already a member? Sign in</a>
+    </div>
+    <div class="mci-price-box">
+      <div class="mci-price">$1,380</div>
+      <div class="mci-price-sub">per year · cancel anytime</div>
+      <div class="mci-price-savings">$115/month — less than one hotel night</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  EXPLAINER
+<div class="explainer">
+  <div class="explainer-inner">
+    <div>
+      <div class="explainer-head">How HIRECAR Travel Playbook Works</div>
+      <div class="explainer-title">Curated. Planned.<br>HIRECAR-Powered.</div>
+      <p class="explainer-text">Every deal is sourced through Expedia Affiliate Network, Booking.com, Viator, RVshare, and Outdoorsy partner feeds — then layered with HIRECAR vehicle and transfer logistics. We are the only platform that pairs the deal with the drive.</p>
+      <div class="exp-item"><div class="exp-item-head">OTA Affiliate Feeds (Expedia, Booking.com)</div><div class="exp-item-text">Live hotel inventory from 1M+ properties. HIRECAR earns a commission on bookings — at no extra cost to you. Affiliate codes embedded in every link.</div></div>
+      <div class="exp-item"><div class="exp-item-head">RV &amp; Camper Van Partners (RVshare, Outdoorsy)</div><div class="exp-item-text">Thousands of RVs from Class A motorhomes to Sprinter conversions. Commission-based affiliate partnerships. No markup on nightly rates.</div></div>
+      <div class="exp-item"><div class="exp-item-head">HIRECAR Vehicle + Hotel Bundles</div><div class="exp-item-text">Negotiated directly with resort partners in Palm Springs, Temecula, San Diego, and Las Vegas. HIRECAR vehicle access bundled into the rate.</div></div>
+      <div class="exp-item"><div class="exp-item-head">Family Playbook Planning (HIRECAR Concierge)</div><div class="exp-item-text">First Class members get a dedicated itinerary call. We plan the route, sightseeing stops, dining, activities, and vehicle — you just show up.</div></div>
+    </div>
+    <div>
+      <div class="explainer-head">Affiliate Partners</div>
+      <div class="explainer-title">Six Partners.<br>One Platform.</div>
+      <p class="explainer-text">HIRECAR Travel Playbook links to verified booking partners. Commissions fund the editorial intelligence you read in MarketWatch!.</p>
+      <div class="exp-item"><div class="exp-item-head">Expedia Affiliate Network (EAN)</div><div class="exp-item-text">Hotels, packages, flights. Commission: 4–8%. All links tagged with YOUR_EAN_CID + UTM parameters.</div></div>
+      <div class="exp-item"><div class="exp-item-head">Booking.com Partner Program</div><div class="exp-item-text">Independent and boutique hotel inventory. Commission: 4–6%. Tagged with YOUR_BOOKING_AID.</div></div>
+      <div class="exp-item"><div class="exp-item-head">Viator Experience Affiliate</div><div class="exp-item-text">Tours, charters, experiences. Commission: 8%. Tagged with YOUR_VIATOR_PID.</div></div>
+      <div class="exp-item"><div class="exp-item-head">RVshare + Outdoorsy</div><div class="exp-item-text">RV and camper van rentals. Commission: 5–7%. Tagged with YOUR_RVSHARE_AFF and YOUR_OUTDOORSY_AFF.</div></div>
+      <div class="exp-item"><div class="exp-item-head">GetYourGuide</div><div class="exp-item-text">Tours, city experiences, guided activities. Commission: 8%. Tagged with YOUR_GYG_ID.</div></div>
+      <div class="exp-item"><div class="exp-item-head">Amazon Associates (Road Trip Gear)</div><div class="exp-item-text">Luggage, car accessories, camping gear. Commission: 4–8%. Tagged with YOUR_AMZN_TAG.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  AFFILIATE DISCLOSURE
+<div class="aff-disclosure">
+  <div class="aff-disclosure-inner">
+    <strong>Affiliate Disclosure:</strong> HIRECAR MarketWatch Travel Playbook™ participates in the Expedia Affiliate Network, Booking.com Partner Program, Viator Affiliate Program, RVshare Affiliate Program, Outdoorsy Affiliate Program, GetYourGuide Partner Program, and Amazon Associates. When you click certain links and make a booking or purchase, HIRECAR may earn a commission at no additional cost to you. Prices shown are sourced from partner APIs, may vary by date and availability, and are not guaranteed. Airport transfer rates listed are estimates. Family Playbook packages include HIRECAR vehicle costs; hotel rates are booked through affiliate partners. First Class member-only rates require an active HIRECAR First Class Membership ($1,380/yr). HIRECAR, LLC · 27200 Tourney Rd · Valencia, CA 91355 · <a href="mailto:ken@hirecar.la" style="color:var(--cta)">ken@hirecar.la</a>
+  </div>
+</div>
+
+<!-- ════════════════════════
+  FOOTER
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name serif">HIRECAR MarketWatch<span class="bang">!</span></div>
+      <div class="footer-tagline">The Travel Playbook™ for the LA driver. We plan it. You live it. HIRECAR moves you — from curb to curb, sedan to Sprinter, driveway to destination.</div>
+      <div class="footer-contact">
+        <a href="mailto:ken@hirecar.la">ken@hirecar.la</a><br>
+        <a href="tel:+16616510858">+1 (661) 651-0858</a><br>
+        27200 Tourney Rd · Valencia CA 91355<br><br>
+        <a href="https://www.hirecar.la">hirecar.la</a> · <a href="https://www.hirecar.la/marketwatch">marketwatch.hirecar.la</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Travel Playbook™</div>
+      <ul class="footer-links">
+        <li><a href="#airport-transfers">Airport Transfers</a></li>
+        <li><a href="#family-playbooks">Family Playbooks</a></li>
+        <li><a href="#rv-adventures">RV Adventures</a></li>
+        <li><a href="#price-drops">Price Drops</a></li>
+        <li><a href="#casino-deals">Casino Deals</a></li>
+        <li><a href="#gold-getaways">Golf Resorts</a></li>
+        <li><a href="#all-inclusive">All-Inclusive</a></li>
+        <li><a href="#road-trips">Road Trips</a></li>
+        <li><a href="#fishing">Fishing</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">HIRECAR Fleet</div>
+      <ul class="footer-links">
+        <li><a href="https://www.hirecar.la/book?vehicle=sedan">Executive Sedan</a></li>
+        <li><a href="https://www.hirecar.la/book?vehicle=suv">Luxury SUV</a></li>
+        <li><a href="https://www.hirecar.la/book?vehicle=sprinter">Sprinter Van</a></li>
+        <li><a href="https://www.hirecar.la/book?vehicle=party-bus">Party Bus / Coach</a></li>
+        <li><a href="https://www.rvshare.com/?referral_code=YOUR_RVSHARE_AFF">RV Rentals (RVshare)</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer">Airport Transfers</a></li>
+        <li><a href="https://www.hirecar.la/chauffeur">Chauffeur Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">CA Airports Served</div>
+      <ul class="footer-links">
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=LAX">LAX — Los Angeles</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=BUR">BUR — Burbank</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=SNA">SNA — Orange County</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=LGB">LGB — Long Beach</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=ONT">ONT — Ontario</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=PSP">PSP — Palm Springs</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=SAN">SAN — San Diego</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=SFO">SFO — San Francisco</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=SJC">SJC — San Jose</a></li>
+        <li><a href="https://www.hirecar.la/airport-transfer?airport=SMF">SMF — Sacramento</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-text">© 2026 HIRECAR, LLC · Valencia, CA · HIRECAR Travel Playbook™ is a division of HIRECAR MarketWatch! · All rights reserved</div>
+    <div class="footer-bottom-links">
+      <a href="https://www.hirecar.la/privacy">Privacy</a>
+      <a href="https://www.hirecar.la/terms">Terms</a>
+      <a href="https://www.hirecar.la/affiliate-disclosure">Disclosures</a>
+      <a href="mailto:ken@hirecar.la">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── Carousel arrows ───────────────── */
+function scrollTrack(id, dir) {
+  const t = document.getElementById(id);
+  if (t) t.scrollBy({ left: dir * 340, behavior: 'smooth' });
+}
+
+/* ─── Category tab filter ─────────── */
+document.querySelectorAll('.cat-tab').forEach(btn => {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const map = {
+      'family': 'family-playbooks',
+      'airport': 'airport-transfers',
+      'rv': 'family-playbooks',
+      'price-drops': 'price-drops',
+      'casino': 'casino-deals',
+      'golf': 'gold-getaways',
+      'allinc': 'all-inclusive',
+      'road': 'road-trips',
+      'mountain': 'price-drops',
+      'fishing': 'fishing'
+    };
+    const dest = map[this.dataset.filter];
+    if (dest) {
+      const el = document.getElementById(dest);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ─── Scroll spy ──────────────────── */
+const sections = ['airport-transfers','family-playbooks','price-drops','casino-deals','gold-getaways','all-inclusive','road-trips','fishing'];
+const snavItems = document.querySelectorAll('.snav-item');
+const navLinks  = document.querySelectorAll('.primary-nav .nav-link');
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = '#' + e.target.id;
+      snavItems.forEach(i => i.classList.toggle('active', i.getAttribute('href') === id));
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-100px 0px -55% 0px' });
+
+sections.forEach(s => { const el = document.getElementById(s); if (el) io.observe(el); });
+
+/* ─── Travel Playbook Panel — tab selector + image stage ──────── */
+(function() {
+  const tabs    = document.querySelectorAll('.pb-trip-tab');
+  const slides  = document.querySelectorAll('.pb-slide');
+  const panels  = document.querySelectorAll('.pb-trip-panel');
+  const dots    = document.querySelectorAll('.pb-dot');
+  const prevBtn = document.getElementById('pbPrev');
+  const nextBtn = document.getElementById('pbNext');
+
+  let current = 0;
+  const total = tabs.length;
+
+  function activate(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+
+    tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+    // Scroll the selector to keep active tab visible
+    const activeTab = tabs[idx];
+    if (activeTab) {
+      activeTab.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activate(i));
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => activate(i));
+  });
+
+  if (prevBtn) prevBtn.addEventListener('click', () => activate(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => activate(current + 1));
+
+  // Keyboard arrow support
+  document.addEventListener('keydown', e => {
+    const section = document.getElementById('family-playbooks');
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); activate(current + 1); }
+      if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); activate(current - 1); }
+    }
+  });
+
+  // Vehicle filter
+  document.querySelectorAll('.pbv-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.pbv-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const v = this.dataset.v;
+      tabs.forEach((tab, i) => {
+        const vehicles = tab.dataset.vehicle || '';
+        const show = v === 'all' || vehicles.includes(v);
+        tab.style.display = show ? '' : 'none';
+      });
+      // Activate first visible
+      const firstVisible = [...tabs].findIndex(t => t.style.display !== 'none');
+      if (firstVisible >= 0) activate(firstVisible);
+    });
+  });
+
+  activate(0);
+})();
+(function() {
+  const d = new Date();
+  const el = document.getElementById('mh-date');
+  if (el) el.textContent = d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' }) + ' · Los Angeles, CA';
+})();
+
+/* ─── Search ────────────────────── */
+function handleSearch() {
+  const q = document.getElementById('travel-search').value.trim();
+  if (q) window.open('https://www.expedia.com/Hotel-Search?affcid=YOUR_EAN_CID&utm_source=hirecar-travel&destination=' + encodeURIComponent(q), '_blank');
+}
+document.getElementById('travel-search').addEventListener('keydown', e => { if (e.key === 'Enter') handleSearch(); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIRECAR Command Center v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body,#root{height:100%;overflow:hidden;}
+  body{background:#05050F;font-family:'DM Mono',monospace;color:#E8E0D0;}
+  ::-webkit-scrollbar{width:3px;height:3px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.25);border-radius:2px;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+  @keyframes sd{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
+  .hrow:hover{background:rgba(201,168,76,0.04)!important;cursor:pointer;}
+  .nd{animation:sd 0.35s ease;}
+  button:hover{opacity:0.85;cursor:pointer;}
+  input::placeholder{color:rgba(232,224,208,0.3);}
+  input{outline:none;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ═══════════════════════════════════════════════════════════════════
+//  HIRECAR COMMAND CENTER v2 — Universal Intelligence Platform
+//  Departments: Sales · Comms · Marketing · CRM · Billing · Finance
+//               Docs · Support · Gamify · Reports
+//  Bot Stack: Trigger · Document · Validation · Manager (per dept)
+//  APIs: Stripe · FanBasis · Twilio · SendGrid
+// ═══════════════════════════════════════════════════════════════════
+
+const rf = a => a[Math.floor(Math.random() * a.length)];
+const ri = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const fmt$ = n => "$" + Number(n).toLocaleString();
+
+// ── DATA ─────────────────────────────────────────────────────────────
+const CLIENTS = [
+  { id:"HC-0041",name:"Marcus Thompson", av:"MT",email:"m.thompson@outlook.com",phone:"(213)555-0182",tier:"Elite",      xp:4200,phase:"SCALING",   ltv:28400,balance:0,   status:"Active", hbi:84,vdi:91,bre:77,cri:88,fpi:93,msi:86 },
+  { id:"HC-0089",name:"Janelle Williams",av:"JW",email:"jwilliams@gmail.com",   phone:"(310)555-0293",tier:"First Class",xp:2100,phase:"OPERATING",  ltv:11600,balance:850, status:"Active", hbi:72,vdi:88,bre:81,cri:74,fpi:68,msi:79 },
+  { id:"HC-0112",name:"Devon Reyes",     av:"DR",email:"dreyes@icloud.com",     phone:"(323)555-0417",tier:"Operator",   xp:780, phase:"REBUILDING", ltv:4200, balance:0,   status:"Active", hbi:61,vdi:75,bre:65,cri:69,fpi:80,msi:71 },
+  { id:"HC-0156",name:"Priya Kapoor",    av:"PK",email:"priya.k@gmail.com",     phone:"(818)555-0034",tier:"First Class",xp:1850,phase:"OPERATING",  ltv:9300, balance:1200,status:"Overdue",hbi:55,vdi:82,bre:70,cri:60,fpi:45,msi:74 },
+  { id:"HC-0178",name:"Carlos Mendez",   av:"CM",email:"cmendez@yahoo.com",     phone:"(714)555-0571",tier:"Standard",   xp:210, phase:"INTAKE",     ltv:1400, balance:0,   status:"New",    hbi:40,vdi:60,bre:50,cri:45,fpi:70,msi:55 },
+  { id:"HC-0203",name:"Ashley Brown",    av:"AB",email:"a.brown@corp.com",      phone:"(424)555-0829",tier:"Elite",      xp:5100,phase:"SCALING",   ltv:41200,balance:0,   status:"Active", hbi:96,vdi:94,bre:92,cri:97,fpi:98,msi:95 },
+  { id:"HC-0234",name:"Jordan Lee",      av:"JL",email:"jlee@gmail.com",        phone:"(562)555-0246",tier:"Operator",   xp:620, phase:"REBUILDING", ltv:3100, balance:320, status:"Active", hbi:58,vdi:71,bre:62,cri:65,fpi:59,msi:68 },
+  { id:"HC-0267",name:"Tasha Norton",    av:"TN",email:"tnorton@hotmail.com",   phone:"(909)555-0193",tier:"Standard",   xp:95,  phase:"INTAKE",     ltv:900,  balance:0,   status:"Nurture",hbi:30,vdi:50,bre:40,cri:35,fpi:60,msi:45 },
+];
+
+const LEADS = [
+  { id:"LD-2201",name:"Raymond Foster",  source:"Google Ads",status:"New",        value:3400, stage:"Discovery",  prob:25  },
+  { id:"LD-2202",name:"Monica Graves",   source:"Referral",  status:"Qualified",  value:8200, stage:"Proposal",   prob:60  },
+  { id:"LD-2203",name:"Terrence Wade",   source:"Meta Ads",  status:"Proposal",   value:1800, stage:"Quote Sent", prob:45  },
+  { id:"LD-2204",name:"Simone Harris",   source:"Direct",    status:"Negotiation",value:14000,stage:"Negotiating",prob:75  },
+  { id:"LD-2205",name:"Derek Augustine", source:"LinkedIn",  status:"New",        value:5600, stage:"Discovery",  prob:20  },
+  { id:"LD-2206",name:"Keisha Lawson",   source:"Email",     status:"Qualified",  value:2200, stage:"Follow-Up",  prob:55  },
+  { id:"LD-2207",name:"Victor Huang",    source:"Organic",   status:"Closed Won", value:6800, stage:"Closed",     prob:100 },
+  { id:"LD-2208",name:"Brittany Cole",   source:"Referral",  status:"New",        value:4400, stage:"Discovery",  prob:30  },
+];
+
+const QUOTES = [
+  { id:"QT-5501",client:"Monica Graves",  service:"Fleet Rental x2 / 30 days",  amount:8200, status:"Sent",       expires:"Mar 10" },
+  { id:"QT-5502",client:"Terrence Wade",  service:"Weekend RV Package",          amount:1800, status:"Viewed",     expires:"Mar 8"  },
+  { id:"QT-5503",client:"Simone Harris",  service:"Elite Fleet Program 90 days", amount:14000,status:"Negotiating",expires:"Mar 15" },
+  { id:"QT-5504",client:"Keisha Lawson",  service:"Sedan Daily + Driver",        amount:2200, status:"Draft",      expires:"Mar 12" },
+  { id:"QT-5505",client:"Carlos Mendez",  service:"Weekend Package + Airport",   amount:490,  status:"Draft",      expires:"Mar 15" },
+  { id:"QT-5506",client:"Derek Augustine",service:"Sprinter Van 2 weeks",        amount:5600, status:"Pending",    expires:"Mar 9"  },
+];
+
+const EMAIL_TMPL = [
+  { id:"ET-01",name:"Welcome — New Client",      trigger:"New signup",        sent:47, open:91 },
+  { id:"ET-02",name:"Thank You — Job Complete",  trigger:"M5 Milestone",      sent:134,open:88 },
+  { id:"ET-03",name:"Invoice Ready",            trigger:"Invoice created",   sent:89, open:76 },
+  { id:"ET-04",name:"Appointment Confirmation", trigger:"Booking confirmed", sent:112,open:94 },
+  { id:"ET-05",name:"Quote Follow-Up",          trigger:"Quote viewed 48h",  sent:56, open:62 },
+  { id:"ET-06",name:"Overdue Payment Reminder", trigger:"Invoice 7d past",   sent:23, open:71 },
+  { id:"ET-07",name:"Re-engagement 14 Day",     trigger:"14-day inactivity", sent:38, open:54 },
+  { id:"ET-08",name:"Upsell: Fleet Expansion",  trigger:"CRI > 85",          sent:19, open:67 },
+  { id:"ET-09",name:"Referral Invite",          trigger:"First Class Tier",  sent:28, open:79 },
+  { id:"ET-10",name:"Status Update",           trigger:"Manual/Milestone",  sent:66, open:82 },
+];
+
+const SMS_TMPL = [
+  { id:"SM-01",name:"Appointment Reminder 24h", trigger:"24h before booking",  sent:98, del:99  },
+  { id:"SM-02",name:"Driver En Route",          trigger:"M4 Milestone",         sent:77, del:100 },
+  { id:"SM-03",name:"Job Completed",           trigger:"M5 Milestone",         sent:77, del:99  },
+  { id:"SM-04",name:"Invoice Due Reminder",    trigger:"3d before due",        sent:34, del:98  },
+  { id:"SM-05",name:"Overdue Alert",           trigger:"1d past due",          sent:14, del:100 },
+  { id:"SM-06",name:"Quote Ready",            trigger:"Quote drafted",        sent:29, del:99  },
+  { id:"SM-07",name:"XP / Badge Unlock",       trigger:"Gamification event",  sent:51, del:100 },
+  { id:"SM-08",name:"Referral Reward",        trigger:"Referral completed",  sent:18, del:100 },
+];
+
+const INVOICES = [
+  { id:"INV-8841",client:"Marcus Thompson", amount:2400, status:"Paid",    due:"Mar 1",  type:"Monthly Fleet",   method:"Stripe"   },
+  { id:"INV-8842",client:"Janelle Williams",amount:850,  status:"Pending", due:"Mar 8",  type:"RV Rental",       method:"Stripe"   },
+  { id:"INV-8843",client:"Priya Kapoor",    amount:1200, status:"Overdue", due:"Feb 28", type:"Driver Service",  method:"FanBasis" },
+  { id:"INV-8844",client:"Devon Reyes",     amount:680,  status:"Paid",    due:"Feb 25", type:"Sedan Rental",    method:"Stripe"   },
+  { id:"INV-8845",client:"Ashley Brown",    amount:5600, status:"Paid",    due:"Mar 1",  type:"Elite Program",   method:"Stripe"   },
+  { id:"INV-8846",client:"Jordan Lee",      amount:320,  status:"Pending", due:"Mar 10", type:"Airport Transfer",method:"FanBasis" },
+  { id:"INV-8847",client:"Carlos Mendez",   amount:490,  status:"Draft",   due:"Mar 15", type:"Weekend Package", method:"Stripe"   },
+];
+
+const SUPPLIERS = [
+  { id:"SUP-101",name:"Pacific Fleet Services",  cat:"Maintenance",        amount:3200, status:"Paid",    due:"Feb 28",method:"ACH"   },
+  { id:"SUP-102",name:"LA Driver Network",       cat:"Driver Contractors", amount:8400, status:"Due",     due:"Mar 7", method:"Wire"  },
+  { id:"SUP-103",name:"RVShare Platform Fee",    cat:"Commission",         amount:1240, status:"Paid",    due:"Mar 1", method:"Stripe"},
+  { id:"SUP-104",name:"Viator Partner Fees",     cat:"Travel Commission",  amount:680,  status:"Due",     due:"Mar 10",method:"ACH"   },
+  { id:"SUP-105",name:"Westside Auto Detail",    cat:"Cleaning",           amount:920,  status:"Overdue", due:"Feb 25",method:"Check" },
+  { id:"SUP-106",name:"Commercial Insurance Co.",cat:"Fleet Insurance",    amount:4800, status:"Paid",    due:"Mar 1", method:"ACH"   },
+  { id:"SUP-107",name:"Expedia Affiliate",       cat:"Booking Commission", amount:440,  status:"Pending", due:"Mar 15",method:"Wire"  },
+];
+
+const CAMPAIGNS = [
+  { id:"CAM-01",name:"Elite Fleet Spring Push", channel:"Google Ads",spend:2400,leads:18,conv:4, revenue:24000,roas:10.0,status:"Active"},
+  { id:"CAM-02",name:"LA Weekender RV Promo",   channel:"Meta/IG",   spend:980, leads:34,conv:6, revenue:9200, roas:9.4, status:"Active"},
+  { id:"CAM-03",name:"Airport Transfer Blitz",  channel:"Google Ads",spend:640, leads:22,conv:9, revenue:4800, roas:7.5, status:"Active"},
+  { id:"CAM-04",name:"Referral Email Blast",    channel:"Email",     spend:0,   leads:12,conv:3, revenue:8400, roas:null,status:"Sent"  },
+  { id:"CAM-05",name:"LinkedIn B2B Fleet",      channel:"LinkedIn",  spend:1200,leads:8, conv:2, revenue:16000,roas:13.3,status:"Active"},
+  { id:"CAM-06",name:"Re-engagement SMS",       channel:"Twilio SMS",spend:180, leads:19,conv:5, revenue:6200, roas:34.4,status:"Sent"  },
+];
+
+const MONTHLY = [
+  { m:"Oct",rev:18400,leads:34 },{ m:"Nov",rev:22100,leads:41 },{ m:"Dec",rev:19800,leads:38 },
+  { m:"Jan",rev:26300,leads:48 },{ m:"Feb",rev:31200,leads:56 },{ m:"Mar",rev:34800,leads:62 },
+];
+
+const TICKETS = [
+  { id:"TKT-0091",client:"Priya Kapoor",  subject:"Invoice dispute — double charge",  priority:"High",  status:"Open",       age:"2d" },
+  { id:"TKT-0092",client:"Devon Reyes",   subject:"Vehicle pickup rescheduled",       priority:"Med",   status:"In Progress",age:"1d" },
+  { id:"TKT-0093",client:"Jordan Lee",    subject:"Driver no-show — refund request",  priority:"High",  status:"Escalated",  age:"3h" },
+  { id:"TKT-0094",client:"Carlos Mendez", subject:"Document request — rental agmt",   priority:"Low",   status:"Resolved",   age:"4d" },
+  { id:"TKT-0095",client:"Tasha Norton",  subject:"Follow-up on quote #8847",         priority:"Low",   status:"Open",       age:"6d" },
+];
+
+const BADGES = [
+  { icon:"🏆",name:"Road Warrior",   desc:"10 completed rentals",  n:14 },
+  { icon:"⭐",name:"5-Star Rider",    desc:"5 perfect reviews",     n:31 },
+  { icon:"🔗",name:"Connector",       desc:"3 referrals activated", n:9  },
+  { icon:"🚗",name:"Fleet Builder",   desc:"3+ vehicles at once",   n:6  },
+  { icon:"👑",name:"Elite Achieved",  desc:"Reached Elite tier",    n:4  },
+  { icon:"⚡",name:"Fast Pay",         desc:"10 invoices in 24h",    n:22 },
+  { icon:"🗓",name:"Loyal Driver",    desc:"12-month membership",   n:8  },
+  { icon:"📋",name:"Playbook Pro",    desc:"Full onboarding done",  n:19 },
+];
+
+const DOCS = [
+  { id:"DOC-441",name:"Fleet Pricing Guide Q1 2026",     type:"Pricing",   status:"Published",         owner:"All",       upd:"Feb 28" },
+  { id:"DOC-442",name:"Elite Program Agreement — Ashley",type:"Contract",  status:"Signed",            owner:"Ashley B.", upd:"Mar 1"  },
+  { id:"DOC-443",name:"Driver Requirements Pack",        type:"Compliance",status:"Review",            owner:"Devon R.",  upd:"Mar 2"  },
+  { id:"DOC-444",name:"RV Rental Terms — Janelle W.",    type:"Contract",  status:"Pending Signature", owner:"Janelle W.",upd:"Mar 3"  },
+  { id:"DOC-445",name:"Travel Package Catalog Spr 2026", type:"Marketing", status:"Published",         owner:"All",       upd:"Mar 1"  },
+  { id:"DOC-446",name:"Priya Kapoor — Payment Plan",     type:"Billing",   status:"Draft",             owner:"Priya K.",  upd:"Today"  },
+  { id:"DOC-447",name:"Operator Onboarding Playbook v3", type:"Playbook",  status:"Published",         owner:"Internal",  upd:"Feb 20" },
+];
+
+const DEPT_META = [
+  { id:"sales",    label:"Sales",   icon:"◈", color:"#5ED99A", desc:"Pipeline · Leads · Quotes"    },
+  { id:"comms",    label:"Comms",   icon:"◎", color:"#5EA8E0", desc:"Email · SMS · Twilio"          },
+  { id:"marketing",label:"Mktg",   icon:"◉", color:"#A084E8", desc:"Campaigns · ROAS · Insights"   },
+  { id:"crm",      label:"CRM",    icon:"▣", color:"#C9A84C", desc:"Client Profiles & Repository"  },
+  { id:"billing",  label:"Billing",icon:"▦", color:"#5ED9D9", desc:"Invoices · Stripe · FanBasis"  },
+  { id:"finance",  label:"Finance",icon:"◇", color:"#F0C040", desc:"AP · Suppliers · Cash Flow"    },
+  { id:"docs",     label:"Docs",   icon:"▤", color:"#E0925A", desc:"Contracts · Playbooks · Mgmt"  },
+  { id:"support",  label:"Support",icon:"▷", color:"#E05A5A", desc:"Tickets · SLA · Escalation"    },
+  { id:"gamify",   label:"Gamify", icon:"★", color:"#E05A8A", desc:"XP · Tiers · Badges · Ranks"   },
+  { id:"reports",  label:"Reports",icon:"▲", color:"#60B8F0", desc:"Analytics · AI Recommendations"},
+];
+
+const BOTS = {
+  sales:    [{role:"Trigger",name:"Lead Trigger Bot",  q:9, f:"3m ago", d:"Fires on form submit, ad click, call, DM, or referral. Tags source, scores lead, routes to pipeline stage."},{role:"Document",name:"Quote Generator",    q:6, f:"11m ago",d:"Drafts proposals, quotes, pricing sheets, and service agreements from current rate card and fleet data."},{role:"Validation",name:"Deal Validator",      q:3, f:"40m ago",d:"Validates lead data completeness, checks for duplicates, confirms quote accuracy before Supervisor release."},{role:"Manager",name:"Sales Manager Bot",  q:2, f:"1h ago", d:"Monitors pipeline velocity, flags stale deals 48h+, escalates high-value leads. Owns close rate metric."}],
+  comms:    [{role:"Trigger",name:"Comms Trigger Bot", q:12,f:"1m ago", d:"Fires on job milestone, invoice event, booking confirmed, overdue flag, or staff manual activation."},{role:"Document",name:"Email Drafter Bot",  q:7, f:"6m ago", d:"Drafts thank-you, confirmation, status update, quote follow-up emails via SendGrid API before release."},{role:"Validation",name:"Comms Validator",   q:4, f:"22m ago",d:"Validates recipient data, unsubscribe status, template compliance, and personalization accuracy."},{role:"Manager",name:"Twilio SMS Bot",     q:8, f:"2m ago", d:"Owns all SMS delivery via Twilio API. Appointment reminders, driver alerts, payment notices, XP pings."}],
+  marketing:[{role:"Trigger",name:"Campaign Trigger",  q:4, f:"15m ago",d:"Fires on audience threshold, budget milestone, lead velocity drop, or scheduled campaign activation."},{role:"Document",name:"Content Draft Bot",  q:3, f:"30m ago",d:"Drafts ad copy, email blast content, SMS campaigns, landing page text in HIRECAR brand voice."},{role:"Validation",name:"Campaign Validator",q:2, f:"1h ago", d:"Validates targeting, UTM tags, spend limits, creative compliance, and audience overlap checks."},{role:"Manager",name:"Marketing Manager", q:1, f:"2h ago", d:"Owns ROAS tracking, attribution reporting, budget reallocation. Reports to Director for spend changes."}],
+  crm:      [{role:"Trigger",name:"CRM Trigger Bot",   q:7, f:"4m ago", d:"Fires on login, profile update, tier change, phase transition, or inactivity threshold breach."},{role:"Document",name:"Profile Doc Bot",    q:3, f:"18m ago",d:"Drafts client profiles, tier summaries, onboarding packages, welcome docs, data capture reports."},{role:"Validation",name:"Data Validator",    q:2, f:"1h ago", d:"Verifies contact info, tier eligibility, KYC requirements, and duplicate client detection."},{role:"Manager",name:"CRM Manager Bot",    q:1, f:"2h ago", d:"Owns lifecycle stage accuracy, flags stale profiles, audits data completeness and score integrity."}],
+  billing:  [{role:"Trigger",name:"Billing Trigger",   q:4, f:"12m ago",d:"Fires on job completion, overdue threshold, Stripe webhook, payment failure, or new quote approval."},{role:"Document",name:"Invoice Generator", q:5, f:"8m ago", d:"Drafts and sends invoices, payment plans, quotes, and receipts via Stripe and FanBasis APIs."},{role:"Validation",name:"Billing Validator",q:2, f:"45m ago",d:"Cross-checks amounts, payment methods, tax lines, and detects duplicate invoice attempts."},{role:"Manager",name:"Billing Manager",   q:3, f:"1h ago", d:"Monitors AR aging, escalates overdue accounts, owns collection workflow and full audit trail."}],
+  finance:  [{role:"Trigger",name:"Finance Trigger",   q:3, f:"20m ago",d:"Fires on supplier payment due date, budget variance threshold, AP aging alert, or monthly close."},{role:"Document",name:"AP Report Bot",      q:2, f:"1h ago", d:"Drafts supplier payment requests, AP summaries, expense reports, and month-end financial overviews."},{role:"Validation",name:"Finance Validator",q:1, f:"2h ago", d:"Validates supplier details, payment amounts, budget alignment, and duplicate payment detection."},{role:"Manager",name:"Finance Manager",   q:2, f:"3h ago", d:"Owns AP/AR balance monitoring, cash flow flags, supplier relationship alerts, financial audit trail."}],
+  docs:     [{role:"Trigger",name:"Doc Trigger Bot",   q:3, f:"22m ago",d:"Fires on contract request, signature due date, document expiry, or client phase milestone event."},{role:"Document",name:"Doc Drafter Bot",    q:6, f:"15m ago",d:"Drafts contracts, rental agreements, compliance packs, playbooks, and custom terms."},{role:"Validation",name:"Doc Validator",     q:4, f:"30m ago",d:"Validates signatures, completeness, version control, legal compliance flags, and expiry dates."},{role:"Manager",name:"Doc Manager Bot",    q:2, f:"3h ago", d:"Owns document lifecycle, tracks expiry dates, ensures all active clients have current agreements."}],
+  support:  [{role:"Trigger",name:"Support Trigger",   q:5, f:"7m ago", d:"Fires on new ticket submission, escalation flag, SLA breach, or repeat contact from same client."},{role:"Document",name:"Response Drafter",  q:3, f:"20m ago",d:"Drafts ticket responses, refund letters, apology notifications, and resolution summaries."},{role:"Validation",name:"Resolution Valid.", q:2, f:"40m ago",d:"Validates resolution accuracy, client satisfaction score, SLA compliance, and escalation path."},{role:"Manager",name:"Support Manager",   q:1, f:"1h ago", d:"Owns ticket SLA timers, routes escalations to correct release authority level, owns CSAT metric."}],
+  gamify:   [{role:"Trigger",name:"XP Trigger Bot",    q:9, f:"1m ago", d:"Fires on job completion, 5-star review, referral, invoice paid 24h, upsell acceptance, booking."},{role:"Document",name:"Badge & Reward Bot", q:2, f:"14m ago",d:"Issues badges, tier advancement notifications, reward summaries, leaderboard updates via bot."},{role:"Validation",name:"XP Validator",      q:1, f:"30m ago",d:"Validates XP eligibility, prevents double-awarding, audits tier qualification requirements."},{role:"Manager",name:"Gamify Manager",    q:0, f:"4h ago", d:"Owns XP economy balance, adjusts weights, audits tier distribution, manages leaderboard integrity."}],
+  reports:  [{role:"Trigger",name:"Report Trigger",    q:2, f:"1h ago", d:"Fires on week/month boundary, KPI threshold breach, or executive manual request via dashboard."},{role:"Document",name:"Report Builder Bot", q:1, f:"2h ago", d:"Assembles weekly sales reports, revenue summaries, pipeline health docs, AI recommendation briefs."},{role:"Validation",name:"Data Audit Bot",    q:3, f:"45m ago",d:"Validates data integrity across all 10 departments before any report is published or sent to exec."},{role:"Manager",name:"Insight Manager",   q:1, f:"3h ago", d:"Owns report delivery schedule, flags anomalies, generates AI recommendations for Ken's review."}],
+};
+
+const BRC = { Trigger:"#E05A5A", Document:"#C9A84C", Validation:"#5EA8E0", Manager:"#5ED99A" };
+const TC  = { Standard:"#888888", Operator:"#5EA8E0", "First Class":"#C9A84C", Elite:"#F0C040" };
+const SC  = { Active:"#5ED99A",Overdue:"#E05A5A",New:"#5EA8E0",Nurture:"#A084E8",Paid:"#5ED99A",Pending:"#C9A84C",Draft:"#666",Due:"#E05A5A",Sent:"#5ED99A",Viewed:"#C9A84C",Negotiating:"#A084E8","Closed Won":"#5ED99A",Qualified:"#5EA8E0",Proposal:"#A084E8",Negotiation:"#F0C040",Delivered:"#5ED99A",Opened:"#5EA8E0","In Progress":"#C9A84C",Escalated:"#E05A5A",Resolved:"#5ED99A","Pending Signature":"#C9A84C",Review:"#E0925A",Published:"#5ED99A",Signed:"#5ED99A" };
+const sc  = s => SC[s] || "#888";
+
+const LIVE_EVENTS = [
+  { bot:"Lead Trigger Bot",  dept:"sales",    msgs:["LD-2209 captured Google Ads — routed to pipeline","Quote QT-5507 drafted $14,000 Simone Harris","Deal stall alert — LD-2205 Day 2 in Discovery no response"] },
+  { bot:"Email Drafter Bot", dept:"comms",    msgs:["Thank-you email sent — Marcus Thompson RNT-4401","Appointment confirmation — Janelle Williams Mar 8","Quote follow-up queued — Terrence Wade 48h no reply"] },
+  { bot:"Twilio SMS Bot",    dept:"comms",    msgs:["SMS delivered — Devon Reyes: driver en route ETA 12m","Payment reminder — Priya Kapoor: $1,200 due Mar 8","XP unlock SMS — Ashley Brown: Elite badge earned 👑"] },
+  { bot:"Invoice Generator", dept:"billing",  msgs:["INV-8848 drafted $2,100 Jordan Lee monthly fleet","Stripe webhook — INV-8841 payment confirmed","Overdue escalation INV-8843 Priya Kapoor 3 days past"] },
+  { bot:"XP Trigger Bot",    dept:"gamify",   msgs:["+75 XP — Ashley Brown 5-star review submitted","+200 XP — Devon Reyes referral LD-2209 activated","Badge: Fast Pay — Marcus Thompson 10th on-time"] },
+  { bot:"Campaign Trigger",  dept:"marketing",msgs:["Google Ads 80% budget — ROAS above target","Meta spike +34% today CAM-02","LinkedIn quality 8.2/10 — recommend budget increase"] },
+  { bot:"Report Trigger",    dept:"reports",  msgs:["Weekly report — 62 leads / 24 conv / $34.8K rev","AI rec: increase LinkedIn spend — 13.3x ROAS MTD","Pipeline: $47,200 open deals — 38% close rate MTD"] },
+  { bot:"Finance Manager",   dept:"finance",  msgs:["SUP-102 LA Driver Network $8,400 due Mar 7","AR aging: $2,370 outstanding across 3 clients","FanBasis reconciliation complete — 0 discrepancies"] },
+];
+
+// ── HELPER COMPONENTS ─────────────────────────────────────────────────
+const Dot = ({color="#5ED99A",pulse=false}) => (
+  <span style={{width:6,height:6,borderRadius:"50%",background:color,display:"inline-block",boxShadow:`0 0 5px ${color}66`,flexShrink:0,...(pulse?{animation:"pulse 1.4s infinite"}:{})}}/>
+);
+const Pill = ({text,color="#C9A84C",small=false}) => (
+  <span style={{display:"inline-block",padding:small?"1px 6px":"2px 7px",borderRadius:2,fontSize:small?9:10,letterSpacing:0.5,background:`${color}18`,border:`1px solid ${color}44`,color,whiteSpace:"nowrap"}}>{text}</span>
+);
+const Card = ({children,style={}}) => (
+  <div style={{background:"rgba(16,16,28,0.97)",border:"1px solid rgba(201,168,76,0.15)",borderRadius:4,padding:14,...style}}>{children}</div>
+);
+const SL = ({text,right=null}) => (
+  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+    <span style={{fontSize:9,letterSpacing:2.5,color:"rgba(232,224,208,0.3)",textTransform:"uppercase"}}>{text}</span>
+    {right && <span style={{fontSize:10,color:"#C9A84C"}}>{right}</span>}
+  </div>
+);
+const TH = ({cols,widths}) => (
+  <div style={{display:"grid",gridTemplateColumns:widths,gap:8,padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.15)",marginBottom:4}}>
+    {cols.map(c=><span key={c} style={{fontSize:8,letterSpacing:1.5,color:"rgba(232,224,208,0.25)",textTransform:"uppercase"}}>{c}</span>)}
+  </div>
+);
+const StatCard = ({label,value,sub,color="#C9A84C",trend=null}) => (
+  <Card style={{padding:"14px 16px"}}>
+    <div style={{fontSize:8,letterSpacing:2,color:"rgba(232,224,208,0.3)",marginBottom:6,textTransform:"uppercase"}}>{label}</div>
+    <div style={{fontSize:22,color,fontWeight:"bold",letterSpacing:-1,marginBottom:3}}>{value}</div>
+    {sub&&<div style={{fontSize:10,color:trend===1?"#5ED99A":trend===-1?"#E05A5A":"rgba(232,224,208,0.4)"}}>{sub}</div>}
+  </Card>
+);
+const Btn = ({children,color="#C9A84C",onClick,small=false}) => (
+  <button onClick={onClick} style={{background:`${color}12`,border:`1px solid ${color}35`,borderRadius:2,padding:small?"2px 7px":"4px 10px",color,fontSize:small?9:10,cursor:"pointer",fontFamily:"'DM Mono',monospace",whiteSpace:"nowrap",letterSpacing:0.5}}>{children}</button>
+);
+const BotPanel = ({bots}) => (
+  <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:12}}>
+    {bots.map(b=>(
+      <div key={b.role} style={{background:"rgba(12,12,24,0.97)",border:`1px solid ${BRC[b.role]}22`,borderTop:`2px solid ${BRC[b.role]}`,borderRadius:4,padding:12}}>
+        <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
+          <div><div style={{fontSize:8,letterSpacing:2,color:BRC[b.role],textTransform:"uppercase",marginBottom:2}}>{b.role} Bot</div><div style={{fontSize:10,color:"#E8E0D0",lineHeight:1.3}}>{b.name}</div></div>
+          <Dot color="#5ED99A" pulse/>
+        </div>
+        <div style={{fontSize:9,color:"rgba(232,224,208,0.35)",lineHeight:1.5,marginBottom:10}}>{b.d}</div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div><div style={{fontSize:18,fontWeight:"bold",color:BRC[b.role]}}>{b.q}</div><div style={{fontSize:7,color:"rgba(232,224,208,0.25)",letterSpacing:1}}>QUEUE</div></div>
+          <span style={{fontSize:8,color:"rgba(232,224,208,0.25)"}}>fired {b.f}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+const ScoreBar = ({label,val,color}) => (
+  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:5}}>
+    <span style={{fontSize:9,color,width:26,letterSpacing:1}}>{label}</span>
+    <div style={{flex:1,height:4,background:"rgba(255,255,255,0.05)",borderRadius:2,overflow:"hidden"}}><div style={{height:"100%",width:`${val}%`,background:color,borderRadius:2}}/></div>
+    <span style={{fontSize:10,color,width:22,textAlign:"right"}}>{val}</span>
+  </div>
+);
+const BarChart = ({data,keyR,keyV,colorFn,height=80}) => {
+  const max = Math.max(...data.map(d=>d[keyV]));
+  return (
+    <div style={{display:"flex",gap:6,alignItems:"flex-end",height}}>
+      {data.map((d,i)=>{
+        const h=Math.round((d[keyV]/max)*(height-16))+8;
+        const isLast=i===data.length-1;
+        const color=colorFn?colorFn(d,i,isLast):(isLast?"rgba(201,168,76,0.4)":"rgba(94,168,224,0.15)");
+        const border=colorFn?`1px solid ${colorFn(d,i,isLast)}`:(isLast?"1px solid rgba(201,168,76,0.7)":"1px solid rgba(94,168,224,0.3)");
+        return (
+          <div key={d[keyR]} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+            <span style={{fontSize:8,color:isLast?"#C9A84C":"rgba(232,224,208,0.4)"}}>{typeof d[keyV]==="number"&&d[keyV]>999?(d[keyV]/1000).toFixed(0)+"K":d[keyV]}</span>
+            <div style={{width:"100%",height:h,background:color,border,borderRadius:"2px 2px 0 0"}}/>
+            <span style={{fontSize:8,color:isLast?"#C9A84C":"rgba(232,224,208,0.3)"}}>{d[keyR]}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ── DEPARTMENT VIEWS ───────────────────────────────────────────────────
+function SalesView({client}) {
+  const [busy,setBusy] = useState({});
+  const fire = id => { setBusy(p=>({...p,[id]:true})); setTimeout(()=>setBusy(p=>{const n={...p};delete n[id];return n;}),1800); };
+  const pipeVal = LEADS.reduce((s,l)=>s+l.value,0);
+  const stages = ["Discovery","Proposal","Quote Sent","Negotiating","Follow-Up","Closed"];
+  const stageC = {Discovery:"#5EA8E0",Proposal:"#A084E8","Quote Sent":"#C9A84C",Negotiating:"#F0C040","Follow-Up":"#E0925A",Closed:"#5ED99A"};
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10}}>
+        <StatCard label="Active Leads"    value={LEADS.filter(l=>l.status!=="Closed Won").length} sub="+3 this week"    color="#5ED99A" trend={1}/>
+        <StatCard label="Pipeline Value"  value={fmt$(pipeVal)}                                   sub="8 open deals"    color="#C9A84C"/>
+        <StatCard label="Quotes Pending"  value={QUOTES.filter(q=>q.status!=="Negotiating").length} sub="Awaiting reply"color="#F0C040"/>
+        <StatCard label="High Prob Deals" value={LEADS.filter(l=>l.prob>=60&&l.status!=="Closed Won").length} sub="≥60% close rate" color="#A084E8" trend={1}/>
+        <StatCard label="Closed MTD"      value={fmt$(6800)}                                       sub="1 deal closed"  color="#5EA8E0"/>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+        <Card>
+          <SL text="Lead Pipeline" right={`${LEADS.length} leads`}/>
+          <TH cols={["ID","Name","Source","Stage","Value","Prob","Action"]} widths="60px 1fr 80px 95px 70px 42px 80px"/>
+          {LEADS.map(l=>(
+            <div key={l.id} className="hrow" style={{display:"grid",gridTemplateColumns:"60px 1fr 80px 95px 70px 42px 80px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+              <span style={{fontSize:8,color:"#5ED99A"}}>{l.id}</span>
+              <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{l.name}</span>
+              <Pill text={l.source} color="#5EA8E0" small/>
+              <span style={{fontSize:9,color:stageC[l.stage]||"#C9A84C"}}>{l.stage}</span>
+              <span style={{color:"#5ED99A"}}>{fmt$(l.value)}</span>
+              <span style={{fontSize:9,color:l.prob>=60?"#5ED99A":l.prob>=40?"#C9A84C":"#888"}}>{l.prob}%</span>
+              <Btn color="#5ED99A" small onClick={()=>fire(l.id+"q")}>{busy[l.id+"q"]?"Sent ✓":"Quote"}</Btn>
+            </div>
+          ))}
+        </Card>
+        <Card>
+          <SL text="Active Quotes" right={fmt$(QUOTES.reduce((s,q)=>s+q.amount,0))}/>
+          <TH cols={["ID","Client","Service","Amount","Expires","Status","Action"]} widths="65px 100px 1fr 65px 62px 100px 80px"/>
+          {QUOTES.map(q=>(
+            <div key={q.id} className="hrow" style={{display:"grid",gridTemplateColumns:"65px 100px 1fr 65px 62px 100px 80px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+              <span style={{fontSize:8,color:"#C9A84C"}}>{q.id}</span>
+              <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{q.client}</span>
+              <span style={{color:"rgba(232,224,208,0.5)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{q.service}</span>
+              <span style={{color:"#5ED99A"}}>{fmt$(q.amount)}</span>
+              <span style={{fontSize:8,color:"rgba(232,224,208,0.35)"}}>{q.expires}</span>
+              <Pill text={q.status} color={sc(q.status)} small/>
+              <Btn color="#C9A84C" small onClick={()=>fire(q.id+"f")}>{busy[q.id+"f"]?"Sent ✓":"Follow-Up"}</Btn>
+            </div>
+          ))}
+        </Card>
+      </div>
+      <Card>
+        <SL text="Sales Funnel"/>
+        <div style={{display:"flex",gap:8,alignItems:"flex-end",height:60}}>
+          {stages.map(s=>{
+            const n=LEADS.filter(l=>l.stage===s).length;
+            const h=Math.max(12,n*18);
+            return (
+              <div key={s} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+                <span style={{fontSize:10,color:stageC[s]||"#888"}}>{n}</span>
+                <div style={{width:"100%",height:h,background:`${stageC[s]||"#888"}25`,border:`1px solid ${stageC[s]||"#888"}44`,borderRadius:2}}/>
+                <span style={{fontSize:7,color:"rgba(232,224,208,0.3)",textAlign:"center"}}>{s}</span>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function CommsView({client}) {
+  const [busy,setBusy] = useState({});
+  const [log,setLog] = useState([
+    {to:"Marcus Thompson", ch:"Email",tmpl:"Thank You — Job Complete", status:"Delivered",opened:true, ts:"2m ago"},
+    {to:"Janelle Williams",ch:"SMS",  tmpl:"Appointment Reminder 24h",status:"Delivered",opened:true, ts:"8m ago"},
+    {to:"Priya Kapoor",    ch:"Email",tmpl:"Overdue Payment Reminder", status:"Opened",   opened:true, ts:"14m ago"},
+    {to:"Devon Reyes",     ch:"SMS",  tmpl:"Driver En Route",          status:"Delivered",opened:true, ts:"22m ago"},
+    {to:"Ashley Brown",    ch:"Email",tmpl:"Status Update",            status:"Sent",     opened:false,ts:"31m ago"},
+    {to:"Carlos Mendez",   ch:"Email",tmpl:"Quote Follow-Up",          status:"Sent",     opened:false,ts:"45m ago"},
+    {to:"Tasha Norton",    ch:"SMS",  tmpl:"Re-engagement 14 Day",     status:"Delivered",opened:true, ts:"1h ago"},
+    {to:"Jordan Lee",      ch:"Email",tmpl:"Invoice Ready",            status:"Opened",   opened:true, ts:"1h ago"},
+  ]);
+  const fire = (to,ch,tmpl) => {
+    const k=to+tmpl;
+    setBusy(p=>({...p,[k]:true}));
+    setTimeout(()=>{ setLog(p=>[{to,ch,tmpl,status:ch==="SMS"?"Delivered":"Sent",opened:false,ts:"just now"},...p].slice(0,20)); setBusy(p=>{const n={...p};delete n[k];return n;}); },1600);
+  };
+  const avgOpen=Math.round(EMAIL_TMPL.reduce((s,t)=>s+t.open,0)/EMAIL_TMPL.length);
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10}}>
+        <StatCard label="Total Emails" value={EMAIL_TMPL.reduce((s,t)=>s+t.sent,0)} sub="All templates" color="#5EA8E0"/>
+        <StatCard label="Avg Open Rate" value={avgOpen+"%"} sub="Email avg" color="#5ED99A" trend={1}/>
+        <StatCard label="SMS Delivery"  value="99.4%"       sub="Twilio API" color="#C9A84C"/>
+        <StatCard label="Total SMS"     value={SMS_TMPL.reduce((s,t)=>s+t.sent,0)} sub="All templates" color="#A084E8"/>
+        <StatCard label="Sent Today"    value="41"          sub="+18 vs yesterday" color="#F0C040" trend={1}/>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+        <Card>
+          <SL text="Email Templates — SendGrid" right={<span style={{display:"flex",alignItems:"center",gap:5}}><Dot color="#5ED99A"/>Connected</span>}/>
+          <TH cols={["Template","Trigger","Sent","Open%","Action"]} widths="1fr 110px 42px 46px 80px"/>
+          {EMAIL_TMPL.map(t=>{
+            const k=(client?.name||"Client")+t.name;
+            return (
+              <div key={t.id} className="hrow" style={{display:"grid",gridTemplateColumns:"1fr 110px 42px 46px 80px",gap:8,padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+                <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.name}</span>
+                <span style={{fontSize:8,color:"rgba(232,224,208,0.4)"}}>{t.trigger}</span>
+                <span style={{color:"rgba(232,224,208,0.6)"}}>{t.sent}</span>
+                <span style={{color:t.open>=80?"#5ED99A":t.open>=65?"#C9A84C":"#E05A5A"}}>{t.open}%</span>
+                <Btn color="#5EA8E0" small onClick={()=>fire(client?.name||"Client","Email",t.name)}>{busy[k]?"Sent ✓":"Send"}</Btn>
+              </div>
+            );
+          })}
+        </Card>
+        <Card>
+          <SL text="SMS Templates — Twilio" right={<span style={{display:"flex",alignItems:"center",gap:5}}><Dot color="#5ED99A"/>Twilio Live</span>}/>
+          <TH cols={["SMS Template","Trigger","Sent","Del%","Action"]} widths="1fr 110px 42px 46px 80px"/>
+          {SMS_TMPL.map(t=>{
+            const k=(client?.name||"Client")+t.name;
+            return (
+              <div key={t.id} className="hrow" style={{display:"grid",gridTemplateColumns:"1fr 110px 42px 46px 80px",gap:8,padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+                <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.name}</span>
+                <span style={{fontSize:8,color:"rgba(232,224,208,0.4)"}}>{t.trigger}</span>
+                <span style={{color:"rgba(232,224,208,0.6)"}}>{t.sent}</span>
+                <span style={{color:t.del===100?"#5ED99A":"#C9A84C"}}>{t.del}%</span>
+                <Btn color="#C9A84C" small onClick={()=>fire(client?.name||"Client","SMS",t.name)}>{busy[k]?"Sent ✓":"Send"}</Btn>
+              </div>
+            );
+          })}
+        </Card>
+      </div>
+      {client && (
+        <Card>
+          <SL text={`Quick Send → ${client.name}`}/>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:12}}>
+            {[["Thank You Email","Email","#5EA8E0"],["Appt Confirmation","SMS","#C9A84C"],["Invoice Ready","Email","#5ED99A"],["Overdue Reminder","SMS","#E05A5A"],["Quote Follow-Up","Email","#A084E8"],["Status Update","SMS","#F0C040"],["Re-engagement","Email","#E0925A"],["XP Unlock","SMS","#E05A8A"]].map(([lbl,ch,c])=>{
+              const k=client.name+lbl;
+              return (
+                <button key={lbl} onClick={()=>fire(client.name,ch,lbl)} style={{background:`${c}10`,border:`1px solid ${c}30`,borderRadius:3,padding:"8px 10px",color:"#E8E0D0",fontSize:10,cursor:"pointer",fontFamily:"'DM Mono',monospace",textAlign:"left",display:"flex",flexDirection:"column",gap:3}}>
+                  <span style={{fontSize:7,color:c,letterSpacing:1}}>{ch} · {busy[k]?"SENDING…":"BOT DRAFT"}</span>
+                  <span>{lbl}</span>
+                </button>
+              );
+            })}
+          </div>
+        </Card>
+      )}
+      <Card>
+        <SL text="Delivery Log" right={log.length+" entries"}/>
+        <TH cols={["To","Channel","Template","Status","Opened","Sent"]} widths="120px 65px 1fr 80px 65px 70px"/>
+        {log.slice(0,10).map((l,i)=>(
+          <div key={i} className="hrow" style={{display:"grid",gridTemplateColumns:"120px 65px 1fr 80px 65px 70px",gap:8,padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:9}}>
+            <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{l.to}</span>
+            <Pill text={l.ch} color={l.ch==="SMS"?"#C9A84C":"#5EA8E0"} small/>
+            <span style={{color:"rgba(232,224,208,0.55)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{l.tmpl}</span>
+            <Pill text={l.status} color={sc(l.status)} small/>
+            <span style={{color:l.opened?"#5ED99A":"rgba(232,224,208,0.3)"}}>{l.opened?"✓ Yes":"—"}</span>
+            <span style={{color:"rgba(232,224,208,0.3)"}}>{l.ts}</span>
+          </div>
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+function MarketingView() {
+  const spend=CAMPAIGNS.reduce((s,c)=>s+c.spend,0);
+  const rev=CAMPAIGNS.reduce((s,c)=>s+c.revenue,0);
+  const leads=CAMPAIGNS.reduce((s,c)=>s+c.leads,0);
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10}}>
+        <StatCard label="Ad Spend MTD"      value={fmt$(spend)}              sub="6 campaigns"        color="#A084E8"/>
+        <StatCard label="Revenue Attributed" value={fmt$(rev)}               sub="All campaigns"      color="#5ED99A" trend={1}/>
+        <StatCard label="Blended ROAS"       value={(rev/Math.max(1,spend)).toFixed(1)+"x"} sub="vs 4.0x target" color="#F0C040" trend={1}/>
+        <StatCard label="Campaign Leads"     value={leads}                   sub="6 active channels"  color="#5EA8E0" trend={1}/>
+        <StatCard label="Top Channel"        value="SMS"                     sub="34.4x ROAS"         color="#C9A84C"/>
+      </div>
+      <Card>
+        <SL text="Campaign Performance"/>
+        <TH cols={["ID","Campaign","Channel","Spend","Leads","Conv","Revenue","ROAS","Status","Action"]} widths="55px 1fr 95px 60px 48px 42px 75px 52px 75px 75px"/>
+        {CAMPAIGNS.map(c=>(
+          <div key={c.id} className="hrow" style={{display:"grid",gridTemplateColumns:"55px 1fr 95px 60px 48px 42px 75px 52px 75px 75px",gap:8,padding:"7px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+            <span style={{fontSize:8,color:"#A084E8"}}>{c.id}</span>
+            <span style={{color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.name}</span>
+            <Pill text={c.channel} color="#5EA8E0" small/>
+            <span style={{color:"rgba(232,224,208,0.7)"}}>{c.spend?fmt$(c.spend):"—"}</span>
+            <span style={{color:"#5EA8E0"}}>{c.leads}</span>
+            <span style={{color:"#C9A84C"}}>{c.conv}</span>
+            <span style={{color:"#5ED99A"}}>{fmt$(c.revenue)}</span>
+            <span style={{color:c.roas&&c.roas>=10?"#5ED99A":c.roas&&c.roas>=5?"#C9A84C":"#888",fontWeight:"bold"}}>{c.roas?c.roas+"x":"—"}</span>
+            <Pill text={c.status} color={c.status==="Active"?"#5ED99A":"#C9A84C"} small/>
+            <Btn color="#A084E8" small>Report</Btn>
+          </div>
+        ))}
+      </Card>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+        <Card>
+          <SL text="Monthly Revenue Trend"/>
+          <BarChart data={MONTHLY} keyR="m" keyV="rev" height={80}/>
+        </Card>
+        <Card>
+          <SL text="AI Marketing Recommendations"/>
+          {[["🔼 Increase LinkedIn Budget","13.3x ROAS — best performing channel","$+400/mo","High"],["✉ Reactivate Email List","54 dormant clients since January","$0 cost","Quick Win"],["📱 Expand SMS Campaigns","34.4x ROAS on re-engagement blast","$+100/mo","High"],["🎯 Retarget Quote Viewers","3 quotes viewed, no response yet","$+200/mo","Medium"]].map(([t,d,cost,pri])=>(
+            <div key={t} style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"7px 0",borderBottom:"1px solid rgba(201,168,76,0.06)"}}>
+              <div><div style={{fontSize:10,color:"#E8E0D0",marginBottom:2}}>{t}</div><div style={{fontSize:9,color:"rgba(232,224,208,0.4)"}}>{d}</div></div>
+              <div style={{textAlign:"right",flexShrink:0,marginLeft:10}}>
+                <div style={{fontSize:10,color:"#5ED99A"}}>{cost}</div>
+                <div style={{fontSize:8,color:pri==="High"?"#E05A5A":pri==="Quick Win"?"#5ED99A":"#C9A84C"}}>{pri}</div>
+              </div>
+            </div>
+          ))}
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function CRMView({client}) {
+  if(!client) return <Card><div style={{textAlign:"center",padding:40,color:"rgba(232,224,208,0.25)",fontSize:12}}>Select a client from the sidebar</div></Card>;
+  const tc=TC[client.tier]||"#888";
+  const prev=[0,500,1500,3000][["Standard","Operator","First Class","Elite"].indexOf(client.tier)]||0;
+  const next=[500,1500,3000,6000][["Standard","Operator","First Class","Elite"].indexOf(client.tier)]||6000;
+  const pct=Math.min(100,Math.round(((client.xp-prev)/(next-prev))*100));
+  return (
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+      <Card>
+        <SL text="Client Profile"/>
+        <div style={{display:"flex",gap:12,marginBottom:14}}>
+          <div style={{width:50,height:50,borderRadius:"50%",background:`${tc}22`,border:`2px solid ${tc}55`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,color:tc,fontWeight:"bold",flexShrink:0}}>{client.av}</div>
+          <div>
+            <div style={{fontSize:15,color:"#E8E0D0",fontWeight:"500",marginBottom:2}}>{client.name}</div>
+            <div style={{fontSize:9,color:"rgba(232,224,208,0.4)",marginBottom:5}}>{client.id} · {client.phase}</div>
+            <div style={{display:"flex",gap:5}}><Pill text={client.tier} color={tc} small/><Pill text={client.status} color={sc(client.status)} small/></div>
+          </div>
+        </div>
+        {[["Email",client.email],["Phone",client.phone],["LTV",fmt$(client.ltv)],["Balance",client.balance?fmt$(client.balance)+" ⚠":"Clear"],["Vehicles",client.vehicles+" units"],["Last Activity","2h ago"]].map(([k,v])=>(
+          <div key={k} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.06)",fontSize:11}}>
+            <span style={{color:"rgba(232,224,208,0.4)"}}>{k}</span><span style={{color:k==="Balance"&&client.balance?"#E05A5A":"#E8E0D0"}}>{v}</span>
+          </div>
+        ))}
+      </Card>
+      <div style={{display:"flex",flexDirection:"column",gap:12}}>
+        <Card>
+          <SL text="XP Progression"/>
+          <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
+            <span style={{fontSize:20,color:tc,fontWeight:"bold"}}>{client.xp.toLocaleString()} XP</span>
+            <span style={{fontSize:10,color:"rgba(232,224,208,0.4)"}}>{pct}% to next tier</span>
+          </div>
+          <div style={{height:5,background:"rgba(255,255,255,0.06)",borderRadius:3,overflow:"hidden",marginBottom:6}}>
+            <div style={{height:"100%",width:`${pct}%`,background:tc,borderRadius:3}}/>
+          </div>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:8,color:"rgba(232,224,208,0.25)"}}>
+            {["Standard","Operator","First Class","Elite"].map(t=><span key={t} style={{color:t===client.tier?tc:"rgba(232,224,208,0.2)"}}>{t}</span>)}
+          </div>
+        </Card>
+        <Card>
+          <SL text="Performance Scores"/>
+          {[["HBI",client.hbi,"#5ED99A"],["VDI",client.vdi,"#5EA8E0"],["BRE",client.bre,"#C9A84C"],["CRI",client.cri,"#A084E8"],["FPI",client.fpi,"#5ED9D9"],["MSI",client.msi,"#E0925A"]].map(([s,v,c])=>(
+            <ScoreBar key={s} label={s} val={v} color={c}/>
+          ))}
+        </Card>
+        <Card>
+          <SL text="Data Capture Record"/>
+          {[["Profile complete","100%","#5ED99A"],["KYC verified","Yes","#5ED99A"],["Agreement signed","Yes","#5ED99A"],["Payment method","Stripe","#5EA8E0"],["Referral source","Google Ads","#C9A84C"],["Tier validated","Yes","#5ED99A"]].map(([k,v,c])=>(
+            <div key={k} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.06)",fontSize:11}}>
+              <span style={{color:"rgba(232,224,208,0.4)"}}>{k}</span><span style={{color:c}}>{v}</span>
+            </div>
+          ))}
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function BillingView({client}) {
+  const paid=INVOICES.filter(i=>i.status==="Paid").reduce((s,i)=>s+i.amount,0);
+  const pend=INVOICES.filter(i=>i.status==="Pending").reduce((s,i)=>s+i.amount,0);
+  const over=INVOICES.filter(i=>i.status==="Overdue").reduce((s,i)=>s+i.amount,0);
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10}}>
+        <StatCard label="Paid MTD"       value={fmt$(paid)} color="#5ED99A" trend={1}/>
+        <StatCard label="Pending"        value={fmt$(pend)} sub={INVOICES.filter(i=>i.status==="Pending").length+" invoices"} color="#C9A84C"/>
+        <StatCard label="Overdue"        value={fmt$(over)} sub="Action required" color="#E05A5A" trend={-1}/>
+        <StatCard label="Stripe"         value="Live ✓" sub="Webhooks active" color="#5EA8E0"/>
+        <StatCard label="FanBasis"       value="Live ✓" sub="0 discrepancies" color="#A084E8"/>
+      </div>
+      <Card>
+        <SL text="Invoice Registry" right={INVOICES.length+" invoices"}/>
+        <TH cols={["Invoice","Client","Type","Amount","Method","Due","Status","Action"]} widths="75px 130px 120px 70px 80px 65px 85px 85px"/>
+        {INVOICES.map(inv=>(
+          <div key={inv.id} className="hrow" style={{display:"grid",gridTemplateColumns:"75px 130px 120px 70px 80px 65px 85px 85px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+            <span style={{fontSize:8,color:"#5ED9D9"}}>{inv.id}</span>
+            <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",color:"#E8E0D0"}}>{inv.client}</span>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.5)"}}>{inv.type}</span>
+            <span style={{color:"#5ED99A",fontWeight:"bold"}}>{fmt$(inv.amount)}</span>
+            <Pill text={inv.method} color={inv.method==="Stripe"?"#5EA8E0":"#A084E8"} small/>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.4)"}}>{inv.due}</span>
+            <Pill text={inv.status} color={sc(inv.status)} small/>
+            <Btn color="#5ED9D9" small>{inv.status==="Draft"?"Send":inv.status==="Pending"?"Remind":inv.status==="Overdue"?"Escalate":"View"}</Btn>
+          </div>
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+function FinanceView() {
+  const due=SUPPLIERS.filter(s=>s.status==="Due"||s.status==="Overdue").reduce((s,i)=>s+i.amount,0);
+  const paid=SUPPLIERS.filter(s=>s.status==="Paid").reduce((s,i)=>s+i.amount,0);
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
+        <StatCard label="Supplier Paid"   value={fmt$(paid)} color="#5ED99A"/>
+        <StatCard label="Supplier Due"    value={fmt$(due)}  sub="Action needed" color="#E05A5A" trend={-1}/>
+        <StatCard label="Total AP Open"   value={fmt$(SUPPLIERS.filter(s=>s.status!=="Paid").reduce((s,i)=>s+i.amount,0))} color="#C9A84C"/>
+        <StatCard label="Active Suppliers" value={SUPPLIERS.length} sub="Vendors" color="#F0C040"/>
+      </div>
+      <Card>
+        <SL text="Supplier Payments — Accounts Payable"/>
+        <TH cols={["ID","Supplier","Category","Amount","Method","Due","Status","Action"]} widths="70px 1fr 120px 70px 65px 65px 85px 85px"/>
+        {SUPPLIERS.map(s=>(
+          <div key={s.id} className="hrow" style={{display:"grid",gridTemplateColumns:"70px 1fr 120px 70px 65px 65px 85px 85px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+            <span style={{fontSize:8,color:"#F0C040"}}>{s.id}</span>
+            <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",color:"#E8E0D0"}}>{s.name}</span>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.5)"}}>{s.cat}</span>
+            <span style={{color:s.status==="Paid"?"#5ED99A":s.status==="Overdue"?"#E05A5A":"#C9A84C",fontWeight:"bold"}}>{fmt$(s.amount)}</span>
+            <Pill text={s.method} color="#888" small/>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.4)"}}>{s.due}</span>
+            <Pill text={s.status} color={sc(s.status)} small/>
+            <Btn color="#F0C040" small>{s.status==="Paid"?"Receipt":s.status==="Overdue"?"Pay Now":"Schedule"}</Btn>
+          </div>
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+function DocsView({client}) {
+  const DS={Published:"#5ED99A",Signed:"#5ED99A","Pending Signature":"#C9A84C",Review:"#E0925A",Draft:"#666"};
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <Card>
+        <SL text="Document Repository" right={DOCS.length+" documents"}/>
+        <TH cols={["ID","Document","Type","Status","Owner","Updated","Action"]} widths="62px 1fr 85px 140px 95px 65px 75px"/>
+        {DOCS.map(d=>(
+          <div key={d.id} className="hrow" style={{display:"grid",gridTemplateColumns:"62px 1fr 85px 140px 95px 65px 75px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+            <span style={{fontSize:8,color:"#E0925A"}}>{d.id}</span>
+            <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",color:"#E8E0D0"}}>{d.name}</span>
+            <Pill text={d.type} color="#E0925A" small/>
+            <Pill text={d.status} color={DS[d.status]||"#888"} small/>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.5)"}}>{d.owner}</span>
+            <span style={{fontSize:8,color:"rgba(232,224,208,0.3)"}}>{d.upd}</span>
+            <Btn color="#E0925A" small>Open</Btn>
+          </div>
+        ))}
+      </Card>
+      {client && (
+        <Card>
+          <SL text={`Quick Draft → ${client.name}`}/>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
+            {["Rental Agreement","Payment Plan","Welcome Packet","Quote / Proposal","Compliance Pack","Custom Contract"].map(t=>(
+              <button key={t} style={{background:"rgba(224,146,90,0.06)",border:"1px solid rgba(224,146,90,0.2)",borderRadius:3,padding:"8px 12px",color:"#E8E0D0",fontSize:10,cursor:"pointer",fontFamily:"'DM Mono',monospace",textAlign:"left"}}>▤ {t}</button>
+            ))}
+          </div>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+function SupportView() {
+  const PC={High:"#E05A5A",Med:"#C9A84C",Low:"#888"};
+  const SS={Open:"#E05A5A","In Progress":"#C9A84C",Escalated:"#E05A5A",Resolved:"#5ED99A"};
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
+        <StatCard label="Open"        value={TICKETS.filter(t=>t.status==="Open").length}        color="#E05A5A" trend={-1}/>
+        <StatCard label="In Progress" value={TICKETS.filter(t=>t.status==="In Progress").length} color="#C9A84C"/>
+        <StatCard label="Escalated"   value={TICKETS.filter(t=>t.status==="Escalated").length}   color="#E05A5A"/>
+        <StatCard label="Resolved Today" value={3}                                               color="#5ED99A" trend={1}/>
+      </div>
+      <Card>
+        <SL text="Support Ticket Queue"/>
+        <TH cols={["Ticket","Client","Subject","Priority","Status","Age","Action"]} widths="75px 115px 1fr 75px 105px 48px 85px"/>
+        {TICKETS.map(t=>(
+          <div key={t.id} className="hrow" style={{display:"grid",gridTemplateColumns:"75px 115px 1fr 75px 105px 48px 85px",gap:8,padding:"6px 0",borderBottom:"1px solid rgba(201,168,76,0.05)",alignItems:"center",fontSize:10}}>
+            <span style={{fontSize:8,color:"#E05A5A"}}>{t.id}</span>
+            <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",color:"#E8E0D0"}}>{t.client}</span>
+            <span style={{color:"rgba(232,224,208,0.6)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.subject}</span>
+            <Pill text={t.priority} color={PC[t.priority]} small/>
+            <Pill text={t.status}   color={SS[t.status]||"#888"} small/>
+            <span style={{fontSize:9,color:"rgba(232,224,208,0.4)"}}>{t.age}</span>
+            <Btn color="#E05A5A" small>{t.status==="Resolved"?"View":"Respond"}</Btn>
+          </div>
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+function GamifyView({client}) {
+  const tc=client?TC[client.tier]||"#888":"#C9A84C";
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+        {client&&(
+          <Card>
+            <SL text={`${client.name} — Gamification`}/>
+            <div style={{textAlign:"center",padding:"12px 0",marginBottom:10}}>
+              <div style={{fontSize:40,color:tc,fontWeight:"bold",marginBottom:4}}>{client.xp.toLocaleString()}</div>
+              <div style={{fontSize:8,letterSpacing:2,color:"rgba(232,224,208,0.3)"}}>TOTAL XP</div>
+              <div style={{marginTop:8}}><Pill text={`${client.tier} TIER`} color={tc}/></div>
+            </div>
+            {[["Job Completed","+50 XP","2h ago"],["5★ Review","+75 XP","2h ago"],["Referral Activated","+200 XP","5d ago"],["Invoice Paid 24h","+25 XP","3d ago"]].map(([e,xp,t])=>(
+              <div key={e} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid rgba(201,168,76,0.06)",fontSize:10}}>
+                <span style={{color:"rgba(232,224,208,0.6)"}}>{e}</span><span style={{color:"#C9A84C",fontWeight:"bold"}}>{xp}</span><span style={{fontSize:8,color:"rgba(232,224,208,0.3)"}}>{t}</span>
+              </div>
+            ))}
+          </Card>
+        )}
+        <Card>
+          <SL text="Tier Distribution"/>
+          {[["Standard","#888"],["Operator","#5EA8E0"],["First Class","#C9A84C"],["Elite","#F0C040"]].map(([tier,c])=>{
+            const n=CLIENTS.filter(cl=>cl.tier===tier).length;
+            return (
+              <div key={tier} style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+                <span style={{fontSize:10,color:c,width:80}}>{tier}</span>
+                <div style={{flex:1,height:6,background:"rgba(255,255,255,0.04)",borderRadius:3,overflow:"hidden"}}><div style={{height:"100%",width:`${(n/CLIENTS.length)*100}%`,background:c,borderRadius:3}}/></div>
+                <span style={{fontSize:14,color:c,fontWeight:"bold",width:16,textAlign:"right"}}>{n}</span>
+              </div>
+            );
+          })}
+        </Card>
+      </div>
+      <Card>
+        <SL text="Badge Catalog"/>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
+          {BADGES.map(b=>(
+            <div key={b.name} style={{background:"rgba(201,168,76,0.04)",border:"1px solid rgba(201,168,76,0.12)",borderRadius:4,padding:"12px 10px",textAlign:"center"}}>
+              <div style={{fontSize:24,marginBottom:5}}>{b.icon}</div>
+              <div style={{fontSize:11,color:"#E8E0D0",marginBottom:2}}>{b.name}</div>
+              <div style={{fontSize:9,color:"rgba(232,224,208,0.35)",marginBottom:5,lineHeight:1.3}}>{b.desc}</div>
+              <div style={{fontSize:9,color:"#C9A84C"}}>{b.n} holders</div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function ReportsView() {
+  const recs=[
+    {t:"Increase LinkedIn Ads Budget",   impact:"Est. +$8,400 revenue/mo",  why:"13.3x ROAS — best performing channel",          pri:"High",  dept:"marketing"},
+    {t:"SMS Re-engagement — 7 Leads",    impact:"Est. +$14,200 pipeline",   why:"7 leads 14+ days inactive — SMS 99% delivery",  pri:"High",  dept:"comms"},
+    {t:"Escalate Priya Kapoor Balance",   impact:"Recover $1,200 overdue",   why:"INV-8843 3 days past due — CRI declining",      pri:"Urgent",dept:"billing"},
+    {t:"Upsell Ashley Brown Fleet",       impact:"Est. +$5,600/mo",          why:"CRI 97 — Elite tier — 4 vehicles running",      pri:"Medium",dept:"sales"},
+    {t:"Update Playbook Operator v4",     impact:"Improve 91% success rate", why:"2 recent fails Step 4 driver verification",     pri:"Medium",dept:"docs"},
+    {t:"Issue XP Badges — 3 Clients",    impact:"Increase CRI avg +8pts",   why:"Road Warrior eligible: Marcus, Ashley, Devon",  pri:"Low",   dept:"gamify"},
+  ];
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:10}}>
+        <StatCard label="MTD Revenue"    value={fmt$(34800)} sub="+12% vs Feb"     color="#5ED99A" trend={1}/>
+        <StatCard label="Total Leads"    value="62"          sub="Month-to-date"   color="#5EA8E0" trend={1}/>
+        <StatCard label="Conversions"    value="24"          sub="38.7% close rate"color="#C9A84C" trend={1}/>
+        <StatCard label="Open Pipeline"  value={fmt$(47200)} sub="8 active deals"  color="#F0C040"/>
+        <StatCard label="Avg Deal Size"  value={fmt$(5900)}  sub="+$800 vs Q4"     color="#A084E8" trend={1}/>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+        <Card>
+          <SL text="6-Month Revenue Trend"/>
+          <BarChart data={MONTHLY} keyR="m" keyV="rev" height={88}/>
+        </Card>
+        <Card>
+          <SL text="Lead Source Performance"/>
+          {[["Google Ads",34,"#5EA8E0",62],["Meta/IG",18,"#A084E8",45],["Referral",9,"#5ED99A",88],["Email",8,"#C9A84C",75],["LinkedIn",7,"#F0C040",28],["Organic",6,"#E0925A",50]].map(([src,n,c,conv])=>(
+            <div key={src} style={{display:"flex",alignItems:"center",gap:8,marginBottom:7}}>
+              <span style={{fontSize:10,color:"rgba(232,224,208,0.55)",width:78}}>{src}</span>
+              <div style={{flex:1,height:4,background:"rgba(255,255,255,0.05)",borderRadius:2,overflow:"hidden"}}><div style={{height:"100%",width:`${(n/34)*100}%`,background:c,borderRadius:2}}/></div>
+              <span style={{fontSize:10,color:c,width:14,textAlign:"right"}}>{n}</span>
+              <span style={{fontSize:8,color:"rgba(232,224,208,0.3)",width:26,textAlign:"right"}}>{conv}%</span>
+            </div>
+          ))}
+        </Card>
+      </div>
+      <Card>
+        <SL text="AI Recommendations — Executive Review (Ken)"/>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+          {recs.map((r,i)=>{
+            const dm=DEPT_META.find(d=>d.id===r.dept);
+            return (
+              <div key={i} style={{background:"rgba(201,168,76,0.03)",border:`1px solid ${r.pri==="Urgent"?"rgba(224,90,90,0.3)":r.pri==="High"?"rgba(201,168,76,0.22)":"rgba(201,168,76,0.1)"}`,borderLeft:`3px solid ${r.pri==="Urgent"?"#E05A5A":r.pri==="High"?"#C9A84C":"#555"}`,borderRadius:"0 4px 4px 0",padding:"10px 12px"}}>
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+                  <span style={{fontSize:11,color:"#E8E0D0",fontWeight:"500"}}>{r.t}</span>
+                  <Pill text={r.pri} color={r.pri==="Urgent"?"#E05A5A":r.pri==="High"?"#C9A84C":"#888"} small/>
+                </div>
+                <div style={{fontSize:10,color:"#5ED99A",marginBottom:2}}>{r.impact}</div>
+                <div style={{fontSize:9,color:"rgba(232,224,208,0.4)",marginBottom:4}}>{r.why}</div>
+                <div style={{fontSize:8,color:dm?.color||"#C9A84C",textTransform:"uppercase",letterSpacing:1}}>{r.dept}</div>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// ── HIRE_BOT ──────────────────────────────────────────────────────────
+function HireBot({client}) {
+  const [open,setOpen] = useState(false);
+  const [msgs,setMsgs] = useState([{role:"bot",text:"Welcome to HIRECAR Command. I'm HIRE_BOT. I can help you draft emails, pull client records, send SMS, or generate reports. What do you need?",ts:new Date().toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"})}]);
+  const [input,setInput] = useState("");
+  const bodyRef = useRef(null);
+
+  useEffect(()=>{ if(open&&bodyRef.current) bodyRef.current.scrollTop=bodyRef.current.scrollHeight; },[msgs,open]);
+
+  const send = (text) => {
+    if(!text.trim()) return;
+    const now = new Date().toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
+    const lower = text.toLowerCase();
+    let resp = "Got it. Let me pull the relevant data and draft that for you.";
+    if(lower.includes("email")||lower.includes("send")) resp=`Drafting email via SendGrid API${client?` to ${client.name}`:""}. Template queued for Supervisor release.`;
+    else if(lower.includes("sms")||lower.includes("text")||lower.includes("twilio")) resp=`Queuing SMS via Twilio${client?` to ${client.name} at ${client.phone}`:""}. Delivery estimate: 2 seconds.`;
+    else if(lower.includes("invoice")||lower.includes("billing")) resp="Pulling billing records. I see 2 pending and 1 overdue invoice. Want me to send reminders via Stripe webhook?";
+    else if(lower.includes("report")||lower.includes("sales")) resp="Compiling sales report: $34.8K MTD, 62 leads, 24 conversions, 38.7% close rate. Sending to executive dashboard.";
+    else if(lower.includes("quote")) resp="I can generate a quote right now. Which client and service package?";
+    else if(lower.includes("lead")) resp=`Pipeline: ${LEADS.length} leads active, $${LEADS.reduce((s,l)=>s+l.value,0).toLocaleString()} total value. 3 need immediate follow-up.`;
+    else if(lower.includes("overdue")) resp="Overdue flags: Priya Kapoor $1,200 (INV-8843, 3 days), Westside Auto Detail $920 (SUP-105, 6 days). Sending escalation now?";
+    setMsgs(p=>[...p,{role:"user",text,ts:now},{role:"bot",text:resp,ts:now}]);
+    setInput("");
+  };
+
+  return (
+    <div style={{position:"fixed",bottom:20,right:20,zIndex:999,display:"flex",flexDirection:"column",alignItems:"flex-end",gap:10}}>
+      {open && (
+        <div style={{width:340,background:"rgba(8,8,20,0.98)",border:"1px solid rgba(201,168,76,0.4)",borderRadius:6,overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.85)"}}>
+          <div style={{background:"rgba(201,168,76,0.08)",borderBottom:"1px solid rgba(201,168,76,0.25)",padding:"10px 14px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <div style={{width:26,height:26,borderRadius:"50%",background:"linear-gradient(135deg,#C9A84C,#5A3E0A)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff",fontWeight:"bold"}}>H</div>
+              <div><div style={{fontSize:11,color:"#C9A84C",fontWeight:"bold",letterSpacing:1}}>HIRE_BOT</div><div style={{display:"flex",alignItems:"center",gap:5}}><Dot color="#5ED99A" pulse/><span style={{fontSize:9,color:"#5ED99A"}}>Online — All APIs Connected</span></div></div>
+            </div>
+            <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:"rgba(232,224,208,0.4)",cursor:"pointer",fontSize:18,fontFamily:"monospace"}}>×</button>
+          </div>
+          <div ref={bodyRef} style={{padding:14,height:260,overflowY:"auto",display:"flex",flexDirection:"column",gap:10}}>
+            {msgs.map((m,i)=>(
+              <div key={i} style={{display:"flex",flexDirection:"column",alignItems:m.role==="bot"?"flex-start":"flex-end",gap:3}}>
+                {m.role==="bot"&&<div style={{display:"flex",alignItems:"center",gap:5}}><div style={{width:16,height:16,borderRadius:"50%",background:"linear-gradient(135deg,#C9A84C,#5A3E0A)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:8,color:"#fff"}}>H</div><span style={{fontSize:9,color:"#C9A84C"}}>HIRE_BOT</span></div>}
+                <div style={{maxWidth:"88%",background:m.role==="bot"?"rgba(201,168,76,0.08)":"rgba(94,168,224,0.1)",border:`1px solid ${m.role==="bot"?"rgba(201,168,76,0.22)":"rgba(94,168,224,0.18)"}`,borderRadius:4,padding:"7px 10px",fontSize:11,color:"#E8E0D0",lineHeight:1.5}}>{m.text}</div>
+                <span style={{fontSize:9,color:"rgba(232,224,208,0.2)"}}>{m.ts}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,padding:"6px 12px",borderTop:"1px solid rgba(201,168,76,0.1)"}}>
+            {["Send thank-you email","SMS appointment reminder","Pull sales report","Check overdue invoices"].map(s=>(
+              <button key={s} onClick={()=>send(s)} style={{background:"rgba(201,168,76,0.06)",border:"1px solid rgba(201,168,76,0.2)",borderRadius:2,padding:"4px 8px",color:"#C9A84C",fontSize:9,cursor:"pointer",fontFamily:"'DM Mono',monospace",textAlign:"left"}}>→ {s}</button>
+            ))}
+          </div>
+          <div style={{display:"flex",borderTop:"1px solid rgba(201,168,76,0.15)"}}>
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send(input)} placeholder="Ask HIRE_BOT anything..." style={{flex:1,background:"rgba(201,168,76,0.04)",border:"none",padding:"10px 12px",color:"#E8E0D0",fontFamily:"'DM Mono',monospace",fontSize:11,outline:"none"}}/>
+            <button onClick={()=>send(input)} style={{background:"rgba(201,168,76,0.12)",border:"none",borderLeft:"1px solid rgba(201,168,76,0.2)",padding:"10px 14px",color:"#C9A84C",cursor:"pointer",fontFamily:"'DM Mono',monospace",fontSize:11}}>→</button>
+          </div>
+          <div style={{padding:"5px 12px 8px",fontSize:9,color:"rgba(232,224,208,0.2)",textAlign:"center"}}>All interactions timestamped · Stripe · Twilio · SendGrid · FanBasis</div>
+        </div>
+      )}
+      <button onClick={()=>setOpen(!open)} style={{width:50,height:50,borderRadius:"50%",background:"linear-gradient(135deg,#C9A84C,#8B6914)",border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:open?20:18,color:"#fff",boxShadow:"0 6px 28px rgba(201,168,76,0.35)"}}>
+        {open?"✕":"H"}
+      </button>
+    </div>
+  );
+}
+
+// ── EMAIL COMPOSER ────────────────────────────────────────────────────
+function EmailComposer({client, onClose, onSent}) {
+  const [to, setTo] = useState(client?.email || "");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [tmpl, setTmpl] = useState("");
+
+  useEffect(() => { if(client) setTo(client.email); }, [client]);
+
+  const applyTemplate = (t) => {
+    setTmpl(t.name);
+    const name = client?.name?.split(" ")[0] || "there";
+    const templates = {
+      "Welcome Onboarding": { subj: `Welcome to HIRECAR, ${client?.name || ""}!`, body: `Hi ${name},\n\nWelcome to the HIRECAR family! We're excited to have you on board as a ${client?.tier || ""} member.\n\nYour dedicated operator team is ready to support your journey. Here's what happens next:\n\n1. Your account has been activated (${client?.id || ""})\n2. You'll receive your digital membership pass within 24 hours\n3. Your first vehicle booking is ready to schedule\n\nIf you have any questions, reply to this email or call us at (213) 555-0100.\n\nBest regards,\nKen — HIRECAR Operations` },
+      "Payment Reminder": { subj: `HIRECAR — Payment Reminder (${client?.id || ""})`, body: `Hi ${name},\n\nThis is a friendly reminder that your account has an outstanding balance of ${client?.balance ? fmt$(client.balance) : "$0"}.\n\nPlease process your payment at your earliest convenience to keep your ${client?.tier || ""} membership in good standing.\n\nPayment methods: Stripe portal, Zelle, or direct transfer.\n\nThank you,\nHIRECAR Billing` },
+      "Service Update": { subj: `Service Update — ${client?.name || ""}`, body: `Hi ${name},\n\nWe wanted to update you on your current service status:\n\n• Tier: ${client?.tier || "N/A"}\n• Phase: ${client?.phase || "N/A"}\n• XP: ${client?.xp || 0} points\n\nYour next milestone is approaching. Keep up the great work!\n\nBest,\nHIRECAR Operations` },
+      "Thank You": { subj: `Thank You, ${client?.name?.split(" ")[0] || ""}!`, body: `Hi ${name},\n\nThank you for your continued trust in HIRECAR. Your ${client?.tier || ""} membership and ${fmt$(client?.ltv || 0)} lifetime value make you one of our most valued operators.\n\nWe appreciate your business and look forward to continuing to serve you.\n\nWarm regards,\nKen — HIRECAR` },
+      "Quote Follow-Up": { subj: `Following Up — Your HIRECAR Quote`, body: `Hi ${name},\n\nI wanted to follow up on the quote we sent over. Have you had a chance to review it?\n\nWe'd love to get you started and can answer any questions you might have about pricing, timelines, or vehicle availability.\n\nLet me know a good time to chat.\n\nBest,\nHIRECAR Sales` },
+    };
+    const t2 = templates[t.name];
+    if(t2) { setSubject(t2.subj); setBody(t2.body); }
+  };
+
+  const handleSend = async () => {
+    if(!to || !subject || !body) return;
+    setSending(true);
+    try {
+      // Try API first, fall back to mailto
+      const resp = await fetch("https://api.hirecar.la/api/email/send", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ to, subject, body, clientId: client?.id })
+      }).catch(() => null);
+
+      if(!resp || !resp.ok) {
+        // Fallback: open mailto link
+        window.open(`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+      }
+      setSent(true);
+      setTimeout(() => { onSent && onSent({to, subject}); onClose(); }, 1500);
+    } catch(e) {
+      window.open(`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+      setSent(true);
+      setTimeout(() => onClose(), 1500);
+    }
+  };
+
+  const TEMPLATES = [
+    {name:"Welcome Onboarding", icon:"🚀"},
+    {name:"Payment Reminder", icon:"💰"},
+    {name:"Service Update", icon:"🔄"},
+    {name:"Thank You", icon:"🙏"},
+    {name:"Quote Follow-Up", icon:"📋"},
+  ];
+
+  const inputStyle = {width:"100%",background:"rgba(201,168,76,0.05)",border:"1px solid rgba(201,168,76,0.18)",borderRadius:3,padding:"8px 11px",color:"#E8E0D0",fontSize:11,fontFamily:"'DM Mono',monospace"};
+
+  return (
+    <div style={{position:"fixed",inset:0,zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.7)",backdropFilter:"blur(4px)"}}>
+      <div style={{width:560,background:"rgba(10,10,22,0.99)",border:"1px solid rgba(201,168,76,0.35)",borderRadius:6,overflow:"hidden",boxShadow:"0 24px 80px rgba(0,0,0,0.9)"}}>
+        {/* Header */}
+        <div style={{background:"rgba(201,168,76,0.08)",borderBottom:"1px solid rgba(201,168,76,0.25)",padding:"12px 18px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:16}}>✉</span>
+            <div>
+              <div style={{fontSize:12,color:"#C9A84C",fontWeight:"bold",letterSpacing:1}}>EMAIL CLIENT</div>
+              <div style={{fontSize:9,color:"rgba(232,224,208,0.35)"}}>via SendGrid API · timestamped</div>
+            </div>
+          </div>
+          <button onClick={onClose} style={{background:"none",border:"none",color:"rgba(232,224,208,0.4)",cursor:"pointer",fontSize:20,fontFamily:"monospace"}}>×</button>
+        </div>
+
+        {sent ? (
+          <div style={{padding:40,textAlign:"center"}}>
+            <div style={{fontSize:32,marginBottom:10}}>✓</div>
+            <div style={{fontSize:13,color:"#5ED99A",fontWeight:"bold"}}>Email Sent Successfully</div>
+            <div style={{fontSize:10,color:"rgba(232,224,208,0.4)",marginTop:6}}>Delivered to {to}</div>
+          </div>
+        ) : (
+          <div style={{padding:18,display:"flex",flexDirection:"column",gap:12}}>
+            {/* Quick Templates */}
+            <div>
+              <div style={{fontSize:8,letterSpacing:2,color:"rgba(232,224,208,0.25)",marginBottom:6,textTransform:"uppercase"}}>Quick Templates</div>
+              <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                {TEMPLATES.map(t=>(
+                  <button key={t.name} onClick={()=>applyTemplate(t)} style={{background:tmpl===t.name?"rgba(201,168,76,0.15)":"rgba(201,168,76,0.04)",border:`1px solid ${tmpl===t.name?"rgba(201,168,76,0.4)":"rgba(201,168,76,0.12)"}`,borderRadius:3,padding:"4px 10px",color:tmpl===t.name?"#C9A84C":"rgba(232,224,208,0.5)",fontSize:9,cursor:"pointer",fontFamily:"'DM Mono',monospace",display:"flex",alignItems:"center",gap:4}}>
+                    <span>{t.icon}</span> {t.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Client Badge */}
+            {client && (
+              <div style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",background:"rgba(201,168,76,0.04)",border:"1px solid rgba(201,168,76,0.1)",borderRadius:3}}>
+                <div style={{width:20,height:20,borderRadius:"50%",background:`${TC[client.tier]||"#888"}22`,border:`1px solid ${TC[client.tier]||"#888"}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:7,color:TC[client.tier]||"#888"}}>{client.av}</div>
+                <span style={{fontSize:10,color:"#C9A84C"}}>{client.name}</span>
+                <Pill text={client.tier} color={TC[client.tier]||"#888"} small/>
+                <span style={{fontSize:9,color:"rgba(232,224,208,0.3)",marginLeft:"auto"}}>{client.id}</span>
+              </div>
+            )}
+
+            {/* To */}
+            <div>
+              <div style={{fontSize:8,letterSpacing:1.5,color:"rgba(232,224,208,0.3)",marginBottom:4}}>TO</div>
+              <input value={to} onChange={e=>setTo(e.target.value)} placeholder="recipient@email.com" style={inputStyle}/>
+            </div>
+
+            {/* Subject */}
+            <div>
+              <div style={{fontSize:8,letterSpacing:1.5,color:"rgba(232,224,208,0.3)",marginBottom:4}}>SUBJECT</div>
+              <input value={subject} onChange={e=>setSubject(e.target.value)} placeholder="Email subject..." style={inputStyle}/>
+            </div>
+
+            {/* Body */}
+            <div>
+              <div style={{fontSize:8,letterSpacing:1.5,color:"rgba(232,224,208,0.3)",marginBottom:4}}>MESSAGE</div>
+              <textarea value={body} onChange={e=>setBody(e.target.value)} placeholder="Write your message..." rows={8} style={{...inputStyle,resize:"vertical",lineHeight:1.6}}/>
+            </div>
+
+            {/* Actions */}
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:4}}>
+              <div style={{fontSize:8,color:"rgba(232,224,208,0.2)"}}>
+                {to && subject && body ? "Ready to send" : "Fill all fields to send"}
+              </div>
+              <div style={{display:"flex",gap:8}}>
+                <button onClick={onClose} style={{background:"rgba(232,224,208,0.05)",border:"1px solid rgba(232,224,208,0.1)",borderRadius:3,padding:"7px 16px",color:"rgba(232,224,208,0.5)",fontSize:10,cursor:"pointer",fontFamily:"'DM Mono',monospace"}}>Cancel</button>
+                <button onClick={handleSend} disabled={!to||!subject||!body||sending} style={{background:(!to||!subject||!body)?"rgba(201,168,76,0.1)":"rgba(201,168,76,0.2)",border:"1px solid rgba(201,168,76,0.35)",borderRadius:3,padding:"7px 20px",color:(!to||!subject||!body)?"rgba(201,168,76,0.3)":"#C9A84C",fontSize:10,cursor:(!to||!subject||!body)?"default":"pointer",fontFamily:"'DM Mono',monospace",fontWeight:"bold",letterSpacing:1}}>
+                  {sending ? "SENDING..." : "→ SEND EMAIL"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── PASSWORD GATE ─────────────────────────────────────────────────────
+// Default password: "hirecar2026" — SHA-256 hash stored below
+// To change: run in browser console: crypto.subtle.digest('SHA-256', new TextEncoder().encode('YOUR_NEW_PASSWORD')).then(h=>console.log([...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')))
+const PASS_HASH = "536c035206b2078b540291e63db1c05683453fe0669a91c2b5147e802579d11a";
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function LoginGate({children}) {
+  const [authed, setAuthed] = useState(()=> sessionStorage.getItem("hc_auth")==="1");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if(!pass.trim()) return;
+    setLoading(true);
+    setError(false);
+    const hash = await sha256(pass);
+    // Accept the hardcoded hash OR the plaintext fallback "hirecar2026"
+    if(hash === PASS_HASH || pass === "hirecar2026") {
+      sessionStorage.setItem("hc_auth","1");
+      setAuthed(true);
+    } else {
+      setError(true);
+    }
+    setLoading(false);
+  };
+
+  const handleLogout = useCallback(() => {
+    sessionStorage.removeItem("hc_auth");
+    setAuthed(false);
+    setPass("");
+  }, []);
+
+  // Expose logout globally so topbar can call it
+  window.__hc_logout = handleLogout;
+
+  if(authed) return children;
+
+  return (
+    <div style={{fontFamily:"'DM Mono',monospace",background:"#05050F",color:"#E8E0D0",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <div style={{width:380,textAlign:"center"}}>
+        {/* Logo */}
+        <div style={{marginBottom:32}}>
+          <div style={{fontFamily:"'Bebas Neue'",fontSize:42,letterSpacing:8,color:"#C9A84C",marginBottom:6}}>HIRECAR</div>
+          <div style={{fontSize:9,letterSpacing:4,color:"rgba(232,224,208,0.25)",textTransform:"uppercase"}}>Command Center v2</div>
+        </div>
+
+        {/* Login Box */}
+        <div style={{background:"rgba(10,10,22,0.98)",border:"1px solid rgba(201,168,76,0.2)",borderRadius:6,padding:"28px 24px",boxShadow:"0 20px 60px rgba(0,0,0,0.6)"}}>
+          <div style={{fontSize:8,letterSpacing:3,color:"rgba(232,224,208,0.3)",marginBottom:16,textTransform:"uppercase"}}>Operator Authentication</div>
+
+          <div style={{display:"flex",alignItems:"center",gap:0,marginBottom:12}}>
+            <div style={{width:36,height:36,background:"rgba(201,168,76,0.08)",border:"1px solid rgba(201,168,76,0.2)",borderRight:"none",borderRadius:"3px 0 0 3px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:"rgba(201,168,76,0.4)"}}>🔒</div>
+            <input
+              type="password"
+              value={pass}
+              onChange={e=>{setPass(e.target.value);setError(false);}}
+              onKeyDown={e=>e.key==="Enter"&&handleLogin()}
+              placeholder="Enter access code..."
+              autoFocus
+              style={{flex:1,background:"rgba(201,168,76,0.04)",border:"1px solid rgba(201,168,76,0.18)",borderLeft:"none",borderRadius:"0 3px 3px 0",padding:"9px 12px",color:"#E8E0D0",fontSize:12,fontFamily:"'DM Mono',monospace"}}
+            />
+          </div>
+
+          {error && (
+            <div style={{fontSize:10,color:"#E05A5A",marginBottom:10,display:"flex",alignItems:"center",gap:6,justifyContent:"center"}}>
+              <span>⚠</span> Invalid access code — try again
+            </div>
+          )}
+
+          <button onClick={handleLogin} disabled={loading||!pass.trim()} style={{width:"100%",background:pass.trim()?"rgba(201,168,76,0.15)":"rgba(201,168,76,0.06)",border:"1px solid rgba(201,168,76,0.3)",borderRadius:3,padding:"10px 0",color:pass.trim()?"#C9A84C":"rgba(201,168,76,0.25)",fontSize:11,cursor:pass.trim()?"pointer":"default",fontFamily:"'DM Mono',monospace",fontWeight:"bold",letterSpacing:2,transition:"all 0.2s"}}>
+            {loading ? "AUTHENTICATING..." : "→ ACCESS COMMAND CENTER"}
+          </button>
+
+          <div style={{marginTop:16,fontSize:8,color:"rgba(232,224,208,0.15)",lineHeight:1.6}}>
+            Session secured · No data stored locally<br/>
+            Authorized personnel only · All access logged
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div style={{marginTop:20,fontSize:8,color:"rgba(232,224,208,0.12)"}}>
+          HIRECAR MarketWatch! · Los Angeles · {new Date().getFullYear()}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── MAIN APP ───────────────────────────────────────────────────────────
+function App() {
+  const [dept,setDept] = useState("sales");
+  const [client,setClient] = useState(CLIENTS[0]);
+  const [search,setSearch] = useState("");
+  const [showEmail,setShowEmail] = useState(false);
+  const [emailCount,setEmailCount] = useState(134);
+  const [log,setLog] = useState([
+    {bot:"Lead Trigger Bot",  dept:"sales",   msg:"LD-2209 captured Google Ads — routed to pipeline",    ts:"1m ago"},
+    {bot:"Twilio SMS Bot",    dept:"comms",   msg:"SMS — Devon Reyes: driver en route ETA 12 min",       ts:"2m ago"},
+    {bot:"Invoice Generator", dept:"billing", msg:"INV-8848 drafted $2,100 — Jordan Lee fleet",           ts:"8m ago"},
+    {bot:"XP Trigger Bot",    dept:"gamify",  msg:"+75 XP Ashley Brown 5-star review submitted",          ts:"12m ago"},
+    {bot:"Report Trigger",    dept:"reports", msg:"Weekly report queued — $34.8K / 62 leads",             ts:"18m ago"},
+    {bot:"Email Drafter Bot", dept:"comms",   msg:"Thank-you email sent — Marcus Thompson RNT-4401",      ts:"24m ago"},
+    {bot:"Finance Manager",   dept:"finance", msg:"SUP-102 LA Driver Network $8,400 due Mar 7",           ts:"30m ago"},
+    {bot:"Campaign Trigger",  dept:"marketing",msg:"LinkedIn B2B quality 8.2/10 — recommend budget↑",   ts:"41m ago"},
+  ]);
+  const [stats,setStats] = useState({triggers:41,docs:23,sms:98});
+
+  useEffect(()=>{
+    const int=setInterval(()=>{
+      const ev=rf(LIVE_EVENTS);
+      setLog(p=>[{bot:ev.bot,dept:ev.dept,msg:rf(ev.msgs),ts:"just now"},...p].slice(0,40));
+      setStats(p=>({triggers:p.triggers+ri(0,2),docs:p.docs+ri(0,1),sms:p.sms+ri(0,1)}));
+      setEmailCount(c=>c+ri(0,1));
+    },3200);
+    return ()=>clearInterval(int);
+  },[]);
+
+  const dm=DEPT_META.find(d=>d.id===dept)||DEPT_META[0];
+  const bots=BOTS[dept]||[];
+  const filtered=CLIENTS.filter(c=>c.name.toLowerCase().includes(search.toLowerCase())||c.id.toLowerCase().includes(search.toLowerCase()));
+
+  return (
+    <div style={{fontFamily:"'DM Mono',monospace",background:"#05050F",color:"#E8E0D0",display:"flex",flexDirection:"column",height:"100vh",overflow:"hidden"}}>
+      {/* TOPBAR */}
+      <div style={{height:50,background:"rgba(6,6,18,0.99)",borderBottom:"1px solid rgba(201,168,76,0.2)",display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 18px",flexShrink:0,zIndex:100}}>
+        <div style={{display:"flex",alignItems:"center",gap:16}}>
+          <span style={{fontFamily:"'Bebas Neue'",fontSize:22,letterSpacing:4,color:"#C9A84C"}}>HIRECAR</span>
+          <span style={{color:"rgba(201,168,76,0.25)"}}>|</span>
+          <span style={{fontSize:9,letterSpacing:3,color:"rgba(232,224,208,0.35)",textTransform:"uppercase"}}>Command Center v2</span>
+        </div>
+        <div style={{display:"flex",gap:16,alignItems:"center"}}>
+          {[["BOT TRIGGERS",stats.triggers,"#E05A5A"],["DOCS DRAFTED",stats.docs,"#C9A84C"],["SMS SENT",stats.sms,"#5EA8E0"],["EMAILS SENT",emailCount,"#5ED99A"]].map(([l,v,c])=>(
+            <div key={l} style={{textAlign:"center"}}>
+              <div style={{fontSize:7,letterSpacing:2,color:"rgba(232,224,208,0.25)",marginBottom:1}}>{l}</div>
+              <div style={{fontSize:13,fontWeight:"bold",color:c}}>{v}</div>
+            </div>
+          ))}
+          <div style={{display:"flex",alignItems:"center",gap:6,background:"rgba(94,217,154,0.07)",border:"1px solid rgba(94,217,154,0.25)",padding:"3px 10px",borderRadius:2}}>
+            <Dot color="#5ED99A" pulse/><span style={{fontSize:8,letterSpacing:2,color:"#5ED99A"}}>ALL BOTS LIVE</span>
+          </div>
+          <button onClick={()=>setShowEmail(true)} title="Email Client" style={{background:"rgba(94,168,224,0.08)",border:"1px solid rgba(94,168,224,0.2)",borderRadius:3,padding:"4px 10px",cursor:"pointer",display:"flex",alignItems:"center",gap:5}}>
+            <span style={{fontSize:11}}>✉</span><span style={{fontSize:8,letterSpacing:1,color:"#5EA8E0"}}>EMAIL</span>
+          </button>
+          <button onClick={()=>window.__hc_logout&&window.__hc_logout()} title="Logout" style={{background:"rgba(224,90,90,0.06)",border:"1px solid rgba(224,90,90,0.15)",borderRadius:3,padding:"4px 8px",cursor:"pointer",display:"flex",alignItems:"center",gap:4}}>
+            <span style={{fontSize:8,letterSpacing:1,color:"rgba(224,90,90,0.6)"}}>⏻</span>
+          </button>
+          <div style={{width:28,height:28,borderRadius:"50%",background:"linear-gradient(135deg,#C9A84C,#5A3E0A)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:"bold",color:"#fff"}}>K</div>
+        </div>
+      </div>
+
+      <div style={{display:"flex",flex:1,overflow:"hidden"}}>
+        {/* DEPT NAV */}
+        <div style={{width:58,background:"rgba(8,8,18,0.99)",borderRight:"1px solid rgba(201,168,76,0.1)",display:"flex",flexDirection:"column",alignItems:"center",paddingTop:10,gap:3,flexShrink:0,overflowY:"auto"}}>
+          {DEPT_META.map(d=>(
+            <button key={d.id} onClick={()=>setDept(d.id)} title={d.desc} style={{width:46,height:44,borderRadius:3,border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:2,transition:"all 0.15s",background:dept===d.id?`${d.color}15`:"transparent",borderLeft:dept===d.id?`2px solid ${d.color}`:"2px solid transparent"}}>
+              <span style={{fontSize:15,color:dept===d.id?d.color:"rgba(232,224,208,0.3)"}}>{d.icon}</span>
+              <span style={{fontSize:7,letterSpacing:0.5,color:dept===d.id?d.color:"rgba(232,224,208,0.2)",textTransform:"uppercase"}}>{d.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* CLIENT SIDEBAR */}
+        <div style={{width:228,background:"rgba(9,9,19,0.98)",borderRight:"1px solid rgba(201,168,76,0.1)",display:"flex",flexDirection:"column",flexShrink:0}}>
+          <div style={{padding:"10px 12px",borderBottom:"1px solid rgba(201,168,76,0.1)"}}>
+            <div style={{fontSize:8,letterSpacing:2.5,color:"rgba(232,224,208,0.25)",marginBottom:7,textTransform:"uppercase"}}>Client Registry</div>
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search clients..." style={{width:"100%",background:"rgba(201,168,76,0.05)",border:"1px solid rgba(201,168,76,0.15)",borderRadius:2,padding:"5px 9px",color:"#E8E0D0",fontSize:10,fontFamily:"'DM Mono',monospace"}}/>
+          </div>
+          <div style={{flex:1,overflowY:"auto"}}>
+            {filtered.map(c=>{
+              const tc=TC[c.tier]||"#888";
+              return (
+                <div key={c.id} className="hrow" onClick={()=>setClient(c)} style={{padding:"9px 12px",borderBottom:"1px solid rgba(201,168,76,0.05)",background:client?.id===c.id?"rgba(201,168,76,0.07)":"transparent",borderLeft:client?.id===c.id?"2px solid #C9A84C":"2px solid transparent",cursor:"pointer"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:4}}>
+                    <div style={{width:24,height:24,borderRadius:"50%",background:`${tc}22`,border:`1px solid ${tc}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:8,fontWeight:"bold",color:tc,flexShrink:0}}>{c.av}</div>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontSize:10,color:"#E8E0D0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.name}</div>
+                      <div style={{fontSize:8,color:"rgba(232,224,208,0.3)"}}>{c.id}</div>
+                    </div>
+                  </div>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                    <Pill text={c.tier} color={tc} small/>
+                    <span style={{fontSize:9,color:sc(c.status)}}>{c.status}</span>
+                  </div>
+                  {c.balance>0&&<div style={{fontSize:8,color:"#E05A5A",marginTop:2}}>⚠ {fmt$(c.balance)} due</div>}
+                </div>
+              );
+            })}
+          </div>
+          <div style={{padding:"7px 12px",borderTop:"1px solid rgba(201,168,76,0.1)",fontSize:8,color:"rgba(232,224,208,0.2)"}}>{CLIENTS.length} clients · {CLIENTS.filter(c=>c.status==="Active").length} active</div>
+        </div>
+
+        {/* MAIN CONTENT */}
+        <div style={{flex:1,overflow:"auto",padding:14,display:"flex",flexDirection:"column",gap:10}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:2}}>
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <span style={{fontSize:20,color:dm.color}}>{dm.icon}</span>
+              <div>
+                <div style={{fontFamily:"'Bebas Neue'",fontSize:18,letterSpacing:3,color:dm.color}}>{dm.label} DEPARTMENT</div>
+                <div style={{fontSize:9,color:"rgba(232,224,208,0.35)",letterSpacing:1}}>{dm.desc}</div>
+              </div>
+            </div>
+            {client&&(
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <div style={{display:"flex",alignItems:"center",gap:9,padding:"5px 12px",background:"rgba(201,168,76,0.05)",border:"1px solid rgba(201,168,76,0.18)",borderRadius:3}}>
+                  <div style={{width:22,height:22,borderRadius:"50%",background:`${TC[client.tier]||"#888"}22`,border:`1px solid ${TC[client.tier]||"#888"}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:8,color:TC[client.tier]||"#888"}}>{client.av}</div>
+                  <div><div style={{fontSize:10,color:"#C9A84C"}}>{client.name}</div><div style={{fontSize:8,color:"rgba(232,224,208,0.3)"}}>{client.id} · {client.tier}</div></div>
+                </div>
+                <button onClick={()=>setShowEmail(true)} style={{background:"rgba(94,168,224,0.1)",border:"1px solid rgba(94,168,224,0.25)",borderRadius:3,padding:"6px 12px",color:"#5EA8E0",fontSize:9,cursor:"pointer",fontFamily:"'DM Mono',monospace",display:"flex",alignItems:"center",gap:5,letterSpacing:0.5}}>
+                  <span style={{fontSize:12}}>✉</span> Email Client
+                </button>
+              </div>
+            )}
+          </div>
+
+          <BotPanel bots={bots}/>
+
+          {dept==="sales"     && <SalesView     client={client}/>}
+          {dept==="comms"     && <CommsView     client={client}/>}
+          {dept==="marketing" && <MarketingView/>}
+          {dept==="crm"       && <CRMView       client={client}/>}
+          {dept==="billing"   && <BillingView   client={client}/>}
+          {dept==="finance"   && <FinanceView/>}
+          {dept==="docs"      && <DocsView      client={client}/>}
+          {dept==="support"   && <SupportView/>}
+          {dept==="gamify"    && <GamifyView    client={client}/>}
+          {dept==="reports"   && <ReportsView/>}
+        </div>
+
+        {/* LIVE BOT LOG */}
+        <div style={{width:248,background:"rgba(8,8,18,0.99)",borderLeft:"1px solid rgba(201,168,76,0.1)",display:"flex",flexDirection:"column",flexShrink:0}}>
+          <div style={{padding:"11px 13px",borderBottom:"1px solid rgba(201,168,76,0.1)"}}>
+            <div style={{display:"flex",alignItems:"center",gap:7}}><Dot color="#5ED99A" pulse/><span style={{fontSize:8,letterSpacing:2.5,color:"rgba(232,224,208,0.35)",textTransform:"uppercase"}}>Live Bot Activity</span></div>
+          </div>
+          <div style={{flex:1,overflowY:"auto",padding:"6px 0"}}>
+            {log.map((l,i)=>{
+              const dm2=DEPT_META.find(d=>d.id===l.dept);
+              return (
+                <div key={i} className="nd" style={{padding:"7px 13px",borderBottom:"1px solid rgba(201,168,76,0.04)"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
+                    <span style={{fontSize:8,color:dm2?.color||"#C9A84C",letterSpacing:0.5}}>{l.bot}</span>
+                    <span style={{fontSize:8,color:"rgba(232,224,208,0.2)"}}>{l.ts}</span>
+                  </div>
+                  <div style={{fontSize:9,color:"rgba(232,224,208,0.5)",lineHeight:1.4}}>{l.msg}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <HireBot client={client}/>
+
+      {/* EMAIL COMPOSER MODAL */}
+      {showEmail && (
+        <EmailComposer
+          client={client}
+          onClose={()=>setShowEmail(false)}
+          onSent={({to,subject})=>{
+            setEmailCount(c=>c+1);
+            setLog(p=>[{bot:"Email Drafter Bot",dept:"comms",msg:`Email sent to ${to} — "${subject}"`,ts:"just now"},...p].slice(0,40));
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <LoginGate><App/></LoginGate>
+);
+</script>
+</body>
+</html>

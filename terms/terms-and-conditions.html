@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR Terms & Conditions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #111820;
+            background-color: #FAFAF8;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            border-bottom: 4px solid #C9920A;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #111820;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .version-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .disclaimer-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #C9920A;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .disclaimer-box h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #0F4C75;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer-box p {
+            font-size: 14px;
+            color: #111820;
+            margin-bottom: 8px;
+        }
+
+        .disclaimer-box ul {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #111820;
+        }
+
+        .disclaimer-box li {
+            margin-bottom: 6px;
+        }
+
+        .draft-warning {
+            background-color: #ffebee;
+            border: 2px solid #c62828;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            color: #c62828;
+        }
+
+        nav.toc {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+
+        nav.toc h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #0F4C75;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        nav.toc ol {
+            margin-left: 20px;
+        }
+
+        nav.toc li {
+            margin-bottom: 12px;
+        }
+
+        nav.toc a {
+            color: #0F4C75;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav.toc a:hover {
+            color: #C9920A;
+            text-decoration: underline;
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #0F4C75;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: #111820;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #0F4C75;
+            font-weight: 600;
+        }
+
+        .tier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .tier-table th {
+            background-color: #0F4C75;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .tier-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tier-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .tier-name {
+            color: #C9920A;
+            font-weight: 600;
+        }
+
+        footer {
+            border-top: 2px solid #C9920A;
+            padding-top: 30px;
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #0F4C75;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #C9920A;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .tier-table {
+                font-size: 12px;
+            }
+
+            .tier-table th, .tier-table td {
+                padding: 8px;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            section {
+                page-break-inside: avoid;
+                border: none;
+                box-shadow: none;
+            }
+
+            nav.toc {
+                page-break-after: always;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <div class="container">
+        <header>
+            <h1>HIRECAR Terms & Conditions</h1>
+            <div class="version-date">Version 1.0 | Last Updated: March 4, 2026</div>
+        </header>
+
+        <div class="draft-warning">
+            ⚠️ DRAFT — This document should be reviewed by an attorney before going live.
+        </div>
+
+        <div class="disclaimer-box">
+            <h2>Important Disclaimers</h2>
+            <ul>
+                <li><strong>Not a Law Firm:</strong> HIRECAR is not a law firm, and the services provided do not constitute legal advice or legal representation.</li>
+                <li><strong>Not Financial Advisors:</strong> HIRECAR does not provide financial advisory services and is not a registered investment advisor.</li>
+                <li><strong>Not a Credit Repair Organization:</strong> HIRECAR is not a credit repair organization as defined by the Credit Repair Organizations Act (CROA). We do not promise to improve your credit score or repair your credit history.</li>
+                <li><strong>Educational Purpose Only:</strong> All tools, templates, and resources are provided for educational purposes to help Members understand financial principles and credit building strategies.</li>
+            </ul>
+        </div>
+
+        <nav class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#definitions">Definitions</a></li>
+                <li><a href="#scope">Scope of Services</a></li>
+                <li><a href="#membership">Membership & Tiers</a></li>
+                <li><a href="#payment">Payment Terms</a></li>
+                <li><a href="#responsibilities">Member Responsibilities</a></li>
+                <li><a href="#liability">Limitation of Liability</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#dispute">Dispute Resolution</a></li>
+                <li><a href="#cancellation">Cancellation</a></li>
+                <li><a href="#changes">Changes to Terms</a></li>
+            </ol>
+        </nav>
+
+        <section id="definitions">
+            <h2>1. Definitions</h2>
+            <p>For purposes of these Terms & Conditions, the following terms shall have the meanings ascribed to them:</p>
+
+            <h3>"HIRECAR"</h3>
+            <p>Refers to HIRECAR, including its owners, operators, managers, employees, agents, representatives, and affiliates providing services via the Platform.</p>
+
+            <h3>"Member"</h3>
+            <p>Any individual or entity that has registered with HIRECAR and entered into a membership agreement, including those in free trial periods.</p>
+
+            <h3>"Services"</h3>
+            <p>All educational content, tools, templates, credit playbooks, resources, coaching, referrals, and other offerings provided by HIRECAR to Members.</p>
+
+            <h3>"Platform"</h3>
+            <p>The HIRECAR website, mobile applications, email communications, and all digital systems through which Services are delivered.</p>
+
+            <h3>"Content"</h3>
+            <p>All text, graphics, images, videos, playbooks, templates, worksheets, advice, strategies, and other materials created or curated by HIRECAR and made available to Members.</p>
+        </section>
+
+        <section id="scope">
+            <h2>2. Scope of Services</h2>
+            <p>HIRECAR provides educational resources and tools designed to help Members understand personal finance, credit building, and wealth management principles. Our Services include, but are not limited to:</p>
+
+            <ul>
+                <li>Access to credit-building playbooks and educational content</li>
+                <li>Customizable templates and worksheets</li>
+                <li>Personalized financial tools and calculators</li>
+                <li>Resource directories and vendor referrals</li>
+                <li>Email support and community access</li>
+                <li>Regular updates and new content releases</li>
+            </ul>
+
+            <h3>Services HIRECAR Does NOT Provide</h3>
+            <p>HIRECAR explicitly does not provide and makes no representations regarding:</p>
+
+            <ul>
+                <li><strong>Legal Advice:</strong> Members must consult qualified attorneys for legal matters.</li>
+                <li><strong>Financial Advice:</strong> HIRECAR is not a registered financial advisor. Members should consult CFAs or registered investment professionals.</li>
+                <li><strong>Credit Repair:</strong> HIRECAR does not repair credit reports or dispute inaccuracies on behalf of Members.</li>
+                <li><strong>Guaranteed Outcomes:</strong> HIRECAR does not guarantee specific financial results, credit score improvements, or loan approvals.</li>
+                <li><strong>Tax Advice:</strong> Members should consult certified accountants or tax professionals for tax-related matters.</li>
+                <li><strong>Medical or Mental Health Services:</strong> If Services reference wellness, this is educational only, not treatment.</li>
+            </ul>
+        </section>
+
+        <section id="membership">
+            <h2>3. Membership & Tiers</h2>
+            <p>HIRECAR offers multiple membership tiers with varying features, benefits, and limitations. All Members agree to comply with the terms applicable to their tier.</p>
+
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Key Features</th>
+                        <th>Support Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tier-name">Standard</span></td>
+                        <td>Access to core playbooks, basic templates, community forum, bi-weekly updates</td>
+                        <td>Email support (5 business days)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-name">Operator</span></td>
+                        <td>Everything in Standard, plus advanced worksheets, exclusive webinars, monthly 1:1 coaching session</td>
+                        <td>Priority email support (2 business days)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-name">First Class</span></td>
+                        <td>Everything in Operator, plus personalized playbook customization, bi-weekly coaching, vendor referral priority</td>
+                        <td>Phone support (24 hours)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-name">Elite</span></td>
+                        <td>Everything in First Class, plus dedicated account manager, weekly coaching, early access to new features, white-glove service</td>
+                        <td>Dedicated support line & account manager</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tier Changes</h3>
+            <p>Members may upgrade or downgrade tiers at any time. Downgrades take effect at the end of the current billing cycle. Upgrades take effect immediately, with prorated charges applied to the next billing period.</p>
+        </section>
+
+        <section id="payment">
+            <h2>4. Payment Terms</h2>
+
+            <h3>Pricing and Billing</h3>
+            <p>Current membership pricing is available on the HIRECAR website and is subject to change with 30 days' written notice. All prices are in USD unless otherwise stated. Members are responsible for payment of all taxes, fees, and charges associated with their membership.</p>
+
+            <h3>Payment Methods</h3>
+            <p>HIRECAR accepts major credit cards, bank transfers, and ACH payments. All payment information is processed securely through PCI-compliant payment processors. Members authorize HIRECAR to charge their selected payment method on the billing date indicated in their account.</p>
+
+            <h3>Billing Cycle</h3>
+            <p>Memberships are billed either monthly or annually, as selected by the Member at registration. Recurring billing continues until the Member cancels, subject to the provisions of Section 9.</p>
+
+            <h3>Refund Policy — 7-Day Satisfaction Guarantee</h3>
+            <p>HIRECAR offers a 7-day satisfaction guarantee for new Members. If a Member is not satisfied with their membership within 7 calendar days of purchase, they may request a full refund by contacting support@hirecar.la. Refund requests made after 7 days are evaluated on a case-by-case basis and are not guaranteed.</p>
+
+            <h3>Failed Payments</h3>
+            <p>If a payment fails, HIRECAR will attempt to recharge the payment method. If payment continues to fail after two attempts, the Member's account may be suspended until payment is received. Suspended accounts lose access to Services but are not considered canceled and remain subject to these Terms.</p>
+        </section>
+
+        <section id="responsibilities">
+            <h2>5. Member Responsibilities</h2>
+            <p>Members acknowledge and agree to the following responsibilities:</p>
+
+            <h3>Accurate Information</h3>
+            <p>Members represent that all information provided during registration and profile completion is accurate, current, and complete. Members are responsible for updating information if it changes.</p>
+
+            <h3>Timely Responses</h3>
+            <p>For Members receiving coaching or support, timely engagement with HIRECAR staff and prompt responses to requests for information are expected. Failure to respond may result in delays in service delivery.</p>
+
+            <h3>Playbook Compliance</h3>
+            <p>Members agree to follow the steps outlined in the HIRECAR playbook in the order recommended. Deviating from the recommended process may reduce the effectiveness of the Services and may invalidate any guarantees or performance commitments.</p>
+
+            <h3>Lawful Use</h3>
+            <p>Members agree to use HIRECAR Services only for lawful purposes and in accordance with all applicable federal, state, and local laws. Members may not use the Platform to commit fraud, identity theft, or other illegal activities.</p>
+
+            <h3>Account Security</h3>
+            <p>Members are responsible for maintaining the confidentiality of their login credentials and account information. Members must immediately notify HIRECAR of any unauthorized access or suspected breach.</p>
+        </section>
+
+        <section id="liability">
+            <h2>6. Limitation of Liability</h2>
+
+            <h3>Educational Nature</h3>
+            <p>Members acknowledge that HIRECAR provides educational tools and resources, not professional financial, legal, tax, or credit services. The Services are designed to be informational and are not tailored to any specific Member's situation.</p>
+
+            <h3>No Guarantees on Outcomes</h3>
+            <p>HIRECAR makes no warranties or guarantees regarding:</p>
+            <ul>
+                <li>Improvement in credit scores or credit reports</li>
+                <li>Approval for credit products, loans, or financing</li>
+                <li>Specific financial results or net worth increases</li>
+                <li>Reduction in debt or debt payoff timelines</li>
+                <li>Results from following the playbook or using the tools</li>
+            </ul>
+
+            <h3>Disclaimer of Warranties</h3>
+            <p>HIRECAR provides Services "AS IS" without warranties of any kind, express or implied. HIRECAR disclaims all warranties of fitness for a particular purpose, merchantability, or non-infringement.</p>
+
+            <h3>Limitation of Damages</h3>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, HIRECAR SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICES, EVEN IF HIRECAR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+
+            <h3>Liability Cap</h3>
+            <p>HIRECAR's total liability to any Member shall not exceed the total amount paid by the Member to HIRECAR in the 12 months preceding the claim.</p>
+        </section>
+
+        <section id="privacy">
+            <h2>7. Privacy</h2>
+            <p>HIRECAR collects and processes Member personal data in accordance with our Privacy Policy, which is incorporated by reference into these Terms. Members are encouraged to review the Privacy Policy at www.hirecar.la/privacy.</p>
+
+            <h3>Data Handling Commitment</h3>
+            <p>HIRECAR commits to:</p>
+            <ul>
+                <li>Collecting only necessary personal information</li>
+                <li>Protecting personal data with industry-standard encryption and security measures</li>
+                <li>Not selling personal data to third parties without explicit Member consent</li>
+                <li>Complying with all applicable privacy laws, including CCPA, GDPR, and state privacy regulations</li>
+                <li>Providing Members with access to, and the ability to delete, their personal data upon request</li>
+            </ul>
+
+            <h3>Third-Party Vendors</h3>
+            <p>HIRECAR may share limited information with service providers, referral partners, and payment processors necessary to deliver Services. All third parties are contractually bound to maintain data confidentiality.</p>
+        </section>
+
+        <section id="dispute">
+            <h2>8. Dispute Resolution</h2>
+
+            <h3>Informal Resolution</h3>
+            <p>In the event of a dispute, Members agree to first contact HIRECAR at support@hirecar.la to attempt informal resolution. HIRECAR will respond within 10 business days with a proposed resolution.</p>
+
+            <h3>Binding Arbitration</h3>
+            <p>If informal resolution is unsuccessful, Members and HIRECAR agree that any dispute arising out of or relating to these Terms or the Services shall be resolved by binding arbitration administered by JAMS (Judicial Arbitration and Mediation Services) in Los Angeles, California.</p>
+
+            <h3>Arbitration Details</h3>
+            <ul>
+                <li>Arbitration shall be conducted by a single neutral arbitrator</li>
+                <li>Each party shall bear its own attorney's fees and costs</li>
+                <li>The arbitrator's decision shall be final and binding and may be entered as a judgment in any court of competent jurisdiction</li>
+                <li>The arbitration shall be confidential and subject to protective orders as needed</li>
+            </ul>
+
+            <h3>Class Action Waiver</h3>
+            <p>Members agree not to bring or participate in class actions, class arbitrations, or representative actions against HIRECAR. All claims must be brought on an individual basis.</p>
+
+            <h3>Exceptions</h3>
+            <p>Notwithstanding the above, either party may seek injunctive relief in court to prevent irreparable harm or to enforce intellectual property rights.</p>
+        </section>
+
+        <section id="cancellation">
+            <h2>9. Cancellation</h2>
+
+            <h3>How to Cancel</h3>
+            <p>Members may cancel their membership at any time by logging into their account and selecting "Cancel Membership" or by emailing support@hirecar.la with the subject line "CANCELLATION REQUEST." Cancellation requests must include the Member's full name and account email address.</p>
+
+            <h3>Effective Date</h3>
+            <p>Cancellations are effective at the end of the current billing period. If a Member cancels before their next billing date, no additional charges will be incurred. Partial month refunds are not available unless within the 7-day satisfaction guarantee period.</p>
+
+            <h3>Data Handling Upon Cancellation</h3>
+            <p>Upon cancellation, Members retain access to their account data for 30 days. After 30 days, HIRECAR will delete or anonymize personal data in accordance with the Privacy Policy, unless legal or regulatory obligations require retention.</p>
+
+            <h3>Refund Eligibility</h3>
+            <p>Refunds upon cancellation are available only within the 7-day satisfaction guarantee period (Section 4) or as required by applicable law. After the satisfaction guarantee period, remaining prepaid fees are forfeited unless otherwise agreed in writing.</p>
+
+            <h3>Reactivation</h3>
+            <p>Members who cancel may reactivate their accounts within 90 days and resume at their previous tier level. Accounts inactive for more than 90 days may be permanently deleted.</p>
+        </section>
+
+        <section id="changes">
+            <h2>10. Changes to Terms</h2>
+
+            <h3>Right to Modify</h3>
+            <p>HIRECAR reserves the right to modify these Terms & Conditions at any time. Changes will be effective 30 days after posting to the Platform. Members who do not agree with modifications may cancel their membership in accordance with Section 9.</p>
+
+            <h3>Notification</h3>
+            <p>HIRECAR will notify Members of material changes via email to the address associated with their account. Members are responsible for reviewing updated Terms periodically.</p>
+
+            <h3>Continued Use</h3>
+            <p>Continued use of HIRECAR Services after the effective date of changes constitutes acceptance of the modified Terms.</p>
+        </section>
+
+        <footer>
+            <p><strong>HIRECAR</strong><br>
+            Los Angeles, California<br>
+            support@hirecar.la<br>
+            www.hirecar.la</p>
+
+            <p style="margin-top: 20px; font-size: 12px;">
+                <em>DRAFT — This document should be reviewed by an attorney before going live.</em><br>
+                Last Updated: March 4, 2026 | Version 1.0
+            </p>
+
+            <a href="#top" class="back-to-top">Back to Top</a>
+        </footer>
+    </div>
+</body>
+</html>

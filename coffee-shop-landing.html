@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ember & Oak Coffee | Craft Coffee, Warm Community</title>
+  <meta name="description" content="Ember & Oak Coffee serves hand-roasted specialty coffee in a warm, inviting atmosphere. Visit us for single-origin pour-overs, artisan pastries, and community.">
+
+  <!-- Google Fonts: Playfair Display SC + Karla -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Playfair+Display+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:    '#78350F',
+            secondary:  '#92400E',
+            cta:        '#FBBF24',
+            'cta-hover':'#F59E0B',
+            surface:    '#FEF3C7',
+            ink:        '#451A03',
+            muted:      '#A16207',
+            cream:      '#FFFBEB',
+            espresso:   '#3B1106',
+          },
+          fontFamily: {
+            display: ['"Playfair Display SC"', 'serif'],
+            body:    ['Karla', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #FEF3C7; }
+    ::-webkit-scrollbar-thumb { background: #78350F; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #92400E; }
+
+    /* Focus ring */
+    *:focus-visible {
+      outline: 2px solid #FBBF24;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* Hero parallax-like gradient overlay */
+    .hero-overlay {
+      background: linear-gradient(
+        135deg,
+        rgba(59, 17, 6, 0.88) 0%,
+        rgba(120, 53, 15, 0.72) 50%,
+        rgba(146, 64, 14, 0.60) 100%
+      );
+    }
+
+    /* Decorative bean illustration via radial gradient */
+    .bean-deco {
+      background: radial-gradient(ellipse at 30% 50%, #92400E 0%, transparent 70%);
+      opacity: 0.06;
+    }
+  </style>
+</head>
+
+<body class="bg-cream font-body text-ink antialiased">
+
+  <!-- ========== SKIP LINK ========== -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-cta focus:text-espresso focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">
+    Skip to main content
+  </a>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="fixed top-0 inset-x-0 z-40 transition-colors duration-300" id="site-header">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20" aria-label="Primary navigation">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-2 cursor-pointer group" aria-label="Ember & Oak Coffee home">
+        <svg class="w-8 h-8 text-cta group-hover:text-white transition-colors duration-200" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 24C8 24 6 20 6 16C6 10 10 6 16 6C22 6 26 10 26 16C26 20 24 24 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 24C12 22 13 18 16 18C19 18 20 22 20 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16 6V2M12 7L10 4M20 7L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <path d="M8 24H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 28H26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="font-display text-lg md:text-xl tracking-wide text-white">Ember & Oak</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#menu" class="text-white/80 hover:text-cta transition-colors duration-200 text-sm font-medium cursor-pointer">Menu</a>
+        <a href="#about" class="text-white/80 hover:text-cta transition-colors duration-200 text-sm font-medium cursor-pointer">Our Story</a>
+        <a href="#testimonials" class="text-white/80 hover:text-cta transition-colors duration-200 text-sm font-medium cursor-pointer">Reviews</a>
+        <a href="#visit" class="text-white/80 hover:text-cta transition-colors duration-200 text-sm font-medium cursor-pointer">Visit</a>
+        <a href="#visit" class="inline-flex items-center gap-2 bg-cta text-espresso font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-cta-hover transition-all duration-200 cursor-pointer shadow-lg shadow-cta/20">
+          Order Now
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="md:hidden text-white p-2 cursor-pointer hover:text-cta transition-colors duration-200"
+        aria-label="Open menu"
+        aria-expanded="false"
+        id="mobile-menu-btn"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="md:hidden hidden bg-espresso/98 backdrop-blur-md border-t border-white/10">
+      <div class="px-4 py-6 space-y-4">
+        <a href="#menu" class="block text-white/90 hover:text-cta transition-colors duration-200 text-base font-medium cursor-pointer py-2">Menu</a>
+        <a href="#about" class="block text-white/90 hover:text-cta transition-colors duration-200 text-base font-medium cursor-pointer py-2">Our Story</a>
+        <a href="#testimonials" class="block text-white/90 hover:text-cta transition-colors duration-200 text-base font-medium cursor-pointer py-2">Reviews</a>
+        <a href="#visit" class="block text-white/90 hover:text-cta transition-colors duration-200 text-base font-medium cursor-pointer py-2">Visit</a>
+        <a href="#visit" class="inline-flex items-center gap-2 bg-cta text-espresso font-semibold text-base px-6 py-3 rounded-full hover:bg-cta-hover transition-all duration-200 cursor-pointer mt-2">
+          Order Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="main">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <!-- Background image placeholder via gradient -->
+      <div class="absolute inset-0 bg-gradient-to-br from-espresso via-primary to-secondary"></div>
+      <!-- Bean texture overlay -->
+      <div class="absolute inset-0 bean-deco"></div>
+      <!-- Dark overlay for text contrast -->
+      <div class="absolute inset-0 hero-overlay"></div>
+
+      <!-- Floating decorative shapes -->
+      <div class="absolute top-20 right-10 w-72 h-72 rounded-full bg-cta/5 blur-3xl"></div>
+      <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-primary/10 blur-3xl"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 md:py-0">
+        <!-- Subheading -->
+        <p class="font-body text-cta/90 text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-6 md:mb-8">
+          Specialty Coffee Since 2019
+        </p>
+
+        <!-- Main Heading -->
+        <h1 class="font-display text-white leading-[0.95] tracking-tight mb-6 md:mb-8" style="font-size: clamp(2.8rem, 8vw, 8rem);">
+          Craft Coffee,<br>
+          <span class="text-cta">Warm Souls</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="font-body text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed">
+          Hand-roasted single-origin beans. Artisan pastries baked fresh every morning. A place where every cup tells a story.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#menu" class="inline-flex items-center gap-2 bg-cta text-espresso font-bold text-base px-8 py-4 rounded-full hover:bg-cta-hover hover:shadow-xl hover:shadow-cta/30 transition-all duration-200 cursor-pointer">
+            Explore Our Menu
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#visit" class="inline-flex items-center gap-2 border-2 border-white/30 text-white font-semibold text-base px-8 py-4 rounded-full hover:border-cta hover:text-cta transition-all duration-200 cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find Us
+          </a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="mt-16 md:mt-24 animate-bounce">
+          <svg class="w-6 h-6 mx-auto text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="bg-primary text-white py-8 md:py-10" aria-label="Key statistics">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+          <div>
+            <p class="font-display text-3xl md:text-4xl text-cta">12+</p>
+            <p class="text-white/70 text-sm mt-1">Single Origins</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl text-cta">50K+</p>
+            <p class="text-white/70 text-sm mt-1">Cups Served</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl text-cta">4.9</p>
+            <p class="text-white/70 text-sm mt-1">Star Rating</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl text-cta">6</p>
+            <p class="text-white/70 text-sm mt-1">Years Brewing</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURED MENU SECTION ===== -->
+    <section id="menu" class="py-20 md:py-28 bg-cream">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <p class="font-body text-muted text-sm font-semibold tracking-[0.2em] uppercase mb-4">Our Craft</p>
+          <h2 class="font-display text-ink text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6">
+            The Menu
+          </h2>
+          <p class="font-body text-muted text-lg max-w-xl mx-auto leading-relaxed">
+            Every drink is made to order with beans roasted in small batches, right here in our shop.
+          </p>
+        </div>
+
+        <!-- Menu Categories Tabs -->
+        <div class="flex justify-center gap-2 mb-12 flex-wrap" role="tablist" aria-label="Menu categories">
+          <button role="tab" aria-selected="true" class="menu-tab bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-secondary" data-category="espresso">
+            Espresso
+          </button>
+          <button role="tab" aria-selected="false" class="menu-tab bg-white text-primary px-5 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-surface border border-primary/10" data-category="brewed">
+            Brewed
+          </button>
+          <button role="tab" aria-selected="false" class="menu-tab bg-white text-primary px-5 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-surface border border-primary/10" data-category="cold">
+            Cold Drinks
+          </button>
+          <button role="tab" aria-selected="false" class="menu-tab bg-white text-primary px-5 py-2.5 rounded-full text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-surface border border-primary/10" data-category="pastries">
+            Pastries
+          </button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="menu-grid">
+
+          <!-- Item 1 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v4M10 2v4M14 2v4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="absolute top-3 right-3 bg-cta text-espresso text-xs font-bold px-3 py-1 rounded-full">Popular</span>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Classic Latte</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$5.50</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">Double-shot espresso with velvety steamed milk and a thin layer of microfoam. Simple. Perfect.</p>
+            </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-cta/10 to-primary/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v4M10 2v4M14 2v4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Honey Oat Cortado</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$6.25</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">Espresso cut with oat milk, sweetened with local wildflower honey. Our signature creation.</p>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-secondary/10 to-cta/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v4M10 2v4M14 2v4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="absolute top-3 right-3 bg-espresso text-white text-xs font-bold px-3 py-1 rounded-full">New</span>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Pour Over Flight</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$9.00</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">Three single-origin pour overs side by side. Taste Ethiopia, Colombia, and Guatemala in one sitting.</p>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-primary/5 to-secondary/15 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M8 2v4M12 2v4M16 2v4M3 10h18v11a2 2 0 01-2 2H5a2 2 0 01-2-2V10z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3 10l2-4h14l2 4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Cold Brew Nitro</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$6.50</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">24-hour steeped cold brew infused with nitrogen for a creamy, stout-like finish. Served on tap.</p>
+            </div>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-cta/15 to-primary/5 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12s1.5 3 4 3 4-3 4-3" stroke-linecap="round"/>
+                  <path d="M9 9h.01M15 9h.01" stroke-linecap="round" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Matcha Ceremonial</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$6.75</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">Stone-ground Japanese ceremonial grade matcha, whisked to order with your choice of milk.</p>
+            </div>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 border border-primary/5">
+            <div class="aspect-[4/3] bg-gradient-to-br from-secondary/5 to-cta/15 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="absolute top-3 right-3 bg-cta text-espresso text-xs font-bold px-3 py-1 rounded-full">Best Seller</span>
+            </div>
+            <div class="p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="font-display text-xl text-ink">Almond Croissant</h3>
+                <span class="font-body font-bold text-primary text-lg whitespace-nowrap">$4.75</span>
+              </div>
+              <p class="text-muted text-sm leading-relaxed">Buttery laminated dough filled with frangipane cream, topped with sliced almonds and powdered sugar.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- View Full Menu CTA -->
+        <div class="text-center mt-12">
+          <a href="#" class="inline-flex items-center gap-2 border-2 border-primary text-primary font-semibold px-8 py-3.5 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-pointer">
+            View Full Menu
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="py-20 md:py-28 bg-white relative overflow-hidden">
+      <!-- Decorative background -->
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-surface/50 to-transparent"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          <!-- Image placeholder -->
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary to-secondary overflow-hidden shadow-2xl shadow-primary/20">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-24 h-24 text-white/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" aria-hidden="true">
+                  <path d="M17 8h1a4 4 0 010 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 2v4M10 2v4M14 2v4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Floating badge -->
+            <div class="absolute -bottom-6 -right-4 md:right-8 bg-cta text-espresso rounded-2xl p-5 shadow-xl shadow-cta/20">
+              <p class="font-display text-3xl">Est.</p>
+              <p class="font-display text-3xl">2019</p>
+            </div>
+          </div>
+
+          <!-- Text Content -->
+          <div>
+            <p class="font-body text-muted text-sm font-semibold tracking-[0.2em] uppercase mb-4">Our Story</p>
+            <h2 class="font-display text-ink text-4xl md:text-5xl tracking-tight mb-8 leading-tight">
+              From Bean<br>to Community
+            </h2>
+            <div class="space-y-5 text-muted text-base md:text-lg leading-relaxed">
+              <p>
+                Ember & Oak started with a simple idea: that great coffee should be an everyday luxury, not an exception. In 2019, we opened our doors in a converted firehouse with a second-hand roaster and a dream.
+              </p>
+              <p>
+                Today, we source directly from small farms across three continents, roast every batch in-house, and serve each cup with the care it deserves. Our baristas train for months before pulling their first shot for a customer.
+              </p>
+              <p>
+                But we are more than coffee. We host open-mic nights, latte art throwdowns, and Saturday morning story hours for kids. This is your neighborhood living room, just with better espresso.
+              </p>
+            </div>
+
+            <!-- Values -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink text-sm">Ethically Sourced</p>
+                  <p class="text-muted text-xs mt-0.5">Direct trade partnerships</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink text-sm">Made with Love</p>
+                  <p class="text-muted text-xs mt-0.5">Every cup, every time</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink text-sm">Community First</p>
+                  <p class="text-muted text-xs mt-0.5">Your neighborhood hub</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section id="testimonials" class="py-20 md:py-28 bg-surface">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <p class="font-body text-muted text-sm font-semibold tracking-[0.2em] uppercase mb-4">What People Say</p>
+          <h2 class="font-display text-ink text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6">
+            Loved by Locals
+          </h2>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+
+          <!-- Testimonial 1 -->
+          <blockquote class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-primary/5 flex flex-col">
+            <!-- Stars -->
+            <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="text-ink text-base leading-relaxed flex-1">
+              "I've tried coffee shops in a dozen cities and nothing comes close. The pour-over flight changed how I think about coffee. The baristas genuinely care about getting it right."
+            </p>
+            <footer class="mt-6 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-sm">MR</span>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">Maria Rodriguez</p>
+                <p class="text-muted text-xs">Regular since 2020</p>
+              </div>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonial 2 -->
+          <blockquote class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-primary/5 flex flex-col">
+            <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="text-ink text-base leading-relaxed flex-1">
+              "This is my office away from the office. Great Wi-Fi, the best oat milk latte in the city, and the almond croissants are dangerously addictive. I come here every single day."
+            </p>
+            <footer class="mt-6 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-sm">JC</span>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">James Chen</p>
+                <p class="text-muted text-xs">Freelance Designer</p>
+              </div>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonial 3 -->
+          <blockquote class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-primary/5 flex flex-col">
+            <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-cta" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="text-ink text-base leading-relaxed flex-1">
+              "My kids love Saturday story hour and I get to enjoy a quiet moment with an actual good cappuccino. Ember & Oak is the heartbeat of our neighborhood. We are so grateful it exists."
+            </p>
+            <footer class="mt-6 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="text-primary font-bold text-sm">AT</span>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">Anika Thompson</p>
+                <p class="text-muted text-xs">Neighborhood Parent</p>
+              </div>
+            </footer>
+          </blockquote>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA BANNER ===== -->
+    <section class="py-16 md:py-20 bg-espresso relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-cta/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h2 class="font-display text-white text-3xl md:text-5xl tracking-tight mb-6">
+          Subscribe & Save <span class="text-cta">15%</span>
+        </h2>
+        <p class="text-white/70 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+          Join our Coffee Club and get a monthly bag of freshly roasted beans delivered to your door, plus member-only perks in the shop.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
+          <label for="email-subscribe" class="sr-only">Your email address</label>
+          <input
+            type="email"
+            id="email-subscribe"
+            placeholder="your@email.com"
+            class="w-full sm:flex-1 px-5 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-cta focus:border-transparent transition-all duration-200"
+          >
+          <button type="button" class="w-full sm:w-auto bg-cta text-espresso font-bold px-8 py-4 rounded-full hover:bg-cta-hover transition-all duration-200 cursor-pointer shadow-lg shadow-cta/20 whitespace-nowrap">
+            Join the Club
+          </button>
+        </div>
+        <p class="text-white/40 text-xs mt-4">No spam. Unsubscribe anytime. First bag ships free.</p>
+      </div>
+    </section>
+
+    <!-- ===== VISIT / LOCATION SECTION ===== -->
+    <section id="visit" class="py-20 md:py-28 bg-cream">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <p class="font-body text-muted text-sm font-semibold tracking-[0.2em] uppercase mb-4">Come Say Hello</p>
+          <h2 class="font-display text-ink text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6">
+            Visit Us
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+
+          <!-- Map Placeholder -->
+          <div class="aspect-[4/3] lg:aspect-auto rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden relative border border-primary/10">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-16 h-16 text-primary/30 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <p class="text-primary/40 text-sm font-medium">Interactive Map</p>
+                <p class="text-primary/30 text-xs mt-1">42 Firehouse Lane, Portland</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Cards -->
+          <div class="space-y-6">
+
+            <!-- Hours -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-primary/5 shadow-sm">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </div>
+                <h3 class="font-display text-xl text-ink">Hours</h3>
+              </div>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-muted">Monday -- Friday</span>
+                  <span class="font-semibold text-ink">6:30 AM -- 8:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-muted">Saturday</span>
+                  <span class="font-semibold text-ink">7:00 AM -- 9:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-muted">Sunday</span>
+                  <span class="font-semibold text-ink">7:30 AM -- 6:00 PM</span>
+                </div>
+              </div>
+              <div class="mt-4 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-green-700 text-sm font-medium">Open Now</span>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-primary/5 shadow-sm">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <h3 class="font-display text-xl text-ink">Location</h3>
+              </div>
+              <address class="not-italic text-muted text-sm leading-relaxed">
+                42 Firehouse Lane<br>
+                Portland, OR 97209<br>
+                <a href="tel:+15035551234" class="text-primary hover:text-secondary transition-colors duration-200 cursor-pointer font-medium">(503) 555-1234</a>
+              </address>
+              <div class="flex gap-3 mt-5">
+                <a href="#" class="inline-flex items-center gap-2 bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-secondary transition-all duration-200 cursor-pointer">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                  Directions
+                </a>
+                <a href="tel:+15035551234" class="inline-flex items-center gap-2 border-2 border-primary text-primary font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-primary hover:text-white transition-all duration-200 cursor-pointer">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                  Call
+                </a>
+              </div>
+            </div>
+
+            <!-- Amenities -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-primary/5 shadow-sm">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 bg-surface rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
+                  </svg>
+                </div>
+                <h3 class="font-display text-xl text-ink">Amenities</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Free Wi-Fi</span>
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Outdoor Patio</span>
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Power Outlets</span>
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Wheelchair Access</span>
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Dog Friendly</span>
+                <span class="bg-surface text-primary text-xs font-medium px-3 py-1.5 rounded-full">Bike Rack</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-espresso text-white/70 py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+
+        <!-- Brand Column -->
+        <div class="lg:col-span-1">
+          <a href="#hero" class="flex items-center gap-2 cursor-pointer group mb-5" aria-label="Back to top">
+            <svg class="w-7 h-7 text-cta" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 24C8 24 6 20 6 16C6 10 10 6 16 6C22 6 26 10 26 16C26 20 24 24 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 24C12 22 13 18 16 18C19 18 20 22 20 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M16 6V2M12 7L10 4M20 7L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+              <path d="M8 24H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 28H26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="font-display text-lg text-white">Ember & Oak</span>
+          </a>
+          <p class="text-white/50 text-sm leading-relaxed max-w-xs">
+            Craft coffee, warm community. Roasted in-house and served with care since 2019.
+          </p>
+          <!-- Social Icons -->
+          <div class="flex gap-3 mt-6">
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-cta hover:text-espresso text-white/60 transition-all duration-200 cursor-pointer" aria-label="Instagram">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-cta hover:text-espresso text-white/60 transition-all duration-200 cursor-pointer" aria-label="Facebook">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-cta hover:text-espresso text-white/60 transition-all duration-200 cursor-pointer" aria-label="Twitter / X">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M13.232 10.768L20 4"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-display text-white text-base mb-5">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="#menu" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Menu</a></li>
+            <li><a href="#about" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Our Story</a></li>
+            <li><a href="#testimonials" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Reviews</a></li>
+            <li><a href="#visit" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Visit Us</a></li>
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Catering</a></li>
+          </ul>
+        </div>
+
+        <!-- Policies -->
+        <div>
+          <h4 class="font-display text-white text-base mb-5">Info</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Careers</a></li>
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Press</a></li>
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Privacy Policy</a></li>
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Terms of Service</a></li>
+            <li><a href="#" class="text-white/50 hover:text-cta transition-colors duration-200 text-sm cursor-pointer">Accessibility</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter mini -->
+        <div>
+          <h4 class="font-display text-white text-base mb-5">Stay in Touch</h4>
+          <p class="text-white/50 text-sm mb-4 leading-relaxed">Weekly brews, events, and promos delivered to your inbox.</p>
+          <form class="flex gap-2" onsubmit="return false;">
+            <label for="footer-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="footer-email"
+              placeholder="Email"
+              class="flex-1 min-w-0 px-4 py-2.5 rounded-full bg-white/10 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-cta focus:border-transparent transition-all duration-200"
+            >
+            <button type="submit" class="bg-cta text-espresso font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-cta-hover transition-all duration-200 cursor-pointer whitespace-nowrap">
+              Go
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-xs">&copy; 2026 Ember & Oak Coffee. All rights reserved.</p>
+        <p class="text-white/30 text-xs">Handcrafted with care in Portland, Oregon.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // --- Mobile Menu Toggle ---
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // --- Sticky Header Background ---
+    const header = document.getElementById('site-header');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          header.classList.remove('bg-espresso/95', 'backdrop-blur-md', 'shadow-lg');
+          header.classList.add('bg-transparent');
+        } else {
+          header.classList.remove('bg-transparent');
+          header.classList.add('bg-espresso/95', 'backdrop-blur-md', 'shadow-lg');
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(document.getElementById('hero'));
+
+    // --- Menu Tab Switching (visual only) ---
+    const tabs = document.querySelectorAll('.menu-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-white');
+          t.classList.add('bg-white', 'text-primary', 'border', 'border-primary/10');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.remove('bg-white', 'text-primary', 'border', 'border-primary/10');
+        tab.classList.add('bg-primary', 'text-white');
+        tab.setAttribute('aria-selected', 'true');
+      });
+    });
+
+    // --- Scroll-triggered Fade-in ---
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-6');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('section > div').forEach(el => {
+      el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-700', 'ease-out');
+      fadeObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>

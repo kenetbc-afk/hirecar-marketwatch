@@ -1,0 +1,92 @@
+{
+  "$schema": "HIRECAR Self-Improving Agent Feedback Loop — HC-WPK-004-A",
+  "version": "1.0.0",
+  "description": "Monitors automation performance and generates optimization recommendations",
+  "feedback_sources": [
+    {
+      "id": "worker-requests",
+      "source": "cloudflare-worker",
+      "data": "API request logs",
+      "metrics": ["success_rate", "response_time", "cpu_time", "error_frequency"],
+      "collection_interval": "daily"
+    },
+    {
+      "id": "stripe-payments",
+      "source": "stripe",
+      "data": "payment events",
+      "metrics": ["success_rate", "avg_amount", "failure_reasons", "chargeback_rate"],
+      "collection_interval": "daily"
+    },
+    {
+      "id": "email-delivery",
+      "source": "sendgrid",
+      "data": "email stats",
+      "metrics": ["delivery_rate", "open_rate", "bounce_rate", "spam_complaints"],
+      "collection_interval": "weekly"
+    },
+    {
+      "id": "site-analytics",
+      "source": "cloudflare",
+      "data": "web analytics",
+      "metrics": ["visitors", "page_views", "bounce_rate", "response_time"],
+      "collection_interval": "daily"
+    }
+  ],
+  "optimization_rules": [
+    {
+      "id": "reduce-cpu",
+      "trigger": "monthly_cpu_time > 40000",
+      "analysis": "Identify endpoints consuming most CPU. Look for: redundant database queries, inefficient loops, unnecessary API calls, N+1 problems.",
+      "action": "Generate optimization recommendations report",
+      "auto_apply": false
+    },
+    {
+      "id": "fix-failures",
+      "trigger": "api_success_rate < 95%",
+      "analysis": "Analyze failure patterns: which endpoint fails most? Is it transient (retry) or systematic (config)? Time-of-day correlation? Check Worker logs.",
+      "action": "Generate failure analysis report with specific fix recommendations",
+      "auto_apply": false
+    },
+    {
+      "id": "improve-email",
+      "trigger": "email_delivery_rate < 90% OR open_rate < 20%",
+      "analysis": "Check domain authentication, content quality, send frequency, subject line performance.",
+      "action": "Generate email optimization recommendations",
+      "auto_apply": false
+    },
+    {
+      "id": "scaling-trigger",
+      "trigger": "monthly_enrollments > 250 OR monthly_cpu_time > 45000",
+      "analysis": "Evaluate if Cloudflare Worker scaling is needed. Project growth trend. Consider Worker optimization vs. upgrading.",
+      "action": "Generate scaling recommendation with cost-benefit analysis",
+      "auto_apply": false
+    }
+  ],
+  "reporting": {
+    "weekly_digest": {
+      "enabled": true,
+      "day": "Monday",
+      "time": "09:00",
+      "channels": ["slack"],
+      "content": ["kpi_summary", "top_issues", "optimization_suggestions"]
+    },
+    "monthly_report": {
+      "enabled": true,
+      "day": 1,
+      "template": "monthly-ops-report-template.md",
+      "channels": ["email"],
+      "content": ["full_metrics", "incidents", "recommendations"]
+    }
+  },
+  "learning_log": {
+    "location": "HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/_reports/learning-log.json",
+    "entries": [
+      {
+        "date": "2026-03-04",
+        "observation": "Initial deployment — all systems in setup phase",
+        "learning": "Baseline established. No performance data yet.",
+        "action": "Monitor first 48 hours closely for configuration issues."
+      }
+    ]
+  }
+}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRECAR Sales Order</title>
+  <style>
+    @page { size: letter; margin: 0.6in; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: #111820;
+      background: #F5F5F5;
+      line-height: 1.5;
+    }
+
+    .so-page {
+      max-width: 700px;
+      margin: 24px auto;
+      background: #FFFFFF;
+      border: 1px solid #E0E0E0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .so-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 32px 36px 24px;
+      border-bottom: 3px solid #0F4C75;
+    }
+    .so-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: #C9920A;
+      letter-spacing: 2px;
+    }
+    .so-brand-sub {
+      font-size: 11px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+    .so-title-block { text-align: right; }
+    .so-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      font-weight: bold;
+      color: #0F4C75;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .so-number {
+      font-size: 13px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+
+    /* Info Grid */
+    .so-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 24px 36px;
+      gap: 24px;
+    }
+    .so-info-block { flex: 1; }
+    .so-info-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+    .so-info-block p {
+      font-size: 13px;
+      color: #374151;
+      margin-bottom: 2px;
+    }
+    .so-info-block p strong { color: #111820; }
+
+    /* Package Detail */
+    .so-package {
+      padding: 0 36px 24px;
+    }
+    .so-package-card {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-left: 4px solid #C9920A;
+      border-radius: 6px;
+      padding: 20px 24px;
+    }
+    .so-pkg-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #111820;
+      margin-bottom: 4px;
+    }
+    .so-pkg-desc {
+      font-size: 13px;
+      color: #6B7280;
+      margin-bottom: 14px;
+    }
+    .so-pkg-features {
+      list-style: none;
+      padding: 0;
+    }
+    .so-pkg-features li {
+      font-size: 13px;
+      color: #374151;
+      padding: 3px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+    .so-pkg-features li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: #16A34A;
+      font-weight: bold;
+    }
+
+    /* Pricing Table */
+    .so-pricing {
+      padding: 0 36px 24px;
+    }
+    .so-pricing table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .so-pricing th {
+      background: #111820;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .so-pricing th:last-child { text-align: right; }
+    .so-pricing td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .so-pricing td:last-child { text-align: right; font-weight: 600; }
+    .so-pricing .total-row td {
+      border-top: 2px solid #111820;
+      font-size: 15px;
+      font-weight: 700;
+      padding-top: 12px;
+    }
+
+    /* Payment Schedule */
+    .so-schedule {
+      padding: 0 36px 24px;
+    }
+    .so-schedule-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9CA3AF;
+      margin-bottom: 10px;
+    }
+    .so-schedule table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .so-schedule th {
+      background: #F9FAFB;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 8px 12px;
+      text-align: left;
+      color: #6B7280;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .so-schedule td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .status-pending {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #FEF3C7;
+      color: #92400E;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .status-paid {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #D1FAE5;
+      color: #065F46;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Acknowledgment */
+    .so-ack {
+      padding: 24px 36px;
+      border-top: 1px solid #E5E7EB;
+      background: #F9FAFB;
+    }
+    .so-ack-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      font-weight: bold;
+      color: #111820;
+      margin-bottom: 12px;
+    }
+    .so-ack p {
+      font-size: 12px;
+      color: #6B7280;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .sig-grid {
+      display: flex;
+      gap: 36px;
+    }
+    .sig-block { flex: 1; }
+    .sig-line {
+      border-bottom: 1px solid #111820;
+      height: 32px;
+      margin-bottom: 6px;
+    }
+    .sig-label {
+      font-size: 10px;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer */
+    .so-footer {
+      padding: 16px 36px;
+      border-top: 1px solid #E5E7EB;
+      font-size: 11px;
+      color: #9CA3AF;
+      text-align: center;
+      line-height: 1.7;
+    }
+    .so-footer a { color: #0F4C75; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .so-header, .so-info, .so-package, .so-pricing, .so-schedule, .so-ack, .so-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .so-info { flex-direction: column; gap: 16px; }
+      .so-header { flex-direction: column; gap: 12px; }
+      .so-title-block { text-align: left; }
+      .sig-grid { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="so-page">
+
+  <!-- Header -->
+  <div class="so-header">
+    <div>
+      <div class="so-brand">HIRECAR</div>
+      <div class="so-brand-sub">Financial Services for Rideshare Operators</div>
+    </div>
+    <div class="so-title-block">
+      <div class="so-title">Sales Order</div>
+      <div class="so-number">#[SO-2026-XXXXX]</div>
+    </div>
+  </div>
+
+  <!-- Info Grid -->
+  <div class="so-info">
+    <div class="so-info-block">
+      <div class="so-info-label">From</div>
+      <p><strong>HIRECAR</strong></p>
+      <p>Los Angeles, CA</p>
+      <p>support@hirecar.la</p>
+    </div>
+    <div class="so-info-block">
+      <div class="so-info-label">Client</div>
+      <p><strong>[Member Name]</strong></p>
+      <p>Member ID: [HC-2026-XXXXX]</p>
+      <p>[Member Email]</p>
+      <p>[Member Phone]</p>
+    </div>
+    <div class="so-info-block">
+      <div class="so-info-label">Order Details</div>
+      <p><strong>Date:</strong> [MM/DD/YYYY]</p>
+      <p><strong>Valid Until:</strong> [MM/DD/YYYY]</p>
+    </div>
+  </div>
+
+  <!-- Package Details -->
+  <div class="so-package">
+    <div class="so-package-card">
+      <div class="so-pkg-title">[Package Name] Package</div>
+      <div class="so-pkg-desc">[Brief description of the package and what the member is signing up for.]</div>
+      <ul class="so-pkg-features">
+        <li>[Included Service 1 — e.g., Q1 Credit Playbook (4 Chapters)]</li>
+        <li>[Included Service 2 — e.g., 5 Dispute Letter Templates]</li>
+        <li>[Included Service 3 — e.g., Credit Score Tracking Dashboard]</li>
+        <li>[Included Service 4 — e.g., Monthly Advisor Check-in]</li>
+        <li>[Included Service 5 — e.g., Community Access]</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="so-pricing">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Duration / Term</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[Package Name] — Monthly</td>
+          <td>[X] months</td>
+          <td>$[0.00]/mo</td>
+        </tr>
+        <tr>
+          <td>[Add-on Service, if any]</td>
+          <td>One-time</td>
+          <td>$[0.00]</td>
+        </tr>
+        <tr>
+          <td>Discount</td>
+          <td>&mdash;</td>
+          <td>-$[0.00]</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2">Total</td>
+          <td>$[0.00]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Payment Schedule (if installments) -->
+  <div class="so-schedule">
+    <div class="so-schedule-title">Payment Schedule</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment #</th>
+          <th>Due Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>[MM/DD/YYYY]</td>
+          <td>$[0.00]</td>
+          <td><span class="status-paid">Paid</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>[MM/DD/YYYY]</td>
+          <td>$[0.00]</td>
+          <td><span class="status-pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>[MM/DD/YYYY]</td>
+          <td>$[0.00]</td>
+          <td><span class="status-pending">Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Acknowledgment -->
+  <div class="so-ack">
+    <div class="so-ack-title">Acknowledgment</div>
+    <p>I acknowledge that I have reviewed the services described in this Sales Order and agree to the <a href="/terms" style="color:#0F4C75;">HIRECAR Terms &amp; Conditions</a>. I understand that HIRECAR provides educational tools and resources and does not guarantee specific credit score outcomes, dispute results, or financial recovery amounts.</p>
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">Member Printed Name</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">Signature</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">Date</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="so-footer">
+    Cancellation: You may cancel your membership at any time. See <a href="/terms">Terms &amp; Conditions</a> for refund eligibility.<br>
+    Questions? <a href="mailto:support@hirecar.la">support@hirecar.la</a> &nbsp;|&nbsp; <a href="tel:+12137686311">(213) 768-6311</a><br><br>
+    &copy; 2026 HIRECAR. All rights reserved.
+  </div>
+
+</div>
+
+</body>
+</html>

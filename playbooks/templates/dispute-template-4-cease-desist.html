@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cease and Desist Letter - HIRECAR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #FAFAF8;
+            color: #111820;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #C9920A;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F4C75;
+            letter-spacing: 1px;
+        }
+
+        .logo-accent {
+            color: #C9920A;
+        }
+
+        .date-section {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .alert-banner {
+            background-color: #FFF3CD;
+            border: 2px solid #C9920A;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #664D03;
+        }
+
+        .alert-banner strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .letter-body {
+            margin-bottom: 40px;
+        }
+
+        .recipient-date {
+            margin-bottom: 30px;
+        }
+
+        .recipient-date p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .salutation {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .paragraph {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 14px;
+        }
+
+        .placeholder {
+            background-color: #FFF3E0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #D97706;
+        }
+
+        .legal-citation {
+            background-color: #F0F4F8;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #0F4C75;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .emphasis-box {
+            background-color: #FFE8E8;
+            border-left: 4px solid #DC2626;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .closing {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .signature-line {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .signature-space {
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .instructions-box {
+            background-color: #F5F5F5;
+            border: 2px solid #C9920A;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 5px;
+        }
+
+        .instructions-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0F4C75;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .instructions-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background-color: #C9920A;
+            margin-right: 10px;
+        }
+
+        .instruction-step {
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #C9920A;
+            margin-right: 8px;
+        }
+
+        .timeline-box {
+            background-color: #F0F4F8;
+            border-left: 4px solid #C9920A;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: #0F4C75;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .timeline-marker {
+            color: #C9920A;
+            font-weight: 700;
+            min-width: 50px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            <strong>IMPORTANT LEGAL NOTICE</strong>
+            This letter demands that all collection activities cease. Send only after other dispute letters have failed or if you wish to exercise your right under FDCPA to stop contact.
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">HIRE<span class="logo-accent">CAR</span></div>
+            <div class="date-section">
+                <p><strong>Date:</strong> <span class="placeholder">[CURRENT DATE]</span></p>
+            </div>
+        </div>
+
+        <!-- Letter Body -->
+        <div class="letter-body">
+            <!-- Recipient Info -->
+            <div class="recipient-date">
+                <p><span class="placeholder">[Collection Agency Name]</span></p>
+                <p><span class="placeholder">[Collection Agency Address]</span></p>
+                <p><span class="placeholder">[City, State ZIP]</span></p>
+                <p style="margin-top: 20px;"><strong>Re: CEASE AND DESIST NOTICE - All Collection Activities</strong></p>
+            </div>
+
+            <!-- Salutation -->
+            <p class="salutation">Dear Sir or Madam,</p>
+
+            <!-- Opening -->
+            <p class="paragraph">
+                This letter serves as formal notice to cease all contact with me regarding any debt claims. I am exercising my rights under the Fair Debt Collection Practices Act (FDCPA), specifically Section 805(c), to demand that you immediately stop all communication and collection activities.
+            </p>
+
+            <!-- Legal Citation -->
+            <div class="legal-citation">
+                <strong>Legal Authority:</strong> Fair Debt Collection Practices Act (FDCPA) Section 805(c) explicitly permits consumers to demand that debt collectors cease all communication. Once a collector receives this written notice, they may only contact the consumer to (1) confirm the cessation of collection efforts, or (2) notify them of a specific legal action (such as a lawsuit) being taken.
+            </div>
+
+            <!-- Emphasis on Legal Rights -->
+            <div class="emphasis-box">
+                Upon receipt of this letter, you MUST stop all collection activities including but not limited to: phone calls, text messages, emails, postal mail, social media contact, communication with employers, family members, or any third parties.
+            </div>
+
+            <!-- Account Information -->
+            <p class="paragraph">
+                <strong>Account Information:</strong>
+            </p>
+            <p class="paragraph" style="margin-left: 20px;">
+                <strong>Your Alleged Account Number:</strong> <span class="placeholder">[Account Number]</span><br>
+                <strong>Original Creditor:</strong> <span class="placeholder">[Original Creditor Name]</span><br>
+                <strong>Collection Agency:</strong> <span class="placeholder">[Agency Name]</span><br>
+                <strong>Amount Claimed:</strong> <span class="placeholder">[Amount]</span>
+            </p>
+
+            <!-- Statement of Facts -->
+            <p class="paragraph">
+                <strong>Reason for Cease and Desist Notice:</strong>
+            </p>
+            <p class="paragraph" style="margin-left: 20px;">
+                <span class="placeholder">[Select relevant reason(s):]</span><br>
+                • I dispute the validity of this debt and have requested validation<br>
+                • The debt is outside the statute of limitations<br>
+                • I have been harassed through repeated contact<br>
+                • The collector lacks proper authorization to collect<br>
+                • I am exercising my right under FDCPA Section 805(c) to stop contact<br>
+                • <span class="placeholder">[Other reason]</span>
+            </p>
+
+            <!-- Legal Consequences -->
+            <p class="paragraph">
+                <strong>Legal Consequences:</strong> You are legally prohibited from:
+            </p>
+            <p class="paragraph" style="margin-left: 20px;">
+                1. Making any phone calls, texts, or voicemails regarding this alleged debt<br>
+                2. Sending any letters, emails, or postal mail<br>
+                3. Contacting my employer, family, friends, or associates about this matter<br>
+                4. Posting information about me on social media or public forums<br>
+                5. Taking any collection action except to notify me of a specific legal proceeding<br>
+                6. Reporting this debt to credit reporting agencies after receiving this letter without proper authorization
+            </p>
+
+            <!-- Acknowledgment Required -->
+            <p class="paragraph">
+                <strong>Confirmation Required:</strong> You must send me written confirmation that you have received this cease and desist notice and that all collection efforts have been terminated. This confirmation must be received within 15 days of your receipt of this letter.
+            </p>
+
+            <!-- Reservation of Rights -->
+            <p class="paragraph">
+                <strong>Reservation of Rights:</strong> This letter does not constitute an admission of debt, an agreement to pay, or a waiver of any defenses or legal rights I may have. I reserve all rights to contest this claim, including challenging the statute of limitations, the collector's authorization, or the validity of the original debt.
+            </p>
+
+            <!-- Warning -->
+            <p class="paragraph">
+                Any violation of this cease and desist notice will be reported to the Consumer Financial Protection Bureau (CFPB), the Federal Trade Commission (FTC), and my state's Attorney General. I will also pursue legal action for damages under FDCPA Section 813, including statutory damages of up to $1,000 and actual damages, plus attorney's fees.
+            </p>
+
+            <!-- Closing -->
+            <p class="paragraph">
+                This letter is sent as my formal and final request to stop all contact and collection activities. Upon receipt of this letter, all communication regarding this alleged debt must cease immediately.
+            </p>
+
+            <!-- Closing Statement -->
+            <p class="paragraph">
+                I expect written confirmation of your compliance with this cease and desist notice within 15 days.
+            </p>
+
+            <!-- Signature Block -->
+            <div class="closing">
+                <p>Sincerely,</p>
+                <div class="signature-space"></div>
+                <p><strong><span class="placeholder">[Your Name]</span></strong></p>
+                <p><span class="placeholder">[Your Address]</span></p>
+                <p><span class="placeholder">[City, State ZIP]</span></p>
+                <p><span class="placeholder">[Your Phone Number]</span></p>
+                <p><span class="placeholder">[Your Email Address]</span></p>
+            </div>
+        </div>
+
+        <!-- Instructions Box -->
+        <div class="instructions-box">
+            <div class="instructions-title">How to Send This Letter</div>
+
+            <div class="instruction-step">
+                <span class="step-number">1.</span> Print this letter on your letterhead or plain white paper.
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">2.</span> Sign the letter by hand above your typed name.
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">3.</span> Make 2-3 copies of the complete letter.
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">4.</span> <strong>Send via Certified Mail with Return Receipt Requested.</strong> This is CRITICAL for proving delivery and your legal compliance.
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">5.</span> Keep the certified mail receipt and return receipt in a secure location.
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">6.</span> Document the date the certified letter is received (based on return receipt).
+            </div>
+
+            <div class="instruction-step">
+                <span class="step-number">7.</span> If you receive any contact after the return receipt date, document it immediately and file a complaint with the CFPB.
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-title">Expected Timeline & Follow-up</div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">Day 1:</div>
+                    <div>Mail certified letter with return receipt</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">Day 3-5:</div>
+                    <div>Collection agency receives letter (check return receipt)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">Day 5-10:</div>
+                    <div>All contact should stop immediately upon receipt</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">Day 15:</div>
+                    <div>You should receive written confirmation of cessation</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">Day 20+:</div>
+                    <div>If any contact occurs after return receipt, file CFPB complaint</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

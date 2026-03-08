@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRECAR Purchase Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #111820;
+            background-color: #FAFAF8;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background-color: #FAFAF8;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8in;
+            border-bottom: 2px solid #C9920A;
+            padding-bottom: 0.3in;
+        }
+
+        .header-left h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #C9920A;
+            margin-bottom: 0.1in;
+        }
+
+        .header-left p {
+            font-size: 11px;
+            color: #111820;
+            line-height: 1.4;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+        }
+
+        .confidential-notice {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 0.1in;
+            margin-bottom: 0.2in;
+            font-size: 10px;
+            color: #856404;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .po-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4in;
+            font-size: 12px;
+        }
+
+        .po-details-left, .po-details-right {
+            flex: 1;
+        }
+
+        .po-details label {
+            font-weight: 600;
+            color: #0F4C75;
+        }
+
+        .po-details-left {
+            padding-right: 0.5in;
+        }
+
+        .vendor-block {
+            margin-bottom: 0.4in;
+            font-size: 12px;
+        }
+
+        .vendor-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+            font-weight: 600;
+        }
+
+        .vendor-block p {
+            margin: 2px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.25in 0;
+            font-size: 11px;
+        }
+
+        table thead {
+            background-color: #0F4C75;
+            color: #ffffff;
+        }
+
+        table th {
+            padding: 0.08in;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #0F4C75;
+        }
+
+        table td {
+            padding: 0.08in;
+            border: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .delivery-section {
+            margin: 0.25in 0;
+            padding: 0.15in;
+            background-color: #f9f9f9;
+            border-left: 4px solid #C9920A;
+            font-size: 12px;
+        }
+
+        .delivery-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            color: #0F4C75;
+            margin-bottom: 0.08in;
+            font-weight: 600;
+        }
+
+        .delivery-section p {
+            margin: 2px 0;
+        }
+
+        .approval-section {
+            margin: 0.25in 0;
+            padding: 0.15in;
+            background-color: #f0f0f0;
+            border-left: 4px solid #C9920A;
+            font-size: 11px;
+        }
+
+        .approval-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            color: #0F4C75;
+            margin-bottom: 0.1in;
+            font-weight: 600;
+        }
+
+        .signature-block {
+            display: flex;
+            margin-top: 0.15in;
+            gap: 1in;
+            font-size: 10px;
+        }
+
+        .signature-line {
+            flex: 1;
+            border-top: 1px solid #111820;
+            padding-top: 0.05in;
+            text-align: center;
+        }
+
+        .totals-section {
+            margin: 0.25in 0;
+            font-size: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.08in;
+        }
+
+        .summary-label {
+            width: 2in;
+            font-weight: 600;
+            color: #0F4C75;
+            text-align: right;
+            padding-right: 0.2in;
+        }
+
+        .summary-value {
+            width: 1in;
+            text-align: right;
+            padding-right: 0.2in;
+        }
+
+        .grand-total {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 0.1in;
+            border-top: 2px solid #C9920A;
+        }
+
+        .grand-total .summary-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #111820;
+        }
+
+        .grand-total .summary-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #C9920A;
+        }
+
+        .footer {
+            margin-top: 0.2in;
+            padding-top: 0.1in;
+            border-top: 1px solid #e0e0e0;
+            font-size: 9px;
+            color: #666;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0.5in;
+                page-break-after: avoid;
+            }
+            @page {
+                size: letter;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>HIRECAR</h1>
+                <p>123 Market Street<br>
+                San Francisco, CA 94103<br>
+                hirecar.la</p>
+            </div>
+            <div class="header-right">
+                <h2>PURCHASE ORDER</h2>
+            </div>
+        </div>
+
+        <!-- Confidential Notice -->
+        <div class="confidential-notice">
+            INTERNAL USE ONLY - NOT FOR DISTRIBUTION
+        </div>
+
+        <!-- PO Details -->
+        <div class="po-details">
+            <div class="po-details-left">
+                <p><label>PO #:</label> PO-2026-00001</p>
+                <p><label>Date:</label> March 04, 2026</p>
+                <p><label>Requested By:</label> [Requester Name]</p>
+            </div>
+            <div class="po-details-right">
+            </div>
+        </div>
+
+        <!-- Vendor Block -->
+        <div class="vendor-block">
+            <h3>Vendor Information</h3>
+            <p><strong>[Vendor Name]</strong><br>
+            Contact: [Vendor Contact Name]<br>
+            Email: [vendor@email.com]<br>
+            Phone: [Phone Number]<br>
+            [Vendor Address]<br>
+            [City, State, ZIP Code]</p>
+        </div>
+
+        <!-- Line Items Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Item/Service</th>
+                    <th style="width: 30%;">Specification</th>
+                    <th style="width: 12%; text-align: center;">Qty</th>
+                    <th style="width: 18%; text-align: right;">Negotiated Rate</th>
+                    <th style="width: 20%; text-align: right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>[Item Name]</td>
+                    <td>[Detailed Specification]</td>
+                    <td class="text-center">0</td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$0.00</td>
+                </tr>
+                <tr style="background-color: #f9f9f9;">
+                    <td>[Item Name]</td>
+                    <td>[Detailed Specification]</td>
+                    <td class="text-center">0</td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Delivery Section -->
+        <div class="delivery-section">
+            <h3>Delivery Terms</h3>
+            <p><label style="font-weight: 600;">Expected Delivery Date:</label> [Date]</p>
+            <p><label style="font-weight: 600;">Delivery Method:</label> [Shipping, Pickup, Digital, etc.]</p>
+        </div>
+
+        <!-- Approval Section -->
+        <div class="approval-section">
+            <h3>Authorization & Approval</h3>
+            <div class="signature-block">
+                <div class="signature-line">Authorized Signature</div>
+                <div class="signature-line">Approval Date</div>
+            </div>
+        </div>
+
+        <!-- Totals Section -->
+        <div class="totals-section">
+            <div class="summary-row">
+                <div class="summary-label">Subtotal:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Tax:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Shipping:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+            <div class="grand-total">
+                <div class="summary-label">Grand Total:</div>
+                <div class="summary-value">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>This Purchase Order is confidential and for internal HIRECAR use only. Do not distribute to external parties.</p>
+        </div>
+    </div>
+</body>
+</html>
