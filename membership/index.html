@@ -8,7 +8,7 @@
 <meta name="description" content="The all-in auto membership for LA operators. Priority credit recovery, full service coverage, intelligence access, and more. $1,380/year.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================
    RESET & BASE
@@ -32,9 +32,9 @@
   --accent-blue: #0f4c75;
   --red: #c0392b;
   --red-muted: #943126;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Nunito Sans', -apple-system, sans-serif;
-  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 html {
@@ -2249,7 +2249,7 @@ img {
       memberBtn.disabled = true;
       memberBtn.textContent = 'Submitting...';
 
-      fetch('https://hook.us2.make.com/cruoficmy70b9mwtxysi03vojk24k8jf', {
+      fetch('https://api.hirecar.la/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
