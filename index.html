@@ -5201,29 +5201,46 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
   /* Per-image crop positions — object-fit:cover handles all framing,
      no scale/translate hacks needed. Pure zoom pulls evenly on all. */
-  .carousel-slide.hero-kb[data-kb="0"] { object-position: 70% 28% !important; } /* 32.jpg — Ritz building, cropped right */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: 70% 28% !important; } /* 32.jpg — Ritz building */
   .carousel-slide.hero-kb[data-kb="1"] { object-position: center 100% !important; } /* 31.jpg LA night skyline — PORTRAIT */
   .carousel-slide.hero-kb[data-kb="2"] { object-position: 55% 50% !important; } /* 40.jpg aerial skyline */
   .carousel-slide.hero-kb[data-kb="3"] { object-position: center 0% !important; } /* 36.jpg DTLA architecture — PORTRAIT */
   .carousel-slide.hero-kb[data-kb="4"] { object-position: 75% 50% !important; } /* 50.jpg 6th St Viaduct night */
   .carousel-slide.hero-kb[data-kb="5"] { object-position: center 50% !important; } /* 14.jpg Santa Monica Pier — PORTRAIT */
   .carousel-slide.hero-kb[data-kb="6"] { object-position: center 50% !important; } /* 18.jpg LA scene — PORTRAIT */
-  .carousel-slide.hero-kb[data-kb="7"] { object-position: center 55% !important; } /* IMG_0256.jpg Audi coastal sunset */
-  .carousel-slide.hero-kb[data-kb="8"] { object-position: center 40% !important; } /* la-palace-theatre.jpg airport sunset */
+  .carousel-slide.hero-kb[data-kb="7"] { object-position: center 55% !important; transform-origin: center 55% !important; } /* IMG_0256.jpg Audi coastal sunset — cropped in tight */
+  .carousel-slide.hero-kb[data-kb="8"] { object-position: center 40% !important; transform-origin: center 40% !important; } /* la-palace-theatre.jpg airport — cropped in tight */
   .carousel-slide.hero-kb[data-kb="9"] { object-position: center bottom !important; } /* pexels-thekameragrapher-16433702 — anchored bottom */
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
   /* Ken Burns — forward-only zoom toward the viewer.
-     Each slide zooms from 1.0→1.25 while active, never pulls back.
+     Each slide zooms while active, never pulls back.
      Animation restarts via JS each time a slide becomes active. */
   .carousel-slide.hero-kb.active {
     animation: kbZoomIn 18s ease-out forwards !important;
+  }
+  /* Audi (kb7) + Airport (kb8) — start already cropped in, zoom further */
+  .carousel-slide.hero-kb[data-kb="7"].active {
+    animation: kbZoomIn7 18s ease-out forwards !important;
+  }
+  .carousel-slide.hero-kb[data-kb="8"].active {
+    animation: kbZoomIn8 18s ease-out forwards !important;
   }
 
   @keyframes kbZoomIn {
     0%   { transform: scale(1.00); }
     100% { transform: scale(1.25); }
+  }
+  /* Audi — start cropped in at 1.40, zoom to 1.60 */
+  @keyframes kbZoomIn7 {
+    0%   { transform: scale(1.40); }
+    100% { transform: scale(1.60); }
+  }
+  /* Airport — start cropped in at 1.35, zoom to 1.55 */
+  @keyframes kbZoomIn8 {
+    0%   { transform: scale(1.35); }
+    100% { transform: scale(1.55); }
   }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
