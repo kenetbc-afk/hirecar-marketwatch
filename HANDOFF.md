@@ -1,70 +1,135 @@
-# HIRECAR MarketWatch — Mobile Carousel Handoff
+# HIRECAR MarketWatch — Session Handoff
 
-**Date:** 2026-03-06
-**Author:** Previous session (Claude)
-**For:** Incoming contributor continuing mobile carousel work
+**Date:** 2026-03-08
+**Author:** Claude (multi-session)
+**For:** Incoming contributor continuing site refinement
 **Project:** HIRECAR MarketWatch landing page — `index.html`
 
 ---
 
 ## Project Context
 
-HIRECAR MarketWatch is a static HTML site hosted on GitHub Pages. All CSS, HTML, and JS live inline in a single file: `index.html`. The landing page has a full-bleed hero carousel (the "credit module") that displays city/car imagery behind a credit-repair headline and CTA buttons.
-
-The current task is building a **mobile-specific image carousel** that runs independently from the desktop carousel. Desktop uses curated landscape/wide shots; mobile needs portrait-friendly LA city and car imagery reviewed by the site owner one image at a time.
+HIRECAR MarketWatch is a static HTML site deployed via **Cloudflare Pages** from GitHub (`main` branch auto-deploys). All CSS, HTML, and JS live inline in a single file: `index.html`. The landing page features a full-bleed hero carousel with **Ken Burns zoom effect** (city/car LA imagery), credit-repair headline overlay, and CTA buttons.
 
 **File path (with shell escaping note):**
 ```
 /Users/hirecarken/Desktop/DOC CRTL/:HIRECAR MARKET WATCH!/index.html
 ```
-The `!` in the directory name causes zsh escaping issues. Use quotes or `git -C "/path/to/repo"` for git commands.
-
----
-
-## What Has Been Completed
-
-### Task 1: Mobile Credit Module Recentering (DONE)
-
-- `.credit-overlay` repositioned from `top: 18%` to true center: `top: 50%; transform: translate(-50%, -55%)`
-- `.credit-headline` uses `display: flex; flex-direction: column; align-items: center`
-- `.collision-text` padding-left zeroed and green dot hidden on mobile for true centering
-- `.credit-sub` centered with `max-width: 90%; margin: 0 auto`
-- CTA panel uses `margin-top: -42vh; min-height: 42vh; justify-content: flex-end`
-- Buttons: `max-width: 300px` + `margin: 0 auto`
-- Gradient overlay rebalanced for readability
-- 480px breakpoint updated to match
-
-### Task 2: Mobile/Desktop Split Carousel (IN PROGRESS)
-
-**Architecture — 3 layers:**
-
-1. **Base CSS (line 524):** `carousel-slide.mobile-slide { display: none !important; }`
-2. **768px CSS:** Desktop slides hidden, mobile slides shown
-3. **JS:** Uses `matchMedia('(max-width: 768px)')` to filter slides, auto-rebuilds on viewport change
-
-**Image 1.jpg (Tesla airport sunset) is added and working.**
-
----
-
-## What Needs to Be Done Next
-
-### For each image (2–18), follow this pattern:
-
-**Step 1 — HTML:** Add after the last mobile slide:
-```html
-<img class="carousel-slide mobile-slide mobile-N" src="img/N.jpg" alt="description" loading="lazy">
+The `!` in the directory name causes **zsh escaping issues**. Standard quoting doesn't work. Use `find` + `xargs` for git commands:
+```bash
+find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 | xargs -0 -I{} git -C '{}' status
 ```
 
-**Step 2 — CSS:** Add at 768px breakpoint:
-```css
-.carousel-slide.mobile-N { object-position: X% Y% !important; }
-```
-
-**Step 3 — Preview:** Reload mobile (375×812), get owner approval: keep / adjust / skip.
+**GitHub repo:** `kenetbc-afk/hirecar-marketwatch`
 
 ---
 
-## Image Candidates
+## What Has Been Completed (All Sessions)
+
+### Hero Carousel — Ken Burns Effect (DONE)
+- 9 slides (kb0–kb8) with cross-dissolve transitions and per-slide zoom animations
+- Custom `@keyframes` for 3 slides that start pre-zoomed (Ritz, Audi, Airport)
+- Per-slide `object-position` and `transform-origin` for optimal cropping
+- JS auto-advances with `setInterval`, restarts animation via reflow trick
+
+### Image Removal — 36.jpg "Do Not Enter" (DONE)
+- DTLA architecture image with visible red "do not enter" signs removed
+- All subsequent slides renumbered (kb4→kb3, kb5→kb4, etc.)
+- Custom keyframe selectors updated to match new numbering
+
+### Ritz Building Crop (kb0 — 32.jpg) (DONE)
+- `object-position: 50% 55%` — centers on white car + Ritz Carlton building
+- `transform-origin: 50% 55%` — zoom focuses on same point
+- Custom `kbZoomIn0`: scale 1.40 → 1.60 (moderate crop, white car visible)
+
+### Audi Crop (kb6 — IMG_0256.jpg) (DONE)
+- `object-position: center 55%` with matching `transform-origin`
+- Custom `kbZoomIn7`: scale 1.50 → 1.70
+
+### Airport Crop (kb7 — la-palace-theatre.jpg) (DONE)
+- `object-position: center 40%` with matching `transform-origin`
+- Custom `kbZoomIn8`: scale 1.35 → 1.55
+
+### Section Gaps Closed (DONE)
+- `.ent-section` margin: `12px 0 32px` → `0`
+- `.member-module` margin: `32px 0` → `0`
+
+### Dark Mode Background Unification (DONE)
+- ALL dark-mode section backgrounds unified to `#000` (was a patchwork of navy shades: `#0d1117`, `#060c18`, `#080e1a`, `#070d1a`, etc.)
+- Desktop + mobile `@media` overrides both updated
+- Affected selectors: `body.dark-mode`, `.ent-section`, `.member-module`, `.co-bar`, `.trending-strip`, `.primary-nav`, `.mci-bar`, `.edition-bar`, `.svc-scroll-section`, `footer`, `.page-wrap + .page-wrap`
+
+### Mobile Credit Module Recentering (DONE)
+- `.credit-overlay` centered: `top: 50%; transform: translate(-50%, -55%)`
+- CTA panel, buttons, headline all centered for mobile
+- Green collision dot hidden on mobile for symmetry
+
+---
+
+## Current Carousel State (9 Slides)
+
+| kb# | File | Description | Custom Zoom | Object-Position |
+|-----|------|-------------|-------------|-----------------|
+| 0 | 32.jpg | Ritz Carlton + white car, urban road | kbZoomIn0 (1.40→1.60) | 50% 55% |
+| 1 | 31.jpg | LA night skyline (portrait) | default (1.00→1.25) | center 100% |
+| 2 | 40.jpg | LA aerial skyline | default | 55% 50% |
+| 3 | 50.jpg | 6th St Viaduct night skyline | default | 75% 50% |
+| 4 | 14.jpg | Santa Monica Pier sunset (portrait) | default | center 50% |
+| 5 | 18.jpg | LA scene (portrait) | default | center 50% |
+| 6 | IMG_0256.jpg | Audi coastal sunset | kbZoomIn7 (1.50→1.70) | center 55% |
+| 7 | la-palace-theatre.jpg | Airport terminal sunset | kbZoomIn8 (1.35→1.55) | center 40% |
+| 8 | pexels-thekameragrapher-16433702.jpg | LA cityscape | default | center bottom |
+
+---
+
+## Key Line References
+
+| What | ~Line | Search Landmark |
+|------|-------|-----------------|
+| Ken Burns hero-kb base CSS | 5193 | `.carousel-slide.hero-kb {` |
+| Per-slide object-position rules | 5204–5212 | `data-kb="0"` through `data-kb="8"` |
+| Per-slide animation selectors | 5223–5231 | `.hero-kb[data-kb="0"].active` |
+| @keyframes (kbZoomIn, 0, 7, 8) | 5234–5253 | `@keyframes kbZoomIn` |
+| Mobile-slide base hide rule | 611 | `.carousel-slide.mobile-slide { display: none` |
+| Carousel HTML (9 slides) | 8840–8855 | `<!-- ═══ HIRECREDIT LEAD MODULE` |
+| Carousel JS (restartZoom, advanceSlide) | 10412–10440 | `function restartZoom` |
+
+---
+
+## How the Ken Burns System Works
+
+### CSS Architecture
+1. **Base rule** (`.carousel-slide.hero-kb`): `object-fit: cover`, absolute positioning, full viewport
+2. **Per-slide positioning** (`[data-kb="N"]`): `object-position` crops the image, `transform-origin` sets zoom focal point
+3. **Animation trigger** (`.hero-kb.active`): Applies the Ken Burns keyframe on `.active` class
+4. **Custom keyframes** (`kbZoomIn0`, `kbZoomIn7`, `kbZoomIn8`): Start at a higher scale for slides that need tighter crops
+
+### JS Logic
+```
+restartZoom(slide) → resets animation via reflow trick
+startSlide(i) → restartZoom + add .active
+advanceSlide() → restartZoom next, add .active, setTimeout remove .active from current
+Runs on setInterval(SLIDE_DURATION)
+```
+
+### Adding/Modifying a Slide Crop
+1. Set `object-position` on `[data-kb="N"]` to frame the subject
+2. If a tighter crop is needed, create a custom `@keyframes kbZoomInN` with higher scale values
+3. Add a selector `.hero-kb[data-kb="N"].active` pointing to the custom keyframe
+4. Set `transform-origin` to match `object-position` so zoom targets the right area
+
+---
+
+## Mobile Carousel (Separate — IN PROGRESS)
+
+A **mobile-specific carousel** was started in a previous session but only image 1 (1.jpg, Tesla airport sunset) was added. This uses a separate system from the desktop Ken Burns carousel:
+
+- `.mobile-slide` class on `<img>` tags (hidden by default at line 611)
+- 768px media query shows mobile slides, hides desktop `.hero-kb` slides
+- JS uses `matchMedia('(max-width: 768px)')` to filter which slides run
+
+### Remaining: Add images 2–18 one at a time
+For each image, add HTML, CSS `object-position`, preview at 375×812, get owner approval.
 
 | # | File | Description | Orientation | Status |
 |---|------|-------------|-------------|--------|
@@ -91,52 +156,57 @@ The `!` in the directory name causes zsh escaping issues. Use quotes or `git -C 
 
 ---
 
-## Key Line References
+## Git History (This Session)
 
-| What | ~Lines | Search Landmark |
-|------|--------|-----------------|
-| Desktop carousel CSS (DO NOT EDIT) | 463-524 | `.carousel-slide.city-slide` |
-| Mobile-slide base hide rule | 524 | `.carousel-slide.mobile-slide { display: none` |
-| 768px mobile CSS | 3145-3313 | `/* Mobile carousel — hide desktop slides` |
-| 480px overrides | 3420-3448 | `@media (max-width: 480px)` |
-| Carousel HTML | 6175-6195 | `<!-- ═══ HIRECREDIT LEAD MODULE` |
-| Mobile slide HTML | 6190-6191 | `<!-- ═══ MOBILE-ONLY SLIDES ═══ -->` |
-| Carousel JS | 7344-7396 | `// 5b-pre. Credit hero image carousel` |
+```
+0c558cb Zoom out Ritz building crop (1.40→1.60) for better white car visibility
+acd8888 Crop Ritz building much tighter (1.65→1.85), center white car
+525fa17 Crop in Ritz + Audi tighter, close section gaps, unify dark backgrounds to #000
+445dcf2 Remove 36.jpg (DTLA do-not-enter) from hero carousel, renumber slides
+```
 
 ---
 
 ## Rules
 
-1. **NEVER touch desktop carousel styles** (lines 463-522)
-2. **Mobile slides use `.mobile-slide.mobile-N`** — always include both classes
-3. **Always test both viewports** after changes
-4. **Green collision dot is hidden on mobile** — intentional for centering
-5. **Carousel dots hidden on mobile** — auto-rotates without user interaction
-6. **Use `!important`** on all mobile slide rules
+1. **NEVER touch desktop carousel base styles** — Ken Burns CSS starts at line ~5193
+2. **Per-slide rules use `!important`** — required to override base `object-position`
+3. **`transform-origin` must match `object-position`** on any slide with a custom zoom
+4. **Test both mobile + desktop** after any change
+5. **Green collision dot hidden on mobile** — intentional
+6. **Carousel dots hidden on mobile** — auto-rotates
 7. **JS handles viewport switching automatically** via `matchMedia`
+8. **Use `find` + `xargs` for git** — zsh can't handle the `!` in the directory name
 
 ---
 
 ## Dev Setup
 
 ```bash
-cd "/Users/hirecarken/Desktop/DOC CRTL/:HIRECAR MARKET WATCH!"
-python3 serve.py 8080
-# Git:
-git -C "/Users/hirecarken/Desktop/DOC CRTL/:HIRECAR MARKET WATCH!" status
+# Navigate (must use find workaround for git):
+find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 | xargs -0 -I{} git -C '{}' status
+
+# Local dev server:
+python3 "/Users/hirecarken/Desktop/DOC CRTL/:HIRECAR MARKET WATCH!/serve.py" 8080
+
+# Or use Claude Preview with launch.json config (server ID may change between sessions)
 ```
 
 ---
 
-## Quick-Start Checklist
+## CSS Variables (:root)
 
-- [ ] Verify image 1 still displays on mobile
-- [ ] Verify desktop carousel is untouched
-- [ ] Add image 2 (`img/2.jpeg`)
-- [ ] Show owner for approval
-- [ ] Continue through images 3–18 one at a time
-- [ ] Clean up any skipped images
-- [ ] Final pass: test mobile + desktop end-to-end
+```css
+:root {
+  --ink: #111820;  --ink-2: #1e2530;  --ink-3: #2d3540;
+  --bg: #ffffff;   --white: #ffffff;
+  --cta: #c9920a;  --cta-hover: #b07d06;
+  --member: #0f4c75;
+  --border: #dde1e7;
+}
+```
+
+Dark mode backgrounds: **all `#000`** (unified this session).
 
 ---
 
