@@ -1186,10 +1186,10 @@ body.dark-mode .hero-tab-link {
   height: calc(100vh - var(--ss-header-h, 100px));
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: auto;
   background: #000;
 }
 .sticky-stories::-webkit-scrollbar { display: none; }
@@ -1304,7 +1304,7 @@ body.dark-mode .hero-tab-link {
 }
 .ss-item-meta .sep { color: #334155; }
 /* End spacer — must be large enough so last card's snap-point is reachable */
-.ss-spacer { height: calc(100vh - var(--ss-header-h, 100px) - 38vh); }
+.ss-spacer { height: calc(100vh - var(--ss-header-h, 100px) - 44vh); }
 
 /* ICYMI strip — below the scroll container */
 .icymi-strip {
@@ -4614,6 +4614,27 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
   }
 
+  /* HIRECAR logo in menu — visible only when expanded */
+  .het-logo {
+    width: 80px;
+    height: 14px;
+    opacity: .55;
+    margin: 0 12px 4px auto;
+    transition: max-height 1.2s cubic-bezier(.4,0,.2,1),
+                opacity .8s cubic-bezier(.4,0,.2,1),
+                margin 1s cubic-bezier(.4,0,.2,1);
+    max-height: 20px;
+    overflow: hidden;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
+  }
+  .het-logo svg { width: 100%; height: 100%; }
+  .hero-exp-tabs.het-collapsed .het-logo {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
   /* Collapsed state — only the menu button visible */
   .hero-exp-tabs.het-collapsed .het-btn:not(.het-menu-btn) {
     max-height: 0;
@@ -4687,9 +4708,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 
   /* Menu button — glow only on the three hamburger lines */
   .het-menu-btn .het-icon line {
-    filter: drop-shadow(0 0 3px rgba(255,255,255,.35))
-            drop-shadow(0 0 6px rgba(255,255,255,.15));
-    stroke: rgba(255,255,255,.7);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,.6))
+            drop-shadow(0 0 10px rgba(255,255,255,.35))
+            drop-shadow(0 0 18px rgba(255,200,120,.2))
+            drop-shadow(0 0 28px rgba(255,180,80,.1));
+    stroke: rgba(255,255,255,.85);
   }
 
   /* Glow pulse on collapse — warm flash on all icons signals close */
@@ -4788,17 +4811,22 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     display: block !important;
     opacity: 0 !important;
     object-fit: cover !important;
-    object-position: center 45% !important;
     transform-origin: center center !important;
     filter: none !important;
     transition: opacity 2.5s ease !important;
     will-change: transform, opacity;
   }
+  /* Per-image crop positions — landscape vs portrait */
+  .carousel-slide.hero-kb[data-kb="0"] { object-position: center 40% !important; } /* 32.jpg landscape — urban road */
+  .carousel-slide.hero-kb[data-kb="1"] { object-position: center 35% !important; } /* 5.jpg landscape — skyline */
+  .carousel-slide.hero-kb[data-kb="2"] { object-position: center 30% !important; } /* 30.jpg landscape — rooftop */
+  .carousel-slide.hero-kb[data-kb="3"] { object-position: center 25% !important; } /* 31.jpg PORTRAIT — crop upper */
+  .carousel-slide.hero-kb[data-kb="4"] { object-position: center 20% !important; } /* 34.jpg PORTRAIT — crop upper */
+  .carousel-slide.hero-kb[data-kb="5"] { object-position: center 22% !important; } /* 36.jpg PORTRAIT — crop upper */
   .carousel-slide.hero-kb.active {
     opacity: 1 !important;
   }
-  /* Each slide zooms from its start scale to end scale over its display time */
-  /* Continuous pull-in: each image picks up where the last left off */
+  /* Pull-IN = zoom from small toward larger — continuous across all slides */
   .carousel-slide.hero-kb[data-kb="0"] { animation: kbPull0 10s linear forwards; }
   .carousel-slide.hero-kb[data-kb="1"] { animation: kbPull1 10s linear forwards; }
   .carousel-slide.hero-kb[data-kb="2"] { animation: kbPull2 10s linear forwards; }
@@ -4809,12 +4837,13 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .carousel-slide.hero-kb { animation-play-state: paused !important; }
   .carousel-slide.hero-kb.kb-playing { animation-play-state: running !important; }
 
-  @keyframes kbPull0 { from { transform: scale(1.32); } to { transform: scale(1.22); } }
-  @keyframes kbPull1 { from { transform: scale(1.22); } to { transform: scale(1.14); } }
-  @keyframes kbPull2 { from { transform: scale(1.14); } to { transform: scale(1.08); } }
-  @keyframes kbPull3 { from { transform: scale(1.08); } to { transform: scale(1.03); } }
-  @keyframes kbPull4 { from { transform: scale(1.03); } to { transform: scale(0.99); } }
-  @keyframes kbPull5 { from { transform: scale(0.99); } to { transform: scale(0.96); } }
+  /* Pull-IN: start small → end larger. Each picks up where last left off. */
+  @keyframes kbPull0 { from { transform: scale(1.00); } to { transform: scale(1.06); } }
+  @keyframes kbPull1 { from { transform: scale(1.06); } to { transform: scale(1.12); } }
+  @keyframes kbPull2 { from { transform: scale(1.12); } to { transform: scale(1.18); } }
+  @keyframes kbPull3 { from { transform: scale(1.18); } to { transform: scale(1.24); } }
+  @keyframes kbPull4 { from { transform: scale(1.24); } to { transform: scale(1.30); } }
+  @keyframes kbPull5 { from { transform: scale(1.30); } to { transform: scale(1.36); } }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
@@ -4823,17 +4852,17 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(180deg,
-      rgba(0,0,0,.98) 0%,
-      rgba(0,1,5,.93) 5%,
-      rgba(2,5,14,.78) 12%,
-      rgba(6,12,26,.32) 22%,
-      rgba(6,12,26,.10) 35%,
-      rgba(6,12,26,.08) 48%,
-      rgba(5,10,22,.20) 58%,
-      rgba(3,6,16,.50) 68%,
-      rgba(1,3,9,.76) 80%,
-      rgba(0,0,0,.93) 92%,
-      rgba(0,0,0,.98) 100%) !important;
+      rgba(0,0,0,.96) 0%,
+      rgba(0,1,5,.88) 4%,
+      rgba(2,5,14,.65) 10%,
+      rgba(6,12,26,.22) 20%,
+      rgba(6,12,26,.06) 32%,
+      rgba(6,12,26,.04) 50%,
+      rgba(5,10,22,.14) 60%,
+      rgba(3,6,16,.42) 70%,
+      rgba(1,3,9,.70) 82%,
+      rgba(0,0,0,.90) 93%,
+      rgba(0,0,0,.96) 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
   }
@@ -4875,7 +4904,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     left: 0 !important;
     right: 0 !important;
     transform: none !important;
-    padding: 60px 24px 32px 24px !important;
+    padding: 50px 24px 24px 24px !important;
     width: 100% !important;
     max-width: 100% !important;
     z-index: 3;
@@ -5241,15 +5270,15 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     height: calc(100vh - var(--ss-header-h, 96px));
   }
   .ss-hero-wrap {
-    min-height: 200px;
-    height: 42%;
+    min-height: 180px;
+    height: 36%;
   }
   .ss-hero-img {
     background-position: center 40%;
   }
   .ss-item {
-    min-height: 42vh;
-    padding: 0 16px 9.5vh;
+    min-height: 38vh;
+    padding: 0 16px 7vh;
   }
   .ss-item-title {
     font-size: 22px !important;
@@ -5264,7 +5293,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     overflow: hidden;
   }
   .icymi-strip {
-    padding: 12px 16px 0;
+    padding: 8px 16px 0;
+    margin-top: -4px;
   }
   .icymi-strip .icymi-item {
     min-width: 200px;
@@ -8373,10 +8403,10 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <div class="credit-icon">
       <div class="credit-carousel" id="creditCarousel">
         <!-- Ken Burns pull-in carousel — continuous zoom with cross-dissolve -->
-        <img class="carousel-slide hero-kb active" data-kb="0" src="img/5.jpg" alt="LA downtown skyline at night — HIRECAR" loading="eager">
-        <img class="carousel-slide hero-kb" data-kb="1" src="img/30.jpg" alt="LA rooftop cityscape — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="2" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
-        <img class="carousel-slide hero-kb" data-kb="3" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb active" data-kb="0" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="eager">
+        <img class="carousel-slide hero-kb" data-kb="1" src="img/5.jpg" alt="LA downtown skyline at night — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="2" src="img/30.jpg" alt="LA rooftop cityscape — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="3" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="4" src="img/34.jpg" alt="LA 6th Street scene — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="5" src="img/36.jpg" alt="Downtown LA architecture — HIRECAR" loading="lazy">
       </div>
@@ -8473,6 +8503,11 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   </div>
   <!-- Expandable tabs — floating section nav at bottom of hero -->
   <div class="hero-exp-tabs" id="heroExpTabs">
+    <div class="het-logo" aria-hidden="true">
+      <svg viewBox="0 0 120 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="13" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="white" letter-spacing="2">HIRECAR</text>
+      </svg>
+    </div>
     <button class="het-btn" data-scroll="#sec-stories" aria-label="Top Stories">
       <svg class="het-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
       <span class="het-label">Top Stories</span>
@@ -8599,6 +8634,48 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   </div>
 
 </div><!-- /page-wrap -->
+
+<!-- ═══ ENTERTAINMENT SECTION ═══ -->
+<div class="ent-section" id="sec-ent">
+  <div class="ent-section-inner" style="position:relative;">
+    <div class="scroll-arrow" style="top:40px;background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);color:#fff;" onclick="var g=document.querySelector('.ent-grid');g.scrollBy ? g.scrollBy({left:300,behavior:'smooth'}) : g.scrollLeft+=300">→</div>
+    <div class="section-label">Entertainment · Culture · Auto · City Life</div>
+    <div class="ent-grid">
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
+        <div style="position:relative;z-index:2;">
+          <div class="ent-cat">Road Trip Culture</div>
+          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Couples on the Road: LA to Las Vegas in a HIRECAR First Class Vehicle</div>
+          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">The best road trips start with the right vehicle. We follow real couples and families on California's most iconic drives.</p>
+        </div>
+      </div>
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
+        <div style="position:relative;z-index:2;">
+          <div class="ent-cat">Family Mobility</div>
+          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Family First: How LA Families are Using Premium Fleet for Weekend Getaways</div>
+          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">From Malibu to Joshua Tree — families choosing First Class mobility over traditional rentals are setting a new standard.</p>
+        </div>
+      </div>
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1562441289-f82a53fe2dd5?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
+        <div style="position:relative;z-index:2;">
+          <div class="ent-cat">Collision + Recovery</div>
+          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Inside the Shop: Collision Centers Restoring LA's Most Expensive Cars</div>
+          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">HIRECAR-certified collision centers working on Lamborghinis, Rolls-Royces, and Tesla Plaids — a behind-the-scenes look.</p>
+        </div>
+      </div>
+      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
+        <div style="position:relative;z-index:2;">
+          <div class="ent-cat">Private Driver Life</div>
+          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">On the Road: Inside HIRECAR's Private Driver Network After Dark</div>
+          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">Chauffeur services, exclusive events — a look inside the private driver economy powering premium LA mobility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ TRENDING STRIP ═══ -->
 <div class="scroll-section" style="position:relative;">
@@ -8838,48 +8915,6 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   </div><!-- /scroll-section pifr -->
 
 </div><!-- /page-wrap -->
-
-<!-- ═══ ENTERTAINMENT SECTION ═══ -->
-<div class="ent-section" id="sec-ent">
-  <div class="ent-section-inner" style="position:relative;">
-    <div class="scroll-arrow" style="top:40px;background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.15);color:#fff;" onclick="var g=document.querySelector('.ent-grid');g.scrollBy ? g.scrollBy({left:300,behavior:'smooth'}) : g.scrollLeft+=300">→</div>
-    <div class="section-label">Entertainment · Culture · Auto · City Life</div>
-    <div class="ent-grid">
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="ent-cat">Road Trip Culture</div>
-          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Couples on the Road: LA to Las Vegas in a HIRECAR First Class Vehicle</div>
-          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">The best road trips start with the right vehicle. We follow real couples and families on California's most iconic drives.</p>
-        </div>
-      </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="ent-cat">Family Mobility</div>
-          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Family First: How LA Families are Using Premium Fleet for Weekend Getaways</div>
-          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">From Malibu to Joshua Tree — families choosing First Class mobility over traditional rentals are setting a new standard.</p>
-        </div>
-      </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1562441289-f82a53fe2dd5?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="ent-cat">Collision + Recovery</div>
-          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">Inside the Shop: Collision Centers Restoring LA's Most Expensive Cars</div>
-          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">HIRECAR-certified collision centers working on Lamborghinis, Rolls-Royces, and Tesla Plaids — a behind-the-scenes look.</p>
-        </div>
-      </div>
-      <div class="ent-card" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=85&fit=crop&crop=center');background-size:cover;background-position:center;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="ent-cat">Private Driver Life</div>
-          <div class="ent-title serif" style="text-shadow:0 2px 12px rgba(0,0,0,.7);">On the Road: Inside HIRECAR's Private Driver Network After Dark</div>
-          <p class="ent-desc" style="text-shadow:0 1px 8px rgba(0,0,0,.6);">Chauffeur services, exclusive events — a look inside the private driver economy powering premium LA mobility.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══ MEMBER PAGE MODULE ═══ -->
 <div class="member-module" id="sec-member">
@@ -9180,6 +9215,18 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
      · Live weather via Open-Meteo (free, no API key)
 ═══════════════════════════════════════════════════════════ -->
 <script>
+/* ── DOM ORDER FIX: Entertainment section above Trending ── */
+(function() {
+  var ent = document.getElementById('sec-ent');
+  var trend = document.getElementById('trendingStrip');
+  if (ent && trend) {
+    var trendWrap = trend.closest('.scroll-section') || trend.parentElement;
+    if (trendWrap && trendWrap.parentNode) {
+      trendWrap.parentNode.insertBefore(ent, trendWrap);
+    }
+  }
+})();
+
 /* ═══════════════════════════════════════════════════════════
    HIRECAR MarketWatch! v6 — Mode System (Desktop / Remote)
    Replaces time-based Day/Night — HIRECAR UX/UI Methodology
