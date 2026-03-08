@@ -1217,7 +1217,7 @@ body.dark-mode .hero-tab-link {
 .ss-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.8) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1253,8 +1253,8 @@ body.dark-mode .hero-tab-link {
 }
 .ss-item {
   scroll-snap-align: start;
-  min-height: 46vh;
-  padding: 0 20px 6vh;
+  min-height: 35vh;
+  padding: 0 20px 1.5vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1272,6 +1272,7 @@ body.dark-mode .hero-tab-link {
   color: var(--cta);
   margin-bottom: 10px;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  text-shadow: 0 1px 6px rgba(0,0,0,.8), 0 0 2px rgba(0,0,0,.6);
 }
 .ss-item-title {
   font-family: 'Instrument Serif', serif;
@@ -1281,22 +1282,25 @@ body.dark-mode .hero-tab-link {
   line-height: 1.12;
   margin-bottom: 12px;
   letter-spacing: -0.01em;
+  text-shadow: 0 1px 8px rgba(0,0,0,.85), 0 2px 16px rgba(0,0,0,.5), 0 0 3px rgba(0,0,0,.7);
 }
 .ss-item-blurb {
   font-size: 14px;
-  color: #94a3b8;
+  color: #c8d0dc;
   line-height: 1.65;
   margin-bottom: 14px;
   max-width: 480px;
+  text-shadow: 0 1px 6px rgba(0,0,0,.8), 0 0 2px rgba(0,0,0,.6);
 }
 .ss-item-meta {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
-  color: #64748b;
+  color: #8896a8;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
+  text-shadow: 0 1px 4px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5);
 }
 .ss-item-meta .sep { color: #334155; }
 /* End spacer — must be large enough so last card's snap-point is reachable */
@@ -1325,8 +1329,8 @@ body.dark-mode .hero-tab-link {
 .icymi-strip .icymi-item:last-child { border-right: none; }
 
 /* Dark mode sticky-stories */
-body.dark-mode .ss-item-title { color: #f1f5f9; }
-body.dark-mode .ss-item-blurb { color: #94a3b8; }
+body.dark-mode .ss-item-title { color: #f1f5f9; text-shadow: 0 1px 8px rgba(0,0,0,.85), 0 2px 16px rgba(0,0,0,.5), 0 0 3px rgba(0,0,0,.7); }
+body.dark-mode .ss-item-blurb { color: #c8d0dc; text-shadow: 0 1px 6px rgba(0,0,0,.8), 0 0 2px rgba(0,0,0,.6); }
 body.dark-mode .icymi-strip { border-top-color: #1a1a1a; }
 body.dark-mode .icymi-strip .icymi-item { border-right-color: #1a1a1a; }
 
@@ -3844,19 +3848,19 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     gap: 6px;
   }
   .masthead.compact .brand-logo {
-    height: 21px !important;
+    height: 23.1px !important;
     transition: height .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-pipe {
-    height: 21px !important;
+    height: 23.1px !important;
     transition: height .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-mw-name {
-    font-size: 13.65px !important;
+    font-size: 15px !important;
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-mw-tag {
-    font-size: 7.5px !important;
+    font-size: 8.3px !important;
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .pill-toggle {
@@ -3890,11 +3894,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     min-width: 0;
     gap: 1px;
   }
-  .brand-logo { height: 23.1px; transition: height .35s cubic-bezier(.4,0,.2,1); }
+  .brand-logo { height: 25.4px; transition: height .35s cubic-bezier(.4,0,.2,1); }
   .brand-pipe {
     display: block;
     width: 1.9px;
-    height: 31.5px;
+    height: 34.7px;
     background: rgba(255,255,255,.85);
     position: relative;
     overflow: visible;
@@ -3965,8 +3969,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     gap: 1px;
     transform: translateY(1px);
   }
-  .brand-mw-name { font-size: 19.95px !important; line-height: 1.1 !important; letter-spacing: 0.04em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
-  .brand-mw-tag { font-size: 9.45px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
+  .brand-mw-name { font-size: 21.9px !important; line-height: 1.1 !important; letter-spacing: 0.04em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
+  .brand-mw-tag { font-size: 10.4px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
   .brand-mw-sub { display: none !important; }
 
   /* Mobile controls — absolute so they don't affect centering */
@@ -3977,11 +3981,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .mh-wx-pill {
     display: none !important;
   }
-  /* Mobile fused weather + toggle widget — offset from hamburger */
+  /* Mobile fused weather + toggle widget — aligned right */
   .fwt-mobile {
     display: flex !important;
     position: absolute;
-    right: 44px;
+    right: 12px;
     top: 26px;
     transform: none;
     height: 28px;
@@ -4596,17 +4600,47 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .credit-module::before { display: none !important; }
   .credit-module::after { display: none !important; }
 
-  /* ── Expandable Tabs — vertical stack, right side of hero ── */
+  /* ── Expandable Tabs — fixed vertical stack, right side ── */
   .hero-exp-tabs {
-    position: absolute;
+    position: fixed;
     bottom: 24px;
     right: calc(10px + env(safe-area-inset-right, 0px));
-    z-index: 50;
+    z-index: 200;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 6px;
     background: transparent;
+    transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
+  }
+
+  /* Collapsed state — only the menu button visible */
+  .hero-exp-tabs.het-collapsed .het-btn:not(.het-menu-btn) {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    margin: 0;
+    overflow: hidden;
+  }
+  .hero-exp-tabs.het-collapsed .het-sep {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  .hero-exp-tabs .het-btn:not(.het-menu-btn),
+  .hero-exp-tabs .het-sep {
+    max-height: 50px;
+    transition: max-height .4s cubic-bezier(.16,1,.3,1),
+                padding .35s cubic-bezier(.16,1,.3,1),
+                opacity .3s cubic-bezier(.16,1,.3,1),
+                margin .35s cubic-bezier(.16,1,.3,1),
+                color .4s cubic-bezier(.16,1,.3,1),
+                gap .5s cubic-bezier(.16,1,.3,1),
+                background .35s cubic-bezier(.16,1,.3,1),
+                transform .4s cubic-bezier(.16,1,.3,1);
   }
 
   /* Tab button — icon only by default, label expands LEFT on tap */
@@ -4633,7 +4667,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: color .4s cubic-bezier(.16,1,.3,1),
                 gap .5s cubic-bezier(.16,1,.3,1),
                 background .35s cubic-bezier(.16,1,.3,1),
-                padding .4s cubic-bezier(.16,1,.3,1);
+                padding .4s cubic-bezier(.16,1,.3,1),
+                transform .4s cubic-bezier(.16,1,.3,1);
     text-decoration: none;
     outline: none;
   }
@@ -4641,15 +4676,16 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     color: rgba(255,255,255,.55);
   }
 
-  /* Active — pill expands, label slides in LEFT of icon */
+  /* Active — no pill, dark shadow popout behind label */
   .het-btn.active {
-    background: rgba(255,255,255,.08);
-    color: rgba(255,255,255,.92);
+    background: transparent;
+    color: rgba(255,255,255,.95);
     gap: 8px;
     padding: 10px 14px;
+    transform: translateX(-4px);
   }
 
-  /* Icon — pinned RIGHT via flex order */
+  /* Icon — pinned RIGHT via flex order, slides left on active */
   .het-btn .het-icon {
     width: 18px;
     height: 18px;
@@ -4660,13 +4696,14 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     stroke-linecap: round;
     stroke-linejoin: round;
     order: 2;
-    transition: color .35s ease;
+    transition: color .35s ease, transform .4s cubic-bezier(.16,1,.3,1);
   }
   .het-btn.active .het-icon {
     color: rgba(201,146,10,.9);
+    transform: translateX(-2px);
   }
 
-  /* Label — LEFT of icon (order:1), spring-expands from 0 width */
+  /* Label — LEFT of icon (order:1), spring-expands with dark shadow */
   .het-label {
     display: inline-block;
     order: 1;
@@ -4674,11 +4711,17 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     opacity: 0;
     overflow: hidden;
     transition: max-width .5s cubic-bezier(.16,1,.3,1),
-                opacity .3s cubic-bezier(.16,1,.3,1) .06s;
+                opacity .3s cubic-bezier(.16,1,.3,1) .06s,
+                text-shadow .3s ease;
+    text-shadow: none;
   }
   .het-btn.active .het-label {
     max-width: 130px;
     opacity: 1;
+    text-shadow: 0 0 12px rgba(0,0,0,.95),
+                 0 0 24px rgba(0,0,0,.9),
+                 0 0 40px rgba(0,0,0,.7),
+                 0 2px 6px rgba(0,0,0,.8);
   }
 
   /* Separator — horizontal line between groups */
@@ -5407,9 +5450,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .mci-metric { min-width: 100%; }
   .credit-module-actions { flex-direction: column; gap: 8px; max-width: 280px !important; }
   .hero-title { font-size: 24px !important; }
-  .brand-mw-name { font-size: 15.75px !important; }
-  .brand-mw-tag { font-size: 9.45px !important; letter-spacing: 1.55px !important; }
-  .brand-logo { height: 23.1px !important; }
+  .brand-mw-name { font-size: 17.3px !important; }
+  .brand-mw-tag { font-size: 10.4px !important; letter-spacing: 1.55px !important; }
+  .brand-logo { height: 25.4px !important; }
   .brand { gap: 4.2px !important; }
   .mci-actions { flex-direction: column; }
   .hero-img-placeholder { height: 200px !important; }
@@ -11311,16 +11354,60 @@ if (document.readyState === 'loading') {
   init();
 }
 
-/* ── Expandable tabs — hero section nav ── */
+/* ── Expandable tabs — fixed nav with collapse on scroll ── */
 (function(){
   var tabs = document.getElementById('heroExpTabs');
   if (!tabs) return;
   var btns = tabs.querySelectorAll('.het-btn');
+  var menuOpen = false;   /* true when user expanded tabs via collapsed menu tap */
+
+  /* ── Scroll-based collapse: past Top Stories → collapse to menu only ── */
+  var storiesSection = document.getElementById('sec-stories');
+  function shouldBeCollapsed() {
+    if (!storiesSection) return false;
+    return storiesSection.getBoundingClientRect().top < window.innerHeight * 0.5;
+  }
+  function applyCollapse() {
+    if (menuOpen) return;                  /* user is interacting, don't collapse */
+    if (shouldBeCollapsed()) {
+      if (!tabs.classList.contains('het-collapsed')) {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        tabs.classList.add('het-collapsed');
+      }
+    } else {
+      tabs.classList.remove('het-collapsed');
+    }
+  }
+  window.addEventListener('scroll', applyCollapse, { passive: true });
+  applyCollapse();
+
+  /* Close expanded menu and re-collapse */
+  function closeMenu() {
+    menuOpen = false;
+    btns.forEach(function(b) { b.classList.remove('active'); });
+    applyCollapse();
+  }
 
   btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      /* Menu button — open nav drawer instead of scrolling */
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+
+      /* ── Menu button ── */
       if (btn.getAttribute('data-action') === 'menu') {
+        if (tabs.classList.contains('het-collapsed') || menuOpen) {
+          if (menuOpen) {
+            /* Already open — close and re-collapse */
+            closeMenu();
+            return;
+          }
+          /* Collapsed → expand all tabs */
+          menuOpen = true;
+          tabs.classList.remove('het-collapsed');
+          btns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          return;
+        }
+        /* On hero (not collapsed): open nav drawer */
         btns.forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         var drawer = document.getElementById('mobileNavDrawer');
@@ -11330,27 +11417,38 @@ if (document.readyState === 'loading') {
         }
         return;
       }
+
+      /* ── Section buttons ── */
       var wasActive = btn.classList.contains('active');
-      /* collapse all */
       btns.forEach(function(b) { b.classList.remove('active'); });
+
       if (!wasActive) {
         btn.classList.add('active');
-        /* after expand animation, scroll to target */
+        /* close menu overlay if open */
+        menuOpen = false;
+        /* after slide animation, scroll to target */
         setTimeout(function() {
           var sel = btn.getAttribute('data-scroll');
           if (sel) {
             var el = document.querySelector(sel);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 380);
+        }, 420);
+      } else {
+        menuOpen = false;
+        applyCollapse();
       }
     });
   });
 
-  /* click-outside collapses active tab */
+  /* click-outside closes menu and collapses */
   document.addEventListener('click', function(e) {
     if (!tabs.contains(e.target)) {
-      btns.forEach(function(b) { b.classList.remove('active'); });
+      if (menuOpen) {
+        closeMenu();
+      } else {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+      }
     }
   });
 })();
