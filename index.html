@@ -3860,7 +3860,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-mw-tag {
-    font-size: 9.5px !important;
+    font-size: 10px !important;
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .pill-toggle {
@@ -3970,7 +3970,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transform: translateY(1px);
   }
   .brand-mw-name { font-size: 25.2px !important; line-height: 1.1 !important; letter-spacing: 0.04em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
-  .brand-mw-tag { font-size: 12px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
+  .brand-mw-tag { font-size: 12.6px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
   .brand-mw-sub { display: none !important; }
 
   /* Mobile controls — absolute so they don't affect centering */
@@ -4633,14 +4633,14 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .hero-exp-tabs .het-btn:not(.het-menu-btn),
   .hero-exp-tabs .het-sep {
     max-height: 50px;
-    transition: max-height .85s cubic-bezier(.16,1,.3,1),
-                padding .75s cubic-bezier(.16,1,.3,1),
-                opacity .6s cubic-bezier(.16,1,.3,1),
-                margin .75s cubic-bezier(.16,1,.3,1),
+    transition: max-height 1.2s cubic-bezier(.4,0,.2,1),
+                padding 1s cubic-bezier(.4,0,.2,1),
+                opacity .8s cubic-bezier(.4,0,.2,1),
+                margin 1s cubic-bezier(.4,0,.2,1),
                 color .4s cubic-bezier(.16,1,.3,1),
                 gap .5s cubic-bezier(.16,1,.3,1),
                 background .35s cubic-bezier(.16,1,.3,1),
-                transform .85s cubic-bezier(.16,1,.3,1);
+                transform 1.2s cubic-bezier(.4,0,.2,1);
   }
 
   /* Tab button — icon only by default, label expands LEFT on tap */
@@ -4692,12 +4692,13 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     stroke: rgba(255,255,255,.7);
   }
 
-  /* Glow pulse on collapse — brief warm flash on all icons */
+  /* Glow pulse on collapse — warm flash on all icons signals close */
   .hero-exp-tabs.het-glow-close .het-btn .het-icon {
-    filter: drop-shadow(0 0 6px rgba(201,146,10,.7))
-            drop-shadow(0 0 12px rgba(201,146,10,.4))
-            drop-shadow(0 0 20px rgba(255,200,50,.2));
-    transition: filter .3s ease;
+    filter: drop-shadow(0 0 8px rgba(201,146,10,.85))
+            drop-shadow(0 0 16px rgba(201,146,10,.5))
+            drop-shadow(0 0 28px rgba(255,200,50,.3))
+            drop-shadow(0 0 40px rgba(255,180,30,.12));
+    transition: filter .4s ease;
   }
 
   /* Icon — pinned RIGHT via flex order, slides left on active */
@@ -4711,8 +4712,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     stroke-linecap: round;
     stroke-linejoin: round;
     order: 2;
-    filter: drop-shadow(0 0 3px rgba(255,255,255,.25))
-            drop-shadow(0 0 5px rgba(255,255,255,.1));
+    filter: drop-shadow(0 0 4px rgba(255,255,255,.35))
+            drop-shadow(0 0 8px rgba(255,255,255,.18))
+            drop-shadow(0 0 14px rgba(255,200,100,.08));
     transition: color .35s ease, transform .4s cubic-bezier(.16,1,.3,1),
                 filter .6s ease;
   }
@@ -4781,21 +4783,38 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     position: absolute !important;
     inset: 0 !important;
   }
-  /* ── Single static hero image — "We own LA" ── */
-  .carousel-slide.hero-static {
+  /* ── Ken Burns pull-in carousel — continuous zoom with dissolve ── */
+  .carousel-slide.hero-kb {
     display: block !important;
-    opacity: 1 !important;
+    opacity: 0 !important;
     object-fit: cover !important;
-    object-position: center 45% !important;  /* center on car + Disney Hall architecture */
-    transform: scale(1.0) !important;
+    object-position: center 45% !important;
     transform-origin: center center !important;
     filter: none !important;
-    animation: heroBreath 20s ease-in-out infinite alternate;
+    transition: opacity 2.5s ease !important;
+    will-change: transform, opacity;
   }
-  @keyframes heroBreath {
-    0%   { transform: scale(1.0); }
-    100% { transform: scale(1.06); }  /* subtle, cinematic — not a gimmick */
+  .carousel-slide.hero-kb.active {
+    opacity: 1 !important;
   }
+  /* Each slide zooms from its start scale to end scale over its display time */
+  /* Continuous pull-in: each image picks up where the last left off */
+  .carousel-slide.hero-kb[data-kb="0"] { animation: kbPull0 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="1"] { animation: kbPull1 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="2"] { animation: kbPull2 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="3"] { animation: kbPull3 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="4"] { animation: kbPull4 10s linear forwards; }
+  .carousel-slide.hero-kb[data-kb="5"] { animation: kbPull5 10s linear forwards; }
+  /* Paused by default — JS plays when active */
+  .carousel-slide.hero-kb { animation-play-state: paused !important; }
+  .carousel-slide.hero-kb.kb-playing { animation-play-state: running !important; }
+
+  @keyframes kbPull0 { from { transform: scale(1.32); } to { transform: scale(1.22); } }
+  @keyframes kbPull1 { from { transform: scale(1.22); } to { transform: scale(1.14); } }
+  @keyframes kbPull2 { from { transform: scale(1.14); } to { transform: scale(1.08); } }
+  @keyframes kbPull3 { from { transform: scale(1.08); } to { transform: scale(1.03); } }
+  @keyframes kbPull4 { from { transform: scale(1.03); } to { transform: scale(0.99); } }
+  @keyframes kbPull5 { from { transform: scale(0.99); } to { transform: scale(0.96); } }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
   .credit-icon::before {
@@ -5469,7 +5488,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .credit-module-actions { flex-direction: column; gap: 8px; max-width: 280px !important; }
   .hero-title { font-size: 24px !important; }
   .brand-mw-name { font-size: 19.9px !important; }
-  .brand-mw-tag { font-size: 12px !important; letter-spacing: 1.55px !important; }
+  .brand-mw-tag { font-size: 12.6px !important; letter-spacing: 1.55px !important; }
   .brand-logo { height: 25.4px !important; }
   .brand { gap: 4.2px !important; }
   .mci-actions { flex-direction: column; }
@@ -8353,8 +8372,13 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <!-- Left: image carousel with text overlay -->
     <div class="credit-icon">
       <div class="credit-carousel" id="creditCarousel">
-        <!-- Single hero: Walt Disney Concert Hall + car — "We own LA" -->
-        <img class="carousel-slide active hero-static" src="img/5.jpg" alt="Downtown Los Angeles street scene — HIRECAR" loading="eager">
+        <!-- Ken Burns pull-in carousel — continuous zoom with cross-dissolve -->
+        <img class="carousel-slide hero-kb active" data-kb="0" src="img/5.jpg" alt="LA downtown skyline at night — HIRECAR" loading="eager">
+        <img class="carousel-slide hero-kb" data-kb="1" src="img/30.jpg" alt="LA rooftop cityscape — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="2" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="3" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="4" src="img/34.jpg" alt="LA 6th Street scene — HIRECAR" loading="lazy">
+        <img class="carousel-slide hero-kb" data-kb="5" src="img/36.jpg" alt="Downtown LA architecture — HIRECAR" loading="lazy">
       </div>
       <div class="credit-overlay">
         <div class="hero-top-tagline"></div>
@@ -9851,59 +9875,72 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })();
 
-  // 5b-pre. Credit hero image carousel with dissolve crossfade + mobile/desktop split
+  // 5b-pre. Ken Burns pull-in carousel — continuous zoom with cross-dissolve
   (function creditCarousel() {
-    var allSlides = document.querySelectorAll('#creditCarousel .carousel-slide');
-    var mod = document.querySelector('.credit-module');
-    var dotsContainer = document.getElementById('creditCarouselDots');
-    if (!allSlides.length || !mod) return;
+    var carousel = document.getElementById('creditCarousel');
+    if (!carousel) return;
+    var kbSlides = carousel.querySelectorAll('.carousel-slide.hero-kb');
+    if (kbSlides.length <= 1) {
+      /* Single image fallback — just play its animation */
+      if (kbSlides.length === 1) { kbSlides[0].classList.add('active','kb-playing'); }
+      return;
+    }
 
-    var isMobile = window.matchMedia('(max-width: 768px)');
-    var slides = [];
+    var slides = Array.from(kbSlides);
+    var total = slides.length;
     var idx = 0;
+    var SLIDE_DURATION = 9000;   /* ms each slide is fully visible */
+    var DISSOLVE_TIME  = 2500;   /* ms cross-dissolve overlap */
 
-    function getActiveSlides() {
-      var mobile = isMobile.matches;
-      return Array.from(allSlides).filter(function(s) {
-        var isMobileSlide = s.classList.contains('mobile-slide');
-        return mobile ? isMobileSlide : !isMobileSlide;
+    /* Reset all slides: hide and pause their animations */
+    function resetAll() {
+      slides.forEach(function(s) {
+        s.classList.remove('active','kb-playing');
+        s.style.animation = 'none';
+        /* force reflow to reset animation */
+        void s.offsetWidth;
+        s.style.animation = '';
       });
     }
 
-    function buildDots() {
-      if (!dotsContainer) return;
-      dotsContainer.innerHTML = '';
-      slides.forEach(function(_, i) {
-        var dot = document.createElement('span');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dotsContainer.appendChild(dot);
-      });
+    /* Start the first slide */
+    function startSlide(i) {
+      var slide = slides[i];
+      slide.classList.add('active','kb-playing');
     }
 
-    function updateDots(i) {
-      var dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
-      dots.forEach(function(d, j) { d.classList.toggle('active', j === i); });
+    /* Transition from current to next with cross-dissolve */
+    function advanceSlide() {
+      var currentSlide = slides[idx];
+      var nextIdx = (idx + 1) % total;
+      var nextSlide = slides[nextIdx];
+
+      /* If we're cycling back to 0, reset its animation for fresh zoom-out start */
+      if (nextIdx === 0) {
+        nextSlide.style.animation = 'none';
+        void nextSlide.offsetWidth;
+        nextSlide.style.animation = '';
+      }
+
+      /* Start next slide (zoomed in, picks up from where last was heading) */
+      nextSlide.classList.add('active','kb-playing');
+
+      /* After dissolve finishes, remove old slide fully */
+      setTimeout(function() {
+        currentSlide.classList.remove('active','kb-playing');
+      }, DISSOLVE_TIME + 200);
+
+      idx = nextIdx;
     }
 
-    function resetSlides() {
-      Array.from(allSlides).forEach(function(s) { s.classList.remove('active'); });
-      slides = getActiveSlides();
-      idx = 0;
-      if (slides.length) slides[0].classList.add('active');
-      buildDots();
-    }
+    /* Initialize — start first slide immediately */
+    resetAll();
+    startSlide(0);
 
-    resetSlides();
-    isMobile.addEventListener('change', resetSlides);
-
-    // Rotate every 3.5 seconds — editorial pace with long dissolve overlap
+    /* Advance at interval: SLIDE_DURATION minus overlap so dissolve starts before end */
     setInterval(function() {
-      if (slides.length <= 1) return;
-      slides[idx].classList.remove('active');
-      idx = (idx + 1) % slides.length;
-      slides[idx].classList.add('active');
-      updateDots(idx);
-    }, 3500);
+      advanceSlide();
+    }, SLIDE_DURATION - DISSOLVE_TIME / 2);
   })();
 
   // Brand-pipe scroll progress + bang glow + tag color + compact header
