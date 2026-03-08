@@ -62,6 +62,9 @@ body {
   background: var(--bg);
   overflow-x: clip; /* prevents double scrollbar when embedded in Wix iframe — clip preserves sticky */
   padding-top: 70px; /* compensate for fixed masthead */
+  /* Edge-to-edge safe areas — all devices, all orientations */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 a { text-decoration: none; color: inherit; }
@@ -3743,15 +3746,15 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 /* ── MOBILE RESPONSIVE ───────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* ── Fixed masthead at top — body padding-top offsets hero below header ── */
-  body { padding-top: calc(44px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; }
+  /* ── Fixed masthead at top — body padding offsets for all safe areas ── */
+  body { padding-top: calc(44px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; padding-left: env(safe-area-inset-left, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important; }
   body.dark-mode { background: #000000 !important; color: #c8d0db !important; }
   body:not(.dark-mode) { background: var(--bg) !important; color: var(--ink) !important; }
 
   /* --- UTIL BAR (BREAKING ticker) — overlaid on hero top-left --- */
   .util-bar {
     position: fixed !important;
-    top: 68px !important;
+    top: calc(68px + env(safe-area-inset-top, 0px)) !important;
     bottom: auto !important;
     left: 0;
     right: 0;
@@ -3792,6 +3795,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     position: fixed !important;
     top: 0 !important;
     padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-left: env(safe-area-inset-left, 0px) !important;
+    padding-right: env(safe-area-inset-right, 0px) !important;
     bottom: auto !important;
     left: 0 !important;
     right: 0 !important;
@@ -5685,7 +5690,7 @@ body.remote-mode #quickjump         { display: none !important; }
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-top: none;
-  padding: 8px 0;
+  padding: 8px env(safe-area-inset-right, 0px) 8px env(safe-area-inset-left, 0px);
   padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   transform: translateY(100%);
   transition: transform .3s ease;
