@@ -708,7 +708,7 @@ body:not(.dark-mode) .credit-sub { color: rgba(255,255,255,.55); }
 }
 /* stat row now lives inside .credit-overlay */
 .credit-overlay .credit-stat-row {
-  margin-top: 14px;
+  margin-top: 8px;
   max-width: 420px;
   border-top-color: rgba(255,255,255,.15);
   padding-top: 12px;
@@ -3856,11 +3856,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: height .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-mw-name {
-    font-size: 15px !important;
+    font-size: 17.3px !important;
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .brand-mw-tag {
-    font-size: 8.3px !important;
+    font-size: 9.5px !important;
     transition: font-size .45s cubic-bezier(.16,1,.3,1);
   }
   .masthead.compact .pill-toggle {
@@ -3969,8 +3969,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     gap: 1px;
     transform: translateY(1px);
   }
-  .brand-mw-name { font-size: 21.9px !important; line-height: 1.1 !important; letter-spacing: 0.04em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
-  .brand-mw-tag { font-size: 10.4px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
+  .brand-mw-name { font-size: 25.2px !important; line-height: 1.1 !important; letter-spacing: 0.04em; transition: font-size .35s cubic-bezier(.4,0,.2,1); }
+  .brand-mw-tag { font-size: 12px !important; letter-spacing: 1.55px !important; margin-top: 2px !important; }
   .brand-mw-sub { display: none !important; }
 
   /* Mobile controls — absolute so they don't affect centering */
@@ -4685,6 +4685,14 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transform: translateX(-4px);
   }
 
+  /* Menu button — subtle warm glow */
+  .het-menu-btn {
+    box-shadow: 0 0 10px 2px rgba(201,146,10,.25),
+                0 0 20px 4px rgba(201,146,10,.12),
+                0 0 4px 1px rgba(255,255,255,.08);
+    border-radius: 24px;
+  }
+
   /* Icon — pinned RIGHT via flex order, slides left on active */
   .het-btn .het-icon {
     width: 18px;
@@ -4924,7 +4932,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     display: flex !important;
     justify-content: center !important;
     gap: 28px !important;
-    margin-top: 28px !important;
+    margin-top: 14px !important;
     padding: 0 !important;
     border: none !important;
     background: none !important;
@@ -5450,8 +5458,8 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   .mci-metric { min-width: 100%; }
   .credit-module-actions { flex-direction: column; gap: 8px; max-width: 280px !important; }
   .hero-title { font-size: 24px !important; }
-  .brand-mw-name { font-size: 17.3px !important; }
-  .brand-mw-tag { font-size: 10.4px !important; letter-spacing: 1.55px !important; }
+  .brand-mw-name { font-size: 19.9px !important; }
+  .brand-mw-tag { font-size: 12px !important; letter-spacing: 1.55px !important; }
   .brand-logo { height: 25.4px !important; }
   .brand { gap: 4.2px !important; }
   .mci-actions { flex-direction: column; }
@@ -8342,7 +8350,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <div class="hero-top-tagline"></div>
         <div class="credit-eyebrow" id="creditEyebrow">HIRECREDIT · Credit Recovery · Los Angeles</div>
         <h1 class="credit-headline"><span class="collision-text" id="collisionText"><span class="coll-left">Your Credit</span> <span class="coll-right">Took a Hit<span class="coll-period" id="collPeriod">.</span></span></span><br class="desktop-br"><strong><span class="typewriter-text" id="typewriterText">We Bring It Back<span class="type-period" id="typePeriod">.</span></span></strong></h1>
-        <p class="credit-sub" id="creditSub">HIRECAR routes you from incident to resolution. One record, one timeline, one clean outcome.</p>
+        <p class="credit-sub" id="creditSub">HIRECAR routes you from incident to resolution.<br>One record, one timeline, one clean outcome.</p>
         <div class="credit-stat-row">
           <div class="credit-stat">
             <div class="credit-stat-n serif" data-count-to="810" data-count-suffix="K+">
@@ -11380,6 +11388,22 @@ if (document.readyState === 'loading') {
   }
   window.addEventListener('scroll', applyCollapse, { passive: true });
   applyCollapse();
+
+  /* Auto-collapse after 7 seconds on the hero (first section) */
+  var autoCollapseTimer = setTimeout(function() {
+    if (!menuOpen && !tabs.classList.contains('het-collapsed')) {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      tabs.classList.add('het-collapsed');
+    }
+  }, 7000);
+
+  /* Cancel auto-collapse if user scrolls past hero (scroll-collapse takes over) */
+  window.addEventListener('scroll', function cancelAutoCollapse() {
+    if (shouldBeCollapsed()) {
+      clearTimeout(autoCollapseTimer);
+      window.removeEventListener('scroll', cancelAutoCollapse);
+    }
+  }, { passive: true });
 
   /* Close expanded menu and re-collapse */
   function closeMenu() {
