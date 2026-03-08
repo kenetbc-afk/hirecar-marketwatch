@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>HIRECAR MarketWatch! — HIRECAR LLC · Est. November 2024</title>
 <!-- v18: Desktop scroll fix, Remote edge-to-edge viewport, Logo wordmark cleanup, Hero city/time images, Enriched remote entry sequence, Top Stories CTA dynamic, Mobility 4-car gallery, Vegas centering, Weather-correlated travel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3778,9 +3778,9 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 
   /* --- MASTHEAD — fixed at TOP of screen --- */
   .masthead {
-    background: linear-gradient(180deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.91) 30%, rgba(0,0,0,.84) 55%, rgba(0,0,0,.55) 100%) !important;
-    backdrop-filter: blur(24px) saturate(1.4) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+    background: #000000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
@@ -3792,35 +3792,20 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     left: 0 !important;
     right: 0 !important;
     z-index: 350 !important;
-    transition: background .5s ease, backdrop-filter .5s ease !important;
-    /* Fade the backdrop-filter at the bottom edge so blur doesn't cut hard */
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, rgba(0,0,0,.6) 88%, rgba(0,0,0,.2) 96%, transparent 100%);
-    mask-image: linear-gradient(180deg, #000 0%, #000 70%, rgba(0,0,0,.6) 88%, rgba(0,0,0,.2) 96%, transparent 100%);
+    transition: background .5s ease !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
-  /* Bottom bleed — extends dark gradient below masthead to dissolve into hero */
+  /* Bottom bleed removed — masthead is solid black */
   .masthead::after {
-    content: '';
-    position: absolute;
-    top: auto;
-    bottom: -280px;
-    left: 0;
-    right: 0;
-    height: 280px;
-    background: linear-gradient(180deg, rgba(0,0,0,.48) 0%, rgba(0,0,0,.34) 12%, rgba(0,0,0,.2) 30%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.04) 72%, transparent 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.5) 35%, rgba(0,0,0,.15) 65%, transparent 100%);
-    mask-image: linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.5) 35%, rgba(0,0,0,.15) 65%, transparent 100%);
-    pointer-events: none;
-    z-index: 339;
-    transition: opacity .5s ease;
+    display: none !important;
   }
   body:not(.dark-mode) .masthead::after { display: none !important; }
   /* Masthead is always dark bg — keep text/links white in both modes */
   .masthead, .masthead a, .masthead button, .masthead [class] { color: rgba(255,255,255,.9); }
   .util-bar, .util-bar a, .util-bar button { color: rgba(255,255,255,.9); }
   .masthead.scrolled {
-    background: linear-gradient(180deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.93) 30%, rgba(0,0,0,.86) 55%, rgba(0,0,0,.6) 100%) !important;
+    background: #000000 !important;
     border: none !important;
     box-shadow: none !important;
   }
@@ -5692,11 +5677,12 @@ body.remote-mode #quickjump         { display: none !important; }
   left: 0;
   right: 0;
   z-index: 400;
-  background: rgba(0,0,0,.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-top: 1px solid rgba(255,255,255,.06);
   padding: 8px 0;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   transform: translateY(100%);
   transition: transform .3s ease;
 }
