@@ -1,6 +1,6 @@
 # HIRECAR MarketWatch — Session Handoff
 
-**Date:** 2026-03-08
+**Date:** 2026-03-10 (updated)
 **Author:** Claude (multi-session)
 **For:** Incoming contributor continuing site refinement
 **Project:** HIRECAR MarketWatch landing page — `index.html`
@@ -63,6 +63,44 @@ find "/Users/hirecarken/Desktop/DOC CRTL" -maxdepth 1 -name ":HIRECAR*" -print0 
 - `.credit-overlay` centered: `top: 50%; transform: translate(-50%, -55%)`
 - CTA panel, buttons, headline all centered for mobile
 - Green collision dot hidden on mobile for symmetry
+
+### Top Stories — Expanded to 5 Articles (DONE — 2026-03-10)
+- Added **4th article** (data-idx="3"): "LA Fleet Operators Face Parts Shortage as OEM Backlogs Stretch to 14 Weeks" — Fleet & Operations category
+- Added **5th article** (data-idx="4"): "California DMV Tightens Salvage Title Rules, Raising Rebuild Costs for LA Operators" — Regulation & Compliance category
+- Added matching hero images for both articles (Unsplash sources)
+- Added `scroll-margin-top` CSS for items 3 and 4 to tune snap alignment
+- JS active-card detection uses dynamic `items.length` — no JS changes needed
+
+### Scroll-Snap: Proximity to Mandatory (DONE — 2026-03-10)
+- Changed `stickyStories` from `scroll-snap-type: y proximity` to `scroll-snap-type: y mandatory`
+- Stories now lock to each card when scrolling — no in-between stops
+
+### Viewport Zoom Prevention (DONE — 2026-03-10)
+- Viewport meta updated: `maximum-scale=1.0, user-scalable=no`
+- Prevents pinch-to-zoom on mobile to maintain layout integrity
+
+### Entertainment Section — Standalone with Scroll-Snap (DONE — 2026-03-10)
+- **Problem:** Browser DOM parser was nesting `#sec-ent` inside `.ss-items` despite source HTML placing it outside `.page-wrap`. Entertainment was rolling with the story cards.
+- **Fix:** Restructured HTML closing tags:
+  - `.ss-items` now closes immediately after `.ss-spacer`
+  - ICYMI strip (`icymi-strip`) moved inside `stickyStories` but outside `ss-items`
+  - Trending strip (`scroll-section`) moved inside `page-wrap` but outside `stickyStories`
+  - Entertainment section (`#sec-ent`) lives inside `page-wrap` but outside `stickyStories`
+- **Page-level scroll-snap:** Added `scroll-snap-type: y proximity` on `body` and `scroll-snap-align: start` on `.ent-section`
+- Entertainment now snaps into view when user scrolls past the stories
+
+### Current DOM Structure (after restructure)
+```
+body
+  page-wrap
+    sec-stories (section-label)
+    stickyStories (scroll-snap: y mandatory)
+      ss-hero-wrap (sticky hero images)
+      ss-items (5x ss-item + ss-spacer)
+      icymi-strip (In Case You Missed It)
+    sec-ent / ent-section (scroll-snap-align: start)
+    scroll-section (trending strip)
+```
 
 ---
 
@@ -164,13 +202,12 @@ For each image, add HTML, CSS `object-position`, preview at 375×812, get owner 
 ## Git History (Recent Commits)
 
 ```
+[pending] Top Stories 5 articles, Entertainment standalone section, scroll-snap updates
+7bd3553 Mobile carousel: pure pull-in zoom, Kobe blend, slide 2 skyline crop
+490c023 Update HANDOFF.md — Ritz now zoomed out at 30% left anchor, OG thumbnail section added
 a856d19 Zoom out Ritz white car fully (scale 1.00→1.20), anchor left at 30%
 8052a64 Ritz 200% crop anchored bottom, update OG thumbnail to match front page
 97c592a Update HANDOFF.md with current carousel state, line refs, and session history
-0c558cb Zoom out Ritz building crop (1.40→1.60) for better white car visibility
-acd8888 Crop Ritz building much tighter (1.65→1.85), center white car
-525fa17 Crop in Ritz + Audi tighter, close section gaps, unify dark backgrounds to #000
-445dcf2 Remove 36.jpg (DTLA do-not-enter) from hero carousel, renumber slides
 ```
 
 ---
