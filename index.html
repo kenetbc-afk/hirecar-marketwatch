@@ -3903,6 +3903,99 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
 /* ── MOBILE RESPONSIVE ───────────────────────────────── */
 @media (max-width: 768px) {
 
+  /* ── Mobile carousel: swap to mobile-specific slides ── */
+  .carousel-slide.hero-kb { display: none !important; }
+  .carousel-slide.mobile-slide {
+    display: block !important;
+    opacity: 0 !important;
+    object-fit: cover !important;
+    object-position: 60% 50% !important;
+    transform: scale(1.0) translateX(0%) translateY(0%);
+    transform-origin: 50% 50% !important;
+    transition: opacity 5s cubic-bezier(0.25, 0, 0.15, 1) !important;
+    will-change: transform, opacity;
+  }
+  .carousel-slide.mobile-slide.active {
+    opacity: 1 !important;
+  }
+  /* First slide appears instantly on load — no fade-in delay */
+  .carousel-slide.mobile-slide.instant-show {
+    transition: none !important;
+    opacity: 1 !important;
+  }
+  /* Mobile slide 0 (40.jpg LA aerial) — first slide, longer hold synced to News+Media icon */
+  .carousel-slide.mobile-slide[data-mob="0"].active {
+    animation: kbMobZoom0 22s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom0 {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.1); }
+  }
+  /* Mobile slide 1 (Kobe Bryant LA mural) — contain + scale + slow pan right, synced to Top Stories icon */
+  .carousel-slide.mobile-slide[data-mob="1"] {
+    object-fit: contain !important;
+    object-position: left top !important;
+    transform-origin: left top !important;
+    transition: opacity 6.5s cubic-bezier(0.2, 0, 0.1, 1) !important;
+    -webkit-mask-image: linear-gradient(to bottom,
+      black 0%, black 18%,
+      rgba(0,0,0,0.72) 30%,
+      rgba(0,0,0,0.45) 42%,
+      rgba(0,0,0,0.22) 54%,
+      rgba(0,0,0,0.08) 66%,
+      transparent 80%);
+    mask-image: linear-gradient(to bottom,
+      black 0%, black 18%,
+      rgba(0,0,0,0.72) 30%,
+      rgba(0,0,0,0.45) 42%,
+      rgba(0,0,0,0.22) 54%,
+      rgba(0,0,0,0.08) 66%,
+      transparent 80%);
+  }
+  .carousel-slide.mobile-slide[data-mob="1"].active {
+    animation: kbMobZoom1 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom1 {
+    0%   { transform: scale(2.0); }
+    100% { transform: scale(2.25); }
+  }
+  /* Mobile slide 2 (31.jpg LA night) — cropped tight on skyline, synced to Credit Help icon */
+  .carousel-slide.mobile-slide[data-mob="2"] {
+    object-position: 50% 88% !important;
+    transform-origin: 50% 95% !important;
+  }
+  .carousel-slide.mobile-slide[data-mob="2"].active {
+    animation: kbMobZoom2 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom2 {
+    0%   { transform: scale(2.0) translateX(-12%) translateY(2%); }
+    100% { transform: scale(2.15) translateX(-12%) translateY(2%); }
+  }
+  /* Mobile slide 3 (32.jpg Downtown road) — synced to Auto Service icon */
+  .carousel-slide.mobile-slide[data-mob="3"].active {
+    animation: kbMobZoom3 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom3 {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.1); }
+  }
+  /* Mobile slide 4 (50.jpg Viaduct night) — synced to Culture & Travel icon */
+  .carousel-slide.mobile-slide[data-mob="4"].active {
+    animation: kbMobZoom4 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom4 {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.1); }
+  }
+  /* Mobile slide 5 (IMG_0256.jpg Audi coastal) — post-intro cycling */
+  .carousel-slide.mobile-slide[data-mob="5"].active {
+    animation: kbMobZoom5 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  }
+  @keyframes kbMobZoom5 {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.1); }
+  }
+
   /* ── Fixed masthead at top — body padding offsets for all safe areas ── */
   body { padding-top: calc(44px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; padding-left: env(safe-area-inset-left, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important; }
   body.dark-mode { background: #000000 !important; color: #c8d0db !important; }
@@ -3921,6 +4014,19 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     border-bottom: none !important;
     border-top: none !important;
     padding: 4px 0 !important;
+  }
+  /* Seamless gradient bleed below util-bar into hero */
+  .util-bar::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: -30px !important;
+    height: 30px !important;
+    background: linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,0) 100%) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
   }
   /* Banner locks in as solid third bar — class toggled by scroll JS */
   .util-bar.banner-solid {
@@ -3962,11 +4068,22 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
-  /* Bottom bleed removed — masthead is solid black */
+  /* Seamless gradient bleed from masthead into hero */
   .masthead::after {
-    display: none !important;
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: -40px !important;
+    height: 40px !important;
+    background: linear-gradient(180deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,0) 100%) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
   }
-  body:not(.dark-mode) .masthead::after { display: none !important; }
+  body:not(.dark-mode) .masthead::after {
+    background: linear-gradient(180deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,0) 100%) !important;
+  }
   /* Masthead is always dark bg — keep text/links white in both modes */
   .masthead, .masthead a, .masthead button, .masthead [class] { color: rgba(255,255,255,.9); }
   .util-bar, .util-bar a, .util-bar button { color: rgba(255,255,255,.9); }
@@ -5249,6 +5366,11 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   @keyframes kbZoomIn8 {
     0%   { transform: scale(1.35); }
     100% { transform: scale(1.55); }
+  }
+
+  /* ── Mobile override: hide desktop KB slides (must come AFTER .hero-kb display:block) ── */
+  @media (max-width: 768px) {
+    .carousel-slide.hero-kb { display: none !important; }
   }
 
   /* Gradient overlay — blue-black bleed matching desktop rgba(6,12,26) */
@@ -8853,6 +8975,12 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <img class="carousel-slide hero-kb" data-kb="6" src="img/IMG_0256.jpg" alt="Audi coastal sunset — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="7" src="img/la-palace-theatre.jpg" alt="Airport terminal sunset — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="8" src="img/pexels-thekameragrapher-16433702.jpg" alt="LA cityscape — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="0" src="img/40.jpg" alt="LA aerial skyline — HIRECAR" loading="eager">
+        <img class="carousel-slide mobile-slide" data-mob="1" src="img/download (3).jpeg" alt="Kobe Bryant LA mural — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="2" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="3" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="4" src="img/50.jpg" alt="6th Street Viaduct night skyline — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="5" src="img/IMG_0256.jpg" alt="Audi coastal sunset — HIRECAR" loading="lazy">
       </div>
       <div class="credit-overlay">
         <div class="hero-top-tagline"></div>
@@ -10388,7 +10516,15 @@ document.addEventListener('DOMContentLoaded', function() {
   (function creditCarousel() {
     var carousel = document.getElementById('creditCarousel');
     if (!carousel) return;
-    var kbSlides = carousel.querySelectorAll('.carousel-slide.hero-kb');
+
+    /* Mobile / Desktop slide switching via matchMedia */
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+    var kbSlides;
+    if (isMobile) {
+      kbSlides = carousel.querySelectorAll('.carousel-slide.mobile-slide');
+    } else {
+      kbSlides = carousel.querySelectorAll('.carousel-slide.hero-kb');
+    }
     if (kbSlides.length <= 1) {
       /* Single image fallback — just play its animation */
       if (kbSlides.length === 1) { kbSlides[0].classList.add('active','kb-playing'); }
@@ -10398,8 +10534,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var slides = Array.from(kbSlides);
     var total = slides.length;
     var idx = 0;
-    var SLIDE_DURATION = 9000;   /* ms each slide is fully visible */
-    var DISSOLVE_TIME  = 5000;   /* ms cross-dissolve overlap */
+    var DISSOLVE_TIME  = isMobile ? 5500  : 5000; /* ms cross-dissolve — longer for smoother mobile blends */
+
+    /* Icon intro timing (ms from page load when each icon appears):
+       Icon 0 (News+Media):      800ms  → holds 8700ms → next at 9800ms
+       Icon 1 (Top Stories):     9800ms → holds 6200ms → next at 16300ms
+       Icon 2 (Credit Help):     16300ms → holds 6200ms → next at 22800ms
+       Icon 3 (Auto Service):    22800ms → holds 6200ms → next at 29300ms
+       Icon 4 (Culture&Travel):  29300ms → holds 6200ms → done at 35500ms
+       Slide advances should fire when each NEW icon appears. */
+    var INTRO_ADVANCES = [9800, 16300, 22800, 29300]; /* ms from load — when slides 1,2,3,4 start */
+    var POST_INTRO_INTERVAL = 6500; /* ms between slides after intro completes */
 
     /* Hide all slides (animations keep running — never stop) */
     function resetAll() {
@@ -10422,6 +10567,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* Cross-dissolve to next — each new slide zooms in from 1.0 */
+    /* Pure smooth dissolve for every transition — no wipes, no mask tricks */
     function advanceSlide() {
       var currentSlide = slides[idx];
       var nextIdx = (idx + 1) % total;
@@ -10431,24 +10577,58 @@ document.addEventListener('DOMContentLoaded', function() {
       restartZoom(nextSlide);
       nextSlide.classList.add('active');
 
-      /* After dissolve finishes, hide outgoing and reset its scale */
-      setTimeout(function() {
-        currentSlide.classList.remove('active');
-        currentSlide.style.transform = 'scale(1)';
-      }, DISSOLVE_TIME + 200);
+      /* Slide 0 → Kobe: pure dissolve — aerial stays active behind Kobe
+         so its content fills the bottom where Kobe's CSS mask is transparent.
+         No mask manipulation, no expansion — just a clean opacity fade. */
+      if (isMobile && idx === 0 && nextIdx === 1) {
+        /* Aerial stays active — don't remove it. Kobe dissolves in on top
+           with its CSS mask already handling the bottom blend. */
+      }
+      /* Leaving Kobe: clean up both Kobe AND the aerial backing */
+      else if (isMobile && idx === 1) {
+        setTimeout(function() {
+          currentSlide.classList.remove('active');
+          currentSlide.style.transform = 'scale(1)';
+          /* Also remove aerial (slide 0) that stayed behind Kobe */
+          slides[0].classList.remove('active');
+          slides[0].style.transform = 'scale(1)';
+        }, DISSOLVE_TIME + 200);
+      }
+      else {
+        /* Standard cross-dissolve for all other transitions */
+        setTimeout(function() {
+          currentSlide.classList.remove('active');
+          currentSlide.style.transform = 'scale(1)';
+        }, DISSOLVE_TIME + 200);
+      }
 
       idx = nextIdx;
     }
 
-    /* Initialize */
+    /* Initialize — first slide appears instantly (no fade) */
     resetAll();
+    slides[0].classList.add('instant-show');
     startSlide(0);
+    /* After first slide is visible, remove instant class so future transitions dissolve */
+    setTimeout(function() {
+      slides[0].classList.remove('instant-show');
+    }, 100);
 
-    /* Advance every SLIDE_DURATION. The dissolve overlaps the tail of
-       one slide with the head of the next, so both are pulling at once. */
-    setInterval(function() {
-      advanceSlide();
-    }, SLIDE_DURATION);
+    if (isMobile && total >= 5) {
+      /* Phase 1: Synced with icon intro — schedule each advance at exact icon switch times */
+      var loadTime = Date.now();
+      INTRO_ADVANCES.forEach(function(ms) {
+        setTimeout(function() { advanceSlide(); }, ms);
+      });
+      /* Phase 2: After intro completes, continue cycling at steady pace */
+      var lastIntroTime = INTRO_ADVANCES[INTRO_ADVANCES.length - 1];
+      setTimeout(function() {
+        setInterval(function() { advanceSlide(); }, POST_INTRO_INTERVAL);
+      }, lastIntroTime + POST_INTRO_INTERVAL);
+    } else {
+      /* Desktop — uniform interval */
+      setInterval(function() { advanceSlide(); }, 9000);
+    }
   })();
 
   // Brand-pipe scroll progress + bang glow + tag color + compact header
