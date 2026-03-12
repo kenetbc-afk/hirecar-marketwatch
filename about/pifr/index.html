@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="msapplication-navbutton-color" content="#000000">
+  <meta name="msapplication-TileColor" content="#000000">
+  <title>PIFR — Personal Incident File &amp; Recovery | HIRECAR MarketWatch</title>
+  <meta name="description" content="PIFR — Personal Incident File &amp; Recovery. One file tracks everything from crash to credit fix: legal, repair, rental, and full credit recovery.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111820;
+      --ink-2: #1e2530;
+      --cta: #c9920a;
+      --cta-hover: #b07f08;
+      --bg: #ffffff;
+      --muted: #9aa3ad;
+      --border: #dde1e7;
+      --slate: #3d4a58;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+      --max-w: 1100px;
+      --radius: 6px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 1px 3px rgba(17,24,32,0.06);
+      --shadow-md: 0 4px 16px rgba(17,24,32,0.08);
+      --transition: 0.25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--sans); color: var(--ink); background: var(--bg); line-height: 1.7; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--ink);
+    }
+    .nav-logo span { color: var(--cta); }
+    .nav-back {
+      font-size: 0.8rem; font-weight: 600; color: var(--slate);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color var(--transition);
+    }
+    .nav-back:hover { color: var(--cta); }
+
+    /* ── HERO ── */
+    .pifr-hero {
+      background: var(--ink);
+      color: #fff;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .pifr-hero-eyebrow {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cta); margin-bottom: 1rem;
+    }
+    .pifr-hero-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.1; font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+    .pifr-hero-title em { font-style: italic; color: var(--cta); }
+    .pifr-hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.72);
+      max-width: 600px; margin: 0 auto 2.5rem;
+    }
+    .pifr-hero-cta {
+      display: inline-block;
+      background: var(--cta); color: #fff;
+      font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.85rem 2.25rem; border-radius: var(--radius);
+      transition: background var(--transition);
+    }
+    .pifr-hero-cta:hover { background: var(--cta-hover); }
+    .pifr-hero-fine {
+      margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.4);
+    }
+
+    /* ── WHAT IS PIFR ── */
+    .section { padding: 4.5rem 1.5rem; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cta); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15; font-weight: 400; margin-bottom: 1.25rem;
+    }
+    .section-body {
+      font-size: 1.05rem; color: var(--slate); max-width: 680px; line-height: 1.8;
+    }
+    .section-body p + p { margin-top: 1rem; }
+
+    /* ── STEPS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .step-card {
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+    .step-card:hover { box-shadow: var(--shadow-md); }
+    .step-num {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--cta); margin-bottom: 0.75rem;
+    }
+    .step-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .step-body { font-size: 0.9rem; color: var(--slate); line-height: 1.65; }
+
+    /* ── WHAT'S INCLUDED ── */
+    .included-bg { background: #f8f9fa; }
+    .included-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .included-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.1rem 1.25rem;
+    }
+    .included-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--cta); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .included-label { font-weight: 600; font-size: 0.9rem; }
+    .included-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      background: var(--ink); color: #fff;
+      padding: 3.5rem 1.5rem;
+    }
+    .stats-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem; text-align: center;
+    }
+    .stat-num {
+      font-family: var(--serif); font-size: 2.8rem; font-weight: 400;
+      color: var(--cta); line-height: 1;
+    }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; letter-spacing: 0.04em; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 2.5rem; max-width: 720px; }
+    .faq-item { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      font-weight: 700; font-size: 0.95rem; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq-q svg { flex-shrink: 0; transition: transform var(--transition); }
+    .faq-item.open .faq-q svg { transform: rotate(180deg); }
+    .faq-a {
+      font-size: 0.9rem; color: var(--slate); line-height: 1.7;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-top: 0.75rem; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: var(--cta); color: #fff;
+      padding: 4rem 1.5rem; text-align: center;
+    }
+    .bottom-cta-title {
+      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1rem; font-weight: 400;
+    }
+    .bottom-cta-sub { font-size: 1rem; opacity: 0.88; margin-bottom: 2rem; }
+    .bottom-cta-btn {
+      display: inline-block; background: #fff; color: var(--cta);
+      font-size: 0.88rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.9rem 2.5rem; border-radius: var(--radius);
+      transition: opacity var(--transition);
+    }
+    .bottom-cta-btn:hover { opacity: 0.9; }
+
+    /* ── FOOTER ── */
+    .pifr-footer {
+      background: var(--ink); color: rgba(255,255,255,0.45);
+      padding: 2rem 1.5rem; text-align: center;
+      font-size: 0.78rem;
+    }
+    .pifr-footer a { color: rgba(255,255,255,0.6); }
+    .pifr-footer a:hover { color: var(--cta); }
+
+    @media (max-width: 600px) {
+      .section { padding: 3rem 1.25rem; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .included-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">HIRECAR <span>MW</span></a>
+      <a href="about/" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to About
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pifr-hero">
+    <p class="pifr-hero-eyebrow">HIRECAR Recovery System</p>
+    <h1 class="pifr-hero-title">Personal Incident File<br>&amp; <em>Recovery</em></h1>
+    <p class="pifr-hero-sub">One file. Every step. From the moment of impact through complete credit recovery — PIFR keeps your case organized, protected, and moving forward.</p>
+    <a href="booking/" class="pifr-hero-cta">Start Your Recovery</a>
+    <p class="pifr-hero-fine">Free intake · No credit pull · Response within 24 hours</p>
+  </section>
+
+  <!-- WHAT IS PIFR -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-eyebrow">What is PIFR</p>
+      <h2 class="section-title">Your single record from crash to credit fix.</h2>
+      <div class="section-body">
+        <p>When an incident happens — a collision, a claim, a dispute — the aftermath is overwhelming. Insurance calls, repair shops, rental logistics, collections notices, and a credit score that starts taking hits. Most people navigate this alone, losing documentation, missing deadlines, and leaving money on the table.</p>
+        <p>PIFR is HIRECAR's proprietary recovery framework. We open a single, structured file on your behalf that tracks every moving part: legal correspondence, repair status, rental coverage, and your credit dispute strategy. Nothing falls through the cracks.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <p class="step-num">STEP 01</p>
+          <h3 class="step-title">Incident Intake</h3>
+          <p class="step-body">We open your PIFR file — collecting all incident documentation, insurance info, and current credit standing.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">STEP 02</p>
+          <h3 class="step-title">Case Mapping</h3>
+          <p class="step-body">Our team maps your recovery path: repair routing, rental placement, legal referral if needed, and credit dispute strategy.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">STEP 03</p>
+          <h3 class="step-title">Active Recovery</h3>
+          <p class="step-body">Disputes are filed. Collections are challenged. Credit bureaus receive structured, compliant letters under your name.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">STEP 04</p>
+          <h3 class="step-title">Score Rebuild</h3>
+          <p class="step-body">We monitor results, add positive tradelines where eligible, and track your score progress until targets are met.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section included-bg">
+    <div class="section-inner">
+      <p class="section-eyebrow">What's Included</p>
+      <h2 class="section-title">Everything in your PIFR file.</h2>
+      <div class="included-list">
+        <div class="included-item">
+          <div class="included-icon">📄</div>
+          <div>
+            <p class="included-label">Incident Documentation</p>
+            <p class="included-desc">Photos, police reports, claim numbers — all stored in one place.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">🏥</div>
+          <div>
+            <p class="included-label">Repair Routing</p>
+            <p class="included-desc">Direct referrals to vetted collision, glass &amp; detailing partners.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">🚗</div>
+          <div>
+            <p class="included-label">Rental Coordination</p>
+            <p class="included-desc">Rental placement while your vehicle is being repaired.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">⚖️</div>
+          <div>
+            <p class="included-label">Legal Referral</p>
+            <p class="included-desc">Warm handoffs to attorneys for liability and insurance disputes.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">📊</div>
+          <div>
+            <p class="included-label">Credit Dispute Filing</p>
+            <p class="included-desc">FCRA-compliant disputes sent to all three major bureaus.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">🛡️</div>
+          <div>
+            <p class="included-label">Collections Protection</p>
+            <p class="included-desc">Debt validation letters and cease &amp; desist when necessary.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">📈</div>
+          <div>
+            <p class="included-label">Score Monitoring</p>
+            <p class="included-desc">Ongoing tracking and reporting until your target score is reached.</p>
+          </div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon">🤝</div>
+          <div>
+            <p class="included-label">Tradeline Strategy</p>
+            <p class="included-desc">Authorized user and secured card recommendations to rebuild faster.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div>
+        <p class="stat-num">24hr</p>
+        <p class="stat-label">Response after intake</p>
+      </div>
+      <div>
+        <p class="stat-num">3</p>
+        <p class="stat-label">Credit bureaus covered</p>
+      </div>
+      <div>
+        <p class="stat-num">$0</p>
+        <p class="stat-label">Intake cost</p>
+      </div>
+      <div>
+        <p class="stat-num">100%</p>
+        <p class="stat-label">FCRA compliant process</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-eyebrow">Common Questions</p>
+      <h2 class="section-title">PIFR — FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">
+            How long does recovery take?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="faq-a">Credit disputes typically resolve in 30–45 days per round. Most clients see meaningful changes within 60–90 days, with full recovery timelines ranging from 3 to 12 months depending on the complexity of their file.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Do I need a lawyer?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="faq-a">Not always. For credit disputes and collections, our process handles most cases without legal counsel. For liability or insurance disputes tied to the incident itself, we'll make a warm referral to an attorney in our network.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Will this hurt my credit score?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="faq-a">No. Filing disputes does not negatively impact your credit score. We do not perform hard pulls during intake. Our process is entirely non-invasive at the start.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            What does it cost?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="faq-a">Intake is free. Recovery services are available as standalone or bundled inside a First Class Membership. Pricing is disclosed clearly after intake — no surprises, no pressure.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Do I need to have been in a collision?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="faq-a">No. PIFR started as a post-collision recovery system but the credit repair and score rebuilding services are available to anyone — whether or not an incident was involved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2 class="bottom-cta-title">Ready to start your recovery?</h2>
+    <p class="bottom-cta-sub">Free intake. No credit pull. Response within 24 hours.</p>
+    <a href="booking/" class="bottom-cta-btn">Open My PIFR File</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pifr-footer">
+    <p>&copy; 2025 HIRECAR, LLC &mdash; Valencia, CA &nbsp;|&nbsp; <a href="terms/">Terms &amp; Conditions</a> &nbsp;|&nbsp; <a href="contact/">Contact</a></p>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -3434,7 +3434,7 @@ body.dark-mode .content-grid { border-bottom-color: #1a1a1a; }
 body.dark-mode .content-main { border-right-color: #1a1a1a; }
 body.dark-mode .art-row { border-bottom-color: #1d2535; }
 body.dark-mode .art-row:hover { background: #0f1924; }
-body.dark-mode .art-thumb { background-color: #0d1826; }
+body.dark-mode .art-thumb { background: #0d1826; }
 body.dark-mode .art-cat { color: #6a7a8a; }
 body.dark-mode .art-title { color: #ffffff; }
 body.dark-mode .art-blurb { color: #6a7a8a; }
@@ -6548,7 +6548,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   body.dark-mode .mci-label-name, body.dark-mode .mci-val { color: #fff !important; }
   body.dark-mode .mci-key, body.dark-mode .mci-sub { color: rgba(255,255,255,.4) !important; }
   body.dark-mode .rh-car-card { background: #0a0e14 !important; border-color: #1d2535 !important; }
-  body.dark-mode .art-thumb { background-color: #0d1826 !important; }
+  body.dark-mode .art-thumb { background: #0d1826 !important; }
   body.dark-mode .edition-bar { background: #000 !important; border-color: #161e2c !important; }
   body.dark-mode .section-rule { border-color: rgba(255,255,255,.08) !important; }
   body.dark-mode hr { border-color: rgba(255,255,255,.08) !important; }
@@ -8346,7 +8346,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       <div class="rh-hero-slides">
         <!-- v19: Slide 0: City skyline + supercar — always city first -->
         <div class="rh-hero-slide active" id="rhHeroSlide0"
-          style="background-image:url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=1920&q=90&fit=crop&crop=center');background-position:center 42%;"></div>
+          style="background-image:url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c6?w=1920&q=90&fit=crop&crop=center');background-position:center 42%;"></div>
         <!-- Slide 1: Luxury car moving in city (supercar culture) -->
         <div class="rh-hero-slide" id="rhHeroSlide1"
           style="background-image:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1920&q=90&fit=crop&crop=center');background-position:center 45%;"></div>
@@ -9382,7 +9382,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           </ul>
         </div>
         <div class="dd-preview">
-          <div class="dd-preview-img" style="background-image:url('https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=400&q=80&fit=crop')"></div>
+          <div class="dd-preview-img" style="background-image:url('https://images.unsplash.com/photo-1530046339160-ce3e530de191?w=400&q=80&fit=crop')"></div>
           <div class="dd-preview-label">Coming Soon</div>
           <div class="dd-preview-title">Full Roadside Coverage for Operators</div>
           <div class="dd-preview-desc">ICE and EV both covered. 24/7, anywhere in LA.</div>
@@ -9412,7 +9412,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
           </ul>
         </div>
         <div class="dd-preview">
-          <div class="dd-preview-img" style="background-image:url('https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=400&q=80&fit=crop')"></div>
+          <div class="dd-preview-img" style="background-image:url('https://images.unsplash.com/photo-1614293993615-ae9cb81b07f9?w=400&q=80&fit=crop')"></div>
           <div class="dd-preview-label">Feature</div>
           <div class="dd-preview-title">The LA Garage: Premium Mobility in 2026</div>
           <div class="dd-preview-desc">Inside the fleet that defines premium operator life in LA.</div>
@@ -9979,7 +9979,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     <div class="content-main">
 
       <div class="art-row">
-        <div class="art-thumb" style="background-image:url('img/credit-repair-collision.jpg');background-size:cover;background-position:center;font-size:0;"></div>
+        <div class="art-thumb" style="background-image:url('https://images.pexels.com/photos/19867473/pexels-photo-19867473.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop');background-size:cover;background-position:center;font-size:0;"></div>
         <div class="art-text">
           <div>
             <div class="art-cat">Credit Repair</div>
@@ -9991,7 +9991,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
 
       <div class="art-row">
-        <div class="art-thumb" style="background-image:url('img/insurance-delay-collections.jpg');background-size:cover;background-position:center;font-size:0;"></div>
+        <div class="art-thumb">🏦</div>
         <div class="art-text">
           <div>
             <div class="art-cat">Auto Insurance</div>
@@ -10003,7 +10003,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
 
       <div class="art-row">
-        <div class="art-thumb" style="background-image:url('img/seedxchange-funding.jpg');background-size:cover;background-position:center;font-size:0;"></div>
+        <div class="art-thumb" style="background-image:url('https://images.pexels.com/photos/534229/pexels-photo-534229.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop');background-size:cover;background-position:center;font-size:0;"></div>
         <div class="art-text">
           <div>
             <div class="art-cat">Small Business Funding</div>
@@ -10014,7 +10014,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
       </div>
 
       <div class="art-row">
-        <div class="art-thumb" style="background-image:url('img/gap-coverage-billing.jpg');background-size:cover;background-position:center;font-size:0;"></div>
+        <div class="art-thumb" style="background-image:url('https://images.pexels.com/photos/33749906/pexels-photo-33749906.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop');background-size:cover;background-position:center;font-size:0;"></div>
         <div class="art-text">
           <div>
             <div class="art-cat">Credit Repair</div>
@@ -10102,13 +10102,19 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   <!-- v18: Mobility 4-Car Swipe Gallery -->
   <div class="rh-car-gallery" id="rhMobilityGallery">
     <div class="rh-car-card">
-      <div class="rh-car-card-img" style="background-image:url('img/rolls-royce-ghost.jpg');"></div>
+      <div class="rh-car-card-img" style="background-image:url('img/lambo-urus.jpg');"></div>
       <div class="rh-car-card-body">
         <div class="rh-car-card-name">Rolls-Royce Ghost</div>
         <div class="rh-car-card-meta">Luxury Fleet · Available Now · LA Basin</div>
       </div>
     </div>
-
+    <div class="rh-car-card">
+      <div class="rh-car-card-img" style="background-image:url('https://images.pexels.com/photos/3821424/pexels-photo-3821424.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop');"></div>
+      <div class="rh-car-card-body">
+        <div class="rh-car-card-name">Lamborghini Huracán</div>
+        <div class="rh-car-card-meta">Supercar Tier · Weekend Rates · First Class</div>
+      </div>
+    </div>
     <div class="rh-car-card">
       <div class="rh-car-card-img" style="background-image:url('img/mercedes-classic.jpg');"></div>
       <div class="rh-car-card-body">
@@ -10236,7 +10242,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </a><div class="svc-scroll-divider"></div>
 
     <a href="services/" class="svc-scroll-item">
-      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=500&q=85&fit=crop')"></div>
+      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1558981852-426c349d3a4e?w=500&q=85&fit=crop')"></div>
       <div class="svc-scroll-body">
         <span class="svc-scroll-badge active">Active</span>
         <div class="svc-scroll-name">Chauffeuring</div>
@@ -10281,7 +10287,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div><div class="svc-scroll-divider"></div>
 
     <div class="svc-scroll-item">
-      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&q=85&fit=crop')"></div>
+      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1530046339160-ce3e530de191?w=500&q=85&fit=crop')"></div>
       <div class="svc-scroll-body">
         <span class="svc-scroll-badge soon">Coming Soon</span>
         <div class="svc-scroll-name">Roadside Assist</div>
@@ -10335,7 +10341,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     </div><div class="svc-scroll-divider"></div>
 
     <div class="svc-scroll-item">
-      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=500&q=85&fit=crop')"></div>
+      <div class="svc-scroll-img" style="background-image:url('https://images.unsplash.com/photo-1614293993615-ae9cb81b07f9?w=500&q=85&fit=crop')"></div>
       <div class="svc-scroll-body">
         <span class="svc-scroll-badge soon">Coming Soon</span>
         <div class="svc-scroll-name">Tint + Wraps</div>
@@ -12493,12 +12499,12 @@ var RH = {
       /* SF: Bay Bridge luxury, Golden Gate, city street POV */
       s1: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&q=90&fit=crop&crop=center',
       s2: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1920&q=90&fit=crop&crop=center',
-      s3: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=90&fit=crop&crop=center'
+      s3: 'https://images.unsplash.com/photo-1596609535549-0a4d56d96e85?w=1920&q=90&fit=crop&crop=center'
     },
     'new-york': {
       label: 'New York', emoji: '🗽', wx: '48° 🌧',
       /* NYC: Manhattan luxury car, skyline, 5th Ave */
-      s1: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1920&q=90&fit=crop&crop=center',
+      s1: 'https://images.unsplash.com/photo-1582407947304-fd86f28f8c74?w=1920&q=90&fit=crop&crop=center',
       s2: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1920&q=90&fit=crop&crop=center',
       s3: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1920&q=90&fit=crop&crop=center'
     },
@@ -13427,7 +13433,7 @@ const CITY_HERO_CONFIG = {
   },
   'new-york': {
     day: [
-      { url: 'https://images.unsplash.com/photo-1515896769750-31548aa180ed?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
+      { url: 'https://images.unsplash.com/photo-1582407947304-fd86f28f8c74?w=1200&q=85&fit=crop', pos: 'center 35%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1200&q=85&fit=crop', pos: 'center 40%', posMobile: 'center 40%' },
       { url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
       { url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop', pos: 'center center', posMobile: 'center center' },
