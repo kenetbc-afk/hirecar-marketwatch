@@ -10515,21 +10515,10 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
     var dy = touchY - e.changedTouches[0].clientY; // positive = swipe up
     var maxScroll = ss.scrollHeight - ss.clientHeight;
     if (dy > 30 && ss.scrollTop >= maxScroll - 8) {
-      /* Reached bottom and swiping up further → exit to trending */
-      var trending = document.querySelector('.scroll-section');
-      if (!trending) return;
-      var target = trending.getBoundingClientRect().top + window.pageYOffset;
-      var from = window.pageYOffset;
-      var dist = target - from;
-      if (Math.abs(dist) < 5) return;
-      var startT = performance.now();
-      var dur = 420;
-      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-      (function step(ts) {
-        var t = Math.min((ts - startT) / dur, 1);
-        window.scrollTo(0, from + dist * easeOut(t));
-        if (t < 1) requestAnimationFrame(step);
-      })(performance.now());
+      /* Reached bottom and swiping up further → exit past this section */
+      var rect = ss.getBoundingClientRect();
+      var target = Math.round(window.pageYOffset + rect.bottom + 2);
+      window.scrollTo({ top: target, behavior: 'smooth' });
     }
   }, {passive: true});
 })();
@@ -11498,6 +11487,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var itemsWrap  = container.querySelector('.ss-items');
     var wrapOffset = itemsWrap ? itemsWrap.offsetTop : 0;
 
+    // ── Helper: compute reliable exit/entry targets ──
+    function getExitTarget() {
+      // Target = bottom edge of the stickyStories container in page coords
+      var rect = container.getBoundingClientRect();
+      return Math.round(window.pageYOffset + rect.bottom + 2);
+    }
+    function getEntryTarget() {
+      // Target = just above the sec-stories label
+      var secLabel = document.getElementById('sec-stories');
+      if (secLabel) {
+        var r = secLabel.getBoundingClientRect();
+        return Math.max(0, Math.round(window.pageYOffset + r.top - headerH - 8));
+      }
+      return Math.max(0, window.pageYOffset - 200);
+    }
+
     function onScroll() {
       var scrollTop  = container.scrollTop;
       var scrollPad  = container.offsetHeight * 0.10;
@@ -11523,13 +11528,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // ── Auto-exit: when scrolled to very bottom, release to page scroll ──
       if (scrollTop >= maxScroll - 4 && !exitTriggered) {
         exitTriggered = true;
-        // Scroll the page past the stickyStories section
-        var secLabel   = document.getElementById('sec-stories');
-        var stickyTop  = secLabel ? secLabel.offsetTop : 0;
-        var exitTarget = stickyTop + container.offsetHeight + headerH + 10;
+        var tgt = getExitTarget();
         setTimeout(function() {
-          window.scrollTo({ top: exitTarget, behavior: 'smooth' });
-          setTimeout(function() { exitTriggered = false; }, 800);
+          window.scrollTo({ top: tgt, behavior: 'smooth' });
+          setTimeout(function() { exitTriggered = false; }, 1200);
         }, 120);
       }
     }
@@ -11556,42 +11558,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Swipe UP at bottom → exit to next section
       if (dy > 30 && container.scrollTop >= maxScroll - 20) {
-        var secLabel   = document.getElementById('sec-stories');
-        var stickyTop  = secLabel ? secLabel.offsetTop : 0;
-        var exitTarget = stickyTop + container.offsetHeight + headerH + 10;
-        window.scrollTo({ top: exitTarget, behavior: 'smooth' });
+        window.scrollTo({ top: getExitTarget(), behavior: 'smooth' });
       }
 
       // Swipe DOWN at top → exit back above section
       if (dy < -30 && container.scrollTop <= 4) {
-        var secLabel2  = document.getElementById('sec-stories');
-        var aboveTarget = secLabel2 ? Math.max(0, secLabel2.offsetTop - headerH - 10) : 0;
-        window.scrollTo({ top: aboveTarget, behavior: 'smooth' });
+        window.scrollTo({ top: getEntryTarget(), behavior: 'smooth' });
       }
     }, { passive: true });
 
-    // ── Desktop: mouse-wheel at bottom exits to next section ──
+    // ── Desktop: mouse-wheel at bottom/top exits smoothly ──
     var _wheelExitLock = false;
     container.addEventListener('wheel', function(e) {
       var maxScroll = container.scrollHeight - container.clientHeight;
-      // Wheel down at very bottom → exit to next section
+      // Wheel down at very bottom → exit forward
       if (e.deltaY > 0 && container.scrollTop >= maxScroll - 8 && !_wheelExitLock) {
         _wheelExitLock = true;
-        var secLabel = document.getElementById('sec-stories');
-        var stickyTop = secLabel ? secLabel.offsetTop : 0;
-        var exitTarget = stickyTop + container.offsetHeight + headerH + 10;
-        window.scrollTo({ top: exitTarget, behavior: 'smooth' });
-        setTimeout(function() { _wheelExitLock = false; }, 900);
+        e.preventDefault();
+        window.scrollTo({ top: getExitTarget(), behavior: 'smooth' });
+        setTimeout(function() { _wheelExitLock = false; }, 1400);
       }
-      // Wheel up at very top → exit back above section
+      // Wheel up at very top → exit backward
       if (e.deltaY < 0 && container.scrollTop <= 4 && !_wheelExitLock) {
         _wheelExitLock = true;
-        var secLabel2 = document.getElementById('sec-stories');
-        var aboveTarget = secLabel2 ? Math.max(0, secLabel2.offsetTop - headerH - 10) : 0;
-        window.scrollTo({ top: aboveTarget, behavior: 'smooth' });
-        setTimeout(function() { _wheelExitLock = false; }, 900);
+        e.preventDefault();
+        window.scrollTo({ top: getEntryTarget(), behavior: 'smooth' });
+        setTimeout(function() { _wheelExitLock = false; }, 1400);
       }
-    }, { passive: true });
+    }, { passive: false });
 
     // ── Section-snap: swipe from hero lands on Top Stories ──
     var secSnap = document.getElementById('sec-stories');
@@ -11634,15 +11628,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }, { passive: true });
     }
 
-    // ── Keyboard exit support (ArrowDown past last item exits) ──
+    // ── Keyboard exit support (ArrowDown past last item exits, ArrowUp at top exits back) ──
     document.addEventListener('keydown', function(e) {
       if (e.key === 'ArrowDown' || e.key === 'PageDown') {
         var maxScroll = container.scrollHeight - container.clientHeight;
         if (container.scrollTop >= maxScroll - 10) {
-          var secLabel   = document.getElementById('sec-stories');
-          var stickyTop  = secLabel ? secLabel.offsetTop : 0;
-          var exitTarget = stickyTop + container.offsetHeight + headerH + 10;
-          window.scrollTo({ top: exitTarget, behavior: 'smooth' });
+          window.scrollTo({ top: getExitTarget(), behavior: 'smooth' });
+        }
+      }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (container.scrollTop <= 4) {
+          window.scrollTo({ top: getEntryTarget(), behavior: 'smooth' });
         }
       }
     });
