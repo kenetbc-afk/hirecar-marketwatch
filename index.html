@@ -3957,6 +3957,7 @@ body.dark-mode .svc-scroll-title { color: #c9920a; }
 .dropdown:has(.dd-preview) { grid-template-columns: 1fr 1fr 1fr 220px !important; width: 900px !important; }
 .dropdown[style*="3,1fr"] { width: 900px !important; }
 /* Mobile: hide previews */
+/* MOBILE-FROZEN-START — do not edit mobile media-query blocks below */
 @media (max-width: 768px) {
   .dd-preview { display: none; }
   .dropdown:has(.dd-preview) { grid-template-columns: 1fr 1fr !important; width: auto !important; }
@@ -7421,6 +7422,7 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
 /* Logo */
 .rh-logo-link { display: flex; align-items: center; gap: 6px; text-decoration: none; flex-shrink: 0; }
 @media (max-width: 768px) { .rh-logo-link { gap: 5px; } }
+/* MOBILE-FROZEN-END */
 .rh-logo { /* v21: center-aligned with pipe */
   height: 26px;
   width: auto;
@@ -8129,6 +8131,112 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   .rh-dsel-btn { padding: 14px 6px 11px; }
   .rh-stat-n { font-size: 28px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   DESKTOP PORT FROM HIRECAR MarketWatch.html (2026-04-18)
+   All rules wrapped in @media (min-width: 769px) to protect
+   the locked mobile baseline.
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  /* ── 5-day weather forecast strip (edition bar) ── */
+  .wx-forecast-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--edition-bar-border, #dde1e7);
+    margin: 10px 0;
+    flex-shrink: 0;
+  }
+  .wx-forecast {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+    flex: 1 1 auto;
+    justify-content: flex-start;
+  }
+  .wx-fday {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .wx-fday-name {
+    font-family: 'JetBrains Mono', 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    color: var(--wx-city-c, #9aa3ad);
+  }
+  .wx-fday-icon { font-size: 16px; line-height: 1; }
+  .wx-fday-temps {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-family: 'Instrument Serif', 'Cormorant Garamond', serif;
+    line-height: 1;
+  }
+  .wx-fday-hi {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--wx-temp-c, #111820);
+  }
+  .wx-fday-lo {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wx-detail-c, #8a9099);
+  }
+
+  /* ── Desktop language toggle (edition bar) ── */
+  .edition-lang {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px;
+    border-right: 1px solid var(--edition-bar-border, #dde1e7);
+    flex-shrink: 0;
+  }
+  .edition-lang-label {
+    font-family: 'JetBrains Mono', 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--wx-city-c, #9aa3ad);
+  }
+  .edition-lang .rh-lang-sw {
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .edition-lang .rh-lang-btn {
+    font-family: 'JetBrains Mono', 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.4);
+    background: none;
+    border: none;
+    border-right: 1px solid rgba(0,0,0,.08);
+    padding: 7px 9px;
+    cursor: pointer;
+    transition: all .18s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .edition-lang .lang-flag { font-size: 11px; line-height: 1; letter-spacing: 0; }
+  .edition-lang .rh-lang-btn:last-child { border-right: none; }
+  .edition-lang .rh-lang-btn.active { color: #c9920a; background: rgba(201,146,10,.1); }
+  body.dark-mode .edition-lang .rh-lang-sw { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); }
+  body.dark-mode .edition-lang .rh-lang-btn { color: rgba(255,255,255,.3); border-right-color: rgba(255,255,255,.06); }
+  body.dark-mode .edition-lang .rh-lang-btn:last-child { border-right: none; }
+  body.dark-mode .edition-lang .rh-lang-btn.active { color: #c9920a; background: rgba(201,146,10,.1); }
+}
+/* ═══ END DESKTOP PORT ═══ */
 
 
 </style>
@@ -9503,12 +9611,14 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <img class="carousel-slide hero-kb" data-kb="6" src="img/IMG_0256.jpg" alt="Audi coastal sunset — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="7" src="img/la-palace-theatre.jpg" alt="Airport terminal sunset — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="8" src="img/pexels-thekameragrapher-16433702.jpg" alt="LA cityscape — HIRECAR" loading="lazy">
+        <!-- MOBILE-FROZEN-START -->
         <img class="carousel-slide mobile-slide" data-mob="0" src="img/40.jpg" alt="LA aerial skyline — HIRECAR" loading="eager">
         <img class="carousel-slide mobile-slide" data-mob="1" src="img/download (3).jpeg" alt="Kobe Bryant LA mural — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="2" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="3" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="4" src="img/50.jpg" alt="6th Street Viaduct night skyline — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="5" src="img/IMG_0256.jpg" alt="Audi coastal sunset — HIRECAR" loading="lazy">
+        <!-- MOBILE-FROZEN-END -->
       </div>
       <div class="credit-overlay">
         <div class="hero-top-tagline"></div>
@@ -14067,6 +14177,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
+<!-- MOBILE-FROZEN-START -->
 <!-- ═══ MOBILE BOTTOM NAV ═══ -->
 <nav class="mobile-bottom-nav" id="mobileBottomNav" role="navigation">
   <button class="mbn-item active" data-nav="home">
@@ -14090,6 +14201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <strong class="mbn-label">account</strong>
   </button>
 </nav>
+<!-- MOBILE-FROZEN-END -->
 
 </body>
 </html>
