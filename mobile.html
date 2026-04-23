@@ -8133,6 +8133,35 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
 
 </style>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<style id="mobile-viewport-lock">
+  /* Pin mobile.html to a phone-width column regardless of window size.
+     Only /desktop.html exposes the wide layout. */
+  @media (min-width: 481px) {
+    html {
+      background: #000 !important;
+      min-height: 100vh;
+    }
+    body {
+      max-width: 430px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      position: relative !important;
+      /* transform creates a containing block so position:fixed descendants
+         stay within the phone-width column instead of escaping to viewport */
+      transform: translateZ(0);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06),
+                  0 24px 80px rgba(0,0,0,.6);
+    }
+    /* Neutralize 100vw rules that assume body spans the full window */
+    body .credit-module,
+    body [style*="100vw"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+</style>
 </head>
 <body>
 
