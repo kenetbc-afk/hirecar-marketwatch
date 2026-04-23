@@ -4365,7 +4365,7 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
      the scene reads wider than a full 1.14 zoom-in would allow. */
   @keyframes kbBroadwayHold {
     from { transform: scale(1.00); }
-    to   { transform: scale(1.04); }
+    to   { transform: scale(1.08); }
   }
   .carousel-slide.mobile-slide[data-mob="2"] { animation-delay: -6.6s !important; }
   .carousel-slide.mobile-slide[data-mob="3"] { animation-delay: -10s !important; }
@@ -4377,14 +4377,43 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
 
   /* ── Fixed masthead at top — body padding offsets for all safe areas ── */
-  body { padding-top: calc(44px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; padding-left: env(safe-area-inset-left, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important; }
+  body { padding-top: calc(68px + env(safe-area-inset-top, 0px)) !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; padding-left: env(safe-area-inset-left, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important; }
   body.dark-mode { background: #000000 !important; color: #c8d0db !important; }
   body:not(.dark-mode) { background: var(--bg) !important; color: var(--ink) !important; }
 
-  /* --- UTIL BAR (BREAKING ticker) — overlaid on hero top-left --- */
+  /* --- Edition + Language bar — sits between masthead and BREAKING ticker --- */
+  .mh-compact-actions {
+    position: fixed !important;
+    top: calc(62px + env(safe-area-inset-top, 0px)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    height: 28px;
+    z-index: 920;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    filter: none !important;
+    background: linear-gradient(180deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.78) 100%);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    padding: 0 12px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: none !important;
+  }
+  .mh-compact-actions > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .mh-compact-actions #mhReportPill { display: none !important; }
+
+  /* --- UTIL BAR (BREAKING ticker) — pushed below edition+lang bar --- */
   .util-bar {
     position: fixed !important;
-    top: calc(68px + env(safe-area-inset-top, 0px)) !important;
+    top: calc(92px + env(safe-area-inset-top, 0px)) !important;
     bottom: auto !important;
     left: 0;
     right: 0;
@@ -9361,18 +9390,18 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <div>
           <div class="dd-col-head">Culture + Auto</div>
           <ul class="dd-links">
-            <li><a href="#" onclick="return false;">LA Garage Feature Series</a></li>
-            <li><a href="#" onclick="return false;">Wrap Culture + Branding</a></li>
-            <li><a href="#" onclick="return false;">Automotive Photography</a></li>
-            <li><a href="#" onclick="return false;">Private Driver Life</a></li>
+            <li><a href="#sec-ent">LA Garage Feature Series</a></li>
+            <li><a href="#sec-ent">Wrap Culture + Branding</a></li>
+            <li><a href="#sec-ent">Automotive Photography</a></li>
+            <li><a href="#sec-ent">Private Driver Life</a></li>
           </ul>
         </div>
         <div>
           <div class="dd-col-head">Community</div>
           <ul class="dd-links">
-            <li><a href="#" onclick="return false;">Operator Stories</a></li>
-            <li><a href="#" onclick="return false;">Events + Activations</a></li>
-            <li><a href="#" onclick="return false;">HIRECAR x LA</a></li>
+            <li><a href="#sec-ent">Operator Stories</a></li>
+            <li><a href="#sec-ent">Events + Activations</a></li>
+            <li><a href="#sec-ent">HIRECAR x LA</a></li>
           </ul>
         </div>
         <div class="dd-preview">
