@@ -55,7 +55,7 @@
   .brand-right {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 2px;
     text-align: left;
   }
@@ -72,8 +72,10 @@
     font-family: 'DM Mono', ui-monospace, "SF Mono", Menlo, monospace;
     font-size: clamp(11px, 1.9vw, 13px);
     color: #ff4500;
-    letter-spacing: 0.08em;
     margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 1;
   }
   .brand-legal {
     font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -194,7 +196,7 @@
       height: 1px;
       background: linear-gradient(90deg, transparent 0%, #3a3a3a 20%, #3a3a3a 80%, transparent 100%);
     }
-    .brand-right { align-items: center; text-align: center; }
+    .brand-right { align-items: stretch; text-align: center; }
   }
   @media (prefers-reduced-motion: reduce) {
     .option, .option:hover { transition: none; transform: none; }
@@ -208,7 +210,7 @@
       <div class="brand-divider" aria-hidden="true"></div>
       <div class="brand-right">
         <div class="brand-title">MarketWatch<span class="bang">!</span></div>
-        <div class="brand-kicker">{NEWS+MEDIA}</div>
+        <div class="brand-kicker"><span>{</span><span>N</span><span>E</span><span>W</span><span>S</span><span>+</span><span>M</span><span>E</span><span>D</span><span>I</span><span>A</span><span>}</span></div>
         <div class="brand-legal">HIRECAR LLC &middot; EST. NOVEMBER 2024</div>
       </div>
     </div>
