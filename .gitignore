@@ -3,3 +3,14 @@ files.zip
 HIRECAR MarketWatch!*
 *.zip
 __pycache__/
+
+# PineGrow editor — local only
+_pgbackup/
+_pginfo/
+pinegrow.json
+
+# Local backups — never deploy
+index-backup-*.html
+hirecar-marketwatch-v*.html
+img/(*)*.png
+img/(*)*.jpg

@@ -347,11 +347,80 @@ async function triggerMilestoneAdvancement(db, env, invoiceId) {
     }).catch(() => {});
   }
 
-  // TODO: Phase 5 — Journey phase advancement logic
-  // Check all milestone conditions for this member
-  // If all conditions met, advance to next phase
-  // Generate milestone brief via D04
-  // Send notification via D05
+  // ── Milestone Advancement Logic (Bot #18) ──
+  // Phase gates from GOVERNANCE-WORKFLOWS.md Section 2.2:
+  //   INTAKE → RECOVERY:  Profile complete + service active + appointment booked
+  //   RECOVERY → REBUILDING: Claims resolved OR PIFR submitted + insurance confirmed
+  //   REBUILDING → OPERATING: CRI ≥ 60 + dispute cycle complete + tradeline strategy active
+  //   OPERATING → SCALING: HBI ≥ 75 + VDI ≥ 80 + BRE ≥ 70 + zero open cure windows
+
+  const memberId = invoice.member_id;
+  const scores = await db.prepare('SELECT * FROM member_scores WHERE member_id = ?').bind(memberId).first();
+  const member = await db.prepare('SELECT * FROM members WHERE member_id = ?').bind(memberId).first();
+  if (!member || !scores) return;
+
+  const currentTier = member.tier;
+  const lane = await db.prepare('SELECT * FROM member_lanes WHERE member_id = ?').bind(memberId).first();
+  const openCures = lane && lane.current_lane === 'cure' ? 1 : 0;
+
+  // Determine current phase from member status or audit log
+  const lastPhase = await db.prepare(
+    "SELECT details FROM audit_log WHERE member_id = ? AND event_type = 'phase_advance' ORDER BY created_at DESC LIMIT 1"
+  ).bind(memberId).first();
+  const currentPhase = lastPhase ? JSON.parse(lastPhase.details || '{}').new_phase || 'intake' : 'intake';
+
+  let nextPhase = null;
+  let gateResult = {};
+
+  if (currentPhase === 'intake') {
+    // Gate: profile complete + service active + appointment booked
+    const hasProfile = member.name && member.email;
+    const hasService = member.product_id ? true : false;
+    if (hasProfile && hasService) {
+      nextPhase = 'recovery';
+      gateResult = { hasProfile, hasService };
+    }
+  } else if (currentPhase === 'recovery') {
+    // Gate: PIFR submitted (invoice paid is a strong signal)
+    nextPhase = 'rebuilding';
+    gateResult = { invoicePaid: true, invoiceId };
+  } else if (currentPhase === 'rebuilding') {
+    // Gate: CRI ≥ 60
+    if (scores.cri_score >= 60) {
+      nextPhase = 'operating';
+      gateResult = { cri: scores.cri_score };
+    }
+  } else if (currentPhase === 'operating') {
+    // Gate: HBI ≥ 75 + VDI ≥ 80 + BRE ≥ 70 + zero cures
+    if (scores.hbi_score >= 75 && scores.vdi_score >= 80 && scores.bre_score >= 70 && openCures === 0) {
+      nextPhase = 'scaling';
+      gateResult = { hbi: scores.hbi_score, vdi: scores.vdi_score, bre: scores.bre_score, openCures };
+    }
+  }
+
+  if (nextPhase) {
+    // Log the phase advancement
+    await db.prepare(
+      "INSERT INTO audit_log (event_type, member_id, tier, details, bot_id) VALUES (?, ?, ?, ?, ?)"
+    ).bind('phase_advance', memberId, currentTier, JSON.stringify({
+      previous_phase: currentPhase, new_phase: nextPhase, gate: gateResult, trigger: 'invoice_paid'
+    }), 'HIRE Bot #18').run();
+
+    console.log(`[Milestone Bot] ${memberId} ADVANCED: ${currentPhase} → ${nextPhase}`);
+
+    // Slack notification
+    if (env.SLACK_WEBHOOK_URL) {
+      await fetch(env.SLACK_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: `:rocket: *Phase Advancement* — ${memberId}\n*${currentPhase.toUpperCase()}* → *${nextPhase.toUpperCase()}*\nGate: ${JSON.stringify(gateResult)}\nTriggered by: Invoice ${invoiceId} paid`
+        })
+      }).catch(() => {});
+    }
+  } else {
+    console.log(`[Milestone Bot] ${memberId} remains in ${currentPhase}. Gate conditions not yet met.`);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════

@@ -71,11 +71,15 @@ export class EnrollmentBot {
       const emailResult = await this.sendWelcomeEmail(customerData, memberId);
       results.steps.push({ step: 'welcome_email', status: emailResult.ok ? 'sent' : 'failed' });
 
-      // Step 7: Post Slack notification
+      // Step 7: Create PassKit digital membership pass (Bot #07)
+      const passResult = await this.createPassKitPass(customerData, memberId);
+      results.steps.push({ step: 'passkit_pass', status: passResult.ok ? 'created' : 'skipped' });
+
+      // Step 8: Post Slack notification
       const slackResult = await this.postSlackNotification(customerData, memberId);
       results.steps.push({ step: 'slack', status: slackResult.ok ? 'sent' : 'failed' });
 
-      // Step 8: Log enrollment event
+      // Step 9: Log enrollment event
       await this.logEnrollmentEvent(memberId, customerData, startTime);
       results.steps.push({ step: 'audit_log', status: 'ok' });
 
@@ -320,7 +324,56 @@ export class EnrollmentBot {
   }
 
   // ─────────────────────────────────────
-  // Step 7: Slack notification
+  // Step 7: PassKit digital membership pass (Bot #07)
+  // ─────────────────────────────────────
+  async createPassKitPass(data, memberId) {
+    const apiKey = this.env.PASSKIT_API_KEY;
+    const programId = this.env.PASSKIT_PROGRAM_ID;
+    if (!apiKey || !programId) return { ok: false, reason: 'passkit_not_configured' };
+
+    try {
+      const tierNames = { standard: 'Standard', operator: 'Operator', first_class: 'First Class', elite: 'Elite' };
+      const resp = await fetch('https://api.pub1.passkit.io/members/member', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          programId: programId,
+          externalId: memberId,
+          tierId: data.tier || 'standard',
+          person: {
+            forename: data.name ? data.name.split(' ')[0] : '',
+            surname: data.name ? data.name.split(' ').slice(1).join(' ') : '',
+            emailAddress: data.email,
+          },
+          metaData: {
+            memberId: memberId,
+            tier: tierNames[data.tier] || 'Standard',
+            portalLink: 'https://hirecar-portal.pages.dev',
+            enrolledAt: new Date().toISOString(),
+          },
+        }),
+      });
+
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(`[PassKit Bot #07] Pass created for ${memberId}: ${result.id || 'ok'}`);
+        return { ok: true, passId: result.id };
+      } else {
+        const errBody = await resp.text();
+        console.error(`[PassKit Bot #07] Failed: ${resp.status} ${errBody}`);
+        return { ok: false, reason: `${resp.status}: ${errBody}` };
+      }
+    } catch (err) {
+      console.error(`[PassKit Bot #07] Error: ${err.message}`);
+      return { ok: false, reason: err.message };
+    }
+  }
+
+  // ─────────────────────────────────────
+  // Step 8: Slack notification
   // ─────────────────────────────────────
   async postSlackNotification(data, memberId, type = 'new') {
     const webhookUrl = this.env.SLACK_WEBHOOK_URL;
