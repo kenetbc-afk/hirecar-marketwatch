@@ -4355,10 +4355,17 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
   }
   .carousel-slide.mobile-slide[data-mob="0"] { animation-delay: 0s !important; }
   .carousel-slide.mobile-slide[data-mob="1"] {
-    animation-delay: -3.3s !important;
+    animation: kbBroadwayHold 22s cubic-bezier(0.4, 0, 0.3, 1) infinite alternate !important;
+    animation-delay: -5s !important;
     object-fit: cover !important;
     object-position: 14% 50% !important;
     transform-origin: 14% 50% !important;
+  }
+  /* Subtle motion only — keeps the image at cover-min most of the time so
+     the scene reads wider than a full 1.14 zoom-in would allow. */
+  @keyframes kbBroadwayHold {
+    from { transform: scale(1.00); }
+    to   { transform: scale(1.04); }
   }
   .carousel-slide.mobile-slide[data-mob="2"] { animation-delay: -6.6s !important; }
   .carousel-slide.mobile-slide[data-mob="3"] { animation-delay: -10s !important; }
