@@ -41,14 +41,10 @@
     justify-content: center;
   }
   .brand-mark {
-    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 300;
-    font-size: clamp(26px, 5.2vw, 44px);
-    letter-spacing: 0.18em;
-    color: #f5f5f5;
-    line-height: 1;
-    padding-right: 0.05em;
-    white-space: nowrap;
+    height: clamp(24px, 4.8vw, 40px);
+    width: auto;
+    display: block;
+    flex-shrink: 0;
   }
   .brand-divider {
     width: 1px;
@@ -208,7 +204,7 @@
 <body>
   <div class="brand">
     <div class="brand-lockup">
-      <div class="brand-mark">HIRECAR</div>
+      <img class="brand-mark" src="img/hirecar-logo.png" alt="HIRECAR">
       <div class="brand-divider" aria-hidden="true"></div>
       <div class="brand-right">
         <div class="brand-title">MarketWatch<span class="bang">!</span></div>
