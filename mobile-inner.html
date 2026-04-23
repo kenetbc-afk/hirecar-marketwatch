@@ -4345,77 +4345,23 @@ body:not(.dark-mode) .pill-toggle-moon-bg { opacity: 0.35; }
     transition: none !important;
     opacity: 1 !important;
   }
-  /* Mobile slide 0 (40.jpg LA aerial) — first slide, longer hold synced to News+Media icon */
-  .carousel-slide.mobile-slide[data-mob="0"].active {
-    animation: kbMobZoom0 22s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
+  /* Unified continuous-pull zoom — all mobile hero slides float gently
+     in and out forever. Staggered delays mean each slide is at a
+     different phase of the cycle, so cross-fades pick up mid-zoom
+     and the motion feels uninterrupted slide-to-slide. */
+  .carousel-slide.mobile-slide {
+    animation: kbMobFloat 20s cubic-bezier(0.4, 0, 0.3, 1) infinite alternate !important;
+    transform-origin: center center !important;
   }
-  @keyframes kbMobZoom0 {
-    0%   { transform: scale(1.0); }
-    100% { transform: scale(1.1); }
-  }
-  /* Mobile slide 1 (Kobe Bryant LA mural) — contain + scale + slow pan right, synced to Top Stories icon */
-  .carousel-slide.mobile-slide[data-mob="1"] {
-    object-fit: contain !important;
-    object-position: left top !important;
-    transform-origin: left top !important;
-    transition: opacity 6.5s cubic-bezier(0.2, 0, 0.1, 1) !important;
-    -webkit-mask-image: linear-gradient(to bottom,
-      black 0%, black 18%,
-      rgba(0,0,0,0.72) 30%,
-      rgba(0,0,0,0.45) 42%,
-      rgba(0,0,0,0.22) 54%,
-      rgba(0,0,0,0.08) 66%,
-      transparent 80%);
-    mask-image: linear-gradient(to bottom,
-      black 0%, black 18%,
-      rgba(0,0,0,0.72) 30%,
-      rgba(0,0,0,0.45) 42%,
-      rgba(0,0,0,0.22) 54%,
-      rgba(0,0,0,0.08) 66%,
-      transparent 80%);
-  }
-  .carousel-slide.mobile-slide[data-mob="1"].active {
-    animation: kbMobZoom1 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
-  }
-  @keyframes kbMobZoom1 {
-    0%   { transform: scale(2.0); }
-    100% { transform: scale(2.25); }
-  }
-  /* Mobile slide 2 (31.jpg LA night) — cropped tight on skyline, synced to Credit Help icon */
-  .carousel-slide.mobile-slide[data-mob="2"] {
-    object-position: 50% 88% !important;
-    transform-origin: 50% 95% !important;
-  }
-  .carousel-slide.mobile-slide[data-mob="2"].active {
-    animation: kbMobZoom2 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
-  }
-  @keyframes kbMobZoom2 {
-    0%   { transform: scale(2.0) translateX(-12%) translateY(2%); }
-    100% { transform: scale(2.15) translateX(-12%) translateY(2%); }
-  }
-  /* Mobile slide 3 (32.jpg Downtown road) — synced to Auto Service icon */
-  .carousel-slide.mobile-slide[data-mob="3"].active {
-    animation: kbMobZoom3 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
-  }
-  @keyframes kbMobZoom3 {
-    0%   { transform: scale(1.0); }
-    100% { transform: scale(1.1); }
-  }
-  /* Mobile slide 4 (50.jpg Viaduct night) — synced to Culture & Travel icon */
-  .carousel-slide.mobile-slide[data-mob="4"].active {
-    animation: kbMobZoom4 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
-  }
-  @keyframes kbMobZoom4 {
-    0%   { transform: scale(1.0); }
-    100% { transform: scale(1.1); }
-  }
-  /* Mobile slide 5 (IMG_0256.jpg Audi coastal) — post-intro cycling */
-  .carousel-slide.mobile-slide[data-mob="5"].active {
-    animation: kbMobZoom5 16s cubic-bezier(0.15, 0, 0.05, 1) forwards !important;
-  }
-  @keyframes kbMobZoom5 {
-    0%   { transform: scale(1.0); }
-    100% { transform: scale(1.1); }
+  .carousel-slide.mobile-slide[data-mob="0"] { animation-delay: 0s !important; }
+  .carousel-slide.mobile-slide[data-mob="1"] { animation-delay: -3.3s !important; }
+  .carousel-slide.mobile-slide[data-mob="2"] { animation-delay: -6.6s !important; }
+  .carousel-slide.mobile-slide[data-mob="3"] { animation-delay: -10s !important; }
+  .carousel-slide.mobile-slide[data-mob="4"] { animation-delay: -13.3s !important; }
+  .carousel-slide.mobile-slide[data-mob="5"] { animation-delay: -16.6s !important; }
+  @keyframes kbMobFloat {
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.14); }
   }
 
   /* ── Fixed masthead at top — body padding offsets for all safe areas ── */
@@ -7666,18 +7612,24 @@ body.remote-mode .rh-masthead { display: flex; pointer-events: all; }
   position: absolute; inset: 0;
   background-size: cover; background-position: center center;
   background-repeat: no-repeat;
-  opacity: 0; 
-  transform: scale(1.05);
-  transition: opacity 1.6s cubic-bezier(.4,0,.2,1), transform 1.6s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  transition: opacity 1.6s cubic-bezier(.4,0,.2,1);
   will-change: opacity, transform;
+  /* Continuous "floating" pull — every slide is always slowly zooming.
+     Staggered negative delays put each slide at a different point in the
+     cycle so transitions pick up mid-zoom, creating a seamless glide. */
+  animation: rhHeroFloat 24s cubic-bezier(.45,0,.3,1) infinite alternate;
 }
-.rh-hero-slide.active { opacity: 1; transform: scale(1); }
-.rh-hero-slide:nth-child(1) { background-size: cover; background-position: center center; animation: rhKB1 20s ease-in-out infinite; }
-.rh-hero-slide:nth-child(2) { animation: rhKB2 20s ease-in-out infinite; }
-.rh-hero-slide:nth-child(3) { animation: rhKB3 20s ease-in-out infinite; }
-@keyframes rhKB1 { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.06) translate(-1%,-1%)} }
-@keyframes rhKB2 { 0%,100%{transform:scale(1.05) translate(1%,0)} 50%{transform:scale(1) translate(0,1%)} }
-@keyframes rhKB3 { 0%,100%{transform:scale(1) translate(-1%,1%)} 50%{transform:scale(1.06) translate(0,0)} }
+.rh-hero-slide.active { opacity: 1; }
+.rh-hero-slide:nth-child(1) { animation-delay: 0s; }
+.rh-hero-slide:nth-child(2) { animation-delay: -5s; }
+.rh-hero-slide:nth-child(3) { animation-delay: -10s; }
+.rh-hero-slide:nth-child(4) { animation-delay: -15s; }
+.rh-hero-slide:nth-child(5) { animation-delay: -20s; }
+@keyframes rhHeroFloat {
+  from { transform: scale(1); }
+  to   { transform: scale(1.14); }
+}
 
 
 .rh-hero-slide::after {
@@ -8111,8 +8063,8 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
   .rh-apply-stats-row { padding: 20px 20px; gap: 0; flex-wrap: wrap; justify-content: center; }
   .rh-apply-stats-row > div { padding: 0 16px; }
   .rh-mode-sw { display: none; }
-  /* Hero slides: disable Ken Burns on mobile to prevent clipping */
-  .rh-hero-slide { animation: none !important; background-attachment: scroll !important; }
+  /* Hero slides: keep continuous float zoom on mobile too */
+  .rh-hero-slide { background-attachment: scroll !important; }
   /* Section bgs: no parallax overshoot on mobile */
   .rh-section-bg { inset: 0 !important; transform: none !important; transition: none !important; }
   /* Rail: ensure full-width scroll containment */
@@ -8347,9 +8299,9 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <!-- v19: Slide 0: City skyline + supercar — always city first -->
         <div class="rh-hero-slide active" id="rhHeroSlide0"
           style="background-image:url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=1920&q=90&fit=crop&crop=center');background-position:center 42%;"></div>
-        <!-- Slide 1: Luxury car moving in city (supercar culture) -->
+        <!-- Slide 1: LA Broadway street scene (local) -->
         <div class="rh-hero-slide" id="rhHeroSlide1"
-          style="background-image:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1920&q=90&fit=crop&crop=center');background-position:center 45%;"></div>
+          style="background-image:url('img/la-broadway-street.jpg');background-position:center 45%;"></div>
         <!-- Slide 2: People enjoying luxury car / road trip -->
         <div class="rh-hero-slide" id="rhHeroSlide2"
           style="background-image:url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1920&q=90&fit=crop&crop=center');background-position:center 40%;"></div>
@@ -9504,7 +9456,7 @@ body.remote-mode .brand-logo-light { mix-blend-mode: normal; }
         <img class="carousel-slide hero-kb" data-kb="7" src="img/la-palace-theatre.jpg" alt="Airport terminal sunset — HIRECAR" loading="lazy">
         <img class="carousel-slide hero-kb" data-kb="8" src="img/pexels-thekameragrapher-16433702.jpg" alt="LA cityscape — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="0" src="img/40.jpg" alt="LA aerial skyline — HIRECAR" loading="eager">
-        <img class="carousel-slide mobile-slide" data-mob="1" src="img/download (3).jpeg" alt="Kobe Bryant LA mural — HIRECAR" loading="lazy">
+        <img class="carousel-slide mobile-slide" data-mob="1" src="img/la-broadway-street.jpg" alt="LA Broadway street scene — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="2" src="img/31.jpg" alt="LA night skyline — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="3" src="img/32.jpg" alt="Downtown urban road — HIRECAR" loading="lazy">
         <img class="carousel-slide mobile-slide" data-mob="4" src="img/50.jpg" alt="6th Street Viaduct night skyline — HIRECAR" loading="lazy">
