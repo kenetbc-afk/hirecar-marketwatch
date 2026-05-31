@@ -16,8 +16,13 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          chmod +x HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/health-check.sh
-          bash HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/health-check.sh
+          SCRIPT_PATH="HC-WORKSTATIONS/WS4-EXECUTION-MONITOR/CFG-HC-0403_HealthCheck_v1.0.0.sh"
+          if [ ! -f "$SCRIPT_PATH" ]; then
+            echo "Health check script not found: $SCRIPT_PATH"
+            exit 1
+          fi
+          chmod +x "$SCRIPT_PATH"
+          bash "$SCRIPT_PATH"
 
       - name: Notify on failure
         if: failure()
